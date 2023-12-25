@@ -57,8 +57,6 @@ class Paladin:
         # self.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] = 0
         # print(self.class_talents["row3"]["Greater Judgment"])
         
-        
-        
         self.base_mana = 250000
         self.mana = self.base_mana
         self.max_mana = self.base_mana
