@@ -2,8 +2,13 @@ from beacon_transfer_rates import beacon_transfer_rates_double_beacon
 import random
 from misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event
 
+
 class Spell:
-    def __init__(self, name, mana_cost=0, base_mana_cost=0, holy_power_gain=0, holy_power_cost=0, cooldown=0, max_charges=1, hasted_cooldown=False, healing_target_count=1, damage_target_count=1, is_heal=False, is_damage_spell=False, is_absorb=False, off_gcd=False, base_cast_time=0, applies_buff_to_target=False, bonus_crit=0, bonus_crit_healing=0, bonus_versatility=0, bonus_mastery=0):
+    
+    def __init__(self, name, mana_cost = 0, base_mana_cost = 0, holy_power_gain = 0, holy_power_cost = 0, cooldown = 0, max_charges = 1,
+                 hasted_cooldown = False, healing_target_count = 1, damage_target_count = 1, is_heal = False, is_damage_spell = False,
+                 is_absorb = False, off_gcd = False, base_cast_time =0 , applies_buff_to_target = False, bonus_crit = 0, bonus_crit_healing = 0,
+                 bonus_versatility = 0, bonus_mastery = 0):
         self.name = name
         self.mana_cost = mana_cost
         self.base_mana_cost = base_mana_cost
@@ -55,7 +60,7 @@ class Spell:
             return False       
         return True
     
-    def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):
+    def cast_damage_spell(self, caster, targets, current_time, healing_targets = None):
         if not self.can_cast(caster):         
             return False
         
@@ -178,7 +183,7 @@ class Spell:
         # print((self.base_cast_time / haste_multiplier) * self.cast_time_modifier)
         return (self.base_cast_time / caster.haste_multiplier) * self.cast_time_modifier
     
-    def calculate_heal(self, caster, bonus_crit=0, bonus_crit_healing=0, bonus_versatility=0, bonus_mastery=0):
+    def calculate_heal(self, caster, bonus_crit = 0, bonus_crit_healing = 0, bonus_versatility = 0, bonus_mastery = 0):
         # spell_power = caster.stats.ratings["intellect"]
         spell_power = caster.get_effective_spell_power()
         
@@ -200,7 +205,7 @@ class Spell:
         # print(f"{self.name}, SP: {spell_power}, COEFF: {self.SPELL_POWER_COEFFICIENT}, caster multiplier: {caster.healing_multiplier}, vers: {versatility_multiplier}, crit: {crit_multiplier}, mastery: {mastery_multiplier}, spell modifier: {self.spell_healing_modifier}")
         return spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier * versatility_multiplier * crit_multiplier * mastery_multiplier * self.spell_healing_modifier, is_crit
     
-    def calculate_damage(self, caster, bonus_crit=0, bonus_versatility=0):
+    def calculate_damage(self, caster, bonus_crit = 0, bonus_versatility = 0):
         spell_power = caster.get_effective_spell_power()
         
         crit_multiplier = 1
@@ -261,7 +266,7 @@ class Spell:
         from spells_passives import TouchOfLight
         from auras_buffs import SophicDevotion
         
-        def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False):
+        def try_proc_rppm_effect(effect, is_hasted = True, is_heal = False, is_self_buff = False):
             # print(f"{effect.name}, {is_heal}, {is_self_buff}")
             caster.time_since_last_rppm_proc[effect.name] = caster.time_since_last_rppm_proc.get(effect.name, 0)
             
@@ -295,6 +300,7 @@ class Spell:
         if "Sophic Devotion" in caster.bonus_enchants:
             sophic_devotion = SophicDevotion()
             try_proc_rppm_effect(sophic_devotion, is_self_buff=True)
+   
         
 class Wait(Spell):
 # waits until next gcd

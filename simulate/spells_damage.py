@@ -6,7 +6,10 @@ from spells_auras import AvengingWrathBuff
 from target import Player
 
 # DAMAGE SPELLS
+
+
 class Judgment(Spell):
+    
     SPELL_POWER_COEFFICIENT = 0.610542 
     BASE_COOLDOWN = 12
     MANA_COST = 0.024
@@ -31,7 +34,7 @@ class Judgment(Spell):
         if caster.is_talent_active("Justification"):
             self.spell_damage_modifier = 1.1
             
-    def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):
+    def cast_damage_spell(self, caster, targets, current_time, healing_targets = None):
         if caster.is_talent_active("Awakening"):
             if "Awakening READY!!!!!!" in caster.active_auras:
                 # add 30% damage buff and guaranteed crit
@@ -104,8 +107,10 @@ class Judgment(Spell):
                 target.apply_debuff_to_target(judgment_of_light_debuff, current_time, stacks_to_apply=5, max_stacks=5)
                 append_aura_applied_event(caster.events, "Judgment of Light", caster, target, current_time, current_stacks=5, max_stacks=5)
                 judgment_of_light_debuff.consume_stacks(caster, target, healing_targets, current_time)
+           
             
 class CrusaderStrike(Spell):
+    
     # uses attack power not spell power
     SPELL_POWER_COEFFICIENT = 1.071 * 1.04
     BASE_COOLDOWN = 7.75
@@ -116,7 +121,7 @@ class CrusaderStrike(Spell):
         super().__init__("Crusader Strike", mana_cost=CrusaderStrike.MANA_COST, cooldown=CrusaderStrike.BASE_COOLDOWN, holy_power_gain=CrusaderStrike.HOLY_POWER_GAIN, hasted_cooldown=True) 
         self.is_damage_spell = True
         
-    def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):  
+    def cast_damage_spell(self, caster, targets, current_time, healing_targets = None):  
         # reclamation
         if caster.is_talent_active("Reclamation"):
             self.spell_damage_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1

@@ -6,6 +6,7 @@ from misc_functions import format_time, append_spell_heal_event, append_aura_app
 import random
 import copy
 
+
 def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_targets):
     if len(glimmer_targets) > max_glimmer_targets:             
         oldest_active_glimmer = min(glimmer_targets, key=lambda glimmer_target: glimmer_target.target_active_buffs["Glimmer of Light"][0].duration)
@@ -22,7 +23,10 @@ def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_ta
         glimmer_targets.remove(oldest_active_glimmer)
 
 # generators
+
+
 class HolyShock(Spell):
+    
     SPELL_POWER_COEFFICIENT = 1.535 * 0.8
     MANA_COST = 0.028
     BASE_COOLDOWN = 8.5
@@ -167,7 +171,9 @@ class HolyShock(Spell):
                         del caster.active_auras["Rising Sunlight"]
                         append_aura_removed_event(caster.buff_events, "Rising Sunlight", caster, caster, current_time)
             
+            
 class Daybreak(Spell):
+    
     BASE_COOLDOWN = 60
     
     def __init__(self, caster):
@@ -227,8 +233,10 @@ class Daybreak(Spell):
                     if len(target.target_active_buffs["Holy Reverberation"]) > 0:
                         caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
             # caster.events.append(f"{current_time}: Glimmers after daybreak: {glimmer_targets}")
+            
                
 class RisingSunlightHolyShock(Spell):
+    
     SPELL_POWER_COEFFICIENT = 1.535
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
@@ -352,8 +360,10 @@ class RisingSunlightHolyShock(Spell):
                         handle_glimmer_removal(caster, glimmer_targets, current_time, 8)
                     else:
                         handle_glimmer_removal(caster, glimmer_targets, current_time, 3)
+            
                     
 class DivineToll(Spell):
+    
     MANA_COST = 0.03
     BASE_COOLDOWN = 60
     
@@ -382,7 +392,9 @@ class DivineToll(Spell):
             if caster.is_talent_active("Divine Resonance"):
                 caster.apply_buff_to_self(DivineResonance(), current_time)
   
+  
 class DivineTollHolyShock(Spell):
+    
     SPELL_POWER_COEFFICIENT = 1.535
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
@@ -512,7 +524,9 @@ class DivineTollHolyShock(Spell):
                                 
                     caster.divine_toll_holy_shock_count = 0 
             
+            
 class DivineResonanceHolyShock(Spell):
+    
     SPELL_POWER_COEFFICIENT = 1.535
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
@@ -607,7 +621,9 @@ class DivineResonanceHolyShock(Spell):
                     else:
                         handle_glimmer_removal(caster, glimmer_targets, current_time, 3)
 
+
 class HolyLight(Spell):
+    
     SPELL_POWER_COEFFICIENT = 5.096
     MANA_COST = 0.024
     HOLY_POWER_GAIN = 0
@@ -709,7 +725,9 @@ class HolyLight(Spell):
                 del caster.active_auras["Divine Favor"]
                 caster.abilities["Divine Favor"].remaining_cooldown = 30
 
+
 class FlashOfLight(Spell):
+    
     SPELL_POWER_COEFFICIENT = 2.63 * 1.2
     MANA_COST = 0.036 
     BASE_MANA_COST = 0.036
@@ -792,9 +810,13 @@ class FlashOfLight(Spell):
                 caster.active_auras["Divine Favor"].remove_effect(caster)
                 del caster.active_auras["Divine Favor"]
                 caster.abilities["Divine Favor"].remaining_cooldown = 30
+         
             
 # spenders
+
+
 class WordOfGlory(Spell):
+    
     SPELL_POWER_COEFFICIENT = 3.15 * 0.88
     MANA_COST = 0.012
     HOLY_POWER_COST = 3
@@ -899,8 +921,10 @@ class WordOfGlory(Spell):
                         caster.apply_buff_to_self(AwakeningTrigger(), current_time)
                 else:
                     caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=12)
+           
             
 class LightOfDawn(Spell):
+    
     SPELL_POWER_COEFFICIENT = 0.8334
     MANA_COST = 0.012
     HOLY_POWER_COST = 3
@@ -1000,7 +1024,9 @@ class LightOfDawn(Spell):
                 else:
                     caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=12)
 
+
 class LightsHammerSpell(Spell):
+    
     BASE_COOLDOWN = 60
     MANA_COST = 0.036
     
@@ -1012,7 +1038,9 @@ class LightsHammerSpell(Spell):
         if cast_success:
             caster.apply_summon(LightsHammerSummon(), current_time)
                 
+                
 class LightsHammerHeal(Spell):
+    
     SPELL_POWER_COEFFICIENT = 0.4
     TARGET_COUNT = 6
     

@@ -10,18 +10,24 @@ from talent_dictionaries import test_active_class_talents, test_active_spec_tale
 from base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
 from gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
 
+
 class Stats:
+    
     def __init__(self, ratings, percentages):
         self.ratings = ratings
         self.percentages = percentages
+   
         
 class Talents:
+    
     def __init__(self, class_talents, spec_talents):
         self.class_talents = class_talents
         self.spec_talents = spec_talents
 
+
 class Paladin:
-    def __init__(self, name, character_data=None, stats_data=None, talent_data=None, equipment_data=None, buffs=None, potential_healing_targets=None):
+    
+    def __init__(self, name, character_data = None, stats_data = None, talent_data = None, equipment_data = None, buffs = None, potential_healing_targets = None):
         self.character_data = character_data if character_data else None
         self.race = self.character_data["race"]["name"] if self.character_data else None
         self.name = name[0].upper() + name[1:]
@@ -214,7 +220,7 @@ class Paladin:
         self.events.append(f"{format_time(current_time)}: {summon.name} created: {summon.duration}s")
         summon.apply_effect(self, current_time)
    
-    def apply_buff_to_self(self, buff, current_time, stacks_to_apply=1, max_stacks=1):
+    def apply_buff_to_self(self, buff, current_time, stacks_to_apply = 1, max_stacks = 1):
         # print(f"{buff.name} applied at {current_time}")     
         if buff.name in self.active_auras:
             if buff.current_stacks < max_stacks:
@@ -233,7 +239,7 @@ class Paladin:
             self.active_auras[buff.name].duration += time_extension
             self.events.append(f"{format_time(current_time)}: {buff.name} extended by {time_extension}s to {round(self.active_auras[buff.name].duration, 2)}s")
     
-    def remove_or_decrement_buff_on_self(self, buff, current_time, max_stacks=1):
+    def remove_or_decrement_buff_on_self(self, buff, current_time, max_stacks = 1):
         if buff.name in self.active_auras:
             if buff.current_stacks > 1:
                 buff.current_stacks -= 1

@@ -4,7 +4,10 @@ from spells_passives import JudgmentOfLightSpell, GreaterJudgmentSpell
 import random
 
 # target debuffs
+
+
 class JudgmentOfLightDebuff(Debuff):
+    
     def __init__(self):
         super().__init__("Judgment of Light", 30, base_duration=30, current_stacks=5, max_stacks=5)
     
@@ -28,7 +31,9 @@ class JudgmentOfLightDebuff(Debuff):
             del judgment_of_light_target.target_active_debuffs[self.name]
             append_aura_removed_event(caster.events, self.name, caster, judgment_of_light_target, current_time)
             
+            
 class GreaterJudgmentDebuff(Debuff):
+    
     def __init__(self):
         super().__init__("Greater Judgment", 15)
         

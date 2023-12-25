@@ -3,8 +3,11 @@ from auras_buffs import AvengingWrathBuff, DivineFavorBuff, BlessingOfFreedomBuf
 from misc_functions import append_aura_applied_event, format_time
 import random
 
-# APPLIES BUFFS        
+# APPLIES BUFFS   
+
+     
 class TyrsDeliveranceSpell(Spell):
+    
     BASE_COOLDOWN = 120
     BASE_CAST_TIME = 2
     MANA_COST = 0.024
@@ -21,7 +24,9 @@ class TyrsDeliveranceSpell(Spell):
                 target = [random.choice(caster.potential_healing_targets)]
                 TyrsDeliveranceHeal(caster).cast_healing_spell(caster, target, current_time, is_heal=True)
             
+            
 class TyrsDeliveranceHeal(Spell):
+    
     SPELL_POWER_COEFFICIENT = 0.626875
     
     def __init__(self, caster):
@@ -35,7 +40,9 @@ class TyrsDeliveranceHeal(Spell):
             
             append_aura_applied_event(caster.events, "Tyr's Deliverance", caster, target, current_time, target.target_active_buffs["Tyr's Deliverance (target)"][0].duration)      
     
+    
 class AvengingWrathSpell(Spell):
+    
     BASE_COOLDOWN = 120
     
     def __init__(self, caster):
@@ -45,8 +52,10 @@ class AvengingWrathSpell(Spell):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             caster.apply_buff_to_self(AvengingWrathBuff(), current_time)
+   
             
 class DivineFavorSpell(Spell):
+    
     BASE_COOLDOWN = 30
     
     def __init__(self, caster):
@@ -57,7 +66,9 @@ class DivineFavorSpell(Spell):
         if cast_success:
             caster.apply_buff_to_self(DivineFavorBuff(), current_time)
             
+            
 class BlessingOfFreedomSpell(Spell):
+    
     MANA_COST = 0.014
     BASE_COOLDOWN = 25
     
@@ -71,7 +82,9 @@ class BlessingOfFreedomSpell(Spell):
             chosen_target.apply_buff_to_target(BlessingOfFreedomBuff(), current_time)
             append_aura_applied_event(caster.buff_events, self.name, caster, chosen_target, current_time)
             
+            
 class BlessingOfTheSeasons(Spell):
+    
     MANA_COST = 0.01
     BASE_COOLDOWN = 45
     

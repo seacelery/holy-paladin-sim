@@ -82,6 +82,7 @@ client_id = "57cdb961fae04b8f9dc4d3caea3716db"
 client_secret = "rIIdFk2In9dQfBUxbPmH6ee4DDDO6oUV"
 access_token = battlenet_api.get_access_token(client_id, client_secret)
 
+
 def main():
     healing_targets = [Target(f"target{i + 1}") for i in range(18)] + [BeaconOfLight(f"beaconTarget{i + 1}") for i in range(2)]
     beacon_targets = [target for target in healing_targets if isinstance(target, BeaconOfLight)]

@@ -1,6 +1,8 @@
 import random
 
+
 class Summon:
+    
     def __init__(self, name, duration):
         self.name = name
         self.duration = duration
@@ -11,7 +13,9 @@ class Summon:
     def remove_effect(self, caster):
         pass
         
+        
 class LightsHammerSummon(Summon):
+    
     def __init__(self):
         super().__init__("Light's Hammer", 14)
         self.last_tick_time = 0
