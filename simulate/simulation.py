@@ -10,7 +10,7 @@ pp = pprint.PrettyPrinter(width=200)
 
 class Simulation:
     
-    def __init__(self, paladin, healing_targets_list, encounter_length, priority_list = None):
+    def __init__(self, paladin, healing_targets_list, encounter_length, priority_list=None):
         self.paladin = paladin
         self.healing_targets_list = healing_targets_list
         self.enemy_targets_list = [EnemyTarget("enemyTarget1")]

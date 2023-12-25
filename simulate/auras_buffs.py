@@ -6,7 +6,7 @@ from misc_functions import append_spell_heal_event, format_time
 
 class HoT(Buff):
     
-    def __init__(self, name, duration, base_duration, base_tick_interval, initial_haste_multiplier, current_stacks = 1, max_stacks = 1):
+    def __init__(self, name, duration, base_duration, base_tick_interval, initial_haste_multiplier, current_stacks=1, max_stacks=1):
         super().__init__(name, duration, base_duration, current_stacks=current_stacks, max_stacks=max_stacks) 
         self.base_tick_interval = base_tick_interval 
         self.time_until_next_tick = base_tick_interval
@@ -20,7 +20,7 @@ class HoT(Buff):
     def update_tick_interval(self, caster):
         pass
         
-    def process_tick(self, caster, target, current_time, buff_instances, is_partial_tick = False):
+    def process_tick(self, caster, target, current_time, buff_instances, is_partial_tick=False):
         # heal_value, is_crit = self.calculate_tick_healing(caster)
         total_heal_value, is_crit = self.calculate_tick_healing(caster) 
         total_heal_value *= len(buff_instances)

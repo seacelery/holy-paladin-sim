@@ -34,7 +34,7 @@ class Judgment(Spell):
         if caster.is_talent_active("Justification"):
             self.spell_damage_modifier = 1.1
             
-    def cast_damage_spell(self, caster, targets, current_time, healing_targets = None):
+    def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):
         if caster.is_talent_active("Awakening"):
             if "Awakening READY!!!!!!" in caster.active_auras:
                 # add 30% damage buff and guaranteed crit
@@ -121,7 +121,7 @@ class CrusaderStrike(Spell):
         super().__init__("Crusader Strike", mana_cost=CrusaderStrike.MANA_COST, cooldown=CrusaderStrike.BASE_COOLDOWN, holy_power_gain=CrusaderStrike.HOLY_POWER_GAIN, hasted_cooldown=True) 
         self.is_damage_spell = True
         
-    def cast_damage_spell(self, caster, targets, current_time, healing_targets = None):  
+    def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):  
         # reclamation
         if caster.is_talent_active("Reclamation"):
             self.spell_damage_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
