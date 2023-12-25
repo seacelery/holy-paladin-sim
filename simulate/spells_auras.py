@@ -1,7 +1,8 @@
+import random
+
 from spells import Spell
 from auras_buffs import AvengingWrathBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring
 from misc_functions import append_aura_applied_event, format_time
-import random
 
 # APPLIES BUFFS   
 

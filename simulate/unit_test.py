@@ -1,4 +1,6 @@
 import unittest
+import re
+
 from simulation import Simulation
 from paladin import Paladin
 from target import Target, BeaconOfLight
@@ -8,7 +10,7 @@ from spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, Ho
 from spells_damage import Judgment, CrusaderStrike
 from auras_buffs import HolyReverberation
 from base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
-import re
+
 
 stats_data = {
     "health": 407620,

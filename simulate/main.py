@@ -70,12 +70,14 @@
 # options to include
 # heals on beacons, light of dawn targets hit
 
+import cache
+import pprint
+
 from simulation import Simulation
 from paladin import Paladin
 from target import Target, BeaconOfLight
 import battlenet_api
-import cache
-import pprint
+
 pp = pprint.PrettyPrinter(width=200)
 
 client_id = "57cdb961fae04b8f9dc4d3caea3716db"

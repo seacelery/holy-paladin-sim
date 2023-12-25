@@ -1,5 +1,5 @@
-from functools import cache
 import battlenet_api
+from functools import cache
 
 @cache
 def cached_get_character_data(access_token, realm, character_name):

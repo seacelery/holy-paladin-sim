@@ -1,5 +1,6 @@
-from beacon_transfer_rates import beacon_transfer_rates_double_beacon
 import random
+
+from beacon_transfer_rates import beacon_transfer_rates_double_beacon
 from misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event
 
 
@@ -164,7 +165,7 @@ class Spell:
         elif self.max_charges > 0:     
             self.current_charges -= 1
 
-        if is_heal is False:
+        if not is_heal:
             append_spell_cast_event(caster.ability_cast_events, self.name, caster, current_time)    
             caster.mana -= self.get_mana_cost(caster)
             

@@ -1,13 +1,11 @@
-import paladin
 import random
-import copy
+import pprint
+
 from target import Target, BeaconOfLight, EnemyTarget
 from auras_buffs import HolyReverberation, HoT
-from misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event
-import pprint
-pp = pprint.PrettyPrinter(width=200)
+from misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time
 
-from misc_functions import format_time
+pp = pprint.PrettyPrinter(width=200)
 
 
 class Simulation:

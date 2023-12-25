@@ -1,10 +1,11 @@
+import random
+import copy
+
 from spells import Spell
 from auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, BlessingOfFreedomBuff, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk
 from spells_passives import GlimmerOfLightSpell
 from summons import LightsHammerSummon
 from misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event
-import random
-import copy
 
 
 def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_targets):
