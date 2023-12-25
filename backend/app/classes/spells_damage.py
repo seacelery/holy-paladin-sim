@@ -1,9 +1,9 @@
-from classes.spells import Spell
-from utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event
-from classes.auras_debuffs import JudgmentOfLightDebuff, GreaterJudgmentDebuff
-from classes.auras_buffs import BlessingOfDawn
-from classes.spells_auras import AvengingWrathBuff
-from classes.target import Player
+from .spells import Spell
+from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event
+from .auras_debuffs import JudgmentOfLightDebuff, GreaterJudgmentDebuff
+from .auras_buffs import BlessingOfDawn
+from .spells_auras import AvengingWrathBuff
+from .target import Player
 
 # DAMAGE SPELLS
 

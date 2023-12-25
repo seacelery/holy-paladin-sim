@@ -1,9 +1,9 @@
 import random
 import pprint
 
-from classes.target import Target, BeaconOfLight, EnemyTarget
-from classes.auras_buffs import HolyReverberation, HoT
-from utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time
+from .target import Target, BeaconOfLight, EnemyTarget
+from .auras_buffs import HolyReverberation, HoT
+from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time
 
 pp = pprint.PrettyPrinter(width=200)
 
@@ -388,6 +388,6 @@ class Simulation:
         pp.pprint(self.paladin.holy_power_by_ability)
         print(f"Glimmers applied: {self.paladin.glimmer_application_counter}")
         print(f"Glimmers removed: {self.paladin.glimmer_removal_counter}")
-        
+        return healing_and_buff_events
         # print(f"Direct heals: {self.times_direct_healed}")
         

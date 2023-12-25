@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from backend.app.simulation.main import run_simulation
+from app.main import run_simulation
 
 main = Blueprint('main', __name__)
 

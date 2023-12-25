@@ -1,13 +1,13 @@
 import pprint
 
-from utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented
-from classes.spells import Wait
-from classes.spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
-from classes.spells_damage import Judgment, CrusaderStrike
-from classes.spells_auras import AvengingWrathSpell, DivineFavorSpell, BlessingOfFreedomSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons
-from utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
-from utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
-from utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
+from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented
+from .spells import Wait
+from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
+from .spells_damage import Judgment, CrusaderStrike
+from .spells_auras import AvengingWrathSpell, DivineFavorSpell, BlessingOfFreedomSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons
+from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
+from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
+from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
 
 pp = pprint.PrettyPrinter(width=200)
 

@@ -1,4 +1,4 @@
-from utils.beacon_transfer_rates import *
+from .beacon_transfer_rates import *
 
 # def apply_holy_reverberation(caster, target, current_time, buff):
 #     print(buff)

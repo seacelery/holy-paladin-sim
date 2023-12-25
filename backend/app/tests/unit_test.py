@@ -9,7 +9,7 @@ from classes.spells_auras import DivineFavorSpell
 from classes.spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
 from classes.spells_damage import Judgment, CrusaderStrike
 from classes.auras_buffs import HolyReverberation
-from talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
+from utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
 
 
 stats_data = {

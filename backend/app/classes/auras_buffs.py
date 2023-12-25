@@ -1,7 +1,7 @@
 import random
 
-from classes.auras import Buff
-from utils.misc_functions import append_spell_heal_event, format_time
+from .auras import Buff
+from ..utils.misc_functions import append_spell_heal_event, format_time
 
 
 class HoT(Buff):

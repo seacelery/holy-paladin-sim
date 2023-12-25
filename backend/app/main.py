@@ -20,12 +20,17 @@
 # options to include
 # heals on beacons, light of dawn targets hit
 
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import pprint
 
-from classes.simulation import Simulation
-from classes.paladin import Paladin
-from classes.target import Target, BeaconOfLight
-from utils import cache, battlenet_api
+from app.classes.simulation import Simulation
+from app.classes.paladin import Paladin
+from app.classes.target import Target, BeaconOfLight
+from app.utils import cache, battlenet_api
 
 pp = pprint.PrettyPrinter(width=200)
 
