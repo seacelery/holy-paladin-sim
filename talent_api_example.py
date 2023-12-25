@@ -24,7 +24,7 @@ def get_talent_data(access_token, realm, character_name):
     return response.json()
 
 client_id = "57cdb961fae04b8f9dc4d3caea3716db"
-client_secret = "y3TJQqhljQ7fp50BWMLlvEoIr7yrfxBg"
+client_secret = "rIIdFk2In9dQfBUxbPmH6ee4DDDO6oUV"
 
 # access_token = battlenet_api.get_access_token(client_id, client_secret)
 access_token = 3

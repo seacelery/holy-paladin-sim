@@ -10,20 +10,6 @@ from talent_dictionaries import test_active_class_talents, test_active_spec_tale
 from base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
 from gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
 
-# client_id = "57cdb961fae04b8f9dc4d3caea3716db"
-# client_secret = "y3TJQqhljQ7fp50BWMLlvEoIr7yrfxBg"
-# access_token = battlenet_api.get_access_token(client_id, client_secret)
-
-# realm = 'twisting-nether'
-# character_name = 'skaneschnell'
-# character_data = battlenet_api.get_character_data(access_token, realm, character_name)
-# stats_url = character_data["statistics"]["href"]
-# stats_data = battlenet_api.get_stats_data(access_token, stats_url)
-# equipment_url = character_data["equipment"]["href"]
-# equipment_data = battlenet_api.get_equipment_data(access_token, equipment_url)
-
-# pp.pprint(stats_data)
-
 class Stats:
     def __init__(self, ratings, percentages):
         self.ratings = ratings
