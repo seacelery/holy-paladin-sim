@@ -22,7 +22,7 @@
 
 import pprint
 
-from app.classes.simulation import Simulation
+from classes.simulation import Simulation
 from classes.paladin import Paladin
 from classes.target import Target, BeaconOfLight
 from utils import cache, battlenet_api
