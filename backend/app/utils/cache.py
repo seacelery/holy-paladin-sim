@@ -1,4 +1,4 @@
-import battlenet_api
+from utils import battlenet_api
 from functools import cache
 
 @cache

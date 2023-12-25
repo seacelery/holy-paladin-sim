@@ -1,7 +1,7 @@
 import random
 
-from beacon_transfer_rates import beacon_transfer_rates_double_beacon
-from misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event
+from utils.beacon_transfer_rates import beacon_transfer_rates_double_beacon
+from utils.misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event
 
 
 class Spell:
@@ -249,7 +249,7 @@ class Spell:
             self.remaining_cooldown = 0
             
     def apply_holy_reverberation(self, caster, target, current_time):
-        from auras_buffs import HolyReverberation
+        from backend.app.classes.auras_buffs import HolyReverberation
         
         new_buff = HolyReverberation(caster)
         if "Holy Reverberation" in target.target_active_buffs:
@@ -264,8 +264,8 @@ class Spell:
         caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
         
     def try_trigger_rppm_effects(self, caster, targets, current_time):
-        from spells_passives import TouchOfLight
-        from auras_buffs import SophicDevotion
+        from classes.spells_passives import TouchOfLight
+        from classes.auras_buffs import SophicDevotion
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False):
             # print(f"{effect.name}, {is_heal}, {is_self_buff}")

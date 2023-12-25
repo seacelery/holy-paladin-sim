@@ -1,4 +1,4 @@
-from spells import Spell
+from classes.spells import Spell
 
 # PASSIVE SPELLS
 

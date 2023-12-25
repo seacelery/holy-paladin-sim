@@ -34,7 +34,7 @@ class LightsHammerSummon(Summon):
             self.last_tick_time = 0
             
     def trigger_lights_hammer_tick(self, caster, current_time):
-        from spells_healing import LightsHammerHeal
+        from classes.spells_healing import LightsHammerHeal
         
         targets = []
         for _ in range(LightsHammerHeal(caster).TARGET_COUNT):

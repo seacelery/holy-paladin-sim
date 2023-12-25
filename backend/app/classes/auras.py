@@ -1,6 +1,6 @@
 import random
 
-from misc_functions import append_spell_heal_event, format_time
+from utils.misc_functions import append_spell_heal_event, format_time
 
 
 class Aura:

@@ -1,9 +1,9 @@
 import random
 import pprint
 
-from target import Target, BeaconOfLight, EnemyTarget
-from auras_buffs import HolyReverberation, HoT
-from misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time
+from classes.target import Target, BeaconOfLight, EnemyTarget
+from classes.auras_buffs import HolyReverberation, HoT
+from utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time
 
 pp = pprint.PrettyPrinter(width=200)
 
