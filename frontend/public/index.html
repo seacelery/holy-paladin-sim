@@ -7,7 +7,7 @@
         <title>howy pawadin simuwator</title>
         <link rel="stylesheet" 
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <link rel="stylesheet" href="../src/styles.css" />
+        <link rel="stylesheet" href="../src/css/styles.css" />
         <link
       href="https://fonts.googleapis.com/css?family=Lato&display=swap"
       rel="stylesheet"
@@ -16,13 +16,33 @@
     <body>
         <div id="simulate-container">
             <div id="simulate-text">aaaaaa</div>
-            
         </div>
+
+        <div id="import-button-container">
+            <button id="import-button">import</button>
+        </div>
+
+        <div id="options-div">
+            <select id="race-filter">
+                <option value="Human">Human</option>
+                <option value="Blood Elf">Blood Elf</option>
+            </select>
+        </div>
+
+        <div id="talents-div">
+            <input type="checkbox" id="talent1" name="talent1" value="1">
+            <label for="talent1" class="talent-checkbox">Light's Conviction</label><br>
+            <input type="checkbox" id="talent2" name="talent2" value="1">
+            <label for="talent2" class="talent-checkbox">Reclamation</label><br>
+            <input type="checkbox" id="talent3" name="talent2" value="1">
+            <label for="talent3" class="talent-checkbox">Light of Dawn</label><br>
+        </div>
+
         <div id="simulate-button-container">
             <button id="simulate-button">lets go!!!!!</button>
         </div>
         
         
-        <script src="../src/script.js" ></script>
+        <script src="../src/js/script.js" ></script>
     </body>
 </html>

@@ -26,6 +26,43 @@ body {
     padding-bottom: 20px;
 }
 
+#import-button-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+#import-button {
+    width: 200px;
+    height: 50px;
+    color:rgb(41, 38, 40);
+    font-size: 22px;
+}
+
+#options-div {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+#race-filter {
+    width: 200px;
+    height: 30px;
+}
+
+#talents-div {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    color: white
+}
+
+.talent-checkbox {
+    padding-right: 15px;
+    padding-left: 5px;
+}
+
 #simulate-button-container {
     margin: 0 auto;
     display: flex;

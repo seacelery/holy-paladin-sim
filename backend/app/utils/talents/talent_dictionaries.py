@@ -1,3 +1,7 @@
+import pprint
+
+pp = pprint.PrettyPrinter(width=200)
+
 test_active_class_talents = {
     "row1": {
         "Lay on Hands": {"ranks": {"current rank": 1, "max rank": 1}},
@@ -148,3 +152,14 @@ test_active_spec_talents = {
         "Boundless Salvation": {"ranks": {"current rank": 1, "max rank": 1}}
     }
 }
+
+
+# talent_to_change = {'Reclamation': 0}
+
+# for row in test_active_spec_talents.values():
+#     for talent_name, new_rank in talent_to_change.items():
+#         if talent_name in row:
+#             row[talent_name]["ranks"]["current rank"] = new_rank
+            
+# pp.pprint(test_active_spec_talents)
+            

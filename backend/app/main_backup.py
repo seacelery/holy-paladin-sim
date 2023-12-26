@@ -39,7 +39,7 @@ client_secret = "rIIdFk2In9dQfBUxbPmH6ee4DDDO6oUV"
 access_token = battlenet_api.get_access_token(client_id, client_secret)
 
 
-def import_character(character_name, realm):
+def run_simulation(character_name, realm):
     character_data = cache.cached_get_character_data(access_token, realm, character_name)
     stats_data = cache.cached_get_stats_data(access_token, character_data["statistics"]["href"])
     equipment_data = cache.cached_get_equipment_data(access_token, character_data["equipment"]["href"])
@@ -51,14 +51,10 @@ def import_character(character_name, realm):
     paladin = Paladin(character_name, character_data, stats_data, talent_data=talent_data, equipment_data=equipment_data, potential_healing_targets=healing_targets)
     paladin.set_beacon_targets(beacon_targets)
     
-    return paladin, healing_targets
-    
-def run_simulation(paladin, healing_targets):
-    simulation = Simulation(paladin, healing_targets, 20)
+    simulation = Simulation(paladin, healing_targets, 30)
     simulation.simulate()
     
     return simulation.display_results(healing_targets)
     
 if __name__ == "__main__":
-    paladin, healing_targets = import_character("daisu", "aszune")
-    run_simulation(paladin, healing_targets)
+    run_simulation("daisu", "aszune")

@@ -46,7 +46,7 @@ class Paladin:
         # self.talents = self.parse_talents(talent_data)
         self.class_talents = test_active_class_talents
         self.spec_talents = test_active_spec_talents
-
+        
         # self.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] = 0
         # print(self.class_talents["row3"]["Greater Judgment"])
         
@@ -100,14 +100,7 @@ class Paladin:
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
         self.global_cooldown = 0
         
-        self.abilities = {
-                            "Wait": Wait(),
-                            "Flash of Light": FlashOfLight(self),
-                            "Holy Light": HolyLight(self),
-                            "Crusader Strike": CrusaderStrike(self),
-                            "Judgment": Judgment(self),
-                            "Word of Glory": WordOfGlory(self),
-        }      
+        self.abilities = {}      
         self.load_abilities_based_on_talents()
         
         self.holy_power = 0
@@ -155,7 +148,37 @@ class Paladin:
         self.afterimage_counter = 0
         
         # for reclamation
-        self.average_raid_health_percentage = 1
+        self.average_raid_health_percentage = 0.7
+    
+    def update_race(self, new_race):
+        self.race = new_race
+        
+        if self.race == "Human":
+            self.haste *= 1.02
+            self.crit *= 1.02
+            self.mastery *= 1.02
+            self.versatility *= 1.02
+        elif self.race == "Blood Elf":
+            self.healing_multiplier = 20
+    
+    def update_talents(self, talents):
+        print("talents:", talents)
+        for talent_name, new_rank in talents.items():
+            for row in self.spec_talents.values():
+                if talent_name in row:
+                    row[talent_name]["ranks"]["current rank"] = new_rank
+                    print(f"{talent_name}: {row[talent_name]['ranks']['current rank']} changed to {new_rank} ")
+        pp.pprint(self.spec_talents)
+    
+        self.load_abilities_based_on_talents()
+    
+    def extract_modifiable_attributes(self):
+        return {
+            "race": self.race
+        }
+        
+    def update_with_modifiable_attributes(self, modifiable_data):
+        self.race = modifiable_data.get("race", self.race)
     
     def update_hasted_cooldowns_with_haste_changes(self):
         for ability in self.abilities.values():
@@ -164,6 +187,15 @@ class Paladin:
                 ability.remaining_cooldown = ability.calculate_cooldown(self) - elapsed_cooldown * (ability.calculate_cooldown(self) / ability.original_cooldown)
     
     def load_abilities_based_on_talents(self):
+        self.abilities = {
+                            "Wait": Wait(),
+                            "Flash of Light": FlashOfLight(self),
+                            "Holy Light": HolyLight(self),
+                            "Crusader Strike": CrusaderStrike(self),
+                            "Judgment": Judgment(self),
+                            "Word of Glory": WordOfGlory(self),
+        }     
+        
         if self.is_talent_active("Holy Shock"):
             self.abilities["Holy Shock"] = HolyShock(self)
             
@@ -379,6 +411,8 @@ class Paladin:
             stat_values_from_equipment["crit"] *= 1.02
             stat_values_from_equipment["mastery"] *= 1.02
             stat_values_from_equipment["versatility"] *= 1.02
+        elif self.race == "Blood Elf":
+            self.healing_multiplier = 20
         
         return stat_values_from_equipment, bonus_effect_enchants
     
