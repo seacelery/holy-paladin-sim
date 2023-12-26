@@ -1,21 +1,43 @@
 const simulateText = document.getElementById("simulate-text")
-const simulateButton = document.getElementById("simulate-button")
-const importButton = document.getElementById("import-button")
 
+// update the paladin class when talents are changed
+const handleTalentChange = (event) => {
+    const talentName = event.target.getAttribute("data-talent")
+    const talentValue = event.target.checked ? 1 : 0
+
+    const talentUpdate = {
+        "talents": {
+            [talentName]: talentValue
+        }
+    };
+
+    fetch("http://127.0.0.1:5000/update_character", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(talentUpdate)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error("Error:", error));
+};
+
+document.querySelectorAll("input[data-talent]").forEach(element => {
+    element.addEventListener("change", handleTalentChange);
+});
+
+// update the paladin class when the race is changed
 const raceFilter = document.getElementById("race-filter")
-
-const lightsConvictionTalent = document.getElementById("talent1")
-const reclamationTalent = document.getElementById("talent2")
-const lightOfDawnTalent = document.getElementById("talent3")
-
 raceFilter.addEventListener("change", () => {
     const raceValue = raceFilter.value
 
-    fetch('http://127.0.0.1:5000/update_character', {
-        method: 'POST',
-        credentials: 'include',
+    fetch("http://127.0.0.1:5000/update_character", {
+        method: "POST",
+        credentials: "include",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({ 
             race: raceValue 
@@ -25,112 +47,43 @@ raceFilter.addEventListener("change", () => {
     .then(data => {
         console.log(data);
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => console.error("Error:", error));
 })
 
+// update displayed information based on imported character
+const importButton = document.getElementById("import-button")
 importButton.addEventListener("click", () => {
-    fetch('http://127.0.0.1:5000/import_character?character_name=daisu&realm=aszune', {
-        credentials: 'include'
+    fetch("http://127.0.0.1:5000/import_character?character_name=daisu&realm=aszune", {
+        credentials: "include"
     })
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        raceFilter.value = data[1]
+        raceFilter.value = data.race
         simulateText.textContent = JSON.stringify(data, null, 2);
 
-        if (data[2].row3["Light's Conviction"].ranks["current rank"] === 1) {
-            lightsConvictionTalent.checked = true
-        }
-        if (data[2].row2["Light of Dawn"].ranks["current rank"] === 1) {
-            lightOfDawnTalent.checked = true
-        }
-        if (data[2].row8["Reclamation"].ranks["current rank"] === 1) {
-            reclamationTalent.checked = true
-        }
+        // create a checkbox for each talent that exists in html, and check it if the talent is active on the character
+        Object.keys(data.talents).forEach(row => {
+            Object.keys(data.talents[row]).forEach(talentName => {
+                const talentCheckbox = document.querySelector(`input[data-talent="${talentName}"]`);
+                if (talentCheckbox) {
+                    talentCheckbox.checked = data.talents[row][talentName].ranks["current rank"] === 1;
+                };
+            });
+        });
     })
-    .catch(error => console.error('Error:', error));
-})
+    .catch(error => console.error("Error:", error));
+});
 
-reclamationTalent.addEventListener("change", () => {
-    const talentUpdate = {
-        "talents": {
-            "Reclamation": reclamationTalent.checked ? 1 : 0 // Assuming checked means talent is active (1), and unchecked means inactive (0)
-        }
-    };
-
-    fetch('http://127.0.0.1:5000/update_character', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(
-            talentUpdate
-        )
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => console.error('Error:', error));
-})
-
-lightOfDawnTalent.addEventListener("change", () => {
-    const talentUpdate = {
-        "talents": {
-            "Light of Dawn": lightOfDawnTalent.checked ? 1 : 0 // Assuming checked means talent is active (1), and unchecked means inactive (0)
-        }
-    };
-
-    fetch('http://127.0.0.1:5000/update_character', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(
-            talentUpdate
-        )
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => console.error('Error:', error));
-})
-
-lightsConvictionTalent.addEventListener("change", () => {
-    const talentUpdate = {
-        "talents": {
-            "Light's Conviction": lightsConvictionTalent.checked ? 1 : 0 // Assuming checked means talent is active (1), and unchecked means inactive (0)
-        }
-    };
-
-    fetch('http://127.0.0.1:5000/update_character', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(
-            talentUpdate
-        )
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => console.error('Error:', error));
-})
-
+const simulateButton = document.getElementById("simulate-button")
 simulateButton.addEventListener("click", () => {
-    fetch('http://127.0.0.1:5000/run_simulation', {
-        credentials: 'include'
+    fetch("http://127.0.0.1:5000/run_simulation", {
+        credentials: "include"
     })
         .then(response => response.json())
         .then(data => {
             simulateText.textContent = JSON.stringify(data, null, 2);
         })
-        .catch(error => console.error('Error:', error));
-})
+        .catch(error => console.error("Error:", error));
+});
 

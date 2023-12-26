@@ -150,6 +150,7 @@ class Paladin:
         # for reclamation
         self.average_raid_health_percentage = 0.7
     
+    # update methods used in routes.py
     def update_race(self, new_race):
         self.race = new_race
         
@@ -162,23 +163,11 @@ class Paladin:
             self.healing_multiplier = 20
     
     def update_talents(self, talents):
-        print("talents:", talents)
         for talent_name, new_rank in talents.items():
             for row in self.spec_talents.values():
                 if talent_name in row:
-                    row[talent_name]["ranks"]["current rank"] = new_rank
-                    print(f"{talent_name}: {row[talent_name]['ranks']['current rank']} changed to {new_rank} ")
-        pp.pprint(self.spec_talents)
-    
+                    row[talent_name]["ranks"]["current rank"] = new_rank 
         self.load_abilities_based_on_talents()
-    
-    def extract_modifiable_attributes(self):
-        return {
-            "race": self.race
-        }
-        
-    def update_with_modifiable_attributes(self, modifiable_data):
-        self.race = modifiable_data.get("race", self.race)
     
     def update_hasted_cooldowns_with_haste_changes(self):
         for ability in self.abilities.values():
