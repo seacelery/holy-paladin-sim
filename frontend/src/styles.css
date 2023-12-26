@@ -1,0 +1,41 @@
+* {
+    font-family: Lato;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0 auto;
+    background-color: rgb(41, 38, 40);
+}
+
+#simulate-container {
+    margin: 0 auto;
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+#simulate-text {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    width: 90%;
+    padding-bottom: 20px;
+}
+
+#simulate-button-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+#simulate-button {
+    width: 200px;
+    height: 50px;
+    color:rgb(41, 38, 40);
+    font-size: 22px;
+}
+
