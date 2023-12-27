@@ -149,6 +149,10 @@ class Paladin:
         
         # for reclamation
         self.average_raid_health_percentage = 0.7
+        
+        # for results output only
+        self.most_relevant_events = []
+        self.ability_breakdown = {}
     
     # update methods used in routes.py
     def update_race(self, new_race):

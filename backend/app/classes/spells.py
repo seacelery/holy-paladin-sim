@@ -1,7 +1,7 @@
 import random
 
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_double_beacon
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts
 
 
 class Spell:
@@ -106,43 +106,55 @@ class Spell:
         
         self.try_trigger_rppm_effects(caster, targets, current_time)
         
-        if caster.mana >= self.get_mana_cost(caster) and is_heal:          
-            aoe_sequence = [f"{self.name}: ", []]
+        if caster.mana >= self.get_mana_cost(caster) and is_heal:  
+            target_count = self.healing_target_count
+            
+            if target_count > 1:  
+                multi_target_healing = [f"{self.name}: ", []]
+                
             for target in targets:
                 ability_healing = 0
                 healing_value, is_crit = self.calculate_heal(caster, self.bonus_crit, self.bonus_versatility, self.bonus_mastery)
                 
+                mana_cost = self.get_mana_cost(caster)
                 healing_value = round(healing_value)        
                 target.receive_heal(healing_value)
-                if self.healing_target_count > 0:
+                if target_count > 0:
                     # deduct mana on the first instance of a multi-target spell
                     if self.aoe_cast_counter == 0:
-                        self.aoe_cast_counter = self.healing_target_count
-                    
-                    if self.aoe_cast_counter == self.healing_target_count:
-                        caster.mana -= self.get_mana_cost(caster)
+                        self.aoe_cast_counter = target_count               
+                    if self.aoe_cast_counter == target_count:
+                        caster.mana -= mana_cost
+                        # add spell, mana cost, holy power attributes, and increment casts
+                        update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, self.holy_power_gain, self.holy_power_cost)
+                        
                     self.aoe_cast_counter -= 1
                 else: 
-                    caster.mana -= self.get_mana_cost(caster)
+                    caster.mana -= mana_cost
+                    update_spell_data_casts(caster.ability_breakdown, self.name)
                 
                 # for detailed logging     
                 caster.healing_by_ability[self.name] = caster.healing_by_ability.get(self.name, 0) + healing_value
                 if is_crit:
                     spell_crit = True
                     caster.ability_crits[self.name] = caster.ability_crits.get(self.name, 0) + 1
-                if self.healing_target_count == 1:
+                    
+                if target_count == 1:
                     caster.healing_sequence.append(f"{self.name}: {current_time}, {healing_value}, {is_crit}")
                 else:
-                    aoe_sequence[1].append([healing_value, target.name, is_crit])
+                    multi_target_healing[1].append([healing_value, target.name, is_crit])
                  
-                if len(aoe_sequence[1]) > 1:  
-                    for aoe_heal in aoe_sequence[1]:
+                if target_count > 1:  
+                    for aoe_heal in multi_target_healing[1]:
                         ability_healing = aoe_heal[0]
                         heal_amount += aoe_heal[0]
                 else:      
                     ability_healing = healing_value   
                     heal_amount += healing_value             
                 current_time = current_time 
+            
+                # add the target, healing, crit status, and increment hits
+                update_spell_data_heals(caster.ability_breakdown, self.name, target, ability_healing, is_crit)
                 
                 append_spell_heal_event(caster.events, self.name, caster, target, ability_healing, current_time, is_crit, spends_mana=True)   
                 append_spell_cast_event(caster.ability_cast_events, self.name, caster, current_time, target)    
@@ -157,7 +169,7 @@ class Spell:
                         append_spell_beacon_event(caster.beacon_events, self.name, caster, beacon_target, healing_value, beacon_healing, current_time)   
                    
             if self.healing_target_count > 1:
-                caster.healing_sequence.append(aoe_sequence)   
+                caster.healing_sequence.append(multi_target_healing)   
 
         if self.current_charges == self.max_charges:
             self.start_cooldown(caster)
@@ -180,12 +192,9 @@ class Spell:
         return True, spell_crit, heal_amount
     
     def calculate_cast_time(self, caster):
-        # haste_multiplier = 1 + caster.stats.percentages["haste"][1] / 100
-        # print((self.base_cast_time / haste_multiplier) * self.cast_time_modifier)
         return (self.base_cast_time / caster.haste_multiplier) * self.cast_time_modifier
     
     def calculate_heal(self, caster, bonus_crit=0, bonus_crit_healing=0, bonus_versatility=0, bonus_mastery=0):
-        # spell_power = caster.stats.ratings["intellect"]
         spell_power = caster.get_effective_spell_power()
         
         crit_multiplier = 1
@@ -227,14 +236,12 @@ class Spell:
         return self.base_mana_cost * caster.base_mana
     
     def start_cooldown(self, caster):
-        # if self.current_charges < self.max_charges:
         self.remaining_cooldown = self.calculate_cooldown(caster)
         self.original_cooldown = self.remaining_cooldown
         
     def calculate_cooldown(self, caster):
         if self.hasted_cooldown:
             haste_multiplier = caster.haste_multiplier
-            # print(self.cooldown / haste_multiplier)
             return self.cooldown / haste_multiplier
         else:
             return self.cooldown

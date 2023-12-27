@@ -16,6 +16,7 @@
 # glorious dawn calculation before or after glimmer application - currently assuming before
 # assuming afterimage cannot proc divine purpose or glistening radiance after testing
 # seal of might gives 3% mastery per point for reasons??
+# light's hammer bad fix on casts vs hits
 
 # options to include
 # heals on beacons, light of dawn targets hit

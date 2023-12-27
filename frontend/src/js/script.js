@@ -1,13 +1,12 @@
-const simulateText = document.getElementById("simulate-text")
+const simulateText = document.getElementById("simulate-text");
 
-const importButton = document.getElementById("import-button")
-const raceFilter = document.getElementById("race-filter")
+const importButton = document.getElementById("import-button");
+const raceOptions = document.getElementById("race-filter");
 
-const simulateButton = document.getElementById("simulate-button")
+const simulateButton = document.getElementById("simulate-button");
 
 // request functions
 const importCharacter = async () => {
-    console.log("hi")
     return fetch("http://127.0.0.1:5000/import_character?character_name=daisu&realm=aszune", {
         credentials: "include"
     })
@@ -32,13 +31,18 @@ const updateCharacter = async (data) => {
     .catch(error => console.error("Error:", error));
 };
 
+const convertToJSON = (data) => {
+    return JSON.stringify(data, null, 2)
+};
+
 const runSimulation = async () => {
     return fetch("http://127.0.0.1:5000/run_simulation", {
         credentials: "include"
     })
     .then(response => response.json())
     .then(data => {
-        simulateText.textContent = JSON.stringify(data, null, 2);
+        rawSimulationData = convertToJSON(data);
+        simulateText.textContent = rawSimulationData;
     })
     .catch(error => console.error("Error:", error));
 };
@@ -46,7 +50,7 @@ const runSimulation = async () => {
 // update the paladin class when attributes are changed
 const handleRaceChange = () => {
     updateCharacter({
-        race: raceFilter.value
+        race: raceOptions.value
     });
 };
 
@@ -66,7 +70,7 @@ const handleTalentChange = (event) => {
 // update displayed information based on imported character
 const updateUIAfterImport = (data) => {
     console.log(data);
-    raceFilter.value = data.race
+    raceOptions.value = data.race
     simulateText.textContent = JSON.stringify(data, null, 2);
 
     // create a checkbox for each talent that exists in html, and check it if the talent is active on the character
@@ -88,4 +92,4 @@ document.querySelectorAll("input[data-talent]").forEach(element => {
     element.addEventListener("change", handleTalentChange);
 });
 
-raceFilter.addEventListener("change", handleRaceChange);
+raceOptions.addEventListener("change", handleRaceChange);

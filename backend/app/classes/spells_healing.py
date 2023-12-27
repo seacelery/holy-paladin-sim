@@ -5,7 +5,7 @@ from .spells import Spell
 from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, BlessingOfFreedomBuff, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts
 
 
 def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_targets):
@@ -1038,6 +1038,8 @@ class LightsHammerSpell(Spell):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             caster.apply_summon(LightsHammerSummon(), current_time)
+            update_spell_data_casts(caster.ability_breakdown, "Light's Hammer", self.get_mana_cost(caster))
+            caster.ability_breakdown["Light's Hammer"]["casts"] -= 8
                 
                 
 class LightsHammerHeal(Spell):

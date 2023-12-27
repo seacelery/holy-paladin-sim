@@ -379,8 +379,19 @@ class Simulation:
         # pp.pprint(self.paladin.events_with_beacon)
         
         # pp.pprint(self.paladin.events)
-        pp.pprint(healing_and_buff_events)
+        # pp.pprint(healing_and_buff_events)
         # pp.pprint(healing_and_beacon_events)
+        
+        for spell, data in self.paladin.ability_breakdown.items():
+            if data["hits"] > data["casts"]:
+                data["crit_percent"] = (data["crits"] / data["hits"]) * 100 if data["casts"] > 0 else 0
+            else:
+                data["crit_percent"] = (data["crits"] / data["casts"]) * 100 if data["casts"] > 0 else 0
+            
+            for target, target_data in data["targets"].items():
+                target_data["crit_percent"] = (target_data["crits"] / target_data["casts"]) * 100 if target_data["casts"] > 0 else 0
+        
+        pp.pprint(self.paladin.ability_breakdown)
         
         # pp.pprint(self.paladin.ability_cast_events)
         
@@ -388,6 +399,6 @@ class Simulation:
         pp.pprint(self.paladin.holy_power_by_ability)
         print(f"Glimmers applied: {self.paladin.glimmer_application_counter}")
         print(f"Glimmers removed: {self.paladin.glimmer_removal_counter}")
-        return healing_and_buff_events
+        return self.paladin.ability_breakdown
         # print(f"Direct heals: {self.times_direct_healed}")
         
