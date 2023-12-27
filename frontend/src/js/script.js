@@ -1,3 +1,6 @@
+import { createAbilityBreakdown } from "./AbilityBreakdown.js";
+import { handleTabs } from "./SimulationOptions.js";
+
 const simulateText = document.getElementById("simulate-text");
 
 const importButton = document.getElementById("import-button");
@@ -7,14 +10,28 @@ const simulateButton = document.getElementById("simulate-button");
 
 // request functions
 const importCharacter = async () => {
-    return fetch("http://127.0.0.1:5000/import_character?character_name=daisu&realm=aszune", {
+    let characterName = document.getElementById("character-name-input").value.toLowerCase()
+    let characterRealm = document.getElementById("character-realm-input").value.toLowerCase()
+
+    characterName = "daisu";
+    characterRealm = "aszune";
+
+    return fetch(`http://127.0.0.1:5000/import_character?character_name=${characterName}&realm=${characterRealm}`, {
         credentials: "include"
     })
     .then(response => response.json())
     .then(data => {
         updateUIAfterImport(data)
     })
-    .catch(error => console.error("Error:", error));
+    .catch(error => { console.error("Error:", error);
+                    if (!characterName) {
+                        window.alert(`Character name missing`)
+                    } else if (!characterRealm) {
+                        window.alert(`Character realm missing`)
+                    } else {
+                        window.alert(`Character not found`)
+                    };          
+    });
 };
 
 const updateCharacter = async (data) => {
@@ -41,8 +58,9 @@ const runSimulation = async () => {
     })
     .then(response => response.json())
     .then(data => {
-        rawSimulationData = convertToJSON(data);
-        simulateText.textContent = rawSimulationData;
+        const simulationData = convertToJSON(data);
+        simulateText.textContent = simulationData;
+        createAbilityBreakdown(simulationData)
     })
     .catch(error => console.error("Error:", error));
 };
@@ -93,3 +111,6 @@ document.querySelectorAll("input[data-talent]").forEach(element => {
 });
 
 raceOptions.addEventListener("change", handleRaceChange);
+
+// initialise options tabs
+handleTabs("options-navbar", "options-tab-content");

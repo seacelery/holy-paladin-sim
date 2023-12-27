@@ -1,5 +1,18 @@
+:root {
+    --background-colour: #151418;
+    --panel-colour: #323138;
+    --panel-colour-2: #262529;
+    --panel-colour-3: #3c3b41;
+    --panel-colour-4: #56545a;
+    --border-colour: #3c3241;
+    --border-colour2: #1b1a1f;
+    --light-font-colour: white;
+    --dark-font-colour: rgb(29, 26, 31);
+}
+
 * {
-    font-family: Lato;
+    font-family: Raleway;
+    font-weight: 500;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -7,72 +20,208 @@
 
 body {
     margin: 0 auto;
-    background-color: rgb(41, 38, 40);
+    background-color: var(--background-colour);
 }
 
-#simulate-container {
-    margin: 0 auto;
-    padding-top: 100px;
+/* character import bar */
+#import-character-container {
+    margin: 50px auto 20px auto;
+    padding: 18px 0 20px 0;
     display: flex;
     justify-content: center;
+
+    width: 65%;
+
+    border: 1px solid var(--border-colour);
+    border-radius: 3px;
+    
+    background-color: var(--panel-colour);
 }
+
+.character-input-label {
+    padding: 3px 10px 0 0;
+
+    font-size: 18px;
+    color: var(--light-font-colour);
+}
+
+.character-input-field {
+    margin-right: 25px;
+    padding-left: 5px;
+    padding-bottom: 1px;
+
+    border: 1px solid var(--border-colour);
+    border-radius: 3px;
+
+    font-size: 18px;
+    color: var(--dark-font-colour);
+}
+
+#character-name-input, #character-realm-input {
+    width: 175px;
+    height: 27px;
+}
+
+#character-region-input {
+    width: 50px;
+    padding-left: 0px;
+    height: 27px;
+}
+
+#import-button {
+    width: 150px;
+    height: 30px;
+    margin-top: -1px;
+    
+    border: 1px solid var(--border-colour);
+    border-radius: 3px;
+
+    font-size: 18px;
+    color: var(--light-font-colour);
+
+    background-color: var(--panel-colour-2);
+}
+
+#import-button:hover {
+    cursor: pointer;
+    user-select: none;
+    background-color: var(--background-colour);
+}
+
+/* character options window */
+#simulation-options-container {
+    margin: 0 auto 20px auto;
+
+    width: 65%;
+
+    border: 1px solid var(--border-colour);
+    border-radius: 3px;
+
+    background-color: var(--panel-colour);
+}
+
+#options-navbar {
+    display: flex;
+
+    border-bottom: 1px solid var(--border-colour);
+    border-radius: 3px;
+
+    background-color: var(--panel-colour-3);
+}
+
+.options-tab {
+    padding: 10px;
+
+    min-width: 80px;
+
+    border-right: 1px solid var(--border-colour);
+    border-radius: 1px;
+
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--light-font-colour);
+    background-color: var(--panel-colour-2);
+
+    user-select: none;
+}
+
+.options-tab:hover {
+    cursor: pointer;
+}
+
+#options-window {
+    height: 500px;
+}
+
+.options-tab-content {
+    display: none;
+}
+
+#options-tab {
+    text-shadow: 0.5px 0 0 var(--light-font-colour);
+    background-color: var(--panel-colour-4);
+}
+
+#options-content {
+    display: block;
+}
+
+#options-container {
+    padding: 15px 0 0 15px;
+    font-size: 15px;
+}
+
+#race-filter-label {
+    padding-right: 5px;
+
+    color: var(--light-font-colour);
+}
+
+#race-filter {
+    padding-left: 1px;
+
+    width: 115px;
+    height: 25px;
+
+    border: 1px solid var(--border-colour);
+    border-radius: 3px;
+
+    font-size: 15px;
+}
+
+#talents-container {
+    display: flex;
+
+    padding: 15px 0 0 15px;
+    font-size: 15px;
+}
+
+.talent-checkbox {
+    color: var(--light-font-colour);
+    padding-right: 15px;
+    padding-left: 5px;
+}
+
+#options-status-bar {
+    display: flex;
+    justify-content: center;
+
+    height: 50px;
+    width: 100%;
+
+    border-top: 1px solid var(--border-colour);
+    border-radius: 1px;
+
+    background-color: var(--panel-colour-3);
+}
+
+#simulate-button-container {
+    margin-top: 5px;
+}
+
+#simulate-button {
+    width: 165px;
+    height: 39px;
+    
+    border: 1px solid var(--border-colour);
+    border-radius: 3px;
+
+    font-size: 20px;
+    color: var(--light-font-colour);
+
+    background-color: var(--panel-colour-2);
+}
+
 
 #simulate-text {
     display: flex;
     justify-content: center;
     color: white;
     font-size: 18px;
-    width: 90%;
+    width: 100%;
     padding-bottom: 20px;
 }
 
-#import-button-container {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 20px;
-}
 
-#import-button {
-    width: 200px;
-    height: 50px;
-    color:rgb(41, 38, 40);
-    font-size: 22px;
-}
-
-#options-div {
-    display: flex;
-    justify-content: center;
-    padding-bottom: 20px;
-}
-
-#race-filter {
-    width: 200px;
-    height: 30px;
-}
-
-#talents-div {
-    display: flex;
-    justify-content: center;
-    padding: 30px;
-    color: white
-}
-
-.talent-checkbox {
-    padding-right: 15px;
-    padding-left: 5px;
-}
-
-#simulate-button-container {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-}
-
-#simulate-button {
-    width: 200px;
-    height: 50px;
-    color:rgb(41, 38, 40);
-    font-size: 22px;
-}
 

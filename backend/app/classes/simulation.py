@@ -379,17 +379,17 @@ class Simulation:
         # pp.pprint(self.paladin.events_with_beacon)
         
         # pp.pprint(self.paladin.events)
-        # pp.pprint(healing_and_buff_events)
+        pp.pprint(healing_and_buff_events)
         # pp.pprint(healing_and_beacon_events)
         
         for spell, data in self.paladin.ability_breakdown.items():
             if data["hits"] > data["casts"]:
-                data["crit_percent"] = (data["crits"] / data["hits"]) * 100 if data["casts"] > 0 else 0
+                data["crit_percent"] = round((data["crits"] / data["hits"]) * 100, 1) if data["casts"] > 0 else 0
             else:
-                data["crit_percent"] = (data["crits"] / data["casts"]) * 100 if data["casts"] > 0 else 0
+                data["crit_percent"] = round((data["crits"] / data["casts"]) * 100, 1) if data["casts"] > 0 else 0
             
             for target, target_data in data["targets"].items():
-                target_data["crit_percent"] = (target_data["crits"] / target_data["casts"]) * 100 if target_data["casts"] > 0 else 0
+                target_data["crit_percent"] = round((target_data["crits"] / target_data["casts"]) * 100, 1) if target_data["casts"] > 0 else 0
         
         pp.pprint(self.paladin.ability_breakdown)
         

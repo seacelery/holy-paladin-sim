@@ -11,38 +11,78 @@
         <link
       href="https://fonts.googleapis.com/css?family=Lato&display=swap"
       rel="stylesheet"
-    />
+        />
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@100;200;300;400;500&family=Poppins:wght@200&family=Raleway:wght@200;300;400;500&family=Source+Sans+3:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
+        <div id="import-character-container">
+            <label for="character-region-input" class="character-input-label">Region:</label>
+            <select id="character-region-input" class="character-input-field">
+                <option value="EU">EU</option>
+                <option value="US">US</option>
+            </select>
+
+            <label for="character-realm-input" class="character-input-label">Realm:</label>
+            <input type="text" id="character-realm-input" class="character-input-field">
+
+            <label for="character-name-input" class="character-input-label">Name:</label>
+            <input type="text" id="character-name-input" class="character-input-field">
+
+            <button id="import-button">Import</button>
+        </div>
+
+        <div id="simulation-options-container">
+            <nav id="options-navbar">
+                <div id="options-tab" class="options-tab">Options</div>
+                <div id="talents-tab" class="options-tab">Talents</div>
+                <div id="equipment-tab" class="options-tab">Equipment</div>
+                <div id="buffs-tab" class="options-tab">Buffs</div>
+                <div id="advanced-tab" class="options-tab">Advanced Options</div>
+                
+            </nav>
+
+            <div id="options-window">
+                <div id="options-content" class="options-tab-content">
+                    <div id="options-container">
+                        <label for="race-filter" id="race-filter-label">Race:</label>
+                        <select id="race-filter">
+                            <option value="Human">Human</option>
+                            <option value="Blood Elf">Blood Elf</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <div id="talents-content" class="options-tab-content">
+                    <div id="talents-container">
+                        <input type="checkbox" id="talent1" class="talent-input" data-talent="Light's Conviction">
+                        <label for="talent1" class="talent-checkbox">Light's Conviction</label><br>
+                        <input type="checkbox" id="talent2" class="talent-input" data-talent="Reclamation">
+                        <label for="talent2" class="talent-checkbox">Reclamation</label><br>
+                        <input type="checkbox" id="talent3" class="talent-input" data-talent="Light of Dawn">
+                        <label for="talent3" class="talent-checkbox">Light of Dawn</label><br>
+                    </div>
+                </div>
+                <div id="equipment-content" class="options-tab-content"></div>
+                <div id="buffs-content" class="options-tab-content"></div>
+                <div id="advanced-content" class="options-tab-content"></div>
+                
+            </div>
+
+            <div id="options-status-bar">
+                <div id="simulate-button-container">
+                    <button id="simulate-button">lets go!!!!!</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        
+        
         <div id="simulate-container">
             <div id="simulate-text">aaaaaa</div>
         </div>
-
-        <div id="import-button-container">
-            <button id="import-button">import</button>
-        </div>
-
-        <div id="options-div">
-            <select id="race-filter">
-                <option value="Human">Human</option>
-                <option value="Blood Elf">Blood Elf</option>
-            </select>
-        </div>
-
-        <div id="talents-div">
-            <input type="checkbox" id="talent1" data-talent="Light's Conviction">
-            <label for="talent1" class="talent-checkbox">Light's Conviction</label><br>
-            <input type="checkbox" id="talent2" data-talent="Reclamation">
-            <label for="talent2" class="talent-checkbox">Reclamation</label><br>
-            <input type="checkbox" id="talent3" data-talent="Light of Dawn">
-            <label for="talent3" class="talent-checkbox">Light of Dawn</label><br>
-        </div>
-
-        <div id="simulate-button-container">
-            <button id="simulate-button">lets go!!!!!</button>
-        </div>
         
-        
-        <script src="../src/js/script.js" ></script>
+        <script type="module" src="../src/js/script.js" ></script>
     </body>
 </html>
