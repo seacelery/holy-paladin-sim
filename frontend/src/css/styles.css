@@ -1,13 +1,16 @@
 :root {
-    --background-colour: #151418;
+    --background-colour: rgb(14, 14, 17);
     --panel-colour: #323138;
-    --panel-colour-2: #262529;
-    --panel-colour-3: #3c3b41;
+    --panel-colour-2: #1c1c1f;
+    --panel-colour-3: #3f3e44;
     --panel-colour-4: #56545a;
+    --panel-colour-5: #2c2b30;
     --border-colour: #3c3241;
     --border-colour2: #1b1a1f;
+
     --light-font-colour: white;
     --dark-font-colour: rgb(29, 26, 31);
+    --green-font: rgb(101, 214, 129);
 }
 
 * {
@@ -94,7 +97,9 @@ body {
 
     width: 65%;
 
-    border: 1px solid var(--border-colour);
+    border-left: 1px solid var(--border-colour);
+    border-bottom: 1px solid var(--border-colour);
+    border-top: none;
     border-radius: 3px;
 
     background-color: var(--panel-colour);
@@ -106,7 +111,7 @@ body {
     border-bottom: 1px solid var(--border-colour);
     border-radius: 3px;
 
-    background-color: var(--panel-colour-3);
+    background-color: var(--background-colour);
 }
 
 .options-tab {
@@ -114,6 +119,7 @@ body {
 
     min-width: 80px;
 
+    border-top: 1px solid var(--border-colour);
     border-right: 1px solid var(--border-colour);
     border-radius: 1px;
 
@@ -126,21 +132,31 @@ body {
     user-select: none;
 }
 
-.options-tab:hover {
+.options-tab.active {
+    background-color: var(--panel-colour-4);
+    text-shadow: 0.5px 0 0 var(--light-font-colour);
+}
+
+.options-tab.inactive {
+    background-color: var(--panel-colour-2);
+    text-shadow: none;
+}
+
+.options-tab.inactive:hover {
     cursor: pointer;
+    background-color: var(--panel-colour-5);
+    user-select: none;
 }
 
 #options-window {
     height: 500px;
+
+    border-right: 1px solid var(--border-colour);
+    border-radius: 3px;
 }
 
 .options-tab-content {
     display: none;
-}
-
-#options-tab {
-    text-shadow: 0.5px 0 0 var(--light-font-colour);
-    background-color: var(--panel-colour-4);
 }
 
 #options-content {
@@ -194,6 +210,35 @@ body {
     border-radius: 1px;
 
     background-color: var(--panel-colour-3);
+
+    position: relative;
+}
+
+#saving-data-status, #saved-data-status {
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    left: 20px;
+    top: 15px;
+
+    color: var(--light-font-colour);
+    display: none;
+}
+
+#saved-data-status {
+    display: block;
+    opacity: 0;
+    margin-top: -4px;
+    color: var(--green-font);
+    transition: opacity 0.4s ease-out;
+}
+
+#saved-data-status-check {
+    margin: 0 10px 0 0;
+    transform: translateY(2px);
+    font-size: 22px;
+    transition: opacity 0.4s ease-out;
 }
 
 #simulate-button-container {
@@ -211,6 +256,12 @@ body {
     color: var(--light-font-colour);
 
     background-color: var(--panel-colour-2);
+}
+
+#simulate-button:hover {
+    cursor: pointer;
+    user-select: none;
+    background-color: var(--background-colour);
 }
 
 

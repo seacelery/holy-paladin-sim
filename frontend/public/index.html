@@ -25,7 +25,7 @@
             <label for="character-realm-input" class="character-input-label">Realm:</label>
             <input type="text" id="character-realm-input" class="character-input-field">
 
-            <label for="character-name-input" class="character-input-label">Name:</label>
+            <label for="character-name-input" class="character-input-label">Character Name:</label>
             <input type="text" id="character-name-input" class="character-input-field">
 
             <button id="import-button">Import</button>
@@ -33,11 +33,11 @@
 
         <div id="simulation-options-container">
             <nav id="options-navbar">
-                <div id="options-tab" class="options-tab">Options</div>
-                <div id="talents-tab" class="options-tab">Talents</div>
-                <div id="equipment-tab" class="options-tab">Equipment</div>
-                <div id="buffs-tab" class="options-tab">Buffs</div>
-                <div id="advanced-tab" class="options-tab">Advanced Options</div>
+                <div id="options-tab" class="options-tab active">Options</div>
+                <div id="talents-tab" class="options-tab inactive">Talents</div>
+                <div id="equipment-tab" class="options-tab inactive">Equipment</div>
+                <div id="buffs-tab" class="options-tab inactive">Buffs</div>
+                <div id="advanced-tab" class="options-tab inactive">Advanced Options</div>
                 
             </nav>
 
@@ -69,6 +69,9 @@
             </div>
 
             <div id="options-status-bar">
+                <div id="saving-data-status">Saving changes...</div>
+                <div id="saved-data-status"><i class="fa-regular fa-circle-check" id="saved-data-status-check"></i>Changes saved</div>
+
                 <div id="simulate-button-container">
                     <button id="simulate-button">lets go!!!!!</button>
                 </div>

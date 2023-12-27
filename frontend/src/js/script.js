@@ -1,6 +1,8 @@
 import { createAbilityBreakdown } from "./AbilityBreakdown.js";
 import { handleTabs } from "./SimulationOptions.js";
 
+let savedDataTimeout;
+
 const simulateText = document.getElementById("simulate-text");
 
 const importButton = document.getElementById("import-button");
@@ -35,6 +37,20 @@ const importCharacter = async () => {
 };
 
 const updateCharacter = async (data) => {
+    // const savingData = document.getElementById("saving-data-status");
+    const savedData = document.getElementById("saved-data-status");
+    
+    const handleSavedDataStatus = () => {
+        savedData.style.opacity = 1
+
+        clearTimeout(savedDataTimeout);
+        savedDataTimeout = setTimeout(() => {
+            savedData.style.opacity = 0;
+        }, 5000);
+    };
+
+    handleSavedDataStatus();
+
     return fetch("http://127.0.0.1:5000/update_character", {
         method: "POST",
         credentials: "include",
@@ -44,7 +60,10 @@ const updateCharacter = async (data) => {
         body: JSON.stringify(data)
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+        console.log(data);
+        handleSavedDataStatus();
+    })
     .catch(error => console.error("Error:", error));
 };
 

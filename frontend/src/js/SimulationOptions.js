@@ -13,14 +13,15 @@ const switchTab = (tabId, contentClass) => {
     });
 
     document.querySelectorAll(".options-tab").forEach(element => {
-        element.style.backgroundColor = "var(--panel-colour-2)"
-        element.style.textShadow = "none";
+        element.classList.remove("active");
+        element.classList.add("inactive");
     });
 
     const contentId = tabId.replace("tab", "content");
     document.getElementById(contentId).style.display = "block";
-    document.getElementById(tabId).style.backgroundColor = "var(--panel-colour-4)";
-    document.getElementById(tabId).style.textShadow = "0.5px 0 0 var(--light-font-colour)";
+    const activeTab = document.getElementById(tabId);
+    activeTab.classList.add("active");
+    activeTab.classList.remove("inactive");
 };
 
 export { handleTabs };
