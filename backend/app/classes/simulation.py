@@ -92,7 +92,7 @@ class Simulation:
             # ("Blessing of the Seasons", lambda: True),
             # ("Avenging Wrath", lambda: True),
             ("Holy Shock", lambda: True),
-            ("Light's Hammer", lambda: True),
+            # ("Light's Hammer", lambda: True),
             # ("Divine Toll", lambda: True),
             # ("Tyr's Deliverance", lambda: True),
             # ("Divine Toll", lambda: self.paladin.holy_power == 4),
@@ -110,8 +110,8 @@ class Simulation:
             # ("Holy Shock", lambda: 127 <= self.elapsed_time <= 128),
             # ("Daybreak", lambda: 128 <= self.elapsed_time <= 129),
             # ("Holy Shock", lambda: self.elapsed_time <= 2),
-            # ("Daybreak", lambda: self.elapsed_time >= 9),
-            # ("Divine Toll", lambda: True),
+            ("Daybreak", lambda: self.elapsed_time >= 9),
+            ("Divine Toll", lambda: True),
             # ("Holy Shock", lambda: self.elapsed_time >= 10),
             
             # ("Wait", lambda: 2 < self.elapsed_time < 14),
@@ -121,7 +121,7 @@ class Simulation:
             # # ("Flash of Light", lambda: True),
             # # ("Holy Light", lambda: "Divine Favor" in self.paladin.active_auras),
             # # ("Judgment", lambda: "Awakening READY!!!!!!" in self.paladin.active_auras),
-            ("Judgment", lambda: True),
+            # ("Judgment", lambda: True),
             ("Light of Dawn", lambda: True),
             # ("Light of Dawn", lambda: self.paladin.holy_power >= 3),
             # ("Holy Light", lambda: True),
@@ -382,15 +382,82 @@ class Simulation:
         pp.pprint(healing_and_buff_events)
         # pp.pprint(healing_and_beacon_events)
         
+        
+        
+        # i.e. Holy Shock (Divine Toll) is a sub-spell of Divine Toll
+        sub_spell_map = {
+            "Holy Shock (Divine Toll)": "Divine Toll",
+            "Holy Shock (Divine Resonance)": "Divine Toll",
+            "Holy Shock (Rising Sunlight)": "Daybreak",
+            "Glimmer of Light": "Holy Shock",
+            "Glimmer of Light (Daybreak)": "Daybreak",
+            "Glimmer of Light (Rising Sunlight)": "Holy Shock (Rising Sunlight)",
+            "Glimmer of Light (Glistening Radiance (Light of Dawn))": "Light of Dawn",
+            "Glimmer of Light (Glistening Radiance (Word of Glory))": "Word of Glory",
+            "Glimmer of Light (Divine Toll)": "Holy Shock (Divine Toll)"
+        }
+        
+        def add_sub_spell_healing(primary_spell_data):
+            total_healing = primary_spell_data.get("total_healing", 0)
+
+            for sub_spell_name, sub_spell_data in primary_spell_data.get('sub_spells', {}).items():
+                total_healing += sub_spell_data.get("total_healing", 0)
+                
+                # add healing and hits from nested sub-spells
+                for nested_sub_spell_data in sub_spell_data.get("sub_spells", {}).values():
+                    total_healing += nested_sub_spell_data.get("total_healing", 0)
+
+            return total_healing
+        
+        # process data to include crit percent
         for spell, data in self.paladin.ability_breakdown.items():
             if data["hits"] > data["casts"]:
                 data["crit_percent"] = round((data["crits"] / data["hits"]) * 100, 1) if data["casts"] > 0 else 0
             else:
                 data["crit_percent"] = round((data["crits"] / data["casts"]) * 100, 1) if data["casts"] > 0 else 0
-            
+                      
             for target, target_data in data["targets"].items():
                 target_data["crit_percent"] = round((target_data["crits"] / target_data["casts"]) * 100, 1) if target_data["casts"] > 0 else 0
         
+        # assign sub-spell data to primary spell
+        for spell, data in self.paladin.ability_breakdown.items():
+            if spell in sub_spell_map:
+                primary_spell = sub_spell_map[spell]
+                self.paladin.ability_breakdown[primary_spell]["sub_spells"][spell] = data
+        
+        for primary_spell, primary_data in self.paladin.ability_breakdown.items():
+            if primary_spell in sub_spell_map.values():
+                # add sub-spell healing to the primary spell's healing
+                primary_data["total_healing"] = add_sub_spell_healing(primary_data)
+                
+                # total crits and hits required for crit percent calculation  
+                total_crits = primary_data.get("crits", 0)
+                total_hits = primary_data.get("hits", 0)
+                total_holy_power_gained = primary_data.get("holy_power_gained", 0)
+
+                for sub_spell_data in primary_data.get("sub_spells", {}).values():
+                    total_crits += sub_spell_data.get("crits", 0)
+                    total_hits += sub_spell_data.get("hits", 0)
+                    total_holy_power_gained += sub_spell_data.get("holy_power_gained", 0)
+
+                    for nested_sub_spell_data in sub_spell_data.get("sub_spells", {}).values():
+                        total_crits += nested_sub_spell_data.get("crits", 0)
+                        total_hits += nested_sub_spell_data.get("hits", 0)
+                        total_holy_power_gained += nested_sub_spell_data.get("holy_power_gained", 0)
+                    
+                # display holy power for a spell as the sum of its sub-spells
+                primary_data["holy_power_gained"] = total_holy_power_gained
+                
+                # # this line is responsible for whether the crit percent propagates back up the table
+                # primary_data["crit_percent"] = round((total_crits / total_hits) * 100, 1) if total_hits > 0 else 0
+        
+        # remove the primary spell data for sub-spells        
+        for spell in ["Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)", "Holy Shock (Rising Sunlight)" , "Glimmer of Light", 
+                      "Glimmer of Light (Daybreak)", "Glimmer of Light (Rising Sunlight)", "Glimmer of Light (Divine Toll)", 
+                      "Glimmer of Light (Glistening Radiance (Light of Dawn))", "Glimmer of Light (Glistening Radiance (Word of Glory))"]:
+            if spell in self.paladin.ability_breakdown:
+                del self.paladin.ability_breakdown[spell]
+                
         pp.pprint(self.paladin.ability_breakdown)
         
         # pp.pprint(self.paladin.ability_cast_events)
@@ -399,6 +466,6 @@ class Simulation:
         pp.pprint(self.paladin.holy_power_by_ability)
         print(f"Glimmers applied: {self.paladin.glimmer_application_counter}")
         print(f"Glimmers removed: {self.paladin.glimmer_removal_counter}")
-        return self.paladin.ability_breakdown
+        return self.paladin.ability_breakdown, self.elapsed_time
         # print(f"Direct heals: {self.times_direct_healed}")
         

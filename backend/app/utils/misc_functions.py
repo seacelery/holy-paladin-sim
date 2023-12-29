@@ -174,7 +174,8 @@ def update_spell_data_casts(spell_breakdown, spell_name, mana_spent=None, holy_p
             "crits": 0,
             "mana_spent": 0,
             "holy_power_gained": 0,
-            "holy_power_spent": 0
+            "holy_power_spent": 0,
+            "sub_spells": {}
         }
     
     spell_data = spell_breakdown[spell_name]

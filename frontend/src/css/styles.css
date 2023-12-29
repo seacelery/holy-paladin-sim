@@ -1,21 +1,28 @@
 :root {
     --background-colour: rgb(14, 14, 17);
     --panel-colour: #323138;
-    --panel-colour-2: #1c1c1f;
+    --panel-colour-2: #17171a;
     --panel-colour-3: #3f3e44;
     --panel-colour-4: #56545a;
     --panel-colour-5: #2c2b30;
     --border-colour: #3c3241;
-    --border-colour2: #1b1a1f;
+    --border-colour-2: #1b1a1f;
+    --border-colour-3: #56545a;
 
     --light-font-colour: white;
-    --dark-font-colour: rgb(29, 26, 31);
+    --dark-font-colour: rgb(0, 0, 0);
     --green-font: rgb(101, 214, 129);
+    --healing-font: #d8fdd8;
+    --holy-font: #f4f8cd;
+
+    --holy-power-gain: rgb(101, 214, 129);
+    --holy-power-loss: rgb(214, 101, 101);
+    --mana: #76afdd;
 }
 
 * {
-    font-family: Raleway;
-    font-weight: 500;
+    font-family: "Inter";
+    font-weight: 400;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -29,13 +36,13 @@ body {
 /* character import bar */
 #import-character-container {
     margin: 50px auto 20px auto;
-    padding: 18px 0 20px 0;
+    padding: 11px 0 11px 0;
     display: flex;
     justify-content: center;
 
     width: 65%;
 
-    border: 1px solid var(--border-colour);
+    border: 1px solid var(--panel-colour-4);
     border-radius: 3px;
     
     background-color: var(--panel-colour);
@@ -53,7 +60,7 @@ body {
     padding-left: 5px;
     padding-bottom: 1px;
 
-    border: 1px solid var(--border-colour);
+    border: 1px solid var(--panel-colour-4);
     border-radius: 3px;
 
     font-size: 18px;
@@ -76,7 +83,7 @@ body {
     height: 30px;
     margin-top: -1px;
     
-    border: 1px solid var(--border-colour);
+    border: 1px solid var(--panel-colour-4);
     border-radius: 3px;
 
     font-size: 18px;
@@ -97,8 +104,8 @@ body {
 
     width: 65%;
 
-    border-left: 1px solid var(--border-colour);
-    border-bottom: 1px solid var(--border-colour);
+    border-left: 1px solid var(--border-colour-3);
+    border-bottom: 1px solid var(--border-colour-3);
     border-top: none;
     border-radius: 3px;
 
@@ -108,7 +115,7 @@ body {
 #options-navbar {
     display: flex;
 
-    border-bottom: 1px solid var(--border-colour);
+    border-bottom: 1px solid var(--border-colour-3);
     border-radius: 3px;
 
     background-color: var(--background-colour);
@@ -119,13 +126,13 @@ body {
 
     min-width: 80px;
 
-    border-top: 1px solid var(--border-colour);
-    border-right: 1px solid var(--border-colour);
+    border-top: 1px solid var(--border-colour-3);
+    border-right: 1px solid var(--border-colour-3);
     border-radius: 1px;
 
     text-align: center;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 300;
     color: var(--light-font-colour);
     background-color: var(--panel-colour-2);
 
@@ -151,7 +158,7 @@ body {
 #options-window {
     height: 500px;
 
-    border-right: 1px solid var(--border-colour);
+    border-right: 1px solid var(--border-colour-3);
     border-radius: 3px;
 }
 
@@ -180,7 +187,7 @@ body {
     width: 115px;
     height: 25px;
 
-    border: 1px solid var(--border-colour);
+    border: 1px solid var(--border-colour-3);
     border-radius: 3px;
 
     font-size: 15px;
@@ -206,7 +213,7 @@ body {
     height: 50px;
     width: 100%;
 
-    border-top: 1px solid var(--border-colour);
+    border-top: 1px solid var(--border-colour-3);
     border-radius: 1px;
 
     background-color: var(--panel-colour-3);
@@ -228,16 +235,20 @@ body {
 
 #saved-data-status {
     display: block;
-    opacity: 0;
     margin-top: -4px;
+
     color: var(--green-font);
+
+    opacity: 0;
     transition: opacity 0.4s ease-out;
 }
 
 #saved-data-status-check {
     margin: 0 10px 0 0;
     transform: translateY(2px);
+
     font-size: 22px;
+
     transition: opacity 0.4s ease-out;
 }
 
@@ -249,7 +260,7 @@ body {
     width: 165px;
     height: 39px;
     
-    border: 1px solid var(--border-colour);
+    border: 1px solid var(--border-colour-3);
     border-radius: 3px;
 
     font-size: 20px;
@@ -264,15 +275,282 @@ body {
     background-color: var(--background-colour);
 }
 
-
 #simulate-text {
     display: flex;
     justify-content: center;
+    padding-bottom: 20px;
+    
+    width: 100%;
+    
     color: white;
     font-size: 18px;
-    width: 100%;
-    padding-bottom: 20px;
 }
 
 
+
+
+/* ABILITY BREAKDOWN TABLE */
+#table-container {
+    margin: 0 auto 200px auto;
+
+    width: 65%;
+
+    color: var(--light-font-colour);
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+#table-headers {
+    font-size: 18px;
+}
+
+.table-header {
+    padding: 5px 5px 5px 10px;
+
+    height: 35px;
+    
+    border: 1px solid var(--border-colour-3);
+    
+    text-align: center;
+
+    background-color: var(--panel-colour);
+}
+
+.table-cell-left {
+    padding-left: 5px;
+
+    width: 350px;
+    height: 35px;
+    
+    border: 1px solid var(--border-colour-3);
+
+    font-weight: 300;
+    font-size: 17px;
+
+    background-color: var(--panel-colour-2);
+}
+
+.table-cell-right {
+    padding-right: 8px;
+
+    height: 35px;
+    
+    border-top: none;
+    border: 1px solid var(--border-colour-3);
+
+    font-weight: 300;
+    font-size: 17px;
+    text-align: right;
+
+    background-color: var(--panel-colour-2);
+}
+
+.table-sub-cell-left {
+    position: relative;
+    padding-left: 5px;
+
+    width: 350px;
+    height: 35px;
+    
+    border: 1px solid var(--border-colour-3);
+
+    font-weight: 300;
+    font-size: 17px;
+
+    background-color: var(--background-colour);
+}
+
+.table-sub-cell-left::before {
+    position: absolute;
+    left: 15px;
+    top: 0px;
+
+    height: 50%;
+    width: 8px;
+
+    content: "";
+    border-bottom: 1.5px solid var(--border-colour-3);
+    border-left: 1.5px solid var(--border-colour-3);
+}
+
+.table-sub-cell-right {
+    padding-right: 8px;
+
+    height: 35px;
+    
+    border-top: none;
+    border: 1px solid var(--border-colour-3);
+
+    font-weight: 300;
+    font-size: 17px;
+    text-align: right;
+
+    background-color: var(--background-colour);
+}
+
+.table-sub-sub-cell-left {
+    padding-left: 5px;
+    position: relative;
+
+    width: 350px;
+    height: 35px;
+    
+    border: 1px solid var(--border-colour-3);
+
+    font-weight: 300;
+    font-size: 17px;
+
+    background-color: rgba(0, 0, 0, 0.233);
+}
+
+.table-sub-sub-cell-left::before {
+    position: absolute;
+    left: 50px;
+    top: 0px;
+
+    height: 50%;
+    width: 8px;
+
+    content: "";
+    border-bottom: 1.5px solid var(--border-colour-3);
+    border-left: 1.5px solid var(--border-colour-3);
+}
+
+.table-sub-sub-cell-right {
+    padding-right: 8px;
+
+    height: 35px;
+    
+    border-top: none;
+    border: 1px solid var(--border-colour-3);
+
+    font-weight: 300;
+    font-size: 17px;
+    text-align: right;
+
+    background-color: rgba(0, 0, 0, 0.233);
+}
+
+.spell-name-cell {
+    color: var(--holy-font);
+}
+
+.healing-cell, .HPS-cell {
+    color: var(--healing-font);
+}
+
+.mana-spent-cell {
+    color: var(--mana);
+}
+
+.sub-cell {
+    padding-left: 35px;
+}
+
+.sub-sub-cell {
+    padding-left: 70px;
+}
+
+.table-header-icon-container {
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.table-header-icon-container:hover {
+    cursor: pointer;
+    user-select: none;
+}
+
+.table-header-arrows {
+    padding-left: 0px;
+    transform: translateY(-3px);
+
+    font-size: 14px;
+
+    color: #cca1ddc9 !important;
+}
+
+.table-icon-container {
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.table-icon-container:hover {
+    cursor: pointer;
+    user-select: none;
+}
+
+.table-arrows {
+    padding-left: 9px;
+    transform: translateY(-3px);
+
+    font-size: 14px;
+
+    color: #cca1ddc9 !important;
+}
+
+.table-cell-bottom-left {
+    padding-left: 5px;
+
+    height: 35px;
+    
+    border: 1px solid var(--border-colour-3);
+
+    font-weight: 300;
+    font-size: 17px;
+
+    background-color: var(--panel-colour);
+}
+
+.table-cell-bottom-right {
+    padding-right: 8px;
+
+    height: 35px;
+    
+    border-bottom: 1px solid var(--border-colour-3);
+
+    font-weight: 300;
+    font-size: 17px;
+    text-align: right;
+
+    background-color: var(--panel-colour);
+}
+
+.healing-percent-cell {
+    border: 1px solid var(--border-colour-3);
+}
+
+.healing-cell {
+    border: 1px solid var(--border-colour-3);
+}
+
+#overall-healing-percent-cell, #overall-casts-cell, #overall-holy-power-cell {
+    border: 1px solid var(--border-colour-3);
+}
+
+#overall-healing-cell {
+    border: 1px solid var(--border-colour-3);
+
+    color: var(--healing-font);
+}
+
+#overall-HPS-cell {
+    border-left: 1px solid var(--border-colour-3);
+    border-right: 1px solid var(--border-colour-3);
+
+    color: var(--healing-font);
+}
+
+#overall-mana-spent-cell {
+    border-left: 1px solid var(--border-colour-3);
+    border-right: 1px solid var(--border-colour-3);
+
+    color: var(--mana);
+}
 

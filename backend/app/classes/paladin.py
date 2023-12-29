@@ -47,6 +47,8 @@ class Paladin:
         self.class_talents = test_active_class_talents
         self.spec_talents = test_active_spec_talents
         
+        self.class_talents["row10"]["Divine Resonance"]["ranks"]["current rank"] = 1
+        
         # self.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] = 0
         # print(self.class_talents["row3"]["Greater Judgment"])
         

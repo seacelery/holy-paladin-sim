@@ -154,7 +154,7 @@ class DivineResonance(Buff):
             self.last_holy_shock_time = 0
     
     def trigger_divine_resonance_holy_shock(self, caster, current_time):
-        from backend.app.classes.spells_healing import DivineResonanceHolyShock
+        from .spells_healing import DivineResonanceHolyShock
         
         glimmer_targets = [glimmer_target for glimmer_target in caster.potential_healing_targets if "Glimmer of Light" in glimmer_target.target_active_buffs]
         non_glimmer_targets = [glimmer_target for glimmer_target in caster.potential_healing_targets if "Glimmer of Light" not in glimmer_target.target_active_buffs]
@@ -215,7 +215,7 @@ class TyrsDeliveranceSelfBuff(Buff):
             self.last_tyr_tick_time = 0
     
     def trigger_tyrs_deliverance_tick(self, caster, current_time):
-        from backend.app.classes.spells_auras import TyrsDeliveranceHeal
+        from .spells_auras import TyrsDeliveranceHeal
         
         non_tyrs_targets = [target for target in caster.potential_healing_targets if "Tyr's Deliverance (target)" not in target.target_active_buffs]
         if len(non_tyrs_targets) > 0:
@@ -226,7 +226,7 @@ class TyrsDeliveranceSelfBuff(Buff):
         TyrsDeliveranceHeal(caster).cast_healing_spell(caster, target, current_time, is_heal=True)
         
     def trigger_partial_tick(self, caster, current_time):
-        from backend.app.classes.spells_auras import TyrsDeliveranceHeal
+        from .spells_auras import TyrsDeliveranceHeal
         
         non_tyrs_targets = [target for target in caster.potential_healing_targets if "Tyr's Deliverance (target)" not in target.target_active_buffs]
         target = [random.choice(non_tyrs_targets)]

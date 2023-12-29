@@ -70,14 +70,18 @@ class Spell:
         self.try_trigger_rppm_effects(caster, targets, current_time)
         
         for target in targets:
+            mana_cost = self.get_mana_cost(caster)
             damage_value, is_crit = self.calculate_damage(caster, self.bonus_crit, self.bonus_versatility)
             damage_value = round(damage_value)
             target.receive_damage(damage_value)
             
             if self.healing_target_count > 0:
-                caster.mana -= self.get_mana_cost(caster) / self.healing_target_count
+                caster.mana -= mana_cost / self.healing_target_count
             else:
-                caster.mana -= self.get_mana_cost(caster)
+                caster.mana -= mana_cost
+            update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, self.holy_power_gain, self.holy_power_cost)
+            
+            update_spell_data_heals(caster.ability_breakdown, self.name, target, 0, is_crit)
             
             append_spell_damage_event(caster.events, self.name, caster, target, damage_value, current_time, is_crit, spends_mana=True)     
             append_spell_cast_event(caster.ability_cast_events, self.name, caster, current_time, target)    
@@ -105,6 +109,10 @@ class Spell:
         heal_amount = 0
         
         self.try_trigger_rppm_effects(caster, targets, current_time)
+        
+        # add spells that trigger other spells as a cast event
+        if self.name in ["Divine Toll", "Daybreak"]:
+            update_spell_data_casts(caster.ability_breakdown, self.name, self.get_mana_cost(caster), self.holy_power_gain, self.holy_power_cost)
         
         if caster.mana >= self.get_mana_cost(caster) and is_heal:  
             target_count = self.healing_target_count

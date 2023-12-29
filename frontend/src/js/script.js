@@ -1,3 +1,6 @@
+// TO DOS
+// colour spell names by spell type
+
 import { createAbilityBreakdown } from "./AbilityBreakdown.js";
 import { handleTabs } from "./SimulationOptions.js";
 
@@ -77,9 +80,9 @@ const runSimulation = async () => {
     })
     .then(response => response.json())
     .then(data => {
-        const simulationData = convertToJSON(data);
+        let simulationData = data;
         simulateText.textContent = simulationData;
-        createAbilityBreakdown(simulationData)
+        createAbilityBreakdown(simulationData);
     })
     .catch(error => console.error("Error:", error));
 };
