@@ -55,7 +55,7 @@ def import_character(character_name, realm):
     return paladin, healing_targets
     
 def run_simulation(paladin, healing_targets):
-    simulation = Simulation(paladin, healing_targets, 20, access_token)
+    simulation = Simulation(paladin, healing_targets, 65, access_token)
     simulation.simulate()
     
     return simulation.display_results(healing_targets)

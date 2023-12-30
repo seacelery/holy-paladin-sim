@@ -147,6 +147,19 @@ def add_heal_to_most_relevant_events(array, time, spell, source, target=None, is
 
 # ability breakdown
 def update_spell_data_heals(spell_breakdown, spell_name, target, heal_amount, is_crit):
+    if spell_name not in spell_breakdown:
+        spell_breakdown[spell_name] = {
+            "total_healing": 0,
+            "casts": 0,
+            "hits": 0,
+            "targets": {},
+            "crits": 0,
+            "mana_spent": 0,
+            "holy_power_gained": 0,
+            "holy_power_spent": 0,
+            "sub_spells": {}
+        }
+    
     spell_data = spell_breakdown[spell_name]
     spell_data["total_healing"] += heal_amount
     spell_data["crits"] += 1 if is_crit else 0
@@ -164,7 +177,46 @@ def update_spell_data_heals(spell_breakdown, spell_name, target, heal_amount, is
     target_data["casts"] += 1
     target_data["crits"] += 1 if is_crit else 0
     
-def update_spell_data_casts(spell_breakdown, spell_name, mana_spent=None, holy_power_gained=None, holy_power_spent=None):
+def update_spell_data_beacon_heals(spell_breakdown, target, heal_amount, source_spell):
+    if "Beacon of Light" not in spell_breakdown:
+        spell_breakdown["Beacon of Light"] = {
+            "total_healing": 0,
+            "casts": 0,
+            "hits": 0,
+            "targets": {},
+            "crits": 0,
+            "mana_spent": 0,
+            "holy_power_gained": 0,
+            "holy_power_spent": 0,
+            "sub_spells": {},
+            "source_spells": {}
+        }   
+        
+    spell_data = spell_breakdown["Beacon of Light"] 
+    spell_data["total_healing"] += heal_amount
+    spell_data["hits"] += 1
+    
+    if target.name not in spell_data["targets"]:
+        spell_data["targets"][target.name] = {
+            "healing": 0,
+            "casts": 0,
+            "crits": 0
+        }
+        
+    target_data = spell_data["targets"][target.name]
+    target_data["healing"] += heal_amount
+    
+    if source_spell not in spell_data["source_spells"]:
+        spell_data["source_spells"][source_spell] = {
+            "healing": 0,
+            "hits": 0
+        }
+    
+    source_spell_data = spell_data["source_spells"][source_spell]
+    source_spell_data["healing"] += heal_amount
+    source_spell_data["hits"] += 1
+    
+def update_spell_data_casts(spell_breakdown, spell_name, mana_spent=None, holy_power_gained=None, holy_power_spent=None, exclude_casts=False):
     if spell_name not in spell_breakdown:
         spell_breakdown[spell_name] = {
             "total_healing": 0,
@@ -179,10 +231,12 @@ def update_spell_data_casts(spell_breakdown, spell_name, mana_spent=None, holy_p
         }
     
     spell_data = spell_breakdown[spell_name]
-    spell_data["casts"] += 1
+    if not exclude_casts:
+        spell_data["casts"] += 1
     if mana_spent != 0 and mana_spent is not None:
         spell_data["mana_spent"] += mana_spent
     if holy_power_gained != 0 and holy_power_gained is not None:
         spell_data["holy_power_gained"] += holy_power_gained
     if holy_power_spent != 0 and holy_power_spent is not None:
         spell_data["holy_power_spent"] += holy_power_spent
+        

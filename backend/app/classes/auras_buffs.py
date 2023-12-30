@@ -234,9 +234,10 @@ class TyrsDeliveranceSelfBuff(Buff):
         spell = TyrsDeliveranceHeal(caster)
         hasted_tick_interval = self.base_tick_interval / caster.haste_multiplier
 
-        spell.spell_healing_modifier *= (hasted_tick_interval - (hasted_tick_interval - self.last_tyr_tick_time)) / hasted_tick_interval
+        # with a low tick rate if it lines up perfectly it can try to divide by 0
+        spell.spell_healing_modifier *= (hasted_tick_interval - (hasted_tick_interval - self.last_tyr_tick_time - 0.0001)) / hasted_tick_interval
         spell.cast_healing_spell(caster, target, current_time, is_heal=True)
-        spell.spell_healing_modifier /= (hasted_tick_interval - (hasted_tick_interval - self.last_tyr_tick_time)) / hasted_tick_interval
+        spell.spell_healing_modifier /= (hasted_tick_interval - (hasted_tick_interval - self.last_tyr_tick_time  - 0.0001)) / hasted_tick_interval
         
         
 class DivinePurpose(Buff):

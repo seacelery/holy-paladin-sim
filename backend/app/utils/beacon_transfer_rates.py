@@ -13,6 +13,7 @@ beacon_transfer_rates_single_beacon = {
     "Word of Glory": single_beacon_transfer_st,
     "Tyr's Deliverance": single_beacon_transfer_st,
     "Resplendent Light": single_beacon_transfer_st,
+    "Afterimage": single_beacon_transfer_st,
     "Light of Dawn": single_beacon_transfer_aoe,
     "Glimmer of Light": single_beacon_transfer_aoe,
 }
@@ -27,6 +28,7 @@ beacon_transfer_rates_double_beacon = {
     "Word of Glory": double_beacon_transfer_st,
     "Tyr's Deliverance": double_beacon_transfer_st,
     "Resplendent Light": double_beacon_transfer_st,
+    "Afterimage": double_beacon_transfer_st,
     "Light of Dawn": double_beacon_transfer_aoe,
     "Glimmer of Light": double_beacon_transfer_aoe
 }

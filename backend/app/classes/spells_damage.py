@@ -1,5 +1,5 @@
 from .spells import Spell
-from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event
+from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals
 from .auras_debuffs import JudgmentOfLightDebuff, GreaterJudgmentDebuff
 from .auras_buffs import BlessingOfDawn
 from .spells_auras import AvengingWrathBuff
@@ -149,5 +149,7 @@ class CrusaderStrike(Spell):
             if caster.is_talent_active("Crusader's Reprieve"):
                 crusaders_reprieve_heal = caster.max_health * 0.02
                 caster.receive_self_heal(crusaders_reprieve_heal)
+                
+                update_spell_data_heals(caster.ability_breakdown, "Crusader's Reprieve", caster, crusaders_reprieve_heal, False)
                 append_spell_heal_event(caster.events, "Crusader's Reprieve", caster, caster, crusaders_reprieve_heal, current_time, is_crit=False)
 

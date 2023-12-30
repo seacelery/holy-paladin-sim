@@ -1,13 +1,15 @@
 import random
 
 from .auras import Debuff
-from ..utils.misc_functions import append_spell_heal_event, format_time, append_aura_stacks_decremented, append_aura_removed_event
+from ..utils.misc_functions import append_spell_heal_event, format_time, append_aura_stacks_decremented, append_aura_removed_event, update_spell_data_heals
 from .spells_passives import JudgmentOfLightSpell, GreaterJudgmentSpell
 
 # target debuffs
 
 
 class JudgmentOfLightDebuff(Debuff):
+    
+    SPELL_ID = 183778
     
     def __init__(self):
         super().__init__("Judgment of Light", 30, base_duration=30, current_stacks=5, max_stacks=5)
@@ -20,6 +22,8 @@ class JudgmentOfLightDebuff(Debuff):
             heal_value, is_crit = JudgmentOfLightSpell(caster).calculate_heal(caster)
             healing_target = random.choice(healing_targets)
             healing_target.receive_heal(heal_value)
+            
+            update_spell_data_heals(caster.ability_breakdown, "Judgment of Light", healing_target, heal_value, is_crit)
             append_spell_heal_event(caster.events, self.name, caster, healing_target, heal_value, current_time, is_crit)
             
             self.current_stacks -= 1
@@ -34,6 +38,8 @@ class JudgmentOfLightDebuff(Debuff):
             
             
 class GreaterJudgmentDebuff(Debuff):
+    
+    SPELL_ID = 231644
     
     def __init__(self):
         super().__init__("Greater Judgment", 15)
@@ -54,9 +60,12 @@ class GreaterJudgmentDebuff(Debuff):
         caster.mastery_multiplier = 1
         
         heal_value, is_crit = greater_judgment_spell.calculate_heal(caster)
+        print(is_crit)
         
         healing_target = random.choice(healing_targets)
         healing_target.receive_heal(heal_value)
+        
+        update_spell_data_heals(caster.ability_breakdown, "Greater Judgment", healing_target, heal_value, is_crit)
         append_spell_heal_event(caster.events, self.name, caster, healing_target, heal_value, current_time, is_crit, is_absorb=greater_judgment_spell.is_absorb)
         
         del greater_judgment_target.target_active_debuffs[self.name]

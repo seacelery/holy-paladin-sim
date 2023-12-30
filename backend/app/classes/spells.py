@@ -1,7 +1,7 @@
 import random
 
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_double_beacon
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts, update_spell_data_beacon_heals
 
 
 class Spell:
@@ -113,21 +113,19 @@ class Spell:
         # add spells that trigger other spells as a cast event
         if self.name in ["Divine Toll", "Daybreak"]:
             update_spell_data_casts(caster.ability_breakdown, self.name, self.get_mana_cost(caster), self.holy_power_gain, self.holy_power_cost)
-        
+            
         if caster.mana >= self.get_mana_cost(caster) and is_heal:  
             target_count = self.healing_target_count
-            
             if target_count > 1:  
-                multi_target_healing = [f"{self.name}: ", []]
-                
-            for target in targets:
+                multi_target_healing = [f"{self.name}: ", []]            
+            for target in targets:            
                 ability_healing = 0
                 healing_value, is_crit = self.calculate_heal(caster, self.bonus_crit, self.bonus_versatility, self.bonus_mastery)
                 
                 mana_cost = self.get_mana_cost(caster)
                 healing_value = round(healing_value)        
                 target.receive_heal(healing_value)
-                if target_count > 0:
+                if target_count > 1:
                     # deduct mana on the first instance of a multi-target spell
                     if self.aoe_cast_counter == 0:
                         self.aoe_cast_counter = target_count               
@@ -139,7 +137,12 @@ class Spell:
                     self.aoe_cast_counter -= 1
                 else: 
                     caster.mana -= mana_cost
-                    update_spell_data_casts(caster.ability_breakdown, self.name)
+                    
+                    # exclude casts for certain spells
+                    if self.name in ["Tyr's Deliverance"]:
+                        update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, self.holy_power_gain, self.holy_power_cost, exclude_casts=True)
+                    else:
+                        update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, self.holy_power_gain, self.holy_power_cost)
                 
                 # for detailed logging     
                 caster.healing_by_ability[self.name] = caster.healing_by_ability.get(self.name, 0) + healing_value
@@ -174,6 +177,9 @@ class Spell:
                         beacon_target.receive_beacon_heal(beacon_healing)
                         caster.healing_by_ability["Beacon of Light"] = caster.healing_by_ability.get("Beacon of Light", 0) + beacon_healing    
                         
+                        update_spell_data_beacon_heals(caster.ability_breakdown, beacon_target, beacon_healing, self.name)
+                        
+                        append_spell_heal_event(caster.events, "beacon", caster, beacon_target, beacon_healing, current_time, False, spends_mana=False)   
                         append_spell_beacon_event(caster.beacon_events, self.name, caster, beacon_target, healing_value, beacon_healing, current_time)   
                    
             if self.healing_target_count > 1:
@@ -304,6 +310,8 @@ class Spell:
                 if is_heal:
                     effect_heal, is_crit = effect.calculate_heal(caster)
                     target.receive_heal(effect_heal)
+                    
+                    update_spell_data_heals(caster.ability_breakdown, effect.name, target, effect_heal, is_crit)
                     append_spell_heal_event(caster.events, effect.name, caster, target, effect_heal, current_time, is_crit)
                     
                 if is_self_buff:

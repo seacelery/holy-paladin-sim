@@ -105,10 +105,10 @@ class Simulation:
         priority_list = [
             # ("Blessing of the Seasons", lambda: True),
             # ("Avenging Wrath", lambda: True),
-            ("Holy Shock", lambda: True),
+            # ("Holy Shock", lambda: True),
             # ("Light's Hammer", lambda: True),
             # ("Divine Toll", lambda: True),
-            # ("Tyr's Deliverance", lambda: True),
+            ("Tyr's Deliverance", lambda: True),
             # ("Divine Toll", lambda: self.paladin.holy_power == 4),
             # ("Divine Favor", lambda: True),
             # ("Blessing of Freedom", lambda: True),
@@ -117,7 +117,7 @@ class Simulation:
             # ("Light of Dawn", lambda: self.paladin.holy_power == 5),
             # ("Word of Glory", lambda: True),
             # ("Crusader Strike", lambda: True),
-            # ("Light of Dawn", lambda: self.paladin.holy_power >= 3),
+            ("Light of Dawn", lambda: self.paladin.holy_power >= 4),
             
             
             # ("Holy Shock", lambda: "First Light" in self.paladin.active_auras),
@@ -126,19 +126,19 @@ class Simulation:
             # ("Holy Shock", lambda: self.elapsed_time <= 2),
             ("Daybreak", lambda: self.elapsed_time >= 9),
             ("Divine Toll", lambda: True),
-            # ("Holy Shock", lambda: self.elapsed_time >= 10),
+            # # ("Holy Shock", lambda: self.elapsed_time >= 10),
             
-            # ("Wait", lambda: 2 < self.elapsed_time < 14),
-            # ("Holy Shock", lambda: True),
-            # # ("Word of Glory", lambda: True),
-            # ("Crusader Strike", lambda: True),
-            # # ("Flash of Light", lambda: True),
-            # # ("Holy Light", lambda: "Divine Favor" in self.paladin.active_auras),
-            # # ("Judgment", lambda: "Awakening READY!!!!!!" in self.paladin.active_auras),
+            # # ("Wait", lambda: 2 < self.elapsed_time < 14),
+            ("Holy Shock", lambda: True),
+            ("Word of Glory", lambda: True),
+            ("Crusader Strike", lambda: True),
+            # # # ("Flash of Light", lambda: True),
+            # # # ("Holy Light", lambda: "Divine Favor" in self.paladin.active_auras),
+            # # # ("Judgment", lambda: "Awakening READY!!!!!!" in self.paladin.active_auras),
             # ("Judgment", lambda: True),
-            ("Light of Dawn", lambda: True),
-            # ("Light of Dawn", lambda: self.paladin.holy_power >= 3),
-            # ("Holy Light", lambda: True),
+            # # ("Light of Dawn", lambda: True),
+            # # ("Light of Dawn", lambda: self.paladin.holy_power >= 3),
+            ("Holy Light", lambda: True),
             # ("Divine Toll", lambda: self.elapsed_time >= 10),
         ]  
         
@@ -359,13 +359,21 @@ class Simulation:
             "app.classes.spells_healing",
             "app.classes.spells_damage",
             "app.classes.spells_auras",
-            "app.classes.spells_passives"
+            "app.classes.spells_passives",
+            "app.classes.auras_debuffs"
         ]
         
         all_spell_ids = {}
         for module in modules:
             all_spell_ids.update(self.get_spell_ids_from_module(module))
-                
+        
+        # add misc spells    
+        all_spell_ids.update({53563: "BeaconOfLight"})
+        all_spell_ids.update({414127: "OverflowingLight"})
+        all_spell_ids.update({392902: "ResplendentLight"})
+        all_spell_ids.update({403042: "CrusadersReprieve"})
+        all_spell_ids.update({385414: "Afterimage"})
+        
         return all_spell_ids
         
     def display_results(self, target):
@@ -431,7 +439,12 @@ class Simulation:
             "Glimmer of Light (Rising Sunlight)": "Holy Shock (Rising Sunlight)",
             "Glimmer of Light (Glistening Radiance (Light of Dawn))": "Light of Dawn",
             "Glimmer of Light (Glistening Radiance (Word of Glory))": "Word of Glory",
-            "Glimmer of Light (Divine Toll)": "Holy Shock (Divine Toll)"
+            "Glimmer of Light (Divine Toll)": "Holy Shock (Divine Toll)",
+            "Resplendent Light": "Holy Light",
+            "Crusader's Reprieve": "Crusader Strike",
+            "Greater Judgment": "Judgment",
+            "Judgment of Light": "Judgment",
+            "Afterimage": "Word of Glory"
         }
         
         def add_sub_spell_healing(primary_spell_data):
@@ -449,7 +462,7 @@ class Simulation:
         # process data to include crit percent
         for spell, data in self.paladin.ability_breakdown.items():
             if data["hits"] > data["casts"]:
-                data["crit_percent"] = round((data["crits"] / data["hits"]) * 100, 1) if data["casts"] > 0 else 0
+                data["crit_percent"] = round((data["crits"] / data["hits"]) * 100, 1)
             else:
                 data["crit_percent"] = round((data["crits"] / data["casts"]) * 100, 1) if data["casts"] > 0 else 0
                       
@@ -491,7 +504,8 @@ class Simulation:
         # remove the primary spell data for sub-spells        
         for spell in ["Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)", "Holy Shock (Rising Sunlight)" , "Glimmer of Light", 
                       "Glimmer of Light (Daybreak)", "Glimmer of Light (Rising Sunlight)", "Glimmer of Light (Divine Toll)", 
-                      "Glimmer of Light (Glistening Radiance (Light of Dawn))", "Glimmer of Light (Glistening Radiance (Word of Glory))"]:
+                      "Glimmer of Light (Glistening Radiance (Light of Dawn))", "Glimmer of Light (Glistening Radiance (Word of Glory))", "Resplendent Light",
+                      "Greater Judgment", "Judgment of Light", "Crusader's Reprieve", "Afterimage"]:
             if spell in self.paladin.ability_breakdown:
                 del self.paladin.ability_breakdown[spell]
                 

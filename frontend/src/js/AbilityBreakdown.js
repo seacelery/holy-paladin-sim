@@ -3,6 +3,12 @@ const createAbilityBreakdown = (simulationData) => {
         return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
+    const formatNumbersNoRounding = (number) => {
+        const parts = number.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
+
     const changeArrowDirection = (element) => {
         if (element.classList.contains("fa-sort-down")) {
             element.classList.remove("fa-sort-down");
@@ -19,10 +25,29 @@ const createAbilityBreakdown = (simulationData) => {
         "Holy Shock (Divine Toll)": 20473,
         "Holy Shock (Divine Resonance)": 20473,
         "Light of Dawn": 85222,
+        "Word of Glory": 85673,
         "Glimmer of Light": 287269,
         "Divine Toll": 375576,
-        "Daybreak": 414170
+        "Daybreak": 414170,
+        "Beacon of Light": 53563,
+        "Holy Light": 82326,
+        "Flash of Light": 19750,
+        "Light's Hammer": 114158,
+        "Blessing of Summer": 328620,
+        "Crusader Strike": 35395,
+        "Judgment": 20271,
+        "Overflowing Light": 414127,
+        "Resplendent Light": 392902,
+        "Crusader's Reprieve": 403042,
+        "Judgment of Light": 183778,
+        "Greater Judgment": 231644,
+        "Touch of Light": 385349,
+        "Afterimage": 385414,
+        "Tyr's Deliverance": 200652
     };
+
+    const excludedSpellsCasts = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Judgment of Light", "Greater Judgment", "Touch of Light", "Afterimage"];
+    const excludedSpellsCrit = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Crusader Strike", "Judgment"];
 
     // convert to array and back to sort the data by healing
     const abilityBreakdownData = simulationData[0];
@@ -34,6 +59,7 @@ const createAbilityBreakdown = (simulationData) => {
     const encounterLength = simulationData[1];
 
     const abilityIcons = simulationData[2];
+    console.log(abilityIcons)
 
     const table = document.createElement("table");
 
@@ -41,7 +67,7 @@ const createAbilityBreakdown = (simulationData) => {
     const header = table.createTHead();
     header.id = "table-headers";
     const headerRow = header.insertRow(0);
-    const headers = ["Spell Name", "%", "Healing", "HPS", "Casts", "Avg Cast", "Hits", "Crit %", "Mana Spent", "Holy Power"];
+    const headers = ["Spell Name", "%", "Healing", "HPS", "Casts", "Average", "Hits", "Crit %", "Mana Spent", "Holy Power"];
     headers.forEach((text, index) => {
         const cell = headerRow.insertCell(index);
         cell.textContent = text;
@@ -262,7 +288,7 @@ const createAbilityBreakdown = (simulationData) => {
         
         const percentHealingCell = row.insertCell();
         percentHealingCell.className = "table-cell-right healing-percent-cell";
-        percentHealingCell.textContent = Number(formatNumbers(((spellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
+        percentHealingCell.textContent = Number(formatNumbersNoRounding(((spellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
 
         const healingCell = row.insertCell();
         healingCell.className = "table-cell-right healing-cell";
@@ -274,11 +300,22 @@ const createAbilityBreakdown = (simulationData) => {
 
         const castsCell = row.insertCell();
         castsCell.className = "table-cell-right";
-        castsCell.textContent = spellData.casts;
 
+        // adjust functionality for certain spells
+        if (excludedSpellsCasts.includes(spellName)) {
+            castsCell.textContent = "";
+        } else {
+            castsCell.textContent = spellData.casts;
+        };
+        
         const avgCastsCell = row.insertCell();
         avgCastsCell.className = "table-cell-right";
-        avgCastsCell.textContent = formatNumbers(spellData.total_healing / spellData.casts);
+
+        if (excludedSpellsCasts.includes(spellName)) {
+            avgCastsCell.textContent = formatNumbers(spellData.total_healing / spellData.hits);
+        } else {
+            avgCastsCell.textContent = formatNumbers(spellData.total_healing / spellData.casts);
+        };
 
         const hitsCell = row.insertCell();
         hitsCell.className = "table-cell-right";
@@ -286,7 +323,11 @@ const createAbilityBreakdown = (simulationData) => {
 
         const critPercentCell = row.insertCell();
         critPercentCell.className = "table-cell-right";
-        critPercentCell.textContent = spellData.crits > 0 ? (spellData.crit_percent).toFixed(1) + "%" : "";
+        if (excludedSpellsCrit.includes(spellName)) {
+            critPercentCell.textContent = "";
+        } else {
+            critPercentCell.textContent = (spellData.crit_percent).toFixed(1) + "%";
+        };
 
         const manaSpentCell = row.insertCell();
         manaSpentCell.className = "table-cell-right mana-spent-cell";
@@ -316,6 +357,7 @@ const createAbilityBreakdown = (simulationData) => {
         // SUB SPELLS
         for (const subSpellName in spellData["sub_spells"]) {
             const subSpellData = spellData["sub_spells"][subSpellName];
+            console.log(subSpellData)
             const subRow = tableBody.insertRow();
             subRow.style.display = "none";
             subRow.className = `${spellName.toLowerCase()}-subrow`;
@@ -384,7 +426,7 @@ const createAbilityBreakdown = (simulationData) => {
 
             const percentHealingCell = subRow.insertCell();
             percentHealingCell.className = "table-sub-cell-right healing-percent-cell";
-            percentHealingCell.textContent = "(" + Number(formatNumbers(((subSpellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%)";
+            percentHealingCell.textContent = "(" + Number(formatNumbersNoRounding(((subSpellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%)";
 
             const healingCell = subRow.insertCell();
             healingCell.className = "table-sub-cell-right healing-cell";
@@ -396,14 +438,22 @@ const createAbilityBreakdown = (simulationData) => {
 
             const castsCell = subRow.insertCell();
             castsCell.className = "table-sub-cell-right";
-            castsCell.textContent = "(" + subSpellData.casts + ")";
-            if (subSpellName.includes("Glimmer")) {
-                castsCell.textContent = "";
-            };
 
+            // adjust functionality for certain spells
+            if (excludedSpellsCasts.includes(subSpellName)) {
+                castsCell.textContent = "";
+            } else {
+                castsCell.textContent = "(" + subSpellData.casts + ")";
+            };
+            
             const avgCastsCell = subRow.insertCell();
             avgCastsCell.className = "table-sub-cell-right";
-            avgCastsCell.textContent = formatNumbers(subSpellData.total_healing / subSpellData.casts);
+
+            if (excludedSpellsCasts.includes(subSpellName)) {
+                avgCastsCell.textContent = formatNumbers(subSpellData.total_healing / subSpellData.hits);
+            } else {
+                avgCastsCell.textContent = formatNumbers(subSpellData.total_healing / subSpellData.casts);
+            };
 
             const hitsCell = subRow.insertCell();
             hitsCell.className = "table-sub-cell-right";
@@ -411,8 +461,14 @@ const createAbilityBreakdown = (simulationData) => {
 
             const critPercentCell = subRow.insertCell();
             critPercentCell.className = "table-sub-cell-right";
-            critPercentCell.textContent = (subSpellData.crit_percent).toFixed(1) + "%";
 
+            if (excludedSpellsCrit.includes(subSpellName)) {
+                critPercentCell.textContent = "";
+            } else {
+                console.log(subSpellName, subSpellData.crit_percent, subSpellData.crits)
+                critPercentCell.textContent = (subSpellData.crit_percent).toFixed(1) + "%";
+            };
+            
             const manaSpentCell = subRow.insertCell();
             manaSpentCell.className = "table-sub-cell-right mana-spent-cell";
             manaSpentCell.textContent = formatNumbers(subSpellData.mana_spent);
@@ -480,7 +536,7 @@ const createAbilityBreakdown = (simulationData) => {
     
                 const percentHealingCell = subRow.insertCell();
                 percentHealingCell.className = "table-sub-sub-cell-right healing-percent-cell";
-                percentHealingCell.textContent = "((" + Number(formatNumbers(((subSubSpellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%))";
+                percentHealingCell.textContent = "((" + Number(formatNumbersNoRounding(((subSubSpellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%))";
     
                 const healingCell = subRow.insertCell();
                 healingCell.className = "table-sub-sub-cell-right healing-cell";

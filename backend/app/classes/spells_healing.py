@@ -5,7 +5,7 @@ from .spells import Spell
 from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, BlessingOfFreedomBuff, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals, update_spell_data_beacon_heals
 
 
 def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_targets):
@@ -23,9 +23,8 @@ def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_ta
         caster.glimmer_removal_counter += 1
         glimmer_targets.remove(oldest_active_glimmer)
 
+
 # generators
-
-
 class HolyShock(Spell):
     
     SPELL_ID = 20473
@@ -128,6 +127,8 @@ class HolyShock(Spell):
                         overflowing_light_absorb_value = glimmer_heal_value * 0.3
                         glimmer_target.receive_heal(overflowing_light_absorb_value)
                         caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
+                        
+                        update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
                         append_spell_heal_event(caster.events, "Overflowing Light", caster, glimmer_target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                     
                     beacon_healing = calculate_beacon_healing("Glimmer of Light", glimmer_heal_value)
@@ -136,6 +137,7 @@ class HolyShock(Spell):
                             beacon_target.receive_beacon_heal(beacon_healing)
                             caster.healing_by_ability["Beacon of Light"] = caster.healing_by_ability.get("Beacon of Light", 0) + beacon_healing    
                             
+                            update_spell_data_beacon_heals(caster.ability_breakdown, beacon_target, beacon_healing, "Glimmer of Light (Holy Shock)")
                             append_spell_beacon_event(caster.beacon_events, "Glimmer of Light", caster, beacon_target, glimmer_heal_value, beacon_healing, current_time)   
                     
                 target = targets[0]
@@ -160,8 +162,6 @@ class HolyShock(Spell):
                     else:
                         handle_glimmer_removal(caster, glimmer_targets, current_time, 3)
                         
-                    
-            
             # rising sunlight  
             if caster.is_talent_active("Rising Sunlight"):
                 if "Rising Sunlight" in caster.active_auras:
@@ -220,6 +220,8 @@ class Daybreak(Spell):
                     overflowing_light_absorb_value = glimmer_heal_value * 0.3
                     glimmer_target.receive_heal(overflowing_light_absorb_value)
                     caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
+                    
+                    update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
                     append_spell_heal_event(caster.events, "Overflowing Light", caster, glimmer_target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                 
                 beacon_healing = calculate_beacon_healing("Glimmer of Light", glimmer_heal_value)
@@ -228,6 +230,7 @@ class Daybreak(Spell):
                         beacon_target.receive_beacon_heal(beacon_healing)
                         caster.healing_by_ability["Beacon of Light"] = caster.healing_by_ability.get("Beacon of Light", 0) + beacon_healing    
                         
+                        update_spell_data_beacon_heals(caster.ability_breakdown, beacon_target, beacon_healing, "Glimmer of Light (Daybreak)")
                         append_spell_beacon_event(caster.beacon_events, "Glimmer of Light", caster, beacon_target, glimmer_heal_value, beacon_healing, current_time) 
             
             for target in glimmer_targets[:]:
@@ -341,6 +344,8 @@ class RisingSunlightHolyShock(Spell):
                         overflowing_light_absorb_value = glimmer_heal_value * 0.3
                         glimmer_target.receive_heal(overflowing_light_absorb_value)
                         caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
+                        
+                        update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
                         append_spell_heal_event(caster.events, "Overflowing Light", caster, glimmer_target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                     
                     beacon_healing = calculate_beacon_healing("Glimmer of Light", glimmer_heal_value)
@@ -349,6 +354,7 @@ class RisingSunlightHolyShock(Spell):
                             beacon_target.receive_beacon_heal(beacon_healing)
                             caster.healing_by_ability["Beacon of Light"] = caster.healing_by_ability.get("Beacon of Light", 0) + beacon_healing    
                             
+                            update_spell_data_beacon_heals(caster.ability_breakdown, beacon_target, beacon_healing, "Glimmer of Light (Rising Sunlight)")
                             append_spell_beacon_event(caster.beacon_events, "Glimmer of Light", caster, beacon_target, glimmer_heal_value, beacon_healing, current_time)   
                     
                 target = targets[0]
@@ -530,6 +536,8 @@ class DivineTollHolyShock(Spell):
                             overflowing_light_absorb_value = glimmer_heal_value * 0.3
                             target.receive_heal(overflowing_light_absorb_value)
                             caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
+                            
+                            update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", target, overflowing_light_absorb_value, False)
                             append_spell_heal_event(caster.events, "Overflowing Light", caster, target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                             
                         beacon_healing = calculate_beacon_healing("Glimmer of Light", glimmer_heal_value)
@@ -538,6 +546,7 @@ class DivineTollHolyShock(Spell):
                                 beacon_target.receive_beacon_heal(beacon_healing)
                                 caster.healing_by_ability["Beacon of Light"] = caster.healing_by_ability.get("Beacon of Light", 0) + beacon_healing    
                                 
+                                update_spell_data_beacon_heals(caster.ability_breakdown, beacon_target, beacon_healing, "Glimmer of Light (Divine Toll)")
                                 append_spell_beacon_event(caster.beacon_events, "Glimmer of Light", caster, beacon_target, glimmer_heal_value, beacon_healing, current_time)  
                                 
                     caster.divine_toll_holy_shock_count = 0 
@@ -681,13 +690,24 @@ class HolyLight(Spell):
             
             # resplendent light
             if caster.is_talent_active("Resplendent Light"):
-                resplendent_light_healing = heal_amount * 0.05
+                resplendent_light_healing = heal_amount * 0.08
                 target_pool = copy.deepcopy(caster.potential_healing_targets)
                 for _ in range(5):
                     target = random.choice(target_pool)
                     target.receive_heal(resplendent_light_healing)
                     target_pool.remove(target)
-                    append_spell_heal_event(caster.events, "Resplendent Light", caster, target, resplendent_light_healing, current_time, is_crit=False)  
+                    append_spell_heal_event(caster.events, "Resplendent Light", caster, target, resplendent_light_healing, current_time, is_crit=False) 
+                    
+                    update_spell_data_heals(caster.ability_breakdown, "Resplendent Light", target, resplendent_light_healing, False) 
+                    
+                    beacon_healing = calculate_beacon_healing("Resplendent Light", resplendent_light_healing)
+                    for beacon_target in caster.beacon_targets:
+                        if target != beacon_target:
+                            beacon_target.receive_beacon_heal(beacon_healing)
+                            caster.healing_by_ability["Beacon of Light"] = caster.healing_by_ability.get("Beacon of Light", 0) + beacon_healing    
+                            
+                            update_spell_data_beacon_heals(caster.ability_breakdown, beacon_target, beacon_healing, "Resplendent Light")
+        
                 # add beacon healing here
             
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
@@ -904,6 +924,8 @@ class WordOfGlory(Spell):
                                 overflowing_light_absorb_value = glimmer_heal_value * 0.3
                                 glimmer_target.receive_heal(overflowing_light_absorb_value)
                                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
+                                
+                                update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
                                 append_spell_heal_event(caster.events, "Overflowing Light", caster, glimmer_target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                             
                             beacon_healing = calculate_beacon_healing("Glimmer of Light", glimmer_heal_value)
@@ -912,6 +934,7 @@ class WordOfGlory(Spell):
                                     beacon_target.receive_beacon_heal(beacon_healing)
                                     caster.healing_by_ability["Beacon of Light"] = caster.healing_by_ability.get("Beacon of Light", 0) + beacon_healing    
                                     
+                                    update_spell_data_beacon_heals(caster.ability_breakdown, beacon_target, beacon_healing, "Glimmer of Light (Glistening Radiance)")
                                     append_spell_beacon_event(caster.beacon_events, "Glimmer of Light", caster, beacon_target, glimmer_heal_value, beacon_healing, current_time)                     
             
             if caster.is_talent_active("Afterimage"):
@@ -922,9 +945,20 @@ class WordOfGlory(Spell):
                     
                 if caster.afterimage_counter >= 20:
                     caster.afterimage_counter = caster.afterimage_counter % 20
-                    afterimage_heal = heal_amount * 0.3
+                    afterimage_heal, afterimage_crit = self.calculate_heal(caster)
+                    afterimage_heal *= 0.3
+                    
                     targets[0].receive_heal(afterimage_heal)
+                    
+                    update_spell_data_heals(caster.ability_breakdown, "Afterimage", targets[0], afterimage_heal, afterimage_crit)
                     append_spell_heal_event(caster.events, "Afterimage", caster, targets[0], afterimage_heal, current_time, is_crit=False)
+                    
+                    beacon_healing = calculate_beacon_healing("Afterimage", afterimage_heal)
+                    for beacon_target in caster.beacon_targets:
+                        beacon_target.receive_beacon_heal(beacon_healing)
+                        caster.healing_by_ability["Beacon of Light"] = caster.healing_by_ability.get("Beacon of Light", 0) + beacon_healing    
+                        
+                        update_spell_data_beacon_heals(caster.ability_breakdown, beacon_target, beacon_healing, "Afterimage")
             
             if caster.is_talent_active("Divine Purpose"):            
                 if "Divine Purpose" in caster.active_auras:
@@ -1017,6 +1051,8 @@ class LightOfDawn(Spell):
                                 overflowing_light_absorb_value = glimmer_heal_value * 0.3
                                 glimmer_target.receive_heal(overflowing_light_absorb_value)
                                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
+                                
+                                update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
                                 append_spell_heal_event(caster.events, "Overflowing Light", caster, glimmer_target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                             
                             beacon_healing = calculate_beacon_healing("Glimmer of Light", glimmer_heal_value)
@@ -1025,6 +1061,7 @@ class LightOfDawn(Spell):
                                     beacon_target.receive_beacon_heal(beacon_healing)
                                     caster.healing_by_ability["Beacon of Light"] = caster.healing_by_ability.get("Beacon of Light", 0) + beacon_healing    
                                     
+                                    update_spell_data_beacon_heals(caster.ability_breakdown, beacon_target, beacon_healing, "Glimmer of Light (Glistening Radiance)")
                                     append_spell_beacon_event(caster.beacon_events, "Glimmer of Light", caster, beacon_target, glimmer_heal_value, beacon_healing, current_time)                    
             
             if caster.is_talent_active("Afterimage"):

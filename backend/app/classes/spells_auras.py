@@ -2,7 +2,7 @@ import random
 
 from .spells import Spell
 from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring
-from ..utils.misc_functions import append_aura_applied_event, format_time
+from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts
 
 # APPLIES BUFFS   
 
@@ -21,6 +21,7 @@ class TyrsDeliveranceSpell(Spell):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             caster.apply_buff_to_self(TyrsDeliveranceSelfBuff(), current_time)
+            update_spell_data_casts(caster.ability_breakdown, self.name, mana_spent=self.get_mana_cost(caster))
             
             for _ in range(5):
                 target = [random.choice(caster.potential_healing_targets)]

@@ -18,7 +18,7 @@ test_active_class_talents = {
     "row3": {
         "Fist of Justice": {"ranks": {"current rank": 0, "max rank": 2}},
         "Divine Steed": {"ranks": {"current rank": 1, "max rank": 1}},
-        "Greater Judgment": {"ranks": {"current rank": 0, "max rank": 1}}
+        "Greater Judgment": {"ranks": {"current rank": 1, "max rank": 1}}
     },
     "row4": {
         "Repentance": {"ranks": {"current rank": 0, "max rank": 1}},
@@ -52,7 +52,7 @@ test_active_class_talents = {
     },
     "row8": {
         "Strength of Conviction": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Judgment of Light": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Judgment of Light": {"ranks": {"current rank": 1, "max rank": 1}},
         "Seal of Might": {"ranks": {"current rank": 2, "max rank": 2}},
         "Divine Purpose": {"ranks": {"current rank": 1, "max rank": 1}},
         "Seal of Alacrity": {"ranks": {"current rank": 2,"max rank": 2}},

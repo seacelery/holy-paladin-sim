@@ -365,18 +365,18 @@ table {
     background-color: var(--background-colour);
 }
 
-/* .table-sub-cell-left::before {
+.table-sub-cell-left::before {
     position: absolute;
-    left: 15px;
+    left: 19px;
     top: 0px;
 
     height: 50%;
-    width: 8px;
+    width: 15px;
 
     content: "";
     border-bottom: 1.5px solid var(--border-colour-3);
     border-left: 1.5px solid var(--border-colour-3);
-} */
+}
 
 .table-sub-cell-right {
     padding-right: 8px;
@@ -408,18 +408,18 @@ table {
     background-color: rgba(0, 0, 0, 0.233);
 }
 
-/* .table-sub-sub-cell-left::before {
+.table-sub-sub-cell-left::before {
     position: absolute;
-    left: 50px;
+    left: 49px;
     top: 0px;
 
     height: 50%;
-    width: 8px;
+    width: 15px;
 
     content: "";
     border-bottom: 1.5px solid var(--border-colour-3);
     border-left: 1.5px solid var(--border-colour-3);
-} */
+}
 
 .table-sub-sub-cell-right {
     padding-right: 8px;
