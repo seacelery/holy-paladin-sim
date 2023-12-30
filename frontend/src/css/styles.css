@@ -301,6 +301,7 @@ body {
 table {
     width: 100%;
 
+    border: 1px solid var(--border-colour-3);
     border-collapse: collapse;
 }
 
@@ -364,7 +365,7 @@ table {
     background-color: var(--background-colour);
 }
 
-.table-sub-cell-left::before {
+/* .table-sub-cell-left::before {
     position: absolute;
     left: 15px;
     top: 0px;
@@ -375,7 +376,7 @@ table {
     content: "";
     border-bottom: 1.5px solid var(--border-colour-3);
     border-left: 1.5px solid var(--border-colour-3);
-}
+} */
 
 .table-sub-cell-right {
     padding-right: 8px;
@@ -407,7 +408,7 @@ table {
     background-color: rgba(0, 0, 0, 0.233);
 }
 
-.table-sub-sub-cell-left::before {
+/* .table-sub-sub-cell-left::before {
     position: absolute;
     left: 50px;
     top: 0px;
@@ -418,7 +419,7 @@ table {
     content: "";
     border-bottom: 1.5px solid var(--border-colour-3);
     border-left: 1.5px solid var(--border-colour-3);
-}
+} */
 
 .table-sub-sub-cell-right {
     padding-right: 8px;
@@ -436,7 +437,34 @@ table {
 }
 
 .spell-name-cell {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
     color: var(--holy-font);
+}
+
+.table-spell-icon-container {
+    width: 30px;
+    height: 35px;
+}
+
+.table-spell-icon {
+    width: 29px;
+    height: 29px;
+    
+    border: 1.5px solid var(--border-colour-3);
+}
+
+.table-spell-name-text {
+    padding-left: 6px;
+
+    font-weight: 300;
 }
 
 .healing-cell, .HPS-cell {
@@ -452,7 +480,7 @@ table {
 }
 
 .sub-sub-cell {
-    padding-left: 70px;
+    padding-left: 65px;
 }
 
 .table-header-icon-container {
@@ -464,6 +492,10 @@ table {
 .table-header-icon-container:hover {
     cursor: pointer;
     user-select: none;
+}
+
+.fa-caret-right {
+    padding-top: 7px;
 }
 
 .table-header-arrows {
@@ -501,6 +533,7 @@ table {
     height: 35px;
     
     border: 1px solid var(--border-colour-3);
+    border-top: none;
 
     font-weight: 300;
     font-size: 17px;

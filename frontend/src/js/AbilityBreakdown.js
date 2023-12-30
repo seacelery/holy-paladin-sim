@@ -3,6 +3,27 @@ const createAbilityBreakdown = (simulationData) => {
         return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
+    const changeArrowDirection = (element) => {
+        if (element.classList.contains("fa-sort-down")) {
+            element.classList.remove("fa-sort-down");
+            element.classList.add("fa-caret-right");
+        } else if (element.classList.contains("fa-caret-right")) {
+            element.classList.remove("fa-caret-right");
+            element.classList.add("fa-sort-down");
+        };       
+    };
+
+    const spellToSpellIdMap = {
+        "Holy Shock": 20473,
+        "Holy Shock (Rising Sunlight)": 20473, 
+        "Holy Shock (Divine Toll)": 20473,
+        "Holy Shock (Divine Resonance)": 20473,
+        "Light of Dawn": 85222,
+        "Glimmer of Light": 287269,
+        "Divine Toll": 375576,
+        "Daybreak": 414170
+    };
+
     // convert to array and back to sort the data by healing
     const abilityBreakdownData = simulationData[0];
     let abilityBreakdownArray = Object.entries(abilityBreakdownData);
@@ -11,6 +32,8 @@ const createAbilityBreakdown = (simulationData) => {
 
     console.log(sortedAbilityBreakdownData)
     const encounterLength = simulationData[1];
+
+    const abilityIcons = simulationData[2];
 
     const table = document.createElement("table");
 
@@ -39,22 +62,63 @@ const createAbilityBreakdown = (simulationData) => {
         cell.className = `table-header`;
 
         if (cell.id === "spell-name-header") {
-            const iconContainer = document.createElement("div");
-            iconContainer.className = "table-header-icon-container";
-            const icon = document.createElement("i");
-            icon.className = "fa-solid fa-sort-down table-header-arrows";
+            const headerIconContainer = document.createElement("div");
+            headerIconContainer.className = "table-header-icon-container";
+            const headerIcon = document.createElement("i");
+            headerIcon.className = "fa-solid fa-caret-right table-header-arrows";
+            headerIcon.id = "table-header-icon";
 
             // expand or collapse all rows on click
-            iconContainer.addEventListener("click", () => {
+            headerIconContainer.addEventListener("click", () => {
                 const subRows = document.querySelectorAll(".sub-row");
-                const subSubRows = document.querySelectorAll(".sub-sub-row");
-                
-                const isHidden = subRows.length > 0 && subRows[0].style.display !== "none";
+                const subRowArrows = document.querySelectorAll(".sub-row-arrows");
 
+                const subSubRows = document.querySelectorAll(".sub-sub-row");
+                const subSubRowArrows = document.querySelectorAll(".sub-sub-row-arrows");
+                
+                const isHidden = subRows.length > 0 && !Array.from(subRows).every(subRow => subRow.style.display === "none");
+
+                // handle sub-rows display
                 subRows.forEach(subRow => {
-                    subRow.style.display = subRow.style.display === "table-row" ? "none" : "table-row";
+                    subRow.style.display = isHidden ? "none" : "table-row";
                 });
 
+                // handle sub-row arrows display
+                subRowArrows.forEach(arrow => {
+                    if (!isHidden) {
+                        if (arrow.classList.contains("fa-caret-right")) {
+                            changeArrowDirection(arrow);
+                        } else if (arrow.classList.contains("fa-sort-down")) {
+                            return
+                        };
+                    } else {
+                        if (arrow.classList.contains("fa-caret-right")) {
+                            return
+                        } else if (arrow.classList.contains("fa-sort-down")) {
+                            changeArrowDirection(arrow);
+                        };
+                    };
+                });
+
+                const allArrowsRight = Array.from(subRowArrows).every(arrow => arrow.classList.contains("fa-caret-right"));
+                const allArrowsDown = Array.from(subRowArrows).every(arrow => arrow.classList.contains("fa-sort-down"));
+
+                if (!allArrowsRight) {
+                    headerIcon.classList.remove("fa-caret-right");
+                    headerIcon.classList.add("fa-sort-down");
+                };
+
+                if (allArrowsRight) {
+                    headerIcon.classList.add("fa-caret-right");
+                    headerIcon.classList.remove("fa-sort-down");
+                };
+
+                if (!allArrowsDown) {
+                    headerIcon.classList.add("fa-caret-right");
+                    headerIcon.classList.remove("fa-sort-down");
+                };
+
+                // handle sub-sub-rows display
                 subSubRows.forEach(subSubRow => {
                     if (isHidden) {
                         if (subSubRow.getAttribute("visibility") === "hidden") {
@@ -71,10 +135,27 @@ const createAbilityBreakdown = (simulationData) => {
                         };
                     };
                 });
+
+                // handle sub-sub-row arrows display
+                subSubRowArrows.forEach(arrow => {
+                    if (!isHidden) {
+                        if (arrow.classList.contains("fa-caret-right")) {
+                            changeArrowDirection(arrow);
+                        } else if (arrow.classList.contains("fa-sort-down")) {
+                           return
+                        };
+                    } else {
+                        if (arrow.classList.contains("fa-caret-right")) {
+                            return
+                        } else if (arrow.classList.contains("fa-sort-down")) {
+                            changeArrowDirection(arrow);
+                        };
+                    };
+                });
             });
 
-            iconContainer.appendChild(icon);
-            cell.appendChild(iconContainer);
+            headerIconContainer.appendChild(headerIcon);
+            cell.appendChild(headerIconContainer);
         };
     });
 
@@ -101,27 +182,50 @@ const createAbilityBreakdown = (simulationData) => {
 
         const nameCell = row.insertCell();
         nameCell.className = "table-cell-left spell-name-cell";
-        if (Object.keys(spellData["sub_spells"]).length > 0) {    
-              
-            const iconContainer = document.createElement("div");
-            iconContainer.className = "table-icon-container";
 
-            const icon = document.createElement("i");
-            icon.className = "fa-solid fa-sort-down table-arrows";
+        // spell icon
+        const spellIconContainer = document.createElement("div");
+        spellIconContainer.className = "table-spell-icon-container";
+
+        const spellIcon = document.createElement("img");
+        spellIcon.src = abilityIcons[spellToSpellIdMap[spellName]];
+        spellIcon.className = "table-spell-icon";
+
+        // spellIconContainer.appendChild(spellIcon);
+        nameCell.appendChild(spellIcon);
+        
+        const spellNameText = document.createElement("div");
+        spellNameText.textContent = spellName;
+        spellNameText.className = "table-spell-name-text";
+        nameCell.appendChild(spellNameText);
+
+        // make collapsible if it has sub-spells
+        if (Object.keys(spellData["sub_spells"]).length > 0) {    
+        
+            const arrowIconContainer = document.createElement("div");
+            arrowIconContainer.className = "table-icon-container";
+
+            const arrowIcon = document.createElement("i");
+            arrowIcon.className = "fa-solid fa-caret-right table-arrows sub-row-arrows";
+            arrowIcon.setAttribute("visibility", "hidden");
 
             // expand sub-row or collapse all nested rows on click
-            iconContainer.addEventListener("click", () => {
+            arrowIconContainer.addEventListener("click", () => {
+                changeArrowDirection(arrowIcon)
+
                 const spellClass = spellName.toLowerCase().replaceAll(" ", "-") + "-subrow";
 
                 let subRows = document.querySelectorAll(`.${spellClass}`);
                 let subSubRows = document.querySelectorAll(`.${spellClass}.sub-sub-row`);
 
-                const isHidden = subRows.length > 0 && subRows[0].style.display !== "none";
+                const isHidden = subRows.length > 0 && !Array.from(subRows).every(subRow => subRow.style.display === "none");
 
+                // handle sub-rows display
                 subRows.forEach(subRow => {
                     subRow.style.display = isHidden ? "none" : "table-row";
                 });
 
+                // handle sub-sub-rows display
                 subSubRows.forEach(subSubRow => {
                     if (isHidden) {
                         if (subSubRow.getAttribute("visibility") === "hidden") {
@@ -137,12 +241,23 @@ const createAbilityBreakdown = (simulationData) => {
                         };
                     };
                 });
+
+                // change header arrow
+                const headerArrow = document.getElementById("table-header-icon");
+                if (!arrowIcon.classList.contains("fa-caret-right")) {
+                    headerArrow.classList.add("fa-sort-down");
+                    headerArrow.classList.remove("fa-caret-right");
+                };
+
+                const subRowArrows = document.querySelectorAll(".sub-row-arrows");
+                const allArrowsRight = Array.from(subRowArrows).every(arrow => arrow.classList.contains("fa-caret-right"));
+
+                if (allArrowsRight) {
+                    changeArrowDirection(headerArrow);
+                };
             });
-            nameCell.textContent = spellName;
-            iconContainer.appendChild(icon);
-            nameCell.appendChild(iconContainer);
-        } else {
-            nameCell.textContent = spellName;
+            arrowIconContainer.appendChild(arrowIcon);
+            nameCell.appendChild(arrowIconContainer);
         };
         
         const percentHealingCell = row.insertCell();
@@ -207,19 +322,48 @@ const createAbilityBreakdown = (simulationData) => {
             subRow.className = subRow.className.replaceAll(/\s|\(|\)/g, "-");
             subRow.className = subRow.className.replaceAll("--", "-");
             subRow.classList.add("sub-row");
+            subRow.setAttribute("visibility", "hidden");
             
             const nameCell = subRow.insertCell();
             nameCell.className = "table-sub-cell-left spell-name-cell sub-cell";
+
+            // spell icon
+            const spellIconContainer = document.createElement("div");
+            spellIconContainer.className = "table-spell-icon-container";
+
+            const spellIcon = document.createElement("img");
+
+            // format spell names to make them less ugly
+            let formattedSubSpellName = subSpellName;
+            if (formattedSubSpellName.includes("Glimmer of Light")) {
+                formattedSubSpellName = "Glimmer of Light";
+            };
+
+            spellIcon.src = abilityIcons[spellToSpellIdMap[formattedSubSpellName]];
+            spellIcon.className = "table-spell-icon";
+
+            // spellIconContainer.appendChild(spellIcon);
+            nameCell.appendChild(spellIcon);
+            
+            const spellNameText = document.createElement("div");
+            spellNameText.textContent = formattedSubSpellName;
+            
+            spellNameText.className = "table-spell-name-text";
+            nameCell.appendChild(spellNameText);
+            
             if (Object.keys(subSpellData["sub_spells"]).length > 0) {
         
-                const iconContainer = document.createElement("div");
-                iconContainer.className = "table-icon-container";
+                const arrowIconContainer = document.createElement("div");
+                arrowIconContainer.className = "table-icon-container";
 
-                const icon = document.createElement("i");
-                icon.className = "fa-solid fa-sort-down table-arrows";
+                const arrowIcon = document.createElement("i");
+                arrowIcon.className = "fa-solid fa-caret-right table-arrows sub-sub-row-arrows";
+                arrowIcon.setAttribute("visibility", "hidden");
 
                 // expand or collapse sub-row on click
-                iconContainer.addEventListener("click", () => {
+                arrowIconContainer.addEventListener("click", () => {
+                    changeArrowDirection(arrowIcon);
+
                     let spellClass = subSpellName.toLowerCase().replaceAll(/\s|\(|\)/g, "-") + "-subrow";
                     spellClass = spellClass.replaceAll("--", "-");
     
@@ -234,19 +378,8 @@ const createAbilityBreakdown = (simulationData) => {
                     });
 
                 });
-                if (subSpellName.includes("Glimmer")) {
-                    nameCell.textContent = "Glimmer of Light";
-                } else {
-                    nameCell.textContent = subSpellName;
-                };
-                iconContainer.appendChild(icon);
-                nameCell.appendChild(iconContainer);
-            } else {
-                if (subSpellName.includes("Glimmer")) {
-                    nameCell.textContent = "Glimmer of Light";
-                } else {
-                    nameCell.textContent = subSpellName;
-                };
+                arrowIconContainer.appendChild(arrowIcon);
+                nameCell.appendChild(arrowIconContainer);
             };
 
             const percentHealingCell = subRow.insertCell();
@@ -319,10 +452,31 @@ const createAbilityBreakdown = (simulationData) => {
                 
                 const nameCell = subRow.insertCell();
                 nameCell.className = "table-sub-sub-cell-left spell-name-cell sub-sub-cell";
-                nameCell.textContent = subSubSpellName;
-                if (subSubSpellName.includes("Glimmer")) {
-                    nameCell.textContent = "Glimmer of Light";
+
+                // spell icon
+                const spellIconContainer = document.createElement("div");
+                spellIconContainer.className = "table-spell-icon-container";
+
+                const spellIcon = document.createElement("img");
+
+                // format spell names to make them less ugly
+                let formattedSubSubSpellName = subSubSpellName;
+                if (formattedSubSubSpellName.includes("Glimmer of Light")) {
+                    formattedSubSubSpellName = "Glimmer of Light";
                 };
+
+                spellIcon.src = abilityIcons[spellToSpellIdMap[formattedSubSubSpellName]];
+                spellIcon.className = "table-spell-icon";
+
+                // spellIconContainer.appendChild(spellIcon);
+                nameCell.appendChild(spellIcon);
+                
+                const spellNameText = document.createElement("div");
+                spellNameText.textContent = formattedSubSubSpellName;
+                
+                spellNameText.className = "table-spell-name-text";
+                nameCell.appendChild(spellNameText);
+
     
                 const percentHealingCell = subRow.insertCell();
                 percentHealingCell.className = "table-sub-sub-cell-right healing-percent-cell";

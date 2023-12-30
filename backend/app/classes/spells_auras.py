@@ -9,6 +9,7 @@ from ..utils.misc_functions import append_aura_applied_event, format_time
      
 class TyrsDeliveranceSpell(Spell):
     
+    SPELL_ID = 200652
     BASE_COOLDOWN = 120
     BASE_CAST_TIME = 2
     MANA_COST = 0.024
@@ -28,6 +29,7 @@ class TyrsDeliveranceSpell(Spell):
             
 class TyrsDeliveranceHeal(Spell):
     
+    SPELL_ID = 200652
     SPELL_POWER_COEFFICIENT = 0.626875
     
     def __init__(self, caster):
@@ -44,6 +46,7 @@ class TyrsDeliveranceHeal(Spell):
     
 class AvengingWrathSpell(Spell):
     
+    SPELL_ID = 31884
     BASE_COOLDOWN = 120
     
     def __init__(self, caster):
@@ -57,6 +60,7 @@ class AvengingWrathSpell(Spell):
             
 class DivineFavorSpell(Spell):
     
+    SPELL_ID = 210294
     BASE_COOLDOWN = 30
     
     def __init__(self, caster):
@@ -68,20 +72,20 @@ class DivineFavorSpell(Spell):
             caster.apply_buff_to_self(DivineFavorBuff(), current_time)
             
             
-class BlessingOfFreedomSpell(Spell):
+# class BlessingOfFreedomSpell(Spell):
     
-    MANA_COST = 0.014
-    BASE_COOLDOWN = 25
+#     MANA_COST = 0.014
+#     BASE_COOLDOWN = 25
     
-    def __init__(self, caster):
-        super().__init__("Blessing of Freedom", mana_cost=BlessingOfFreedomSpell.MANA_COST, cooldown=BlessingOfFreedomSpell.BASE_COOLDOWN, applies_buff_to_target=True)
+#     def __init__(self, caster):
+#         super().__init__("Blessing of Freedom", mana_cost=BlessingOfFreedomSpell.MANA_COST, cooldown=BlessingOfFreedomSpell.BASE_COOLDOWN, applies_buff_to_target=True)
         
-    def cast_healing_spell(self, caster, targets, current_time, is_heal):
-        cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
-        if cast_success:
-            chosen_target = random.choice(targets)
-            chosen_target.apply_buff_to_target(BlessingOfFreedomBuff(), current_time)
-            append_aura_applied_event(caster.buff_events, self.name, caster, chosen_target, current_time)
+#     def cast_healing_spell(self, caster, targets, current_time, is_heal):
+#         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
+#         if cast_success:
+#             chosen_target = random.choice(targets)
+#             chosen_target.apply_buff_to_target(BlessingOfFreedomBuff(), current_time)
+#             append_aura_applied_event(caster.buff_events, self.name, caster, chosen_target, current_time)
             
             
 class BlessingOfTheSeasons(Spell):
@@ -111,3 +115,15 @@ class BlessingOfTheSeasons(Spell):
             elif self.name == "Blessing of Spring":
                 caster.apply_buff_to_self(BlessingOfSpring(), current_time)
                 self.name = "Blessing of Summer"
+                
+class BlessingOfSummer(Spell):
+    SPELL_ID = 388007
+
+class BlessingOfAutumn(Spell):
+    SPELL_ID = 388010
+    
+class BlessingOfWinter(Spell):
+    SPELL_ID = 388015
+    
+class BlessingOfSpring(Spell):
+    SPELL_ID = 388013

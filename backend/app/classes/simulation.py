@@ -1,16 +1,26 @@
 import random
 import pprint
+import inspect
+import sys
 
 from .target import Target, BeaconOfLight, EnemyTarget
 from .auras_buffs import HolyReverberation, HoT
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time
+from ..utils.battlenet_api import get_spell_icon_data, get_access_token
+from ..utils import cache
+# from .spells_healing import *
+# from .spells_damage import *
+# from .spells_auras import *
+# from .spells_passives import *
+
 
 pp = pprint.PrettyPrinter(width=200)
 
 
 class Simulation:
     
-    def __init__(self, paladin, healing_targets_list, encounter_length, priority_list=None):
+    def __init__(self, paladin, healing_targets_list, encounter_length, access_token, priority_list=None):
+        
         self.paladin = paladin
         self.healing_targets_list = healing_targets_list
         self.enemy_targets_list = [EnemyTarget("enemyTarget1")]
@@ -23,6 +33,10 @@ class Simulation:
         
         self.times_direct_healed = {}
         self.previous_ability = None
+        
+        self.access_token = access_token
+        self.spell_icons = {}
+        self.add_spell_icons()
                 
     def simulate(self):
         while self.elapsed_time < self.encounter_length:
@@ -323,15 +337,36 @@ class Simulation:
         else:
             self.paladin.mana += self.paladin.mana_regen_per_second * self.tick_rate
     
-    def test_healing_and_buff_events(self, target):
-        healing_and_buff_events = sorted(self.paladin.events + self.paladin.buff_events, key=get_timestamp)
-        pp.pprint(healing_and_buff_events)
-        
-        return healing_and_buff_events
+    def add_spell_icons(self):
+        for spell_id, spell_name in self.get_spell_ids().items():
+            if spell_id not in self.spell_icons:
+                spell_icon_data = cache.cached_get_spell_icon_data(self.access_token, spell_id)
+                try:
+                    self.spell_icons[spell_id] = spell_icon_data["assets"][0]["value"]
+                except:
+                    print(f"Spell: {spell_name} not found")
     
-    def test_cast_events(self, target):
-        pp.pprint(self.paladin.ability_cast_events)
-        return self.paladin.ability_cast_events
+    def get_spell_ids_from_module(self, module_name):
+        spell_ids = {}
+        for name, obj in inspect.getmembers(sys.modules[module_name]):
+            if inspect.isclass(obj) and hasattr(obj, "SPELL_ID"):
+                spell_id = getattr(obj, "SPELL_ID")
+                spell_ids[spell_id] = name
+        return spell_ids
+    
+    def get_spell_ids(self):
+        modules = [
+            "app.classes.spells_healing",
+            "app.classes.spells_damage",
+            "app.classes.spells_auras",
+            "app.classes.spells_passives"
+        ]
+        
+        all_spell_ids = {}
+        for module in modules:
+            all_spell_ids.update(self.get_spell_ids_from_module(module))
+                
+        return all_spell_ids
         
     def display_results(self, target):
         healing_and_buff_events = sorted(self.paladin.events + self.paladin.buff_events, key=get_timestamp)
@@ -382,8 +417,10 @@ class Simulation:
         pp.pprint(healing_and_buff_events)
         # pp.pprint(healing_and_beacon_events)
         
+        # icon retrieval
         
         
+        # data processing
         # i.e. Holy Shock (Divine Toll) is a sub-spell of Divine Toll
         sub_spell_map = {
             "Holy Shock (Divine Toll)": "Divine Toll",
@@ -466,6 +503,6 @@ class Simulation:
         pp.pprint(self.paladin.holy_power_by_ability)
         print(f"Glimmers applied: {self.paladin.glimmer_application_counter}")
         print(f"Glimmers removed: {self.paladin.glimmer_removal_counter}")
-        return self.paladin.ability_breakdown, self.elapsed_time
+        return self.paladin.ability_breakdown, self.elapsed_time, self.spell_icons
         # print(f"Direct heals: {self.times_direct_healed}")
         

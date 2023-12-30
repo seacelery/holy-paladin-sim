@@ -4,7 +4,7 @@ from ..utils.misc_functions import format_time, append_aura_applied_event, appen
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
 from .spells_damage import Judgment, CrusaderStrike
-from .spells_auras import AvengingWrathSpell, DivineFavorSpell, BlessingOfFreedomSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons
+from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
@@ -209,8 +209,8 @@ class Paladin:
         if self.is_talent_active("Divine Favor"):
             self.abilities["Divine Favor"] = DivineFavorSpell(self)
             
-        if self.is_talent_active("Blessing of Freedom"):
-            self.abilities["Blessing of Freedom"] = BlessingOfFreedomSpell(self)
+        # if self.is_talent_active("Blessing of Freedom"):
+        #     self.abilities["Blessing of Freedom"] = BlessingOfFreedomSpell(self)
             
         if self.is_talent_active("Tyr's Deliverance") and self.is_talent_active("Holy Shock"):
             self.abilities["Tyr's Deliverance"] = TyrsDeliveranceSpell(self)

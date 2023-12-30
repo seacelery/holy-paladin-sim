@@ -10,6 +10,7 @@ from .target import Player
 
 class Judgment(Spell):
     
+    SPELL_ID = 20271
     SPELL_POWER_COEFFICIENT = 0.610542 
     BASE_COOLDOWN = 12
     MANA_COST = 0.024
@@ -112,6 +113,7 @@ class Judgment(Spell):
 class CrusaderStrike(Spell):
     
     # uses attack power not spell power
+    SPELL_ID = 35395
     SPELL_POWER_COEFFICIENT = 1.071 * 1.04
     BASE_COOLDOWN = 7.75
     MANA_COST = 0.006

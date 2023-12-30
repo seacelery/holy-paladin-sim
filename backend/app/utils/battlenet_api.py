@@ -30,3 +30,10 @@ def get_talent_data(access_token, realm, character_name):
     response = requests.get(url)
     return response.json()
 
+def get_spell_icon_data(access_token, spellId):
+    url = f'https://eu.api.blizzard.com/data/wow/media/spell/{spellId}?locale=en_GB&access_token={access_token}&namespace=static-eu'
+    response = requests.get(url)
+    return response.json()
+
+# print(spell_data["assets"][0]["value"])
+

@@ -28,6 +28,7 @@ def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_ta
 
 class HolyShock(Spell):
     
+    SPELL_ID = 20473
     SPELL_POWER_COEFFICIENT = 1.535 * 0.8
     MANA_COST = 0.028
     BASE_COOLDOWN = 8.5
@@ -178,6 +179,7 @@ class HolyShock(Spell):
             
 class Daybreak(Spell):
     
+    SPELL_ID = 414170
     BASE_COOLDOWN = 60
     
     def __init__(self, caster):
@@ -244,6 +246,7 @@ class Daybreak(Spell):
                
 class RisingSunlightHolyShock(Spell):
     
+    SPELL_ID = 20473
     SPELL_POWER_COEFFICIENT = 1.535
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
@@ -374,6 +377,7 @@ class RisingSunlightHolyShock(Spell):
                     
 class DivineToll(Spell):
     
+    SPELL_ID = 375576
     MANA_COST = 0.03
     BASE_COOLDOWN = 60
     
@@ -405,6 +409,7 @@ class DivineToll(Spell):
   
 class DivineTollHolyShock(Spell):
     
+    SPELL_ID = 20473
     SPELL_POWER_COEFFICIENT = 1.535
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
@@ -540,6 +545,7 @@ class DivineTollHolyShock(Spell):
             
 class DivineResonanceHolyShock(Spell):
     
+    SPELL_ID = 20473
     SPELL_POWER_COEFFICIENT = 1.535
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
@@ -637,6 +643,7 @@ class DivineResonanceHolyShock(Spell):
 
 class HolyLight(Spell):
     
+    SPELL_ID = 82326
     SPELL_POWER_COEFFICIENT = 5.096
     MANA_COST = 0.024
     HOLY_POWER_GAIN = 0
@@ -741,6 +748,7 @@ class HolyLight(Spell):
 
 class FlashOfLight(Spell):
     
+    SPELL_ID = 19750
     SPELL_POWER_COEFFICIENT = 2.63 * 1.2
     MANA_COST = 0.036 
     BASE_MANA_COST = 0.036
@@ -830,6 +838,7 @@ class FlashOfLight(Spell):
 
 class WordOfGlory(Spell):
     
+    SPELL_ID = 85673
     SPELL_POWER_COEFFICIENT = 3.15 * 0.88
     MANA_COST = 0.012
     HOLY_POWER_COST = 3
@@ -941,6 +950,7 @@ class WordOfGlory(Spell):
             
 class LightOfDawn(Spell):
     
+    SPELL_ID = 85222
     SPELL_POWER_COEFFICIENT = 0.8334
     MANA_COST = 0.012
     HOLY_POWER_COST = 3
@@ -1046,6 +1056,7 @@ class LightOfDawn(Spell):
 
 class LightsHammerSpell(Spell):
     
+    SPELL_ID = 114158
     BASE_COOLDOWN = 60
     MANA_COST = 0.036
     
@@ -1062,6 +1073,7 @@ class LightsHammerSpell(Spell):
                 
 class LightsHammerHeal(Spell):
     
+    SPELL_ID = 114158
     SPELL_POWER_COEFFICIENT = 0.4
     TARGET_COUNT = 6
     

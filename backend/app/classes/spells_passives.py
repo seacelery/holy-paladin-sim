@@ -6,6 +6,7 @@ from .spells import Spell
 class GlimmerOfLightSpell(Spell):
     
     # glorious dawn multiplier
+    SPELL_ID = 287269
     SPELL_POWER_COEFFICIENT = 1.6416 * 1.1
     
     def __init__(self, caster):
@@ -17,6 +18,7 @@ class GlimmerOfLightSpell(Spell):
     
 class JudgmentOfLightSpell(Spell):
     
+    SPELL_ID = 183778
     SPELL_POWER_COEFFICIENT = 0.175
     
     def __init__(self, caster):
@@ -25,6 +27,7 @@ class JudgmentOfLightSpell(Spell):
 
 class GreaterJudgmentSpell(Spell):
     
+    SPELL_ID = 231644
     SPELL_POWER_COEFFICIENT = 1.84
     
     def __init__(self, caster):
@@ -33,6 +36,7 @@ class GreaterJudgmentSpell(Spell):
         
 class TouchOfLight(Spell):
     
+    SPELL_ID = 385349
     SPELL_POWER_COEFFICIENT = 0.45 * 5
     BASE_PPM = 3
     
