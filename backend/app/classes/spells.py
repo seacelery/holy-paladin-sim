@@ -132,7 +132,10 @@ class Spell:
                     if self.aoe_cast_counter == target_count:
                         caster.mana -= mana_cost
                         # add spell, mana cost, holy power attributes, and increment casts
-                        update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, self.holy_power_gain, self.holy_power_cost)
+                        if self.name in ["Light's Hammer"]:
+                            update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, 0, self.holy_power_cost, exclude_casts=True)
+                        else:
+                            update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, 0, self.holy_power_cost)
                         
                     self.aoe_cast_counter -= 1
                 else: 
@@ -140,9 +143,9 @@ class Spell:
                     
                     # exclude casts for certain spells
                     if self.name in ["Tyr's Deliverance"]:
-                        update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, self.holy_power_gain, self.holy_power_cost, exclude_casts=True)
+                        update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, 0, self.holy_power_cost, exclude_casts=True)
                     else:
-                        update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, self.holy_power_gain, self.holy_power_cost)
+                        update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, 0, self.holy_power_cost)
                 
                 # for detailed logging     
                 caster.healing_by_ability[self.name] = caster.healing_by_ability.get(self.name, 0) + healing_value
@@ -179,7 +182,7 @@ class Spell:
                         
                         update_spell_data_beacon_heals(caster.ability_breakdown, beacon_target, beacon_healing, self.name)
                         
-                        append_spell_heal_event(caster.events, "beacon", caster, beacon_target, beacon_healing, current_time, False, spends_mana=False)   
+                        # append_spell_heal_event(caster.events, "beacon", caster, beacon_target, beacon_healing, current_time, False, spends_mana=False)   
                         append_spell_beacon_event(caster.beacon_events, self.name, caster, beacon_target, healing_value, beacon_healing, current_time)   
                    
             if self.healing_target_count > 1:

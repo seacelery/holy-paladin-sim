@@ -267,11 +267,9 @@ class SophicDevotion(Buff):
         
     def apply_effect(self, caster):
         caster.spell_power += 932
-        print(f"EFFECT ACTIVE, NEW INT: {caster.spell_power}")
         
     def remove_effect(self, caster):
         caster.spell_power -= 932
-        print(f"EFFECT ENDING, NEW INT: {caster.spell_power}")
  
  
 # target buffs   

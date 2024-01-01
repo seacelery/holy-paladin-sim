@@ -1,4 +1,5 @@
 import pprint
+import copy
 
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented
 from .spells import Wait
@@ -155,6 +156,12 @@ class Paladin:
         # for results output only
         self.most_relevant_events = []
         self.ability_breakdown = {}
+        
+        self.initial_state = copy.deepcopy(self)
+    
+    def reset_state(self):
+        current_state = copy.deepcopy(self.initial_state)
+        self.__dict__.update(current_state.__dict__)
     
     # update methods used in routes.py
     def update_race(self, new_race):

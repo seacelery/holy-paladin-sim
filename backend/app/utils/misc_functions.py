@@ -240,3 +240,6 @@ def update_spell_data_casts(spell_breakdown, spell_name, mana_spent=None, holy_p
     if holy_power_spent != 0 and holy_power_spent is not None:
         spell_data["holy_power_spent"] += holy_power_spent
         
+def update_spell_holy_power_gain(spell_breakdown, spell_name, holy_power_gained=None):
+    if holy_power_gained:
+        spell_breakdown[spell_name]["holy_power_gained"] += holy_power_gained

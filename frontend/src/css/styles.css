@@ -305,6 +305,11 @@ table {
     border-collapse: collapse;
 }
 
+tr {
+    border: 1px solid var(--border-colour-3);
+    height: 36px;
+}
+
 #table-headers {
     font-size: 18px;
 }
@@ -324,10 +329,8 @@ table {
 .table-cell-left {
     padding-left: 5px;
 
-    width: 350px;
+    min-width: 350px;
     height: 35px;
-    
-    border: 1px solid var(--border-colour-3);
 
     font-weight: 300;
     font-size: 17px;
@@ -339,9 +342,8 @@ table {
     padding-right: 8px;
 
     height: 35px;
-    
-    border-top: none;
-    border: 1px solid var(--border-colour-3);
+
+    border-right: 1px solid var(--border-colour-3);
 
     font-weight: 300;
     font-size: 17px;
@@ -356,8 +358,6 @@ table {
 
     width: 350px;
     height: 35px;
-    
-    border: 1px solid var(--border-colour-3);
 
     font-weight: 300;
     font-size: 17px;
@@ -383,8 +383,7 @@ table {
 
     height: 35px;
     
-    border-top: none;
-    border: 1px solid var(--border-colour-3);
+    border-right: 1px solid var(--border-colour-3);
 
     font-weight: 300;
     font-size: 17px;
@@ -400,8 +399,6 @@ table {
     width: 350px;
     height: 35px;
     
-    border: 1px solid var(--border-colour-3);
-
     font-weight: 300;
     font-size: 17px;
 
@@ -425,9 +422,8 @@ table {
     padding-right: 8px;
 
     height: 35px;
-    
-    border-top: none;
-    border: 1px solid var(--border-colour-3);
+
+    border-right: 1px solid var(--border-colour-3);
 
     font-weight: 300;
     font-size: 17px;
@@ -442,9 +438,7 @@ table {
 
     width: 100%;
 
-    border-top: none;
-    border-left: none;
-    border-right: none;
+    border-right: 1px solid var(--border-colour-3);
 
     color: var(--holy-font);
 }
@@ -455,8 +449,8 @@ table {
 }
 
 .table-spell-icon {
-    width: 29px;
-    height: 29px;
+    width: 30px;
+    height: 30px;
     
     border: 1.5px solid var(--border-colour-3);
 }
@@ -477,10 +471,12 @@ table {
 
 .sub-cell {
     padding-left: 35px;
+    border-right: 1px solid var(--border-colour-3);
 }
 
 .sub-sub-cell {
     padding-left: 65px;
+    border-right: 1px solid var(--border-colour-3);
 }
 
 .table-header-icon-container {
@@ -530,10 +526,11 @@ table {
 .table-cell-bottom-left {
     padding-left: 5px;
 
+    min-width: 350px;
     height: 35px;
     
     border: 1px solid var(--border-colour-3);
-    border-top: none;
+    border-right: none;
 
     font-weight: 300;
     font-size: 17px;
@@ -555,16 +552,8 @@ table {
     background-color: var(--panel-colour);
 }
 
-.healing-percent-cell {
-    border: 1px solid var(--border-colour-3);
-}
-
-.healing-cell {
-    border: 1px solid var(--border-colour-3);
-}
-
-#overall-healing-percent-cell, #overall-casts-cell, #overall-holy-power-cell {
-    border: 1px solid var(--border-colour-3);
+#overall-healing-percent-cell {
+    border-left: 1px solid var(--border-colour-3);
 }
 
 #overall-healing-cell {
@@ -578,6 +567,10 @@ table {
     border-right: 1px solid var(--border-colour-3);
 
     color: var(--healing-font);
+}
+
+#overall-casts-cell {
+    border-right: 1px solid var(--border-colour-3);
 }
 
 #overall-mana-spent-cell {

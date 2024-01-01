@@ -16,6 +16,7 @@ beacon_transfer_rates_single_beacon = {
     "Afterimage": single_beacon_transfer_st,
     "Light of Dawn": single_beacon_transfer_aoe,
     "Glimmer of Light": single_beacon_transfer_aoe,
+    "Light's Hammer": single_beacon_transfer_aoe
 }
 
 beacon_transfer_rates_double_beacon = {
@@ -30,5 +31,6 @@ beacon_transfer_rates_double_beacon = {
     "Resplendent Light": double_beacon_transfer_st,
     "Afterimage": double_beacon_transfer_st,
     "Light of Dawn": double_beacon_transfer_aoe,
-    "Glimmer of Light": double_beacon_transfer_aoe
+    "Glimmer of Light": double_beacon_transfer_aoe,
+    "Light's Hammer": double_beacon_transfer_aoe
 }

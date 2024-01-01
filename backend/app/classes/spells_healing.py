@@ -5,7 +5,7 @@ from .spells import Spell
 from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, BlessingOfFreedomBuff, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals, update_spell_data_beacon_heals
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals, update_spell_data_beacon_heals, update_spell_holy_power_gain
 
 
 def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_targets):
@@ -103,6 +103,7 @@ class HolyShock(Spell):
                 
             # handle holy power gain and logging
             increment_holy_power(self, caster)
+            update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
             
             # apply glimmer
             # glimmer_healing = []
@@ -320,6 +321,7 @@ class RisingSunlightHolyShock(Spell):
                     
             # handle holy power gain and logging
             increment_holy_power(self, caster)
+            update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
             
             # apply glimmer
             # glimmer_healing = []
@@ -488,6 +490,7 @@ class DivineTollHolyShock(Spell):
                     
             # handle holy power gain and logging
             increment_holy_power(self, caster)
+            update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
             
             # apply glimmers THEN calculate divine toll's glimmer healing  
             if caster.is_talent_active("Glimmer of Light"):       
@@ -625,6 +628,7 @@ class DivineResonanceHolyShock(Spell):
             
             # handle holy power gain and logging
             increment_holy_power(self, caster)
+            update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
             
             if caster.is_talent_active("Glimmer of Light"):
                 target = targets[0]
@@ -744,11 +748,10 @@ class HolyLight(Spell):
                     self.holy_power_gain = 3
                     
                 increment_holy_power(self, caster)
+                update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
                 
                 if caster.active_auras["Infusion of Light"].current_stacks > 1:
-                    print(caster.active_auras["Infusion of Light"].current_stacks)
                     caster.active_auras["Infusion of Light"].current_stacks -= 1
-                    print(caster.active_auras["Infusion of Light"].current_stacks)
                     append_aura_stacks_decremented(caster.events, "Infusion of Light", caster, current_time, caster.active_auras["Infusion of Light"].current_stacks, duration=caster.active_auras['Infusion of Light'].duration)
                 else:
                     caster.active_auras["Infusion of Light"].remove_effect(caster)
@@ -756,6 +759,7 @@ class HolyLight(Spell):
                     append_aura_removed_event(caster.events, "Infusion of Light", caster, caster, current_time)
             else:
                 increment_holy_power(self, caster)
+                update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
             
             # remove divine favor, start divine favor spell cd
             if "Divine Favor" in caster.active_auras:
@@ -818,6 +822,7 @@ class FlashOfLight(Spell):
                             caster.tyrs_deliverance_extended_by += 40 - caster.tyrs_deliverance_extended_by
             
             increment_holy_power(self, caster)
+            update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
             
             # decrement stacks or remove infusion of light
             if "Infusion of Light" in caster.active_auras:
@@ -854,8 +859,6 @@ class FlashOfLight(Spell):
          
             
 # spenders
-
-
 class WordOfGlory(Spell):
     
     SPELL_ID = 85673
@@ -1105,7 +1108,7 @@ class LightsHammerSpell(Spell):
         if cast_success:
             caster.apply_summon(LightsHammerSummon(), current_time)
             update_spell_data_casts(caster.ability_breakdown, "Light's Hammer", self.get_mana_cost(caster))
-            caster.ability_breakdown["Light's Hammer"]["casts"] -= 8
+            # caster.ability_breakdown["Light's Hammer"]["casts"] -= 8
                 
                 
 class LightsHammerHeal(Spell):

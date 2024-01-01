@@ -1,3 +1,5 @@
+import { spellToSpellIdMap } from './spellToSpellIdMap.js';
+
 const createAbilityBreakdown = (simulationData) => {
     const formatNumbers = (number) => {
         return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -19,35 +21,9 @@ const createAbilityBreakdown = (simulationData) => {
         };       
     };
 
-    const spellToSpellIdMap = {
-        "Holy Shock": 20473,
-        "Holy Shock (Rising Sunlight)": 20473, 
-        "Holy Shock (Divine Toll)": 20473,
-        "Holy Shock (Divine Resonance)": 20473,
-        "Light of Dawn": 85222,
-        "Word of Glory": 85673,
-        "Glimmer of Light": 287269,
-        "Divine Toll": 375576,
-        "Daybreak": 414170,
-        "Beacon of Light": 53563,
-        "Holy Light": 82326,
-        "Flash of Light": 19750,
-        "Light's Hammer": 114158,
-        "Blessing of Summer": 328620,
-        "Crusader Strike": 35395,
-        "Judgment": 20271,
-        "Overflowing Light": 414127,
-        "Resplendent Light": 392902,
-        "Crusader's Reprieve": 403042,
-        "Judgment of Light": 183778,
-        "Greater Judgment": 231644,
-        "Touch of Light": 385349,
-        "Afterimage": 385414,
-        "Tyr's Deliverance": 200652
-    };
-
-    const excludedSpellsCasts = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Judgment of Light", "Greater Judgment", "Touch of Light", "Afterimage"];
-    const excludedSpellsCrit = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Crusader Strike", "Judgment"];
+    // leave cells blank for certain spells
+    const excludedSpellsCasts = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Judgment of Light", "Greater Judgment", "Touch of Light", "Afterimage", "Glimmer of Light"];
+    const excludedSpellsCrit = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Crusader Strike", "Judgment", "Daybreak", "Divine Toll"];
 
     // convert to array and back to sort the data by healing
     const abilityBreakdownData = simulationData[0];
@@ -55,11 +31,8 @@ const createAbilityBreakdown = (simulationData) => {
     abilityBreakdownArray.sort((a, b) => b[1].total_healing - a[1].total_healing);
     let sortedAbilityBreakdownData = Object.fromEntries(abilityBreakdownArray);
 
-    console.log(sortedAbilityBreakdownData)
     const encounterLength = simulationData[1];
-
     const abilityIcons = simulationData[2];
-    console.log(abilityIcons)
 
     const table = document.createElement("table");
 
@@ -174,7 +147,7 @@ const createAbilityBreakdown = (simulationData) => {
                         if (arrow.classList.contains("fa-caret-right")) {
                             return
                         } else if (arrow.classList.contains("fa-sort-down")) {
-                            changeArrowDirection(arrow);
+                            return
                         };
                     };
                 });
@@ -226,7 +199,7 @@ const createAbilityBreakdown = (simulationData) => {
         nameCell.appendChild(spellNameText);
 
         // make collapsible if it has sub-spells
-        if (Object.keys(spellData["sub_spells"]).length > 0) {    
+        if (Object.keys(spellData["sub_spells"]).length > 0 || spellName === "Beacon of Light") {    
         
             const arrowIconContainer = document.createElement("div");
             arrowIconContainer.className = "table-icon-container";
@@ -305,7 +278,7 @@ const createAbilityBreakdown = (simulationData) => {
         if (excludedSpellsCasts.includes(spellName)) {
             castsCell.textContent = "";
         } else {
-            castsCell.textContent = spellData.casts;
+            castsCell.textContent = spellData.casts.toFixed(1);
         };
         
         const avgCastsCell = row.insertCell();
@@ -319,7 +292,7 @@ const createAbilityBreakdown = (simulationData) => {
 
         const hitsCell = row.insertCell();
         hitsCell.className = "table-cell-right";
-        hitsCell.textContent = spellData.hits > 0 ? spellData.hits : "";
+        hitsCell.textContent = spellData.hits > 0 ? spellData.hits.toFixed(1) : "";
 
         const critPercentCell = row.insertCell();
         critPercentCell.className = "table-cell-right";
@@ -339,25 +312,100 @@ const createAbilityBreakdown = (simulationData) => {
         // show positive if gained, negative if spent
         const holyPowerCell = row.insertCell();
         holyPowerCell.className = "table-cell-right holy-power-cell";
-        let holyPowerText = spellData.holy_power_gained > 0 ? spellData.holy_power_gained : spellData.holy_power_spent;
+        let holyPowerText = spellData.holy_power_gained > 0 ? spellData.holy_power_gained.toFixed(1) : spellData.holy_power_spent.toFixed(1);
         
         if (spellData.holy_power_gained > 0) {
             holyPowerText = "+" + holyPowerText;
             holyPowerCell.style.color = "var(--holy-power-gain)";
-            overallHolyPower += spellData.holy_power_gained;
+            overallHolyPower += spellData.holy_power_gained.toFixed(1);
         } else if (spellData.holy_power_spent > 0) {
             holyPowerText = "-" + holyPowerText;
             holyPowerCell.style.color = "var(--holy-power-loss)";
-            overallHolyPower -= spellData.holy_power_spent;
+            overallHolyPower -= spellData.holy_power_spent.toFixed(1);
         } else if (spellData.holy_power_gained === 0 && spellData.holy_power_spent === 0) {
             holyPowerText = "";
         };
-        holyPowerCell.textContent = holyPowerText;
+        holyPowerCell.textContent = holyPowerText
+
+        // BEACON SOURCES
+        if (spellName === "Beacon of Light") {
+            for (const sourceSpellName in spellData["source_spells"]) {
+                const sourceSpellData = spellData["source_spells"][sourceSpellName];
+                const sourceSpellRow = tableBody.insertRow();
+                sourceSpellRow.style.display = "none";
+                sourceSpellRow.className = `${spellName.toLowerCase()}-subrow`;
+                sourceSpellRow.className = sourceSpellRow.className.replaceAll(/\s|\(|\)/g, "-");
+                sourceSpellRow.className = sourceSpellRow.className.replaceAll("--", "-");
+                sourceSpellRow.classList.add("sub-row");
+                sourceSpellRow.setAttribute("visibility", "hidden");
+                // subRow.style.display = "none";
+
+                const nameCell = sourceSpellRow.insertCell();
+                nameCell.className = "table-sub-cell-left spell-name-cell sub-cell";
+
+                // spell icon
+            const spellIconContainer = document.createElement("div");
+            spellIconContainer.className = "table-spell-icon-container";
+
+            const spellIcon = document.createElement("img");
+
+            // format spell names to make them less ugly
+            let formattedSubSpellName = sourceSpellName;
+            if (formattedSubSpellName.includes("Glimmer of Light")) {
+                formattedSubSpellName = "Glimmer of Light";
+            };
+
+            spellIcon.src = abilityIcons[spellToSpellIdMap[formattedSubSpellName]];
+            spellIcon.className = "table-spell-icon";
+
+            // spellIconContainer.appendChild(spellIcon);
+            nameCell.appendChild(spellIcon);
+            
+            const spellNameText = document.createElement("div");
+            spellNameText.textContent = formattedSubSpellName;
+            
+            spellNameText.className = "table-spell-name-text";
+            nameCell.appendChild(spellNameText);
+
+            const percentHealingCell = sourceSpellRow.insertCell();
+            percentHealingCell.className = "table-sub-cell-right healing-percent-cell";
+            percentHealingCell.textContent = "(" + Number(formatNumbersNoRounding(((sourceSpellData.healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%)";
+
+            const healingCell = sourceSpellRow.insertCell();
+            healingCell.className = "table-sub-cell-right healing-cell";
+            healingCell.textContent = "(" + formatNumbers(sourceSpellData.healing) + ")";
+
+            const HPSCell = sourceSpellRow.insertCell();
+            HPSCell.className = "table-sub-cell-right HPS-cell";
+            HPSCell.textContent = "(" + formatNumbers(sourceSpellData.healing / encounterLength) + ")";
+
+            const castsCell = sourceSpellRow.insertCell();
+            castsCell.className = "table-sub-cell-right";
+            
+            const avgCastsCell = sourceSpellRow.insertCell();
+            avgCastsCell.className = "table-sub-cell-right";
+            avgCastsCell.textContent = "(" + formatNumbers(sourceSpellData.healing / sourceSpellData.hits) + ")";
+
+            const hitsCell = sourceSpellRow.insertCell();
+            hitsCell.className = "table-sub-cell-right";
+            hitsCell.textContent = sourceSpellData.hits > 0 ? "(" + sourceSpellData.hits.toFixed(1) + ")": "";
+
+            const critPercentCell = sourceSpellRow.insertCell();
+            critPercentCell.className = "table-sub-cell-right";
+  
+            const manaSpentCell = sourceSpellRow.insertCell();
+            manaSpentCell.className = "table-sub-cell-right mana-spent-cell";
+
+            // show positive if gained, negative if spent
+            const holyPowerCell = sourceSpellRow.insertCell();
+            holyPowerCell.className = "table-sub-cell-right holy-power-cell";
+            };
+        };
+        
 
         // SUB SPELLS
         for (const subSpellName in spellData["sub_spells"]) {
             const subSpellData = spellData["sub_spells"][subSpellName];
-            console.log(subSpellData)
             const subRow = tableBody.insertRow();
             subRow.style.display = "none";
             subRow.className = `${spellName.toLowerCase()}-subrow`;
@@ -443,21 +491,21 @@ const createAbilityBreakdown = (simulationData) => {
             if (excludedSpellsCasts.includes(subSpellName)) {
                 castsCell.textContent = "";
             } else {
-                castsCell.textContent = "(" + subSpellData.casts + ")";
+                castsCell.textContent = "(" + subSpellData.casts.toFixed(1) + ")";
             };
             
             const avgCastsCell = subRow.insertCell();
             avgCastsCell.className = "table-sub-cell-right";
 
             if (excludedSpellsCasts.includes(subSpellName)) {
-                avgCastsCell.textContent = formatNumbers(subSpellData.total_healing / subSpellData.hits);
+                avgCastsCell.textContent = "(" + formatNumbers(subSpellData.total_healing / subSpellData.hits) + ")";
             } else {
-                avgCastsCell.textContent = formatNumbers(subSpellData.total_healing / subSpellData.casts);
+                avgCastsCell.textContent = "(" + formatNumbers(subSpellData.total_healing / subSpellData.casts) + ")";
             };
 
             const hitsCell = subRow.insertCell();
             hitsCell.className = "table-sub-cell-right";
-            hitsCell.textContent = subSpellData.hits > 0 ? subSpellData.hits : "";
+            hitsCell.textContent = subSpellData.hits > 0 ? "(" + subSpellData.hits.toFixed(1) + ")" : "";
 
             const critPercentCell = subRow.insertCell();
             critPercentCell.className = "table-sub-cell-right";
@@ -465,13 +513,12 @@ const createAbilityBreakdown = (simulationData) => {
             if (excludedSpellsCrit.includes(subSpellName)) {
                 critPercentCell.textContent = "";
             } else {
-                console.log(subSpellName, subSpellData.crit_percent, subSpellData.crits)
-                critPercentCell.textContent = (subSpellData.crit_percent).toFixed(1) + "%";
+                critPercentCell.textContent = "(" + (subSpellData.crit_percent).toFixed(1) + "%)";
             };
             
             const manaSpentCell = subRow.insertCell();
             manaSpentCell.className = "table-sub-cell-right mana-spent-cell";
-            manaSpentCell.textContent = formatNumbers(subSpellData.mana_spent);
+            manaSpentCell.textContent = "(" + formatNumbers(subSpellData.mana_spent) + ")";
             if (subSpellData.mana_spent === 0) {
                 manaSpentCell.textContent = "";
             };
@@ -479,20 +526,20 @@ const createAbilityBreakdown = (simulationData) => {
             // show positive if gained, negative if spent
             const holyPowerCell = subRow.insertCell();
             holyPowerCell.className = "table-sub-cell-right holy-power-cell";
-            let holyPowerText = subSpellData.holy_power_gained > 0 ? subSpellData.holy_power_gained : subSpellData.holy_power_spent;
+            let holyPowerText = subSpellData.holy_power_gained > 0 ? subSpellData.holy_power_gained.toFixed(1) : subSpellData.holy_power_spent.toFixed(1);
             
             if (subSpellData.holy_power_gained > 0) {
                 holyPowerText = "(+" + holyPowerText + ")";
                 holyPowerCell.style.color = "var(--holy-power-gain)";
-                overallHolyPower += subSpellData.holy_power_gained;
+                overallHolyPower += subSpellData.holy_power_gained.toFixed(1);
             } else if (subSpellData.holy_power_spent > 0) {
                 holyPowerText = "(-" + holyPowerText + ")";
                 holyPowerCell.style.color = "var(--holy-power-loss)";
-                overallHolyPower -= subSpellData.holy_power_spent;
+                overallHolyPower -= subSpellData.holy_power_spent.toFixed(1);
             } else if (subSpellData.holy_power_gained === 0 && subSpellData.holy_power_spent === 0) {
                 holyPowerText = "";
             };
-            holyPowerCell.textContent = holyPowerText;  
+            holyPowerCell.textContent = holyPowerText
 
             // SUB SUB SPELLS
             for (const subSubSpellName in spellData["sub_spells"][subSpellName]["sub_spells"]) {
@@ -548,26 +595,26 @@ const createAbilityBreakdown = (simulationData) => {
     
                 const castsCell = subRow.insertCell();
                 castsCell.className = "table-sub-sub-cell-right";
-                castsCell.textContent = "((" + subSubSpellData.casts + "))";
+                castsCell.textContent = "((" + subSubSpellData.casts.toFixed(1) + "))";
                 if (subSubSpellName.includes("Glimmer")) {
                     castsCell.textContent = "";
                 };
     
                 const avgCastsCell = subRow.insertCell();
                 avgCastsCell.className = "table-sub-sub-cell-right";
-                avgCastsCell.textContent = formatNumbers(subSubSpellData.total_healing / subSubSpellData.casts);
+                avgCastsCell.textContent = "((" + formatNumbers(subSubSpellData.total_healing / subSubSpellData.casts) + "))";
     
                 const hitsCell = subRow.insertCell();
                 hitsCell.className = "table-sub-sub-cell-right";
-                hitsCell.textContent = subSubSpellData.hits;
+                hitsCell.textContent = "((" + subSubSpellData.hits.toFixed(1) + "))";
     
                 const critPercentCell = subRow.insertCell();
                 critPercentCell.className = "table-sub-sub-cell-right";
-                critPercentCell.textContent = (subSubSpellData.crit_percent).toFixed(1) + "%";
+                critPercentCell.textContent = "((" + (subSubSpellData.crit_percent).toFixed(1) + "%))";
     
                 const manaSpentCell = subRow.insertCell();
                 manaSpentCell.className = "table-sub-sub-cell-right mana-spent-cell";
-                manaSpentCell.textContent = formatNumbers(subSubSpellData.mana_spent);
+                manaSpentCell.textContent = "((" + formatNumbers(subSubSpellData.mana_spent) + "))";
                 if (subSpellData.mana_spent === 0) {
                     manaSpentCell.textContent = "";
                 };
@@ -575,20 +622,20 @@ const createAbilityBreakdown = (simulationData) => {
                 // show positive if gained, negative if spent
                 const holyPowerCell = subRow.insertCell();
                 holyPowerCell.className = "table-sub-sub-cell-right holy-power-cell";
-                let holyPowerText = subSubSpellData.holy_power_gained > 0 ? subSubSpellData.holy_power_gained : subSubSpellData.holy_power_spent;
+                let holyPowerText = subSubSpellData.holy_power_gained > 0 ? subSubSpellData.holy_power_gained.toFixed(1) : subSubSpellData.holy_power_spent.toFixed(1);
                 
                 if (subSubSpellData.holy_power_gained > 0) {
                     holyPowerText = "((+" + holyPowerText + "))";
                     holyPowerCell.style.color = "var(--holy-power-gain)";
-                    overallHolyPower += subSubSpellData.holy_power_gained;
+                    overallHolyPower += subSubSpellData.holy_power_gained.toFixed(1);
                 } else if (subSubSpellData.holy_power_spent > 0) {
                     holyPowerText = "((-" + holyPowerText + "))";
                     holyPowerCell.style.color = "var(--holy-power-loss)";
-                    overallHolyPower -= subSubSpellData.holy_power_spent;
+                    overallHolyPower -= subSubSpellData.holy_power_spent.toFixed(1);
                 } else if (subSubSpellData.holy_power_gained === 0 && subSubSpellData.holy_power_spent === 0) {
                     holyPowerText = "";
                 };
-                holyPowerCell.textContent = holyPowerText;  
+                holyPowerCell.textContent = holyPowerText
             };
         };
     };
@@ -621,7 +668,7 @@ const createAbilityBreakdown = (simulationData) => {
     const overallCastsCell = row.insertCell(4);
     overallCastsCell.id = "overall-casts-cell";
     overallCastsCell.className = "table-cell-bottom-right";
-    overallCastsCell.textContent = overallCasts;
+    overallCastsCell.textContent = overallCasts.toFixed(1);
     overallCastsCell.style.fontWeight = 500;
 
     const cell5 = row.insertCell(5);

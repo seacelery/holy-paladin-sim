@@ -117,14 +117,26 @@ class BlessingOfTheSeasons(Spell):
                 caster.apply_buff_to_self(BlessingOfSpring(), current_time)
                 self.name = "Blessing of Summer"
                 
-class BlessingOfSummer(Spell):
-    SPELL_ID = 388007
+# class BlessingOfSummer(Spell):
+#     SPELL_ID = 388007
+    
+#     def __init__(self, caster):
+#         super().__init__("Blessing of Summer", mana_cost=BlessingOfTheSeasons.MANA_COST, cooldown=BlessingOfTheSeasons.BASE_COOLDOWN)
 
-class BlessingOfAutumn(Spell):
-    SPELL_ID = 388010
+# class BlessingOfAutumn(Spell):
+#     SPELL_ID = 388010
     
-class BlessingOfWinter(Spell):
-    SPELL_ID = 388015
+#     def __init__(self, caster):
+#         super().__init__("Blessing of Summer", mana_cost=BlessingOfTheSeasons.MANA_COST, cooldown=BlessingOfTheSeasons.BASE_COOLDOWN)
     
-class BlessingOfSpring(Spell):
-    SPELL_ID = 388013
+# class BlessingOfWinter(Spell):
+#     SPELL_ID = 388015
+    
+#     def __init__(self, caster):
+#         super().__init__("Blessing of Summer", mana_cost=BlessingOfTheSeasons.MANA_COST, cooldown=BlessingOfTheSeasons.BASE_COOLDOWN)
+    
+# class BlessingOfSpring(Spell):
+#     SPELL_ID = 388013
+    
+#     def __init__(self, caster):
+#         super().__init__("Blessing of Summer", mana_cost=BlessingOfTheSeasons.MANA_COST, cooldown=BlessingOfTheSeasons.BASE_COOLDOWN)

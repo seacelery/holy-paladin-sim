@@ -17,6 +17,7 @@
 # assuming afterimage cannot proc divine purpose or glistening radiance after testing
 # seal of might gives 3% mastery per point for reasons??
 # light's hammer bad fix on casts vs hits
+# it's slow
 
 # options to include
 # heals on beacons, light of dawn targets hit
@@ -55,8 +56,7 @@ def import_character(character_name, realm):
     return paladin, healing_targets
     
 def run_simulation(paladin, healing_targets):
-    simulation = Simulation(paladin, healing_targets, 65, access_token)
-    simulation.simulate()
+    simulation = Simulation(paladin, healing_targets, 45, 1, access_token)
     
     return simulation.display_results(healing_targets)
     
