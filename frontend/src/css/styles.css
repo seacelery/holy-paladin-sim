@@ -171,19 +171,41 @@ body {
 }
 
 #options-container {
+    display: flex;
+
     padding: 15px 0 0 15px;
+
     font-size: 15px;
 }
 
-#race-filter-label {
-    padding-right: 5px;
-
-    color: var(--light-font-colour);
+.options-half {
+    flex: 1;
+    padding: 10px;
 }
 
-#race-filter {
-    padding-left: 1px;
+.option-container {
+    display: flex;
 
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+.option-container label {
+    margin-right: 10px; /* Adjust spacing between label and input */
+}
+
+.option-container input {
+    flex-grow: 1;
+}
+
+.options-option {
+    display: block;
+
+    margin-right: 130px;
+    padding-left: 3px;
+
+    max-width: 115px;
     width: 115px;
     height: 25px;
 
@@ -193,17 +215,25 @@ body {
     font-size: 15px;
 }
 
+.options-option-label {
+    padding-right: 5px;
+
+    color: var(--light-font-colour);
+}
+
 #talents-container {
     display: flex;
 
     padding: 15px 0 0 15px;
+
     font-size: 15px;
 }
 
 .talent-checkbox {
-    color: var(--light-font-colour);
     padding-right: 15px;
     padding-left: 5px;
+
+    color: var(--light-font-colour);
 }
 
 #options-status-bar {

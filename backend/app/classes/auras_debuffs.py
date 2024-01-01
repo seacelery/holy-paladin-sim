@@ -60,7 +60,6 @@ class GreaterJudgmentDebuff(Debuff):
         caster.mastery_multiplier = 1
         
         heal_value, is_crit = greater_judgment_spell.calculate_heal(caster)
-        print(is_crit)
         
         healing_target = random.choice(healing_targets)
         healing_target.receive_heal(heal_value)

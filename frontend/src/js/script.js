@@ -2,14 +2,15 @@
 // colour spell names by spell type
 
 import { createAbilityBreakdown } from "./AbilityBreakdown.js";
-import { handleTabs } from "./SimulationOptions.js";
+import { handleTabs } from "./SimulationOptionsTabs.js";
+import { setSimulationOptionsFromImportedData } from "./SimulationOptions.js";
 
 let savedDataTimeout;
 
 const simulateText = document.getElementById("simulate-text");
 
 const importButton = document.getElementById("import-button");
-const raceOptions = document.getElementById("race-filter");
+const raceOption = document.getElementById("race-filter");
 
 const simulateButton = document.getElementById("simulate-button");
 
@@ -75,7 +76,10 @@ const convertToJSON = (data) => {
 };
 
 const runSimulation = async () => {
-    return fetch("http://127.0.0.1:5000/run_simulation", {
+    const encounterLength = document.getElementById("encounter-length-option").value;
+    const iterations = document.getElementById("iterations-option").value;
+
+    return fetch(`http://127.0.0.1:5000/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}`, {
         credentials: "include"
     })
     .then(response => response.json())
@@ -90,7 +94,7 @@ const runSimulation = async () => {
 // update the paladin class when attributes are changed
 const handleRaceChange = () => {
     updateCharacter({
-        race: raceOptions.value
+        race: raceOption.value
     });
 };
 
@@ -110,18 +114,19 @@ const handleTalentChange = (event) => {
 // update displayed information based on imported character
 const updateUIAfterImport = (data) => {
     console.log(data);
-    raceOptions.value = data.race
+    setSimulationOptionsFromImportedData(data);
+
     simulateText.textContent = JSON.stringify(data, null, 2);
 
     // create a checkbox for each talent that exists in html, and check it if the talent is active on the character
-    Object.keys(data.talents).forEach(row => {
-        Object.keys(data.talents[row]).forEach(talentName => {
+    Object.keys(data.spec_talents).forEach(row => {
+        Object.keys(data.spec_talents[row]).forEach(talentName => {
             const talentCheckbox = document.querySelector(`input[data-talent="${talentName}"]`);
             if (talentCheckbox) {
-                talentCheckbox.checked = data.talents[row][talentName].ranks["current rank"] === 1;
+                talentCheckbox.checked = data.spec_talents[row][talentName].ranks["current rank"] === 1;
             };
         });
-    });
+    }); 
 };
 
 // event listeners
@@ -132,7 +137,7 @@ document.querySelectorAll("input[data-talent]").forEach(element => {
     element.addEventListener("change", handleTalentChange);
 });
 
-raceOptions.addEventListener("change", handleRaceChange);
+raceOption.addEventListener("change", handleRaceChange);
 
 // initialise options tabs
 handleTabs("options-navbar", "options-tab-content");

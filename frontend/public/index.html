@@ -45,24 +45,49 @@
             <div id="options-window">
                 <div id="options-content" class="options-tab-content">
                     <div id="options-container">
-                        <label for="race-filter" id="race-filter-label">Race:</label>
-                        <select id="race-filter">
-                            <option value="Human">Human</option>
-                            <option value="Blood Elf">Blood Elf</option>
-                        </select>
+                        <div class="options-half options-half-left">
+                            <div class="option-container">
+                                <label for="iterations-option" id="iterations-option-label" class="options-option-label">Iterations:</label>
+                                <input id="iterations-option" class="options-option" value="1">
+                            </div>
+
+                            <div class="option-container">
+                                <label for="encounter-length-option" id="encounter-length-option-label" class="options-option-label">Encounter Length:</label>
+                                <input id="encounter-length-option" class="options-option" value="30">
+                            </div>
+
+                            <div class="option-container">
+                                <label for="race-filter" id="race-filter-label" class="options-option-label">Race:</label>
+                                <select id="race-filter" class="options-option">
+                                    <option value="Human">Human</option>
+                                    <option value="Blood Elf">Blood Elf</option>
+                                </select>
+                            </div>
+                        </div>    
+                        
+                        <div class="options-half options-half-right">
+                            <div class="option-container">
+                                <label class="options-option-label">Something:</label>
+                                <input class="options-option">
+                            </div>
+                        </div>
                     </div>
                     
                 </div>
                 <div id="talents-content" class="options-tab-content">
-                    <div id="talents-container">
+                    <!-- <div id="talents-container">
                         <input type="checkbox" id="talent1" class="talent-input" data-talent="Light's Conviction">
                         <label for="talent1" class="talent-checkbox">Light's Conviction</label><br>
                         <input type="checkbox" id="talent2" class="talent-input" data-talent="Reclamation">
                         <label for="talent2" class="talent-checkbox">Reclamation</label><br>
                         <input type="checkbox" id="talent3" class="talent-input" data-talent="Light of Dawn">
                         <label for="talent3" class="talent-checkbox">Light of Dawn</label><br>
+                    </div> -->
+                    <div id="class-talents" class="talents-container">
+                        
                     </div>
                 </div>
+
                 <div id="equipment-content" class="options-tab-content"></div>
                 <div id="buffs-content" class="options-tab-content"></div>
                 <div id="advanced-content" class="options-tab-content"></div>

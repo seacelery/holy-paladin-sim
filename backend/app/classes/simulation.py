@@ -3,6 +3,7 @@ import pprint
 import inspect
 import sys
 import copy
+import time
 
 from collections import defaultdict
 
@@ -112,17 +113,17 @@ class Simulation:
             # ("Blessing of the Seasons", lambda: True),
             # ("Avenging Wrath", lambda: True),
             # ("Holy Shock", lambda: True),
-            # ("Light's Hammer", lambda: True),
+            ("Light's Hammer", lambda: True),
             # ("Divine Toll", lambda: True),
-            # ("Tyr's Deliverance", lambda: True),
+            ("Tyr's Deliverance", lambda: True),
             # # ("Divine Toll", lambda: self.paladin.holy_power == 4),
             # ("Divine Favor", lambda: True),
             # # ("Blessing of Freedom", lambda: True),
-            # ("Light of Dawn", lambda: self.paladin.holy_power == 5),
+            ("Light of Dawn", lambda: self.paladin.holy_power == 5),
             # # # ("Holy Shock", lambda: True),
-            # # ("Light of Dawn", lambda: True),
-            # ("Word of Glory", lambda: True),
-            # # ("Crusader Strike", lambda: True),
+            # ("Light of Dawn", lambda: True),
+            ("Word of Glory", lambda: True),
+            ("Crusader Strike", lambda: True),
             # # ("Light of Dawn", lambda: self.paladin.holy_power >= 4),
             
             
@@ -130,8 +131,8 @@ class Simulation:
             # # # ("Holy Shock", lambda: 127 <= self.elapsed_time <= 128),
             # # # ("Daybreak", lambda: 128 <= self.elapsed_time <= 129),
             # # # ("Holy Shock", lambda: self.elapsed_time <= 2),
-            # ("Daybreak", lambda: self.elapsed_time >= 9),
-            # ("Divine Toll", lambda: True),
+            ("Daybreak", lambda: self.elapsed_time >= 9),
+            ("Divine Toll", lambda: True),
             # # # # ("Holy Shock", lambda: self.elapsed_time >= 10),
             
             # # # # ("Wait", lambda: 2 < self.elapsed_time < 14),
@@ -141,10 +142,10 @@ class Simulation:
             # # ("Flash of Light", lambda: True),
             # # # # # ("Holy Light", lambda: "Divine Favor" in self.paladin.active_auras),
             # # # # # ("Judgment", lambda: "Awakening READY!!!!!!" in self.paladin.active_auras),
-            # ("Judgment", lambda: True),
+            ("Judgment", lambda: True),
             # # # # ("Light of Dawn", lambda: True),
             # # # # ("Light of Dawn", lambda: self.paladin.holy_power >= 3),
-            # ("Holy Light", lambda: True),
+            ("Holy Light", lambda: True),
             # ("Divine Toll", lambda: self.elapsed_time >= 10),
         ]  
         
@@ -386,26 +387,11 @@ class Simulation:
         current_state = copy.deepcopy(self.initial_state)
         self.__dict__.update(current_state.__dict__)
         
-    def display_results(self, target):
+    def display_results(self):
         full_simulation_results = {}
         short_simulation_results = {}
-        aggregated_ability_breakdown = {}
 
-        for i in range(self.iterations):
-            # # Reset the state of the simulation
-            print(i)
-            self.paladin.reset_state()
-            self.reset_simulation()
-            # print(f"ITERATION {i}")
-            # Run the simulation
-            # print("BEFORE SIM")
-            # pp.pprint(self.paladin.ability_breakdown)
-            
-            self.simulate()
-            # print("BEFORE PROCESSING")
-            # pp.pprint(self.paladin.ability_breakdown)
-
-            sub_spell_map = {
+        sub_spell_map = {
                 "Holy Shock (Divine Toll)": "Divine Toll",
                 "Holy Shock (Divine Resonance)": "Divine Toll",
                 "Holy Shock (Rising Sunlight)": "Daybreak",
@@ -421,7 +407,21 @@ class Simulation:
                 "Judgment of Light": "Judgment",
                 "Afterimage": "Word of Glory"
             }
+
+        # time the function
+        start_time = time.time()
+        
+        # complete all simulation iterations and process the data of each
+        for i in range(self.iterations):
+            # reset simulation states
+            print(i)
+            self.paladin.reset_state()
+            self.reset_simulation()
+        
+            self.simulate()
             
+            ability_breakdown = self.paladin.ability_breakdown
+
             def add_sub_spell_healing(primary_spell_data):
                 total_healing = primary_spell_data.get("total_healing", 0)
 
@@ -434,8 +434,26 @@ class Simulation:
 
                 return total_healing
             
+            def combine_beacon_sources_by_prefix(prefix, beacon_sources):
+                combined_source = {
+                    "healing": 0,
+                    "hits": 0
+                }
+                keys_to_delete = []
+
+                for spell, data in beacon_sources.items():
+                    if spell.startswith(prefix):
+                        combined_source["healing"] += data["healing"]
+                        combined_source["hits"] += data["hits"]
+                        keys_to_delete.append(spell)
+
+                for key in keys_to_delete:
+                    del beacon_sources[key]
+
+                beacon_sources[prefix] = combined_source
+            
             # process data to include crit percent
-            for spell, data in self.paladin.ability_breakdown.items():
+            for spell, data in ability_breakdown.items():
                 if data["hits"] > data["casts"]:
                     data["crit_percent"] = round((data["crits"] / data["hits"]) * 100, 1)
                 else:
@@ -445,12 +463,12 @@ class Simulation:
                     target_data["crit_percent"] = round((target_data["crits"] / target_data["casts"]) * 100, 1) if target_data["casts"] > 0 else 0
             
             # assign sub-spell data to primary spell
-            for spell, data in self.paladin.ability_breakdown.items():
+            for spell, data in ability_breakdown.items():
                 if spell in sub_spell_map:
                     primary_spell = sub_spell_map[spell]
-                    self.paladin.ability_breakdown[primary_spell]["sub_spells"][spell] = data
+                    ability_breakdown[primary_spell]["sub_spells"][spell] = data
             
-            for primary_spell, primary_data in self.paladin.ability_breakdown.items():
+            for primary_spell, primary_data in ability_breakdown.items():
                 if primary_spell in sub_spell_map.values():
                     # add sub-spell healing to the primary spell's healing
                     primary_data["total_healing"] = add_sub_spell_healing(primary_data)
@@ -481,35 +499,22 @@ class Simulation:
                         "Glimmer of Light (Daybreak)", "Glimmer of Light (Rising Sunlight)", "Glimmer of Light (Divine Toll)", 
                         "Glimmer of Light (Glistening Radiance (Light of Dawn))", "Glimmer of Light (Glistening Radiance (Word of Glory))", "Resplendent Light",
                         "Greater Judgment", "Judgment of Light", "Crusader's Reprieve", "Afterimage"]:
-                if spell in self.paladin.ability_breakdown:
-                    del self.paladin.ability_breakdown[spell]
-                       
-            def combine_beacon_sources_by_prefix(prefix, beacon_sources):
-                combined_source = {
-                    "healing": 0,
-                    "hits": 0
-                }
-                keys_to_delete = []
-
-                for spell, data in beacon_sources.items():
-                    if spell.startswith(prefix):
-                        combined_source["healing"] += data["healing"]
-                        combined_source["hits"] += data["hits"]
-                        keys_to_delete.append(spell)
-
-                for key in keys_to_delete:
-                    del beacon_sources[key]
-
-                beacon_sources[prefix] = combined_source
-                
+                if spell in ability_breakdown:
+                    del ability_breakdown[spell]
+                          
             # combine beacon glimmer sources into one spell
-            beacon_source_spells = self.paladin.ability_breakdown["Beacon of Light"]["source_spells"]   
+            beacon_source_spells = ability_breakdown["Beacon of Light"]["source_spells"]   
             combine_beacon_sources_by_prefix("Glimmer of Light", beacon_source_spells)
             combine_beacon_sources_by_prefix("Holy Shock", beacon_source_spells)
                     
             # add primary spell as a sub-spell
+            def adjust_spell_data(spell_data, total_healing):
+                spell_data["total_healing"] -= total_healing
+                keys_to_copy = ["casts", "hits", "targets", "crits", "crit_percent", "mana_spent", "holy_power_gained", "holy_power_spent"]
+                for key in keys_to_copy:
+                    spell_data[key] = ability_breakdown[spell][key]
+            
             excluded_spells = ["Divine Toll", "Daybreak", "Judgment", "Crusader Strike"]
-            ability_breakdown = self.paladin.ability_breakdown
             
             for spell in ability_breakdown:
                 if spell not in excluded_spells:
@@ -532,71 +537,41 @@ class Simulation:
                             "sub_spells": {}
                         }
                         
-                        sub_spells[spell]["total_healing"] = ability_breakdown[spell]["total_healing"] - total_sub_spell_healing
-                        sub_spells[spell]["casts"] = ability_breakdown[spell]["casts"]
-                        sub_spells[spell]["hits"] = ability_breakdown[spell]["hits"]
-                        sub_spells[spell]["targets"] = ability_breakdown[spell]["targets"]
-                        sub_spells[spell]["crits"] = ability_breakdown[spell]["crits"]
-                        sub_spells[spell]["crit_percent"] = ability_breakdown[spell]["crit_percent"]
-                        sub_spells[spell]["mana_spent"] = ability_breakdown[spell]["mana_spent"]
-                        sub_spells[spell]["holy_power_gained"] = ability_breakdown[spell]["holy_power_gained"]
-                        sub_spells[spell]["holy_power_spent"] = ability_breakdown[spell]["holy_power_spent"]
+                        adjust_spell_data(sub_spells[spell], total_sub_spell_healing)
             
             for spell in ability_breakdown:
-                # if spell not in excluded_spells:
-                    total_sub_sub_spell_healing = 0
-                    sub_spells = ability_breakdown[spell]["sub_spells"]
-                    
-                    for sub_spell in sub_spells:
-                        sub_sub_spells = sub_spells[sub_spell]["sub_spells"]
-                        if len(sub_sub_spells) > 0:
-                            for sub_sub_spell in sub_sub_spells:
-                                total_sub_sub_spell_healing += sub_sub_spells[sub_sub_spell]["total_healing"]      
-                                
-                            if total_sub_spell_healing > 0:   
-                                sub_sub_spells[sub_spell] = {
-                                    "total_healing": 0,
-                                    "casts": 0,
-                                    "hits": 0,
-                                    "targets": {},
-                                    "crits": 0,
-                                    "mana_spent": 0,
-                                    "holy_power_gained": 0,
-                                    "holy_power_spent": 0,
-                                    "sub_spells": {}
-                                }
-                                
-                                sub_sub_spells[sub_spell]["total_healing"] = sub_spells[sub_spell]["total_healing"] - total_sub_sub_spell_healing
-                                sub_sub_spells[sub_spell]["casts"] = sub_spells[sub_spell]["casts"]
-                                sub_sub_spells[sub_spell]["hits"] = sub_spells[sub_spell]["hits"]
-                                sub_sub_spells[sub_spell]["targets"] = sub_spells[sub_spell]["targets"]
-                                sub_sub_spells[sub_spell]["crits"] = sub_spells[sub_spell]["crits"]
-                                sub_sub_spells[sub_spell]["crit_percent"] = sub_spells[sub_spell]["crit_percent"]
-                                sub_sub_spells[sub_spell]["mana_spent"] = sub_spells[sub_spell]["mana_spent"]
-                                sub_sub_spells[sub_spell]["holy_power_gained"] = sub_spells[sub_spell]["holy_power_gained"]
-                                sub_sub_spells[sub_spell]["holy_power_spent"] = sub_spells[sub_spell]["holy_power_spent"]
-            
-            # print("AFTER PROCESSING")                
-            # pp.pprint(self.paladin.ability_breakdown)
+                total_sub_sub_spell_healing = 0
+                sub_spells = ability_breakdown[spell]["sub_spells"]
+                
+                for sub_spell in sub_spells:
+                    sub_sub_spells = sub_spells[sub_spell]["sub_spells"]
+                    if len(sub_sub_spells) > 0:
+                        for sub_sub_spell in sub_sub_spells:
+                            total_sub_sub_spell_healing += sub_sub_spells[sub_sub_spell]["total_healing"]      
+                            
+                        if total_sub_spell_healing > 0:   
+                            sub_sub_spells[sub_spell] = {
+                                "total_healing": 0,
+                                "casts": 0,
+                                "hits": 0,
+                                "targets": {},
+                                "crits": 0,
+                                "mana_spent": 0,
+                                "holy_power_gained": 0,
+                                "holy_power_spent": 0,
+                                "sub_spells": {}
+                            }
+                            
+                            adjust_spell_data(sub_sub_spells[sub_spell], total_sub_sub_spell_healing)
             
             # track results for all simulations separately
-            full_simulation_results.update({f"iteration {i}": self.paladin.ability_breakdown})
+            full_simulation_results.update({f"iteration {i}": ability_breakdown})
             sim_total_healing = 0
-            for spell in self.paladin.ability_breakdown:
-                sim_total_healing += self.paladin.ability_breakdown[spell]["total_healing"]
+            for spell in ability_breakdown:
+                sim_total_healing += ability_breakdown[spell]["total_healing"]
             short_simulation_results.update({f"iteration {i}": sim_total_healing})
-            
-            
-            
-            
-        # print("ALL RESULTS")
-        # pp.pprint(full_simulation_results)
-        # pp.pprint(short_simulation_results)
-        def combine_dictionaries(*dicts):
-            # print("DICTIONARIES")
-            # pp.pprint(dicts)
-            combined = {}
-
+                
+        def combine_results(*dicts):
             def add_dicts(d1, d2):
                 for key in d2:
                     if key in d1:
@@ -607,80 +582,37 @@ class Simulation:
                     else:
                         d1[key] = d2[key]
 
-            combined = {}
+            combined_results = {}
             for d in dicts:
-                add_dicts(combined, d)
-            return combined
+                add_dicts(combined_results, d)
+            return combined_results
         
-        def get_all_iterations(full_simulation_results):
-            iteration_dicts = [value for key, value in full_simulation_results.items() if key.startswith("iteration")]
-            return iteration_dicts
+        def get_all_iterations_results(full_simulation_results):
+            iteration_results = [value for key, value in full_simulation_results.items() if key.startswith("iteration")]
+            return iteration_results
 
-        # Extract all iteration dictionaries
-        all_iteration_dicts = get_all_iterations(full_simulation_results)
-
-        # Combine them
-        combined_dicts = combine_dictionaries(*all_iteration_dicts)
+        all_iteration_results = get_all_iterations_results(full_simulation_results)
+        combined_results = combine_results(*all_iteration_results)
         
-        # print("COMBINED")
-        # pp.pprint(combined_dicts)
-        
-        def divide_nested_dict_values(d, divisor):
-            for key in d:
-                if isinstance(d[key], dict):
-                    divide_nested_dict_values(d[key], divisor)
-                elif isinstance(d[key], (int, float)):
-                    d[key] /= divisor
+        def average_out_simulation_results(simulation_results, iterations):
+            for key in simulation_results:
+                if isinstance(simulation_results[key], dict):
+                    average_out_simulation_results(simulation_results[key], iterations)
+                elif isinstance(simulation_results[key], (int, float)):
+                    simulation_results[key] /= iterations
                     
-            return d
+            return simulation_results
         
-        final_ability_breakdown = divide_nested_dict_values(combined_dicts, self.iterations)
-        # print("FINAL BREAKDOWN")
-        # pp.pprint(final_ability_breakdown)
+        average_ability_breakdown = average_out_simulation_results(combined_results, self.iterations)
         
         # healing_and_buff_events = sorted(self.paladin.events + self.paladin.buff_events, key=get_timestamp)
         # healing_and_beacon_events = sorted(self.paladin.events + self.paladin.beacon_events, key=get_timestamp)
         
-        # total_healing = 0
-        # total_healing_no_beacon = 0
-        # healing_by_target = {}
-        # for target in self.healing_targets_list:         
-        #     total_healing += target.healing_received
-        #     total_healing_no_beacon += target.healing_received
-        #     healing_by_target[target.name] = target.healing_received
-        # for beacon_target in self.paladin.beacon_targets:
-        #     total_healing += beacon_target.beacon_healing_received
-        #     healing_by_target[beacon_target.name] = beacon_target.healing_received + beacon_target.beacon_healing_received
-        
-        # print(f"Total healing done: {total_healing}")
-        # # print(f"Healing by target: {healing_by_target}")
-        # print(f"Breakdown: {self.paladin.healing_by_ability}")
-        
-        # print(f"Total casts: {self.paladin.total_casts}")
-        # print(f"Total crits: {self.paladin.ability_crits}")
-        
-        # ability_cpm = {}
-        # for ability, casts in self.paladin.total_casts.items():
-        #     ability_cpm[ability] = casts / (self.encounter_length / 60)
-        # print(f"CPM: {ability_cpm}")
-        
-        
         # print(f"Mana remaining: {self.paladin.mana}")
-        # print(f"Holy power gained: {self.paladin.holy_power_gained}, Holy power wasted: {self.paladin.holy_power_wasted}")
-        # print(f"Sequence: {self.paladin.cast_sequence}")
-        # print(f"Healing Sequence: {self.paladin.healing_sequence}")
-        
-        # DISPLAY DETAILED EVENT OUTPUT
-        # self.paladin.events.append(f"Total healing w/o beacons: {total_healing_no_beacon}")
-        # healing_and_buff_events.append(f"Total healing w/o beacons: {total_healing_no_beacon}")
-        # healing_and_beacon_events.append(f"Total healing: {total_healing}")
 
         # pp.pprint(healing_and_buff_events)
         # pp.pprint(healing_and_beacon_events)
-        
-        
-        # data processing
-        # i.e. Holy Shock (Divine Toll) is a sub-spell of Divine Toll
+    
         
         
         # pp.pprint(self.paladin.ability_cast_events)
@@ -689,6 +621,9 @@ class Simulation:
         # pp.pprint(self.paladin.holy_power_by_ability)
         # print(f"Glimmers applied: {self.paladin.glimmer_application_counter}")
         # print(f"Glimmers removed: {self.paladin.glimmer_removal_counter}")
-        return final_ability_breakdown, self.elapsed_time, self.spell_icons
+        end_time = time.time()
+        simulation_time = end_time - start_time
+        print(f"Simulation time: {simulation_time} seconds")
+        return average_ability_breakdown, self.elapsed_time, self.spell_icons
         # print(f"Direct heals: {self.times_direct_healed}")
         
