@@ -1,6 +1,6 @@
 base_active_class_talents = {
     "row1": {
-        "Lay on Hands": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Lay on Hands": {"ranks": {"current rank": 1, "max rank": 1}},
         "Blessing of Freedom": {"ranks": {"current rank": 0, "max rank": 1}},
         "Hammer of Wrath": {"ranks": {"current rank": 0, "max rank": 1}}
     },
@@ -24,7 +24,7 @@ base_active_class_talents = {
         "Rebuke": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row5": {
-        "Divine Aegis": {"ranks": {"current rank": 0, "max rank": 2}},
+        "Holy Aegis": {"ranks": {"current rank": 0, "max rank": 2}},
         "Avenging Wrath": {"ranks": {"current rank": 0, "max rank": 1}},
         "Justification": {"ranks": {"current rank": 0, "max rank": 1}},
         "Punishment": {"ranks": {"current rank": 0, "max rank": 1}}

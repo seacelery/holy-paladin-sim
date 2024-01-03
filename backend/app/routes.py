@@ -1,12 +1,19 @@
 import sys
+import pprint
+
 from flask import Blueprint, request, jsonify, session
 from app.main import import_character, run_simulation, initialise_simulation
 
 main = Blueprint("main", __name__)
+pp = pprint.PrettyPrinter(width=200)
 
 def log_session_size():
-    session_size = sys.getsizeof(str(session))
-    print(f"Session size: {session_size} bytes")
+    session_keys_count = len(session.keys())
+    print(f"Session contains {session_keys_count} keys")
+    
+    # not compatible with pypy
+    # session_size = sys.getsizeof(str(session))
+    # print(f"Session size: {session_size} bytes")
 
 @main.route("/import_character", methods=["GET"])
 def import_character_route():
@@ -16,13 +23,18 @@ def import_character_route():
 
     paladin, healing_targets = import_character(character_name, realm)
     
+    paladin.reset_state()
+    # print("Talents")
+    # pp.pprint(paladin.class_talents)
+    
     session["character_name"] = character_name
     session["realm"] = realm
     
-    session["modifiable_data"] = {"spec_talents": {}, "race": ""}
+    session["modifiable_data"] = {"class_talents": {}, "spec_talents": {}, "race": ""}
 
     return jsonify({
         "message": f"Character imported successfully, {character_name}, {realm}",
+        "class_talents": paladin.class_talents,
         "spec_talents": paladin.spec_talents,
         "race": paladin.race,
     })
@@ -30,18 +42,23 @@ def import_character_route():
 @main.route("/update_character", methods=["POST"])
 def update_character_route():
     user_input = request.json
-    # print("User Input:", user_input)
+    print("User Input:", user_input)
     modifiable_data = session.get("modifiable_data", {})
-    # print(modifiable_data)
     
+    if "class_talents" in user_input:
+        for talent, value in user_input["class_talents"].items():
+            modifiable_data["class_talents"][talent] = value
+
     if "spec_talents" in user_input:
         for talent, value in user_input["spec_talents"].items():
             modifiable_data["spec_talents"][talent] = value
-    else:
-        modifiable_data.update(user_input)
-    # print(modifiable_data)
+            
+    for item in user_input:
+        if item not in ["class_talents", "spec_talents"]:
+            modifiable_data[item] = user_input[item]
+            
+    print(modifiable_data)
     session["modifiable_data"] = modifiable_data
-    # print(session["modifiable_data"]["talents"])
     log_session_size()
 
     return jsonify({"message": "Character updated successfully"})
@@ -54,18 +71,23 @@ def run_simulation_route():
     if not character_name or not realm:
         return jsonify({"error": "Character name or realm not found in session"}), 400
 
-    encounter_length = request.args.get("encounter_length", default=30, type=int)
+    encounter_length = request.args.get("encounter_length", default=60, type=int)
     iterations = request.args.get("iterations", default=1, type=int)
 
     paladin, healing_targets = import_character(character_name, realm)
     
     if "race" in session["modifiable_data"]:
         paladin.update_race(session["modifiable_data"]["race"])
+    if "class_talents" in session["modifiable_data"]:
+        paladin.update_class_talents(session["modifiable_data"]["class_talents"])
     if "spec_talents" in session["modifiable_data"]:
-        paladin.update_talents(session["modifiable_data"]["spec_talents"])
+        paladin.update_spec_talents(session["modifiable_data"]["spec_talents"])
         
+        
+    pp.pprint(paladin.spec_talents)
     simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations)
 
+    # pp.pprint(paladin.class_talents)
     results = run_simulation(simulation)
 
     return jsonify(results)

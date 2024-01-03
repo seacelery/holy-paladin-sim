@@ -28,7 +28,7 @@ test_active_class_talents = {
         "Rebuke": {"ranks": {"current rank": 1, "max rank": 1}}
     },
     "row5": {
-        "Divine Aegis": {"ranks": {"current rank": 2, "max rank": 2}},
+        "Holy Aegis": {"ranks": {"current rank": 2, "max rank": 2}},
         "Avenging Wrath": {"ranks": {"current rank": 1, "max rank": 1}},
         "Justification": {"ranks": {"current rank": 1, "max rank": 1}},
         "Punishment": {"ranks": {"current rank": 0, "max rank": 1}}

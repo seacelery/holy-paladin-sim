@@ -33,7 +33,6 @@ def increment_holy_power(ability, caster):
     else:
         caster.holy_power += ability.holy_power_gain      
     caster.holy_power_gained += ability.holy_power_gain
-    add_to_holy_power_by_ability(caster.holy_power_by_ability, ability, caster)
     
 def add_to_holy_power_by_ability(dict, ability, caster):
     caster.holy_power_by_ability[ability.name] = caster.holy_power_by_ability.get(ability.name, 0) + ability.holy_power_gain

@@ -22,6 +22,10 @@ class Target:
         if buff.name in self.target_active_buffs:
             self.target_active_buffs[buff.name].duration = self.target_active_buffs[buff.name].base_duration
    
+    def reset_state(self):
+        self.healing_received = 0
+        self.target_active_buffs = {}
+        self.healing_taken_modifier = 1
         
 class BeaconOfLight(Target):
     
@@ -31,6 +35,10 @@ class BeaconOfLight(Target):
         
     def receive_beacon_heal(self, amount):
         self.beacon_healing_received += amount
+        
+    def reset_state(self):
+        super().reset_state()
+        self.beacon_healing_received = 0
 
 
 class Player(Target):
@@ -39,6 +47,9 @@ class Player(Target):
         super().__init__(name)
         self.self_healing = 0
 
+    def reset_state(self):
+        super().reset_state()
+        self.self_healing = 0
 
 class EnemyTarget(Target):
     
@@ -56,3 +67,8 @@ class EnemyTarget(Target):
         else:
             self.target_active_debuffs[debuff.name] = [debuff]
         debuff.apply_effect(self)
+        
+    def reset_state(self):
+        super().reset_state()
+        self.damage_taken = 0
+        self.target_active_debuffs = {}

@@ -38,17 +38,20 @@ class Paladin:
         # self.spec_talents = self.parse_talents(talent_data)[1]
         
         # self.talents = self.parse_talents(talent_data)
-        # self.class_talents = self.talents.class_talents
-        # self.spec_talents = self.talents.spec_talents
+        # self.class_talents = copy.deepcopy(self.talents.class_talents)
+        # self.spec_talents = copy.deepcopy(self.talents.spec_talents)
         
         # self.class_talents = self.parse_talents(talent_data)
         # self.spec_talents = self.parse_talents(talent_data)
         
         # self.talents = self.parse_talents(talent_data)
-        self.class_talents = test_active_class_talents
-        self.spec_talents = test_active_spec_talents
+        self.class_talents = copy.deepcopy(test_active_class_talents)
+        self.spec_talents = copy.deepcopy(test_active_spec_talents)
         
-        self.class_talents["row10"]["Divine Resonance"]["ranks"]["current rank"] = 1
+        # self.class_talents = copy.deepcopy(base_active_class_talents)
+        # self.spec_talents = copy.deepcopy(base_active_spec_talents)
+        
+        # self.class_talents["row10"]["Divine Resonance"]["ranks"]["current rank"] = 1
         
         # self.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] = 0
         # print(self.class_talents["row3"]["Greater Judgment"])
@@ -88,6 +91,8 @@ class Paladin:
             self.stats = Stats({}, None)
             self.stats.ratings["health"] = 450000
             self.bonus_enchants = []
+        
+        print(f"Haste: {self.haste}, Crit: {self.crit}, Mastery: {self.mastery}, Vers: {self.versatility}")
         
         self.haste_multiplier = (self.haste / 100) + 1
         self.crit_multiplier = (self.crit / 100) + 1
@@ -162,7 +167,7 @@ class Paladin:
     def reset_state(self):
         current_state = copy.deepcopy(self.initial_state)
         self.__dict__.update(current_state.__dict__)
-    
+        
     # update methods used in routes.py
     def update_race(self, new_race):
         self.race = new_race
@@ -175,7 +180,14 @@ class Paladin:
         elif self.race == "Blood Elf":
             self.healing_multiplier = 20
     
-    def update_talents(self, talents):
+    def update_class_talents(self, talents):
+        for talent_name, new_rank in talents.items():
+            for row in self.class_talents.values():
+                if talent_name in row:
+                    row[talent_name]["ranks"]["current rank"] = new_rank 
+        self.load_abilities_based_on_talents()
+        
+    def update_spec_talents(self, talents):
         for talent_name, new_rank in talents.items():
             for row in self.spec_talents.values():
                 if talent_name in row:

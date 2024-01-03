@@ -149,7 +149,7 @@ class DivineResonance(Buff):
     
     def increment_divine_resonance(self, caster, current_time, tick_rate):
         self.last_holy_shock_time += tick_rate
-        if self.last_holy_shock_time >= 4.99:
+        if self.last_holy_shock_time >= 5 - tick_rate - 0.01:
             self.trigger_divine_resonance_holy_shock(caster, current_time)
             self.last_holy_shock_time = 0
     

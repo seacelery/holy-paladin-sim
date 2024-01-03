@@ -692,6 +692,7 @@ const createAbilityBreakdown = (simulationData) => {
     const tableContainer = document.getElementById('table-container');
     tableContainer.innerHTML = '';
     tableContainer.appendChild(table);
+    tableContainer.style.display = "block";
 };
 
 export { createAbilityBreakdown };

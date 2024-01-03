@@ -14,5 +14,5 @@ client_id = "57cdb961fae04b8f9dc4d3caea3716db"
 client_secret = "rIIdFk2In9dQfBUxbPmH6ee4DDDO6oUV"
 access_token = get_access_token(client_id, client_secret)
 
-icon = get_spell_icon_data(access_token, 385414)
+icon = get_spell_icon_data(access_token, 156910)
 print(icon)

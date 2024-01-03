@@ -64,5 +64,5 @@ def run_simulation(simulation):
     
 if __name__ == "__main__":
     paladin, healing_targets = import_character("daisu", "aszune")
-    simulation = initialise_simulation(paladin, healing_targets, 45, 100)
+    simulation = initialise_simulation(paladin, healing_targets, 60, 1000)
     run_simulation(simulation)

@@ -4,6 +4,7 @@ import inspect
 import sys
 import copy
 import time
+import cProfile
 
 from collections import defaultdict
 
@@ -33,7 +34,7 @@ class Simulation:
         self.iterations = iterations
         self.priority_list = priority_list
         # increase tick rate for better hot accuracy
-        self.tick_rate = 0.01
+        self.tick_rate = 0.05
         self.abilities = paladin.abilities
         
         self.times_direct_healed = {}
@@ -52,7 +53,6 @@ class Simulation:
                 if self.paladin.remaining_cast_time <= 0:
                     self.complete_cast(self.paladin, self.elapsed_time)
                     self.paladin.currently_casting = None
-                    # self.remove_expired_auras()
             
             if "Divine Resonance" in self.paladin.active_auras:
                 self.paladin.active_auras["Divine Resonance"].increment_divine_resonance(self.paladin, self.elapsed_time, self.tick_rate)      
@@ -62,6 +62,7 @@ class Simulation:
                 self.paladin.active_summons["Light's Hammer"].increment_lights_hammer(self.paladin, self.elapsed_time, self.tick_rate)
             if "Blessing of Winter" in self.paladin.active_auras:
                 self.paladin.active_auras["Blessing of Winter"].increment_blessing_of_winter(self.paladin, self.elapsed_time, self.tick_rate)
+                
             self.action()
             self.paladin.update_gcd(self.tick_rate)
             self.check_delayed_casts(self.paladin)
@@ -111,15 +112,16 @@ class Simulation:
     
         priority_list = [
             # ("Blessing of the Seasons", lambda: True),
-            # ("Avenging Wrath", lambda: True),
+            ("Avenging Wrath", lambda: True),
             # ("Holy Shock", lambda: True),
             ("Light's Hammer", lambda: True),
             # ("Divine Toll", lambda: True),
             ("Tyr's Deliverance", lambda: True),
             # # ("Divine Toll", lambda: self.paladin.holy_power == 4),
-            # ("Divine Favor", lambda: True),
+            ("Divine Favor", lambda: True),
             # # ("Blessing of Freedom", lambda: True),
             ("Light of Dawn", lambda: self.paladin.holy_power == 5),
+            ("Holy Shock", lambda: True),
             # # # ("Holy Shock", lambda: True),
             # ("Light of Dawn", lambda: True),
             ("Word of Glory", lambda: True),
@@ -136,7 +138,7 @@ class Simulation:
             # # # # ("Holy Shock", lambda: self.elapsed_time >= 10),
             
             # # # # ("Wait", lambda: 2 < self.elapsed_time < 14),
-            ("Holy Shock", lambda: True),
+            
             # # ("Word of Glory", lambda: True),
             # ("Crusader Strike", lambda: True),
             # # ("Flash of Light", lambda: True),
@@ -509,7 +511,7 @@ class Simulation:
                     
             # add primary spell as a sub-spell
             def adjust_spell_data(spell_data, total_healing):
-                spell_data["total_healing"] -= total_healing
+                spell_data["total_healing"] = ability_breakdown[spell]["total_healing"] - total_healing
                 keys_to_copy = ["casts", "hits", "targets", "crits", "crit_percent", "mana_spent", "holy_power_gained", "holy_power_spent"]
                 for key in keys_to_copy:
                     spell_data[key] = ability_breakdown[spell][key]
@@ -537,7 +539,15 @@ class Simulation:
                             "sub_spells": {}
                         }
                         
-                        adjust_spell_data(sub_spells[spell], total_sub_spell_healing)
+                        sub_spells[spell]["total_healing"] = ability_breakdown[spell]["total_healing"] - total_sub_spell_healing
+                        sub_spells[spell]["casts"] = ability_breakdown[spell]["casts"]
+                        sub_spells[spell]["hits"] = ability_breakdown[spell]["hits"]
+                        sub_spells[spell]["targets"] = ability_breakdown[spell]["targets"]
+                        sub_spells[spell]["crits"] = ability_breakdown[spell]["crits"]
+                        sub_spells[spell]["crit_percent"] = ability_breakdown[spell]["crit_percent"]
+                        sub_spells[spell]["mana_spent"] = ability_breakdown[spell]["mana_spent"]
+                        sub_spells[spell]["holy_power_gained"] = ability_breakdown[spell]["holy_power_gained"]
+                        sub_spells[spell]["holy_power_spent"] = ability_breakdown[spell]["holy_power_spent"]
             
             for spell in ability_breakdown:
                 total_sub_sub_spell_healing = 0
@@ -562,7 +572,15 @@ class Simulation:
                                 "sub_spells": {}
                             }
                             
-                            adjust_spell_data(sub_sub_spells[sub_spell], total_sub_sub_spell_healing)
+                            sub_sub_spells[sub_spell]["total_healing"] = sub_spells[sub_spell]["total_healing"] - total_sub_sub_spell_healing
+                            sub_sub_spells[sub_spell]["casts"] = sub_spells[sub_spell]["casts"]
+                            sub_sub_spells[sub_spell]["hits"] = sub_spells[sub_spell]["hits"]
+                            sub_sub_spells[sub_spell]["targets"] = sub_spells[sub_spell]["targets"]
+                            sub_sub_spells[sub_spell]["crits"] = sub_spells[sub_spell]["crits"]
+                            sub_sub_spells[sub_spell]["crit_percent"] = sub_spells[sub_spell]["crit_percent"]
+                            sub_sub_spells[sub_spell]["mana_spent"] = sub_spells[sub_spell]["mana_spent"]
+                            sub_sub_spells[sub_spell]["holy_power_gained"] = sub_spells[sub_spell]["holy_power_gained"]
+                            sub_sub_spells[sub_spell]["holy_power_spent"] = sub_spells[sub_spell]["holy_power_spent"]
             
             # track results for all simulations separately
             full_simulation_results.update({f"iteration {i}": ability_breakdown})
@@ -612,9 +630,7 @@ class Simulation:
 
         # pp.pprint(healing_and_buff_events)
         # pp.pprint(healing_and_beacon_events)
-    
-        
-        
+
         # pp.pprint(self.paladin.ability_cast_events)
         
         # this works for a 30s window
