@@ -1,4 +1,4 @@
-import { buffsToIconsMap } from "./buffsToIconsMap.js";
+import { buffsToIconsMap } from "../utils/buffsToIconsMap.js";
 
 const createBuffsBreakdown = (simulationData) => {
     

@@ -429,6 +429,7 @@ tr {
 .table-header {
     padding: 5px 5px 5px 10px;
 
+    min-width: 75px;
     height: 35px;
     border-left: 1px solid var(--border-colour-3);
 
@@ -439,14 +440,19 @@ tr {
 
 #spell-name-header {
     border: none;
+    padding-bottom: 8px;
+}
+
+#healing-header {
+    min-width: 100px;
 }
 
 .table-cell-left {
     padding-left: 5px;
+    margin-left: -1px;
 
     min-width: 350px;
     height: 35px;
-
 
     font-weight: 300;
     font-size: 17px;
@@ -473,7 +479,7 @@ tr {
     position: relative;
     padding-left: 5px;
 
-    width: 350px;
+    min-width: 350px;
     height: 35px;
 
     font-weight: 300;
@@ -513,7 +519,7 @@ tr {
     padding-left: 5px;
     position: relative;
 
-    width: 350px;
+    min-width: 350px;
     height: 35px;
     
     font-weight: 300;
@@ -560,7 +566,7 @@ tr {
 
 .table-spell-icon-container {
     width: 30px;
-    height: 35px;
+    height: 36px;
 }
 
 .table-spell-icon {
@@ -615,7 +621,7 @@ tr {
 
 .table-header-arrows {
     padding-left: 0px;
-    transform: translateY(-3px);
+    transform: translateY(0px);
 
     font-size: 14px;
 
@@ -707,7 +713,7 @@ tr {
 #buffs-breakdown-table-container {
     display: none;
     justify-content: space-between;
-    margin: 0 auto 200px auto;
+    margin: 0 auto 100px auto;
 
     width: 65%;
     overflow: hidden;
@@ -716,11 +722,12 @@ tr {
 }
 
 .buffs-tab-container {
+    height: 100%;
     width: 100%;
 }
 
 .buffs-tab-container:nth-child(2) .buffs-tab {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .buffs-tab {
@@ -732,7 +739,8 @@ tr {
 
     border: 1px solid var(--border-colour-3);
     border-bottom: none;
-    border-radius: 1px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 
     text-align: center;
     font-size: 16px;
@@ -745,23 +753,28 @@ tr {
 }
 
 #self-buffs-breakdown-table-container {
-    padding-right: 10px;
 
-    width: 100%;
+
+    width: 99%;
     height: 100%;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
     border-right: none;
-    border-radius: 3px;
     overflow: hidden;
 
     color: var(--light-font-colour);
 }
 
 #target-buffs-breakdown-table-container {
-    padding-left: 10px;
 
-    width: 100%;
+    margin-left: 5px;
+    width: 99%;
     height: 100%;
-    border-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-right: none;
     overflow: hidden;
 
     color: var(--light-font-colour);

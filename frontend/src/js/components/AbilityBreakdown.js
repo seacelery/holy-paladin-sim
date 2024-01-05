@@ -1,4 +1,4 @@
-import { spellToSpellIdMap } from './spellToSpellIdMap.js';
+import { spellToSpellIdMap } from '../utils/spellToSpellIdMap.js';
 
 const createAbilityBreakdown = (simulationData) => {
     const formatNumbers = (number) => {
@@ -369,26 +369,26 @@ const createAbilityBreakdown = (simulationData) => {
 
             const percentHealingCell = sourceSpellRow.insertCell();
             percentHealingCell.className = "table-sub-cell-right healing-percent-cell";
-            percentHealingCell.textContent = "(" + Number(formatNumbersNoRounding(((sourceSpellData.healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%)";
+            percentHealingCell.textContent = Number(formatNumbersNoRounding(((sourceSpellData.healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
 
             const healingCell = sourceSpellRow.insertCell();
             healingCell.className = "table-sub-cell-right healing-cell";
-            healingCell.textContent = "(" + formatNumbers(sourceSpellData.healing) + ")";
+            healingCell.textContent = formatNumbers(sourceSpellData.healing);
 
             const HPSCell = sourceSpellRow.insertCell();
             HPSCell.className = "table-sub-cell-right HPS-cell";
-            HPSCell.textContent = "(" + formatNumbers(sourceSpellData.healing / encounterLength) + ")";
+            HPSCell.textContent = formatNumbers(sourceSpellData.healing / encounterLength);
 
             const castsCell = sourceSpellRow.insertCell();
             castsCell.className = "table-sub-cell-right";
             
             const avgCastsCell = sourceSpellRow.insertCell();
             avgCastsCell.className = "table-sub-cell-right";
-            avgCastsCell.textContent = "(" + formatNumbers(sourceSpellData.healing / sourceSpellData.hits) + ")";
+            avgCastsCell.textContent = formatNumbers(sourceSpellData.healing / sourceSpellData.hits);
 
             const hitsCell = sourceSpellRow.insertCell();
             hitsCell.className = "table-sub-cell-right";
-            hitsCell.textContent = sourceSpellData.hits > 0 ? "(" + sourceSpellData.hits.toFixed(1) + ")": "";
+            hitsCell.textContent = sourceSpellData.hits > 0 ? sourceSpellData.hits.toFixed(1): "";
 
             const critPercentCell = sourceSpellRow.insertCell();
             critPercentCell.className = "table-sub-cell-right";
@@ -474,15 +474,15 @@ const createAbilityBreakdown = (simulationData) => {
 
             const percentHealingCell = subRow.insertCell();
             percentHealingCell.className = "table-sub-cell-right healing-percent-cell";
-            percentHealingCell.textContent = "(" + Number(formatNumbersNoRounding(((subSpellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%)";
+            percentHealingCell.textContent = Number(formatNumbersNoRounding(((subSpellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
 
             const healingCell = subRow.insertCell();
             healingCell.className = "table-sub-cell-right healing-cell";
-            healingCell.textContent = "(" + formatNumbers(subSpellData.total_healing) + ")";
+            healingCell.textContent = formatNumbers(subSpellData.total_healing);
 
             const HPSCell = subRow.insertCell();
             HPSCell.className = "table-sub-cell-right HPS-cell";
-            HPSCell.textContent = "(" + formatNumbers(subSpellData.total_healing / encounterLength) + ")";
+            HPSCell.textContent = formatNumbers(subSpellData.total_healing / encounterLength);
 
             const castsCell = subRow.insertCell();
             castsCell.className = "table-sub-cell-right";
@@ -491,21 +491,21 @@ const createAbilityBreakdown = (simulationData) => {
             if (excludedSpellsCasts.includes(subSpellName)) {
                 castsCell.textContent = "";
             } else {
-                castsCell.textContent = "(" + subSpellData.casts.toFixed(1) + ")";
+                castsCell.textContent = subSpellData.casts.toFixed(1);
             };
             
             const avgCastsCell = subRow.insertCell();
             avgCastsCell.className = "table-sub-cell-right";
 
             if (excludedSpellsCasts.includes(subSpellName)) {
-                avgCastsCell.textContent = "(" + formatNumbers(subSpellData.total_healing / subSpellData.hits) + ")";
+                avgCastsCell.textContent = formatNumbers(subSpellData.total_healing / subSpellData.hits);
             } else {
-                avgCastsCell.textContent = "(" + formatNumbers(subSpellData.total_healing / subSpellData.casts) + ")";
+                avgCastsCell.textContent = formatNumbers(subSpellData.total_healing / subSpellData.casts);
             };
 
             const hitsCell = subRow.insertCell();
             hitsCell.className = "table-sub-cell-right";
-            hitsCell.textContent = subSpellData.hits > 0 ? "(" + subSpellData.hits.toFixed(1) + ")" : "";
+            hitsCell.textContent = subSpellData.hits > 0 ? subSpellData.hits.toFixed(1) : "";
 
             const critPercentCell = subRow.insertCell();
             critPercentCell.className = "table-sub-cell-right";
@@ -513,12 +513,12 @@ const createAbilityBreakdown = (simulationData) => {
             if (excludedSpellsCrit.includes(subSpellName)) {
                 critPercentCell.textContent = "";
             } else {
-                critPercentCell.textContent = "(" + (subSpellData.crit_percent).toFixed(1) + "%)";
+                critPercentCell.textContent = (subSpellData.crit_percent).toFixed(1) + "%";
             };
             
             const manaSpentCell = subRow.insertCell();
             manaSpentCell.className = "table-sub-cell-right mana-spent-cell";
-            manaSpentCell.textContent = "(" + formatNumbers(subSpellData.mana_spent) + ")";
+            manaSpentCell.textContent = formatNumbers(subSpellData.mana_spent);
             if (subSpellData.mana_spent === 0) {
                 manaSpentCell.textContent = "";
             };
@@ -529,11 +529,11 @@ const createAbilityBreakdown = (simulationData) => {
             let holyPowerText = subSpellData.holy_power_gained > 0 ? subSpellData.holy_power_gained.toFixed(1) : subSpellData.holy_power_spent.toFixed(1);
             
             if (subSpellData.holy_power_gained > 0) {
-                holyPowerText = "(+" + holyPowerText + ")";
+                holyPowerText = "+" + holyPowerText;
                 holyPowerCell.style.color = "var(--holy-power-gain)";
                 overallHolyPower += subSpellData.holy_power_gained.toFixed(1);
             } else if (subSpellData.holy_power_spent > 0) {
-                holyPowerText = "(-" + holyPowerText + ")";
+                holyPowerText = "(-" + holyPowerText;
                 holyPowerCell.style.color = "var(--holy-power-loss)";
                 overallHolyPower -= subSpellData.holy_power_spent.toFixed(1);
             } else if (subSpellData.holy_power_gained === 0 && subSpellData.holy_power_spent === 0) {
@@ -583,38 +583,38 @@ const createAbilityBreakdown = (simulationData) => {
     
                 const percentHealingCell = subRow.insertCell();
                 percentHealingCell.className = "table-sub-sub-cell-right healing-percent-cell";
-                percentHealingCell.textContent = "((" + Number(formatNumbersNoRounding(((subSubSpellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%))";
+                percentHealingCell.textContent = Number(formatNumbersNoRounding(((subSubSpellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
     
                 const healingCell = subRow.insertCell();
                 healingCell.className = "table-sub-sub-cell-right healing-cell";
-                healingCell.textContent = "((" + formatNumbers(subSubSpellData.total_healing) + "))";
+                healingCell.textContent = formatNumbers(subSubSpellData.total_healing);
     
                 const HPSCell = subRow.insertCell();
                 HPSCell.className = "table-sub-sub-cell-right HPS-cell";
-                HPSCell.textContent = "((" + formatNumbers(subSubSpellData.total_healing / encounterLength) + "))";
+                HPSCell.textContent = formatNumbers(subSubSpellData.total_healing / encounterLength);
     
                 const castsCell = subRow.insertCell();
                 castsCell.className = "table-sub-sub-cell-right";
-                castsCell.textContent = "((" + subSubSpellData.casts.toFixed(1) + "))";
+                castsCell.textContent = subSubSpellData.casts.toFixed(1);
                 if (subSubSpellName.includes("Glimmer")) {
                     castsCell.textContent = "";
                 };
     
                 const avgCastsCell = subRow.insertCell();
                 avgCastsCell.className = "table-sub-sub-cell-right";
-                avgCastsCell.textContent = "((" + formatNumbers(subSubSpellData.total_healing / subSubSpellData.casts) + "))";
+                avgCastsCell.textContent = formatNumbers(subSubSpellData.total_healing / subSubSpellData.casts);
     
                 const hitsCell = subRow.insertCell();
                 hitsCell.className = "table-sub-sub-cell-right";
-                hitsCell.textContent = "((" + subSubSpellData.hits.toFixed(1) + "))";
+                hitsCell.textContent = subSubSpellData.hits.toFixed(1);
     
                 const critPercentCell = subRow.insertCell();
                 critPercentCell.className = "table-sub-sub-cell-right";
-                critPercentCell.textContent = "((" + (subSubSpellData.crit_percent).toFixed(1) + "%))";
+                critPercentCell.textContent = (subSubSpellData.crit_percent).toFixed(1) + "%";
     
                 const manaSpentCell = subRow.insertCell();
                 manaSpentCell.className = "table-sub-sub-cell-right mana-spent-cell";
-                manaSpentCell.textContent = "((" + formatNumbers(subSubSpellData.mana_spent) + "))";
+                manaSpentCell.textContent = formatNumbers(subSubSpellData.mana_spent);
                 if (subSpellData.mana_spent === 0) {
                     manaSpentCell.textContent = "";
                 };
@@ -625,11 +625,11 @@ const createAbilityBreakdown = (simulationData) => {
                 let holyPowerText = subSubSpellData.holy_power_gained > 0 ? subSubSpellData.holy_power_gained.toFixed(1) : subSubSpellData.holy_power_spent.toFixed(1);
                 
                 if (subSubSpellData.holy_power_gained > 0) {
-                    holyPowerText = "((+" + holyPowerText + "))";
+                    holyPowerText = "+" + holyPowerText;
                     holyPowerCell.style.color = "var(--holy-power-gain)";
                     overallHolyPower += subSubSpellData.holy_power_gained.toFixed(1);
                 } else if (subSubSpellData.holy_power_spent > 0) {
-                    holyPowerText = "((-" + holyPowerText + "))";
+                    holyPowerText = "((-" + holyPowerText;
                     holyPowerCell.style.color = "var(--holy-power-loss)";
                     overallHolyPower -= subSubSpellData.holy_power_spent.toFixed(1);
                 } else if (subSubSpellData.holy_power_gained === 0 && subSubSpellData.holy_power_spent === 0) {
