@@ -1,10 +1,7 @@
 # DO NEXT
 # fix
-# light's hammer & prism, aura mastery, consecrate, hammer of wrath, light of the martyr, barrier of faith, virtue, melee wings, summer
-# divine purpose, dusk and dawn, afterimage, glorious dawn, reclamation, revelations, resplendent light, golden path, crusader's reprieve, moment of compassion
-# seal of mercy, strength of conviction, incandescence, touch of light, seal of order, fading light, seal of the crusader, vanguard's momentum, tirion's devotion
-# unending light, awestruck, holy infusion, hand of divinity, glistening radiance, imbued infusions, single glimmer, saved by the light, power of the silver hand
-# maraads, overflowing light, righteous judgment, veneration, crusader's might, aura of mercy, relentless inquisitor, boundless salvation, empyrean legacy, sanctified wrath
+# append each sim at the top of the list, make collapsible
+# mana, holy power, glimmer, tyrs targets graphs
 
 # awakening cancelaura
 # movement every so often
@@ -20,7 +17,7 @@
 # it's slow
 
 # options to include
-# heals on beacons, light of dawn targets hit
+# heals on beacons, light of dawn targets hit, resplendent, mastery effectiveness, overheal for overflowing and reclamation
 
 import sys
 import os
@@ -64,5 +61,5 @@ def run_simulation(simulation):
     
 if __name__ == "__main__":
     paladin, healing_targets = import_character("daisu", "aszune")
-    simulation = initialise_simulation(paladin, healing_targets, 60, 1000)
+    simulation = initialise_simulation(paladin, healing_targets, 30, 1)
     run_simulation(simulation)

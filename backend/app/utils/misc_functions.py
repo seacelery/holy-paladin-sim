@@ -242,3 +242,28 @@ def update_spell_data_casts(spell_breakdown, spell_name, mana_spent=None, holy_p
 def update_spell_holy_power_gain(spell_breakdown, spell_name, holy_power_gained=None):
     if holy_power_gained:
         spell_breakdown[spell_name]["holy_power_gained"] += holy_power_gained
+
+def update_self_buff_data(buff_breakdown, buff_name, current_time, event_type, duration=0, stacks=1, time_extension=0):
+    buff_breakdown.append({
+        "buff_name": buff_name,
+        "time": round(current_time, 2),
+        "type": event_type, # "applied", "expired", "stacks_incremented", "stacks_decremented", "extended",
+        "details": {
+            "duration": round(duration, 2),
+            "stacks": stacks,
+            "time_extension": round(time_extension, 2)
+        }
+    })
+    
+def update_target_buff_data(buff_breakdown, buff_name, current_time, event_type, target, duration=0, stacks=1, time_extension=0):
+    buff_breakdown.append({
+        "buff_name": buff_name,
+        "time": round(current_time, 2),
+        "type": event_type, # "applied", "expired", "stacks_incremented", "stacks_decremented", "extended",
+        "details": {
+            "duration": round(duration, 2),
+            "stacks": stacks,
+            "time_extension": round(time_extension, 2)
+        },
+        "target": target
+    })

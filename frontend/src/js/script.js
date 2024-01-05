@@ -2,15 +2,12 @@
 // colour spell names by spell type
 
 import { createAbilityBreakdown } from "./AbilityBreakdown.js";
+import { createBuffsBreakdown } from "./BuffsBreakdown.js";
 import { handleTabs } from "./SimulationOptionsTabs.js";
 import { setSimulationOptionsFromImportedData } from "./SimulationOptions.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./TalentGrid.js";
 
-
-
 let savedDataTimeout;
-
-const simulateText = document.getElementById("simulate-text");
 
 const importButton = document.getElementById("import-button");
 const raceOption = document.getElementById("race-filter");
@@ -94,6 +91,7 @@ const runSimulation = async () => {
         let simulationData = data;
         // simulateText.textContent = simulationData;
         createAbilityBreakdown(simulationData);
+        createBuffsBreakdown(simulationData);
     })
     .catch(error => console.error("Error:", error));
 };

@@ -689,8 +689,8 @@ const createAbilityBreakdown = (simulationData) => {
     overallHolyPowerCell.className = "table-cell-bottom-right";
 
     // append
-    const tableContainer = document.getElementById('table-container');
-    tableContainer.innerHTML = '';
+    const tableContainer = document.getElementById("ability-breakdown-table-container");
+    tableContainer.innerHTML = "";
     tableContainer.appendChild(table);
     tableContainer.style.display = "block";
 };

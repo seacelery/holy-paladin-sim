@@ -12,6 +12,8 @@ class Aura:
         self.current_stacks = current_stacks
         self.max_stacks = max_stacks
         
+        self.times_applied = 0
+        
     def apply_effect(self, caster):
         pass
     
@@ -23,6 +25,7 @@ class Buff(Aura):
     
     def __init__(self, name, duration, base_duration=0, current_stacks=1, max_stacks=1):
         super().__init__(name, duration, base_duration, current_stacks=current_stacks, max_stacks=max_stacks) 
+        self.times_applied += 1
     
     
 class Debuff(Aura):

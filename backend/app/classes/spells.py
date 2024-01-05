@@ -1,7 +1,7 @@
 import random
 
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_double_beacon
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts, update_spell_data_beacon_heals
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts, update_spell_data_beacon_heals, update_self_buff_data, update_target_buff_data
 
 
 class Spell:
@@ -280,9 +280,12 @@ class Spell:
             if len(target.target_active_buffs["Holy Reverberation"]) >= 6:
                 shortest_buff = min(target.target_active_buffs["Holy Reverberation"], key=lambda buff: buff.duration)
                 target.target_active_buffs["Holy Reverberation"].remove(shortest_buff)
+                update_target_buff_data(caster.target_buff_breakdown, "Holy Reverberation", current_time, "stacks_decremented", target.name, stacks=len(target.target_active_buffs["Holy Reverberation"]))
             target.target_active_buffs["Holy Reverberation"].append(new_buff)
+            update_target_buff_data(caster.target_buff_breakdown, "Holy Reverberation", current_time, "stacks_incremented", target.name, stacks=len(target.target_active_buffs["Holy Reverberation"]))
         else:
             target.target_active_buffs["Holy Reverberation"] = [new_buff]
+            update_target_buff_data(caster.target_buff_breakdown, new_buff.name, current_time, "applied", target.name, new_buff.duration, new_buff.current_stacks)
 
         longest_reverberation_duration = max(buff.duration for buff in target.target_active_buffs["Holy Reverberation"])
         caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")

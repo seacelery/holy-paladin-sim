@@ -10,7 +10,7 @@ from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget
 from .auras_buffs import HolyReverberation, HoT
-from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time
+from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
 from ..utils.battlenet_api import get_spell_icon_data, get_access_token
 from ..utils import cache
 # from .spells_healing import *
@@ -111,44 +111,19 @@ class Simulation:
         non_beacon_targets = [target for target in self.healing_targets_list if not isinstance(target, BeaconOfLight)]
     
         priority_list = [
-            # ("Blessing of the Seasons", lambda: True),
+            ("Blessing of the Seasons", lambda: True),
             ("Avenging Wrath", lambda: True),
-            # ("Holy Shock", lambda: True),
-            ("Light's Hammer", lambda: True),
-            # ("Divine Toll", lambda: True),
+            # ("Light's Hammer", lambda: True),
             ("Tyr's Deliverance", lambda: True),
-            # # ("Divine Toll", lambda: self.paladin.holy_power == 4),
             ("Divine Favor", lambda: True),
-            # # ("Blessing of Freedom", lambda: True),
             ("Light of Dawn", lambda: self.paladin.holy_power == 5),
             ("Holy Shock", lambda: True),
-            # # # ("Holy Shock", lambda: True),
-            # ("Light of Dawn", lambda: True),
-            ("Word of Glory", lambda: True),
-            ("Crusader Strike", lambda: True),
-            # # ("Light of Dawn", lambda: self.paladin.holy_power >= 4),
-            
-            
-            # # # ("Holy Shock", lambda: "First Light" in self.paladin.active_auras),
-            # # # ("Holy Shock", lambda: 127 <= self.elapsed_time <= 128),
-            # # # ("Daybreak", lambda: 128 <= self.elapsed_time <= 129),
-            # # # ("Holy Shock", lambda: self.elapsed_time <= 2),
+            # ("Word of Glory", lambda: True),
+            # ("Crusader Strike", lambda: True),
             ("Daybreak", lambda: self.elapsed_time >= 9),
             ("Divine Toll", lambda: True),
-            # # # # ("Holy Shock", lambda: self.elapsed_time >= 10),
-            
-            # # # # ("Wait", lambda: 2 < self.elapsed_time < 14),
-            
-            # # ("Word of Glory", lambda: True),
-            # ("Crusader Strike", lambda: True),
-            # # ("Flash of Light", lambda: True),
-            # # # # # ("Holy Light", lambda: "Divine Favor" in self.paladin.active_auras),
-            # # # # # ("Judgment", lambda: "Awakening READY!!!!!!" in self.paladin.active_auras),
-            ("Judgment", lambda: True),
-            # # # # ("Light of Dawn", lambda: True),
-            # # # # ("Light of Dawn", lambda: self.paladin.holy_power >= 3),
+            # ("Judgment", lambda: True),
             ("Holy Light", lambda: True),
-            # ("Divine Toll", lambda: self.elapsed_time >= 10),
         ]  
         
         if self.priority_list:
@@ -253,6 +228,8 @@ class Simulation:
                 
             self.paladin.active_auras[buff_name].remove_effect(self.paladin)
             del self.paladin.active_auras[buff_name]
+            
+            update_self_buff_data(self.paladin.self_buff_breakdown, buff_name, self.elapsed_time, "expired")
             # print(f"new crit %: {self.paladin.crit}")
         
     def decrement_buffs_on_targets(self):
@@ -290,13 +267,15 @@ class Simulation:
                 else:
                     if buff_name in target.target_active_buffs:
                         if "Glimmer of Light" in target.target_active_buffs and buff_name == "Glimmer of Light":
-                            target.apply_buff_to_target(HolyReverberation(self.paladin), self.elapsed_time)
+                            target.apply_buff_to_target(HolyReverberation(self.paladin), self.elapsed_time, caster=self.paladin)
                             longest_reverberation_duration = max(buff_instance.duration for buff_instance in target.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in target.target_active_buffs and target.target_active_buffs["Holy Reverberation"] else None
                             if "Holy Reverberation" in target.target_active_buffs:
                                 if len(target.target_active_buffs["Holy Reverberation"]) > 0:
                                     self.paladin.buff_events.append(f"{format_time(self.elapsed_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
                         append_aura_removed_event(self.paladin.buff_events, buff_name, self.paladin, target, self.elapsed_time)
                         del target.target_active_buffs[buff_name]
+                        
+                        update_target_buff_data(self.paladin.target_buff_breakdown, buff_name, self.elapsed_time, "expired", target.name)
             
             if "Holy Reverberation" in target.target_active_buffs:
                 longest_reverberation_duration = max(buff_instance.duration for buff_instance in target.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in target.target_active_buffs and target.target_active_buffs["Holy Reverberation"] else None            
@@ -369,6 +348,7 @@ class Simulation:
             "app.classes.spells_damage",
             "app.classes.spells_auras",
             "app.classes.spells_passives",
+            "app.classes.auras_buffs",
             "app.classes.auras_debuffs"
         ]
         
@@ -390,8 +370,10 @@ class Simulation:
         self.__dict__.update(current_state.__dict__)
         
     def display_results(self):
-        full_simulation_results = {}
-        short_simulation_results = {}
+        full_ability_breakdown_results = {}
+        full_self_buff_breakdown_results = {}
+        full_target_buff_breakdown_results= {}
+        full_aggregated_target_buff_breakdown_results = {}
 
         sub_spell_map = {
                 "Holy Shock (Divine Toll)": "Divine Toll",
@@ -423,7 +405,10 @@ class Simulation:
             self.simulate()
             
             ability_breakdown = self.paladin.ability_breakdown
+            self_buff_breakdown = self.paladin.self_buff_breakdown
+            target_buff_breakdown = self.paladin.target_buff_breakdown
 
+            # PROCESS ABILITY HEALING
             def add_sub_spell_healing(primary_spell_data):
                 total_healing = primary_spell_data.get("total_healing", 0)
 
@@ -508,13 +493,6 @@ class Simulation:
             beacon_source_spells = ability_breakdown["Beacon of Light"]["source_spells"]   
             combine_beacon_sources_by_prefix("Glimmer of Light", beacon_source_spells)
             combine_beacon_sources_by_prefix("Holy Shock", beacon_source_spells)
-                    
-            # add primary spell as a sub-spell
-            def adjust_spell_data(spell_data, total_healing):
-                spell_data["total_healing"] = ability_breakdown[spell]["total_healing"] - total_healing
-                keys_to_copy = ["casts", "hits", "targets", "crits", "crit_percent", "mana_spent", "holy_power_gained", "holy_power_spent"]
-                for key in keys_to_copy:
-                    spell_data[key] = ability_breakdown[spell][key]
             
             excluded_spells = ["Divine Toll", "Daybreak", "Judgment", "Crusader Strike"]
             
@@ -582,13 +560,147 @@ class Simulation:
                             sub_sub_spells[sub_spell]["holy_power_gained"] = sub_spells[sub_spell]["holy_power_gained"]
                             sub_sub_spells[sub_spell]["holy_power_spent"] = sub_spells[sub_spell]["holy_power_spent"]
             
-            # track results for all simulations separately
-            full_simulation_results.update({f"iteration {i}": ability_breakdown})
-            sim_total_healing = 0
-            for spell in ability_breakdown:
-                sim_total_healing += ability_breakdown[spell]["total_healing"]
-            short_simulation_results.update({f"iteration {i}": sim_total_healing})
+            # PROCESS BUFFS                
+            def process_buff_data(events):
+                def add_time(buff_name, time):
+                    if buff_name in buff_summary:
+                        buff_summary[buff_name]["total_duration"] += time
+                        buff_summary[buff_name]["uptime"] += time / self.encounter_length
+                        buff_summary[buff_name]["count"] += 1
+                    else:
+                        buff_summary[buff_name] = {"total_duration": time, "uptime": time / self.encounter_length, "count": 1, "average_duration": 0}
                 
+                buff_summary = {}
+                active_buffs = {}
+                
+                for event in events:
+                    buff_name = event["buff_name"]
+                    event_time = event["time"]
+                    event_type = event["type"]
+                    
+                    if event_type == "applied":
+                        if buff_name in active_buffs:
+                            active_duration = event_time - active_buffs.pop(buff_name)
+                            add_time(buff_name, active_duration)
+                            active_buffs[buff_name] = event_time
+                        else:
+                            active_buffs[buff_name] = event_time
+                    elif event_type == "expired":
+                        if buff_name in active_buffs:
+                            active_duration = event_time - active_buffs.pop(buff_name)
+                            add_time(buff_name, active_duration)
+                       
+                for buff_name, start_time in active_buffs.items():
+                    active_duration = self.encounter_length - start_time
+                    add_time(buff_name, active_duration)
+
+                for buff in buff_summary:
+                    buff_summary[buff]["average_duration"] = buff_summary[buff]["total_duration"] / buff_summary[buff]["count"]
+                
+                return buff_summary
+            
+            # include targets separately
+            def process_target_buff_data(events):
+                def add_time(buff_name, target, time):
+                    if buff_name not in buff_summary:
+                        buff_summary[buff_name] = {}
+                    if target not in buff_summary[buff_name]:
+                        buff_summary[buff_name][target] = {
+                            "total_duration": 0, 
+                            "uptime": 0, 
+                            "count": 0, 
+                            "average_duration": 0
+                        }
+                    buff_summary[buff_name][target]["total_duration"] += time
+                    buff_summary[buff_name][target]["uptime"] += time / self.encounter_length
+                    buff_summary[buff_name][target]["count"] += 1
+
+                buff_summary = {}
+                active_buffs = {}
+
+                for event in events:
+                    buff_name = event["buff_name"]
+                    target = event["target"]
+                    event_time = event["time"]
+                    event_type = event["type"]
+                    key = (buff_name, target)
+
+                    if event_type == "applied":
+                        if key in active_buffs:
+                            active_duration = event_time - active_buffs.pop(key)
+                            add_time(buff_name, target, active_duration)
+                        active_buffs[key] = event_time
+                    elif event_type == "expired":
+                        if key in active_buffs:
+                            active_duration = event_time - active_buffs.pop(key)
+                            add_time(buff_name, target, active_duration)
+
+                for key, start_time in active_buffs.items():
+                    buff_name, target = key
+                    active_duration = self.encounter_length - start_time
+                    add_time(buff_name, target, active_duration)
+
+                for buff_name in buff_summary:
+                    for target in buff_summary[buff_name]:
+                        buff_data = buff_summary[buff_name][target]
+                        buff_data["average_duration"] = buff_data["total_duration"] / buff_data["count"]
+
+                return buff_summary
+            
+            # include all targets combined
+            def process_aggregated_target_buff_data(events):
+                def add_time(buff_name, time):
+                    if buff_name in buff_summary:
+                        buff_summary[buff_name]["total_duration"] += time
+                        buff_summary[buff_name]["uptime"] += time / self.encounter_length
+                        buff_summary[buff_name]["count"] += 1
+                    else:
+                        buff_summary[buff_name] = {"total_duration": time, "uptime": time / self.encounter_length, "count": 1, "average_duration": 0}
+                
+                buff_summary = {}
+                active_buffs = {}
+                
+                for event in events:
+                    buff_name = event["buff_name"]
+                    event_time = event["time"]
+                    event_type = event["type"]
+                    target = event["target"]
+                    
+                    if event_type == "applied":
+                        if buff_name in active_buffs:
+                            active_duration = event_time - active_buffs.pop(buff_name)[0]
+                            add_time(buff_name, active_duration)
+                            active_buffs[buff_name] = [event_time, target]
+                        else:
+                            active_buffs[buff_name] = [event_time, target]
+                    elif event_type == "expired":
+                        if buff_name in active_buffs:
+                            if target in active_buffs[buff_name]:
+                                active_duration = event_time - active_buffs.pop(buff_name)[0]
+                                add_time(buff_name, active_duration)
+                           
+                for buff_name, start_time in active_buffs.items():
+                    active_duration = self.encounter_length - start_time[0]
+                    add_time(buff_name, active_duration)
+
+                for buff in buff_summary:
+                    buff_summary[buff]["average_duration"] = buff_summary[buff]["total_duration"] / buff_summary[buff]["count"]
+                
+                return buff_summary
+            
+            # COLLECT RESULTS FOR ALL ITERATIONS
+            full_ability_breakdown_results.update({f"iteration {i}": ability_breakdown})
+            
+            self_buff_summary = process_buff_data(self_buff_breakdown)
+            full_self_buff_breakdown_results.update({f"iteration {i}": self_buff_summary})
+            
+            target_buff_summary = process_target_buff_data(target_buff_breakdown)
+            full_target_buff_breakdown_results.update({f"iteration {i}": target_buff_summary})
+            
+            aggregated_target_buff_summary = process_aggregated_target_buff_data(target_buff_breakdown)
+            full_aggregated_target_buff_breakdown_results.update({f"iteration {i}": aggregated_target_buff_summary})
+        
+        # COMBINE AND AVERAGE ALL KEYS OVER ITERATIONS       
         def combine_results(*dicts):
             def add_dicts(d1, d2):
                 for key in d2:
@@ -605,13 +717,10 @@ class Simulation:
                 add_dicts(combined_results, d)
             return combined_results
         
-        def get_all_iterations_results(full_simulation_results):
-            iteration_results = [value for key, value in full_simulation_results.items() if key.startswith("iteration")]
+        def get_all_iterations_results(full_ability_breakdown_results):
+            iteration_results = [value for key, value in full_ability_breakdown_results.items() if key.startswith("iteration")]
             return iteration_results
 
-        all_iteration_results = get_all_iterations_results(full_simulation_results)
-        combined_results = combine_results(*all_iteration_results)
-        
         def average_out_simulation_results(simulation_results, iterations):
             for key in simulation_results:
                 if isinstance(simulation_results[key], dict):
@@ -621,7 +730,22 @@ class Simulation:
                     
             return simulation_results
         
-        average_ability_breakdown = average_out_simulation_results(combined_results, self.iterations)
+        all_ability_breakdown_iteration_results = get_all_iterations_results(full_ability_breakdown_results)
+        combined_ability_breakdown_results = combine_results(*all_ability_breakdown_iteration_results)
+        
+        all_self_buff_breakdown_iteration_results = get_all_iterations_results(full_self_buff_breakdown_results)
+        combined_self_buff_breakdown_results = combine_results(*all_self_buff_breakdown_iteration_results)
+        
+        all_target_buff_breakdown_iteration_results = get_all_iterations_results(full_target_buff_breakdown_results)
+        combined_target_buff_breakdown_results = combine_results(*all_target_buff_breakdown_iteration_results)
+        
+        all_aggregated_target_buff_breakdown_iteration_results = get_all_iterations_results(full_aggregated_target_buff_breakdown_results)
+        combined_aggregated_target_buff_breakdown_results = combine_results(*all_aggregated_target_buff_breakdown_iteration_results)
+        
+        average_ability_breakdown = average_out_simulation_results(combined_ability_breakdown_results, self.iterations)
+        average_self_buff_breakdown = average_out_simulation_results(combined_self_buff_breakdown_results, self.iterations)
+        average_target_buff_breakdown = average_out_simulation_results(combined_target_buff_breakdown_results, self.iterations)
+        average_aggregated_target_buff_breakdown = average_out_simulation_results(combined_aggregated_target_buff_breakdown_results, self.iterations)
         
         # healing_and_buff_events = sorted(self.paladin.events + self.paladin.buff_events, key=get_timestamp)
         # healing_and_beacon_events = sorted(self.paladin.events + self.paladin.beacon_events, key=get_timestamp)
@@ -637,9 +761,13 @@ class Simulation:
         # pp.pprint(self.paladin.holy_power_by_ability)
         # print(f"Glimmers applied: {self.paladin.glimmer_application_counter}")
         # print(f"Glimmers removed: {self.paladin.glimmer_removal_counter}")
+        
+        # pp.pprint(self.paladin.target_buff_breakdown)
+        pp.pprint(average_target_buff_breakdown)
+        # pp.pprint(average_aggregated_target_buff_breakdown)
+    
         end_time = time.time()
         simulation_time = end_time - start_time
         print(f"Simulation time: {simulation_time} seconds")
-        return average_ability_breakdown, self.elapsed_time, self.spell_icons
-        # print(f"Direct heals: {self.times_direct_healed}")
+        return average_ability_breakdown, self.elapsed_time, self.spell_icons, average_self_buff_breakdown, average_target_buff_breakdown, average_aggregated_target_buff_breakdown, self.paladin.name
         

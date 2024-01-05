@@ -40,7 +40,7 @@ class TyrsDeliveranceHeal(Spell):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             target = targets[0]
-            target.apply_buff_to_target(TyrsDeliveranceTargetBuff(), current_time)  
+            target.apply_buff_to_target(TyrsDeliveranceTargetBuff(), current_time, caster=caster)  
             
             append_aura_applied_event(caster.events, "Tyr's Deliverance", caster, target, current_time, target.target_active_buffs["Tyr's Deliverance (target)"][0].duration)      
     

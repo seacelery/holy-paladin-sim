@@ -1,0 +1,41 @@
+const buffsToIconsMap = {
+    "Avenging Wrath": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_avenginewrath.jpg",
+    "Avenging Crusader": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_veneration.jpg",
+    "Glimmer of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_toweroflight.jpg",
+    "Beacon of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_beaconoflight.jpg",
+    "Beacon of Virtue": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_beaconofinsight.jpg",
+    "Blessing of Summer": "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_summer.jpg",
+    "Blessing of Winter": "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_winter.jpg",
+    "Blessing of Spring": "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_spring.jpg",
+    "Blessing of Autumn": "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_autumn.jpg",
+    "Overflowing Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holyguidance.jpg",
+    "Afterimage": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_aspiration.jpg",
+    "Tyr's Deliverance": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_2h_artifactsilverhand_d_01.jpg",
+    "Tyr's Deliverance (self)": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_2h_artifactsilverhand_d_01.jpg",
+    "Tyr's Deliverance (target)": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_2h_artifactsilverhand_d_01.jpg",
+    "Fading Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_shadow_sealofkings.jpg",
+    "Blessing of Dawn": "https://render.worldofwarcraft.com/eu/icons/56/achievement_zone_valeofeternalblossoms.jpg",
+    "Blessing of Dusk": "https://render.worldofwarcraft.com/eu/icons/56/achievement_zone_newshadowmoonvalley.jpg",
+    "Divine Resonance": "https://render.worldofwarcraft.com/eu/icons/56/ability_mount_goatmountwhite.jpg",
+    "Divine Purpose": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_divinepurpose.jpg",
+    "Strength of Conviction": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_eyeforaneye.jpg",
+    "Aura Mastery": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_auramastery.jpg",
+    "Unending Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holybolt.jpg",
+    "Divine Favor": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_heal.jpg",
+    "Hand of Divinity": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_vindication.jpg",
+    "Saved by the Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_savedbythelight.jpg",
+    "Power of the Silver Hand": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_blessedhands.jpg",
+    "Barrier of Faith": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_barrieroffaith.jpg",
+    "Relentless Inquisitor": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_mindvision.jpg",
+    "Rising Sunlight": "https://render.worldofwarcraft.com/eu/icons/56/spell_priest_divinestar_holy.jpg",
+    "Awakening": "https://render.worldofwarcraft.com/eu/icons/56/inv_helm_plate_raidpaladin_n_01.jpg",
+    "Empyrean Legacy": "https://render.worldofwarcraft.com/eu/icons/56/item_holyspark.jpg",
+    "Infusion of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_infusionoflight.jpg",
+    "First Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_lightsgrace.jpg",
+    "Sophic Devotion": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_elementalcombinedfoozles_titan.jpg",
+    "Holy Reverberation": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_holybolts01.jpg"
+
+    // consumables
+};
+
+export { buffsToIconsMap };

@@ -5,13 +5,13 @@ from .spells import Spell
 from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, BlessingOfFreedomBuff, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals, update_spell_data_beacon_heals, update_spell_holy_power_gain
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals, update_spell_data_beacon_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data
 
 
 def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_targets):
     if len(glimmer_targets) > max_glimmer_targets:             
         oldest_active_glimmer = min(glimmer_targets, key=lambda glimmer_target: glimmer_target.target_active_buffs["Glimmer of Light"][0].duration)
-        oldest_active_glimmer.apply_buff_to_target(HolyReverberation(caster), current_time)
+        oldest_active_glimmer.apply_buff_to_target(HolyReverberation(caster), current_time, caster=caster)
         
         longest_reverberation_duration = max(buff_instance.duration for buff_instance in oldest_active_glimmer.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in oldest_active_glimmer.target_active_buffs and oldest_active_glimmer.target_active_buffs["Holy Reverberation"] else None
         if "Holy Reverberation" in oldest_active_glimmer.target_active_buffs:
@@ -20,6 +20,9 @@ def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_ta
         
         append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, oldest_active_glimmer, current_time, oldest_active_glimmer.target_active_buffs["Glimmer of Light"][0].duration)
         del oldest_active_glimmer.target_active_buffs["Glimmer of Light"]
+        
+        update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", oldest_active_glimmer.name)
+        
         caster.glimmer_removal_counter += 1
         glimmer_targets.remove(oldest_active_glimmer)
 
@@ -112,6 +115,9 @@ class HolyShock(Spell):
                     glimmer_heal, glimmer_crit = GlimmerOfLightSpell(caster).calculate_heal(caster)
                     glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
                     
+                    if caster.is_talent_active("Glorious Dawn"):
+                        glimmer_heal_value *= 1.1
+                    
                     # see healing by target for each glimmer proc
                     # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                     # print(glimmer_healing)
@@ -145,14 +151,16 @@ class HolyShock(Spell):
                 if target in glimmer_targets:
                     append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, target, current_time)
                     del target.target_active_buffs["Glimmer of Light"]
-                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time)
+                    update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", target.name)
+                    
+                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
                     append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     glimmer_targets.append(targets[0])
                     self.apply_holy_reverberation(caster, target, current_time)
                     # append_aura_applied_event(caster.buff_events, "Holy Reverberation", caster, target, current_time, longest_reverberation_duration)
                 else:
-                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time)
+                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
                     append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     
@@ -171,10 +179,14 @@ class HolyShock(Spell):
                     caster.rising_sunlight_timer = 0
                     if caster.active_auras["Rising Sunlight"].current_stacks > 1:
                         caster.active_auras["Rising Sunlight"].current_stacks -= 1
+                        
+                        update_self_buff_data(caster.self_buff_breakdown, "Rising Sunlight", current_time, "stacks_decremented", caster.active_auras['Rising Sunlight'].duration, caster.active_auras["Rising Sunlight"].current_stacks)
                         append_aura_stacks_decremented(caster.buff_events, "Rising Sunlight", caster, current_time, caster.active_auras["Rising Sunlight"].current_stacks, duration=caster.active_auras["Rising Sunlight"].duration)
                     else:
                         caster.active_auras["Rising Sunlight"].remove_effect(caster)
                         del caster.active_auras["Rising Sunlight"]
+                        
+                        update_self_buff_data(caster.self_buff_breakdown, "Rising Sunlight", current_time, "expired")
                         append_aura_removed_event(caster.buff_events, "Rising Sunlight", caster, caster, current_time)
             
             
@@ -204,6 +216,9 @@ class Daybreak(Spell):
             for glimmer_target in glimmer_targets:
                 glimmer_heal, glimmer_crit = GlimmerOfLightSpell(caster).calculate_heal(caster)
                 glimmer_heal_value = 2 * glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / number_of_glimmers_removed
+                
+                if caster.is_talent_active("Glorious Dawn"):
+                    glimmer_heal_value *= 1.1
                 
                 # see healing by target for each glimmer proc
                 # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
@@ -237,9 +252,10 @@ class Daybreak(Spell):
             for target in glimmer_targets[:]:
                 append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                 del target.target_active_buffs["Glimmer of Light"]
+                update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", target.name)
                 glimmer_targets.remove(target)
                 
-                target.apply_buff_to_target(HolyReverberation(caster), current_time)
+                target.apply_buff_to_target(HolyReverberation(caster), current_time, caster=caster)
                 
                 longest_reverberation_duration = max(buff_instance.duration for buff_instance in target.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in target.target_active_buffs and target.target_active_buffs["Holy Reverberation"] else None
                 if "Holy Reverberation" in target.target_active_buffs:
@@ -330,6 +346,9 @@ class RisingSunlightHolyShock(Spell):
                     glimmer_heal, glimmer_crit = GlimmerOfLightSpell(caster).calculate_heal(caster)
                     glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
                     
+                    if caster.is_talent_active("Glorious Dawn"):
+                        glimmer_heal_value *= 1.1
+                    
                     # see healing by target for each glimmer proc
                     # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                     # print(glimmer_healing)
@@ -364,13 +383,14 @@ class RisingSunlightHolyShock(Spell):
                     # caster.events.append(f"{current_time}: {glimmer_targets}")
                     append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, target, current_time)
                     del target.target_active_buffs["Glimmer of Light"]
-                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time)
+                    update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", target.name)
+                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
                     append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     glimmer_targets.append(targets[0])
                     self.apply_holy_reverberation(caster, target, current_time)
                 else:
-                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time)
+                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
                     append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"].duration)
                     caster.glimmer_application_counter += 1
                     
@@ -498,13 +518,14 @@ class DivineTollHolyShock(Spell):
                 if target in glimmer_targets:
                     append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, target, current_time)
                     del target.target_active_buffs["Glimmer of Light"]
-                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time)
+                    update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", target.name)
+                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
                     append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     glimmer_targets.append(targets[0])
                     self.apply_holy_reverberation(caster, target, current_time)
                 else:
-                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time)
+                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
                     append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     
@@ -522,6 +543,9 @@ class DivineTollHolyShock(Spell):
                         glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
                     else:
                         glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / 1
+                        
+                    if caster.is_talent_active("Glorious Dawn"):
+                        glimmer_heal_value *= 1.1
                         # see healing by target for each glimmer proc
                         # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                         # print(glimmer_healing)
@@ -635,14 +659,15 @@ class DivineResonanceHolyShock(Spell):
                 if target in glimmer_targets:
                     append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, target, current_time)
                     del target.target_active_buffs["Glimmer of Light"]
-                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time)
+                    update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", target.name)
+                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
                     append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     glimmer_targets.append(targets[0])
                     self.apply_holy_reverberation(caster, target, current_time)
                     # append_aura_applied_event(caster.buff_events, "Holy Reverberation", caster, target, current_time, longest_reverberation_duration)
                 else:
-                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time)
+                    target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
                     append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     
@@ -753,10 +778,14 @@ class HolyLight(Spell):
                 if caster.active_auras["Infusion of Light"].current_stacks > 1:
                     caster.active_auras["Infusion of Light"].current_stacks -= 1
                     append_aura_stacks_decremented(caster.events, "Infusion of Light", caster, current_time, caster.active_auras["Infusion of Light"].current_stacks, duration=caster.active_auras['Infusion of Light'].duration)
+                    
+                    update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "stacks_decremented", caster.active_auras['Infusion of Light'].duration, caster.active_auras["Infusion of Light"].current_stacks)
                 else:
                     caster.active_auras["Infusion of Light"].remove_effect(caster)
                     del caster.active_auras["Infusion of Light"]
                     append_aura_removed_event(caster.events, "Infusion of Light", caster, caster, current_time)
+                    
+                    update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "expired")
             else:
                 increment_holy_power(self, caster)
                 update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
@@ -768,6 +797,8 @@ class HolyLight(Spell):
                 caster.active_auras["Divine Favor"].remove_effect(caster)
                 del caster.active_auras["Divine Favor"]
                 caster.abilities["Divine Favor"].remaining_cooldown = 30
+                
+                update_self_buff_data(caster.self_buff_breakdown, "Divine Favor", current_time, "expired")
 
 
 class FlashOfLight(Spell):
@@ -844,9 +875,12 @@ class FlashOfLight(Spell):
                     caster.active_auras["Infusion of Light"].current_stacks -= 1
                     
                     append_aura_stacks_decremented(caster.events, "Infusion of Light", caster, current_time, caster.active_auras["Infusion of Light"].current_stacks, duration=caster.active_auras['Infusion of Light'].duration)
+                    update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "stacks_decremented", caster.active_auras['Infusion of Light'].duration, caster.active_auras["Infusion of Light"].current_stacks)
                 else:
                     caster.active_auras["Infusion of Light"].remove_effect(caster)
                     del caster.active_auras["Infusion of Light"]
+                    
+                    update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "expired")
                     append_aura_removed_event(caster.events, "Infusion of Light", caster, caster, current_time)
                 
             # remove divine favor, start divine favor spell cd
@@ -856,6 +890,9 @@ class FlashOfLight(Spell):
                 caster.active_auras["Divine Favor"].remove_effect(caster)
                 del caster.active_auras["Divine Favor"]
                 caster.abilities["Divine Favor"].remaining_cooldown = 30
+                
+                update_self_buff_data(caster.self_buff_breakdown, "Divine Favor", current_time, "expired")
+                
          
             
 # spenders
@@ -896,6 +933,8 @@ class WordOfGlory(Spell):
                     elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
                         self.spell_healing_modifier /= 1.6   
                     del caster.active_auras["Blessing of Dawn"]
+                    
+                    update_self_buff_data(caster.self_buff_breakdown, "Blessing of Dawn", current_time, "expired")
                     append_aura_removed_event(caster.buff_events, "Blessing of Dawn", caster, caster, current_time)
                     caster.apply_buff_to_self(BlessingOfDusk(), current_time)
             
@@ -910,6 +949,9 @@ class WordOfGlory(Spell):
                         for glimmer_target in glimmer_targets:
                             glimmer_heal, glimmer_crit = spell.calculate_heal(caster)
                             glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
+                            
+                            if caster.is_talent_active("Glorious Dawn"):
+                                glimmer_heal_value *= 1.1
                             
                             # see healing by target for each glimmer proc
                             # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
@@ -966,6 +1008,8 @@ class WordOfGlory(Spell):
             if caster.is_talent_active("Divine Purpose"):            
                 if "Divine Purpose" in caster.active_auras:
                     del caster.active_auras["Divine Purpose"]
+                    
+                    update_self_buff_data(caster.self_buff_breakdown, "Divine Purpose", current_time, "expired")
                     append_aura_removed_event(caster.events, "Divine Purpose", caster, caster, current_time)
                     self.spell_healing_modifier /= 1.15
                     self.holy_power_cost = 3
@@ -979,6 +1023,8 @@ class WordOfGlory(Spell):
                     caster.apply_buff_to_self(caster.active_auras["Awakening"], current_time, stacks_to_apply=1, max_stacks=12)
                     if caster.active_auras["Awakening"].current_stacks >= 12:
                         del caster.active_auras["Awakening"]
+                        
+                        update_self_buff_data(caster.self_buff_breakdown, "Awakening", current_time, "expired")
                         append_aura_removed_event(caster.events, "Awakening", caster, caster, current_time)
                         caster.apply_buff_to_self(AwakeningTrigger(), current_time)
                 else:
@@ -1023,6 +1069,8 @@ class LightOfDawn(Spell):
                     elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
                         self.spell_healing_modifier /= 1.6   
                     del caster.active_auras["Blessing of Dawn"]
+                    
+                    update_self_buff_data(caster.self_buff_breakdown, "Blessing of Dawn", current_time, "expired")
                     append_aura_removed_event(caster.buff_events, "Blessing of Dawn", caster, caster, current_time)
                     caster.apply_buff_to_self(BlessingOfDusk(), current_time)
             
@@ -1037,6 +1085,9 @@ class LightOfDawn(Spell):
                         for glimmer_target in glimmer_targets:
                             glimmer_heal, glimmer_crit = spell.calculate_heal(caster)
                             glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
+                            
+                            if caster.is_talent_active("Glorious Dawn"):
+                                glimmer_heal_value *= 1.1
                             
                             # see healing by target for each glimmer proc
                             # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
@@ -1075,6 +1126,8 @@ class LightOfDawn(Spell):
             if caster.is_talent_active("Divine Purpose"): 
                 if "Divine Purpose" in caster.active_auras:
                     del caster.active_auras["Divine Purpose"]
+                    
+                    update_self_buff_data(caster.self_buff_breakdown, "Divine Purpose", current_time, "expired")
                     append_aura_removed_event(caster.events, "Divine Purpose", caster, caster, current_time)
                     self.spell_healing_modifier /= 1.15
                     self.holy_power_cost = 3
@@ -1088,6 +1141,8 @@ class LightOfDawn(Spell):
                     caster.apply_buff_to_self(caster.active_auras["Awakening"], current_time, stacks_to_apply=1, max_stacks=12)
                     if caster.active_auras["Awakening"].current_stacks >= 12:
                         del caster.active_auras["Awakening"]
+                        
+                        update_self_buff_data(caster.self_buff_breakdown, "Awakening", current_time, "expired")
                         append_aura_removed_event(caster.events, "Awakening", caster, caster, current_time)
                         caster.apply_buff_to_self(AwakeningTrigger(), current_time)
                 else:
@@ -1108,7 +1163,6 @@ class LightsHammerSpell(Spell):
         if cast_success:
             caster.apply_summon(LightsHammerSummon(), current_time)
             update_spell_data_casts(caster.ability_breakdown, "Light's Hammer", self.get_mana_cost(caster))
-            # caster.ability_breakdown["Light's Hammer"]["casts"] -= 8
                 
                 
 class LightsHammerHeal(Spell):

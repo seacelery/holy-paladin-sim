@@ -83,8 +83,6 @@ def run_simulation_route():
     if "spec_talents" in session["modifiable_data"]:
         paladin.update_spec_talents(session["modifiable_data"]["spec_talents"])
         
-        
-    pp.pprint(paladin.spec_talents)
     simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations)
 
     # pp.pprint(paladin.class_talents)

@@ -1,7 +1,7 @@
 import pprint
 import copy
 
-from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented
+from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
 from .spells_damage import Judgment, CrusaderStrike
@@ -80,7 +80,7 @@ class Paladin:
             # print(self.haste_rating, self.crit_rating, self.mastery_rating, self.versatility_rating)
             
             self.haste, self.crit, self.mastery, self.versatility = self.convert_stat_ratings_to_percent(self.stats.ratings)
-            print(self.haste, self.crit, self.mastery, self.versatility)
+            # print(self.haste, self.crit, self.mastery, self.versatility)
         else:
             self.spell_power = 9340
             self.haste = 22.98
@@ -161,6 +161,8 @@ class Paladin:
         # for results output only
         self.most_relevant_events = []
         self.ability_breakdown = {}
+        self.self_buff_breakdown = []
+        self.target_buff_breakdown = []
         
         self.initial_state = copy.deepcopy(self)
     
@@ -278,23 +280,29 @@ class Paladin:
             self.active_auras[buff.name] = buff
             buff.apply_effect(self)
         
-        append_aura_applied_event(self.events, buff.name, self, self, current_time, self.active_auras[buff.name].duration, buff.current_stacks, max_stacks)
-        # print(f"new crit %: {self.crit}")
-        
+        buff.times_applied += 1
+        update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "applied", buff.duration, buff.current_stacks)
+
     def extend_buff_on_self(self, buff, current_time, time_extension):
         if buff.name in self.active_auras:
             self.active_auras[buff.name].duration += time_extension
             self.events.append(f"{format_time(current_time)}: {buff.name} extended by {time_extension}s to {round(self.active_auras[buff.name].duration, 2)}s")
+            
+        update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "extended", buff.duration, buff.current_stacks, time_extension)
     
     def remove_or_decrement_buff_on_self(self, buff, current_time, max_stacks=1):
         if buff.name in self.active_auras:
             if buff.current_stacks > 1:
                 buff.current_stacks -= 1
                 append_aura_stacks_decremented(self.events, buff.name, self, current_time, buff.current_stacks, duration=self.active_auras[buff.name].duration)
+                
+                update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "stacks_decremented", buff.duration, buff.current_stacks)
         else:
             del self.active_auras[buff.name]
             buff.remove_effect(self)
             append_aura_removed_event(self.events, buff.name, self, self, current_time, duration=self.active_auras[buff.name].duration)
+            
+            update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "expired")
         
     def set_beacon_targets(self, beacon_targets):
         self.beacon_targets = beacon_targets

@@ -1,4 +1,4 @@
-
+from ..utils.misc_functions import format_time, update_target_buff_data
 
 class Target:
     
@@ -11,16 +11,19 @@ class Target:
     def receive_heal(self, amount):
         self.healing_received += amount
         
-    def apply_buff_to_target(self, buff, current_time, stacks_to_apply=1, max_stacks=1):
+    def apply_buff_to_target(self, buff, current_time, stacks_to_apply=1, max_stacks=1, caster=None):
         if buff.name in self.target_active_buffs:
             self.target_active_buffs[buff.name].append(buff)
         else:
             self.target_active_buffs[buff.name] = [buff]
         buff.apply_effect(self)
         
-    def refresh_buff_on_target(self, buff, caster, current_time):
-        if buff.name in self.target_active_buffs:
-            self.target_active_buffs[buff.name].duration = self.target_active_buffs[buff.name].base_duration
+        buff.times_applied += 1
+        update_target_buff_data(caster.target_buff_breakdown, buff.name, current_time, "applied", self.name, buff.duration, buff.current_stacks)
+           
+    # def refresh_buff_on_target(self, buff, caster, current_time):
+    #     if buff.name in self.target_active_buffs:
+    #         self.target_active_buffs[buff.name].duration = self.target_active_buffs[buff.name].base_duration
    
     def reset_state(self):
         self.healing_received = 0
@@ -67,6 +70,8 @@ class EnemyTarget(Target):
         else:
             self.target_active_debuffs[debuff.name] = [debuff]
         debuff.apply_effect(self)
+        
+        debuff.times_applied += 1
         
     def reset_state(self):
         super().reset_state()

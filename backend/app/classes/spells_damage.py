@@ -1,5 +1,5 @@
 from .spells import Spell
-from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals
+from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals, update_self_buff_data
 from .auras_debuffs import JudgmentOfLightDebuff, GreaterJudgmentDebuff
 from .auras_buffs import BlessingOfDawn
 from .spells_auras import AvengingWrathBuff
@@ -72,6 +72,8 @@ class Judgment(Spell):
                     
                     caster.apply_buff_to_self(buff, current_time)
                     del caster.active_auras["Awakening READY!!!!!!"]
+                    
+                    update_self_buff_data(caster.self_buff_breakdown, "Awakening READY!!!!!!", current_time, "expired")
                     append_aura_removed_event(caster.events, "Awakening READY!!!!!!", caster, caster, current_time)
                 
             # decrement stacks or remove infusion of light
@@ -89,10 +91,13 @@ class Judgment(Spell):
                 if caster.active_auras["Infusion of Light"].current_stacks > 1:
                     caster.active_auras["Infusion of Light"].current_stacks -= 1
                     
+                    update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "stacks_decremented", caster.active_auras['Infusion of Light'].duration, caster.active_auras["Infusion of Light"].current_stacks)
                     append_aura_stacks_decremented(caster.buff_events, "Infusion of Light", caster, current_time, caster.active_auras["Infusion of Light"].current_stacks, duration=caster.active_auras['Infusion of Light'].duration)
                 else:
                     caster.active_auras["Infusion of Light"].remove_effect(caster)
                     del caster.active_auras["Infusion of Light"]
+                    
+                    update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "expired")
                     append_aura_removed_event(caster.buff_events, "Infusion of Light", caster, caster, current_time)
 
             # apply greater judgment, add talent condition
