@@ -8,11 +8,15 @@ import { setSimulationOptionsFromImportedData } from "./SimulationOptions.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./TalentGrid.js";
 
 let savedDataTimeout;
+let containerCount = 0;
 
 const importButton = document.getElementById("import-button");
 const raceOption = document.getElementById("race-filter");
 
 const simulateButton = document.getElementById("simulate-button");
+// const resultsNavbar = document.getElementById("results-navbar");
+
+const fullResultsContainer = document.getElementById("results-container");
 
 document.addEventListener("DOMContentLoaded", () => {
     createTalentGrid();
@@ -88,12 +92,78 @@ const runSimulation = async () => {
     })
     .then(response => response.json())
     .then(data => {
-        let simulationData = data;
-        // simulateText.textContent = simulationData;
-        createAbilityBreakdown(simulationData);
-        createBuffsBreakdown(simulationData);
+        let simulationData = data;     
+        createSimulationResults(simulationData);
     })
     .catch(error => console.error("Error:", error));
+};
+
+const createElement = (elementName, className = null, id = null) => {
+    const element = document.createElement(elementName);
+
+    if (className && className.includes(" ")) {
+        element.classList = className;
+    } else if (className) {
+        element.classList.add(className);
+    };
+
+    if (id) {
+        element.id = id + `-${containerCount}`;
+    };
+    return element;
+};
+
+const createSimulationResults = (simulationData) => {
+    containerCount++;
+
+    const resultContainer = createElement("div", "single-result-container", "single-result-container");
+
+    // create simulation header
+    const resultHeader = createElement("div", "result-header", "result-header");
+    resultHeader.textContent = `Simulation ${containerCount}`;
+    resultContainer.appendChild(resultHeader);
+
+    // create the navbar and tabs
+    const resultsNavbar = createElement("nav", null, "results-navbar");
+
+    const healingTab = createElement("div", `results-tab-${containerCount} active`, "healing-tab");
+    healingTab.textContent = "Healing";
+    const buffsWindowTab = createElement("div", `results-tab-${containerCount} inactive`, "buffs-window-tab");
+    buffsWindowTab.textContent = "Buffs";
+
+    resultsNavbar.appendChild(healingTab);
+    resultsNavbar.appendChild(buffsWindowTab);
+    resultContainer.appendChild(resultsNavbar);
+
+    // create content windows
+
+    // ability breakdown
+    const healingContent = createElement("div", `results-tab-content-${containerCount}`, "healing-content");
+    const abilityBreakdown = createElement("div", null, "ability-breakdown-table-container");
+    
+    healingContent.appendChild(abilityBreakdown);
+    resultContainer.appendChild(healingContent);
+
+    // buffs breakdown
+    const buffsContent = createElement("div", `results-tab-content-${containerCount}`, "buffs-window-content");
+    const buffsBreakdown = createElement("div", null, "buffs-breakdown-table-container");
+
+    buffsContent.appendChild(buffsBreakdown);
+    resultContainer.appendChild(buffsContent);
+    
+    const firstChild = fullResultsContainer.firstChild;
+    if (firstChild) {
+        fullResultsContainer.insertBefore(resultContainer, firstChild);
+    } else {
+        fullResultsContainer.appendChild(resultContainer);
+    };
+
+    createAbilityBreakdown(simulationData, containerCount);
+    createBuffsBreakdown(simulationData, containerCount);
+
+    // initialise tabs within the results
+    handleTabs(`results-navbar-${containerCount}`, `results-tab-content-${containerCount}`, containerCount);
+    handleTabs(`buffs-line-graph-navbar-${containerCount}`, `buffs-line-graph-tab-content-${containerCount}`, containerCount);
 };
 
 // update the paladin class when attributes are changed
@@ -117,7 +187,7 @@ simulateButton.addEventListener("click", runSimulation);
 
 raceOption.addEventListener("change", handleRaceChange);
 
-// initialise options tabs
-handleTabs("options-navbar", "options-tab-content");
+// initialise tabs for primary navbar
+handleTabs(`options-navbar-1`, "options-tab-content");
 
-export { updateCharacter };
+export { updateCharacter, createElement };

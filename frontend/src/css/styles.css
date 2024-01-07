@@ -1,10 +1,11 @@
 :root {
-    --background-colour: rgb(14, 14, 17);
+    --background-colour: rgb(12, 12, 15);
     --panel-colour: #323138;
     --panel-colour-2: #17171a;
     --panel-colour-3: #3f3e44;
     --panel-colour-4: #56545a;
     --panel-colour-5: #2c2b30;
+    --panel-colour-6: rgb(16, 16, 20);
     --border-colour: #3c3241;
     --border-colour-2: #1b1a1f;
     --border-colour-3: #56545a;
@@ -19,6 +20,8 @@
     --holy-power-gain: rgb(101, 214, 129);
     --holy-power-loss: rgb(214, 101, 101);
     --mana: #76afdd;
+
+    
 }
 
 * {
@@ -29,8 +32,14 @@
     padding: 0;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+  }
+
 body {
     margin: 0 auto;
+    margin-bottom: 60px;
     background-color: var(--background-colour);
 }
 
@@ -41,7 +50,7 @@ body {
     display: flex;
     justify-content: center;
 
-    width: 65%;
+    width: 68%;
 
     border: 1px solid var(--panel-colour-4);
     border-radius: 3px;
@@ -103,7 +112,7 @@ body {
 #simulation-options-container {
     margin: 0 auto 20px auto;
 
-    width: 65%;
+    width: 68%;
 
     border-left: 1px solid var(--border-colour-3);
     border-bottom: 1px solid var(--border-colour-3);
@@ -113,7 +122,7 @@ body {
     background-color: var(--panel-colour);
 }
 
-#options-navbar {
+#options-navbar-1, [id^="results-navbar-"], [id^="buffs-line-graph-navbar-"] {
     display: flex;
 
     border-bottom: 1px solid var(--border-colour-3);
@@ -122,7 +131,11 @@ body {
     background-color: var(--background-colour);
 }
 
-.options-tab {
+[id^="buffs-line-graph-navbar-"] {
+    background-color: var(--panel-colour-6);
+}
+
+.options-tab, [class^="results-tab"], [class^="buffs-line-graph-tab"] {
     padding: 10px;
 
     min-width: 80px;
@@ -140,17 +153,17 @@ body {
     user-select: none;
 }
 
-.options-tab.active {
+.options-tab.active, [class^="results-tab"].active, [class^="buffs-line-graph-tab"].active {
     background-color: var(--panel-colour-4);
     text-shadow: 0.5px 0 0 var(--light-font-colour);
 }
 
-.options-tab.inactive {
+.options-tab.inactive, [class^="results-tab"].inactive, [class^="buffs-line-graph-tab"].inactive {
     background-color: var(--panel-colour-2);
     text-shadow: none;
 }
 
-.options-tab.inactive:hover {
+.options-tab.inactive:hover, [class^="results-tab"].inactive:hover, [class^="buffs-line-graph-tab"].inactive:hover {
     cursor: pointer;
     background-color: var(--panel-colour-5);
     user-select: none;
@@ -398,15 +411,71 @@ body {
 /* ALL RESULTS */
 #results-container {
     display: block;
+    margin: 0 auto 100px auto;
+    width: 68%;
+}
+
+.result-header { 
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    
+    margin-top: 40px;
+    margin-bottom: 15px;
+    padding-left: 20px;
+
+    width: 100%;
+    height: 50px;
+
+    border: 1px solid var(--border-colour-3);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+
+    font-size: 18px;
+    color: var(--light-font-colour);
+    background-color: var(--panel-colour-6);
+}
+
+[id^="results-navbar-"] {
+    border-bottom: none;
+}
+
+[class^="results-tab"] {
+    border-bottom: 1px solid var(--border-colour-3);
+    border-left: 1px solid var(--border-colour-3);
+    border-right: none;
+}
+
+[class^="results-tab"]:last-child {
+    border-right: 1px solid var(--border-colour-3);
+}
+
+[class^="results-tab-content"] {
+    margin-bottom: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    border-radius: 3px;
+    border-top-left-radius: 0px;
+    border-right: 1px solid var(--border-colour-3);
+    background-color: var(--panel-colour-6);
+}
+
+[id^="healing-tab-"], [id^="buffs-window-tab-"] {
+    border-bottom: none;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 }
 
 /* ABILITY BREAKDOWN TABLE */
-#ability-breakdown-table-container {
-    margin: 0 auto 20px auto;
+[id^="ability-breakdown-table-container-"] {
+    margin: 0 auto 0px auto;
     display: none;
 
-    width: 65%;
+    width: 100%;
     border-radius: 3px;
+    border-top-left-radius: 0px;
     overflow: hidden;
 
     color: var(--light-font-colour);
@@ -422,8 +491,8 @@ tr {
     height: 36px;
 }
 
-#table-headers {
-    font-size: 18px;
+[id^="table-headers-"] {
+    font-size: 17px;
 }
 
 .table-header {
@@ -438,12 +507,20 @@ tr {
     background-color: var(--panel-colour);
 }
 
-#spell-name-header {
+.table-header .fa-sort-down {
+    transform: translateY(6px);
+}
+
+.table-header .fa-caret-right {
+    transform: translateY(1px);
+}
+
+[id^="spell-name-header-"] {
     border: none;
     padding-bottom: 8px;
 }
 
-#healing-header {
+[id^="healing-header-"] {
     min-width: 100px;
 }
 
@@ -461,7 +538,7 @@ tr {
 }
 
 .table-cell-right {
-    padding-right: 8px;
+    padding-right: 6px;
 
     height: 35px;
 
@@ -502,7 +579,7 @@ tr {
 }
 
 .table-sub-cell-right {
-    padding-right: 8px;
+    padding-right: 6px;
 
     height: 35px;
     
@@ -542,7 +619,7 @@ tr {
 }
 
 .table-sub-sub-cell-right {
-    padding-right: 8px;
+    padding-right: 6px;
 
     height: 35px;
 
@@ -562,6 +639,10 @@ tr {
     width: 100%;
 
     color: var(--holy-font);
+}
+
+.CPM-cell {
+    border-left: 1px solid var(--border-colour-3);
 }
 
 .table-spell-icon-container {
@@ -620,8 +701,9 @@ tr {
 }
 
 .table-header-arrows {
+    position: absolute;
+
     padding-left: 0px;
-    transform: translateY(0px);
 
     font-size: 14px;
 
@@ -629,10 +711,16 @@ tr {
 }
 
 .table-icon-container {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     width: 40px;
     height: 20px;
 }
+
+/* .table-icon-container .fa-sort-down {
+    transform: translateY(-5px);
+    transform: translateX(-10px);
+} */
 
 .table-icon-container:hover {
     cursor: pointer;
@@ -641,7 +729,7 @@ tr {
 
 .table-arrows {
     padding-left: 9px;
-    transform: translateY(-3px);
+    margin-top: -5px;
 
     font-size: 14px;
 
@@ -649,7 +737,7 @@ tr {
 }
 
 .table-cell-bottom-left {
-    padding-left: 5px;
+    padding-left: 6px;
 
     min-width: 350px;
     height: 35px;
@@ -665,7 +753,7 @@ tr {
 }
 
 .table-cell-bottom-right {
-    padding-right: 8px;
+    padding-right: 4px;
 
     height: 35px;
     
@@ -678,30 +766,30 @@ tr {
     background-color: var(--panel-colour);
 }
 
-#overall-healing-percent-cell {
+[id^="overall-healing-percent-cell-"] {
     border-left: 1px solid var(--border-colour-3);
     
 }
 
-#overall-healing-cell {
+[id^="overall-healing-cell-"] {
     border: 1px solid var(--border-colour-3);
     border-bottom: none;
 
     color: var(--healing-font);
 }
 
-#overall-HPS-cell {
+[id^="overall-HPS-cell-"] {
     border-left: 1px solid var(--border-colour-3);
     border-right: 1px solid var(--border-colour-3);
 
     color: var(--healing-font);
 }
 
-#overall-casts-cell {
+[id^="overall-casts-cell-"] {
     border-right: 1px solid var(--border-colour-3);
 }
 
-#overall-mana-spent-cell {
+[id^="overall-mana-spent-cell-"] {
     border-left: 1px solid var(--border-colour-3);
     border-right: 1px solid var(--border-colour-3);
 
@@ -710,12 +798,16 @@ tr {
 
 
 /* BUFFS BREAKDOWN TABLE */
-#buffs-breakdown-table-container {
+[id^="buffs-window-content-"] {
+    display: none;
+}
+
+[id^="buffs-breakdown-table-container-"] {
     display: none;
     justify-content: space-between;
-    margin: 0 auto 100px auto;
+    margin: 0 auto 0px auto;
 
-    width: 65%;
+    width: 100%;
     overflow: hidden;
 
     color: var(--light-font-colour);
@@ -748,15 +840,14 @@ tr {
     background-color: var(--panel-colour-2);
 }
 
-#paladin-buffs-tab {
+[id^="paladin-buffs-tab-"] {
     color: var(--paladin-font);
 }
 
-#self-buffs-breakdown-table-container {
-
-
+[id^="self-buffs-breakdown-table-container-"] {
     width: 99%;
     height: 100%;
+
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
@@ -766,11 +857,12 @@ tr {
     color: var(--light-font-colour);
 }
 
-#target-buffs-breakdown-table-container {
-
+[id^="target-buffs-breakdown-table-container-"] {
     margin-left: 5px;
+
     width: 99%;
     height: 100%;
+
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
@@ -784,15 +876,15 @@ tr {
     border-left: none;
 }
 
-#count-header {
+[id^="count-header-"] {
     padding-right: 8px;
 }
 
-#uptime-header {
+[id^="uptime-header-"] {
     padding-right: 8px;
 }
 
-#average-duration-header {
+[id^="average-duration-header-"]{
     border-right: 1px solid var(--border-colour-3);
 }
 
@@ -865,4 +957,63 @@ tr {
     content: "";
     border-bottom: 1.5px solid var(--border-colour-3);
     border-left: 1.5px solid var(--border-colour-3);
+}
+
+[class^="buffs-line-graph-tab"] {
+    border-top-left-radius: 0px;
+}
+
+[class^="buffs-line-graph-tab-content-"] {
+    margin-left: 5px;
+    width: 99%;
+
+    border: 1px solid var(--border-colour-3);
+    border-radius: 3px;
+    border-top-left-radius: 0px;
+
+    background-color: var(--panel-colour-2);
+}
+
+[id^="buffs-line-graph-navbar-"] {
+    margin: 15px 0 0 5px;
+
+    border-left: 1px solid var(--border-colour-3);
+    border-bottom-left-radius: 0px;
+    border-bottom: none;
+}
+
+[id^="tyrs-content-"], [id^="awakening-content-"] {
+    display: none;
+}
+
+[id^="awakening-tab-"] {
+    display: none;
+}
+
+[id^="awakening-tab-"], [id^="glimmer-tab-"], [id^="tyrs-tab-"] {
+    border-radius: 2px;
+    border-top-left-radius: 0px;
+}
+
+.path {
+    stroke: rgb(206, 163, 106);
+}
+
+.axis-label {
+    font-size: 14px;
+    fill: #f8f8f8;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width:100%;
+    height:40px;
+
+    border-top: 2px solid var(--panel-colour);
+
+    background-color: var(--panel-colour-2);
 }

@@ -1,6 +1,6 @@
 import { spellToSpellIdMap } from '../utils/spellToSpellIdMap.js';
 
-const createAbilityBreakdown = (simulationData) => {
+const createAbilityBreakdown = (simulationData, containerCount) => {
     const formatNumbers = (number) => {
         return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
@@ -38,19 +38,19 @@ const createAbilityBreakdown = (simulationData) => {
 
     // headers
     const header = table.createTHead();
-    header.id = "table-headers";
+    header.id = `table-headers-${containerCount}`;
     const headerRow = header.insertRow(0);
-    const headers = ["Spell Name", "%", "Healing", "HPS", "Casts", "Average", "Hits", "Crit %", "Mana Spent", "Holy Power"];
+    const headers = ["Spell Name", "%", "Healing", "HPS", "Casts", "Average", "Hits", "Crit %", "Mana Spent", "Holy Power", "CPM"];
     headers.forEach((text, index) => {
         const cell = headerRow.insertCell(index);
         cell.textContent = text;
 
         // format the headers
         if (text.includes("%")) {
-            cell.id = `${text.toLowerCase()}-header`;
+            cell.id = `${text.toLowerCase()}-header-${containerCount}`;
             cell.id = cell.id.replaceAll("%", "percent");
         } else {
-            cell.id = `${text.toLowerCase()}-header`;
+            cell.id = `${text.toLowerCase()}-header-${containerCount}`;
         };
 
         if (cell.id.includes(" ")) {
@@ -60,20 +60,20 @@ const createAbilityBreakdown = (simulationData) => {
         // header arrow
         cell.className = `table-header`;
 
-        if (cell.id === "spell-name-header") {
+        if (cell.id === `spell-name-header-${containerCount}`) {
             const headerIconContainer = document.createElement("div");
             headerIconContainer.className = "table-header-icon-container";
             const headerIcon = document.createElement("i");
             headerIcon.className = "fa-solid fa-caret-right table-header-arrows";
-            headerIcon.id = "table-header-icon";
+            headerIcon.id = `table-header-icon-${containerCount}`;
 
             // expand or collapse all rows on click
             headerIconContainer.addEventListener("click", () => {
-                const subRows = document.querySelectorAll(".sub-row");
-                const subRowArrows = document.querySelectorAll(".sub-row-arrows");
+                const subRows = document.querySelectorAll(`.sub-row-${containerCount}`);
+                const subRowArrows = document.querySelectorAll(`.sub-row-arrows-${containerCount}`);
 
-                const subSubRows = document.querySelectorAll(".sub-sub-row");
-                const subSubRowArrows = document.querySelectorAll(".sub-sub-row-arrows");
+                const subSubRows = document.querySelectorAll(`.sub-sub-row-${containerCount}`);
+                const subSubRowArrows = document.querySelectorAll(`.sub-sub-row-arrows-${containerCount}`);
                 
                 const isHidden = subRows.length > 0 && !Array.from(subRows).every(subRow => subRow.style.display === "none");
 
@@ -205,7 +205,7 @@ const createAbilityBreakdown = (simulationData) => {
             arrowIconContainer.className = "table-icon-container";
 
             const arrowIcon = document.createElement("i");
-            arrowIcon.className = "fa-solid fa-caret-right table-arrows sub-row-arrows";
+            arrowIcon.className = `fa-solid fa-caret-right table-arrows sub-row-arrows-${containerCount}`;
             arrowIcon.setAttribute("visibility", "hidden");
 
             // expand sub-row or collapse all nested rows on click
@@ -214,8 +214,8 @@ const createAbilityBreakdown = (simulationData) => {
 
                 const spellClass = spellName.toLowerCase().replaceAll(" ", "-") + "-subrow";
 
-                let subRows = document.querySelectorAll(`.${spellClass}`);
-                let subSubRows = document.querySelectorAll(`.${spellClass}.sub-sub-row`);
+                let subRows = document.querySelectorAll(`.${spellClass}-${containerCount}`);
+                let subSubRows = document.querySelectorAll(`.${spellClass}-${containerCount}.sub-sub-row-${containerCount}`);
 
                 const isHidden = subRows.length > 0 && !Array.from(subRows).every(subRow => subRow.style.display === "none");
 
@@ -242,13 +242,13 @@ const createAbilityBreakdown = (simulationData) => {
                 });
 
                 // change header arrow
-                const headerArrow = document.getElementById("table-header-icon");
+                const headerArrow = document.getElementById(`table-header-icon-${containerCount}`);
                 if (!arrowIcon.classList.contains("fa-caret-right")) {
                     headerArrow.classList.add("fa-sort-down");
                     headerArrow.classList.remove("fa-caret-right");
                 };
 
-                const subRowArrows = document.querySelectorAll(".sub-row-arrows");
+                const subRowArrows = document.querySelectorAll(`.sub-row-arrows-${containerCount}`);
                 const allArrowsRight = Array.from(subRowArrows).every(arrow => arrow.classList.contains("fa-caret-right"));
 
                 if (allArrowsRight) {
@@ -327,6 +327,12 @@ const createAbilityBreakdown = (simulationData) => {
         };
         holyPowerCell.textContent = holyPowerText
 
+        const CPMCell = row.insertCell();
+        CPMCell.className = "table-cell-right CPM-cell";
+        if (spellData.casts > 0) {
+            CPMCell.textContent = (spellData.casts / (encounterLength / 60)).toFixed(1);
+        };
+        
         // BEACON SOURCES
         if (spellName === "Beacon of Light") {
             for (const sourceSpellName in spellData["source_spells"]) {
@@ -336,7 +342,8 @@ const createAbilityBreakdown = (simulationData) => {
                 sourceSpellRow.className = `${spellName.toLowerCase()}-subrow`;
                 sourceSpellRow.className = sourceSpellRow.className.replaceAll(/\s|\(|\)/g, "-");
                 sourceSpellRow.className = sourceSpellRow.className.replaceAll("--", "-");
-                sourceSpellRow.classList.add("sub-row");
+                sourceSpellRow.className = sourceSpellRow.className + `-${containerCount}`;
+                sourceSpellRow.classList.add(`sub-row-${containerCount}`);
                 sourceSpellRow.setAttribute("visibility", "hidden");
                 // subRow.style.display = "none";
 
@@ -399,6 +406,9 @@ const createAbilityBreakdown = (simulationData) => {
             // show positive if gained, negative if spent
             const holyPowerCell = sourceSpellRow.insertCell();
             holyPowerCell.className = "table-sub-cell-right holy-power-cell";
+
+            const CPMCell = sourceSpellRow.insertCell();
+            CPMCell.className = "table-sub-cell-right CPM-cell";
             };
         };
         
@@ -411,7 +421,8 @@ const createAbilityBreakdown = (simulationData) => {
             subRow.className = `${spellName.toLowerCase()}-subrow`;
             subRow.className = subRow.className.replaceAll(/\s|\(|\)/g, "-");
             subRow.className = subRow.className.replaceAll("--", "-");
-            subRow.classList.add("sub-row");
+            subRow.className = subRow.className + `-${containerCount}`
+            subRow.classList.add(`sub-row-${containerCount}`);
             subRow.setAttribute("visibility", "hidden");
             
             const nameCell = subRow.insertCell();
@@ -447,7 +458,7 @@ const createAbilityBreakdown = (simulationData) => {
                 arrowIconContainer.className = "table-icon-container";
 
                 const arrowIcon = document.createElement("i");
-                arrowIcon.className = "fa-solid fa-caret-right table-arrows sub-sub-row-arrows";
+                arrowIcon.className = `fa-solid fa-caret-right table-arrows sub-sub-row-arrows-${containerCount}`;
                 arrowIcon.setAttribute("visibility", "hidden");
 
                 // expand or collapse sub-row on click
@@ -457,7 +468,7 @@ const createAbilityBreakdown = (simulationData) => {
                     let spellClass = subSpellName.toLowerCase().replaceAll(/\s|\(|\)/g, "-") + "-subrow";
                     spellClass = spellClass.replaceAll("--", "-");
     
-                    let subRows = document.querySelectorAll(`.${spellClass}`);
+                    let subRows = document.querySelectorAll(`.${spellClass}-${containerCount}`);
                     subRows.forEach(subRow => {
                         subRow.style.display = subRow.style.display === "none" ? "table-row" : "none";
                         if (subRow.style.display === "none") {
@@ -533,13 +544,19 @@ const createAbilityBreakdown = (simulationData) => {
                 holyPowerCell.style.color = "var(--holy-power-gain)";
                 overallHolyPower += subSpellData.holy_power_gained.toFixed(1);
             } else if (subSpellData.holy_power_spent > 0) {
-                holyPowerText = "(-" + holyPowerText;
+                holyPowerText = "-" + holyPowerText;
                 holyPowerCell.style.color = "var(--holy-power-loss)";
                 overallHolyPower -= subSpellData.holy_power_spent.toFixed(1);
             } else if (subSpellData.holy_power_gained === 0 && subSpellData.holy_power_spent === 0) {
                 holyPowerText = "";
             };
             holyPowerCell.textContent = holyPowerText
+
+            const CPMCell = subRow.insertCell();
+            CPMCell.className = "table-sub-cell-right CPM-cell";
+            if (subSpellData.casts > 0) {
+                CPMCell.textContent = (subSpellData.casts / (encounterLength / 60)).toFixed(1);
+            };
 
             // SUB SUB SPELLS
             for (const subSubSpellName in spellData["sub_spells"][subSpellName]["sub_spells"]) {
@@ -550,8 +567,9 @@ const createAbilityBreakdown = (simulationData) => {
                 subRow.className = `${subSpellName.toLowerCase()}-subrow`;
                 subRow.className = subRow.className.replaceAll(/\s|\(|\)/g, "-");
                 subRow.className = subRow.className.replaceAll("--", "-");
+                subRow.className = subRow.className + `-${containerCount}`
                 subRow.classList.add(spellName.toLowerCase().replaceAll(/\s|\(|\)/g, "-").replaceAll("--", "-") + "-subrow");
-                subRow.classList.add("sub-sub-row");
+                subRow.classList.add(`sub-sub-row-${containerCount}`);
                 
                 const nameCell = subRow.insertCell();
                 nameCell.className = "table-sub-sub-cell-left spell-name-cell sub-sub-cell";
@@ -629,13 +647,19 @@ const createAbilityBreakdown = (simulationData) => {
                     holyPowerCell.style.color = "var(--holy-power-gain)";
                     overallHolyPower += subSubSpellData.holy_power_gained.toFixed(1);
                 } else if (subSubSpellData.holy_power_spent > 0) {
-                    holyPowerText = "((-" + holyPowerText;
+                    holyPowerText = "-" + holyPowerText;
                     holyPowerCell.style.color = "var(--holy-power-loss)";
                     overallHolyPower -= subSubSpellData.holy_power_spent.toFixed(1);
                 } else if (subSubSpellData.holy_power_gained === 0 && subSubSpellData.holy_power_spent === 0) {
                     holyPowerText = "";
                 };
                 holyPowerCell.textContent = holyPowerText
+
+                const CPMCell = subRow.insertCell();
+                CPMCell.className = "table-sub-sub-cell-right CPM-cell";
+                if (subSubSpellData.casts > 0) {
+                    CPMCell.textContent = (subSubSpellData.casts / (encounterLength / 60)).toFixed(1);
+                };
             };
         };
     };
@@ -648,25 +672,25 @@ const createAbilityBreakdown = (simulationData) => {
     overallHealingTextCell.style.fontWeight = 500;
 
     const overallHealingPercentCell = row.insertCell(1);
-    overallHealingPercentCell.id = "overall-healing-percent-cell";
+    overallHealingPercentCell.id = `overall-healing-percent-cell-${containerCount}`;
     overallHealingPercentCell.className = "table-cell-bottom-right";
     overallHealingPercentCell.textContent = "100%";
     overallHealingPercentCell.style.fontWeight = 500;
     
     const overallHealingCell = row.insertCell(2);
-    overallHealingCell.id = "overall-healing-cell"
+    overallHealingCell.id = `overall-healing-cell-${containerCount}`
     overallHealingCell.className = "table-cell-bottom-right";
     overallHealingCell.textContent = formatNumbers(overallHealing);
     overallHealingCell.style.fontWeight = 500;
 
     const overallHPSCell = row.insertCell(3);
-    overallHPSCell.id = "overall-HPS-cell";
+    overallHPSCell.id = `overall-HPS-cell-${containerCount}`;
     overallHPSCell.className = "table-cell-bottom-right";
     overallHPSCell.textContent = formatNumbers(overallHPS);
     overallHPSCell.style.fontWeight = 500;
 
     const overallCastsCell = row.insertCell(4);
-    overallCastsCell.id = "overall-casts-cell";
+    overallCastsCell.id = `overall-casts-cell-${containerCount}`;
     overallCastsCell.className = "table-cell-bottom-right";
     overallCastsCell.textContent = overallCasts.toFixed(1);
     overallCastsCell.style.fontWeight = 500;
@@ -679,17 +703,20 @@ const createAbilityBreakdown = (simulationData) => {
     cell7.className = "table-cell-bottom-right";
 
     const overallManaSpentCell = row.insertCell(8);
-    overallManaSpentCell.id = "overall-mana-spent-cell";
+    overallManaSpentCell.id = `overall-mana-spent-cell-${containerCount}`;
     overallManaSpentCell.className = "table-cell-bottom-right";
     overallManaSpentCell.textContent = formatNumbers(overallManaSpent);
     overallManaSpentCell.style.fontWeight = 500;
 
     const overallHolyPowerCell = row.insertCell(9);
-    overallHolyPowerCell.id = "overall-holy-power-cell";
+    overallHolyPowerCell.id = `overall-holy-power-cell-${containerCount}`;
     overallHolyPowerCell.className = "table-cell-bottom-right";
 
+    const cell10 = row.insertCell(10);
+    cell10.className = "table-cell-bottom-right";
+
     // append
-    const tableContainer = document.getElementById("ability-breakdown-table-container");
+    const tableContainer = document.getElementById(`ability-breakdown-table-container-${containerCount}`);
     tableContainer.innerHTML = "";
     tableContainer.appendChild(table);
     tableContainer.style.display = "block";

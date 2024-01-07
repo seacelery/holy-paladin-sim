@@ -159,10 +159,12 @@ class Paladin:
         self.average_raid_health_percentage = 0.7
         
         # for results output only
-        self.most_relevant_events = []
         self.ability_breakdown = {}
         self.self_buff_breakdown = []
         self.target_buff_breakdown = []
+        self.glimmer_counts = {0: 0}
+        self.tyrs_counts = {0: 0}
+        self.awakening_counts = {0: 0}
         
         self.initial_state = copy.deepcopy(self)
     

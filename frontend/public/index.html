@@ -33,12 +33,12 @@
         </div>
 
         <div id="simulation-options-container">
-            <nav id="options-navbar">
+            <nav id="options-navbar-1">
                 <div id="options-tab" class="options-tab active">Options</div>
                 <div id="talents-tab" class="options-tab inactive">Talents</div>
                 <div id="equipment-tab" class="options-tab inactive">Equipment</div>
                 <div id="buffs-tab" class="options-tab inactive">Buffs</div>
-                <div id="advanced-tab" class="options-tab inactive">Advanced Options</div>
+                <div id="priority-list-tab" class="options-tab inactive">Priority List</div>
                 
             </nav>
 
@@ -96,7 +96,7 @@
 
                 <div id="equipment-content" class="options-tab-content"></div>
                 <div id="buffs-content" class="options-tab-content"></div>
-                <div id="advanced-content" class="options-tab-content"></div>
+                <div id="priority-list-content" class="options-tab-content"></div>
                 
             </div>
 
@@ -114,29 +114,53 @@
             <div id="simulate-text" >aaaaaa</div>
         </div> -->
         <div id="results-container">
-            
-            <div id="ability-breakdown-table-container">
-            
-            </div>
-
-            <div id="buffs-breakdown-table-container">
-                <div class="buffs-tab-container">
-                    <div class="buffs-tab" id="paladin-buffs-tab"></div>
-                    <div id="self-buffs-breakdown-table-container">
+            <!-- <div class="single-result-container">
+                <nav id="results-navbar">
+                    <div id="healing-tab" class="results-tab active">Healing</div>
+                    <div id="buffs-window-tab" class="results-tab inactive">Buffs</div>
+                </nav>
+    
+                <div id="healing-content" class="results-tab-content">
+                    <div id="ability-breakdown-table-container">
                 
                     </div>
                 </div>
                 
-                <div class="buffs-tab-container">
-                    <div class="buffs-tab">Targets</div>
-                    <div id="target-buffs-breakdown-table-container">
-
-                    </div>
+                <div id="buffs-window-content" class="results-tab-content">
+                    <div id="buffs-breakdown-table-container">
+                        <div class="buffs-tab-container">
+                            <div class="buffs-tab" id="paladin-buffs-tab"></div>
+                            <div id="self-buffs-breakdown-table-container"></div>
+                        </div>
+                        
+                        <div id="target-buffs-container" class="buffs-tab-container">
+                            <div class="buffs-tab">Targets</div>
+                            <div id="target-buffs-breakdown-table-container"></div>
+    
+                            <nav id="buffs-line-graph-navbar">
+                                <div id="glimmer-tab" class="buffs-line-graph-tab active">Glimmer of Light</div>
+                                <div id="tyrs-tab" class="buffs-line-graph-tab inactive">Tyr's Deliverance</div>
+                                <div id="awakening-tab" class="buffs-line-graph-tab inactive">Awakening</div>
+                            </nav>
+    
+                            <div id="glimmer-content" class="buffs-line-graph-tab-content">
+                                <div id="glimmer-graph"></div>
+                            </div>
+                            <div id="tyrs-content" class="buffs-line-graph-tab-content">
+                                <div id="tyrs-graph"></div>
+                            </div>
+                            <div id="awakening-content" class="buffs-line-graph-tab-content">
+                                <div id="awakening-graph"></div>
+                            </div>
+                        </div>
+                    </div>                 
                 </div>
-                
-            </div>
+            </div> -->
         </div>
         
+        <div class="footer"></div>
+
+        <script src="https://d3js.org/d3.v6.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/leader-line/leader-line.min.js"></script>
         <script type="module" src="../src/js/components/script.js" ></script>
     </body>

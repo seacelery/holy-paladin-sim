@@ -59,9 +59,6 @@ const updateTalentsFromImportedData = (importedTalents) => {
 const handleTalentChange = (talentName, talentData) => {
     const talentValue = talentData.ranks["current rank"];
 
-    console.log(talentName)
-    console.log(talentData)
-
     let talentUpdate = {};
 
     const isClassTalent = classTalents.some(t => t.includes(talentName));
