@@ -3,9 +3,16 @@ import pprint
 
 from flask import Blueprint, request, jsonify, session
 from app.main import import_character, run_simulation, initialise_simulation
+from app.socketio_setup import socketio
+from flask_socketio import emit
 
 main = Blueprint("main", __name__)
 pp = pprint.PrettyPrinter(width=200)
+
+@socketio.on('my event')
+def handle_my_custom_event(json):
+    print('received json: ' + str(json))
+    emit('my response', {'data': 'got it!'})
 
 def log_session_size():
     session_keys_count = len(session.keys())

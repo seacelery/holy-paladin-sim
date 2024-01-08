@@ -13,7 +13,7 @@
       rel="stylesheet"
         />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&family=JetBrains+Mono:wght@100;200;300;400;500&family=Libre+Franklin:wght@100;200;300;400;500&family=Manrope:wght@200;300;400;500&family=Montserrat:wght@100;200;300;400;500&family=Nunito+Sans:opsz,wght@6..12,200;6..12,300;6..12,400;6..12,500&family=Poppins:wght@200&family=Raleway:wght@200;300;400;500&family=Roboto:wght@100;300;400;500&family=Source+Sans+3:wght@200;300;400&display=swap" rel="stylesheet">
-        
+        <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
     </head>
     <body>
         <div id="import-character-container">
@@ -33,12 +33,12 @@
         </div>
 
         <div id="simulation-options-container">
-            <nav id="options-navbar">
+            <nav id="options-navbar-1">
                 <div id="options-tab" class="options-tab active">Options</div>
                 <div id="talents-tab" class="options-tab inactive">Talents</div>
                 <div id="equipment-tab" class="options-tab inactive">Equipment</div>
                 <div id="buffs-tab" class="options-tab inactive">Buffs</div>
-                <div id="advanced-tab" class="options-tab inactive">Advanced Options</div>
+                <div id="priority-list-tab" class="options-tab inactive">Priority List</div>
                 
             </nav>
 
@@ -75,14 +75,6 @@
                     
                 </div>
                 <div id="talents-content" class="options-tab-content">
-                    <!-- <div id="talents-container">
-                        <input type="checkbox" id="talent1" class="talent-input" data-talent="Light's Conviction">
-                        <label for="talent1" class="talent-checkbox">Light's Conviction</label><br>
-                        <input type="checkbox" id="talent2" class="talent-input" data-talent="Reclamation">
-                        <label for="talent2" class="talent-checkbox">Reclamation</label><br>
-                        <input type="checkbox" id="talent3" class="talent-input" data-talent="Light of Dawn">
-                        <label for="talent3" class="talent-checkbox">Light of Dawn</label><br>
-                    </div> -->
                     <div id="all-talents-container">
                         <div id="class-talents" class="talents-container">
                         
@@ -96,7 +88,7 @@
 
                 <div id="equipment-content" class="options-tab-content"></div>
                 <div id="buffs-content" class="options-tab-content"></div>
-                <div id="advanced-content" class="options-tab-content"></div>
+                <div id="priority-list-content" class="options-tab-content"></div>
                 
             </div>
 
@@ -105,38 +97,32 @@
                 <div id="saved-data-status"><i class="fa-regular fa-circle-check" id="saved-data-status-check"></i>Changes saved</div>
 
                 <div id="simulate-button-container">
+                    <input id="simulation-name-text-input">
                     <button id="simulate-button">lets go!!!!!</button>
+
+                    <div id="simulation-progress-bar-container">                      
+                        <div id="simulation-progress-bar"></div>
+                        <span id="simulation-progress-bar-text"></span>
+                        <div class="simulation-progress-bar-check-container"> 
+                            <svg class="simulation-progress-bar-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> 
+                                <circle class="simulation-progress-bar-checkmark-circle" cx="26" cy="26" r="25" fill="none"/> 
+                                <path class="simulation-progress-bar-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                            </svg>
+                        </div>
+                    </div>          
                 </div>
             </div>
         </div>
 
-        <!-- <div id="simulate-container">
-            <div id="simulate-text" >aaaaaa</div>
-        </div> -->
         <div id="results-container">
             
-            <div id="ability-breakdown-table-container">
-            
-            </div>
-
-            <div id="buffs-breakdown-table-container">
-                <div class="buffs-tab-container">
-                    <div class="buffs-tab" id="paladin-buffs-tab"></div>
-                    <div id="self-buffs-breakdown-table-container">
-                
-                    </div>
-                </div>
-                
-                <div class="buffs-tab-container">
-                    <div class="buffs-tab">Targets</div>
-                    <div id="target-buffs-breakdown-table-container">
-
-                    </div>
-                </div>
-                
-            </div>
         </div>
         
+        <div class="footer"></div>
+
+        
+
+        <script src="https://d3js.org/d3.v6.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/leader-line/leader-line.min.js"></script>
         <script type="module" src="../src/js/components/script.js" ></script>
     </body>
