@@ -129,6 +129,21 @@ class Simulation:
         
         self.time_since_last_check = 0
     
+    def check_buff_counts(self):
+        glimmer_count = len([glimmer_target for glimmer_target in self.paladin.potential_healing_targets if "Glimmer of Light" in glimmer_target.target_active_buffs])
+        self.paladin.glimmer_counts.update({round(self.elapsed_time): glimmer_count})
+        
+        tyrs_count = len([tyrs_target for tyrs_target in self.paladin.potential_healing_targets if "Tyr's Deliverance (target)" in tyrs_target.target_active_buffs])
+        self.paladin.tyrs_counts.update({round(self.elapsed_time): tyrs_count})
+        
+        if "Awakening" in self.paladin.active_auras:
+            awakening_count = self.paladin.active_auras["Awakening"].current_stacks
+        else:
+            awakening_count = 0
+        self.paladin.awakening_counts.update({round(self.elapsed_time): awakening_count})
+        
+        self.time_since_last_check = 0
+    
     def check_delayed_casts(self, caster):
         for cast in caster.delayed_casts:
             if self.elapsed_time >= cast[1]:
@@ -867,5 +882,6 @@ class Simulation:
         end_time = time.time()
         simulation_time = end_time - start_time
         print(f"Simulation time: {simulation_time} seconds")
-        return average_ability_breakdown, self.elapsed_time, self.spell_icons, average_self_buff_breakdown, average_target_buff_breakdown, average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, average_tyrs_counts, average_awakening_counts, average_healing_timeline, average_mana_timeline
+
+        return average_ability_breakdown, self.elapsed_time, self.spell_icons, average_self_buff_breakdown, average_target_buff_breakdown, average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, average_tyrs_counts, average_awakening_counts
         
