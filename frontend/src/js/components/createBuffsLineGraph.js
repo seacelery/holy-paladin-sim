@@ -1,17 +1,21 @@
-const createBuffsLineGraph = (data, graphId, title, colour) => {
+const createBuffsLineGraph = (data, graphId, title, colour, awakening = false, awakeningTriggers = null) => {
     const buffCountData = data;
     const buffCountDataArray = Object.keys(buffCountData).map(key => ({ key: +key, value: buffCountData[key] }));
+    if (awakening) {
+        console.log((awakeningTriggers))
+    };
 
     const margin = { top: 60, right: 20, bottom: 55, left: 65 },
         width = 600 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
 
-    const svg = d3.select(graphId)
-        .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
+    const svgContainer = d3.select(graphId).append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .style("background", "transparent");
+
+    const svg = svgContainer.append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
     svg.append("text")
         .attr("x", width / 2)
@@ -20,6 +24,18 @@ const createBuffsLineGraph = (data, graphId, title, colour) => {
         .style("font-size", "16px")
         .style("fill", "white")
         .text(`${title} Count`);
+
+    function formatTime(seconds) {
+        let minutes = Math.floor(seconds / 60);
+        let remainingSeconds = Math.round(seconds % 60);
+
+        if (remainingSeconds === 60) {
+            minutes += 1;
+            remainingSeconds = 0;
+        };
+    
+        return [minutes, remainingSeconds].map(t => String(t).padStart(2, '0')).join(':');
+    };
 
     const x = d3.scaleLinear()
         .domain(d3.extent(buffCountDataArray, d => d.key))
@@ -43,7 +59,7 @@ const createBuffsLineGraph = (data, graphId, title, colour) => {
 
     const xAxisGroup = svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x).tickFormat(d => formatTime(d)));
 
     xAxisGroup.append("text")
         .attr("class", "axis-label")
@@ -71,6 +87,100 @@ const createBuffsLineGraph = (data, graphId, title, colour) => {
     yAxisGroup.selectAll("path").style("stroke", "white");
     yAxisGroup.selectAll("text").style("fill", "white");
 
+    const tooltip = d3.select(graphId)
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("border-width", "1px")
+        .style("border-radius", "3px")
+        .style("padding", "5px");
+
+    svgContainer.on("mousemove", function(event) {
+        const [mouseX, mouseY] = d3.pointer(event);
+
+        const adjustedMouseX = mouseX - margin.left;
+        const adjustedMouseY = mouseY - margin.top;
+
+        if (adjustedMouseX >= 0 && adjustedMouseX <= width && adjustedMouseY >= 0 && adjustedMouseY <= height) {
+            const time = formatTime(x.invert(adjustedMouseX));
+            const count = buffCountData[`${Math.round(x.invert(adjustedMouseX))}`];
+
+            tooltip.html(`<span class="tooltip-time">${time}</span><br/>
+                        <span class="tooltip-count" style="color: ${colour}">${Math.round(count * 10) / 10}</span>`)
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 15) + "px")
+                .style("opacity", 1);
+        } else {
+            tooltip.style("opacity", 0);
+        };
+    })
+    .on("mouseout", function() { 
+        tooltip.style("opacity", 0);
+    });
+    
+    // disastrous attempt at plotting most common points for awakening to reach 12 stacks
+    function findPeakIntervals(data, cooldownPeriod, iterations) {
+        let interval = 65;
+        let previousPeak = 0;
+        let peaks = [];
+        
+        const encounterLength = Number(document.getElementById("encounter-length-option").value);
+        console.log(encounterLength)
+    
+        while (previousPeak <= encounterLength) {
+            console.log(`Checking between ${previousPeak} and ${interval}`);
+    
+            let filteredEntries = Object.entries(data)
+                .filter(([key, _]) => Number(key) <= interval && Number(key) > previousPeak + cooldownPeriod);
+    
+            if (filteredEntries.length === 0) {
+                interval += 65;
+                if (interval > encounterLength) {
+                    break;
+                };
+                continue;
+            };
+    
+            let highestValueEntry = filteredEntries.reduce((prev, current) => {
+                return (prev[1] > current[1]) ? prev : current;
+            }, [null, -Infinity]);
+    
+            let keyWithHighestValue = Number(highestValueEntry[0]);
+
+            // console.log(highestValueEntry[1])
+            // console.log(iterations * 0.03)
+
+            if (highestValueEntry[1] >= iterations * 0.01) {
+                peaks.push({ key: keyWithHighestValue });
+            };
+            
+            // console.log("Highest key", keyWithHighestValue);
+    
+            previousPeak = keyWithHighestValue;
+            interval = keyWithHighestValue + Math.max(65, keyWithHighestValue - previousPeak);
+    
+            // console.log("New interval", interval);
+        };
+        return peaks;
+    };
+    
+    if (awakening) {
+        const cooldownPeriod = 30;
+        const iterations = document.getElementById("iterations-option").value;
+        const peaks = findPeakIntervals(awakeningTriggers, cooldownPeriod, iterations);
+
+        peaks.forEach(point => {
+            svg.append("line")
+                .attr("x1", x(point.key))
+                .attr("x2", x(point.key))
+                .attr("y1", y(point.value))
+                .attr("y2", height)
+                .attr("stroke", "var(--healing-font)")
+                .attr("stroke-width", 1);
+        });
+    };
+    
     return svg;
 };
 

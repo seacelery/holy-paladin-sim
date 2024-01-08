@@ -600,7 +600,27 @@ input:focus {
 }
 
 /* ABILITY BREAKDOWN TABLE */
+.tooltip {
+
+    z-index: 1000;
+    pointer-events: none;
+
+    border: 1px solid var(--border-colour-3);
+
+    text-align: left;
+    background-color: var(--panel-colour-2) !important;
+}
+
+.tooltip-healing {
+    color: var(--healing-font);
+}
+
+.tooltip-mana {
+    color: var(--mana);
+}
+
 [id^="ability-breakdown-table-container-"] {
+
     margin: 0 auto 0px auto;
     display: none;
 

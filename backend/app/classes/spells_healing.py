@@ -1027,6 +1027,7 @@ class WordOfGlory(Spell):
                         update_self_buff_data(caster.self_buff_breakdown, "Awakening", current_time, "expired")
                         append_aura_removed_event(caster.events, "Awakening", caster, caster, current_time)
                         caster.apply_buff_to_self(AwakeningTrigger(), current_time)
+                        caster.awakening_trigger_times.update({round(current_time): 1})
                 else:
                     caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=12)
            
@@ -1145,6 +1146,7 @@ class LightOfDawn(Spell):
                         update_self_buff_data(caster.self_buff_breakdown, "Awakening", current_time, "expired")
                         append_aura_removed_event(caster.events, "Awakening", caster, caster, current_time)
                         caster.apply_buff_to_self(AwakeningTrigger(), current_time)
+                        caster.awakening_trigger_times.update({round(current_time): 1})
                 else:
                     caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=12)
 

@@ -7,6 +7,10 @@ import { handleTabs } from "./SimulationOptionsTabs.js";
 import { setSimulationOptionsFromImportedData } from "./SimulationOptions.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./TalentGrid.js";
 
+// window.addEventListener("mouseover", (e) => {
+//     console.log(e.target)
+// })
+
 const socket = io('http://localhost:5000');
 
 socket.on('connect', function() {
@@ -36,7 +40,6 @@ const simulateButtonContainer = document.getElementById("simulate-button-contain
 const simulationProgressBarContainer = document.getElementById("simulation-progress-bar-container");
 const simulationProgressBar = document.getElementById("simulation-progress-bar");
 const simulationProgressBarText = document.getElementById("simulation-progress-bar-text");
-const simulationProgressBarCheck = document.getElementById("simulation-progress-bar-check");
 
 const fullResultsContainer = document.getElementById("results-container");
 

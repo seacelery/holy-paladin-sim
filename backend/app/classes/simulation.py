@@ -235,7 +235,6 @@ class Simulation:
                                 ability.cast_healing_spell(self.paladin, targets, self.elapsed_time, ability.is_heal)
                                 
                             self.previous_ability = ability.name
-                            print(self.previous_ability)
                             # print(f"new previous ability: {ability.name}")
                     
                             break
@@ -451,6 +450,8 @@ class Simulation:
         full_awakening_count_results = {}
         full_healing_timeline_results = {}
         full_mana_timeline_results = {}
+        
+        full_awakening_trigger_times_results = {}
 
         sub_spell_map = {
                 "Holy Shock (Divine Toll)": "Divine Toll",
@@ -490,7 +491,10 @@ class Simulation:
             awakening_counts = self.paladin.awakening_counts
             healing_timeline = self.paladin.healing_timeline
             mana_timeline = self.paladin.mana_timeline
-
+            
+            for key, value in self.paladin.awakening_trigger_times.items():
+                full_awakening_trigger_times_results[key] = full_awakening_trigger_times_results.get(key, 0) + value
+            
             # PROCESS ABILITY HEALING
             def add_sub_spell_healing(primary_spell_data):
                 total_healing = primary_spell_data.get("total_healing", 0)
@@ -878,10 +882,11 @@ class Simulation:
         # pp.pprint(average_aggregated_target_buff_breakdown)
         
         # pp.pprint(average_awakening_counts)
+        pp.pprint(full_awakening_trigger_times_results)
     
         end_time = time.time()
         simulation_time = end_time - start_time
         print(f"Simulation time: {simulation_time} seconds")
 
-        return average_ability_breakdown, self.elapsed_time, self.spell_icons, average_self_buff_breakdown, average_target_buff_breakdown, average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, average_tyrs_counts, average_awakening_counts, average_healing_timeline, average_mana_timeline
+        return average_ability_breakdown, self.elapsed_time, self.spell_icons, average_self_buff_breakdown, average_target_buff_breakdown, average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, average_tyrs_counts, average_awakening_counts, average_healing_timeline, average_mana_timeline, full_awakening_trigger_times_results
         

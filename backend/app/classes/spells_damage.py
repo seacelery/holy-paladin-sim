@@ -74,6 +74,7 @@ class Judgment(Spell):
                     del caster.active_auras["Awakening READY!!!!!!"]
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Awakening READY!!!!!!", current_time, "expired")
+                    
                     append_aura_removed_event(caster.events, "Awakening READY!!!!!!", caster, caster, current_time)
                 
             # decrement stacks or remove infusion of light

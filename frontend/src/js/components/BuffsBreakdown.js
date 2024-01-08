@@ -3,7 +3,7 @@ import { createBuffsLineGraph } from "./createBuffsLineGraph.js";
 import { createElement } from "./script.js";
 
 const createBuffsBreakdown = (simulationData, containerCount) => {
-    const handleTalentGraph = (talentData, prefix, talentName, colour) => {
+    const handleTalentGraph = (talentData, prefix, talentName, colour, awakening = false) => {
         const isTalentActive = Object.values(talentData).reduce((a, b) => a + b, 0) > 0 ? true : false;
 
         const talentTab = document.getElementById(`${prefix}-tab-${containerCount}`);
@@ -14,7 +14,7 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
             talentTab.style.display = "block";
             talentGraph.innerHTML = "";
 
-            createBuffsLineGraph(talentData, `#${prefix}-graph-${containerCount}`, talentName, colour);
+            createBuffsLineGraph(talentData, `#${prefix}-graph-${containerCount}`, talentName, colour, awakening, simulationData[12], simulationData);
         } else if (!isTalentActive) {
             talentTab.style.display = "none";
             talentTab.classList.remove("active");
@@ -236,7 +236,7 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
     // add tracking for other talents only if the talent is active
     createBuffsLineGraph(glimmerCountData, `#glimmer-graph-${containerCount}`, "Glimmer of Light", "rgb(206, 163, 106)");
     handleTalentGraph(tyrsCountData, "tyrs", "Tyr's Deliverance", "#ececc3");
-    handleTalentGraph(awakeningCountData, "awakening", "Awakening", "rgb(206, 163, 106)");
+    handleTalentGraph(awakeningCountData, "awakening", "Awakening", "rgb(206, 163, 106)", true);
 };
 
 export { createBuffsBreakdown };

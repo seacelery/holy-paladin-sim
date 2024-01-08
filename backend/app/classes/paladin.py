@@ -165,6 +165,7 @@ class Paladin:
         self.glimmer_counts = {0: 0}
         self.tyrs_counts = {0: 0}
         self.awakening_counts = {0: 0}
+        self.awakening_trigger_times = {}
         self.healing_timeline = {}
         self.mana_timeline = {}
         
