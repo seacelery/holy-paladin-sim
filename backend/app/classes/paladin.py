@@ -167,7 +167,8 @@ class Paladin:
         self.awakening_counts = {0: 0}
         self.awakening_trigger_times = {}
         self.healing_timeline = {}
-        self.mana_timeline = {}
+        self.mana_timeline = {0: self.max_mana}
+        self.holy_power_timeline = {0: 0}
         
         self.initial_state = copy.deepcopy(self)
     

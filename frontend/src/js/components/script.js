@@ -3,6 +3,7 @@
 
 import { createAbilityBreakdown } from "./AbilityBreakdown.js";
 import { createBuffsBreakdown } from "./BuffsBreakdown.js";
+import { createResourcesBreakdown } from "./ResourcesBreakdown.js";
 import { handleTabs } from "./SimulationOptionsTabs.js";
 import { setSimulationOptionsFromImportedData } from "./SimulationOptions.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./TalentGrid.js";
@@ -194,9 +195,12 @@ const createSimulationResults = (simulationData) => {
     healingTab.textContent = "Healing";
     const buffsWindowTab = createElement("div", `results-tab-${containerCount} inactive`, "buffs-window-tab");
     buffsWindowTab.textContent = "Buffs";
+    const resourcesTab = createElement("div", `results-tab-${containerCount} inactive`, "resources-tab");
+    resourcesTab.textContent = "Resources";
 
     resultsNavbar.appendChild(healingTab);
     resultsNavbar.appendChild(buffsWindowTab);
+    resultsNavbar.appendChild(resourcesTab);
     resultContainer.appendChild(resultsNavbar);
 
     // create content windows
@@ -215,6 +219,13 @@ const createSimulationResults = (simulationData) => {
     buffsContent.appendChild(buffsBreakdown);
     resultContainer.appendChild(buffsContent);
     
+    // resources breakdown
+    const resourcesContent = createElement("div", `results-tab-content-${containerCount}`, "resources-content");
+    const resourcesBreakdown = createElement("div", null, "resources-breakdown-table-container");
+
+    resourcesContent.appendChild(resourcesBreakdown);
+    resultContainer.appendChild(resourcesContent);
+
     const firstChild = fullResultsContainer.firstChild;
     if (firstChild) {
         fullResultsContainer.insertBefore(resultContainer, firstChild);
@@ -224,6 +235,7 @@ const createSimulationResults = (simulationData) => {
 
     createAbilityBreakdown(simulationData, containerCount);
     createBuffsBreakdown(simulationData, containerCount);
+    createResourcesBreakdown(simulationData, containerCount);
 
     // initialise tabs within the results
     handleTabs(`results-navbar-${containerCount}`, `results-tab-content-${containerCount}`, containerCount);

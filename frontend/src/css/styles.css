@@ -593,7 +593,7 @@ input:focus {
     background-color: var(--panel-colour-6);
 }
 
-[id^="healing-tab-"], [id^="buffs-window-tab-"] {
+[id^="healing-tab-"], [id^="buffs-window-tab-"], [id^="resources-tab-"] {
     border-bottom: none;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
@@ -1153,6 +1153,26 @@ tr {
 .axis-label {
     font-size: 14px;
     fill: #f8f8f8;
+}
+
+/* RESOURCES BREAKDOWN */
+[id^="resources-content"] {
+    display: none;
+}
+
+[id^="resources-breakdown-table-container-"] {
+    display: none;
+    justify-content: space-between;
+    margin: 0 auto 0px auto;
+
+    width: 100%;
+    overflow: hidden;
+
+    color: var(--light-font-colour);
+}
+
+.resources-table {
+    width: 98%;
 }
 
 .footer {

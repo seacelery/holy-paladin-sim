@@ -31,7 +31,10 @@ def increment_holy_power(ability, caster):
         caster.holy_power = caster.max_holy_power
         caster.holy_power_wasted += ability.holy_power_gain
     else:
-        caster.holy_power += ability.holy_power_gain      
+        caster.holy_power += ability.holy_power_gain  
+        if caster.holy_power >= caster.max_holy_power:
+            caster.holy_power = caster.max_holy_power
+            caster.holy_power_wasted += ability.holy_power_gain    
     caster.holy_power_gained += ability.holy_power_gain
     
 def add_to_holy_power_by_ability(dict, ability, caster):

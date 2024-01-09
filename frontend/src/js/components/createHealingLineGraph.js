@@ -1,6 +1,5 @@
 const createHealingLineGraph = (healingData, manaData, graphId, title, colour) => {
     let healingDataArray = Object.keys(healingData).map(key => ({ key: +key, value: healingData[key] }));
-    console.log(healingDataArray)
     let manaDataArray = Object.keys(manaData).map(key => ({ key: +key, value: manaData[key] }));
 
     const margin = { top: 30, right: 15, bottom: 75, left: 15 },

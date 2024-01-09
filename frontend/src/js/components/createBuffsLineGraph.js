@@ -1,9 +1,7 @@
 const createBuffsLineGraph = (data, graphId, title, colour, awakening = false, awakeningTriggers = null) => {
     const buffCountData = data;
     const buffCountDataArray = Object.keys(buffCountData).map(key => ({ key: +key, value: buffCountData[key] }));
-    if (awakening) {
-        console.log((awakeningTriggers))
-    };
+    console.log(buffCountDataArray)
 
     const margin = { top: 60, right: 20, bottom: 55, left: 65 },
         width = 600 - margin.left - margin.right,
@@ -126,10 +124,9 @@ const createBuffsLineGraph = (data, graphId, title, colour, awakening = false, a
         let peaks = [];
         
         const encounterLength = Number(document.getElementById("encounter-length-option").value);
-        console.log(encounterLength)
     
         while (previousPeak <= encounterLength) {
-            console.log(`Checking between ${previousPeak} and ${interval}`);
+            // console.log(`Checking between ${previousPeak} and ${interval}`);
     
             let filteredEntries = Object.entries(data)
                 .filter(([key, _]) => Number(key) <= interval && Number(key) > previousPeak + cooldownPeriod);

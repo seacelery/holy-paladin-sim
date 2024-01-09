@@ -82,7 +82,7 @@ class Simulation:
             if self.time_since_last_check >= 1:
                 self.check_buff_counts()
                 self.check_healing()
-                self.check_mana()
+                self.check_resources()
                 
             self.elapsed_time += self.tick_rate
         
@@ -96,8 +96,9 @@ class Simulation:
             
         self.paladin.healing_timeline.update({round(self.elapsed_time): healing_this_second})
         
-    def check_mana(self):
+    def check_resources(self):
         self.paladin.mana_timeline.update({round(self.elapsed_time): self.paladin.mana})
+        self.paladin.holy_power_timeline.update({round(self.elapsed_time): self.paladin.holy_power})
     
     def check_buff_counts(self):
         glimmer_count = len([glimmer_target for glimmer_target in self.paladin.potential_healing_targets if "Glimmer of Light" in glimmer_target.target_active_buffs])
@@ -450,6 +451,7 @@ class Simulation:
         full_awakening_count_results = {}
         full_healing_timeline_results = {}
         full_mana_timeline_results = {}
+        full_holy_power_timeline_results = {}
         
         full_awakening_trigger_times_results = {}
 
@@ -491,6 +493,7 @@ class Simulation:
             awakening_counts = self.paladin.awakening_counts
             healing_timeline = self.paladin.healing_timeline
             mana_timeline = self.paladin.mana_timeline
+            holy_power_timeline = self.paladin.holy_power_timeline
             
             for key, value in self.paladin.awakening_trigger_times.items():
                 full_awakening_trigger_times_results[key] = full_awakening_trigger_times_results.get(key, 0) + value
@@ -793,6 +796,7 @@ class Simulation:
             
             full_healing_timeline_results.update({f"iteration {i}": healing_timeline})
             full_mana_timeline_results.update({f"iteration {i}": mana_timeline})
+            full_holy_power_timeline_results.update({f"iteration {i}": holy_power_timeline})
         
         # COMBINE AND AVERAGE ALL KEYS OVER ITERATIONS       
         def combine_results(*dicts):
@@ -851,6 +855,9 @@ class Simulation:
         all_mana_timeline_iteration_results = get_all_iterations_results(full_mana_timeline_results)
         combined_mana_timeline_results = combine_results(*all_mana_timeline_iteration_results)
         
+        all_holy_power_timeline_iteration_results = get_all_iterations_results(full_holy_power_timeline_results)
+        combined_holy_power_timeline_results = combine_results(*all_holy_power_timeline_iteration_results)
+        
         average_ability_breakdown = average_out_simulation_results(combined_ability_breakdown_results, self.iterations)
         average_self_buff_breakdown = average_out_simulation_results(combined_self_buff_breakdown_results, self.iterations)
         average_target_buff_breakdown = average_out_simulation_results(combined_target_buff_breakdown_results, self.iterations)
@@ -860,6 +867,7 @@ class Simulation:
         average_awakening_counts = average_out_simulation_results(combined_awakening_count_results, self.iterations)
         average_healing_timeline = average_out_simulation_results(combined_healing_timeline_results, self.iterations)
         average_mana_timeline = average_out_simulation_results(combined_mana_timeline_results, self.iterations)
+        average_holy_power_timeline = average_out_simulation_results(combined_holy_power_timeline_results, self.iterations)
         
         # healing_and_buff_events = sorted(self.paladin.events + self.paladin.buff_events, key=get_timestamp)
         # healing_and_beacon_events = sorted(self.paladin.events + self.paladin.beacon_events, key=get_timestamp)
@@ -876,17 +884,17 @@ class Simulation:
         # print(f"Glimmers applied: {self.paladin.glimmer_application_counter}")
         # print(f"Glimmers removed: {self.paladin.glimmer_removal_counter}")
         
-        # pp.pprint(self.paladin.events)
+        pp.pprint(self.paladin.events)
         # pp.pprint(self.paladin.target_buff_breakdown)
         # pp.pprint(average_target_buff_breakdown)
         # pp.pprint(average_aggregated_target_buff_breakdown)
         
         # pp.pprint(average_awakening_counts)
-        pp.pprint(full_awakening_trigger_times_results)
+        pp.pprint(average_holy_power_timeline)
     
         end_time = time.time()
         simulation_time = end_time - start_time
         print(f"Simulation time: {simulation_time} seconds")
 
-        return average_ability_breakdown, self.elapsed_time, self.spell_icons, average_self_buff_breakdown, average_target_buff_breakdown, average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, average_tyrs_counts, average_awakening_counts, average_healing_timeline, average_mana_timeline, full_awakening_trigger_times_results
+        return average_ability_breakdown, self.elapsed_time, self.spell_icons, average_self_buff_breakdown, average_target_buff_breakdown, average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, average_tyrs_counts, average_awakening_counts, average_healing_timeline, average_mana_timeline, full_awakening_trigger_times_results, average_holy_power_timeline
         
