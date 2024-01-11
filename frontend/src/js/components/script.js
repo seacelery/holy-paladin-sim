@@ -12,9 +12,9 @@ import { createTalentGrid, updateTalentsFromImportedData } from "./TalentGrid.js
 //     console.log(e.target)
 // })
 
-// window.addEventListener("click", (e) => {
-//     console.log(e.target)
-// })
+window.addEventListener("click", (e) => {
+    console.log(e.target)
+})
 
 const socket = io('http://localhost:5000');
 

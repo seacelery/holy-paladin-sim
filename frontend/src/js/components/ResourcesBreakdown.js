@@ -3,10 +3,28 @@ import { createResourceGraph } from "./createResourceGraph.js";
 import { spellToIconsMap } from "../utils/spellToIconsMap.js";
 
 const createResourcesBreakdown = (simulationData, containerCount) => {
-    const sortTableByColumn = (table, column, asc = true) => {
+    const sortTableByColumn = (table, column, asc = true, headerNames) => {
         if (column !== lastSortedColumn) {
             asc = defaultSortOrders[column] !== undefined ? defaultSortOrders[column] : false;
             lastSortedColumn = column;
+        };
+
+        // reset sorting icons display
+        table.querySelectorAll(`.sorting-icon-${containerCount}`).forEach(icon => {
+            icon.style.display = "none";
+        });
+
+        const currentArrowIcon = table.querySelector(`tr:first-child td:nth-child(${column + 1}) i`);
+        currentArrowIcon.style.display = "inline-block";
+        if (!asc) {
+            currentArrowIcon.className = `fa fa-sort-down sorting-icon-${containerCount}`;
+        } else {
+            currentArrowIcon.className = `fa fa-sort-up sorting-icon-${containerCount}`;
+        };
+
+        if (headerNames.includes("Holy Power Gained")) {
+            console.log("hi")
+            currentArrowIcon.classList.add("holy-power-arrow");
         };
 
         const dirModifier = asc ? 1 : -1;
@@ -145,12 +163,25 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
             };
         
             cell.addEventListener("click", (e) => {
-                if (e.target.classList.contains("table-header")) {
+                if (e.target.classList.contains("table-header") || e.target.classList.contains(`sorting-icon-${containerCount}`)) {
                     const isAscending = sortOrder[index] === "asc";
-                    sortTableByColumn(table, index, !isAscending);
+                    sortTableByColumn(table, index, !isAscending, headerNames);
                     sortOrder[index] = isAscending ? "desc" : "asc";
                 };
             });
+
+            const sortArrowIcon = document.createElement("i");
+            sortArrowIcon.classList.add("fa", "fa-sort-down", `sorting-icon-${containerCount}`);
+            cell.appendChild(sortArrowIcon);
+            sortArrowIcon.style.display = "none";
+
+            if (cell.id === `spell-name-header-${containerCount}`) {
+                sortArrowIcon.style.display = "inline-block";
+                if (headers.includes("Holy Power Gained")) {
+                    cell.classList.add("resources-spell-name-header");
+                    sortArrowIcon.classList.add("holy-power-arrow");
+                };
+            };
         });
 
         const tableBody = table.createTBody();
@@ -245,7 +276,7 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
                 row.id = `${spellName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}-row-${containerCount}`;
 
                 const nameCell = row.insertCell();
-                nameCell.className = "table-cell-left spell-name-cell";
+                nameCell.className = "resources-table-cell-left spell-name-cell";
 
                 // spell icon
                 const spellIcon = document.createElement("img");
@@ -369,7 +400,7 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
                     subRow.setAttribute("visibility", "hidden");
 
                     const nameCell = subRow.insertCell();
-                    nameCell.className = "table-sub-cell-left spell-name-cell sub-cell";
+                    nameCell.className = "resources-table-sub-cell-left spell-name-cell sub-cell";
 
                     // spell icon
                     const spellIcon = document.createElement("img");
@@ -407,7 +438,7 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
         const row = tableBody.insertRow();
         row.classList.add("total-values-row");
         const overallTextCell = row.insertCell(0);
-        overallTextCell.className = "table-cell-bottom-left";
+        overallTextCell.className = "resources-table-cell-bottom-left";
         overallTextCell.textContent = "Total";
         overallTextCell.style.fontWeight = 500;
 

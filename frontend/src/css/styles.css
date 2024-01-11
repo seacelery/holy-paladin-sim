@@ -13,7 +13,6 @@
     --light-font-colour: white;
     --dark-font-colour: rgb(0, 0, 0);
     --green-font: rgb(101, 214, 129);
-    --purple-font: #cca1ddc9;
     --progress-bar-font: rgb(92, 172, 76);
     --healing-font: #d8fdd8;
     --holy-font: #f4f8cd;
@@ -23,7 +22,8 @@
     --holy-power-loss: rgb(214, 101, 101);
     --mana: #76afdd;
 
-    
+    --subrow-arrow-colour: #cca1ddc9;
+    --sorting-arrow-colour: #91fcd8c9;
 }
 
 * {
@@ -650,10 +650,11 @@ tr {
 }
 
 .table-header {
+    position: relative;
     padding: 5px 5px 5px 10px;
 
     min-width: 75px;
-    height: 35px;
+    height: 60px;
     border-left: 1px solid var(--border-colour-3);
 
     text-align: center;
@@ -861,7 +862,7 @@ tr {
 
     font-size: 14px;
 
-    color: var(--purple-font) !important;
+    color: var(--subrow-arrow-colour) !important;
 }
 
 .table-icon-container {
@@ -887,7 +888,35 @@ tr {
 
     font-size: 14px;
 
-    color: #cca1ddc9 !important;
+    color: var(--subrow-arrow-colour) !important;
+}
+
+[class*="fa-sort-down sorting-icon-"] {
+    position: absolute;
+    top: 32px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    padding-left: 3px;
+
+    font-size: 14px;
+
+    color: var(--sorting-arrow-colour) !important;
+}
+
+[class*="fa-sort-up sorting-icon-"] {
+    position: absolute;
+    top: 44px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    padding-left: 3px;
+
+    font-size: 14px;
+
+    color: var(--sorting-arrow-colour) !important;
 }
 
 .table-cell-bottom-left {
@@ -947,6 +976,31 @@ tr {
     border-right: 1px solid var(--border-colour-3);
 
     color: var(--mana);
+}
+
+[id*="holy-power-gained-header"], [id*="holy-power-spent-header"], [id*="holy-power-wasted-header"] {
+    font-size: 16px;
+    min-width: 100px;
+}
+
+.resources-spell-name-header {
+    height: 75px;
+}
+
+.fa-sort-down.holy-power-arrow {
+    top: 46px;
+}
+
+.fa-sort-up.holy-power-arrow {
+    top: 58px;
+}
+
+.spell-name-header > .fa-sort-down.holy-power-arrow {
+    top: 42px;
+}
+
+.spell-name-header > .fa-sort-up.holy-power-arrow {
+    top: 54px;
 }
 
 [id^="overall-holy-power-gained-cell-"] {
@@ -1182,6 +1236,48 @@ tr {
 
 .resources-table {
     width: 98%;
+}
+
+.resources-table-cell-left {
+    padding-left: 5px;
+    margin-left: -1px;
+
+    min-width: 250px;
+    height: 35px;
+
+    font-weight: 300;
+    font-size: 17px;
+
+    background-color: var(--panel-colour-2);
+}
+
+.resources-table-sub-cell-left {
+    position: relative;
+    padding-left: 5px;
+
+    min-width: 250px;
+    height: 35px;
+
+    font-weight: 300;
+    font-size: 17px;
+
+    background-color: var(--panel-colour-1);
+}
+
+.resources-table-cell-bottom-left {
+    padding-left: 6px;
+
+    min-width: 250px;
+    height: 35px;
+    
+    border-top: 1px solid var(--border-colour-3);
+    border-right: none;
+    border-left: none;
+
+    font-weight: 300;
+    font-size: 17px;
+
+    background-color: var(--panel-colour);
 }
 
 .holy-power-gained-cell {

@@ -9,6 +9,19 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             lastSortedColumn = column;
         };
 
+        // reset sorting icons display
+        table.querySelectorAll(`.sorting-icon-${containerCount}`).forEach(icon => {
+            icon.style.display = "none";
+        });
+
+        const currentArrowIcon = table.querySelector(`tr:first-child td:nth-child(${column + 1}) i`);
+        currentArrowIcon.style.display = "inline-block";
+        if (!asc) {
+            currentArrowIcon.className = `fa fa-sort-down sorting-icon-${containerCount}`;
+        } else {
+            currentArrowIcon.className = `fa fa-sort-up sorting-icon-${containerCount}`;
+        };
+
         const dirModifier = asc ? 1 : -1;
         const tBody = table.tBodies[0];
         const totalRow = tBody.querySelector(".total-values-row");
@@ -154,8 +167,8 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             sortOrder[index] = "asc";
         };
     
-        cell.addEventListener('click', (e) => {
-            if (e.target.classList.contains("table-header")) {
+        cell.addEventListener("click", (e) => {
+            if (e.target.classList.contains("table-header") || e.target.classList.contains(`sorting-icon-${containerCount}`)) {
                 const isAscending = sortOrder[index] === "asc";
                 sortTableByColumn(table, index, !isAscending);
                 sortOrder[index] = isAscending ? "desc" : "asc";
@@ -164,6 +177,15 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         
         // header arrow
         cell.className = `table-header`;
+
+        const sortArrowIcon = document.createElement("i");
+        sortArrowIcon.classList.add("fa", "fa-sort-down", `sorting-icon-${containerCount}`);
+        cell.appendChild(sortArrowIcon);
+        sortArrowIcon.style.display = "none";
+
+        if (cell.id === `healing-header-${containerCount}`) {
+            sortArrowIcon.style.display = "inline-block";
+        };
 
         if (cell.id === `spell-name-header-${containerCount}`) {
             const headerIconContainer = document.createElement("div");
