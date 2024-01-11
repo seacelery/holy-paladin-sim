@@ -4,6 +4,11 @@ import { createElement } from "./script.js";
 
 const createBuffsBreakdown = (simulationData, containerCount) => {
     const sortTableByColumn = (table, column, asc = true) => {
+        if (column !== lastSortedColumn) {
+            asc = defaultSortOrders[column] !== undefined ? defaultSortOrders[column] : false;
+            lastSortedColumn = column;
+        };
+
         const dirModifier = asc ? 1 : -1;
         const tBody = table.tBodies[0];
     
@@ -48,6 +53,10 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
     };
     
     let sortOrder = {};
+    let lastSortedColumn = null;
+    const defaultSortOrders = {
+        0: true
+    };
 
     const handleTalentGraph = (talentData, prefix, talentName, colour, awakening = false) => {
         const isTalentActive = Object.values(talentData).reduce((a, b) => a + b, 0) > 0 ? true : false;
@@ -109,13 +118,15 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
             cell.id = `${text.toLowerCase().replaceAll(" ", "-")}-header-${containerCount}`;
 
             if (sortOrder[index] === undefined) {
-                sortOrder[index] = 'asc';
+                sortOrder[index] = "asc";
             };
         
-            cell.addEventListener('click', () => {
-                const isAscending = sortOrder[index] === 'asc';
-                sortTableByColumn(table, index, !isAscending);
-                sortOrder[index] = isAscending ? 'desc' : 'asc';
+            cell.addEventListener("click", (e) => {
+                if (e.target.classList.contains("table-header")) {
+                    const isAscending = sortOrder[index] === "asc";
+                    sortTableByColumn(table, index, !isAscending);
+                    sortOrder[index] = isAscending ? "desc" : "asc";
+                };
             });
         });
 

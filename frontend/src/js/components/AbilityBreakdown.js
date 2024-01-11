@@ -2,11 +2,16 @@ import { spellToIconsMap } from '../utils/spellToIconsMap.js';
 import { createHealingLineGraph } from './createHealingLineGraph.js';
 import { createElement } from './script.js';
 
-const createAbilityBreakdown = (simulationData, containerCount) => {
-    function sortTableByColumn(table, column, asc = true) {
+const createAbilityBreakdown = (simulationData, containerCount) => {    
+    const sortTableByColumn = (table, column, asc = true) => {
+        if (column !== lastSortedColumn) {
+            asc = defaultSortOrders[column] !== undefined ? defaultSortOrders[column] : false;
+            lastSortedColumn = column;
+        };
+
         const dirModifier = asc ? 1 : -1;
         const tBody = table.tBodies[0];
-        const totalRow = tBody.querySelector('.total-values-row');
+        const totalRow = tBody.querySelector(".total-values-row");
         const totalRowParent = totalRow.parentNode;
     
         // remove total row
@@ -44,12 +49,12 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     
             // find and append subrows belonging to the parent row
             allSubRows.forEach(subRow => {
-                if (subRow.getAttribute('data-parent-row') === mainRow.id) {
+                if (subRow.getAttribute("data-parent-row") === mainRow.id) {
                     tBody.appendChild(subRow);
     
                     // find and append sub-subrows belonging to the parent row
                     allSubSubRows.forEach(subSubRow => {
-                        if (subSubRow.getAttribute('data-parent-row') === subRow.id) {
+                        if (subSubRow.getAttribute("data-parent-row") === subRow.id) {
                             tBody.appendChild(subSubRow);
                         };
                     });
@@ -67,6 +72,10 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     };
     
     let sortOrder = {};
+    let lastSortedColumn = null;
+    const defaultSortOrders = {
+        0: true
+    };
 
     const formatNumbers = (number) => {
         return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -142,13 +151,15 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         };
 
         if (sortOrder[index] === undefined) {
-            sortOrder[index] = 'asc';
+            sortOrder[index] = "asc";
         };
     
-        cell.addEventListener('click', () => {
-            const isAscending = sortOrder[index] === 'asc';
-            sortTableByColumn(table, index, !isAscending);
-            sortOrder[index] = isAscending ? 'desc' : 'asc';
+        cell.addEventListener('click', (e) => {
+            if (e.target.classList.contains("table-header")) {
+                const isAscending = sortOrder[index] === "asc";
+                sortTableByColumn(table, index, !isAscending);
+                sortOrder[index] = isAscending ? "desc" : "asc";
+            };        
         });
         
         // header arrow

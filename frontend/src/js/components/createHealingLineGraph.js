@@ -97,7 +97,6 @@ const createHealingLineGraph = (healingData, manaData, graphId, title, colour) =
     //     .selectAll("text")
     //     .style("fill", "white");
 
-    // Path for mana data
     const manaLine = d3.line()
         .x(d => x(d.key))
         .y(d => yRight(d.value))
@@ -145,14 +144,6 @@ const createHealingLineGraph = (healingData, manaData, graphId, title, colour) =
         .style("border-width", "1px")
         .style("border-radius", "3px")
         .style("padding", "5px");
-
-    // function findNearestData(mouseX) {
-    //     const time = x.invert(mouseX);
-    //     const healing = healingData[`${Math.round(time)}`];
-    //     const mana = manaData[`${Math.round(time)}`];
-    
-    //     return { time: Math.round(time), healing, mana };
-    // };
 
     svgContainer.on("mousemove", function(event) {
         const [mouseX, mouseY] = d3.pointer(event);

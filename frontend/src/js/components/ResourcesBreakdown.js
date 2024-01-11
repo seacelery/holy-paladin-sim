@@ -4,9 +4,14 @@ import { spellToIconsMap } from "../utils/spellToIconsMap.js";
 
 const createResourcesBreakdown = (simulationData, containerCount) => {
     const sortTableByColumn = (table, column, asc = true) => {
+        if (column !== lastSortedColumn) {
+            asc = defaultSortOrders[column] !== undefined ? defaultSortOrders[column] : false;
+            lastSortedColumn = column;
+        };
+
         const dirModifier = asc ? 1 : -1;
         const tBody = table.tBodies[0];
-        const totalRow = tBody.querySelector('.total-values-row');
+        const totalRow = tBody.querySelector(".total-values-row");
         const totalRowParent = totalRow.parentNode;
     
         // remove total row
@@ -18,9 +23,13 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
     
         // sort the rows
         const sortedRows = rows.sort((a, b) => {
-            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            let aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            let bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
     
+            // remove number formatting
+            aColText = aColText.replace(/[-,]/g, '');
+            bColText = bColText.replace(/[-,]/g, '');
+
             // i'm not really sure but it stops different types from messing it up
             if (!isNaN(parseFloat(aColText)) && !isNaN(parseFloat(bColText))) {
                 return dirModifier * (parseFloat(aColText) - parseFloat(bColText));
@@ -40,7 +49,7 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
     
             // find and append subrows belonging to the parent row
             allSubRows.forEach(subRow => {
-                if (subRow.getAttribute('data-parent-row') === mainRow.id) {
+                if (subRow.getAttribute("data-parent-row") === mainRow.id) {
                     tBody.appendChild(subRow);
                 };
             });
@@ -54,8 +63,16 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
         table.querySelector(`tr:first-child td:nth-child(${column + 1})`).classList.toggle("td-sort-asc", asc);
         table.querySelector(`tr:first-child td:nth-child(${column + 1})`).classList.toggle("td-sort-desc", !asc);
     };
+
+    const formatNumbers = (number) => {
+        return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
     
     let sortOrder = {};
+    let lastSortedColumn = null;
+    const defaultSortOrders = {
+        0: true,
+    };
     
     const tableContainer = document.getElementById(`resources-breakdown-table-container-${containerCount}`);
     tableContainer.innerHTML = "";
@@ -124,13 +141,15 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
             cell.id = `${text.toLowerCase().replaceAll(" ", "-")}-header-${containerCount}`;
 
             if (sortOrder[index] === undefined) {
-                sortOrder[index] = 'asc';
+                sortOrder[index] = "asc";
             };
         
-            cell.addEventListener('click', () => {
-                const isAscending = sortOrder[index] === 'asc';
-                sortTableByColumn(table, index, !isAscending);
-                sortOrder[index] = isAscending ? 'desc' : 'asc';
+            cell.addEventListener("click", (e) => {
+                if (e.target.classList.contains("table-header")) {
+                    const isAscending = sortOrder[index] === "asc";
+                    sortTableByColumn(table, index, !isAscending);
+                    sortOrder[index] = isAscending ? "desc" : "asc";
+                };
             });
         });
 
@@ -211,13 +230,13 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
                 const manaGainedCell = row.insertCell();
                 manaGainedCell.className = "table-cell-right mana-gained-cell";
                 if (spellData.mana_gained > 0) {
-                    manaGainedCell.textContent = "+" + Math.round(spellData.mana_gained);
+                    manaGainedCell.textContent = "+" + formatNumbers(spellData.mana_gained);
                 };
                 
                 const manaSpentCell = row.insertCell();
                 manaSpentCell.className = "table-cell-right mana-spent-cell";
                 if (spellData.mana_spent > 0) {
-                    manaSpentCell.textContent = "-" + Math.round(spellData.mana_spent);
+                    manaSpentCell.textContent = "-" + formatNumbers(spellData.mana_spent);
                 };
             };
 
