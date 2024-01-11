@@ -5,7 +5,7 @@ from .spells import Spell
 from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, BlessingOfFreedomBuff, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals, update_spell_data_beacon_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals, update_spell_data_beacon_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained
 
 
 def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_targets):
@@ -70,7 +70,9 @@ class HolyShock(Spell):
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
                 caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
-                caster.mana += self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                reclamation_mana = self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                caster.mana += reclamation_mana
+                update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
             
             # blessing of dawn
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -207,7 +209,10 @@ class Daybreak(Spell):
             
             number_of_glimmers_removed = len(glimmer_targets)
             caster.glimmer_removal_counter += number_of_glimmers_removed
-            caster.mana += 2000 * number_of_glimmers_removed
+            daybreak_mana_gain = 2000 * number_of_glimmers_removed
+            caster.mana += daybreak_mana_gain
+            update_mana_gained(caster.ability_breakdown, "Daybreak", daybreak_mana_gain)
+            
             if caster.is_talent_active("Rising Sunlight"):
                 caster.apply_buff_to_self(RisingSunlight(), current_time, stacks_to_apply=3, max_stacks=3)
             caster.apply_buff_to_self(FirstLight(), current_time)
@@ -301,7 +306,9 @@ class RisingSunlightHolyShock(Spell):
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
                 caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
-                caster.mana += self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                reclamation_mana = self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                caster.mana += reclamation_mana
+                update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
             
             # blessing of dawn
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -472,7 +479,9 @@ class DivineTollHolyShock(Spell):
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
                 caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
-                caster.mana += self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                reclamation_mana = self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                caster.mana += reclamation_mana
+                update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
             
             # blessing of dawn
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -616,7 +625,9 @@ class DivineResonanceHolyShock(Spell):
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
                 caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
-                caster.mana += self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                reclamation_mana = self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                caster.mana += reclamation_mana
+                update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
             
             # blessing of dawn
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -708,7 +719,9 @@ class HolyLight(Spell):
             # divine revelations
             if caster.is_talent_active("Divine Revelations"):
                 if "Infusion of Light" in caster.active_auras:
-                    caster.mana += caster.base_mana * 0.005
+                    divine_revelations_mana_gain = caster.base_mana * 0.005
+                    caster.mana += divine_revelations_mana_gain
+                    update_mana_gained(caster.ability_breakdown, "Divine Revelations (Holy Light)", divine_revelations_mana_gain)
             
             # blessing of dawn
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -1164,7 +1177,6 @@ class LightsHammerSpell(Spell):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             caster.apply_summon(LightsHammerSummon(), current_time)
-            update_spell_data_casts(caster.ability_breakdown, "Light's Hammer", self.get_mana_cost(caster))
                 
                 
 class LightsHammerHeal(Spell):

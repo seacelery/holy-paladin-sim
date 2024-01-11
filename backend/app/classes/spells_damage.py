@@ -1,5 +1,5 @@
 from .spells import Spell
-from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals, update_self_buff_data
+from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals, update_self_buff_data, update_mana_gained
 from .auras_debuffs import JudgmentOfLightDebuff, GreaterJudgmentDebuff
 from .auras_buffs import BlessingOfDawn
 from .spells_auras import AvengingWrathBuff
@@ -51,7 +51,9 @@ class Judgment(Spell):
             # divine revelations
             if caster.is_talent_active("Divine Revelations"):
                 if "Infusion of Light" in caster.active_auras:
-                    caster.mana += caster.base_mana * 0.005
+                    divine_revelations_mana_gain = caster.base_mana * 0.005
+                    caster.mana += divine_revelations_mana_gain
+                    update_mana_gained(caster.ability_breakdown, "Divine Revelations (Judgment)", divine_revelations_mana_gain)
             
             # blessing of dawn
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -140,7 +142,9 @@ class CrusaderStrike(Spell):
             if caster.is_talent_active("Reclamation"):
                 self.spell_damage_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
                 caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
-                caster.mana += self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                reclamation_mana = self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                caster.mana += reclamation_mana
+                update_mana_gained(caster.ability_breakdown, "Reclamation (Crusader Strike)", reclamation_mana)
             
             # blessing of dawn
             if caster.is_talent_active("Of Dusk and Dawn"):

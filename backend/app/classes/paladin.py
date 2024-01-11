@@ -169,6 +169,8 @@ class Paladin:
         self.healing_timeline = {}
         self.mana_timeline = {0: self.max_mana}
         self.holy_power_timeline = {0: 0}
+        self.mana_breakdown = {}
+        self.holy_power_breakdown = {}
         
         self.initial_state = copy.deepcopy(self)
     

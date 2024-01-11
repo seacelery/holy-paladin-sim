@@ -601,7 +601,6 @@ input:focus {
 
 /* ABILITY BREAKDOWN TABLE */
 .tooltip {
-
     z-index: 1000;
     pointer-events: none;
 
@@ -615,8 +614,12 @@ input:focus {
     color: var(--healing-font);
 }
 
-.tooltip-mana {
+.tooltip-mana, #tooltip-mana {
     color: var(--mana);
+}
+
+#tooltip-holy-power {
+    color: var(--holy-font);
 }
 
 [id^="ability-breakdown-table-container-"] {
@@ -818,7 +821,7 @@ tr {
     color: var(--healing-font);
 }
 
-.mana-spent-cell {
+.mana-spent-cell, .mana-gained-cell {
     color: var(--mana);
 }
 
@@ -917,9 +920,8 @@ tr {
     background-color: var(--panel-colour);
 }
 
-[id^="overall-healing-percent-cell-"] {
+[id^="overall-healing-percent-cell-"], [id^="overall-mana-gained-cell-"], [id^="overall-holy-power-gained-cell-"], [id^="overall-holy-power-spent-cell-"], [id^="overall-holy-power-wasted-cell-"] {
     border-left: 1px solid var(--border-colour-3);
-    
 }
 
 [id^="overall-healing-cell-"] {
@@ -940,13 +942,20 @@ tr {
     border-right: 1px solid var(--border-colour-3);
 }
 
-[id^="overall-mana-spent-cell-"] {
+[id^="overall-mana-spent-cell-"], [id^="overall-mana-gained-cell-"] {
     border-left: 1px solid var(--border-colour-3);
     border-right: 1px solid var(--border-colour-3);
 
     color: var(--mana);
 }
 
+[id^="overall-holy-power-gained-cell-"] {
+    color: var(--holy-power-gain);
+}
+
+[id^="overall-holy-power-spent-cell-"], [id^="overall-holy-power-wasted-cell-"] {
+    color: var(--holy-power-loss);
+}
 
 /* BUFFS BREAKDOWN TABLE */
 [id^="buffs-window-content-"] {
@@ -1173,6 +1182,18 @@ tr {
 
 .resources-table {
     width: 98%;
+}
+
+.holy-power-gained-cell {
+    color: var(--holy-power-gain);
+}
+
+.holy-power-spent-cell {
+    color: var(--holy-power-loss);
+}
+
+.holy-power-wasted-cell {
+    color: var(--holy-power-loss);
 }
 
 .footer {

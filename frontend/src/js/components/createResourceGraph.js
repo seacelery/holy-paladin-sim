@@ -1,8 +1,7 @@
 const createResourceGraph = (data, graphId, title, colour) => {
     const dataArray = Object.keys(data).map(key => ({ key: +key, value: data[key] }));
-    console.log(dataArray)
-
-    const margin = { top: 30, right: 30, bottom: 75, left: title === "Mana" ? 70 : 45 },
+    
+    const margin = { top: 30, right: 30, bottom: 75, left: title === "Mana" ? 75 : 45 },
         width = 640 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
@@ -30,8 +29,8 @@ const createResourceGraph = (data, graphId, title, colour) => {
         .domain(d3.extent(dataArray, d => d.key))
         .range([0, width]);
         
-    const y = d3.scaleLinear()
-        .domain([0, d3.max(dataArray, d => d.value)])
+        const y = d3.scaleLinear()
+        .domain(title === "Holy Power" ? [0, 5] : [0, d3.max(dataArray, d => d.value)])
         .range([height, 0]);
 
     const line = d3.line()
@@ -62,13 +61,13 @@ const createResourceGraph = (data, graphId, title, colour) => {
     xAxisGroup.selectAll("text").style("fill", "white");
 
     const yAxisGroup = svg.append("g")
-    .call(d3.axisLeft(y).ticks(6));
+    .call(d3.axisLeft(y).ticks(title === "Holy Power" ? 5 : 6));
 
     yAxisGroup.append("text")
         .attr("class", "axis-label")
         .attr("transform", "rotate(-90)")
         .attr("x", -height / 2)
-        .attr("y", title === "Mana" ? -55 : -30)
+        .attr("y", title === "Mana" ? -60 : -30)
         .style("text-anchor", "middle")
         .text(title);
 
@@ -93,10 +92,10 @@ const createResourceGraph = (data, graphId, title, colour) => {
 
         if (adjustedMouseX >= 0 && adjustedMouseX <= width && adjustedMouseY >= 0 && adjustedMouseY <= height) {
             const time = formatTime(x.invert(adjustedMouseX));
-            const mana = data[`${Math.round(x.invert(adjustedMouseX))}`];
+            const resource = data[`${Math.round(x.invert(adjustedMouseX))}`];
 
             tooltip.html(`<span class="tooltip-time">${time}</span><br/>
-                <span class="tooltip-mana">${Math.round(mana)}</span>`)
+                <span id="tooltip-${title.toLowerCase().replaceAll(" ", "-")}">${title === "Mana" ? Math.round(resource) : Math.round(resource * 10) / 10}</span>`)
             .style("left", (event.pageX + 10) + "px")
             .style("top", (event.pageY - 15) + "px")
             .style("opacity", 1)

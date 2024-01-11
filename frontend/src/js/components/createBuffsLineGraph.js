@@ -1,7 +1,6 @@
 const createBuffsLineGraph = (data, graphId, title, colour, awakening = false, awakeningTriggers = null) => {
     const buffCountData = data;
     const buffCountDataArray = Object.keys(buffCountData).map(key => ({ key: +key, value: buffCountData[key] }));
-    console.log(buffCountDataArray)
 
     const margin = { top: 60, right: 20, bottom: 55, left: 65 },
         width = 600 - margin.left - margin.right,

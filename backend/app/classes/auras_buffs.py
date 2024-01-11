@@ -1,7 +1,7 @@
 import random
 
 from .auras import Buff
-from ..utils.misc_functions import append_spell_heal_event, format_time
+from ..utils.misc_functions import append_spell_heal_event, format_time, update_mana_gained
 
 
 class HoT(Buff):
@@ -317,17 +317,16 @@ class BlessingOfWinter(Buff):
     
     def increment_blessing_of_winter(self, caster, current_time, tick_rate):       
         self.last_winter_tick_time += tick_rate
-        if self.last_winter_tick_time >= 1.99:
-            caster.mana += caster.base_mana * 0.01
-            self.mana_gained += caster.base_mana * 0.01
-            # caster.events.append(f"{current_time}: {caster.base_mana * 0.01} mana restored by winter new caster mana {caster.mana}")
+        if self.last_winter_tick_time >= 2.94:
+            winter_mana_gain = caster.max_mana * 0.01
+            caster.mana += winter_mana_gain
+            update_mana_gained(caster.ability_breakdown, "Blessing of Winter", winter_mana_gain)
+            self.mana_gained += caster.max_mana * 0.01
+            
             self.last_winter_tick_time = 0
             
         if caster.active_auras["Blessing of Winter"].duration < 0.01:
             caster.events.append(f"{format_time(current_time)}: {caster.name} gained {round(self.mana_gained)} mana from Blessing of Winter")
-    
-    # def remove_effect(self, caster):
-    #     caster.events.append(f"Mana after winter: {caster.mana}, {self.mana_gained}")    
     
     
 class BlessingOfSpring(Buff):

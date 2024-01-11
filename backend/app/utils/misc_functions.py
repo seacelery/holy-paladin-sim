@@ -27,14 +27,12 @@ def calculate_beacon_healing(spell_name, amount):
     return amount * beacon_transfer_rates_double_beacon.get(spell_name, 0)
 
 def increment_holy_power(ability, caster):
+    caster.holy_power += ability.holy_power_gain   
     if caster.holy_power >= caster.max_holy_power:
+        caster.holy_power_wasted += caster.holy_power - caster.max_holy_power
+        update_wasted_holy_power(caster.ability_breakdown, ability.name, caster.holy_power - caster.max_holy_power)
         caster.holy_power = caster.max_holy_power
-        caster.holy_power_wasted += ability.holy_power_gain
-    else:
-        caster.holy_power += ability.holy_power_gain  
-        if caster.holy_power >= caster.max_holy_power:
-            caster.holy_power = caster.max_holy_power
-            caster.holy_power_wasted += ability.holy_power_gain    
+        
     caster.holy_power_gained += ability.holy_power_gain
     
 def add_to_holy_power_by_ability(dict, ability, caster):
@@ -157,8 +155,10 @@ def update_spell_data_heals(spell_breakdown, spell_name, target, heal_amount, is
             "targets": {},
             "crits": 0,
             "mana_spent": 0,
+            "mana_gained": 0,
             "holy_power_gained": 0,
             "holy_power_spent": 0,
+            "holy_power_wasted": 0,
             "sub_spells": {}
         }
     
@@ -188,8 +188,10 @@ def update_spell_data_beacon_heals(spell_breakdown, target, heal_amount, source_
             "targets": {},
             "crits": 0,
             "mana_spent": 0,
+            "mana_gained": 0,
             "holy_power_gained": 0,
             "holy_power_spent": 0,
+            "holy_power_wasted": 0,
             "sub_spells": {},
             "source_spells": {}
         }   
@@ -217,8 +219,11 @@ def update_spell_data_beacon_heals(spell_breakdown, target, heal_amount, source_
     source_spell_data = spell_data["source_spells"][source_spell]
     source_spell_data["healing"] += heal_amount
     source_spell_data["hits"] += 1
+   
+def update_wasted_holy_power(spell_breakdown, spell_name, holy_power_wasted):
+    spell_breakdown[spell_name]["holy_power_wasted"] += holy_power_wasted   
     
-def update_spell_data_casts(spell_breakdown, spell_name, mana_spent=None, holy_power_gained=None, holy_power_spent=None, exclude_casts=False):
+def update_mana_gained(spell_breakdown, spell_name, mana_gained):
     if spell_name not in spell_breakdown:
         spell_breakdown[spell_name] = {
             "total_healing": 0,
@@ -227,8 +232,28 @@ def update_spell_data_casts(spell_breakdown, spell_name, mana_spent=None, holy_p
             "targets": {},
             "crits": 0,
             "mana_spent": 0,
+            "mana_gained": 0,
             "holy_power_gained": 0,
             "holy_power_spent": 0,
+            "holy_power_wasted": 0,
+            "sub_spells": {}
+        }
+    
+    spell_breakdown[spell_name]["mana_gained"] += mana_gained
+ 
+def update_spell_data_casts(spell_breakdown, spell_name, mana_spent=None, holy_power_gained=None, holy_power_spent=None, holy_power_wasted=None, exclude_casts=False):
+    if spell_name not in spell_breakdown:
+        spell_breakdown[spell_name] = {
+            "total_healing": 0,
+            "casts": 0,
+            "hits": 0,
+            "targets": {},
+            "crits": 0,
+            "mana_spent": 0,
+            "mana_gained": 0,
+            "holy_power_gained": 0,
+            "holy_power_spent": 0,
+            "holy_power_wasted": 0,
             "sub_spells": {}
         }
     
@@ -241,10 +266,28 @@ def update_spell_data_casts(spell_breakdown, spell_name, mana_spent=None, holy_p
         spell_data["holy_power_gained"] += holy_power_gained
     if holy_power_spent != 0 and holy_power_spent is not None:
         spell_data["holy_power_spent"] += holy_power_spent
+    if holy_power_wasted != 0 and holy_power_wasted is not None:
+        spell_data["holy_power_wasted"] += holy_power_wasted
         
 def update_spell_holy_power_gain(spell_breakdown, spell_name, holy_power_gained=None):
     if holy_power_gained:
         spell_breakdown[spell_name]["holy_power_gained"] += holy_power_gained
+        
+def update_spell_data_initialise_spell(spell_breakdown, spell_name):
+    if spell_name not in spell_breakdown:
+        spell_breakdown[spell_name] = {
+            "total_healing": 0,
+            "casts": 0,
+            "hits": 0,
+            "targets": {},
+            "crits": 0,
+            "mana_spent": 0,
+            "mana_gained": 0,
+            "holy_power_gained": 0,
+            "holy_power_spent": 0,
+            "holy_power_wasted": 0,
+            "sub_spells": {}
+        }
 
 def update_self_buff_data(buff_breakdown, buff_name, current_time, event_type, duration=0, stacks=1, time_extension=0):
     buff_breakdown.append({

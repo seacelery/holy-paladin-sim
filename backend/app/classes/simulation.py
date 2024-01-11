@@ -42,8 +42,6 @@ class Simulation:
         self.previous_ability = None
         
         self.access_token = access_token
-        self.spell_icons = {}
-        self.add_spell_icons()
         
         self.time_since_last_check = 0
         self.previous_total_healing = 0
@@ -115,36 +113,6 @@ class Simulation:
         
         self.time_since_last_check = 0
     
-    def check_buff_counts(self):
-        glimmer_count = len([glimmer_target for glimmer_target in self.paladin.potential_healing_targets if "Glimmer of Light" in glimmer_target.target_active_buffs])
-        self.paladin.glimmer_counts.update({round(self.elapsed_time): glimmer_count})
-        
-        tyrs_count = len([tyrs_target for tyrs_target in self.paladin.potential_healing_targets if "Tyr's Deliverance (target)" in tyrs_target.target_active_buffs])
-        self.paladin.tyrs_counts.update({round(self.elapsed_time): tyrs_count})
-        
-        if "Awakening" in self.paladin.active_auras:
-            awakening_count = self.paladin.active_auras["Awakening"].current_stacks
-        else:
-            awakening_count = 0
-        self.paladin.awakening_counts.update({round(self.elapsed_time): awakening_count})
-        
-        self.time_since_last_check = 0
-    
-    def check_buff_counts(self):
-        glimmer_count = len([glimmer_target for glimmer_target in self.paladin.potential_healing_targets if "Glimmer of Light" in glimmer_target.target_active_buffs])
-        self.paladin.glimmer_counts.update({round(self.elapsed_time): glimmer_count})
-        
-        tyrs_count = len([tyrs_target for tyrs_target in self.paladin.potential_healing_targets if "Tyr's Deliverance (target)" in tyrs_target.target_active_buffs])
-        self.paladin.tyrs_counts.update({round(self.elapsed_time): tyrs_count})
-        
-        if "Awakening" in self.paladin.active_auras:
-            awakening_count = self.paladin.active_auras["Awakening"].current_stacks
-        else:
-            awakening_count = 0
-        self.paladin.awakening_counts.update({round(self.elapsed_time): awakening_count})
-        
-        self.time_since_last_check = 0
-    
     def check_delayed_casts(self, caster):
         for cast in caster.delayed_casts:
             if self.elapsed_time >= cast[1]:
@@ -183,15 +151,15 @@ class Simulation:
             ("Divine Toll", lambda: self.previous_ability == "Daybreak"),
             ("Blessing of the Seasons", lambda: True),
             ("Avenging Wrath", lambda: True),
-            # ("Light's Hammer", lambda: True),
+            ("Light's Hammer", lambda: True),
             ("Tyr's Deliverance", lambda: True),
-            ("Divine Favor", lambda: True),
+            # ("Divine Favor", lambda: True),
             ("Light of Dawn", lambda: self.paladin.holy_power == 5),
             ("Daybreak", lambda: self.elapsed_time >= 12),
             ("Holy Shock", lambda: True),
             
             # ("Word of Glory", lambda: True),
-            # ("Crusader Strike", lambda: True),
+            ("Crusader Strike", lambda: True),
             
             
             ("Judgment", lambda: True),
@@ -456,6 +424,10 @@ class Simulation:
         full_awakening_trigger_times_results = {}
 
         sub_spell_map = {
+                "Reclamation (Holy Shock)": "Holy Shock",
+                "Reclamation (Crusader Strike)": "Crusader Strike",
+                "Divine Revelations (Holy Light)": "Holy Light",
+                "Divine Revelations (Judgment)": "Judgment",
                 "Holy Shock (Divine Toll)": "Divine Toll",
                 "Holy Shock (Divine Resonance)": "Divine Toll",
                 "Holy Shock (Rising Sunlight)": "Daybreak",
@@ -469,7 +441,11 @@ class Simulation:
                 "Crusader's Reprieve": "Crusader Strike",
                 "Greater Judgment": "Judgment",
                 "Judgment of Light": "Judgment",
-                "Afterimage": "Word of Glory"
+                "Afterimage": "Word of Glory",
+                "Blessing of Summer": "Blessing of the Seasons",
+                "Blessing of Autumn": "Blessing of the Seasons",
+                "Blessing of Winter": "Blessing of the Seasons",
+                "Blessing of Spring": "Blessing of the Seasons",
             }
 
         # time the function
@@ -494,6 +470,9 @@ class Simulation:
             healing_timeline = self.paladin.healing_timeline
             mana_timeline = self.paladin.mana_timeline
             holy_power_timeline = self.paladin.holy_power_timeline
+            
+            # pp.pprint(self.paladin.events)           
+            # pp.pprint(ability_breakdown)
             
             for key, value in self.paladin.awakening_trigger_times.items():
                 full_awakening_trigger_times_results[key] = full_awakening_trigger_times_results.get(key, 0) + value
@@ -553,29 +532,48 @@ class Simulation:
                     # total crits and hits required for crit percent calculation  
                     total_crits = primary_data.get("crits", 0)
                     total_hits = primary_data.get("hits", 0)
+                    total_mana_gained = primary_data.get("mana_gained", 0)
                     total_holy_power_gained = primary_data.get("holy_power_gained", 0)
+                    total_holy_power_wasted = primary_data.get("holy_power_wasted", 0)
+                    if primary_spell == "Blessing of the Seasons":
+                        total_mana_spent = primary_data.get("mana_spent", 0)
+                        total_casts = primary_data.get("casts", 0)
 
                     for sub_spell_data in primary_data.get("sub_spells", {}).values():
                         total_crits += sub_spell_data.get("crits", 0)
                         total_hits += sub_spell_data.get("hits", 0)
+                        total_mana_gained += sub_spell_data.get("mana_gained", 0)
                         total_holy_power_gained += sub_spell_data.get("holy_power_gained", 0)
+                        total_holy_power_wasted += sub_spell_data.get("holy_power_wasted", 0)
+                        if primary_spell == "Blessing of the Seasons":
+                            total_mana_spent += sub_spell_data.get("mana_spent", 0)
+                            total_casts += sub_spell_data.get("casts", 0)
 
                         for nested_sub_spell_data in sub_spell_data.get("sub_spells", {}).values():
                             total_crits += nested_sub_spell_data.get("crits", 0)
                             total_hits += nested_sub_spell_data.get("hits", 0)
+                            total_mana_gained += nested_sub_spell_data.get("mana_gained", 0)
                             total_holy_power_gained += nested_sub_spell_data.get("holy_power_gained", 0)
+                            total_holy_power_wasted += nested_sub_spell_data.get("holy_power_wasted", 0)
                         
                     # display holy power for a spell as the sum of its sub-spells
+                    primary_data["mana_gained"] = total_mana_gained
                     primary_data["holy_power_gained"] = total_holy_power_gained
+                    primary_data["holy_power_wasted"] = total_holy_power_wasted
+                    if primary_spell == "Blessing of the Seasons":
+                        primary_data["mana_spent"] = total_mana_spent
+                        primary_data["casts"] = total_casts
                     
-                    # # this line is responsible for whether the crit percent propagates back up the table
+                    # this line is responsible for whether the crit percent propagates back up the table
                     # primary_data["crit_percent"] = round((total_crits / total_hits) * 100, 1) if total_hits > 0 else 0
             
             # remove the primary spell data for sub-spells        
             for spell in ["Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)", "Holy Shock (Rising Sunlight)" , "Glimmer of Light", 
                         "Glimmer of Light (Daybreak)", "Glimmer of Light (Rising Sunlight)", "Glimmer of Light (Divine Toll)", 
                         "Glimmer of Light (Glistening Radiance (Light of Dawn))", "Glimmer of Light (Glistening Radiance (Word of Glory))", "Resplendent Light",
-                        "Greater Judgment", "Judgment of Light", "Crusader's Reprieve", "Afterimage"]:
+                        "Greater Judgment", "Judgment of Light", "Crusader's Reprieve", "Afterimage", "Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", 
+                        "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", "Blessing of Summer", "Blessing of Autumn",
+                        "Blessing of Winter", "Blessing of Spring"]:
                 if spell in ability_breakdown:
                     del ability_breakdown[spell]
                           
@@ -602,8 +600,10 @@ class Simulation:
                             "targets": {},
                             "crits": 0,
                             "mana_spent": 0,
+                            "mana_gained": 0,
                             "holy_power_gained": 0,
                             "holy_power_spent": 0,
+                            "holy_power_wasted": 0,
                             "sub_spells": {}
                         }
                         
@@ -614,8 +614,10 @@ class Simulation:
                         sub_spells[spell]["crits"] = ability_breakdown[spell]["crits"]
                         sub_spells[spell]["crit_percent"] = ability_breakdown[spell]["crit_percent"]
                         sub_spells[spell]["mana_spent"] = ability_breakdown[spell]["mana_spent"]
+                        sub_spells[spell]["mana_gained"] = ability_breakdown[spell]["mana_gained"]
                         sub_spells[spell]["holy_power_gained"] = ability_breakdown[spell]["holy_power_gained"]
                         sub_spells[spell]["holy_power_spent"] = ability_breakdown[spell]["holy_power_spent"]
+                        sub_spells[spell]["holy_power_wasted"] = ability_breakdown[spell]["holy_power_wasted"]
             
             for spell in ability_breakdown:
                 total_sub_sub_spell_healing = 0
@@ -635,8 +637,10 @@ class Simulation:
                                 "targets": {},
                                 "crits": 0,
                                 "mana_spent": 0,
+                                "mana_gained": 0,
                                 "holy_power_gained": 0,
                                 "holy_power_spent": 0,
+                                "holy_power_wasted": 0,
                                 "sub_spells": {}
                             }
                             
@@ -647,8 +651,10 @@ class Simulation:
                             sub_sub_spells[sub_spell]["crits"] = sub_spells[sub_spell]["crits"]
                             sub_sub_spells[sub_spell]["crit_percent"] = sub_spells[sub_spell]["crit_percent"]
                             sub_sub_spells[sub_spell]["mana_spent"] = sub_spells[sub_spell]["mana_spent"]
+                            sub_sub_spells[sub_spell]["mana_gained"] = sub_spells[sub_spell]["mana_gained"]
                             sub_sub_spells[sub_spell]["holy_power_gained"] = sub_spells[sub_spell]["holy_power_gained"]
                             sub_sub_spells[sub_spell]["holy_power_spent"] = sub_spells[sub_spell]["holy_power_spent"]
+                            sub_sub_spells[sub_spell]["holy_power_wasted"] = sub_spells[sub_spell]["holy_power_wasted"]
             
             # PROCESS BUFFS                
             def process_buff_data(events):
@@ -884,17 +890,18 @@ class Simulation:
         # print(f"Glimmers applied: {self.paladin.glimmer_application_counter}")
         # print(f"Glimmers removed: {self.paladin.glimmer_removal_counter}")
         
-        pp.pprint(self.paladin.events)
+        
         # pp.pprint(self.paladin.target_buff_breakdown)
         # pp.pprint(average_target_buff_breakdown)
         # pp.pprint(average_aggregated_target_buff_breakdown)
         
         # pp.pprint(average_awakening_counts)
-        pp.pprint(average_holy_power_timeline)
+        # pp.pprint(average_ability_breakdown)
+        pp.pprint(self.paladin.events)
     
         end_time = time.time()
         simulation_time = end_time - start_time
         print(f"Simulation time: {simulation_time} seconds")
 
-        return average_ability_breakdown, self.elapsed_time, self.spell_icons, average_self_buff_breakdown, average_target_buff_breakdown, average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, average_tyrs_counts, average_awakening_counts, average_healing_timeline, average_mana_timeline, full_awakening_trigger_times_results, average_holy_power_timeline
+        return average_ability_breakdown, self.elapsed_time, None, average_self_buff_breakdown, average_target_buff_breakdown, average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, average_tyrs_counts, average_awakening_counts, average_healing_timeline, average_mana_timeline, full_awakening_trigger_times_results, average_holy_power_timeline
         

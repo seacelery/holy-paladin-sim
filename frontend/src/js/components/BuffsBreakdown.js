@@ -3,6 +3,52 @@ import { createBuffsLineGraph } from "./createBuffsLineGraph.js";
 import { createElement } from "./script.js";
 
 const createBuffsBreakdown = (simulationData, containerCount) => {
+    const sortTableByColumn = (table, column, asc = true) => {
+        const dirModifier = asc ? 1 : -1;
+        const tBody = table.tBodies[0];
+    
+        // select the rows
+        const rows = Array.from(tBody.querySelectorAll("tr:not(.target-sub-row)"));
+        const allSubRows = Array.from(tBody.querySelectorAll(".target-sub-row"));
+    
+        // sort the rows
+        const sortedRows = rows.sort((a, b) => {
+            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+    
+            // i'm not really sure but it stops different types from messing it up
+            if (!isNaN(parseFloat(aColText)) && !isNaN(parseFloat(bColText))) {
+                return dirModifier * (parseFloat(aColText) - parseFloat(bColText));
+            } else {
+                return dirModifier * aColText.localeCompare(bColText);
+            };
+        });
+    
+        // clear the table
+        while (tBody.firstChild) {
+            tBody.removeChild(tBody.firstChild);
+        };
+    
+        // re-add each row
+        sortedRows.forEach(mainRow => {
+            tBody.appendChild(mainRow);
+    
+            // find and append subrows belonging to the parent row
+            allSubRows.forEach(subRow => {
+                if (subRow.getAttribute('data-parent-row') === mainRow.id) {
+                    tBody.appendChild(subRow);
+                };
+            });
+        });
+    
+        // update sorting indicators
+        table.querySelectorAll("tr:first-child td").forEach(td => td.classList.remove("td-sort-asc", "td-sort-desc"));
+        table.querySelector(`tr:first-child td:nth-child(${column + 1})`).classList.toggle("td-sort-asc", asc);
+        table.querySelector(`tr:first-child td:nth-child(${column + 1})`).classList.toggle("td-sort-desc", !asc);
+    };
+    
+    let sortOrder = {};
+
     const handleTalentGraph = (talentData, prefix, talentName, colour, awakening = false) => {
         const isTalentActive = Object.values(talentData).reduce((a, b) => a + b, 0) > 0 ? true : false;
 
@@ -61,6 +107,16 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
             cell.className = `table-header`;
             cell.classList.add(`${text.toLowerCase().replaceAll(" ", "-")}-header`);
             cell.id = `${text.toLowerCase().replaceAll(" ", "-")}-header-${containerCount}`;
+
+            if (sortOrder[index] === undefined) {
+                sortOrder[index] = 'asc';
+            };
+        
+            cell.addEventListener('click', () => {
+                const isAscending = sortOrder[index] === 'asc';
+                sortTableByColumn(table, index, !isAscending);
+                sortOrder[index] = isAscending ? 'desc' : 'asc';
+            });
         });
 
         const tableBody = table.createTBody();
@@ -68,12 +124,13 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
         for (const buffName in buffsData) {
             const buffData = buffsData[buffName];
             const row = tableBody.insertRow();
+            row.id = `${buffName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}-row-${containerCount}`;
 
             const formattedBuffName = buffName
                 .toLowerCase()
                 .replace(/['()]/g, "")
                 .replace(/\s+/g, "-")
-                .replace(/-self/g, "")
+                .replace(/-self/g, "");
 
             const nameCell = row.insertCell();
             nameCell.className = "buff-table-cell-left spell-name-cell";
@@ -145,6 +202,7 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
                 for (const target in sortedTargetData) {
                     const targetData = sortedTargetData[target];
                     const row = tableBody.insertRow();
+                    row.setAttribute('data-parent-row', `${buffName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}-row-${containerCount}`);
                     
                     const nameCell = row.insertCell();
                     nameCell.className = "buff-table-sub-cell-left spell-name-cell";

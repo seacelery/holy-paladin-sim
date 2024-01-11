@@ -110,11 +110,15 @@ class Spell:
         
         self.try_trigger_rppm_effects(caster, targets, current_time)
         
-        # add spells that trigger other spells as a cast event
-        if self.name in ["Divine Toll", "Daybreak"]:
+        # add spells that trigger other spells as a cast event and don't cost mana
+        if self.name in ["Daybreak"]:
             update_spell_data_casts(caster.ability_breakdown, self.name, self.get_mana_cost(caster), self.holy_power_gain, self.holy_power_cost)
             
-        if caster.mana >= self.get_mana_cost(caster) and is_heal:  
+        # add spells that cost mana and don't heal
+        if caster.mana >= self.get_mana_cost(caster) and self.get_mana_cost(caster) > 0 and not is_heal: 
+            update_spell_data_casts(caster.ability_breakdown, self.name, self.get_mana_cost(caster), self.holy_power_gain, self.holy_power_cost)   
+        # add spells that cost mana and do heal       
+        elif caster.mana >= self.get_mana_cost(caster) and is_heal:  
             target_count = self.healing_target_count
             if target_count > 1:  
                 multi_target_healing = [f"{self.name}: ", []]            

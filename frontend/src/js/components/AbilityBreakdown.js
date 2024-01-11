@@ -1,8 +1,73 @@
-import { spellToSpellIdMap } from '../utils/spellToSpellIdMap.js';
+import { spellToIconsMap } from '../utils/spellToIconsMap.js';
 import { createHealingLineGraph } from './createHealingLineGraph.js';
 import { createElement } from './script.js';
 
 const createAbilityBreakdown = (simulationData, containerCount) => {
+    function sortTableByColumn(table, column, asc = true) {
+        const dirModifier = asc ? 1 : -1;
+        const tBody = table.tBodies[0];
+        const totalRow = tBody.querySelector('.total-values-row');
+        const totalRowParent = totalRow.parentNode;
+    
+        // remove total row
+        totalRowParent.removeChild(totalRow);
+    
+        const rows = Array.from(tBody.querySelectorAll(`tr:not(.sub-row-${containerCount}):not(.sub-sub-row-${containerCount})`));
+        const allSubRows = Array.from(tBody.querySelectorAll(`.sub-row-${containerCount}`));
+        const allSubSubRows = Array.from(tBody.querySelectorAll(`.sub-sub-row-${containerCount}`));
+    
+        // select the rows
+        const sortedRows = rows.sort((a, b) => {
+            let aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            let bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+    
+            // remove number formatting
+            aColText = aColText.replace(/,/g, '');
+            bColText = bColText.replace(/,/g, '');
+    
+            // i'm not really sure but it stops different types from messing it up
+            if (!isNaN(parseFloat(aColText)) && !isNaN(parseFloat(bColText))) {
+                return dirModifier * (parseFloat(aColText) - parseFloat(bColText));
+            } else {
+                return dirModifier * aColText.localeCompare(bColText);
+            };
+        });
+    
+        // clear the table
+        while (tBody.firstChild) {
+            tBody.removeChild(tBody.firstChild);
+        };
+    
+        // re-add each row
+        sortedRows.forEach(mainRow => {
+            tBody.appendChild(mainRow);
+    
+            // find and append subrows belonging to the parent row
+            allSubRows.forEach(subRow => {
+                if (subRow.getAttribute('data-parent-row') === mainRow.id) {
+                    tBody.appendChild(subRow);
+    
+                    // find and append sub-subrows belonging to the parent row
+                    allSubSubRows.forEach(subSubRow => {
+                        if (subSubRow.getAttribute('data-parent-row') === subRow.id) {
+                            tBody.appendChild(subSubRow);
+                        };
+                    });
+                };
+            });
+        });
+    
+        // add total values back
+        tBody.appendChild(totalRow);
+    
+        // update sorting indicators
+        table.querySelectorAll("tr:first-child td").forEach(td => td.classList.remove("td-sort-asc", "td-sort-desc"));
+        table.querySelector(`tr:first-child td:nth-child(${column + 1})`).classList.toggle("td-sort-asc", asc);
+        table.querySelector(`tr:first-child td:nth-child(${column + 1})`).classList.toggle("td-sort-desc", !asc);
+    };
+    
+    let sortOrder = {};
+
     const formatNumbers = (number) => {
         return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
@@ -24,8 +89,14 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     };
 
     // leave cells blank for certain spells
-    const excludedSpellsCasts = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Judgment of Light", "Greater Judgment", "Touch of Light", "Afterimage", "Glimmer of Light"];
-    const excludedSpellsCrit = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Crusader Strike", "Judgment", "Daybreak", "Divine Toll"];
+    // "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", 
+    const excludedSpells = ["Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)"];
+    const excludedSpellsOnlyManaAndCasts = ["Blessing of the Seasons", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring"];
+    const excludedSpellsCasts = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", 
+                                 "Judgment of Light", "Greater Judgment", "Touch of Light", "Afterimage", "Glimmer of Light", "Glimmer of Light (Glistening Radiance (Light of Dawn))",
+                                 "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)"];
+    const excludedSpellsCrit = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", 
+                                "Crusader Strike", "Judgment", "Daybreak", "Divine Toll"];
 
     const tableContainer = document.getElementById(`ability-breakdown-table-container-${containerCount}`);
     tableContainer.innerHTML = "";
@@ -46,7 +117,6 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     let sortedAbilityBreakdownData = Object.fromEntries(abilityBreakdownArray);
 
     const encounterLength = simulationData[1];
-    const abilityIcons = simulationData[2];
 
     const table = document.createElement("table");
 
@@ -70,6 +140,16 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         if (cell.id.includes(" ")) {
             cell.id = cell.id.replaceAll(" ", "-");
         };
+
+        if (sortOrder[index] === undefined) {
+            sortOrder[index] = 'asc';
+        };
+    
+        cell.addEventListener('click', () => {
+            const isAscending = sortOrder[index] === 'asc';
+            sortTableByColumn(table, index, !isAscending);
+            sortOrder[index] = isAscending ? 'desc' : 'asc';
+        });
         
         // header arrow
         cell.className = `table-header`;
@@ -179,6 +259,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     let overallCasts = 0;
     let overallManaSpent = 0;
     let overallHolyPower = 0;
+    let overallCPM = 0;
 
     // overall required for some cells in the main table
     for (const spellName in sortedAbilityBreakdownData) {
@@ -187,11 +268,17 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         overallHPS += spellData.total_healing / encounterLength;
         overallCasts += spellData.casts;
         overallManaSpent += spellData.mana_spent;
+        overallCPM += spellData.casts / (encounterLength / 60);
     };
 
     for (const spellName in sortedAbilityBreakdownData) {
+        if (excludedSpells.includes(spellName)) {
+            continue
+        };
+
         const spellData = sortedAbilityBreakdownData[spellName];
         const row = tableBody.insertRow();
+        row.id = `${spellName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}-row-${containerCount}`;
 
         const nameCell = row.insertCell();
         nameCell.className = "table-cell-left spell-name-cell";
@@ -201,7 +288,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         spellIconContainer.className = "table-spell-icon-container";
 
         const spellIcon = document.createElement("img");
-        spellIcon.src = abilityIcons[spellToSpellIdMap[spellName]];
+        spellIcon.src = spellToIconsMap[spellName];
         spellIcon.className = "table-spell-icon";
 
         // spellIconContainer.appendChild(spellIcon);
@@ -275,16 +362,28 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         
         const percentHealingCell = row.insertCell();
         percentHealingCell.className = "table-cell-right healing-percent-cell";
-        percentHealingCell.textContent = Number(formatNumbersNoRounding(((spellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
-
+        if (excludedSpellsOnlyManaAndCasts.includes(spellName)) {
+            percentHealingCell.textContent = "";
+        } else {
+            percentHealingCell.textContent = Number(formatNumbersNoRounding(((spellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
+        };
+        
         const healingCell = row.insertCell();
         healingCell.className = "table-cell-right healing-cell";
-        healingCell.textContent = formatNumbers(spellData.total_healing);
-
+        if (excludedSpellsOnlyManaAndCasts.includes(spellName)) {
+            healingCell.textContent = "";
+        } else {
+            healingCell.textContent = formatNumbers(spellData.total_healing);
+        };
+        
         const HPSCell = row.insertCell();
         HPSCell.className = "table-cell-right HPS-cell";
-        HPSCell.textContent = formatNumbers(spellData.total_healing / encounterLength);
-
+        if (excludedSpellsOnlyManaAndCasts.includes(spellName)) {
+            HPSCell.textContent = "";
+        } else {
+            HPSCell.textContent = formatNumbers(spellData.total_healing / encounterLength);
+        };
+        
         const castsCell = row.insertCell();
         castsCell.className = "table-cell-right";
 
@@ -300,6 +399,8 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
         if (excludedSpellsCasts.includes(spellName)) {
             avgCastsCell.textContent = formatNumbers(spellData.total_healing / spellData.hits);
+        } else if (excludedSpellsOnlyManaAndCasts.includes(spellName)) {
+            avgCastsCell.textContent = "";
         } else {
             avgCastsCell.textContent = formatNumbers(spellData.total_healing / spellData.casts);
         };
@@ -310,7 +411,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
         const critPercentCell = row.insertCell();
         critPercentCell.className = "table-cell-right";
-        if (excludedSpellsCrit.includes(spellName)) {
+        if (excludedSpellsCrit.includes(spellName) || excludedSpellsOnlyManaAndCasts.includes(spellName)) {
             critPercentCell.textContent = "";
         } else {
             critPercentCell.textContent = (spellData.crit_percent).toFixed(1) + "%";
@@ -358,6 +459,8 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
                 sourceSpellRow.className = sourceSpellRow.className.replaceAll("--", "-");
                 sourceSpellRow.className = sourceSpellRow.className + `-${containerCount}`;
                 sourceSpellRow.classList.add(`sub-row-${containerCount}`);
+                sourceSpellRow.id = `${sourceSpellName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}-row-${containerCount}`;
+                sourceSpellRow.setAttribute('data-parent-row', `${spellName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}-row-${containerCount}`);
                 sourceSpellRow.setAttribute("visibility", "hidden");
                 // subRow.style.display = "none";
 
@@ -376,7 +479,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
                 formattedSubSpellName = "Glimmer of Light";
             };
 
-            spellIcon.src = abilityIcons[spellToSpellIdMap[formattedSubSpellName]];
+            spellIcon.src = spellToIconsMap[formattedSubSpellName];
             spellIcon.className = "table-spell-icon";
 
             // spellIconContainer.appendChild(spellIcon);
@@ -429,6 +532,10 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
         // SUB SPELLS
         for (const subSpellName in spellData["sub_spells"]) {
+            if (excludedSpells.includes(subSpellName)) {
+                continue
+            };
+
             const subSpellData = spellData["sub_spells"][subSpellName];
             const subRow = tableBody.insertRow();
             subRow.style.display = "none";
@@ -437,6 +544,8 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             subRow.className = subRow.className.replaceAll("--", "-");
             subRow.className = subRow.className + `-${containerCount}`
             subRow.classList.add(`sub-row-${containerCount}`);
+            subRow.id = `${subSpellName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}-row-${containerCount}`;
+            subRow.setAttribute('data-parent-row', `${spellName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}-row-${containerCount}`);
             subRow.setAttribute("visibility", "hidden");
             
             const nameCell = subRow.insertCell();
@@ -454,7 +563,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
                 formattedSubSpellName = "Glimmer of Light";
             };
 
-            spellIcon.src = abilityIcons[spellToSpellIdMap[formattedSubSpellName]];
+            spellIcon.src = spellToIconsMap[formattedSubSpellName];
             spellIcon.className = "table-spell-icon";
 
             // spellIconContainer.appendChild(spellIcon);
@@ -499,15 +608,28 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
             const percentHealingCell = subRow.insertCell();
             percentHealingCell.className = "table-sub-cell-right healing-percent-cell";
-            percentHealingCell.textContent = Number(formatNumbersNoRounding(((subSpellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
-
+            if (excludedSpellsOnlyManaAndCasts.includes(subSpellName)) {
+                percentHealingCell.textContent = "";
+            } else {
+                percentHealingCell.textContent = Number(formatNumbersNoRounding(((subSpellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
+            };
+            
             const healingCell = subRow.insertCell();
             healingCell.className = "table-sub-cell-right healing-cell";
-            healingCell.textContent = formatNumbers(subSpellData.total_healing);
+            if (excludedSpellsOnlyManaAndCasts.includes(subSpellName)) {
+                healingCell.textContent = "";
+            } else {
+                healingCell.textContent = formatNumbers(subSpellData.total_healing);
+            };
 
             const HPSCell = subRow.insertCell();
             HPSCell.className = "table-sub-cell-right HPS-cell";
-            HPSCell.textContent = formatNumbers(subSpellData.total_healing / encounterLength);
+            if (excludedSpellsOnlyManaAndCasts.includes(subSpellName)) {
+                HPSCell.textContent = "";
+            } else {
+                HPSCell.textContent = formatNumbers(subSpellData.total_healing / encounterLength);
+
+            };
 
             const castsCell = subRow.insertCell();
             castsCell.className = "table-sub-cell-right";
@@ -522,8 +644,10 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             const avgCastsCell = subRow.insertCell();
             avgCastsCell.className = "table-sub-cell-right";
 
-            if (excludedSpellsCasts.includes(subSpellName)) {
+            if (excludedSpellsCasts.includes(subSpellName) ) {
                 avgCastsCell.textContent = formatNumbers(subSpellData.total_healing / subSpellData.hits);
+            } else if (excludedSpellsOnlyManaAndCasts.includes(subSpellName)) {
+                avgCastsCell.textContent = "";
             } else {
                 avgCastsCell.textContent = formatNumbers(subSpellData.total_healing / subSpellData.casts);
             };
@@ -535,7 +659,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             const critPercentCell = subRow.insertCell();
             critPercentCell.className = "table-sub-cell-right";
 
-            if (excludedSpellsCrit.includes(subSpellName)) {
+            if (excludedSpellsCrit.includes(subSpellName) || (excludedSpellsOnlyManaAndCasts.includes(subSpellName))) {
                 critPercentCell.textContent = "";
             } else {
                 critPercentCell.textContent = (subSpellData.crit_percent).toFixed(1) + "%";
@@ -584,6 +708,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
                 subRow.className = subRow.className + `-${containerCount}`
                 subRow.classList.add(spellName.toLowerCase().replaceAll(/\s|\(|\)/g, "-").replaceAll("--", "-") + "-subrow");
                 subRow.classList.add(`sub-sub-row-${containerCount}`);
+                subRow.setAttribute('data-parent-row', `${subSpellName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}-row-${containerCount}`);
                 
                 const nameCell = subRow.insertCell();
                 nameCell.className = "table-sub-sub-cell-left spell-name-cell sub-sub-cell";
@@ -600,7 +725,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
                     formattedSubSubSpellName = "Glimmer of Light";
                 };
 
-                spellIcon.src = abilityIcons[spellToSpellIdMap[formattedSubSubSpellName]];
+                spellIcon.src = spellToIconsMap[formattedSubSubSpellName];
                 spellIcon.className = "table-spell-icon";
 
                 // spellIconContainer.appendChild(spellIcon);
@@ -680,6 +805,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
     // bottom row
     const row = tableBody.insertRow();
+    row.classList.add("total-values-row");
     const overallHealingTextCell = row.insertCell(0);
     overallHealingTextCell.className = "table-cell-bottom-left";
     overallHealingTextCell.textContent = "Total";
@@ -726,8 +852,11 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     overallHolyPowerCell.id = `overall-holy-power-cell-${containerCount}`;
     overallHolyPowerCell.className = "table-cell-bottom-right";
 
-    const cell10 = row.insertCell(10);
-    cell10.className = "table-cell-bottom-right";
+    const overallCPMCell = row.insertCell(10);
+    overallCPMCell.id = `overall-CPM-cell-${containerCount}`;
+    overallCPMCell.className = "table-cell-bottom-right";
+    overallCPMCell.textContent = overallCPM.toFixed(1);
+    overallCPMCell.style.fontWeight = 500;
 
     // append
     tableContainer.appendChild(table);

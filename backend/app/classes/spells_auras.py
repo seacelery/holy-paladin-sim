@@ -2,7 +2,7 @@ import random
 
 from .spells import Spell
 from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring
-from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts
+from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts, update_spell_data_initialise_spell
 
 # APPLIES BUFFS   
 
@@ -21,7 +21,6 @@ class TyrsDeliveranceSpell(Spell):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             caster.apply_buff_to_self(TyrsDeliveranceSelfBuff(), current_time)
-            update_spell_data_casts(caster.ability_breakdown, self.name, mana_spent=self.get_mana_cost(caster))
             
             for _ in range(5):
                 target = [random.choice(caster.potential_healing_targets)]
@@ -96,10 +95,15 @@ class BlessingOfTheSeasons(Spell):
     
     def __init__(self, caster):
         super().__init__("Blessing of Summer", mana_cost=BlessingOfTheSeasons.MANA_COST, cooldown=BlessingOfTheSeasons.BASE_COOLDOWN)
+        self.initial_cast = True
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
+            if self.initial_cast:
+                update_spell_data_initialise_spell(caster.ability_breakdown, "Blessing of the Seasons")
+                self.initial_cast = False
+            
             caster.events.append(f"{format_time(current_time)}: {self.name} cast on {caster.name}")
             if self.name == "Blessing of Summer":
                 caster.apply_buff_to_self(BlessingOfSummer(), current_time)
@@ -116,6 +120,7 @@ class BlessingOfTheSeasons(Spell):
             elif self.name == "Blessing of Spring":
                 caster.apply_buff_to_self(BlessingOfSpring(), current_time)
                 self.name = "Blessing of Summer"
+                self.initial_cast = True
                 
 # class BlessingOfSummer(Spell):
 #     SPELL_ID = 388007

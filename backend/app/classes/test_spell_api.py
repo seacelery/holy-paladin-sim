@@ -49,10 +49,10 @@ client_id = "57cdb961fae04b8f9dc4d3caea3716db"
 client_secret = "rIIdFk2In9dQfBUxbPmH6ee4DDDO6oUV"
 access_token = get_access_token(client_id, client_secret)
 
-# spell_ids = [200482]
-# for id in spell_ids:
-#     icon = get_spell_icon_data(access_token, id)
-#     print(icon)
+spell_ids = [20473,85222,85673,287269,375576,53563,82326,19750,114158,35395,20271,414127,392902,403042,183778,231644,385349,]
+for id in spell_ids:
+    icon = get_icon_from_spell_info(access_token, id)
+    print(icon)
 
 # achievement_ids = [8845]
 # for id in achievement_ids:
@@ -61,5 +61,5 @@ access_token = get_access_token(client_id, client_secret)
 
 # print(get_spell_info(access_token, 53576))
 
-pp.pprint(get_item_info(access_token, 207170))
+# pp.pprint(get_item_info(access_token, 207170))
 # print(get(access_token, "https://eu.api.blizzard.com/data/wow/media/item/210692?namespace=static-10.2.0_51825-eu"))
