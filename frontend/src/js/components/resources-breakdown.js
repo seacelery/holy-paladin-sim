@@ -1,4 +1,4 @@
-import { createElement } from "./script.js";
+import { createElement } from "./index.js";
 import { createResourceGraph } from "./create-resource-line-graph.js";
 import { spellToIconsMap } from "../utils/spell-to-icons-map.js";
 

@@ -1,6 +1,6 @@
 import { buffsToIconsMap } from "../utils/buffs-to-icons-map.js";
 import { createBuffsLineGraph } from "./create-buffs-line-graph.js";
-import { createElement } from "./script.js";
+import { createElement } from "./index.js";
 
 const createBuffsBreakdown = (simulationData, containerCount) => {
     const sortTableByColumn = (table, column, asc = true) => {

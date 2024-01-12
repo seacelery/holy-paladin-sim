@@ -1,6 +1,6 @@
 import { spellToIconsMap } from '../utils/spell-to-icons-map.js';
 import { createHealingLineGraph } from './create-healing-line-graph.js';
-import { createElement } from './script.js';
+import { createElement } from './index.js';
 
 const createAbilityBreakdown = (simulationData, containerCount) => {    
     const sortTableByColumn = (table, column, asc = true) => {
