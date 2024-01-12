@@ -82,7 +82,7 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
             talentTab.style.display = "block";
             talentGraph.innerHTML = "";
 
-            createBuffsLineGraph(talentData, `#${prefix}-graph-${containerCount}`, talentName, colour, awakening, simulationData[12], simulationData);
+            createBuffsLineGraph(talentData, `#${prefix}-graph-${containerCount}`, talentName, colour, awakening, simulationData.results.awakening_triggers, simulationData);
         } else if (!isTalentActive) {
             talentTab.style.display = "none";
             talentTab.classList.remove("active");
@@ -269,7 +269,7 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
 
     const buffsTabContainer = createElement("div", "buffs-tab-container", null);
     const paladinBuffsTab = createElement("div", "buffs-tab", `paladin-buffs-tab`);
-    paladinBuffsTab.textContent = simulationData[6];
+    paladinBuffsTab.textContent = simulationData.simulation_details.paladin_name;
     const selfBuffsTableContainer = createElement("div", null, `self-buffs-breakdown-table-container`);
     buffsTabContainer.appendChild(paladinBuffsTab);
     buffsTabContainer.appendChild(selfBuffsTableContainer);
@@ -297,7 +297,7 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
     const glimmerContent = createElement("div", `buffs-line-graph-tab-content-${containerCount}`, `glimmer-content`);
     const glimmerGraph = createElement("div", null, `glimmer-graph`);
     glimmerGraph.innerHTML = "";
-    const glimmerCountData = simulationData[7];
+    const glimmerCountData = simulationData.results.glimmer_counts;
     
     glimmerContent.appendChild(glimmerGraph);
     targetBuffsTabContainer.appendChild(glimmerContent);
@@ -314,15 +314,15 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
 
     buffTablesContainer.appendChild(targetBuffsTabContainer);
 
-    const selfBuffsData = simulationData[3];
-    const individualTargetBuffsData = simulationData[4];
-    const combinedTargetBuffsData = simulationData[5];
+    const selfBuffsData = simulationData.results.self_buff_breakdown;
+    const individualTargetBuffsData = simulationData.results.target_buff_breakdown;
+    const combinedTargetBuffsData = simulationData.results.aggregated_target_buff_breakdown;
     
     createBuffsTable(selfBuffsTableContainer, selfBuffsData, true);
     createBuffsTable(targetBuffsTableContainer, combinedTargetBuffsData, false, individualTargetBuffsData);
 
-    const tyrsCountData = simulationData[8];
-    const awakeningCountData = simulationData[9];
+    const tyrsCountData = simulationData.results.tyrs_counts;
+    const awakeningCountData = simulationData.results.awakening_counts;
 
     // add tracking for other talents only if the talent is active
     createBuffsLineGraph(glimmerCountData, `#glimmer-graph-${containerCount}`, "Glimmer of Light", "rgb(206, 163, 106)");

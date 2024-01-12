@@ -122,8 +122,9 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
     const tableContainer = document.getElementById(`ability-breakdown-table-container-${containerCount}`);
     tableContainer.innerHTML = "";
-    const healingTimelineData = simulationData[10];
-    const manaTimelineData = simulationData[11];
+    console.log(simulationData)
+    const healingTimelineData = simulationData.results.healing_timeline;
+    const manaTimelineData = simulationData.results.mana_timeline;
     const healingGraphContainer = createElement("div", `healing-graph-container-${containerCount}`, `healing-graph-content`);
     const healingGraph = createElement("div", null, `healing-graph`);
 
@@ -133,12 +134,12 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     createHealingLineGraph(healingTimelineData, manaTimelineData, `#healing-graph-${containerCount}`, "Healing", "var(--healing-font)");
 
     // convert to array and back to sort the data by healing
-    const abilityBreakdownData = simulationData[0];
+    const abilityBreakdownData = simulationData.results.ability_breakdown;
     let abilityBreakdownArray = Object.entries(abilityBreakdownData);
     abilityBreakdownArray.sort((a, b) => b[1].total_healing - a[1].total_healing);
     let sortedAbilityBreakdownData = Object.fromEntries(abilityBreakdownArray);
 
-    const encounterLength = simulationData[1];
+    const encounterLength = simulationData.simulation_details.encounter_length;
 
     const table = document.createElement("table");
 

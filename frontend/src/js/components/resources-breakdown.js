@@ -117,13 +117,13 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
     manaGraphContainer.appendChild(manaGraph);
     manaBreakdown.appendChild(manaGraphContainer);
 
-    const manaTimelineData = simulationData[11];
+    const manaTimelineData = simulationData.results.mana_timeline;
     createResourceGraph(manaTimelineData, `#mana-graph-${containerCount}`, "Mana", "var(--mana)");
 
     holyPowerGraphContainer.appendChild(holyPowerGraph);
     holyPowerBreakdown.appendChild(holyPowerGraphContainer);
 
-    const holyPowerTimelineData = simulationData[13];
+    const holyPowerTimelineData = simulationData.results.holy_power_timeline;
     createResourceGraph(holyPowerTimelineData, `#holy-power-graph-${containerCount}`, "Holy Power", "var(--holy-font");
 
     const createArrowIcon = (spellName = null) => {
@@ -479,8 +479,8 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
         return table;
     };
 
-    let manaTable = createResourceTable(simulationData[0], ["Spell Name", "Mana Gained", "Mana Spent"]);
-    let holyPowerTable = createResourceTable(simulationData[0], ["Spell Name", "Holy Power Gained", "Holy Power Wasted", "Holy Power Spent"]);
+    let manaTable = createResourceTable(simulationData.results.ability_breakdown, ["Spell Name", "Mana Gained", "Mana Spent"]);
+    let holyPowerTable = createResourceTable(simulationData.results.ability_breakdown, ["Spell Name", "Holy Power Gained", "Holy Power Wasted", "Holy Power Spent"]);
 
     const manaTableWrapper = createElement("div", "table-wrapper", `mana-table-wrapper-${containerCount}`);
     manaTableWrapper.appendChild(manaTable);

@@ -898,10 +898,32 @@ class Simulation:
         # pp.pprint(average_awakening_counts)
         # pp.pprint(average_ability_breakdown)
         pp.pprint(self.paladin.events)
+        
+        full_results = {
+            "healing_timeline": average_healing_timeline,
+            "mana_timeline": average_mana_timeline,
+            "holy_power_timeline": average_holy_power_timeline,
+            "ability_breakdown": average_ability_breakdown,
+            "self_buff_breakdown": average_self_buff_breakdown,
+            "target_buff_breakdown": average_target_buff_breakdown,
+            "aggregated_target_buff_breakdown": average_aggregated_target_buff_breakdown,
+            "glimmer_counts": average_glimmer_counts,
+            "tyrs_counts": average_tyrs_counts,
+            "awakening_counts": average_awakening_counts,
+            "awakening_triggers": full_awakening_trigger_times_results
+        }
+        
+        simulation_details = {
+            "encounter_length": self.encounter_length,
+            "paladin_name": self.paladin.name,
+        }
     
         end_time = time.time()
         simulation_time = end_time - start_time
         print(f"Simulation time: {simulation_time} seconds")
 
-        return average_ability_breakdown, self.elapsed_time, None, average_self_buff_breakdown, average_target_buff_breakdown, average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, average_tyrs_counts, average_awakening_counts, average_healing_timeline, average_mana_timeline, full_awakening_trigger_times_results, average_holy_power_timeline
+        # average_ability_breakdown, self.elapsed_time, None, average_self_buff_breakdown, average_target_buff_breakdown, 
+        # average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, 
+        # average_tyrs_counts, average_awakening_counts, average_healing_timeline, average_mana_timeline, full_awakening_trigger_times_results, average_holy_power_timeline
+        return {"results": full_results, "simulation_details": simulation_details}
         
