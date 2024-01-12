@@ -1,6 +1,6 @@
-import { baseClassTalents, baseSpecTalents } from "../utils/BaseTalents.js";
+import { baseClassTalents, baseSpecTalents } from "../utils/base-talents.js";
 import { updateCharacter } from "./script.js";
-import { talentsToIcons } from "../utils/talentsToIconsMap.js";
+import { talentsToIcons } from "../utils/talents-to-icons-map.js";
 
 const classTalents = [
     "", "Lay on Hands", "", "Blessing of Freedom", "", "Hammer of Wrath", "",

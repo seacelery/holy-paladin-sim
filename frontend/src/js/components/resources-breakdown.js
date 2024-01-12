@@ -1,6 +1,6 @@
 import { createElement } from "./script.js";
-import { createResourceGraph } from "./createResourceGraph.js";
-import { spellToIconsMap } from "../utils/spellToIconsMap.js";
+import { createResourceGraph } from "./create-resource-line-graph.js";
+import { spellToIconsMap } from "../utils/spell-to-icons-map.js";
 
 const createResourcesBreakdown = (simulationData, containerCount) => {
     const sortTableByColumn = (table, column, asc = true, headerNames) => {
@@ -482,8 +482,13 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
     let manaTable = createResourceTable(simulationData[0], ["Spell Name", "Mana Gained", "Mana Spent"]);
     let holyPowerTable = createResourceTable(simulationData[0], ["Spell Name", "Holy Power Gained", "Holy Power Wasted", "Holy Power Spent"]);
 
-    manaBreakdown.appendChild(manaTable);
-    holyPowerBreakdown.appendChild(holyPowerTable);
+    const manaTableWrapper = createElement("div", "table-wrapper", `mana-table-wrapper-${containerCount}`);
+    manaTableWrapper.appendChild(manaTable);
+    manaBreakdown.appendChild(manaTableWrapper);
+
+    const holyPowerTableWrapper = createElement("div", "table-wrapper", `holy-power-table-wrapper-${containerCount}`);
+    holyPowerTableWrapper.appendChild(holyPowerTable);
+    holyPowerBreakdown.appendChild(holyPowerTableWrapper);
 };
 
 export { createResourcesBreakdown };

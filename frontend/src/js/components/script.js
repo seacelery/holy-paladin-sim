@@ -1,20 +1,21 @@
 // TO DOS
 // colour spell names by spell type
 
-import { createAbilityBreakdown } from "./AbilityBreakdown.js";
-import { createBuffsBreakdown } from "./BuffsBreakdown.js";
-import { createResourcesBreakdown } from "./ResourcesBreakdown.js";
-import { handleTabs } from "./SimulationOptionsTabs.js";
-import { setSimulationOptionsFromImportedData } from "./SimulationOptions.js";
-import { createTalentGrid, updateTalentsFromImportedData } from "./TalentGrid.js";
+import { createAbilityBreakdown } from "./ability-breakdown.js";
+import { createBuffsBreakdown } from "./buffs-breakdown.js";
+import { createResourcesBreakdown } from "./resources-breakdown.js";
+import { createPriorityBreakdown } from "./priority-breakdown.js";
+import { handleTabs } from "./simulation-options-tabs.js";
+import { setSimulationOptionsFromImportedData } from "./simulation-options.js";
+import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
 
 // window.addEventListener("mouseover", (e) => {
 //     console.log(e.target)
 // })
 
-window.addEventListener("click", (e) => {
-    console.log(e.target)
-})
+// window.addEventListener("click", (e) => {
+//     console.log(e.target)
+// })
 
 const socket = io('http://localhost:5000');
 
@@ -117,10 +118,6 @@ const updateCharacter = async (data) => {
     .catch(error => console.error("Error:", error));
 };
 
-const convertToJSON = (data) => {
-    return JSON.stringify(data, null, 2)
-};
-
 const playCheckmarkAnimation = () => {
     document.querySelector('.simulation-progress-bar-checkmark-circle').classList.add('animate-circle');
     document.querySelector('.simulation-progress-bar-checkmark-check').classList.add('animate-check');
@@ -181,16 +178,59 @@ const createElement = (elementName, className = null, id = null) => {
 const createSimulationResults = (simulationData) => {
     containerCount++;
 
+    const simulationContainer = createElement("div", "simulation-container", "simulation-container");
     const resultContainer = createElement("div", "single-result-container", "single-result-container");
 
     // create simulation header
     const resultHeader = createElement("div", "result-header", "result-header");
-    resultHeader.textContent = simulatioName.value;
-    console.log(containerCount)
+
+    // make collapsible with arrows
+    const resultArrowIconContainer = createElement("div", `result-arrow-container`, null);
+    const resultArrowIcon = createElement("i", `fa-solid fa-sort-down result-arrow-icon`, null);
+    resultArrowIconContainer.appendChild(resultArrowIcon);
+    resultArrowIconContainer.addEventListener("click", (e) => {
+        if (resultArrowIcon.classList.contains("fa-sort-down")) {
+            resultArrowIcon.classList.remove("fa-sort-down");
+            resultArrowIcon.classList.add("fa-caret-right");
+            resultContainer.style.display = "none";
+            resultHeader.style.display = "flex";
+        } else if (resultArrowIcon.classList.contains("fa-caret-right")) {
+            resultArrowIcon.classList.remove("fa-caret-right");
+            resultArrowIcon.classList.add("fa-sort-down");
+            resultContainer.style.display = "block";
+        };
+    });
+    resultHeader.appendChild(resultArrowIconContainer);
+
+    // auto-generate new title if no input given
+    const resultText = createElement("div", `result-text-${containerCount}`, null);
+    resultText.textContent = simulatioName.value;
     if (simulatioName.value.includes (`Simulation ${containerCount}`)) {
         simulatioName.value = `Simulation ${containerCount + 1}`;
     };
-    resultContainer.appendChild(resultHeader);
+
+    // allow editing of title
+    resultText.addEventListener("click", function() {
+        this.setAttribute("contenteditable", "true");
+        this.focus();
+    });
+    
+    // stop editing when you click outside
+    resultText.addEventListener("blur", function() {
+        this.removeAttribute("contenteditable");
+    });
+    resultHeader.appendChild(resultText);
+
+    // add a delete option
+    const resultRemoveContainer = createElement("div", `result-remove-container`, null);
+    const resultRemoveIcon = createElement("i", `fa-solid fa-xmark result-remove-icon`, null);
+    resultRemoveContainer.appendChild(resultRemoveIcon);
+    resultRemoveContainer.addEventListener("click", () => {
+        simulationContainer.remove();
+    });
+    resultHeader.appendChild(resultRemoveContainer);
+
+    simulationContainer.appendChild(resultHeader);
 
     // create the navbar and tabs
     const resultsNavbar = createElement("nav", null, "results-navbar");
@@ -201,10 +241,13 @@ const createSimulationResults = (simulationData) => {
     buffsWindowTab.textContent = "Buffs";
     const resourcesTab = createElement("div", `results-tab-${containerCount} inactive`, "resources-tab");
     resourcesTab.textContent = "Resources";
+    const priorityTab = createElement("div", `results-tab-${containerCount} inactive`, "priority-tab");
+    priorityTab.textContent = "Priority";
 
     resultsNavbar.appendChild(healingTab);
     resultsNavbar.appendChild(buffsWindowTab);
     resultsNavbar.appendChild(resourcesTab);
+    resultsNavbar.appendChild(priorityTab);
     resultContainer.appendChild(resultsNavbar);
 
     // create content windows
@@ -230,16 +273,26 @@ const createSimulationResults = (simulationData) => {
     resourcesContent.appendChild(resourcesBreakdown);
     resultContainer.appendChild(resourcesContent);
 
+    // priority breakdown
+    const priorityContent = createElement("div", `results-tab-content-${containerCount}`, "priority-content");
+    const priorityBreakdown = createElement("div", null, "priority-breakdown-table-container");
+
+    priorityContent.appendChild(priorityBreakdown);
+    resultContainer.appendChild(priorityContent);
+
+    simulationContainer.appendChild(resultContainer);
+
     const firstChild = fullResultsContainer.firstChild;
     if (firstChild) {
-        fullResultsContainer.insertBefore(resultContainer, firstChild);
+        fullResultsContainer.insertBefore(simulationContainer, firstChild);
     } else {
-        fullResultsContainer.appendChild(resultContainer);
+        fullResultsContainer.appendChild(simulationContainer);
     };
 
     createAbilityBreakdown(simulationData, containerCount);
     createBuffsBreakdown(simulationData, containerCount);
     createResourcesBreakdown(simulationData, containerCount);
+    createPriorityBreakdown(simulationData, containerCount);
 
     // initialise tabs within the results
     handleTabs(`results-navbar-${containerCount}`, `results-tab-content-${containerCount}`, containerCount);

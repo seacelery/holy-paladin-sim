@@ -13,6 +13,9 @@
     --light-font-colour: white;
     --dark-font-colour: rgb(0, 0, 0);
     --green-font: rgb(101, 214, 129);
+    --red-font: rgb(214, 96, 96);
+    --red-font-hover: rgb(209, 119, 119);
+    --red-font-active: rgb(214, 75, 75);
     --progress-bar-font: rgb(92, 172, 76);
     --healing-font: #d8fdd8;
     --holy-font: #f4f8cd;
@@ -23,6 +26,8 @@
     --mana: #76afdd;
 
     --subrow-arrow-colour: #cca1ddc9;
+    --subrow-arrow-colour-hover: #c8add3c9;
+    --subrow-arrow-colour-active: #c790ddc9;
     --sorting-arrow-colour: #91fcd8c9;
 }
 
@@ -550,22 +555,92 @@ input:focus {
     display: flex;
     justify-content: left;
     align-items: center;
+    position: relative;
     
-    margin-top: 40px;
+    margin-top: 15px;
     margin-bottom: 15px;
-    padding-left: 20px;
+    padding-left: 10px;
 
     width: 100%;
     height: 50px;
 
     border: 1px solid var(--border-colour-3);
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-radius: 3px;
 
     font-size: 18px;
     color: var(--light-font-colour);
     background-color: var(--panel-colour-6);
+}
+
+.result-arrow-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+
+    width: 30px;
+    height: 100%;
+
+    color: var(--subrow-arrow-colour);
+    font-size: 24px;
+}
+
+.result-arrow-container:hover {
+    cursor: pointer;
+    user-select: none;
+}
+
+.result-arrow-container:hover, .table-header-arrows:hover, .table-arrows:hover {
+    color: var(--subrow-arrow-colour-hover);
+}
+
+.result-arrow-container:active, .table-header-arrows:active, .table-arrows:active {
+    color: var(--subrow-arrow-colour-active);
+}
+
+.result-arrow-icon.fa-caret-right {
+    transform: translateY(-4px);
+}
+
+.result-arrow-icon.fa-sort-down {
+    transform: translateY(-4px);
+}
+
+[class*="result-text"] {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    word-wrap: break-word;
+    padding: 1px 5px 0 5px;
+
+    min-width: 150px;
+    height: 60%;
+}
+
+.result-remove-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    margin-left: auto;
+
+    width: 30px;
+    height: 100%;
+
+    font-size: 26px;
+    color: var(--red-font);
+}
+
+.result-remove-container:hover {
+    cursor: pointer;
+
+    color: var(--red-font-hover);
+}
+
+.result-remove-container:active {
+    cursor: pointer;
+
+    color: var(--red-font-active);
 }
 
 [id^="results-navbar-"] {
@@ -593,7 +668,7 @@ input:focus {
     background-color: var(--panel-colour-6);
 }
 
-[id^="healing-tab-"], [id^="buffs-window-tab-"], [id^="resources-tab-"] {
+[id^="healing-tab-"], [id^="buffs-window-tab-"], [id^="resources-tab-"], [id^="priority-tab"] {
     border-bottom: none;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
@@ -623,16 +698,18 @@ input:focus {
 }
 
 [id^="ability-breakdown-table-container-"] {
-
     margin: 0 auto 0px auto;
     display: none;
 
     width: 100%;
-    border-radius: 3px;
-    border-top-left-radius: 0px;
     overflow: hidden;
 
     color: var(--light-font-colour);
+}
+
+.table-wrapper {
+    overflow: hidden;
+    border-radius: 3px;
 }
 
 table {
@@ -647,6 +724,15 @@ tr {
 
 [id^="table-headers-"] {
     font-size: 17px;
+    border-radius: 30px;
+}
+
+#table-headers-2 tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+#table-headers-2 tr:first-child th:last-child {
+    border-top-right-radius: 10px;
 }
 
 .table-header {
@@ -872,11 +958,6 @@ tr {
     height: 20px;
 }
 
-/* .table-icon-container .fa-sort-down {
-    transform: translateY(-5px);
-    transform: translateX(-10px);
-} */
-
 .table-icon-container:hover {
     cursor: pointer;
     user-select: none;
@@ -949,7 +1030,7 @@ tr {
     background-color: var(--panel-colour);
 }
 
-[id^="overall-healing-percent-cell-"], [id^="overall-mana-gained-cell-"], [id^="overall-holy-power-gained-cell-"], [id^="overall-holy-power-spent-cell-"], [id^="overall-holy-power-wasted-cell-"] {
+[id^="overall-healing-percent-cell-"], [id^="overall-mana-gained-cell-"], [id^="overall-holy-power-gained-cell-"], [id^="overall-holy-power-spent-cell-"], [id^="overall-holy-power-wasted-cell-"], [id^="overall-CPM-cell"] {
     border-left: 1px solid var(--border-colour-3);
 }
 
@@ -1240,9 +1321,8 @@ tr {
 
 .resources-table-cell-left {
     padding-left: 5px;
-    margin-left: -1px;
 
-    min-width: 250px;
+    min-width: 300px;
     height: 35px;
 
     font-weight: 300;
@@ -1255,7 +1335,7 @@ tr {
     position: relative;
     padding-left: 5px;
 
-    min-width: 250px;
+    min-width: 300px;
     height: 35px;
 
     font-weight: 300;
@@ -1267,7 +1347,7 @@ tr {
 .resources-table-cell-bottom-left {
     padding-left: 6px;
 
-    min-width: 250px;
+    min-width: 300px;
     height: 35px;
     
     border-top: 1px solid var(--border-colour-3);
@@ -1278,6 +1358,10 @@ tr {
     font-size: 17px;
 
     background-color: var(--panel-colour);
+}
+
+[id*="holy-power-breakdown-container"] {
+    margin-left: 5px;
 }
 
 .holy-power-gained-cell {

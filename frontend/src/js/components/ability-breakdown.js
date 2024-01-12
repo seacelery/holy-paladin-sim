@@ -1,5 +1,5 @@
-import { spellToIconsMap } from '../utils/spellToIconsMap.js';
-import { createHealingLineGraph } from './createHealingLineGraph.js';
+import { spellToIconsMap } from '../utils/spell-to-icons-map.js';
+import { createHealingLineGraph } from './create-healing-line-graph.js';
 import { createElement } from './script.js';
 
 const createAbilityBreakdown = (simulationData, containerCount) => {    
@@ -892,7 +892,9 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     overallCPMCell.style.fontWeight = 500;
 
     // append
-    tableContainer.appendChild(table);
+    const tableWrapper = createElement("div", "table-wrapper", `ability-table-wrapper-${containerCount}`);
+    tableWrapper.appendChild(table);
+    tableContainer.appendChild(tableWrapper);
     tableContainer.style.display = "block";
 };
 

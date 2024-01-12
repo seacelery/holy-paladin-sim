@@ -1,5 +1,5 @@
-import { buffsToIconsMap } from "../utils/buffsToIconsMap.js";
-import { createBuffsLineGraph } from "./createBuffsLineGraph.js";
+import { buffsToIconsMap } from "../utils/buffs-to-icons-map.js";
+import { createBuffsLineGraph } from "./create-buffs-line-graph.js";
 import { createElement } from "./script.js";
 
 const createBuffsBreakdown = (simulationData, containerCount) => {
