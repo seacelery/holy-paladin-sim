@@ -313,3 +313,8 @@ def update_target_buff_data(buff_breakdown, buff_name, current_time, event_type,
         },
         "target": target
     })
+    
+def update_priority_breakdown(priority_breakdown, caster, current_time, priority_list_number, spell_name, player_active_auras, resources, heal=None, is_crit=None, target_active_auras=None):
+    if caster.last_iteration:
+        priority_breakdown[current_time] = {"priority_list_number": priority_list_number, "spell_name": spell_name, "player_active_auras": player_active_auras,
+                                            "resources": resources, "heal": heal, "is_crit": is_crit, "target_active_auras": target_active_auras}

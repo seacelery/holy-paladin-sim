@@ -159,6 +159,7 @@ class Paladin:
         self.average_raid_health_percentage = 0.7
         
         # for results output only
+        self.last_iteration = False
         self.ability_breakdown = {}
         self.self_buff_breakdown = []
         self.target_buff_breakdown = []
@@ -171,6 +172,7 @@ class Paladin:
         self.holy_power_timeline = {0: 0}
         self.mana_breakdown = {}
         self.holy_power_breakdown = {}
+        self.priority_breakdown = {}
         
         self.initial_state = copy.deepcopy(self)
     

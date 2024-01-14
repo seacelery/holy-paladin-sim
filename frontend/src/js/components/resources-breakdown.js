@@ -215,7 +215,7 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
                 row.id = `${spellName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}-row-${containerCount}`;
 
                 const nameCell = row.insertCell();
-                nameCell.className = "table-cell-left spell-name-cell";
+                nameCell.className = "table-cell-left spell-name-cell resources-mana-cell";
 
                 // spell icon
                 const spellIcon = document.createElement("img");

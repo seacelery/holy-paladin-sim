@@ -133,6 +133,8 @@ body {
 
     border-bottom: 1px solid var(--border-colour-3);
     border-radius: 3px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 
     background-color: var(--background-colour);
 }
@@ -724,20 +726,11 @@ tr {
 
 [id^="table-headers-"] {
     font-size: 17px;
-    border-radius: 30px;
-}
-
-#table-headers-2 tr:first-child th:first-child {
-    border-top-left-radius: 10px;
-}
-
-#table-headers-2 tr:first-child th:last-child {
-    border-top-right-radius: 10px;
 }
 
 .table-header {
     position: relative;
-    padding: 5px 5px 5px 10px;
+    padding: 5px 5px 5px 5px;
 
     min-width: 75px;
     height: 60px;
@@ -767,7 +760,6 @@ tr {
 
 .table-cell-left {
     padding-left: 5px;
-    margin-left: -1px;
 
     min-width: 350px;
     height: 35px;
@@ -1315,8 +1307,12 @@ tr {
     color: var(--light-font-colour);
 }
 
-.resources-table {
+[id*="mana-table-wrapper"], [id*="holy-power-table-wrapper"] {
     width: 98%;
+}
+
+.resources-table {
+    width: 100%;
 }
 
 .resources-table-cell-left {
@@ -1360,6 +1356,10 @@ tr {
     background-color: var(--panel-colour);
 }
 
+.resources-mana-cell {
+    margin-left: 1px;
+}
+
 [id*="holy-power-breakdown-container"] {
     margin-left: 5px;
 }
@@ -1375,6 +1375,48 @@ tr {
 .holy-power-wasted-cell {
     color: var(--holy-power-loss);
 }
+
+/* PRIORITY BREAKDOWN */
+.priority-grid-container {
+    display: grid;
+    grid-template-columns: 0.3fr 0.2fr 0.3fr 1fr 1fr 1fr 1fr;
+}
+  
+.priority-grid-header-row,
+.priority-grid-row {
+    display: contents;
+}
+  
+.priority-grid-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+
+    border: 1px solid var(--border-colour-3);
+
+    text-align: center;
+}
+  
+.priority-grid-header-cell {
+    background-color: var(--panel-colour);
+}
+
+.priority-grid-container > * > .priority-grid-cell:not(:last-child) {
+    border-right: none;
+}
+
+.priority-grid-container > :not(:last-child) > .priority-grid-cell {
+    border-bottom: none;
+}
+
+.priority-grid-spell-icon {
+    width: 97px;
+    height: 20px;
+
+    /* border: 1px solid var(--border-colour-3); */
+}
+
 
 .footer {
     position: absolute;

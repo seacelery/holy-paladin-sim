@@ -316,7 +316,7 @@ const updateUIAfterImport = (data) => {
 
 // event listeners
 importButton.addEventListener("click", importCharacter);
-simulateButtonContainer.addEventListener("click", runSimulation);
+simulationProgressBarContainer.addEventListener("click", runSimulation);
 
 raceOption.addEventListener("change", handleRaceChange);
 

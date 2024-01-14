@@ -14,11 +14,6 @@ from .auras_buffs import HolyReverberation, HoT
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
 from ..utils.battlenet_api import get_spell_icon_data, get_access_token
 from ..utils import cache
-# from .spells_healing import *
-# from .spells_damage import *
-# from .spells_auras import *
-# from .spells_passives import *
-
 
 pp = pprint.PrettyPrinter(width=200)
 
@@ -26,7 +21,7 @@ pp = pprint.PrettyPrinter(width=200)
 class Simulation:
     
     def __init__(self, paladin, healing_targets_list, encounter_length, iterations, access_token, priority_list=None):
-        
+
         self.paladin = paladin
         self.healing_targets_list = healing_targets_list
         self.enemy_targets_list = [EnemyTarget("enemyTarget1")]
@@ -458,6 +453,10 @@ class Simulation:
             emit('iteration_update', {'iteration': i + 1}, broadcast=True, namespace='/')
             self.paladin.reset_state()
             self.reset_simulation()
+            
+            # only record some data on the last iteration
+            if i == self.iterations - 1:
+                self.paladin.last_iteration = True
         
             self.simulate()
             
@@ -897,7 +896,7 @@ class Simulation:
         
         # pp.pprint(average_awakening_counts)
         # pp.pprint(average_ability_breakdown)
-        pp.pprint(self.paladin.events)
+        # pp.pprint(self.paladin.events)
         
         full_results = {
             "healing_timeline": average_healing_timeline,
@@ -910,12 +909,14 @@ class Simulation:
             "glimmer_counts": average_glimmer_counts,
             "tyrs_counts": average_tyrs_counts,
             "awakening_counts": average_awakening_counts,
-            "awakening_triggers": full_awakening_trigger_times_results
+            "awakening_triggers": full_awakening_trigger_times_results,
+            "priority_breakdown": self.paladin.priority_breakdown
         }
         
         simulation_details = {
             "encounter_length": self.encounter_length,
             "paladin_name": self.paladin.name,
+            "iterations": self.iterations,
         }
     
         end_time = time.time()
