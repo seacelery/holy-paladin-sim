@@ -750,8 +750,17 @@ tr {
 }
 
 [id^="spell-name-header-"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     border: none;
     padding-bottom: 8px;
+}
+
+.ability-spell-name-header {
+    padding-left: 40px;
+    padding-top: 6px;
 }
 
 [id^="healing-header-"] {
@@ -919,9 +928,12 @@ tr {
 }
 
 .table-header-icon-container {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
+    display: flex;
+    padding-left: 10px;
+    padding-top: 1.5px;
+
+    width: 35px;
+    height: 30px;
 }
 
 .table-header-icon-container:hover {
@@ -1377,9 +1389,14 @@ tr {
 }
 
 /* PRIORITY BREAKDOWN */
+[id*="priority-content"] {
+    display: none;
+    min-width: 525px;
+}
+
 .priority-grid-container {
     display: grid;
-    grid-template-columns: 0.3fr 0.2fr 0.3fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 0.3fr 0.2fr 0.2fr 1fr 1fr 1fr 1fr;  
 }
   
 .priority-grid-header-row,
@@ -1411,10 +1428,15 @@ tr {
 }
 
 .priority-grid-spell-icon {
-    width: 97px;
-    height: 20px;
+    width: 50px;
+    height: 50px;
 
-    /* border: 1px solid var(--border-colour-3); */
+    border: 1px solid var(--border-colour-3);
+}
+
+/* COOLDOWNS CONTENT */
+[id*="cooldowns-content"] {
+    display: none;
 }
 
 

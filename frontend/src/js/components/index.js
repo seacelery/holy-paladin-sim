@@ -243,11 +243,14 @@ const createSimulationResults = (simulationData) => {
     resourcesTab.textContent = "Resources";
     const priorityTab = createElement("div", `results-tab-${containerCount} inactive`, "priority-tab");
     priorityTab.textContent = "Priority";
+    const cooldownsTab = createElement("div", `results-tab-${containerCount} inactive`, "cooldowns-tab");
+    cooldownsTab.textContent = "Cooldowns";
 
     resultsNavbar.appendChild(healingTab);
     resultsNavbar.appendChild(buffsWindowTab);
     resultsNavbar.appendChild(resourcesTab);
     resultsNavbar.appendChild(priorityTab);
+    resultsNavbar.appendChild(cooldownsTab);
     resultContainer.appendChild(resultsNavbar);
 
     // create content windows
@@ -279,6 +282,13 @@ const createSimulationResults = (simulationData) => {
 
     priorityContent.appendChild(priorityBreakdown);
     resultContainer.appendChild(priorityContent);
+
+    // cooldowns breakdown
+    const cooldownsContent = createElement("div", `results-tab-content-${containerCount}`, "cooldowns-content");
+    const cooldownsBreakdown = createElement("div", null, "cooldowns-breakdown-table-container");
+
+    cooldownsContent.appendChild(cooldownsBreakdown);
+    resultContainer.appendChild(cooldownsContent);
 
     simulationContainer.appendChild(resultContainer);
 

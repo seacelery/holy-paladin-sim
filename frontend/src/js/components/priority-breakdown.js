@@ -36,20 +36,22 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const spellCell = createElement("div", "priority-grid-name-cell priority-grid-cell", null);
             const spellIconContainer = createElement("div", "priority-grid-spell-icon-container", null);
             const spellIcon = createElement("img", "priority-grid-spell-icon", null);
-            spellIcon.src = "holy-power/single/4-full.png";
+            spellIcon.src = spellToIconsMap[timestampData.spell_name];
             
             spellIconContainer.appendChild(spellIcon);
-            console.log(spellIconContainer)
             spellCell.appendChild(spellIconContainer);
             gridRow.appendChild(spellCell);
 
-            const playerAurasCell = createElement("div", "priority-grid-player-auras-cell priority-grid-cell", null);
-            playerAurasCell.textContent = "a";
-            gridRow.appendChild(playerAurasCell);
-
             const resourcesCell = createElement("div", "priority-grid-resources-cell priority-grid-cell", null);
-            resourcesCell.textContent = `${timestampData.resources.holy_power} ${timestampData.resources.mana}`
+            // resourcesCell.textContent = `${timestampData.resources.holy_power} ${timestampData.resources.mana}`
+            const holyPowerDisplay = createElement("img", "priority-grid-holy-power-display");
+            holyPowerDisplay.src = `holy-power/holy-power-${timestampData.resources.holy_power}.png`;
+            
+            resourcesCell.appendChild(holyPowerDisplay);
             gridRow.appendChild(resourcesCell);
+
+            const playerAurasCell = createElement("div", "priority-grid-player-auras-cell priority-grid-cell", null);
+            gridRow.appendChild(playerAurasCell);
 
             const targetCell = createElement("div", "priority-grid-target-cell priority-grid-cell", null);
             const targetAurasCell = createElement("div", "priority-grid-target-auras-cell priority-grid-cell", null);
@@ -59,8 +61,11 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
                 // console.log(timestampData.target_active_auras[target])
             };
 
-            gridRow.appendChild(targetCell);
+            // gridRow.appendChild(targetCell);
             gridRow.appendChild(targetAurasCell);
+
+            const cooldownsCell = createElement("div", "priority-grid-cooldowns-cell priority-grid-cell", null);
+            gridRow.appendChild(cooldownsCell);
 
             gridContainer.appendChild(gridRow);
             
@@ -68,7 +73,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
         return gridContainer;
     };
 
-    const gridHeaders = ["Time", "Priority", "Spell", "Player Auras", "Resources", "Target", "Target Auras"];
+    const gridHeaders = ["Time", "Priority", "Spell", "Resources", "Player Auras", "Target Auras", "Cooldowns"];
     const priorityGrid = createPriorityGrid(priorityData, priorityBreakdownContainer, gridHeaders);
     priorityBreakdownContainer.appendChild(priorityGrid);
 };

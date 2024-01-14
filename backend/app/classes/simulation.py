@@ -146,8 +146,8 @@ class Simulation:
             ("Divine Toll", lambda: self.previous_ability == "Daybreak"),
             ("Blessing of the Seasons", lambda: True),
             ("Avenging Wrath", lambda: True),
-            ("Light's Hammer", lambda: True),
-            ("Tyr's Deliverance", lambda: True),
+            # ("Light's Hammer", lambda: True),
+            # ("Tyr's Deliverance", lambda: True),
             # ("Divine Favor", lambda: True),
             ("Light of Dawn", lambda: self.paladin.holy_power == 5),
             ("Daybreak", lambda: self.elapsed_time >= 12),
@@ -896,7 +896,7 @@ class Simulation:
         
         # pp.pprint(average_awakening_counts)
         # pp.pprint(average_ability_breakdown)
-        # pp.pprint(self.paladin.events)
+        pp.pprint(self.paladin.events)
         
         full_results = {
             "healing_timeline": average_healing_timeline,

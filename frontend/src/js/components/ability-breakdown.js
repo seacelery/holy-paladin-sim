@@ -189,6 +189,8 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         };
 
         if (cell.id === `spell-name-header-${containerCount}`) {
+            cell.classList.add("ability-spell-name-header");
+
             const headerIconContainer = document.createElement("div");
             headerIconContainer.className = "table-header-icon-container";
             const headerIcon = document.createElement("i");
