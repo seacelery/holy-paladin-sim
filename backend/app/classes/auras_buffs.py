@@ -141,7 +141,7 @@ class InfusionOfLight(Buff):
 class DivineResonance(Buff):
     
     def __init__(self):
-        super().__init__("Divine Resonance", 15)
+        super().__init__("Divine Resonance", 15, base_duration=15)
         self.last_holy_shock_time = 0
         
     def apply_effect(self, caster):
@@ -167,14 +167,14 @@ class DivineResonance(Buff):
 class RisingSunlight(Buff):
     
     def __init__(self):
-        super().__init__("Rising Sunlight", 30, current_stacks=3, max_stacks=3)
+        super().__init__("Rising Sunlight", 30, base_duration=30, current_stacks=3, max_stacks=3)
        
         
 class FirstLight(Buff):
     
     # casting Daybreak increases haste by 25% for 6 seconds
     def __init__(self):
-        super().__init__("First Light", 6)
+        super().__init__("First Light", 6, base_duration=6)
         
     def apply_effect(self, caster):
         caster.haste_multiplier *= 1.25
@@ -188,19 +188,19 @@ class FirstLight(Buff):
 class AwakeningStacks(Buff):
     
     def __init__(self):
-        super().__init__("Awakening", 60, base_duration=60, current_stacks=1, max_stacks=12)
+        super().__init__("Awakening", 60, base_duration=60, current_stacks=1, max_stacks=12, base_duration=60)
        
         
 class AwakeningTrigger(Buff):
     
     def __init__(self):
-        super().__init__("Awakening READY!!!!!!", 30)
+        super().__init__("Awakening READY!!!!!!", 30, base_duration=30)
         
         
 class TyrsDeliveranceSelfBuff(Buff):
     
     def __init__(self):
-        super().__init__("Tyr's Deliverance (self)", 20)
+        super().__init__("Tyr's Deliverance (self)", 20, base_duration=20)
         self.last_tyr_tick_time = 0
         self.base_tick_interval = 1
         
@@ -243,7 +243,7 @@ class TyrsDeliveranceSelfBuff(Buff):
 class DivinePurpose(Buff):
     
     def __init__(self):
-        super().__init__("Divine Purpose", 12)
+        super().__init__("Divine Purpose", 12, base_duration=12)
         
         
 class BlessingOfDawn(Buff):
@@ -255,7 +255,7 @@ class BlessingOfDawn(Buff):
 class BlessingOfDusk(Buff):
     
     def __init__(self):
-        super().__init__("Blessing of Dusk", 10)
+        super().__init__("Blessing of Dusk", 10, base_duration=10)
       
         
 class SophicDevotion(Buff):
@@ -263,7 +263,7 @@ class SophicDevotion(Buff):
     BASE_PPM = 1
     
     def __init__(self):
-        super().__init__("Sophic Devotion", 15)
+        super().__init__("Sophic Devotion", 15, base_duration=15)
         
     def apply_effect(self, caster):
         caster.spell_power += 932
@@ -284,31 +284,31 @@ class GlimmerOfLightBuff(Buff):
 class BlessingOfFreedomBuff(Buff):
     
     def __init__(self):
-        super().__init__("Blessing of Freedom", 8)
+        super().__init__("Blessing of Freedom", 8, base_duration=8)
         
         
 class TyrsDeliveranceTargetBuff(Buff):
     
     def __init__(self):
-        super().__init__("Tyr's Deliverance (target)", 12)
+        super().__init__("Tyr's Deliverance (target)", 12, base_duration=12)
         
         
 class BlessingOfSummer(Buff):
     
     def __init__(self):
-        super().__init__("Blessing of Summer", 30)
+        super().__init__("Blessing of Summer", 30, base_duration=30)
         
         
 class BlessingOfAutumn(Buff):
     
     def __init__(self):
-        super().__init__("Blessing of Autumn", 30)
+        super().__init__("Blessing of Autumn", 30, base_duration=30)
         
         
 class BlessingOfWinter(Buff):
     
     def __init__(self):
-        super().__init__("Blessing of Winter", 30)
+        super().__init__("Blessing of Winter", 30, base_duration=30)
         self.last_holy_shock_time = 0
         
     def apply_effect(self, caster):
@@ -332,7 +332,7 @@ class BlessingOfWinter(Buff):
 class BlessingOfSpring(Buff):
     
     def __init__(self):
-        super().__init__("Blessing of Spring", 30)
+        super().__init__("Blessing of Spring", 30, base_duration=30)
         
     def apply_effect(self, caster):
         caster.healing_multiplier *= 1.15

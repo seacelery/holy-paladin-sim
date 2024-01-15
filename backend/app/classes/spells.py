@@ -67,22 +67,6 @@ class Spell:
         
         spell_crit = False
         
-        # auras = {}
-        # for aura in caster.active_auras:
-        #     auras[caster.active_auras[aura].name] = {"duration": caster.active_auras[aura].duration, "stacks": caster.active_auras[aura].current_stacks}
-        # priority_targets = []
-        # target_auras = {}
-        # for target in targets:
-        #     priority_targets.append(target.name)
-        #     for aura in target.target_active_buffs:
-        #         print(aura)
-        #         print(target)
-        #         print(target.target_active_buffs)
-        #         print(target.target_active_buffs[aura])
-        #         target_auras[target.target_active_buffs[aura].name] = {"duration": target.target_active_buffs[aura].duration, "stacks": target.target_active_buffs[aura].current_stacks}
-            
-        # update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target=priority_targets, target_active_auras=target_auras)
-        
         self.try_trigger_rppm_effects(caster, targets, current_time)
         
         for target in targets:
@@ -124,28 +108,30 @@ class Spell:
         spell_crit = False
         heal_amount = 0
         
+        self.try_trigger_rppm_effects(caster, targets, current_time)
+        
+        # add auras to dictionaries and check current spell cooldownsfor display in priority list example
         self_auras = defaultdict(dict)
         for aura in caster.active_auras.values():
-            self_auras[aura.name] = {"duration": caster.active_auras[aura.name].duration, "stacks": caster.active_auras[aura.name].current_stacks}
+            self_auras[aura.name] = {"duration": caster.active_auras[aura.name].duration, "stacks": caster.active_auras[aura.name].current_stacks, "applied_duration": caster.active_auras[aura.name].base_duration}
+            
         target_auras = defaultdict(dict)
         for target in targets:
             for auras in target.target_active_buffs.values():
                 for aura in auras:
-                    target_auras[target.name][aura.name] = {"duration": aura.duration, "stacks": aura.current_stacks}
-            
+                    target_auras[target.name][aura.name] = {"duration": aura.duration, "stacks": aura.current_stacks, "applied_duration": aura.applied_duration}
         
-        
-        self.try_trigger_rppm_effects(caster, targets, current_time)
+        spell_cooldowns = caster.check_cooldowns()
         
         # add spells that trigger other spells as a cast event and don't cost mana
         if self.name in ["Daybreak"]:
             update_spell_data_casts(caster.ability_breakdown, self.name, self.get_mana_cost(caster), self.holy_power_gain, self.holy_power_cost)
-            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power})
+            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns)
             
         # add spells that cost mana and don't heal
         if caster.mana >= self.get_mana_cost(caster) and self.get_mana_cost(caster) > 0 and not is_heal: 
             update_spell_data_casts(caster.ability_breakdown, self.name, self.get_mana_cost(caster), self.holy_power_gain, self.holy_power_cost)   
-            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras)
+            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns)
             
         # add spells that cost mana and do heal       
         elif caster.mana >= self.get_mana_cost(caster) and is_heal:  
@@ -203,7 +189,7 @@ class Spell:
                 # add the target, healing, crit status, and increment hits
                 update_spell_data_heals(caster.ability_breakdown, self.name, target, ability_healing, is_crit)
                 if self.name not in ["Tyr's Deliverance", "Light's Hammer"]:
-                    update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, heal=heal_amount, is_crit=is_crit)    
+                    update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, heal=heal_amount, is_crit=is_crit, remaining_cooldowns=spell_cooldowns)    
                 
                 append_spell_heal_event(caster.events, self.name, caster, target, ability_healing, current_time, is_crit, spends_mana=True)   
                 append_spell_cast_event(caster.ability_cast_events, self.name, caster, current_time, target)    

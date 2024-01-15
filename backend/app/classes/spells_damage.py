@@ -67,6 +67,7 @@ class Judgment(Spell):
                 if "Awakening READY!!!!!!" in caster.active_auras:
                     buff = AvengingWrathBuff()
                     buff.duration = 12
+                    buff.applied_duration = 12
                     
                     # remove 30% damage buff
                     self.spell_damage_modifier /= 1.3

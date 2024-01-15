@@ -147,8 +147,8 @@ class Simulation:
             ("Blessing of the Seasons", lambda: True),
             ("Avenging Wrath", lambda: True),
             # ("Light's Hammer", lambda: True),
-            # ("Tyr's Deliverance", lambda: True),
-            # ("Divine Favor", lambda: True),
+            ("Tyr's Deliverance", lambda: True),
+            ("Divine Favor", lambda: True),
             ("Light of Dawn", lambda: self.paladin.holy_power == 5),
             ("Daybreak", lambda: self.elapsed_time >= 12),
             ("Holy Shock", lambda: True),
@@ -917,6 +917,7 @@ class Simulation:
             "encounter_length": self.encounter_length,
             "paladin_name": self.paladin.name,
             "iterations": self.iterations,
+            "max_mana": self.paladin.max_mana
         }
     
         end_time = time.time()

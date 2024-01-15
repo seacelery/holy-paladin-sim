@@ -42,7 +42,7 @@ class GreaterJudgmentDebuff(Debuff):
     SPELL_ID = 231644
     
     def __init__(self):
-        super().__init__("Greater Judgment", 15)
+        super().__init__("Greater Judgment", 15, base_duration=15)
         
     def consume_greater_judgment(self, caster, damage_targets, healing_targets, current_time):
         greater_judgment_target = damage_targets

@@ -526,7 +526,7 @@ input:focus {
 
     border: 1px solid var(--border-colour-3);
 	background: linear-gradient(to bottom, #16a137 0%,#15b12c 50%,#12aa2b 51%,#17c52e 100%);
-    transition: width 0.05s ease-in-out;
+    transition: width 0.09s ease-in-out;
 }
 
 #simulate-button:hover {
@@ -1394,14 +1394,100 @@ tr {
     min-width: 525px;
 }
 
+/* priority filter modals */
+.priority-grid-options-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 15px;
+
+    width: 100%;
+    height: 30px;
+}
+
+.priority-grid-cooldown-filter {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 45px;
+    height: 35px;
+}
+
+.priority-grid-cooldown-filter-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30px;
+    height: 25px;
+
+    border: 1px solid var(--border-colour-3);
+
+    background-color: var(--panel-colour-2);
+}
+
+.priority-grid-cooldown-filter-icon {
+    font-size: 15px;
+}
+
+.popover {
+    min-height: 85px;
+    min-width: 125px;
+    max-width: 200px;
+
+    border: 1px solid var(--border-colour-3);
+    border-radius: 3px;
+
+    background-color: var(--panel-colour-2);
+}
+
+.popover-body {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 5px 0 0 0;
+}
+
+.popover.bs-popover-right .arrow::before {
+    border-right-color: var(--border-colour-3);
+}
+
+.popover.bs-popover-right .arrow::after {
+    border-right-color: var(--panel-colour-2);
+}
+
+.priority-grid-cooldown-popover-icon-container {
+    display: inline-block;
+    padding: 3px;
+}
+
+/* priority grid css */
 .priority-grid-container {
     display: grid;
-    grid-template-columns: 0.3fr 0.2fr 0.2fr 1fr 1fr 1fr 1fr;  
+    grid-template-columns: 0.3fr 0.2fr 0.2fr 0.4fr 1fr 1fr 1fr;  
 }
   
 .priority-grid-header-row,
 .priority-grid-row {
     display: contents;
+}
+
+.priority-grid-header-cell:first-child {
+    border-top-left-radius: 3px;
+}
+
+.priority-grid-header-cell:last-child {
+    border-top-right-radius: 3px;
+}
+
+.priority-grid-container > .priority-grid-row:last-child > .priority-grid-cell:first-child {
+    border-bottom-left-radius: 3px;
+}
+
+.priority-grid-container > .priority-grid-row:last-child > .priority-grid-cell:last-child {
+    border-bottom-right-radius: 3px;
 }
   
 .priority-grid-cell {
@@ -1411,6 +1497,8 @@ tr {
     padding: 5px;
 
     border: 1px solid var(--border-colour-3);
+
+    background-color: var(--panel-colour-2);
 
     text-align: center;
 }
@@ -1432,6 +1520,171 @@ tr {
     height: 50px;
 
     border: 1px solid var(--border-colour-3);
+}
+
+.priority-grid-resources-cell {
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px 0 5px 0;
+}
+
+/* .priority-grid-holy-power-display {
+    transform: translateY(5px);
+    padding-left: 1px;
+    border: 1px solid var(--background-colour);
+    border-bottom: none;
+} */
+
+.priority-grid-mana-bar-container {
+    position: relative;
+
+    width: 100px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.priority-grid-mana-bar {
+    -webkit-appearance: none;
+    appearance: none;
+
+    height: 100%;
+    width: 100%;
+    border: 1px solid var(--background-colour);
+    border-radius: 3px;
+
+    color: #2a3bd8;
+    background: none;
+}
+
+.priority-grid-mana-bar::-webkit-progress-value {
+    background: linear-gradient(to right, #1e209a 0%,#2a3bd8 30%,#202eca 73%,#2a3cbd 100%);
+}
+
+.priority-grid-mana-bar::-webkit-progress-bar {
+    background-color: #2e30b63a;
+    
+}
+
+.priority-grid-mana-bar::-moz-progress-bar {
+    background: linear-gradient(to right, #1e209a 0%, #2a3bd8 30%, #202eca 73%, #2a3cbd 100%);
+    background-color: #2e30b63a;
+}
+
+.priority-grid-mana-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.priority-grid-player-auras-cell {
+    padding: 3px;
+    justify-content: flex-start;
+}
+
+.priority-grid-player-auras-container, .priority-grid-cooldowns-container {
+    display: flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: 100%;
+}
+
+.priority-grid-aura-icon-container, [class*="priority-grid-cooldown-icon-container"], .priority-grid-cooldown-popover-icon-container {
+    position: relative;
+}
+
+[class*="priority-grid-cooldown-icon-container"] {
+    margin: 5px 5px 0 0;
+
+    width: 30px;
+    height: 30px;
+}
+
+.aura-icon-overlay-container, .cooldown-icon-overlay-container {
+    position: relative;
+    margin: 2px;
+
+    width: 30px;
+    height: 30px;
+}
+
+.priority-grid-aura-icon, .priority-grid-cooldown-icon {
+    z-index: 1;
+
+    width: 30px;
+    height: 30px;
+
+    border: 1px solid var(--border-colour-3);
+}
+
+.priority-grid-aura-duration-text {
+    margin-top: -3px;
+
+    font-size: 13px;
+    color: var(--healing-font);
+}
+
+.priority-grid-cooldown-remaining-text {
+    margin: -3px 0 0 3px;
+
+    font-size: 13px;
+    color: var(--red-font-hover);
+}
+
+.priority-grid-aura-stacks-text, .priority-grid-cooldown-charges-text {
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 0;
+    right: 0;
+    text-shadow:
+        0.09em 0 black,
+        0 0.09em black,
+        -0.09em 0 black,
+        0 -0.09em black,
+        -0.09em -0.09em black,
+        -0.09em 0.09em black,
+        0.09em -0.09em black,
+        0.09em 0.09em black;
+
+    font-size: 16px;
+}
+
+.priority-grid-cooldown-charges-text {
+    left: 3px;
+}
+
+.aura-icon-overlay, .cooldown-icon-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: transparent;
+    z-index: 2;
+}
+
+.aura-duration-overlay, .cooldown-remaining-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+}
+
+.priority-grid-cooldown-row {
+    display: flex;
+
+    width: 100%;
+    height: 50px;
 }
 
 /* COOLDOWNS CONTENT */

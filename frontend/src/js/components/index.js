@@ -147,6 +147,7 @@ const runSimulation = async () => {
     .then(response => response.json())
     .then(data => {
         let simulationData = data;     
+        console.log(simulationData)
         createSimulationResults(simulationData);
 
         simulationProgressBarText.textContent = "";

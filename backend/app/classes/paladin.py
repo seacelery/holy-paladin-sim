@@ -211,6 +211,16 @@ class Paladin:
             if ability.hasted_cooldown and ability.original_cooldown is not None:
                 elapsed_cooldown = ability.original_cooldown - ability.remaining_cooldown
                 ability.remaining_cooldown = ability.calculate_cooldown(self) - elapsed_cooldown * (ability.calculate_cooldown(self) / ability.original_cooldown)
+                
+    def check_cooldowns(self):
+        spell_cooldowns = {}
+        
+        for ability_name, ability in self.abilities.items():
+            spell_cooldowns[ability_name] = {"remaining_cooldown": ability.remaining_cooldown, "base_cooldown": ability.original_cooldown, 
+                                             "current_charges": ability.current_charges, "max_charges": ability.max_charges}
+            
+        return spell_cooldowns
+            
     
     def load_abilities_based_on_talents(self):
         self.abilities = {

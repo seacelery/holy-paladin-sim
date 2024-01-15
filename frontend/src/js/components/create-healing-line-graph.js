@@ -21,7 +21,7 @@ const createHealingLineGraph = (healingData, manaData, graphId, title, colour) =
         .style("font-size", "16px")
         .style("fill", "white")
 
-    function formatTime(seconds) {
+    const formatTime = (seconds) => {
         let minutes = Math.floor(seconds / 60);
         let remainingSeconds = Math.round(seconds % 60);
 
