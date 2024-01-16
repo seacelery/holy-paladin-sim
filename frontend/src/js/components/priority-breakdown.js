@@ -1,6 +1,7 @@
 import { createElement } from "./index.js";
 import { spellToIconsMap } from '../utils/spell-to-icons-map.js';
 import { buffsToIconsMap } from "../utils/buffs-to-icons-map.js";
+import { cooldownFilterState } from './index.js';
 
 const createPriorityBreakdown = (simulationData, containerCount) => {
     const formatTime = (seconds) => {
@@ -30,14 +31,51 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     const priorityBreakdownContainer = document.getElementById(`priority-breakdown-table-container-${containerCount}`);
 
     // create filter options
-    const cooldownFilter = createElement("div", "priority-grid-cooldown-filter");
-
-    const cooldownFilterButton = createElement("div", "priority-grid-cooldown-filter-button", "priority-grid-cooldown-filter-button");
-    const cooldownFilterIcon = createElement("i", "priority-grid-cooldown-filter-icon fa-regular fa-hourglass", "priority-grid-cooldown-filter-icon");
+    const cooldownFilter = createElement("div", "priority-grid-cooldown-filter", null);
+    const cooldownFilterModal = createElement("div", "priority-grid-cooldown-filter-modal", null);
+    
+    const cooldownFilterButton = createElement("div", "priority-grid-cooldown-filter-button", "priority-grid-cooldown-filter-button", null);
+    const cooldownFilterIcon = createElement("i", "priority-grid-cooldown-filter-icon fa-regular fa-hourglass", "priority-grid-cooldown-filter-icon", null);
     cooldownFilterButton.appendChild(cooldownFilterIcon);
+    cooldownFilterButton.addEventListener("click", (e) => {
+        cooldownFilterModal.style.opacity = cooldownFilterModal.style.opacity === "0" ? "1" : "0";
+    });
 
+    cooldownFilter.appendChild(cooldownFilterModal);
     cooldownFilter.appendChild(cooldownFilterButton);
 
+    const cooldownModalIconOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath", "Avenging Wrath", "Daybreak", 
+                            "Divine Toll", "Tyr's Deliverance", "Blessing of the Seasons", "Divine Favor",]
+    for (const timestamp in priorityData) {
+        const timestampData = priorityData[timestamp];
+        const cooldowns = timestampData.remaining_cooldowns;
+        cooldownModalIconOrder.forEach(cooldownName => {
+            if (cooldowns[cooldownName]) {
+                const formattedCooldownName = cooldownName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
+                const modalIconContainer = createElement("div", "priority-grid-cooldown-modal-icon-container", null);
+                const modalIcon = createElement("img", "priority-grid-cooldown-modal-icon", null);
+                modalIcon.src = spellToIconsMap[cooldownName];
+                modalIconContainer.appendChild(modalIcon);
+                modalIconContainer.addEventListener("click", () => {
+                    const isVisible = modalIconContainer.style.opacity !== "0.4";
+                    modalIconContainer.style.opacity = isVisible ? "0.4" : "1";
+
+                    cooldownFilterState[formattedCooldownName] = !isVisible;
+                    console.log(cooldownFilterState)
+
+                    const iconsToHide = document.querySelectorAll(`.priority-grid-cooldown-icon-container-${formattedCooldownName}`);
+                    iconsToHide.forEach(icon => {
+                        icon.style.display = isVisible ? "none" : "block";
+                    });            
+                });
+                cooldownFilterModal.appendChild(modalIconContainer);
+                
+                const index = cooldownModalIconOrder.indexOf(cooldownName);
+                cooldownModalIconOrder.splice(index, 1);
+            };
+        });          
+    };
+    
     // create the grid
     const createPriorityGrid = (data, container, headers) => {
         const gridContainer = createElement("div", "priority-grid-container", `priority-grid-container`);
@@ -158,13 +196,11 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const generatorRowOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath"];
             const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Tyr's Deliverance", "Blessing of the Seasons", "Divine Favor",];
 
-            let cooldownsPopoverHTML = "";
-
             generatorRowOrder.forEach(cooldownName => {
                 if (cooldowns[cooldownName]) {
                     const cooldown = cooldowns[cooldownName];
                     const formattedCooldownName = cooldownName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
-                    const cooldownIconContainer = createElement("div", `priority-grid-cooldown-icon-container-${formattedCooldownName}-${containerCount}`, `priority-grid-cooldown-icon-container-${formattedCooldownName}`);
+                    const cooldownIconContainer = createElement("div", `priority-grid-cooldown-icon-container-${formattedCooldownName}`, `priority-grid-cooldown-icon-container-${formattedCooldownName}`);
 
                     const iconOverlayContainer = createElement("div", "cooldown-icon-overlay-container", null);
                     const cooldownOverlay = createElement("div", "cooldown-remaining-overlay", null);
@@ -172,17 +208,20 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     
                     const cooldownIcon = createElement("img", "priority-grid-cooldown-icon", null);
                     cooldownIcon.src = spellToIconsMap[cooldownName];
-                    cooldownsPopoverHTML += `<div class="priority-grid-cooldown-popover-icon-container" data-cooldown="${formattedCooldownName}">
-                                                <img class="priority-grid-cooldown-icon" src="${spellToIconsMap[cooldownName]}"></img>
-                                             </div>`;
     
                     const cooldownRemainingText = createElement("div", "priority-grid-cooldown-remaining-text", null);
                     cooldownRemainingText.textContent = cooldown.remaining_cooldown > 0 ? cooldown.remaining_cooldown.toFixed(1) : '';
+
+                    const cooldownChargesText = createElement("div", "priority-grid-cooldown-charges-text", null);
+                    if (cooldown.max_charges > 1) {
+                        cooldownChargesText.textContent = cooldown.current_charges;
+                    };
     
                     iconOverlayContainer.appendChild(cooldownIcon);
                     iconOverlayContainer.appendChild(cooldownOverlay);
                     cooldownIconContainer.appendChild(iconOverlayContainer);
                     cooldownIconContainer.appendChild(cooldownRemainingText);
+                    cooldownIconContainer.appendChild(cooldownChargesText);
                     generatorRow.appendChild(cooldownIconContainer);
                 };
             });
@@ -191,34 +230,29 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
                 if (cooldowns[cooldownName]) {
                     const cooldown = cooldowns[cooldownName];
                     const formattedCooldownName = cooldownName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
-                    const cooldownIconContainer = createElement("div", `priority-grid-cooldown-icon-container-${formattedCooldownName}-${containerCount}`, `priority-grid-cooldown-icon-container-${formattedCooldownName}`);
+                    const cooldownIconContainer = createElement("div", `priority-grid-cooldown-icon-container-${formattedCooldownName}`, `priority-grid-cooldown-icon-container-${formattedCooldownName}`);
                     const iconOverlayContainer = createElement("div", "cooldown-icon-overlay-container", null);
                     const cooldownOverlay = createElement("div", "cooldown-remaining-overlay", null);
                     setupCooldownOverlay(cooldownOverlay, cooldown.remaining_cooldown, cooldown.base_cooldown);
     
                     const cooldownIcon = createElement("img", "priority-grid-cooldown-icon", null);
                     cooldownIcon.src = spellToIconsMap[cooldownName];
-                    cooldownsPopoverHTML += `<div class="priority-grid-cooldown-popover-icon-container" data-cooldown="${formattedCooldownName}">
-                                                <img class="priority-grid-cooldown-icon" src="${spellToIconsMap[cooldownName]}"></img>
-                                             </div>`;
-    
+
                     const cooldownRemainingText = createElement("div", "priority-grid-cooldown-remaining-text", null);
                     cooldownRemainingText.textContent = cooldown.remaining_cooldown > 0 ? formatTime(cooldown.remaining_cooldown) : '';
+
+                    const cooldownChargesText = createElement("div", "priority-grid-cooldown-charges-text", null);
+                    if (cooldown.max_charges > 1) {
+                        cooldownChargesText.textContent = cooldown.current_charges;
+                    };
     
                     iconOverlayContainer.appendChild(cooldownIcon);
                     iconOverlayContainer.appendChild(cooldownOverlay);
                     cooldownIconContainer.appendChild(iconOverlayContainer);
                     cooldownIconContainer.appendChild(cooldownRemainingText);
+                    cooldownIconContainer.appendChild(cooldownChargesText);
                     majorCooldownRow.appendChild(cooldownIconContainer);
                 };
-            });
-
-            // add popover with the accumulated html
-            $(cooldownFilterButton).popover({
-                html: true,
-                content: cooldownsPopoverHTML,
-                placement: "right",
-                sanitize: false,
             });
 
             cooldownsContainer.appendChild(generatorRow);
@@ -228,24 +262,33 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     
             gridContainer.appendChild(gridRow);
         };
+
+        
+        
         return gridContainer;
     };
 
-    $(document).on("click", ".priority-grid-cooldown-popover-icon-container", function(e) {
-        const cooldownName = $(this).attr('data-cooldown');
-        console.log(cooldownName)
-
-        console.log(`priority-grid-cooldown-icon-container-${cooldownName}-${containerCount}`)
-        const iconsToHide = document.querySelectorAll(`.priority-grid-cooldown-icon-container-${cooldownName}-${containerCount}`);
-        console.log(iconsToHide)
-        iconsToHide.forEach(icon => {
-            icon.style.display = icon.style.display === "none" ? "block" : "none";
-        });
+    // close popover when clicked away
+    document.addEventListener("click", (e) => {
+        const targetClasses = ["priority-grid-cooldown-filter-modal", "priority-grid-cooldown-filter-icon", "priority-grid-cooldown-filter-button",
+                               "priority-grid-cooldown-modal-icon", "priority-grid-cooldown-modal-icon-container"];
+        if (!targetClasses.some(className => e.target.classList.contains(className))) {
+            cooldownFilterModal.style.opacity = "0";
+        };
     });
 
     const gridHeaders = ["Time", "Priority", "Spell", "Resources", "Player Auras", "Target Auras", "Cooldowns"];
     const priorityGrid = createPriorityGrid(priorityData, priorityBreakdownContainer, gridHeaders);
     priorityBreakdownContainer.appendChild(priorityGrid);
+
+    // disable icons that are in the global filter list
+    Object.keys(cooldownFilterState).forEach(cooldownName => {
+        const isVisible = cooldownFilterState[cooldownName];
+        const icons = document.querySelectorAll(`.priority-grid-cooldown-icon-container-${cooldownName}`);
+        icons.forEach(icon => {
+            icon.style.display = isVisible ? "block" : "none";
+        });
+    });
 };
 
 export { createPriorityBreakdown };

@@ -661,8 +661,8 @@ input:focus {
 
 [class^="results-tab-content"] {
     margin-bottom: 30px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 
     border-radius: 3px;
     border-top-left-radius: 0px;
@@ -1412,7 +1412,12 @@ tr {
     align-items: center;
 
     width: 45px;
-    height: 35px;
+    height: 25px;
+}
+
+.priority-grid-cooldown-filter:hover, .priority-grid-cooldown-icon-container:hover {
+    cursor: pointer;
+    user-select: none;
 }
 
 .priority-grid-cooldown-filter-button {
@@ -1432,35 +1437,49 @@ tr {
     font-size: 15px;
 }
 
-.popover {
+.priority-grid-cooldown-filter-modal {
+    position: absolute;
+    top: -20px;
+    left: 50px;
+    z-index: 3;
+
     min-height: 85px;
-    min-width: 125px;
+    min-width: 200px;
     max-width: 200px;
 
     border: 1px solid var(--border-colour-3);
     border-radius: 3px;
 
     background-color: var(--panel-colour-2);
+    transition: opacity 0.1s ease-in-out;
 }
 
-.popover-body {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 5px 0 0 0;
+.priority-grid-cooldown-filter-modal::before, .priority-grid-cooldown-filter-modal::after {
+    content: "";
+    position: absolute;
+    transform: rotate(-90deg);
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
 }
 
-.popover.bs-popover-right .arrow::before {
-    border-right-color: var(--border-colour-3);
+.priority-grid-cooldown-filter-modal::before {
+    top: 33px;
+    left: -16px;
+    z-index: 2;
+    border-bottom: 11px solid var(--panel-colour-2);
 }
 
-.popover.bs-popover-right .arrow::after {
-    border-right-color: var(--panel-colour-2);
+.priority-grid-cooldown-filter-modal::after {
+    top: 34px;
+    left: -17px;
+    border-bottom: 10px solid var(--border-colour-3);
 }
 
-.priority-grid-cooldown-popover-icon-container {
+.priority-grid-cooldown-modal-icon-container {
     display: inline-block;
     padding: 3px;
+
+    opacity: 1;
 }
 
 /* priority grid css */
@@ -1595,11 +1614,11 @@ tr {
     height: 100%;
 }
 
-.priority-grid-aura-icon-container, [class*="priority-grid-cooldown-icon-container"], .priority-grid-cooldown-popover-icon-container {
+.priority-grid-aura-icon-container, [class*="priority-grid-cooldown-icon-container"], .priority-grid-cooldown-icon-container, .priority-grid-cooldown-modal-icon-container {
     position: relative;
 }
 
-[class*="priority-grid-cooldown-icon-container"] {
+[class*="priority-grid-cooldown-icon-container"], .priority-grid-cooldown-modal-icon-container {
     margin: 5px 5px 0 0;
 
     width: 30px;
@@ -1614,7 +1633,7 @@ tr {
     height: 30px;
 }
 
-.priority-grid-aura-icon, .priority-grid-cooldown-icon {
+.priority-grid-aura-icon, .priority-grid-cooldown-icon, .priority-grid-cooldown-modal-icon {
     z-index: 1;
 
     width: 30px;
@@ -1640,7 +1659,7 @@ tr {
 .priority-grid-aura-stacks-text, .priority-grid-cooldown-charges-text {
     position: absolute;
     left: 0;
-    top: 6px;
+    top: 4px;
     bottom: 0;
     right: 0;
     text-shadow:

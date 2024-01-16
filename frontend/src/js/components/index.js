@@ -35,6 +35,7 @@ let savedDataTimeout;
 let containerCount = 0;
 let iterations = 0;
 let isSimulationRunning = false;
+export let cooldownFilterState = {};
 
 const importButton = document.getElementById("import-button");
 const raceOption = document.getElementById("race-filter");
