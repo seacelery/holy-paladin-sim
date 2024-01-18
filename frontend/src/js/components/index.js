@@ -13,9 +13,9 @@ import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.j
 //     console.log(e.target)
 // })
 
-// window.addEventListener("click", (e) => {
-//     console.log(e.target)
-// })
+window.addEventListener("click", (e) => {
+    console.log(e.target)
+})
 
 const socket = io('http://localhost:5000');
 
@@ -35,7 +35,10 @@ let savedDataTimeout;
 let containerCount = 0;
 let iterations = 0;
 let isSimulationRunning = false;
+
+// save states for use in separate priority breakdowns
 export let cooldownFilterState = {};
+export let playerAurasFilterState = {};
 
 const importButton = document.getElementById("import-button");
 const raceOption = document.getElementById("race-filter");

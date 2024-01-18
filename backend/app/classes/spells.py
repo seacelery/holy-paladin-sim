@@ -116,22 +116,34 @@ class Spell:
             self_auras[aura.name] = {"duration": caster.active_auras[aura.name].duration, "stacks": caster.active_auras[aura.name].current_stacks, "applied_duration": caster.active_auras[aura.name].base_duration}
             
         target_auras = defaultdict(dict)
-        for target in targets:
-            for auras in target.target_active_buffs.values():
-                for aura in auras:
-                    target_auras[target.name][aura.name] = {"duration": aura.duration, "stacks": aura.current_stacks, "applied_duration": aura.applied_duration}
+        # for target in targets:
+        #     for auras in target.target_active_buffs.values():
+        #         for aura in auras:
+        #             target_auras[target.name][aura.name] = {"duration": aura.duration, "stacks": aura.current_stacks, "applied_duration": aura.applied_duration}
+        if self.healing_target_count == 1:
+            for target in targets:
+                for auras in target.target_active_buffs.values():
+                    for aura in auras:
+                        target_auras[target.name][aura.name] = {"duration": aura.duration, "stacks": aura.current_stacks, "applied_duration": aura.applied_duration}
         
+        # count the auras active across all targets
+        total_target_aura_counts = defaultdict(dict)
+        for target in caster.potential_healing_targets:
+            for aura in target.target_active_buffs:
+                total_target_aura_counts[aura] = total_target_aura_counts.get(aura, 0) + 1
+        
+        # check cooldowns and add to priority breakdown
         spell_cooldowns = caster.check_cooldowns()
         
         # add spells that trigger other spells as a cast event and don't cost mana
         if self.name in ["Daybreak"]:
             update_spell_data_casts(caster.ability_breakdown, self.name, self.get_mana_cost(caster), self.holy_power_gain, self.holy_power_cost)
-            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns)
+            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts)
             
         # add spells that cost mana and don't heal
         if caster.mana >= self.get_mana_cost(caster) and self.get_mana_cost(caster) > 0 and not is_heal: 
             update_spell_data_casts(caster.ability_breakdown, self.name, self.get_mana_cost(caster), self.holy_power_gain, self.holy_power_cost)   
-            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns)
+            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts)
             
         # add spells that cost mana and do heal       
         elif caster.mana >= self.get_mana_cost(caster) and is_heal:  
@@ -189,7 +201,7 @@ class Spell:
                 # add the target, healing, crit status, and increment hits
                 update_spell_data_heals(caster.ability_breakdown, self.name, target, ability_healing, is_crit)
                 if self.name not in ["Tyr's Deliverance", "Light's Hammer"]:
-                    update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, heal=heal_amount, is_crit=is_crit, remaining_cooldowns=spell_cooldowns)    
+                    update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, heal=heal_amount, is_crit=is_crit, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts)    
                 
                 append_spell_heal_event(caster.events, self.name, caster, target, ability_healing, current_time, is_crit, spends_mana=True)   
                 append_spell_cast_event(caster.ability_cast_events, self.name, caster, current_time, target)    

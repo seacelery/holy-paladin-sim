@@ -10,7 +10,7 @@ from flask_socketio import emit
 from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget
-from .auras_buffs import HolyReverberation, HoT
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
 from ..utils.battlenet_api import get_spell_icon_data, get_access_token
 from ..utils import cache
@@ -40,6 +40,12 @@ class Simulation:
         
         self.time_since_last_check = 0
         self.previous_total_healing = 0
+        
+        for target in self.paladin.beacon_targets:
+            target.apply_buff_to_target(BeaconOfLightBuff(), self.elapsed_time, caster=self.paladin)
+        
+        for target in self.paladin.beacon_targets:
+            print(target.target_active_buffs)
         
         self.initial_state = copy.deepcopy(self)
                 
@@ -244,8 +250,7 @@ class Simulation:
                     
                     if ability_instance.current_charges < ability_instance.max_charges:
                         ability_instance.start_cooldown(self.paladin)
-
-                                        
+                                 
     def decrement_buffs_on_self(self):
         # for buff_name, buff in self.paladin.active_auras.items():
             # print(f"{self.elapsed_time}: buff name: {buff_name}, duration: {buff.duration}, charges: {buff.current_stacks}")
@@ -917,7 +922,7 @@ class Simulation:
             "encounter_length": self.encounter_length,
             "paladin_name": self.paladin.name,
             "iterations": self.iterations,
-            "max_mana": self.paladin.max_mana
+            "max_mana": self.paladin.max_mana,
         }
     
         end_time = time.time()

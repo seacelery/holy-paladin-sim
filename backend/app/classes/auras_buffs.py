@@ -273,7 +273,11 @@ class SophicDevotion(Buff):
  
  
 # target buffs   
-
+class BeaconOfLightBuff(Buff):
+    
+    def __init__(self):
+        super().__init__("Beacon of Light", float("inf"), base_duration=float("inf"))
+        
              
 class GlimmerOfLightBuff(Buff):
     

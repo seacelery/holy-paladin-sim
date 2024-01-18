@@ -124,16 +124,13 @@ body {
     border-bottom: 1px solid var(--border-colour-3);
     border-top: none;
     border-radius: 3px;
-
-    background-color: var(--panel-colour);
 }
 
 #options-navbar-1, [id^="results-navbar-"], [id^="buffs-line-graph-navbar-"] {
-    display: flex;
+    display: inline-flex;
 
     border-bottom: 1px solid var(--border-colour-3);
     border-radius: 3px;
-    border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 
     background-color: var(--background-colour);
@@ -150,7 +147,6 @@ body {
 
     border-top: 1px solid var(--border-colour-3);
     border-right: 1px solid var(--border-colour-3);
-    border-radius: 1px;
 
     text-align: center;
     font-size: 16px;
@@ -159,6 +155,15 @@ body {
     background-color: var(--panel-colour-2);
 
     user-select: none;
+}
+
+[id*="buffs-window-content"] {
+    text-align: left;
+}
+
+.options-tab:last-child, [class^="results-tab"]:last-child, [class^="buffs-line-graph-tab"]:last-child {
+    border-top-right-radius: 3px;
+    border-bottom: none;
 }
 
 .options-tab.active, [class^="results-tab"].active, [class^="buffs-line-graph-tab"].active {
@@ -182,6 +187,8 @@ body {
 
     border-right: 1px solid var(--border-colour-3);
     border-radius: 3px;
+
+    background-color: var(--panel-colour);
 }
 
 .options-tab-content {
@@ -672,8 +679,10 @@ input:focus {
 
 [id^="healing-tab-"], [id^="buffs-window-tab-"], [id^="resources-tab-"], [id^="priority-tab"] {
     border-bottom: none;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+}
+
+[id^="healing-tab-"]:first-child, [id^="buffs-window-tab-"]:first-child, [id^="resources-tab-"]:first-child, [id^="priority-tab"]:first-child {
+    border-top-left-radius: 3px;
 }
 
 /* ABILITY BREAKDOWN TABLE */
@@ -769,6 +778,7 @@ tr {
 
 .table-cell-left {
     padding-left: 5px;
+    padding-top: 1px;
 
     min-width: 350px;
     height: 35px;
@@ -781,6 +791,7 @@ tr {
 
 .table-cell-right {
     padding-right: 6px;
+    padding-top: 1px;
 
     height: 35px;
 
@@ -797,6 +808,7 @@ tr {
 .table-sub-cell-left {
     position: relative;
     padding-left: 5px;
+    padding-top: 1px;
 
     min-width: 350px;
     height: 35px;
@@ -822,6 +834,7 @@ tr {
 
 .table-sub-cell-right {
     padding-right: 6px;
+    padding-top: 1px;
 
     height: 35px;
     
@@ -837,6 +850,7 @@ tr {
 .table-sub-sub-cell-left {
     padding-left: 5px;
     position: relative;
+    padding-top: 1px;
 
     min-width: 350px;
     height: 35px;
@@ -862,6 +876,7 @@ tr {
 
 .table-sub-sub-cell-right {
     padding-right: 6px;
+    padding-top: 1px;
 
     height: 35px;
 
@@ -901,6 +916,7 @@ tr {
 
 .table-spell-name-text {
     padding-left: 6px;
+    padding-top: 1px;
 
     font-weight: 300;
 }
@@ -969,7 +985,7 @@ tr {
 
 .table-arrows {
     padding-left: 9px;
-    margin-top: -5px;
+    margin-top: -6px;
 
     font-size: 14px;
 
@@ -1193,6 +1209,7 @@ tr {
 
 .buff-table-cell-left {
     padding-left: 5px;
+    padding-top: 1px;
 
     height: 35px;
 
@@ -1204,6 +1221,7 @@ tr {
 
 .buff-table-cell-right {
     padding-right: 8px;
+    padding-top: 1px;
 
     height: 35px;
 
@@ -1220,6 +1238,7 @@ tr {
 .buff-table-sub-cell-left {
     position: relative;
     padding-left: 37px;
+    padding-top: 1px;
 
     height: 35px;
 
@@ -1232,6 +1251,7 @@ tr {
 
 .buff-table-sub-cell-right {
     padding-right: 8px;
+    padding-top: 1px;
 
     height: 35px;
 
@@ -1405,22 +1425,24 @@ tr {
     height: 30px;
 }
 
-.priority-grid-cooldown-filter {
+.priority-grid-cooldown-filter, .priority-grid-player-auras-filter {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: flex;
     align-items: center;
+
+    transform: translateX(7px);
 
     width: 45px;
     height: 25px;
 }
 
-.priority-grid-cooldown-filter:hover, .priority-grid-cooldown-icon-container:hover {
+.priority-grid-cooldown-filter:hover, .priority-grid-cooldown-icon-container:hover, .priority-grid-player-auras-filter:hover {
     cursor: pointer;
     user-select: none;
 }
 
-.priority-grid-cooldown-filter-button {
+.priority-grid-cooldown-filter-button, .priority-grid-player-auras-filter-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1433,18 +1455,19 @@ tr {
     background-color: var(--panel-colour-2);
 }
 
-.priority-grid-cooldown-filter-icon {
+.priority-grid-cooldown-filter-icon, .priority-grid-player-auras-filter-icon {
     font-size: 15px;
 }
 
-.priority-grid-cooldown-filter-modal {
+.priority-grid-cooldown-filter-modal, .priority-grid-player-auras-filter-modal {
     position: absolute;
-    top: -20px;
-    left: 50px;
-    z-index: 3;
+    top: -26px;
+    left: 41px;
+    padding: 5px;
+    z-index: 1000;
 
-    min-height: 85px;
-    min-width: 200px;
+    min-height: 80px;
+    min-width: 187px;
     max-width: 200px;
 
     border: 1px solid var(--border-colour-3);
@@ -1454,7 +1477,7 @@ tr {
     transition: opacity 0.1s ease-in-out;
 }
 
-.priority-grid-cooldown-filter-modal::before, .priority-grid-cooldown-filter-modal::after {
+.priority-grid-cooldown-filter-modal::before, .priority-grid-cooldown-filter-modal::after, .priority-grid-player-auras-filter-modal::before, .priority-grid-player-auras-filter-modal::after {
     content: "";
     position: absolute;
     transform: rotate(-90deg);
@@ -1462,30 +1485,34 @@ tr {
     border-right: 11px solid transparent;
 }
 
-.priority-grid-cooldown-filter-modal::before {
+.priority-grid-cooldown-filter-modal::before, .priority-grid-player-auras-filter-modal::before {
     top: 33px;
     left: -16px;
     z-index: 2;
     border-bottom: 11px solid var(--panel-colour-2);
 }
 
-.priority-grid-cooldown-filter-modal::after {
+.priority-grid-cooldown-filter-modal::after, .priority-grid-player-auras-filter-modal::after {
     top: 34px;
     left: -17px;
     border-bottom: 10px solid var(--border-colour-3);
 }
 
-.priority-grid-cooldown-modal-icon-container {
-    display: inline-block;
-    padding: 3px;
+.priority-grid-player-auras-modal-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
 
+[class*="priority-grid-cooldown-modal-icon-container"], [class*="priority-grid-player-auras-modal-icon-container"] {
+    display: inline-block;
     opacity: 1;
 }
 
 /* priority grid css */
 .priority-grid-container {
     display: grid;
-    grid-template-columns: 0.3fr 0.2fr 0.2fr 0.4fr 1fr 1fr 1fr;  
+    grid-template-columns: 0.3fr 0.2fr 0.2fr 0.35fr 1fr 0.35fr 1fr 0.35fr;  
 }
   
 .priority-grid-header-row,
@@ -1511,9 +1538,11 @@ tr {
   
 .priority-grid-cell {
     display: flex;
-    align-items: center;
+    align-items: flex-start;    
     justify-content: center;
-    padding: 5px;
+    padding: 7px 5px 5px 5px;
+
+    height: 100%;
 
     border: 1px solid var(--border-colour-3);
 
@@ -1523,6 +1552,7 @@ tr {
 }
   
 .priority-grid-header-cell {
+    padding: 10px 0 10px 0;
     background-color: var(--panel-colour);
 }
 
@@ -1534,6 +1564,10 @@ tr {
     border-bottom: none;
 }
 
+.priority-grid-time-cell, .priority-grid-number-cell, .priority-grid-name-cell {
+    padding-top: 10px;
+}
+
 .priority-grid-spell-icon {
     width: 50px;
     height: 50px;
@@ -1543,22 +1577,25 @@ tr {
 
 .priority-grid-resources-cell {
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     gap: 5px;
-    padding: 5px 0 5px 0;
+    padding: 9px 0 5px 0;
 }
 
-/* .priority-grid-holy-power-display {
-    transform: translateY(5px);
+.priority-grid-holy-power-display {
+    transform: translateY(2px);
     padding-left: 1px;
-    border: 1px solid var(--background-colour);
     border-bottom: none;
-} */
+    width: 103px;
+}
 
 .priority-grid-mana-bar-container {
     position: relative;
+    margin-top: 1px;
 
-    width: 100px;
-    height: 20px;
+    width: 105px;
+    height: 25px;
     overflow: hidden;
 }
 
@@ -1581,7 +1618,6 @@ tr {
 
 .priority-grid-mana-bar::-webkit-progress-bar {
     background-color: #2e30b63a;
-    
 }
 
 .priority-grid-mana-bar::-moz-progress-bar {
@@ -1599,11 +1635,6 @@ tr {
     pointer-events: none;
 }
 
-.priority-grid-player-auras-cell {
-    padding: 3px;
-    justify-content: flex-start;
-}
-
 .priority-grid-player-auras-container, .priority-grid-cooldowns-container {
     display: flex;
     max-width: 100%;
@@ -1614,12 +1645,12 @@ tr {
     height: 100%;
 }
 
-.priority-grid-aura-icon-container, [class*="priority-grid-cooldown-icon-container"], .priority-grid-cooldown-icon-container, .priority-grid-cooldown-modal-icon-container {
+[class*="priority-grid-player-auras-icon-container"], [class*="priority-grid-cooldown-icon-container"], .priority-grid-cooldown-icon-container, [class*="priority-grid-cooldown-modal-icon-container"], [class*="priority-grid-player-auras-modal-icon-container"] {
     position: relative;
 }
 
-[class*="priority-grid-cooldown-icon-container"], .priority-grid-cooldown-modal-icon-container {
-    margin: 5px 5px 0 0;
+[class*="priority-grid-player-auras-icon-container"], [class*="priority-grid-cooldown-icon-container"], [class*="priority-grid-cooldown-modal-icon-container"], [class*="priority-grid-player-auras-modal-icon-container"] {
+    margin: 2.5px;
 
     width: 30px;
     height: 30px;
@@ -1627,14 +1658,12 @@ tr {
 
 .aura-icon-overlay-container, .cooldown-icon-overlay-container {
     position: relative;
-    margin: 2px;
 
     width: 30px;
     height: 30px;
 }
 
-.priority-grid-aura-icon, .priority-grid-cooldown-icon, .priority-grid-cooldown-modal-icon {
-    z-index: 1;
+.priority-grid-aura-icon, .priority-grid-cooldown-icon, .priority-grid-cooldown-modal-icon, .priority-grid-player-auras-modal-icon {
 
     width: 30px;
     height: 30px;
@@ -1642,24 +1671,24 @@ tr {
     border: 1px solid var(--border-colour-3);
 }
 
-.priority-grid-aura-duration-text {
-    margin-top: -3px;
-
-    font-size: 13px;
+.priority-grid-aura-duration-text, .priority-grid-aura-counts-text {
+    font-size: 12px;
     color: var(--healing-font);
 }
 
-.priority-grid-cooldown-remaining-text {
-    margin: -3px 0 0 3px;
+.priority-grid-aura-counts-text {
+    margin-right: 1px;
+}
 
-    font-size: 13px;
+.priority-grid-cooldown-remaining-text {
+    font-size: 12px;
     color: var(--red-font-hover);
 }
 
 .priority-grid-aura-stacks-text, .priority-grid-cooldown-charges-text {
     position: absolute;
-    left: 0;
-    top: 4px;
+    left: 0px;
+    top: 2px;
     bottom: 0;
     right: 0;
     text-shadow:
@@ -1675,10 +1704,6 @@ tr {
     font-size: 16px;
 }
 
-.priority-grid-cooldown-charges-text {
-    left: 3px;
-}
-
 .aura-icon-overlay, .cooldown-icon-overlay {
     position: absolute;
     top: 0;
@@ -1687,7 +1712,6 @@ tr {
     height: 100%;
     border-radius: 50%;
     background: transparent;
-    z-index: 2;
 }
 
 .aura-duration-overlay, .cooldown-remaining-overlay {

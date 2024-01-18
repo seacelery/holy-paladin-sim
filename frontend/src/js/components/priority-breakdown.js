@@ -2,6 +2,7 @@ import { createElement } from "./index.js";
 import { spellToIconsMap } from '../utils/spell-to-icons-map.js';
 import { buffsToIconsMap } from "../utils/buffs-to-icons-map.js";
 import { cooldownFilterState } from './index.js';
+import { playerAurasFilterState } from './index.js';
 
 const createPriorityBreakdown = (simulationData, containerCount) => {
     const formatTime = (seconds) => {
@@ -16,14 +17,17 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
         return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
     };
 
+    // aura overlay starts from nothing and fills clockwise
     const setupAuraOverlay = (overlayElement, currentDuration, totalDuration) => {
         const percentage = 100 - (currentDuration / totalDuration) * 100;
         overlayElement.style.background = `conic-gradient(rgba(0, 0, 0, 0.5) ${percentage}%, transparent ${percentage}%)`;
     };
 
+    // cooldown overlay should start with the full overlay present but needs to be mirrored to unfill clockwise
     const setupCooldownOverlay = (overlayElement, remainingCooldown, baseCooldown) => {
-        const percentage = 100 - (remainingCooldown / baseCooldown) * 100;
+        const percentage = (remainingCooldown / baseCooldown) * 100;
         overlayElement.style.background = `conic-gradient(rgba(0, 0, 0, 0.5) ${percentage}%, transparent ${percentage}%)`;
+        overlayElement.style.transform = "scaleX(-1)";
     };
 
     const priorityData = simulationData.results.priority_breakdown;
@@ -31,6 +35,72 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     const priorityBreakdownContainer = document.getElementById(`priority-breakdown-table-container-${containerCount}`);
 
     // create filter options
+
+    // player auras filter
+    const playerAurasFilter = createElement("div", "priority-grid-player-auras-filter", null);
+    const playerAurasFilterModal = createElement("div", "priority-grid-player-auras-filter-modal", null);
+
+    const playerAurasFilterButton = createElement("div", "priority-grid-player-auras-filter-button", "priority-grid-player-auras-filter-button", null);
+    const playerAurasFilterIcon = createElement("i", "priority-grid-player-auras-filter-icon fa-solid fa-wand-sparkles", "priority-grid-player-auras-filter-icon", null);
+    playerAurasFilterButton.appendChild(playerAurasFilterIcon);
+    playerAurasFilterButton.addEventListener("click", (e) => {
+        playerAurasFilterModal.style.opacity = playerAurasFilterModal.style.opacity === "0" ? "1" : "0";
+    });
+
+    playerAurasFilter.appendChild(playerAurasFilterModal);
+    playerAurasFilter.appendChild(playerAurasFilterButton);
+
+    // hardcode the order and track the auras present in the current simulation
+    const playerAurasModalIconOrder = ["Avenging Wrath", "Blessing of Dawn", "Blessing of Dusk", "Infusion of Light", "Divine Purpose", 
+                                       "Tyr's Deliverance (self)", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring",
+                                       "Rising Sunlight", "First Light", "Divine Favor", "Awakening", "Awakening READY!!!!!!"];
+    const currentSimulationPlayerAuras = [];
+
+    for (const timestamp in priorityData) {
+        const playerAurasData = priorityData[timestamp].player_active_auras;
+        for (const auraName in playerAurasData) {
+            if (!playerAurasModalIconOrder.includes(auraName)) {
+                playerAurasModalIconOrder.push(auraName);      
+            };
+            if (!currentSimulationPlayerAuras.includes(auraName)) {
+                currentSimulationPlayerAuras.push(auraName);
+            };  
+        };
+    };
+
+    // create the player auras modal
+    const playerAurasModalContainer = createElement("div", `priority-grid-player-auras-modal-container`, null);
+    playerAurasModalIconOrder.forEach(auraName => {
+        if (currentSimulationPlayerAuras.includes(auraName)) {
+            const formattedAuraName = auraName.toLowerCase().replaceAll(" (self)", "").replaceAll(" ", "-").replaceAll("'", "");
+            const playerAurasModalIconContainer = createElement("div", `priority-grid-player-auras-modal-icon-container-${formattedAuraName}`, null);
+            const playerAurasModalIcon = createElement("img", "priority-grid-player-auras-modal-icon", null);
+            playerAurasModalIcon.src = buffsToIconsMap[auraName];
+            playerAurasModalIconContainer.appendChild(playerAurasModalIcon);
+            playerAurasModalIconContainer.addEventListener("click", () => {
+                const isVisible = playerAurasModalIconContainer.style.filter !== "grayscale(1)";
+                playerAurasModalIconContainer.style.filter = isVisible ? "grayscale(1)" : "grayscale(0)";
+
+                playerAurasFilterState[formattedAuraName] = !isVisible;
+            
+                const playerAurasIconsToHide = document.querySelectorAll(`.priority-grid-player-auras-icon-container-${formattedAuraName}`);
+                playerAurasIconsToHide.forEach(icon => {
+                    icon.style.display = isVisible ? "none" : "block";
+                });      
+                
+                const playerAurasModalIconsToDim = document.querySelectorAll(`.priority-grid-player-auras-modal-icon-container-${formattedAuraName}`);
+                playerAurasModalIconsToDim.forEach(icon => {
+                    icon.style.filter = isVisible ? "grayscale(1)" : "grayscale(0)";
+                });
+            });
+            playerAurasModalContainer.appendChild(playerAurasModalIconContainer);
+        };
+        
+        
+    });      
+    playerAurasFilterModal.appendChild(playerAurasModalContainer);
+
+    // cooldown filter
     const cooldownFilter = createElement("div", "priority-grid-cooldown-filter", null);
     const cooldownFilterModal = createElement("div", "priority-grid-cooldown-filter-modal", null);
     
@@ -44,37 +114,45 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     cooldownFilter.appendChild(cooldownFilterModal);
     cooldownFilter.appendChild(cooldownFilterButton);
 
-    const cooldownModalIconOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath", "Avenging Wrath", "Daybreak", 
-                            "Divine Toll", "Tyr's Deliverance", "Blessing of the Seasons", "Divine Favor",]
+    // hardcode the order and exclude certain spells
+    const cooldownModalIconOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Avenging Wrath", "Daybreak", 
+                            "Divine Toll", "Tyr's Deliverance", "Blessing of the Seasons", "Divine Favor",];
+    const excludedCooldowns = ["Flash of Light", "Holy Light", "Word of Glory", "Light of Dawn", "Wait",]
+
     for (const timestamp in priorityData) {
-        const timestampData = priorityData[timestamp];
-        const cooldowns = timestampData.remaining_cooldowns;
-        cooldownModalIconOrder.forEach(cooldownName => {
-            if (cooldowns[cooldownName]) {
-                const formattedCooldownName = cooldownName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
-                const modalIconContainer = createElement("div", "priority-grid-cooldown-modal-icon-container", null);
-                const modalIcon = createElement("img", "priority-grid-cooldown-modal-icon", null);
-                modalIcon.src = spellToIconsMap[cooldownName];
-                modalIconContainer.appendChild(modalIcon);
-                modalIconContainer.addEventListener("click", () => {
-                    const isVisible = modalIconContainer.style.opacity !== "0.4";
-                    modalIconContainer.style.opacity = isVisible ? "0.4" : "1";
-
-                    cooldownFilterState[formattedCooldownName] = !isVisible;
-                    console.log(cooldownFilterState)
-
-                    const iconsToHide = document.querySelectorAll(`.priority-grid-cooldown-icon-container-${formattedCooldownName}`);
-                    iconsToHide.forEach(icon => {
-                        icon.style.display = isVisible ? "none" : "block";
-                    });            
-                });
-                cooldownFilterModal.appendChild(modalIconContainer);
-                
-                const index = cooldownModalIconOrder.indexOf(cooldownName);
-                cooldownModalIconOrder.splice(index, 1);
+        const cooldownsData = priorityData[timestamp].remaining_cooldowns;
+        for (const cooldownName in cooldownsData) {
+            if (!cooldownModalIconOrder.includes(cooldownName) && !excludedCooldowns.includes(cooldownName)) {
+                cooldownModalIconOrder.push(cooldownName);      
             };
-        });          
+        };
     };
+
+    // create the cooldowns modal
+    cooldownModalIconOrder.forEach(cooldownName => {
+        const formattedCooldownName = cooldownName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
+        const cooldownModalIconContainer = createElement("div", `priority-grid-cooldown-modal-icon-container-${formattedCooldownName}`, null);
+        const cooldownModalIcon = createElement("img", "priority-grid-cooldown-modal-icon", null);
+        cooldownModalIcon.src = spellToIconsMap[cooldownName];
+        cooldownModalIconContainer.appendChild(cooldownModalIcon);
+        cooldownModalIconContainer.addEventListener("click", () => {
+            const isVisible = cooldownModalIconContainer.style.filter !== "grayscale(1)";
+            cooldownModalIconContainer.style.filter = isVisible ? "grayscale(1)" : "grayscale(0)";
+
+            cooldownFilterState[formattedCooldownName] = !isVisible;
+        
+            const cooldownIconsToHide = document.querySelectorAll(`.priority-grid-cooldown-icon-container-${formattedCooldownName}`);
+            cooldownIconsToHide.forEach(icon => {
+                icon.style.display = isVisible ? "none" : "block";
+            });      
+            
+            const cooldownModalIconsToDim = document.querySelectorAll(`.priority-grid-cooldown-modal-icon-container-${formattedCooldownName}`);
+            cooldownModalIconsToDim.forEach(icon => {
+                icon.style.filter = isVisible ? "grayscale(1)" : "grayscale(0)";
+            });
+        });
+        cooldownFilterModal.appendChild(cooldownModalIconContainer);
+    });          
     
     // create the grid
     const createPriorityGrid = (data, container, headers) => {
@@ -87,8 +165,11 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             headerCell.textContent = header;
             gridHeaderRow.appendChild(headerCell);
 
+            if (headerCell.textContent === "Player Auras") {
+                headerCell.appendChild(playerAurasFilter);
+            };
+
             if (headerCell.textContent === "Cooldowns") {
-                // convert to jquery object for popover
                 headerCell.appendChild(cooldownFilter);
             };
         });
@@ -142,8 +223,9 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const playerAurasContainer = createElement("div", "priority-grid-player-auras-container", null);
             const playerAuras = timestampData.player_active_auras;
             for (const aura in playerAuras) {                
+                const formattedAuraName = aura.toLowerCase().replaceAll(" (self)", "").replaceAll(" ", "-").replaceAll("'", "");
                 // create an icon for each aura and show duration & stacks
-                const auraIconContainer = createElement("div", "priority-grid-aura-icon-container", null);
+                const auraIconContainer = createElement("div", `priority-grid-player-auras-icon-container-${formattedAuraName}`, null);
 
                 // create an overlay for each icon, going clockwise
                 const iconOverlayContainer = createElement("div", "aura-icon-overlay-container", null);
@@ -175,15 +257,44 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             playerAurasCell.appendChild(playerAurasContainer);
             gridRow.appendChild(playerAurasCell);
 
-            const targetCell = createElement("div", "priority-grid-target-cell priority-grid-cell", null);
             const targetAurasCell = createElement("div", "priority-grid-target-auras-cell priority-grid-cell", null);
-
-            for (const target in timestampData.target_active_auras) {
-                // console.log(target)
-                // console.log(timestampData.target_active_auras[target])
-            };
-
-            // gridRow.appendChild(targetCell);
+            const targetAurasContainer = createElement("div", "priority-grid-player-auras-container", null);
+            const targets = timestampData.target_active_auras;           
+            for (const target in targets) {
+                const targetAuras = targets[target];
+                for (const aura in targetAuras) {                
+                    const formattedAuraName = aura.toLowerCase().replaceAll(" (self)", "").replaceAll(" ", "-").replaceAll("'", "");
+                    // create an icon for each aura and show duration & stacks
+                    const auraIconContainer = createElement("div", `priority-grid-player-auras-icon-container-${formattedAuraName}`, null);
+    
+                    // create an overlay for each icon, going clockwise
+                    const iconOverlayContainer = createElement("div", "aura-icon-overlay-container", null);
+                    const auraOverlay = createElement("div", "aura-duration-overlay", null);
+                    setupAuraOverlay(auraOverlay, targetAuras[aura].duration, targetAuras[aura].applied_duration);
+    
+                    const auraIcon = createElement("img", "priority-grid-aura-icon", null);
+                    auraIcon.src = buffsToIconsMap[aura];
+    
+                    const auraDurationText = createElement("div", "priority-grid-aura-duration-text", null);
+                    if (targetAuras[aura].duration < 1000) {
+                        auraDurationText.textContent = targetAuras[aura].duration.toFixed(1);
+                    };
+                    
+                    const auraStacksText = createElement("div", "priority-grid-aura-stacks-text", null);
+                    if (targetAuras[aura].stacks > 1) {
+                        auraStacksText.textContent = targetAuras[aura].stacks;
+                    };
+    
+                    iconOverlayContainer.appendChild(auraIcon);
+                    iconOverlayContainer.appendChild(auraOverlay);
+    
+                    auraIconContainer.appendChild(iconOverlayContainer);
+                    auraIconContainer.appendChild(auraStacksText);
+                    auraIconContainer.appendChild(auraDurationText);
+                    targetAurasContainer.appendChild(auraIconContainer);
+                }; 
+            };         
+            targetAurasCell.appendChild(targetAurasContainer);        
             gridRow.appendChild(targetAurasCell);
 
             const cooldownsCell = createElement("div", "priority-grid-cooldowns-cell priority-grid-cell", null);
@@ -193,9 +304,11 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const generatorRow = createElement("div", "priority-grid-cooldown-row", null);
             const majorCooldownRow = createElement("div", "priority-grid-cooldown-row", null);
 
+            // select the order for each row
             const generatorRowOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath"];
-            const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Tyr's Deliverance", "Blessing of the Seasons", "Divine Favor",];
+            const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Tyr's Deliverance", "Light's Hammer", "Blessing of the Seasons", "Divine Favor",];
 
+            // only append if the cooldown is actually present in the current simulation
             generatorRowOrder.forEach(cooldownName => {
                 if (cooldowns[cooldownName]) {
                     const cooldown = cooldowns[cooldownName];
@@ -208,7 +321,11 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     
                     const cooldownIcon = createElement("img", "priority-grid-cooldown-icon", null);
                     cooldownIcon.src = spellToIconsMap[cooldownName];
-    
+                    // set to greyscale if the spell is on cooldown
+                    if (cooldown.remaining_cooldown > 0 && cooldown.current_charges < 1) {
+                        cooldownIcon.style.filter = "grayscale(1)";
+                    };
+     
                     const cooldownRemainingText = createElement("div", "priority-grid-cooldown-remaining-text", null);
                     cooldownRemainingText.textContent = cooldown.remaining_cooldown > 0 ? cooldown.remaining_cooldown.toFixed(1) : '';
 
@@ -237,6 +354,10 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     
                     const cooldownIcon = createElement("img", "priority-grid-cooldown-icon", null);
                     cooldownIcon.src = spellToIconsMap[cooldownName];
+                    // set to greyscale if the spell is on cooldown
+                    if (cooldowns[cooldownName].remaining_cooldown > 0) {
+                        cooldownIcon.style.filter = "grayscale(1)";
+                    };
 
                     const cooldownRemainingText = createElement("div", "priority-grid-cooldown-remaining-text", null);
                     cooldownRemainingText.textContent = cooldown.remaining_cooldown > 0 ? formatTime(cooldown.remaining_cooldown) : '';
@@ -259,34 +380,84 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             cooldownsContainer.appendChild(majorCooldownRow);
             cooldownsCell.appendChild(cooldownsContainer);
             gridRow.appendChild(cooldownsCell);
-    
+
+            const auraCountsCell = createElement("div", "priority-grid-player-auras-cell priority-grid-cell", null);
+            const auraCountsContainer = createElement("div", "priority-grid-player-auras-container", null);
+            const auraCounts = timestampData.total_target_aura_counts;
+            for (const aura in auraCounts) {                
+                const formattedAuraName = aura.toLowerCase().replaceAll(" (self)", "").replaceAll(" ", "-").replaceAll("'", "");
+                // create an icon for each aura and show duration & stacks
+                const auraIconContainer = createElement("div", `priority-grid-player-auras-icon-container-${formattedAuraName}`, null);
+
+                // create an overlay for each icon, going clockwise
+                const iconOverlayContainer = createElement("div", "aura-icon-overlay-container", null);
+                const auraOverlay = createElement("div", "aura-duration-overlay", null);
+
+                const auraIcon = createElement("img", "priority-grid-aura-icon", null);
+                auraIcon.src = buffsToIconsMap[aura];
+
+                const auraCountsText = createElement("div", "priority-grid-aura-counts-text", null);
+                auraCountsText.textContent = auraCounts[aura];
+
+                iconOverlayContainer.appendChild(auraIcon);
+                iconOverlayContainer.appendChild(auraOverlay);
+
+                auraIconContainer.appendChild(iconOverlayContainer);
+                auraIconContainer.appendChild(auraCountsText)
+                auraCountsContainer.appendChild(auraIconContainer);
+            };
+
+            auraCountsCell.appendChild(auraCountsContainer);
+            gridRow.appendChild(auraCountsCell);
+
             gridContainer.appendChild(gridRow);
         };
-
-        
-        
         return gridContainer;
     };
 
-    // close popover when clicked away
+    // close modals when clicked away
     document.addEventListener("click", (e) => {
-        const targetClasses = ["priority-grid-cooldown-filter-modal", "priority-grid-cooldown-filter-icon", "priority-grid-cooldown-filter-button",
-                               "priority-grid-cooldown-modal-icon", "priority-grid-cooldown-modal-icon-container"];
-        if (!targetClasses.some(className => e.target.classList.contains(className))) {
+        const playerAurasTargetClasses = ["priority-grid-player-auras-filter-modal", "priority-grid-player-auras-filter-icon", "priority-grid-player-auras-filter-button",
+                                          "priority-grid-player-auras-modal-icon", "priority-grid-player-auras-modal-icon-container"];
+        const cooldownsTargetClasses = ["priority-grid-cooldown-filter-modal", "priority-grid-cooldown-filter-icon", "priority-grid-cooldown-filter-button",
+                                        "priority-grid-cooldown-modal-icon", "priority-grid-cooldown-modal-icon-container"];
+        
+        if (!playerAurasTargetClasses.some(className => e.target.classList.contains(className))) {
+            playerAurasFilterModal.style.opacity = "0";
+        };
+
+        if (!cooldownsTargetClasses.some(className => e.target.classList.contains(className))) {
             cooldownFilterModal.style.opacity = "0";
         };
     });
 
-    const gridHeaders = ["Time", "Priority", "Spell", "Resources", "Player Auras", "Target Auras", "Cooldowns"];
+    // choose headers and create the grid
+    const gridHeaders = ["Time", "Priority", "Spell", "Resources", "Player Auras", "Target Auras", "Cooldowns", "Counts"];
     const priorityGrid = createPriorityGrid(priorityData, priorityBreakdownContainer, gridHeaders);
     priorityBreakdownContainer.appendChild(priorityGrid);
 
-    // disable icons that are in the global filter list
+    // disable icons that are in the global filter lists
+    Object.keys(playerAurasFilterState).forEach(auraName => {
+        const isVisible = playerAurasFilterState[auraName];
+        const icons = document.querySelectorAll(`.priority-grid-player-auras-icon-container-${auraName}`);
+        icons.forEach(icon => {
+            icon.style.display = isVisible ? "block" : "none";
+        });
+        const modalIcons = document.querySelectorAll(`.priority-grid-player-auras-modal-icon-container-${auraName}`);
+        modalIcons.forEach(icon => {
+            icon.style.filter = isVisible ? "grayscale(0)" : "grayscale(1)";
+        });
+    });
+
     Object.keys(cooldownFilterState).forEach(cooldownName => {
         const isVisible = cooldownFilterState[cooldownName];
         const icons = document.querySelectorAll(`.priority-grid-cooldown-icon-container-${cooldownName}`);
         icons.forEach(icon => {
             icon.style.display = isVisible ? "block" : "none";
+        });
+        const modalIcons = document.querySelectorAll(`.priority-grid-cooldown-modal-icon-container-${cooldownName}`);
+        modalIcons.forEach(icon => {
+            icon.style.filter = isVisible ? "grayscale(0)" : "grayscale(1)";
         });
     });
 };
