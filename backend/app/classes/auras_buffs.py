@@ -276,7 +276,7 @@ class SophicDevotion(Buff):
 class BeaconOfLightBuff(Buff):
     
     def __init__(self):
-        super().__init__("Beacon of Light", float("inf"), base_duration=float("inf"))
+        super().__init__("Beacon of Light", 10000, base_duration=10000)
         
              
 class GlimmerOfLightBuff(Buff):

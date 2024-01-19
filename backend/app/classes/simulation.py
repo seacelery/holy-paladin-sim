@@ -44,9 +44,6 @@ class Simulation:
         for target in self.paladin.beacon_targets:
             target.apply_buff_to_target(BeaconOfLightBuff(), self.elapsed_time, caster=self.paladin)
         
-        for target in self.paladin.beacon_targets:
-            print(target.target_active_buffs)
-        
         self.initial_state = copy.deepcopy(self)
                 
     def simulate(self):
@@ -152,7 +149,7 @@ class Simulation:
             ("Divine Toll", lambda: self.previous_ability == "Daybreak"),
             ("Blessing of the Seasons", lambda: True),
             ("Avenging Wrath", lambda: True),
-            # ("Light's Hammer", lambda: True),
+            ("Light's Hammer", lambda: True),
             ("Tyr's Deliverance", lambda: True),
             ("Divine Favor", lambda: True),
             ("Light of Dawn", lambda: self.paladin.holy_power == 5),
@@ -901,7 +898,8 @@ class Simulation:
         
         # pp.pprint(average_awakening_counts)
         # pp.pprint(average_ability_breakdown)
-        pp.pprint(self.paladin.events)
+        # pp.pprint(self.paladin.events)
+        # pp.pprint(self.paladin.priority_breakdown)
         
         full_results = {
             "healing_timeline": average_healing_timeline,
@@ -924,6 +922,8 @@ class Simulation:
             "iterations": self.iterations,
             "max_mana": self.paladin.max_mana,
         }
+        
+        # pp.pprint(average_ability_breakdown)
     
         end_time = time.time()
         simulation_time = end_time - start_time

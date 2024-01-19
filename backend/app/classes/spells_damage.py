@@ -51,7 +51,7 @@ class Judgment(Spell):
             # divine revelations
             if caster.is_talent_active("Divine Revelations"):
                 if "Infusion of Light" in caster.active_auras:
-                    divine_revelations_mana_gain = caster.base_mana * 0.005
+                    divine_revelations_mana_gain = caster.max_mana * 0.005
                     caster.mana += divine_revelations_mana_gain
                     update_mana_gained(caster.ability_breakdown, "Divine Revelations (Judgment)", divine_revelations_mana_gain)
             

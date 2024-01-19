@@ -33,13 +33,14 @@ class HolyShock(Spell):
     SPELL_ID = 20473
     SPELL_POWER_COEFFICIENT = 1.535 * 0.8
     MANA_COST = 0.028
+    BASE_MANA_COST = 0.028
     BASE_COOLDOWN = 8.5
     HOLY_POWER_GAIN = 1
     CHARGES = 1
     BONUS_CRIT = 0.1
     
     def __init__(self, caster):
-        super().__init__("Holy Shock", mana_cost=HolyShock.MANA_COST, cooldown=HolyShock.BASE_COOLDOWN, holy_power_gain=HolyShock.HOLY_POWER_GAIN, max_charges=HolyShock.CHARGES, hasted_cooldown=True, is_heal=True)
+        super().__init__("Holy Shock", mana_cost=HolyShock.MANA_COST, base_mana_cost=HolyShock.BASE_MANA_COST, cooldown=HolyShock.BASE_COOLDOWN, holy_power_gain=HolyShock.HOLY_POWER_GAIN, max_charges=HolyShock.CHARGES, hasted_cooldown=True, is_heal=True)
         if caster.is_talent_active("Light's Conviction"):
             self.max_charges = 2
             self.current_charges = self.max_charges
@@ -70,7 +71,7 @@ class HolyShock(Spell):
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
                 caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
-                reclamation_mana = self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                reclamation_mana = self.get_base_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
                 caster.mana += reclamation_mana
                 update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
             
@@ -277,7 +278,7 @@ class RisingSunlightHolyShock(Spell):
     BONUS_CRIT = 0.1
     
     def __init__(self, caster):
-        super().__init__("Holy Shock (Rising Sunlight)", holy_power_gain=RisingSunlightHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
+        super().__init__("Holy Shock (Rising Sunlight)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=RisingSunlightHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         # divine glimpse
@@ -306,7 +307,7 @@ class RisingSunlightHolyShock(Spell):
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
                 caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
-                reclamation_mana = self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                reclamation_mana = self.get_base_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
                 caster.mana += reclamation_mana
                 update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
             
@@ -450,7 +451,7 @@ class DivineTollHolyShock(Spell):
     BONUS_CRIT = 0.1
     
     def __init__(self, caster):
-        super().__init__("Holy Shock (Divine Toll)", holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, is_heal=True)
+        super().__init__("Holy Shock (Divine Toll)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, base_mana_cost=HolyShock.BASE_MANA_COST, is_heal=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         # divine glimpse
@@ -479,7 +480,7 @@ class DivineTollHolyShock(Spell):
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
                 caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
-                reclamation_mana = self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                reclamation_mana = self.get_base_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
                 caster.mana += reclamation_mana
                 update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
             
@@ -596,7 +597,7 @@ class DivineResonanceHolyShock(Spell):
     BONUS_CRIT = 0.1
     
     def __init__(self, caster):
-        super().__init__("Holy Shock (Divine Resonance)", holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
+        super().__init__("Holy Shock (Divine Resonance)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         # divine glimpse
@@ -625,7 +626,7 @@ class DivineResonanceHolyShock(Spell):
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
                 caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
-                reclamation_mana = self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
+                reclamation_mana = self.get_base_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
                 caster.mana += reclamation_mana
                 update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
             
@@ -719,7 +720,7 @@ class HolyLight(Spell):
             # divine revelations
             if caster.is_talent_active("Divine Revelations"):
                 if "Infusion of Light" in caster.active_auras:
-                    divine_revelations_mana_gain = caster.base_mana * 0.005
+                    divine_revelations_mana_gain = caster.max_mana * 0.005
                     caster.mana += divine_revelations_mana_gain
                     update_mana_gained(caster.ability_breakdown, "Divine Revelations (Holy Light)", divine_revelations_mana_gain)
             

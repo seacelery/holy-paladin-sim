@@ -113,7 +113,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     // leave cells blank for certain spells
     // "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", 
     const excludedSpells = ["Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)"];
-    const excludedSpellsOnlyManaAndCasts = ["Blessing of the Seasons", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring"];
+    const excludedSpellsOnlyManaAndCasts = ["Blessing of the Seasons", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", "Divine Favor", "Avenging Wrath"];
     const excludedSpellsCasts = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", 
                                  "Judgment of Light", "Greater Judgment", "Touch of Light", "Afterimage", "Glimmer of Light", "Glimmer of Light (Glistening Radiance (Light of Dawn))",
                                  "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)"];

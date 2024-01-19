@@ -190,10 +190,11 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
         let overallHolyPowerGained = 0;
         let overallHolyPowerSpent = 0;
         let overallHolyPowerWasted = 0;
+        let holyShockTotalManaGained = 0;
 
         for (const spellName in data) {
             const spellData = data[spellName];
-            overallManaGained += spellData.mana_gained;
+            overallManaGained += spellData.mana_gained;           
             overallManaSpent += spellData.mana_spent;
             overallHolyPowerGained += spellData.holy_power_gained;
             overallHolyPowerSpent += spellData.holy_power_spent;

@@ -211,7 +211,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             manaBarContainer.appendChild(manaBar);
 
             const manaText = createElement("div", "priority-grid-mana-text", null);
-            manaText.textContent = `${timestampData.resources.mana}`;
+            manaText.textContent = `${Math.round(timestampData.resources.mana)}`;
             // percent option
             // manaText.textContent = `${Math.round(timestampData.resources.mana / simulationData.simulation_details.max_mana * 100)}%`;
             manaBarContainer.appendChild(manaText);
