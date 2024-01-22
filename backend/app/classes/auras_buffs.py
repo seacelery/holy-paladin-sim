@@ -1,7 +1,7 @@
 import random
 
 from .auras import Buff
-from ..utils.misc_functions import append_spell_heal_event, format_time, update_mana_gained
+from ..utils.misc_functions import append_spell_heal_event, format_time, update_mana_gained, update_self_buff_data
 
 
 class HoT(Buff):
@@ -78,25 +78,47 @@ class AvengingWrathBuff(Buff):
     def __init__(self):
         super().__init__("Avenging Wrath", 20, base_duration=20)
         
-    def apply_effect(self, caster):
+    def apply_effect(self, caster, current_time=None):
+        if "Avenging Wrath (Awakening)" in caster.active_auras:
+            caster.active_auras["Avenging Wrath (Awakening)"].remove_effect(caster)
+            del caster.active_auras["Avenging Wrath (Awakening)"]   
+            update_self_buff_data(caster.self_buff_breakdown, "Avenging Wrath (Awakening)", current_time, "expired")      
+        
         if caster.is_talent_active("Avenging Wrath: Might"):
             caster.crit += 15
         caster.healing_multiplier *= 1.15
         caster.damage_multiplier *= 1.15
         
-    def remove_effect(self, caster):
+    def remove_effect(self, caster, current_time=None):
         if caster.is_talent_active("Avenging Wrath: Might"):
             caster.crit -= 15
         caster.healing_multiplier /= 1.15
         caster.damage_multiplier /= 1.15
+       
+       
+class AvengingWrathAwakening(Buff):
+     
+    def __init__(self):
+        super().__init__("Avenging Wrath (Awakening)", 12, base_duration=12)
         
+    def apply_effect(self, caster, current_time=None):
+        if caster.is_talent_active("Avenging Wrath: Might"):
+            caster.crit += 15
+        caster.healing_multiplier *= 1.15
+        caster.damage_multiplier *= 1.15
+        
+    def remove_effect(self, caster, current_time=None):
+        if caster.is_talent_active("Avenging Wrath: Might"):
+            caster.crit -= 15
+        caster.healing_multiplier /= 1.15
+        caster.damage_multiplier /= 1.15
         
 class DivineFavorBuff(Buff):
     
     def __init__(self):
         super().__init__("Divine Favor", 10000)
         
-    def apply_effect(self, caster):
+    def apply_effect(self, caster, current_time=None):
         if "Holy Light" in caster.abilities:
             caster.abilities["Holy Light"].spell_healing_modifier *= 1.6
             caster.abilities["Holy Light"].cast_time_modifier *= 0.7
@@ -106,7 +128,7 @@ class DivineFavorBuff(Buff):
             caster.abilities["Flash of Light"].cast_time_modifier *= 0.7
             caster.abilities["Flash of Light"].mana_cost_modifier *= 0.5
             
-    def remove_effect(self, caster):
+    def remove_effect(self, caster, current_time=None):
         if "Holy Light" in caster.abilities:
             caster.abilities["Holy Light"].spell_healing_modifier /= 1.6
             caster.abilities["Holy Light"].cast_time_modifier /= 0.7
@@ -125,11 +147,11 @@ class InfusionOfLight(Buff):
             self.current_stacks = 2
             self.max_stacks = 2
         
-    def apply_effect(self, caster):
+    def apply_effect(self, caster, current_time=None):
         if "Flash of Light" in caster.abilities:
             caster.abilities["Flash of Light"].mana_cost_modifier *= 0
         
-    def remove_effect(self, caster):
+    def remove_effect(self, caster, current_time=None):
         if "Flash of Light" in caster.abilities:
             caster.abilities["Flash of Light"].mana_cost_modifier = 1
             if "Divine Favor" in caster.active_auras:
@@ -144,7 +166,7 @@ class DivineResonance(Buff):
         super().__init__("Divine Resonance", 15, base_duration=15)
         self.last_holy_shock_time = 0
         
-    def apply_effect(self, caster):
+    def apply_effect(self, caster, current_time=None):
         self.last_holy_shock_time = 0
     
     def increment_divine_resonance(self, caster, current_time, tick_rate):
@@ -176,11 +198,11 @@ class FirstLight(Buff):
     def __init__(self):
         super().__init__("First Light", 6, base_duration=6)
         
-    def apply_effect(self, caster):
+    def apply_effect(self, caster, current_time=None):
         caster.haste_multiplier *= 1.25
         caster.update_hasted_cooldowns_with_haste_changes()
     
-    def remove_effect(self, caster):
+    def remove_effect(self, caster, current_time=None):
         caster.haste_multiplier /= 1.25
         caster.update_hasted_cooldowns_with_haste_changes()
         
@@ -204,7 +226,7 @@ class TyrsDeliveranceSelfBuff(Buff):
         self.last_tyr_tick_time = 0
         self.base_tick_interval = 1
         
-    def apply_effect(self, caster):
+    def apply_effect(self, caster, current_time=None):
         self.last_tyr_tick_time = 0
         caster.tyrs_deliverance_extended_by = 0
     
@@ -265,10 +287,10 @@ class SophicDevotion(Buff):
     def __init__(self):
         super().__init__("Sophic Devotion", 15, base_duration=15)
         
-    def apply_effect(self, caster):
+    def apply_effect(self, caster, current_time=None):
         caster.spell_power += 932
         
-    def remove_effect(self, caster):
+    def remove_effect(self, caster, current_time=None):
         caster.spell_power -= 932
  
  
@@ -315,7 +337,7 @@ class BlessingOfWinter(Buff):
         super().__init__("Blessing of Winter", 30, base_duration=30)
         self.last_holy_shock_time = 0
         
-    def apply_effect(self, caster):
+    def apply_effect(self, caster, current_time=None):
         self.last_winter_tick_time = 0
         self.mana_gained = 0
     
@@ -338,8 +360,8 @@ class BlessingOfSpring(Buff):
     def __init__(self):
         super().__init__("Blessing of Spring", 30, base_duration=30)
         
-    def apply_effect(self, caster):
+    def apply_effect(self, caster, current_time=None):
         caster.healing_multiplier *= 1.15
         
-    def remove_effect(self, caster):
+    def remove_effect(self, caster, current_time=None):
         caster.healing_multiplier /= 1.15

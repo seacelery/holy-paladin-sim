@@ -10,7 +10,7 @@ from flask_socketio import emit
 from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget
-from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
 from ..utils.battlenet_api import get_spell_icon_data, get_access_token
 from ..utils import cache
@@ -40,9 +40,13 @@ class Simulation:
         
         self.time_since_last_check = 0
         self.previous_total_healing = 0
+        self.aura_healing = {}
+        self.aura_instances = {}
         
         for target in self.paladin.beacon_targets:
             target.apply_buff_to_target(BeaconOfLightBuff(), self.elapsed_time, caster=self.paladin)
+            
+        self.test_time_since_last = 0
         
         self.initial_state = copy.deepcopy(self)
                 
@@ -74,23 +78,65 @@ class Simulation:
             self.increment_rppm_effects()
             self.regen_mana()
             
+            # TESTING ONLY
+            self.test_time_since_last += self.tick_rate
+            if self.test_time_since_last > 1:
+                # print(f"time: {self.elapsed_time}, healing: {self.paladin.healing_multiplier}, crit: {self.paladin.crit}")
+                print(f"time: {self.elapsed_time}" )
+                pp.pprint(self.paladin.active_auras)
+                self.test_time_since_last = 0
+            
             self.time_since_last_check += self.tick_rate
-            if self.time_since_last_check >= 1:
+            if self.time_since_last_check >= 0.05:
                 self.check_buff_counts()
                 self.check_healing()
                 self.check_resources()
                 
             self.elapsed_time += self.tick_rate
-        
+            # print(self.elapsed_time, self.paladin.abilities["Holy Shock"].remaining_cooldown, self.paladin.abilities["Holy Shock"].current_charges)
+       
     def check_healing(self):
         total_healing = 0
         for spell in self.paladin.ability_breakdown:
             total_healing += self.paladin.ability_breakdown[spell]["total_healing"]
-            
+        
         healing_this_second = total_healing - self.previous_total_healing
         self.previous_total_healing = total_healing
             
-        self.paladin.healing_timeline.update({round(self.elapsed_time): healing_this_second})
+        self.paladin.healing_timeline[round(self.elapsed_time, 2)] = healing_this_second
+        
+        # check healing during specific auras
+        auras_to_track = set(["Avenging Wrath", "Avenging Wrath (Awakening)", "First Light"])
+
+        # active_auras is a dictionary with aura names as keys
+        active_auras = set(self.paladin.active_auras.keys())
+
+        for aura in auras_to_track:
+            is_active = aura in active_auras
+
+            if aura not in self.aura_healing:
+                self.aura_healing[aura] = {}
+
+            if aura not in self.aura_instances:
+                self.aura_instances[aura] = 0
+
+            last_instance = self.aura_instances[aura]
+
+            # start or continue an aura instance
+            if is_active:
+                if last_instance not in self.aura_healing[aura] or self.aura_healing[aura][last_instance]["end_time"] is not None:
+                    self.aura_instances[aura] += 1
+                    self.aura_healing[aura][self.aura_instances[aura]] = {
+                        "start_time": round(self.elapsed_time, 2),
+                        "end_time": None,
+                        "total_healing": 0
+                    }
+                self.aura_healing[aura][self.aura_instances[aura]]["total_healing"] += round(healing_this_second)
+
+            # end the current aura period
+            elif self.aura_healing[aura] and last_instance in self.aura_healing[aura] and \
+                    self.aura_healing[aura][last_instance]["end_time"] is None:
+                self.aura_healing[aura][last_instance]["end_time"] = round(self.elapsed_time, 2)
         
     def check_resources(self):
         self.paladin.mana_timeline.update({round(self.elapsed_time): self.paladin.mana})
@@ -157,11 +203,13 @@ class Simulation:
             ("Holy Shock", lambda: True),
             
             # ("Word of Glory", lambda: True),
+            ("Judgment", lambda: True),
             ("Crusader Strike", lambda: True),
             
             
-            ("Judgment", lambda: True),
             ("Holy Light", lambda: True),
+            # ("Holy Shock", lambda: True),
+            # ("Divine Toll", lambda: True)
         ]  
         
         if self.priority_list:
@@ -262,10 +310,14 @@ class Simulation:
             
             if buff_name == "Tyr's Deliverance (self)":
                 self.paladin.active_auras["Tyr's Deliverance (self)"].trigger_partial_tick(self.paladin, self.elapsed_time)
-                
+                                  
+            if buff_name == "Avenging Wrath" and self.paladin.awakening_queued:
+                self.paladin.apply_buff_to_self(AvengingWrathAwakening(), self.elapsed_time)
+                self.paladin.awakening_queued = False
+
             self.paladin.active_auras[buff_name].remove_effect(self.paladin)
             del self.paladin.active_auras[buff_name]
-            
+                         
             update_self_buff_data(self.paladin.self_buff_breakdown, buff_name, self.elapsed_time, "expired")
             # print(f"new crit %: {self.paladin.crit}")
         
@@ -371,36 +423,45 @@ class Simulation:
                 except:
                     print(f"Spell: {spell_name} not found")
     
-    def get_spell_ids_from_module(self, module_name):
-        spell_ids = {}
-        for name, obj in inspect.getmembers(sys.modules[module_name]):
-            if inspect.isclass(obj) and hasattr(obj, "SPELL_ID"):
-                spell_id = getattr(obj, "SPELL_ID")
-                spell_ids[spell_id] = name
-        return spell_ids
+    def update_final_cooldowns_breakdown_times(self):
+        for aura, instances in self.aura_healing.items():
+                last_instance_number = max(instances.keys(), default=0)
+                if last_instance_number > 0:
+                    last_instance = instances[last_instance_number]
+                    if last_instance["end_time"] is None:
+                        last_instance["end_time"] = self.encounter_length
     
-    def get_spell_ids(self):
-        modules = [
-            "app.classes.spells_healing",
-            "app.classes.spells_damage",
-            "app.classes.spells_auras",
-            "app.classes.spells_passives",
-            "app.classes.auras_buffs",
-            "app.classes.auras_debuffs"
-        ]
+    # old maybe useful idk
+    # def get_spell_ids_from_module(self, module_name):
+    #     spell_ids = {}
+    #     for name, obj in inspect.getmembers(sys.modules[module_name]):
+    #         if inspect.isclass(obj) and hasattr(obj, "SPELL_ID"):
+    #             spell_id = getattr(obj, "SPELL_ID")
+    #             spell_ids[spell_id] = name
+    #     return spell_ids
+    
+    # def get_spell_ids(self):
+    #     modules = [
+    #         "app.classes.spells_healing",
+    #         "app.classes.spells_damage",
+    #         "app.classes.spells_auras",
+    #         "app.classes.spells_passives",
+    #         "app.classes.auras_buffs",
+    #         "app.classes.auras_debuffs"
+    #     ]
         
-        all_spell_ids = {}
-        for module in modules:
-            all_spell_ids.update(self.get_spell_ids_from_module(module))
+    #     all_spell_ids = {}
+    #     for module in modules:
+    #         all_spell_ids.update(self.get_spell_ids_from_module(module))
         
-        # add misc spells    
-        all_spell_ids.update({53563: "BeaconOfLight"})
-        all_spell_ids.update({414127: "OverflowingLight"})
-        all_spell_ids.update({392902: "ResplendentLight"})
-        all_spell_ids.update({403042: "CrusadersReprieve"})
-        all_spell_ids.update({385414: "Afterimage"})
+    #     # add misc spells    
+    #     all_spell_ids.update({53563: "BeaconOfLight"})
+    #     all_spell_ids.update({414127: "OverflowingLight"})
+    #     all_spell_ids.update({392902: "ResplendentLight"})
+    #     all_spell_ids.update({403042: "CrusadersReprieve"})
+    #     all_spell_ids.update({385414: "Afterimage"})
         
-        return all_spell_ids
+    #     return all_spell_ids
     
     def reset_simulation(self):
         current_state = copy.deepcopy(self.initial_state)
@@ -417,9 +478,11 @@ class Simulation:
         full_healing_timeline_results = {}
         full_mana_timeline_results = {}
         full_holy_power_timeline_results = {}
+        full_cooldowns_breakdown_results = {}
         
         full_awakening_trigger_times_results = {}
 
+        # first spell belongs to the second
         sub_spell_map = {
                 "Reclamation (Holy Shock)": "Holy Shock",
                 "Reclamation (Crusader Strike)": "Crusader Strike",
@@ -462,6 +525,10 @@ class Simulation:
         
             self.simulate()
             
+            self.update_final_cooldowns_breakdown_times()
+            
+            
+            
             ability_breakdown = self.paladin.ability_breakdown
             self_buff_breakdown = self.paladin.self_buff_breakdown
             target_buff_breakdown = self.paladin.target_buff_breakdown
@@ -471,10 +538,34 @@ class Simulation:
             healing_timeline = self.paladin.healing_timeline
             mana_timeline = self.paladin.mana_timeline
             holy_power_timeline = self.paladin.holy_power_timeline
+            cooldowns_breakdown = self.aura_healing
+            
+            
             
             # pp.pprint(self.paladin.events)           
             # pp.pprint(ability_breakdown)
+            # pp.pprint(healing_timeline)
             
+            pp.pprint(cooldowns_breakdown)
+            
+            # accumulate cooldown breakdown results
+            for aura, instances in cooldowns_breakdown.items():
+                for instance_number, data in instances.items():
+                    # Initialize the aura and instance number if not already present
+                    if aura not in full_cooldowns_breakdown_results:
+                        full_cooldowns_breakdown_results[aura] = {}
+                    if instance_number not in full_cooldowns_breakdown_results[aura]:
+                        full_cooldowns_breakdown_results[aura][instance_number] = {"total_healing": 0, "total_duration": 0}
+
+                    # Add the total healing of this instance to the full results
+                    full_cooldowns_breakdown_results[aura][instance_number]["total_healing"] += data["total_healing"]
+
+                    # Calculate and add the duration for this instance
+                    if data["end_time"] is not None and data["start_time"] is not None:
+                        duration = data["end_time"] - data["start_time"]
+                        full_cooldowns_breakdown_results[aura][instance_number]["total_duration"] += duration
+            
+            # accumulate awakening trigger results
             for key, value in self.paladin.awakening_trigger_times.items():
                 full_awakening_trigger_times_results[key] = full_awakening_trigger_times_results.get(key, 0) + value
             
@@ -876,6 +967,19 @@ class Simulation:
         average_mana_timeline = average_out_simulation_results(combined_mana_timeline_results, self.iterations)
         average_holy_power_timeline = average_out_simulation_results(combined_holy_power_timeline_results, self.iterations)
         
+        # adjust cooldowns breakdown for number of iterations
+        for aura, instances in full_cooldowns_breakdown_results.items():
+            for instance, details in instances.items():
+                details["total_duration"] /= self.iterations
+                details["total_healing"] /= self.iterations 
+                details["hps"] = details["total_healing"] / details["total_duration"]
+        
+        # adjust healing timeline from tick rate increments to integers
+        adjusted_average_healing_timeline = {}        
+        for timestamp, healing in average_healing_timeline.items():
+            rounded_time = int(timestamp)
+            adjusted_average_healing_timeline[rounded_time] = adjusted_average_healing_timeline.get(rounded_time, 0) + healing
+        
         # healing_and_buff_events = sorted(self.paladin.events + self.paladin.buff_events, key=get_timestamp)
         # healing_and_beacon_events = sorted(self.paladin.events + self.paladin.beacon_events, key=get_timestamp)
         
@@ -900,9 +1004,10 @@ class Simulation:
         # pp.pprint(average_ability_breakdown)
         # pp.pprint(self.paladin.events)
         # pp.pprint(self.paladin.priority_breakdown)
+        pp.pprint(full_cooldowns_breakdown_results)
         
         full_results = {
-            "healing_timeline": average_healing_timeline,
+            "healing_timeline": adjusted_average_healing_timeline,
             "mana_timeline": average_mana_timeline,
             "holy_power_timeline": average_holy_power_timeline,
             "ability_breakdown": average_ability_breakdown,
@@ -913,7 +1018,8 @@ class Simulation:
             "tyrs_counts": average_tyrs_counts,
             "awakening_counts": average_awakening_counts,
             "awakening_triggers": full_awakening_trigger_times_results,
-            "priority_breakdown": self.paladin.priority_breakdown
+            "priority_breakdown": self.paladin.priority_breakdown,
+            "cooldowns_breakdown": full_cooldowns_breakdown_results
         }
         
         simulation_details = {
@@ -928,6 +1034,7 @@ class Simulation:
         end_time = time.time()
         simulation_time = end_time - start_time
         print(f"Simulation time: {simulation_time} seconds")
+        print(self.paladin.holy_shock_resets)
 
         # average_ability_breakdown, self.elapsed_time, None, average_self_buff_breakdown, average_target_buff_breakdown, 
         # average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, 

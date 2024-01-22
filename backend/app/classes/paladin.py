@@ -154,6 +154,8 @@ class Paladin:
         self.tyrs_deliverance_extended_by = 0
         self.blessing_of_dawn_counter = 0
         self.afterimage_counter = 0
+        self.awakening_queued = False
+        self.holy_shock_resets = 0
         
         # for reclamation
         self.average_raid_health_percentage = 0.7
@@ -298,7 +300,7 @@ class Paladin:
             self.active_auras[buff.name] = buff
         else:
             self.active_auras[buff.name] = buff
-            buff.apply_effect(self)
+            buff.apply_effect(self, current_time)
         
         buff.times_applied += 1
         update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "applied", buff.duration, buff.current_stacks)
@@ -319,7 +321,7 @@ class Paladin:
                 update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "stacks_decremented", buff.duration, buff.current_stacks)
         else:
             del self.active_auras[buff.name]
-            buff.remove_effect(self)
+            buff.remove_effect(self, current_time)
             append_aura_removed_event(self.events, buff.name, self, self, current_time, duration=self.active_auras[buff.name].duration)
             
             update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "expired")

@@ -5,6 +5,7 @@ import { createAbilityBreakdown } from "./ability-breakdown.js";
 import { createBuffsBreakdown } from "./buffs-breakdown.js";
 import { createResourcesBreakdown } from "./resources-breakdown.js";
 import { createPriorityBreakdown } from "./priority-breakdown.js";
+import { createCooldownsBreakdown } from "./cooldowns-breakdown.js";
 import { handleTabs } from "./simulation-options-tabs.js";
 import { setSimulationOptionsFromImportedData } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
@@ -308,6 +309,7 @@ const createSimulationResults = (simulationData) => {
     createBuffsBreakdown(simulationData, containerCount);
     createResourcesBreakdown(simulationData, containerCount);
     createPriorityBreakdown(simulationData, containerCount);
+    createCooldownsBreakdown(simulationData, containerCount);
 
     // initialise tabs within the results
     handleTabs(`results-navbar-${containerCount}`, `results-tab-content-${containerCount}`, containerCount);

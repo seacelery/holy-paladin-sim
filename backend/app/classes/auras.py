@@ -15,10 +15,10 @@ class Aura:
         
         self.times_applied = 0
         
-    def apply_effect(self, caster):
+    def apply_effect(self, caster, current_time=None):
         pass
     
-    def remove_effect(self, caster):
+    def remove_effect(self, caster, current_time=None):
         pass
 
 

@@ -163,7 +163,6 @@ body {
 
 .options-tab:last-child, [class^="results-tab"]:last-child, [class^="buffs-line-graph-tab"]:last-child {
     border-top-right-radius: 3px;
-    border-bottom: none;
 }
 
 .options-tab.active, [class^="results-tab"].active, [class^="buffs-line-graph-tab"].active {
@@ -1146,8 +1145,8 @@ tr {
 
     border: 1px solid var(--border-colour-3);
     border-bottom: none;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 
     text-align: center;
     font-size: 16px;
@@ -1279,6 +1278,7 @@ tr {
 }
 
 [class^="buffs-line-graph-tab"] {
+    border-radius: 3px;
     border-top-left-radius: 0px;
 }
 

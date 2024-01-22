@@ -1,6 +1,8 @@
 const buffsToIconsMap = {
-    "Avenging Wrath": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_avenginewrath.jpg",
     "Avenging Crusader": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_veneration.jpg",
+    "Avenging Wrath": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_avenginewrath.jpg",
+    "Avenging Wrath (Awakening)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_avenginewrath.jpg",
+    "Awakening READY!!!!!!": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_judgementofthepure.jpg",
     "Glimmer of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_toweroflight.jpg",
     "Beacon of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_beaconoflight.jpg",
     "Beacon of Virtue": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_beaconofinsight.jpg",
@@ -33,7 +35,7 @@ const buffsToIconsMap = {
     "Infusion of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_infusionoflight.jpg",
     "First Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_lightsgrace.jpg",
     "Sophic Devotion": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_elementalcombinedfoozles_titan.jpg",
-    "Holy Reverberation": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_holybolts01.jpg"
+    "Holy Reverberation": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_holybolts01.jpg",
 
     // consumables
 };

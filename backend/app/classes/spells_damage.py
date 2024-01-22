@@ -1,7 +1,7 @@
 from .spells import Spell
 from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals, update_self_buff_data, update_mana_gained
 from .auras_debuffs import JudgmentOfLightDebuff, GreaterJudgmentDebuff
-from .auras_buffs import BlessingOfDawn
+from .auras_buffs import BlessingOfDawn, AvengingWrathAwakening
 from .spells_auras import AvengingWrathBuff
 from .target import Player
 
@@ -65,20 +65,24 @@ class Judgment(Spell):
             # awakening
             if caster.is_talent_active("Awakening"):
                 if "Awakening READY!!!!!!" in caster.active_auras:
-                    buff = AvengingWrathBuff()
-                    buff.duration = 12
-                    buff.applied_duration = 12
+                    if "Avenging Wrath" in caster.active_auras:
+                        caster.awakening_queued = True
+                    else:
+                        buff = AvengingWrathAwakening()
+                        caster.apply_buff_to_self(buff, current_time)
+                        
+                    del caster.active_auras["Awakening READY!!!!!!"]
+                        
+                    update_self_buff_data(caster.self_buff_breakdown, "Awakening READY!!!!!!", current_time, "expired")
+             
+                    append_aura_removed_event(caster.events, "Awakening READY!!!!!!", caster, caster, current_time)
+                    # buff.duration += 12
+                    # buff.applied_duration = 12
                     
                     # remove 30% damage buff
                     self.spell_damage_modifier /= 1.3
                     self.bonus_crit = 0
-                    
-                    caster.apply_buff_to_self(buff, current_time)
-                    del caster.active_auras["Awakening READY!!!!!!"]
-                    
-                    update_self_buff_data(caster.self_buff_breakdown, "Awakening READY!!!!!!", current_time, "expired")
-                    
-                    append_aura_removed_event(caster.events, "Awakening READY!!!!!!", caster, caster, current_time)
+                              
                 
             # decrement stacks or remove infusion of light
             if "Infusion of Light" in caster.active_auras:

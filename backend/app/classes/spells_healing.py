@@ -322,7 +322,7 @@ class RisingSunlightHolyShock(Spell):
             if caster.is_talent_active("Glorious Dawn"):
                 holy_shock_reset_chance = (10 + len(glimmer_targets) * 1.5) / 100
                 if random.random() <= holy_shock_reset_chance:
-                    self.reset_cooldown(caster, current_time)
+                    caster.abilities["Holy Shock"].reset_cooldown(caster, current_time)
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
@@ -495,7 +495,7 @@ class DivineTollHolyShock(Spell):
             if caster.is_talent_active("Glorious Dawn"):
                 holy_shock_reset_chance = (10 + len(glimmer_targets) * 1.5) / 100
                 if random.random() <= holy_shock_reset_chance:
-                    self.reset_cooldown(caster, current_time)
+                    caster.abilities["Holy Shock"].reset_cooldown(caster, current_time)
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
@@ -641,7 +641,7 @@ class DivineResonanceHolyShock(Spell):
             if caster.is_talent_active("Glorious Dawn"):
                 holy_shock_reset_chance = (10 + len(glimmer_targets) * 1.5) / 100
                 if random.random() <= holy_shock_reset_chance:
-                    self.reset_cooldown(caster, current_time)
+                    caster.abilities["Holy Shock"].reset_cooldown(caster, current_time)
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:

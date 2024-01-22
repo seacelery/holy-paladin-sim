@@ -281,6 +281,8 @@ class Spell:
             return self.cooldown
         
     def reset_cooldown(self, caster, current_time):
+        caster.holy_shock_resets += 1
+        
         caster.events.append(f"{format_time(current_time)}: {self.name}'s cooldown was reset")
         if self.current_charges < self.max_charges:
             self.current_charges += 1

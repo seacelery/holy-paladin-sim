@@ -16,7 +16,7 @@ class Target:
             self.target_active_buffs[buff.name].append(buff)
         else:
             self.target_active_buffs[buff.name] = [buff]
-        buff.apply_effect(self)
+        buff.apply_effect(self, current_time)
         
         buff.times_applied += 1
         update_target_buff_data(caster.target_buff_breakdown, buff.name, current_time, "applied", self.name, buff.duration, buff.current_stacks)
@@ -69,7 +69,7 @@ class EnemyTarget(Target):
             self.target_active_debuffs[debuff.name].append(debuff)
         else:
             self.target_active_debuffs[debuff.name] = [debuff]
-        debuff.apply_effect(self)
+        debuff.apply_effect(self, current_time)
         
         debuff.times_applied += 1
         
