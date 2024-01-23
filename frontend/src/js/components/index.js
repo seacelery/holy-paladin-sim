@@ -90,8 +90,8 @@ export let playerAurasFilterState = {};
 const importButton = document.getElementById("import-button");
 const raceOption = document.getElementById("race-filter");
 
-const simulatioName = document.getElementById("simulation-name-text-input");
-simulatioName.value = "Simulation 1";
+const simulationName = document.getElementById("simulation-name-text-input");
+simulationName.value = "Simulation 1";
 const simulateButton = document.getElementById("simulate-button");
 const simulateButtonContainer = document.getElementById("simulate-button-container");
 const simulationProgressBarContainer = document.getElementById("simulation-progress-bar-container");
@@ -221,6 +221,11 @@ const createSimulationResults = (simulationData) => {
     // create simulation header
     const resultHeader = createElement("div", "result-header", "result-header");
 
+    const leftSideContainer = createElement("div", "result-left-side", null);
+    resultHeader.appendChild(leftSideContainer);
+    const rightSideContainer = createElement("div", "result-right-side", null);
+    resultHeader.appendChild(rightSideContainer);
+
     // make collapsible with arrows
     const resultArrowIconContainer = createElement("div", `result-arrow-container`, null);
     const resultArrowIcon = createElement("i", `fa-solid fa-sort-down result-arrow-icon`, null);
@@ -237,13 +242,13 @@ const createSimulationResults = (simulationData) => {
             resultContainer.style.display = "block";
         };
     });
-    resultHeader.appendChild(resultArrowIconContainer);
+    leftSideContainer.appendChild(resultArrowIconContainer);
 
     // auto-generate new title if no input given
     const resultText = createElement("div", `result-text-${containerCount}`, null);
-    resultText.textContent = simulatioName.value;
-    if (simulatioName.value.includes (`Simulation ${containerCount}`)) {
-        simulatioName.value = `Simulation ${containerCount + 1}`;
+    resultText.textContent = simulationName.value;
+    if (simulationName.value.includes (`Simulation ${containerCount}`)) {
+        simulationName.value = `Simulation ${containerCount + 1}`;
     };
 
     // allow editing of title
@@ -256,7 +261,25 @@ const createSimulationResults = (simulationData) => {
     resultText.addEventListener("blur", function() {
         this.removeAttribute("contenteditable");
     });
-    resultHeader.appendChild(resultText);
+    leftSideContainer.appendChild(resultText);
+
+    // add a display for hps, encounter length, and iterations
+    const resultDetailsContainer = createElement("div", `result-details-container-${containerCount}`, null);
+    const resultHPS = createElement("div", `result-details-hps-${containerCount}`, null);
+    resultHPS.innerHTML = `<span>HPS: </span><span style="color: var(--healing-font)">${formatThousands(simulationData.simulation_details.average_hps)}</span>`;
+    resultDetailsContainer.appendChild(resultHPS);
+
+    const resultEncounterLength = createElement("div", `result-details-encounter-length-${containerCount}`, null);
+    resultEncounterLength.innerHTML = `<span>Length: </span><span style="color: var(--holy-font)">${formatTime(simulationData.simulation_details.encounter_length)}</span>`;
+    resultDetailsContainer.appendChild(resultEncounterLength);
+
+    const resultIterations = createElement("div", `result-details-iterations-${containerCount}`, null);
+    const iterationsText = simulationData.simulation_details.iterations > 1 ? "iterations" : "iteration";
+    resultIterations.innerHTML = `<span>Iterations: </span><span style="color: var(--paladin-font)">${simulationData.simulation_details.iterations}</span>`
+    
+    resultDetailsContainer.appendChild(resultIterations);
+
+    rightSideContainer.appendChild(resultDetailsContainer);
 
     // add a delete option
     const resultRemoveContainer = createElement("div", `result-remove-container`, null);
@@ -265,7 +288,7 @@ const createSimulationResults = (simulationData) => {
     resultRemoveContainer.addEventListener("click", () => {
         simulationContainer.remove();
     });
-    resultHeader.appendChild(resultRemoveContainer);
+    rightSideContainer.appendChild(resultRemoveContainer);
 
     simulationContainer.appendChild(resultHeader);
 

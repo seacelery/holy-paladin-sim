@@ -167,7 +167,15 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     
     // create the grid
     const createPriorityGrid = (data, container, headers) => {
+        const rowHeight = 113;
+        // extra rows to generate below viewport
+        const buffer = 9;
+        const timestamps = Object.keys(priorityData);
+
+        const headerGridContainer = createElement("div", "priority-header-grid-container", null);
         const gridContainer = createElement("div", "priority-grid-container", `priority-grid-container`);
+        gridContainer.style.height = "100vh"; // Adjust based on your desired viewport height
+        gridContainer.style.overflowY = "scroll";
 
         // generate header row
         const gridHeaderRow = createElement("div", "priority-grid-header-row", null);
@@ -184,10 +192,12 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
                 headerCell.appendChild(cooldownFilter);
             };
         });
-        gridContainer.appendChild(gridHeaderRow);
+        headerGridContainer.appendChild(gridHeaderRow);
 
-        // generate content rows
-        for (const timestamp in priorityData) {
+        // create each row to be added while scrolling
+        const createRow = (timestamp) => {
+            if (!timestamp) return null;
+
             const timestampData = priorityData[timestamp];
 
             const gridRow = createElement("div", "priority-grid-row", null);
@@ -336,7 +346,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
                     if (cooldown.remaining_cooldown > 0 && cooldown.current_charges < 1) {
                         cooldownIcon.style.filter = "grayscale(1)";
                     };
-     
+    
                     const cooldownRemainingText = createElement("div", "priority-grid-cooldown-remaining-text", null);
                     cooldownRemainingText.textContent = cooldown.remaining_cooldown > 0 ? cooldown.remaining_cooldown.toFixed(1) : '';
 
@@ -421,9 +431,43 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             auraCountsCell.appendChild(auraCountsContainer);
             gridRow.appendChild(auraCountsCell);
 
-            gridContainer.appendChild(gridRow);
+            return gridRow
         };
-        return gridContainer;
+
+        // create rows from scrolling instead of loading all at once
+        const handleScroll = () => {
+            const scrollTop = gridContainer.scrollTop;
+            const visibleRowCount = Math.ceil(gridContainer.clientHeight / rowHeight);
+            const totalRows = timestamps.length;
+        
+            const startIndex = Math.max(0, Math.floor(scrollTop / rowHeight) - buffer);
+            const endIndex = Math.min(totalRows - 1, startIndex + visibleRowCount + buffer);
+        
+            // Append new rows as needed when scrolling down
+            if (endIndex > currentEndIndex) {
+                const fragment = document.createDocumentFragment();
+                for (let i = currentEndIndex + 1; i <= endIndex; i++) {
+                    const row = createRow(timestamps[i]);
+                    if (row) fragment.appendChild(row);
+                }
+                gridContainer.appendChild(fragment);
+                currentEndIndex = endIndex;
+            };
+        };
+        
+        let currentEndIndex = Math.ceil(gridContainer.clientHeight / rowHeight) + buffer - 1;
+        
+        // initial rows
+        const initialFragment = document.createDocumentFragment();
+        for (let i = 0; i <= currentEndIndex; i++) {
+            const row = createRow(timestamps[i]);
+            if (row) initialFragment.appendChild(row);
+        };
+        gridContainer.appendChild(initialFragment);
+        
+        gridContainer.addEventListener("scroll", handleScroll);
+        headerGridContainer.appendChild(gridContainer);
+        return headerGridContainer;
     };
 
     // close modals when clicked away
@@ -471,6 +515,19 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             icon.style.filter = isVisible ? "grayscale(0)" : "grayscale(1)";
         });
     });
+
+    // align header with grid rows as size changes
+    const syncColumnWidths = () => {
+        const headerCells = document.querySelectorAll(".priority-grid-header-row .priority-grid-header-cell");
+        const firstRowCells = document.querySelector(".priority-grid-row").children;
+
+        if (firstRowCells.length === headerCells.length) {
+            for (let i = 0; i < headerCells.length; i++) {
+                headerCells[i].style.width = `${firstRowCells[i].offsetWidth}px`;
+            };
+        };
+    };
+    window.addEventListener("resize", syncColumnWidths);
 };
 
 export { createPriorityBreakdown };

@@ -942,6 +942,12 @@ class Simulation:
         average_mana_timeline = return_complete_combined_results(full_mana_timeline_results)
         average_holy_power_timeline = return_complete_combined_results(full_holy_power_timeline_results)
         
+        # calculate average hps
+        total_healing = 0
+        for ability in average_ability_breakdown:
+            total_healing += average_ability_breakdown[ability]["total_healing"]
+        average_hps = total_healing / self.encounter_length
+        
         # adjust cooldowns breakdown for number of iterations
         for aura, instances in full_cooldowns_breakdown_results.items():
             for instance, details in instances.items():
@@ -981,7 +987,7 @@ class Simulation:
         # pp.pprint(average_ability_breakdown)
         # pp.pprint(self.paladin.events)
         # pp.pprint(self.paladin.priority_breakdown)
-        pp.pprint(full_cooldowns_breakdown_results)
+        pp.pprint(average_ability_breakdown)
         
         full_results = {
             "healing_timeline": adjusted_average_healing_timeline,
@@ -1004,6 +1010,7 @@ class Simulation:
             "paladin_name": self.paladin.name,
             "iterations": self.iterations,
             "max_mana": self.paladin.max_mana,
+            "average_hps": average_hps
         }
         
         # pp.pprint(average_ability_breakdown)
