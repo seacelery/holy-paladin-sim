@@ -1,3 +1,5 @@
+import { formatNumbers } from './index.js';
+
 const createResourceGraph = (data, graphId, title, colour) => {
     const dataArray = Object.keys(data).map(key => ({ key: +key, value: data[key] }));
     
@@ -95,7 +97,7 @@ const createResourceGraph = (data, graphId, title, colour) => {
             const resource = data[`${Math.round(x.invert(adjustedMouseX))}`];
 
             tooltip.html(`<span class="tooltip-time">${time}</span><br/>
-                <span id="tooltip-${title.toLowerCase().replaceAll(" ", "-")}">${title === "Mana" ? Math.round(resource) : Math.round(resource * 10) / 10}</span>`)
+                <span id="tooltip-${title.toLowerCase().replaceAll(" ", "-")}">${title === "Mana" ? formatNumbers(resource) : Math.round(resource * 10) / 10}</span>`)
             .style("left", (event.pageX + 10) + "px")
             .style("top", (event.pageY - 15) + "px")
             .style("opacity", 1)

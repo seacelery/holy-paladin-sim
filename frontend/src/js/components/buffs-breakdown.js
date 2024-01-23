@@ -1,6 +1,6 @@
 import { buffsToIconsMap } from "../utils/buffs-to-icons-map.js";
 import { createBuffsLineGraph } from "./create-buffs-line-graph.js";
-import { createElement } from "./index.js";
+import { formatNumbersNoRounding, createElement } from './index.js';
 
 const createBuffsBreakdown = (simulationData, containerCount) => {
     const sortTableByColumn = (table, column, asc = true) => {
@@ -96,12 +96,6 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
         };
     };
 
-    const formatNumbersNoRounding = (number) => {
-        const parts = number.toString().split(".");
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        return parts.join(".");
-    };
-
     const createArrowIcon = (buffName = null) => {
         const iconContainer = document.createElement("div");
         iconContainer.className = "table-icon-container";
@@ -147,15 +141,19 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
             cell.appendChild(sortArrowIcon);
             sortArrowIcon.style.display = "none";
 
-            if (cell.id === `buff-name-header-${containerCount}`) {
+            if (cell.id === `uptime-header-${containerCount}`) {
                 sortArrowIcon.style.display = "inline-block";
             };
         });
 
         const tableBody = table.createTBody();
 
-        for (const buffName in buffsData) {
-            const buffData = buffsData[buffName];
+        let buffsBreakdownArray = Object.entries(buffsData);
+        buffsBreakdownArray.sort((a, b) => b[1].uptime - a[1].uptime);
+        let sortedBuffsBreakdownData = Object.fromEntries(buffsBreakdownArray);
+
+        for (const buffName in sortedBuffsBreakdownData) {
+            const buffData = sortedBuffsBreakdownData[buffName];
             const row = tableBody.insertRow();
             row.id = `${buffName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}-row-${containerCount}`;
 

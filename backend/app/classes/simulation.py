@@ -79,12 +79,12 @@ class Simulation:
             self.regen_mana()
             
             # TESTING ONLY
-            self.test_time_since_last += self.tick_rate
-            if self.test_time_since_last > 1:
-                # print(f"time: {self.elapsed_time}, healing: {self.paladin.healing_multiplier}, crit: {self.paladin.crit}")
-                print(f"time: {self.elapsed_time}" )
-                pp.pprint(self.paladin.active_auras)
-                self.test_time_since_last = 0
+            # self.test_time_since_last += self.tick_rate
+            # if self.test_time_since_last > 1:
+            #     # print(f"time: {self.elapsed_time}, healing: {self.paladin.healing_multiplier}, crit: {self.paladin.crit}")
+            #     print(f"time: {self.elapsed_time}" )
+            #     pp.pprint(self.paladin.active_auras)
+            #     self.test_time_since_last = 0
             
             self.time_since_last_check += self.tick_rate
             if self.time_since_last_check >= 0.05:
@@ -106,7 +106,7 @@ class Simulation:
         self.paladin.healing_timeline[round(self.elapsed_time, 2)] = healing_this_second
         
         # check healing during specific auras
-        auras_to_track = set(["Avenging Wrath", "Avenging Wrath (Awakening)", "First Light"])
+        auras_to_track = set(["Avenging Wrath", "Avenging Wrath (Awakening)", "First Light", "Blessing of Spring"])
 
         # active_auras is a dictionary with aura names as keys
         active_auras = set(self.paladin.active_auras.keys())
@@ -551,19 +551,19 @@ class Simulation:
             # accumulate cooldown breakdown results
             for aura, instances in cooldowns_breakdown.items():
                 for instance_number, data in instances.items():
-                    # Initialize the aura and instance number if not already present
                     if aura not in full_cooldowns_breakdown_results:
                         full_cooldowns_breakdown_results[aura] = {}
                     if instance_number not in full_cooldowns_breakdown_results[aura]:
-                        full_cooldowns_breakdown_results[aura][instance_number] = {"total_healing": 0, "total_duration": 0}
+                        full_cooldowns_breakdown_results[aura][instance_number] = {"total_healing": 0, "total_duration": 0, "start_time": 0, "end_time": 0, "count": 0}
 
-                    # Add the total healing of this instance to the full results
                     full_cooldowns_breakdown_results[aura][instance_number]["total_healing"] += data["total_healing"]
+                    full_cooldowns_breakdown_results[aura][instance_number]["count"] += 1
 
-                    # Calculate and add the duration for this instance
                     if data["end_time"] is not None and data["start_time"] is not None:
                         duration = data["end_time"] - data["start_time"]
                         full_cooldowns_breakdown_results[aura][instance_number]["total_duration"] += duration
+                        full_cooldowns_breakdown_results[aura][instance_number]["start_time"] += data["start_time"]
+                        full_cooldowns_breakdown_results[aura][instance_number]["end_time"] += data["end_time"]
             
             # accumulate awakening trigger results
             for key, value in self.paladin.awakening_trigger_times.items():
@@ -926,53 +926,30 @@ class Simulation:
                     
             return simulation_results
         
-        all_ability_breakdown_iteration_results = get_all_iterations_results(full_ability_breakdown_results)
-        combined_ability_breakdown_results = combine_results(*all_ability_breakdown_iteration_results)
-        
-        all_self_buff_breakdown_iteration_results = get_all_iterations_results(full_self_buff_breakdown_results)
-        combined_self_buff_breakdown_results = combine_results(*all_self_buff_breakdown_iteration_results)
-        
-        all_target_buff_breakdown_iteration_results = get_all_iterations_results(full_target_buff_breakdown_results)
-        combined_target_buff_breakdown_results = combine_results(*all_target_buff_breakdown_iteration_results)
-        
-        all_aggregated_target_buff_breakdown_iteration_results = get_all_iterations_results(full_aggregated_target_buff_breakdown_results)
-        combined_aggregated_target_buff_breakdown_results = combine_results(*all_aggregated_target_buff_breakdown_iteration_results)
-        
-        all_glimmer_count_iteration_results = get_all_iterations_results(full_glimmer_count_results)
-        combined_glimmer_count_results = combine_results(*all_glimmer_count_iteration_results)
-        
-        all_tyrs_count_iteration_results = get_all_iterations_results(full_tyrs_count_results)
-        combined_tyrs_count_results = combine_results(*all_tyrs_count_iteration_results)
-        
-        all_awakening_count_iteration_results = get_all_iterations_results(full_awakening_count_results)
-        combined_awakening_count_results = combine_results(*all_awakening_count_iteration_results)
-        
-        all_healing_timeline_iteration_results = get_all_iterations_results(full_healing_timeline_results)
-        combined_healing_timeline_results = combine_results(*all_healing_timeline_iteration_results)
-        
-        all_mana_timeline_iteration_results = get_all_iterations_results(full_mana_timeline_results)
-        combined_mana_timeline_results = combine_results(*all_mana_timeline_iteration_results)
-        
-        all_holy_power_timeline_iteration_results = get_all_iterations_results(full_holy_power_timeline_results)
-        combined_holy_power_timeline_results = combine_results(*all_holy_power_timeline_iteration_results)
-        
-        average_ability_breakdown = average_out_simulation_results(combined_ability_breakdown_results, self.iterations)
-        average_self_buff_breakdown = average_out_simulation_results(combined_self_buff_breakdown_results, self.iterations)
-        average_target_buff_breakdown = average_out_simulation_results(combined_target_buff_breakdown_results, self.iterations)
-        average_aggregated_target_buff_breakdown = average_out_simulation_results(combined_aggregated_target_buff_breakdown_results, self.iterations)
-        average_glimmer_counts = average_out_simulation_results(combined_glimmer_count_results, self.iterations)
-        average_tyrs_counts = average_out_simulation_results(combined_tyrs_count_results, self.iterations)
-        average_awakening_counts = average_out_simulation_results(combined_awakening_count_results, self.iterations)
-        average_healing_timeline = average_out_simulation_results(combined_healing_timeline_results, self.iterations)
-        average_mana_timeline = average_out_simulation_results(combined_mana_timeline_results, self.iterations)
-        average_holy_power_timeline = average_out_simulation_results(combined_holy_power_timeline_results, self.iterations)
+        def return_complete_combined_results(full_results):
+            all_iteration_results = get_all_iterations_results(full_results)
+            combined_results = combine_results(*all_iteration_results)
+            return average_out_simulation_results(combined_results, self.iterations)
+            
+        average_ability_breakdown = return_complete_combined_results(full_ability_breakdown_results)
+        average_self_buff_breakdown = return_complete_combined_results(full_self_buff_breakdown_results)
+        average_target_buff_breakdown = return_complete_combined_results(full_target_buff_breakdown_results)
+        average_aggregated_target_buff_breakdown = return_complete_combined_results(full_aggregated_target_buff_breakdown_results)
+        average_glimmer_counts = return_complete_combined_results(full_glimmer_count_results)
+        average_tyrs_counts = return_complete_combined_results(full_tyrs_count_results)
+        average_awakening_counts = return_complete_combined_results(full_awakening_count_results)
+        average_healing_timeline = return_complete_combined_results(full_healing_timeline_results)
+        average_mana_timeline = return_complete_combined_results(full_mana_timeline_results)
+        average_holy_power_timeline = return_complete_combined_results(full_holy_power_timeline_results)
         
         # adjust cooldowns breakdown for number of iterations
         for aura, instances in full_cooldowns_breakdown_results.items():
             for instance, details in instances.items():
-                details["total_duration"] /= self.iterations
-                details["total_healing"] /= self.iterations 
+                details["total_duration"] /= details["count"]
+                details["total_healing"] /= details["count"]
                 details["hps"] = details["total_healing"] / details["total_duration"]
+                details["start_time"] /= details["count"]
+                details["end_time"] /= details["count"]
         
         # adjust healing timeline from tick rate increments to integers
         adjusted_average_healing_timeline = {}        

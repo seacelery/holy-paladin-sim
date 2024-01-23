@@ -1,20 +1,32 @@
-import { createElement } from "./index.js";
+import { createElement, formatNumbers, formatTime } from "./index.js";
 import { spellToIconsMap } from '../utils/spell-to-icons-map.js';
 import { buffsToIconsMap } from "../utils/buffs-to-icons-map.js";
 import { cooldownFilterState } from './index.js';
 import { playerAurasFilterState } from './index.js';
 
 const createPriorityBreakdown = (simulationData, containerCount) => {
-    const formatTime = (seconds) => {
+    const formatPriorityTime = (seconds) => {
         let minutes = Math.floor(seconds / 60);
-        let remainingSeconds = Math.round(seconds % 60);
-
+        let remainingSeconds = (seconds % 60).toFixed(2);
+    
         if (remainingSeconds === 60) {
             minutes += 1;
             remainingSeconds = 0;
         };
-    
-        return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
+
+        // if (seconds > 59.99 && remainingSeconds < 10) {
+        //     return `${minutes}:0${String(remainingSeconds).padStart(2, '0')}`;
+        // } else if (seconds > 59.99 && remainingSeconds > 10) {
+        //     return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
+        // } else {
+        //     return Number(seconds).toFixed(2);
+        // };
+
+        if (remainingSeconds < 10) {
+            return `${minutes}:0${String(remainingSeconds).padStart(2, '0')}`;
+        } else if (remainingSeconds > 10) {
+            return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
+        }
     };
 
     // aura overlay starts from nothing and fills clockwise
@@ -31,7 +43,6 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     };
 
     const priorityData = simulationData.results.priority_breakdown;
-    console.log(priorityData)
     const priorityBreakdownContainer = document.getElementById(`priority-breakdown-table-container-${containerCount}`);
 
     // create filter options
@@ -182,7 +193,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const gridRow = createElement("div", "priority-grid-row", null);
 
             const timeCell = createElement("div", "priority-grid-time-cell priority-grid-cell", null);
-            timeCell.textContent = Number(timestamp).toFixed(2);
+            timeCell.textContent = formatPriorityTime(timestamp);
             gridRow.appendChild(timeCell);
 
             const numberCell = createElement("div", "priority-grid-number-cell priority-grid-cell", null);
@@ -211,7 +222,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             manaBarContainer.appendChild(manaBar);
 
             const manaText = createElement("div", "priority-grid-mana-text", null);
-            manaText.textContent = `${Math.round(timestampData.resources.mana)}`;
+            manaText.textContent = `${formatNumbers(timestampData.resources.mana)}`;
             // percent option
             // manaText.textContent = `${Math.round(timestampData.resources.mana / simulationData.simulation_details.max_mana * 100)}%`;
             manaBarContainer.appendChild(manaText);

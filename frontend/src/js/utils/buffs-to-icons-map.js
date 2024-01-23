@@ -1,7 +1,7 @@
 const buffsToIconsMap = {
     "Avenging Crusader": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_veneration.jpg",
     "Avenging Wrath": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_avenginewrath.jpg",
-    "Avenging Wrath (Awakening)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_avenginewrath.jpg",
+    "Avenging Wrath (Awakening)": "custom-icons/avenging-wrath-awakening.png",
     "Awakening READY!!!!!!": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_judgementofthepure.jpg",
     "Glimmer of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_toweroflight.jpg",
     "Beacon of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_beaconoflight.jpg",

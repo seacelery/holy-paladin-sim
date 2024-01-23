@@ -1,3 +1,5 @@
+import { formatNumbers } from './index.js';
+
 const createHealingLineGraph = (healingData, manaData, graphId, title, colour) => {
     let healingDataArray = Object.keys(healingData).map(key => ({ key: +key, value: healingData[key] }));
     let manaDataArray = Object.keys(manaData).map(key => ({ key: +key, value: manaData[key] }));
@@ -157,8 +159,8 @@ const createHealingLineGraph = (healingData, manaData, graphId, title, colour) =
             const mana = manaData[`${Math.round(x.invert(adjustedMouseX))}`];
 
             tooltip.html(`<span class="tooltip-time">${time}</span><br/>
-                <span class="tooltip-healing">${Math.round(healing)}</span><br/>
-                <span class="tooltip-mana">${Math.round(mana)}</span>`)
+                <span class="tooltip-healing">${formatNumbers(healing)}</span><br/>
+                <span class="tooltip-mana">${formatNumbers(mana)}</span>`)
             .style("left", (event.pageX + 10) + "px")
             .style("top", (event.pageY - 15) + "px")
             .style("opacity", 1)

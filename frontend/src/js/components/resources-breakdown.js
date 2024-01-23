@@ -1,4 +1,4 @@
-import { createElement } from "./index.js";
+import { formatNumbers, createElement } from './index.js';
 import { createResourceGraph } from "./create-resource-line-graph.js";
 import { spellToIconsMap } from "../utils/spell-to-icons-map.js";
 
@@ -23,7 +23,6 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
         };
 
         if (headerNames.includes("Holy Power Gained")) {
-            console.log("hi")
             currentArrowIcon.classList.add("holy-power-arrow");
         };
 
@@ -80,10 +79,6 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
         table.querySelectorAll("tr:first-child td").forEach(td => td.classList.remove("td-sort-asc", "td-sort-desc"));
         table.querySelector(`tr:first-child td:nth-child(${column + 1})`).classList.toggle("td-sort-asc", asc);
         table.querySelector(`tr:first-child td:nth-child(${column + 1})`).classList.toggle("td-sort-desc", !asc);
-    };
-
-    const formatNumbers = (number) => {
-        return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
     
     let sortOrder = {};
@@ -175,12 +170,17 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
             cell.appendChild(sortArrowIcon);
             sortArrowIcon.style.display = "none";
 
-            if (cell.id === `spell-name-header-${containerCount}`) {
+            if (cell.id === `spell-name-header-${containerCount}` && headers.includes("Holy Power Gained")) {
+                // specific formatting for holy power headers
+                cell.classList.add("resources-spell-name-header");
+                sortArrowIcon.classList.add("holy-power-arrow");
+            };
+
+            if (cell.id === `mana-spent-header-${containerCount}`) {
                 sortArrowIcon.style.display = "inline-block";
-                if (headers.includes("Holy Power Gained")) {
-                    cell.classList.add("resources-spell-name-header");
-                    sortArrowIcon.classList.add("holy-power-arrow");
-                };
+            } else if (cell.id === `holy-power-gained-header-${containerCount}`) {
+                sortArrowIcon.style.display = "inline-block"; 
+                sortArrowIcon.classList.add("holy-power-arrow");
             };
         });
 
@@ -201,9 +201,18 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
             overallHolyPowerWasted += spellData.holy_power_wasted;
         };
 
+        // sort data by chosen headings
+        let resourcesArray = Object.entries(data);
+        if (headerNames.includes("Mana Spent")) {
+            resourcesArray.sort((a, b) => b[1].mana_spent - a[1].mana_spent);
+        } else if (headerNames.includes("Holy Power Gained")) {
+            resourcesArray.sort((a, b) => b[1].holy_power_gained - a[1].holy_power_gained);
+        };
+        let sortedResourcesData = Object.fromEntries(resourcesArray);
+
         // rows
-        for (const spellName in data) {
-            const spellData = data[spellName];
+        for (const spellName in sortedResourcesData) {
+            const spellData = sortedResourcesData[spellName];
 
             const formattedSpellName = spellName
                 .toLowerCase()

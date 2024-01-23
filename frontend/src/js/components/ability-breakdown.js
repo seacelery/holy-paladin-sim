@@ -1,6 +1,6 @@
 import { spellToIconsMap } from '../utils/spell-to-icons-map.js';
 import { createHealingLineGraph } from './create-healing-line-graph.js';
-import { createElement } from './index.js';
+import { formatNumbers, formatNumbersNoRounding, createElement } from './index.js';
 
 const createAbilityBreakdown = (simulationData, containerCount) => {    
     const sortTableByColumn = (table, column, asc = true) => {
@@ -90,16 +90,6 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         0: true
     };
 
-    const formatNumbers = (number) => {
-        return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    };
-
-    const formatNumbersNoRounding = (number) => {
-        const parts = number.toString().split(".");
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        return parts.join(".");
-    };
-
     const changeArrowDirection = (element) => {
         if (element.classList.contains("fa-sort-down")) {
             element.classList.remove("fa-sort-down");
@@ -122,7 +112,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
     const tableContainer = document.getElementById(`ability-breakdown-table-container-${containerCount}`);
     tableContainer.innerHTML = "";
-    console.log(simulationData)
+
     const healingTimelineData = simulationData.results.healing_timeline;
     const manaTimelineData = simulationData.results.mana_timeline;
     const healingGraphContainer = createElement("div", `healing-graph-container-${containerCount}`, `healing-graph-content`);
@@ -347,12 +337,12 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
             // expand sub-row or collapse all nested rows on click
             arrowIconContainer.addEventListener("click", () => {
-                changeArrowDirection(arrowIcon)
+                changeArrowDirection(arrowIcon);
 
                 const spellClass = spellName.toLowerCase().replaceAll(" ", "-") + "-subrow";
 
                 let subRows = document.querySelectorAll(`.${spellClass}-${containerCount}`);
-                let subSubRows = document.querySelectorAll(`.${spellClass}-${containerCount}.sub-sub-row-${containerCount}`);
+                let subSubRows = document.querySelectorAll(`.${spellClass}.sub-sub-row-${containerCount}`);
 
                 const isHidden = subRows.length > 0 && !Array.from(subRows).every(subRow => subRow.style.display === "none");
 

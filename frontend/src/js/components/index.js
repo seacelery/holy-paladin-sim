@@ -14,9 +14,55 @@ import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.j
 //     console.log(e.target)
 // })
 
-window.addEventListener("click", (e) => {
-    console.log(e.target)
-})
+// window.addEventListener("click", (e) => {
+//     console.log(e.target)
+// })
+
+// helper functions
+const createElement = (elementName, className = null, id = null) => {
+    const element = document.createElement(elementName);
+
+    if (className && className.includes(" ")) {
+        element.classList = className;
+    } else if (className) {
+        element.classList.add(className);
+    };
+
+    if (id) {
+        element.id = id + `-${containerCount}`;
+    };
+    return element;
+};
+
+const formatNumbers = (number) => {
+    return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+const formatNumbersNoRounding = (number) => {
+    const parts = number.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+};
+
+const formatThousands = (number) => {
+    if (number >= 1000) {
+        return (number / 1000).toFixed(1) + 'K';
+    } else {
+        return number.toString();
+    };
+};
+
+const formatTime = (seconds) => {
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = Math.round(seconds % 60);
+
+    if (remainingSeconds === 60) {
+        minutes += 1;
+        remainingSeconds = 0;
+    };
+
+    return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
+};
 
 const socket = io('http://localhost:5000');
 
@@ -164,21 +210,6 @@ const runSimulation = async () => {
         console.error("Error:", error);
         isSimulationRunning = false;
     });
-};
-
-const createElement = (elementName, className = null, id = null) => {
-    const element = document.createElement(elementName);
-
-    if (className && className.includes(" ")) {
-        element.classList = className;
-    } else if (className) {
-        element.classList.add(className);
-    };
-
-    if (id) {
-        element.id = id + `-${containerCount}`;
-    };
-    return element;
 };
 
 const createSimulationResults = (simulationData) => {
@@ -340,4 +371,4 @@ raceOption.addEventListener("change", handleRaceChange);
 // initialise tabs for primary navbar
 handleTabs(`options-navbar-1`, "options-tab-content");
 
-export { updateCharacter, createElement };
+export { updateCharacter, formatNumbers, formatNumbersNoRounding, formatThousands, formatTime, createElement };

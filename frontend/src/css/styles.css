@@ -1021,6 +1021,7 @@ tr {
 
 .table-cell-bottom-left {
     padding-left: 6px;
+    padding-top: 2px;
 
     min-width: 350px;
     height: 35px;
@@ -1037,6 +1038,7 @@ tr {
 
 .table-cell-bottom-right {
     padding-right: 4px;
+    padding-top: 2px;
 
     height: 35px;
     
@@ -1088,11 +1090,11 @@ tr {
 }
 
 .fa-sort-down.holy-power-arrow {
-    top: 46px;
+    top: 49px;
 }
 
 .fa-sort-up.holy-power-arrow {
-    top: 58px;
+    top: 61px;
 }
 
 .spell-name-header > .fa-sort-down.holy-power-arrow {
@@ -1374,6 +1376,7 @@ tr {
 
 .resources-table-cell-bottom-left {
     padding-left: 6px;
+    padding-top: 2px;
 
     min-width: 300px;
     height: 35px;
@@ -1735,8 +1738,101 @@ tr {
 }
 
 /* COOLDOWNS CONTENT */
+[id*="cooldowns-tab"] {
+    border-bottom: none;
+}
+
 [id*="cooldowns-content"] {
     display: none;
+}
+
+[id^="cooldowns-breakdown-table-container-"] {
+    display: none;
+    justify-content: space-between;
+    margin: 0 auto 0px auto;
+
+    width: 100%;
+    overflow: hidden;
+
+    color: var(--light-font-colour);
+}
+
+.cooldowns-breakdown-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 30px;
+
+    width: 100%;
+
+    border: 1px solid var(--border-colour-3);
+    border-radius: 3px;
+}
+
+.cooldowns-breakdown-cooldown-container {
+    display: flex;
+
+    margin-bottom: 20px;
+    margin-right: 20px;
+
+    width: 100%;
+}
+
+.cooldowns-breakdown-cooldown-icon {
+    margin-right: 5px;
+
+    height: 60px;
+    width: 60px;
+
+    border: 2px solid var(--border-colour-3);
+    border-radius: 3px;
+}
+
+.cooldowns-breakdown-cooldown-name-text {
+    padding-bottom: 10px;
+
+    font-size: 20px;
+    color: var(--holy-font);
+}
+
+.cooldowns-breakdown-cooldown-name-and-instances-container {
+    padding: 0px 0px 10px 10px;
+    text-align: left;
+    /* border-bottom: 1px solid var(--border-colour-3) */
+}
+
+.cooldowns-breakdown-cooldown-instance-container {
+    display: flex;
+
+    background-color: var(--panel-colour-2);
+    border: 1px solid var(--border-colour-3);
+    border-radius: 3px;
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
+
+.cooldowns-breakdown-cooldown-instance-text, .cooldowns-breakdown-cooldown-hps-text, .cooldowns-breakdown-cooldown-average-duration-text {
+    margin: 0 30px 10px 0;
+    
+    width: 30px;
+}
+
+.cooldowns-breakdown-cooldown-instance-text {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-left: 30px;
+
+    font-size: 19px;
+}
+
+.cooldowns-breakdown-cooldown-hps-text, .cooldowns-breakdown-cooldown-average-duration-text {
+    width: 100px;
+    
+    border-radius: 3px;
+
+    text-align: center;
 }
 
 
