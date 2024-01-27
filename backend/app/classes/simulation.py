@@ -29,7 +29,8 @@ class Simulation:
         self.elapsed_time = 0
         self.iterations = iterations
         self.priority_list = priority_list
-        # increase tick rate for better hot accuracy
+        
+        # make tick rate smaller for better hot accuracy
         self.tick_rate = 0.05
         self.abilities = paladin.abilities
         
@@ -66,7 +67,12 @@ class Simulation:
                 self.paladin.active_summons["Light's Hammer"].increment_lights_hammer(self.paladin, self.elapsed_time, self.tick_rate)
             if "Blessing of Winter" in self.paladin.active_auras:
                 self.paladin.active_auras["Blessing of Winter"].increment_blessing_of_winter(self.paladin, self.elapsed_time, self.tick_rate)
-                
+               
+            # increment rppm effects 
+            for effect in self.paladin.time_since_last_rppm_proc_attempt:
+                self.paladin.time_since_last_rppm_proc_attempt[effect] += self.tick_rate
+                self.paladin.time_since_last_rppm_proc[effect] += self.tick_rate
+            
             self.action()
             self.paladin.update_gcd(self.tick_rate)
             self.check_delayed_casts(self.paladin)
@@ -75,16 +81,16 @@ class Simulation:
             self.decrement_buffs_on_targets()
             self.decrement_debuffs_on_targets()
             self.decrement_summons()
-            self.increment_rppm_effects()
             self.regen_mana()
             
             # TESTING ONLY
-            # self.test_time_since_last += self.tick_rate
-            # if self.test_time_since_last > 1:
-            #     # print(f"time: {self.elapsed_time}, healing: {self.paladin.healing_multiplier}, crit: {self.paladin.crit}")
-            #     print(f"time: {self.elapsed_time}" )
-            #     pp.pprint(self.paladin.active_auras)
-            #     self.test_time_since_last = 0
+            self.test_time_since_last += self.tick_rate
+            if self.test_time_since_last > 1:
+                # print(f"time: {self.elapsed_time}, healing: {self.paladin.healing_multiplier}, crit: {self.paladin.crit}")
+                
+                # print(f"time: {self.elapsed_time}" )
+                # pp.pprint(self.paladin.active_auras)
+                self.test_time_since_last = 0
             
             self.time_since_last_check += self.tick_rate
             if self.time_since_last_check >= 0.05:
@@ -184,6 +190,8 @@ class Simulation:
                 caster.global_cooldown = caster.hasted_global_cooldown - ability.calculate_cast_time(caster) * 0.7
             else:
                 caster.global_cooldown = 0
+                
+            ability.try_trigger_rppm_effects(caster, targets, current_time)
             
     def action(self):
         if self.paladin.currently_casting:
@@ -194,6 +202,8 @@ class Simulation:
         priority_list = [
             ("Divine Toll", lambda: self.previous_ability == "Daybreak"),
             ("Blessing of the Seasons", lambda: True),
+            ("Arcane Torrent", lambda: self.paladin.race == "Blood Elf"),
+            ("Fireblood", lambda: self.paladin.race == "Dark Iron Dwarf"),
             ("Avenging Wrath", lambda: True),
             ("Light's Hammer", lambda: True),
             ("Tyr's Deliverance", lambda: True),
@@ -218,7 +228,7 @@ class Simulation:
         for ability_name, condition in priority_list:    
             if ability_name in self.abilities and condition():
                 ability = self.abilities[ability_name]
-                if ability.can_cast(self.paladin, self.elapsed_time):
+                if ability.can_cast(self.paladin, self.elapsed_time):                    
                     # healing spells
                     if not ability.is_damage_spell:
                         if ability.base_cast_time > 0 and self.paladin.currently_casting is None:
@@ -403,10 +413,6 @@ class Simulation:
                 
             self.paladin.active_summons[summon_name].remove_effect(self.paladin)
             del self.paladin.active_summons[summon_name]
-    
-    def increment_rppm_effects(self):
-        if "Touch of Light" in self.paladin.time_since_last_rppm_proc:
-            self.paladin.time_since_last_rppm_proc["Touch of Light"] += self.tick_rate
         
     def regen_mana(self):
         if self.paladin.mana + self.paladin.mana_regen_per_second * self.tick_rate > self.paladin.max_mana:
@@ -468,6 +474,15 @@ class Simulation:
         self.__dict__.update(current_state.__dict__)
         
     def display_results(self):
+        print(self.paladin.race)
+        print("sp", self.paladin.spell_power)
+        print("haste", self.paladin.haste)
+        print("crit", self.paladin.crit)
+        print("mast", self.paladin.mastery)
+        print("vers", self.paladin.versatility)
+        
+        print(self.paladin.haste_multiplier, self.paladin.crit_multiplier, self.paladin.mastery_multiplier, self.paladin.versatility_multiplier)
+        
         full_ability_breakdown_results = {}
         full_self_buff_breakdown_results = {}
         full_target_buff_breakdown_results= {}
@@ -546,7 +561,7 @@ class Simulation:
             # pp.pprint(ability_breakdown)
             # pp.pprint(healing_timeline)
             
-            pp.pprint(cooldowns_breakdown)
+            # pp.pprint(cooldowns_breakdown)
             
             # accumulate cooldown breakdown results
             for aura, instances in cooldowns_breakdown.items():
@@ -670,9 +685,10 @@ class Simulation:
                     del ability_breakdown[spell]
                           
             # combine beacon glimmer sources into one spell
-            beacon_source_spells = ability_breakdown["Beacon of Light"]["source_spells"]   
-            combine_beacon_sources_by_prefix("Glimmer of Light", beacon_source_spells)
-            combine_beacon_sources_by_prefix("Holy Shock", beacon_source_spells)
+            if "Beacon of Light" in ability_breakdown:
+                beacon_source_spells = ability_breakdown["Beacon of Light"]["source_spells"]   
+                combine_beacon_sources_by_prefix("Glimmer of Light", beacon_source_spells)
+                combine_beacon_sources_by_prefix("Holy Shock", beacon_source_spells)
             
             excluded_spells = ["Divine Toll", "Daybreak", "Judgment", "Crusader Strike"]
             
@@ -987,7 +1003,7 @@ class Simulation:
         # pp.pprint(average_ability_breakdown)
         # pp.pprint(self.paladin.events)
         # pp.pprint(self.paladin.priority_breakdown)
-        pp.pprint(average_ability_breakdown)
+        # pp.pprint(average_ability_breakdown)
         
         full_results = {
             "healing_timeline": adjusted_average_healing_timeline,

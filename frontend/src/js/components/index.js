@@ -1,5 +1,6 @@
 // TO DOS
 // colour spell names by spell type
+// change awakening triggers on the graph using the cooldown data instead
 
 import { createAbilityBreakdown } from "./ability-breakdown.js";
 import { createBuffsBreakdown } from "./buffs-breakdown.js";
@@ -46,7 +47,7 @@ const formatNumbersNoRounding = (number) => {
 
 const formatThousands = (number) => {
     if (number >= 1000) {
-        return (number / 1000).toFixed(1) + 'K';
+        return (number / 1000).toFixed(1) + "K";
     } else {
         return number.toString();
     };
@@ -61,21 +62,22 @@ const formatTime = (seconds) => {
         remainingSeconds = 0;
     };
 
-    return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
+    return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
 };
 
-const socket = io('http://localhost:5000');
+// socket to allow the server to send updates while the simulation is ongoing
+const socket = io("http://localhost:5000");
 
-socket.on('connect', function() {
-    console.log('Connected to the server');
+socket.on("connect", function() {
+    console.log("Connected to the server");
 });
 
-socket.on('disconnect', function() {
-    console.log('Disconnected from the server');
+socket.on("disconnect", function() {
+    console.log("Disconnected from the server");
 });
 
-socket.on('connect_error', (error) => {
-    console.log('Connection failed:', error);
+socket.on("connect_error", (error) => {
+    console.log("Connection failed:", error);
 });
 
 let savedDataTimeout;
@@ -92,8 +94,8 @@ const raceOption = document.getElementById("race-filter");
 
 const simulationName = document.getElementById("simulation-name-text-input");
 simulationName.value = "Simulation 1";
+
 const simulateButton = document.getElementById("simulate-button");
-const simulateButtonContainer = document.getElementById("simulate-button-container");
 const simulationProgressBarContainer = document.getElementById("simulation-progress-bar-container");
 const simulationProgressBar = document.getElementById("simulation-progress-bar");
 const simulationProgressBarText = document.getElementById("simulation-progress-bar-text");
@@ -104,7 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
     createTalentGrid();
 });
 
-socket.on('iteration_update', function(data) {
+// increment the percentage on the progress bar when the server sends an iteration update
+socket.on("iteration_update", function(data) {
     if (isSimulationRunning) {
         const progressPercentage = Math.round((data.iteration / iterations) * 100);
         simulationProgressBar.style.width = progressPercentage + "%";
@@ -139,7 +142,6 @@ const importCharacter = async () => {
 };
 
 const updateCharacter = async (data) => {
-    // const savingData = document.getElementById("saving-data-status");
     const savedData = document.getElementById("saved-data-status");
     
     const handleSavedDataStatus = () => {
@@ -169,20 +171,21 @@ const updateCharacter = async (data) => {
     .catch(error => console.error("Error:", error));
 };
 
+// used on progress bar
 const playCheckmarkAnimation = () => {
-    document.querySelector('.simulation-progress-bar-checkmark-circle').classList.add('animate-circle');
-    document.querySelector('.simulation-progress-bar-checkmark-check').classList.add('animate-check');
-    document.querySelector('.simulation-progress-bar-checkmark').classList.add('animate-checkmark');
+    document.querySelector(".simulation-progress-bar-checkmark-circle").classList.add("animate-circle");
+    document.querySelector(".simulation-progress-bar-checkmark-check").classList.add("animate-check");
+    document.querySelector(".simulation-progress-bar-checkmark").classList.add("animate-checkmark");
     
     setTimeout(() => {         
         simulateButton.style.opacity = "100";
         simulationProgressBarContainer.style.opacity = "0";
         simulationProgressBar.style.width = "0%";
-        document.querySelector('.simulation-progress-bar-checkmark-circle').classList.remove('animate-circle');
-        document.querySelector('.simulation-progress-bar-checkmark-check').classList.remove('animate-check');
-        document.querySelector('.simulation-progress-bar-checkmark').classList.remove('animate-checkmark');
+        document.querySelector(".simulation-progress-bar-checkmark-circle").classList.remove("animate-circle");
+        document.querySelector(".simulation-progress-bar-checkmark-check").classList.remove("animate-check");
+        document.querySelector(".simulation-progress-bar-checkmark").classList.remove("animate-checkmark");
     }, 3000);    
-}
+};
 
 const runSimulation = async () => {
     const encounterLength = document.getElementById("encounter-length-option").value;
@@ -212,6 +215,7 @@ const runSimulation = async () => {
     });
 };
 
+// main function to bring the components together
 const createSimulationResults = (simulationData) => {
     containerCount++;
 

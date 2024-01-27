@@ -249,6 +249,10 @@ body {
     color: var(--light-font-colour);
 }
 
+.race-filter-option {
+    min-width: 200px;
+}
+
 #all-talents-container {
     display: flex;
     justify-content: space-evenly;
@@ -1374,7 +1378,7 @@ tr {
 }
 
 [id*="mana-table-wrapper"], [id*="holy-power-table-wrapper"] {
-    width: 98%;
+    width: 98.5%;
 }
 
 .resources-table {

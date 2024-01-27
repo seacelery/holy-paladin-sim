@@ -120,7 +120,7 @@ class Spell:
         self_auras, target_auras, total_target_aura_counts, spell_cooldowns = self.collect_priority_breakdown_data(caster, targets)
         
         # add spells that trigger other spells as a cast event and don't cost mana
-        if self.name in ["Daybreak"]:
+        if self.name in ["Daybreak", "Arcane Torrent"]:
             update_spell_data_casts(caster.ability_breakdown, self.name, self.get_mana_cost(caster), self.holy_power_gain, self.holy_power_cost)
             update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts)
             
@@ -145,7 +145,8 @@ class Spell:
                 healing_value, is_crit = self.calculate_heal(caster, self.bonus_crit, self.bonus_versatility, self.bonus_mastery)
                 
                 mana_cost = self.get_mana_cost(caster)
-                healing_value = round(healing_value)    
+                healing_value = round(healing_value) 
+                # print(self.name, healing_value)   
                 target.receive_heal(healing_value)
                 if target_count > 1:
                     # deduct mana on the first instance of a multi-target spell
@@ -229,14 +230,16 @@ class Spell:
         return (self.base_cast_time / caster.haste_multiplier) * self.cast_time_modifier
     
     def calculate_heal(self, caster, bonus_crit=0, bonus_crit_healing=0, bonus_versatility=0, bonus_mastery=0):
-        spell_power = caster.get_effective_spell_power()
+        spell_power = caster.spell_power
         
         crit_multiplier = 1
         is_crit = False
         crit_chance = caster.crit + (self.bonus_crit * 100)
+        caster_crit_healing_modifier = 1
         random_num = random.random() * 100
         if random_num <= crit_chance:
             crit_multiplier = 2 + (self.bonus_crit_healing / 100)
+            caster_crit_healing_modifier = caster.crit_healing_modifier
             is_crit = True
           
         mastery_multiplier = 1 + ((caster.mastery_multiplier + self.bonus_mastery) - 1) * caster.mastery_effectiveness
@@ -247,21 +250,23 @@ class Spell:
         # versatility_multiplier = 1.1782
         # mastery_multiplier = 1.261
         # print(f"{self.name}, SP: {spell_power}, COEFF: {self.SPELL_POWER_COEFFICIENT}, caster multiplier: {caster.healing_multiplier}, vers: {versatility_multiplier}, crit: {crit_multiplier}, mastery: {mastery_multiplier}, spell modifier: {self.spell_healing_modifier}")
-        return spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier * versatility_multiplier * crit_multiplier * mastery_multiplier * self.spell_healing_modifier, is_crit
+        return spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier * versatility_multiplier * crit_multiplier * mastery_multiplier * self.spell_healing_modifier * caster_crit_healing_modifier, is_crit
     
     def calculate_damage(self, caster, bonus_crit=0, bonus_versatility=0):
-        spell_power = caster.get_effective_spell_power()
+        spell_power = caster.spell_power
         
         crit_multiplier = 1
         is_crit = False
         crit_chance = caster.crit + (bonus_crit * 100)
+        caster_crit_damage_modifier = 1
         random_num = random.random() * 100
         if random_num <= crit_chance:
             crit_multiplier = 2
+            caster_crit_damage_modifier = caster.crit_damage_modifier
             is_crit = True
             
         versatility_multiplier = caster.versatility_multiplier + bonus_versatility
-        return spell_power * self.SPELL_POWER_COEFFICIENT * caster.damage_multiplier * versatility_multiplier * crit_multiplier * self.spell_damage_modifier, is_crit
+        return spell_power * self.SPELL_POWER_COEFFICIENT * caster.damage_multiplier * versatility_multiplier * crit_multiplier * self.spell_damage_modifier * caster_crit_damage_modifier, is_crit
     
     def get_mana_cost(self, caster):
         return self.mana_cost * caster.base_mana * self.mana_cost_modifier
@@ -310,27 +315,24 @@ class Spell:
         caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
         
     def try_trigger_rppm_effects(self, caster, targets, current_time):
-        from .spells_passives import TouchOfLight
-        from .auras_buffs import SophicDevotion
+        from .spells_passives import TouchOfLight, EmbraceOfAkunda
+        from .auras_buffs import SophicDevotion, EmbraceOfPaku
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False):
-            # print(f"{effect.name}, {is_heal}, {is_self_buff}")
+            # time since last attempt makes it so the number of events happening has very little impact on the number of procs that occur
+            
             caster.time_since_last_rppm_proc[effect.name] = caster.time_since_last_rppm_proc.get(effect.name, 0)
+            caster.time_since_last_rppm_proc_attempt[effect.name] = caster.time_since_last_rppm_proc_attempt.get(effect.name, 0)
             
             if is_hasted:
-                effect_proc_chance = (effect.BASE_PPM * caster.haste_multiplier) / 60
-                effect_average_proc_interval = 60 / (effect.BASE_PPM * caster.haste_multiplier)
+                bad_luck_protection = max(1, 1 + 3 * (caster.time_since_last_rppm_proc[effect.name] * (effect.BASE_PPM * caster.haste_multiplier) / 60 - 1.5))
+                effect_proc_chance = bad_luck_protection * ((effect.BASE_PPM * caster.haste_multiplier) / 60) * min(caster.time_since_last_rppm_proc_attempt[effect.name], 10)
             else:
-                effect_proc_chance = effect.BASE_PPM / 60
-                effect_average_proc_interval = 60 / effect.BASE_PPM
-                
-            if effect.name in caster.time_since_last_rppm_proc:
-                effect_proc_chance *= max(1, 1 + ((caster.time_since_last_rppm_proc[effect.name] / effect_average_proc_interval) - 1.5) * 3)
-                
-            if random.random() < effect_proc_chance:           
-                # print(caster.time_since_last_rppm_proc)
+                bad_luck_protection = max(1, 1 + 3 * (caster.time_since_last_rppm_proc[effect.name] * effect.BASE_PPM / 60 - 1.5))
+                effect_proc_chance = bad_luck_protection * (effect.BASE_PPM / 60) * min(caster.time_since_last_rppm_proc_attempt[effect.name], 10)
+            
+            if random.random() < effect_proc_chance:     
                 caster.time_since_last_rppm_proc[effect.name] = 0
-                
                 target = targets[0]
                 if is_heal:
                     effect_heal, is_crit = effect.calculate_heal(caster)
@@ -341,6 +343,8 @@ class Spell:
                     
                 if is_self_buff:
                     caster.apply_buff_to_self(effect, current_time)
+                    
+            caster.time_since_last_rppm_proc_attempt[effect.name] = 0
         
         if caster.is_talent_active("Touch of Light"):        
             touch_of_light = TouchOfLight(caster)        
@@ -348,8 +352,14 @@ class Spell:
             
         if "Sophic Devotion" in caster.bonus_enchants:
             sophic_devotion = SophicDevotion()
-            try_proc_rppm_effect(sophic_devotion, is_self_buff=True)
+            try_proc_rppm_effect(sophic_devotion, is_hasted=False, is_self_buff=True)
             
+        if caster.race == "Zandalari Troll":
+            embrace_of_paku = EmbraceOfPaku()
+            try_proc_rppm_effect(embrace_of_paku, is_self_buff=True)
+            embrace_of_akunda = EmbraceOfAkunda(caster)
+            try_proc_rppm_effect(embrace_of_akunda, is_heal=True)
+                  
     def collect_priority_breakdown_data(self, caster, targets=None, exclude_target_auras=False):
         # add auras to dictionaries and check current spell cooldownsfor display in priority list example
         self_auras = defaultdict(dict)

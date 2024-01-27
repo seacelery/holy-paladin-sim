@@ -1,7 +1,7 @@
 import random
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring
+from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff
 from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts, update_spell_data_initialise_spell
 
 # APPLIES BUFFS   
@@ -122,26 +122,15 @@ class BlessingOfTheSeasons(Spell):
                 self.name = "Blessing of Summer"
                 self.initial_cast = True
                 
-# class BlessingOfSummer(Spell):
-#     SPELL_ID = 388007
-    
-#     def __init__(self, caster):
-#         super().__init__("Blessing of Summer", mana_cost=BlessingOfTheSeasons.MANA_COST, cooldown=BlessingOfTheSeasons.BASE_COOLDOWN)
 
-# class BlessingOfAutumn(Spell):
-#     SPELL_ID = 388010
+class FirebloodSpell(Spell):
     
-#     def __init__(self, caster):
-#         super().__init__("Blessing of Summer", mana_cost=BlessingOfTheSeasons.MANA_COST, cooldown=BlessingOfTheSeasons.BASE_COOLDOWN)
+    BASE_COOLDOWN = 120
     
-# class BlessingOfWinter(Spell):
-#     SPELL_ID = 388015
-    
-#     def __init__(self, caster):
-#         super().__init__("Blessing of Summer", mana_cost=BlessingOfTheSeasons.MANA_COST, cooldown=BlessingOfTheSeasons.BASE_COOLDOWN)
-    
-# class BlessingOfSpring(Spell):
-#     SPELL_ID = 388013
-    
-#     def __init__(self, caster):
-#         super().__init__("Blessing of Summer", mana_cost=BlessingOfTheSeasons.MANA_COST, cooldown=BlessingOfTheSeasons.BASE_COOLDOWN)
+    def __init__(self, caster):
+        super().__init__("Fireblood", cooldown=BlessingOfTheSeasons.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            caster.apply_buff_to_self(FirebloodBuff(), current_time)

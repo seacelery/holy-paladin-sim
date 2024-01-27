@@ -926,6 +926,7 @@ class WordOfGlory(Spell):
             if "Divine Purpose" in caster.active_auras:
                 self.spell_healing_modifier *= 1.15
                 self.holy_power_cost = 0
+                self.mana_cost = 0
             
         # apply blessing of dawn healing (20% per stack without seal of order or fading light)
         if caster.is_talent_active("Of Dusk and Dawn"):
@@ -1027,6 +1028,7 @@ class WordOfGlory(Spell):
                     append_aura_removed_event(caster.events, "Divine Purpose", caster, caster, current_time)
                     self.spell_healing_modifier /= 1.15
                     self.holy_power_cost = 3
+                    self.mana_cost = WordOfGlory.MANA_COST
                 
                 divine_purpose_chance = 0.15
                 if random.random() <= divine_purpose_chance:
@@ -1063,6 +1065,7 @@ class LightOfDawn(Spell):
             if "Divine Purpose" in caster.active_auras:
                 self.spell_healing_modifier *= 1.15
                 self.holy_power_cost = 0
+                self.mana_cost = 0
                 
         # apply blessing of dawn healing (20% per stack without seal of order or fading light)
         if caster.is_talent_active("Of Dusk and Dawn"):
@@ -1146,6 +1149,7 @@ class LightOfDawn(Spell):
                     append_aura_removed_event(caster.events, "Divine Purpose", caster, caster, current_time)
                     self.spell_healing_modifier /= 1.15
                     self.holy_power_cost = 3
+                    self.mana_cost = LightOfDawn.MANA_COST
                 
                 divine_purpose_chance = 0.15
                 if random.random() <= divine_purpose_chance:

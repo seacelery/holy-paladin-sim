@@ -1,4 +1,7 @@
 const spellToIconsMap = {
+    "Embrace of Akunda": "https://render.worldofwarcraft.com/eu/icons/56/ability_racial_embraceoftheloa_akuna.jpg",
+    "Arcane Torrent": "https://render.worldofwarcraft.com/eu/icons/56/spell_shadow_teleport.jpg",
+    "Fireblood": "https://render.worldofwarcraft.com/eu/icons/56/ability_racial_fireblood.jpg",
     "Holy Shock": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_searinglight.jpg", 
     "Holy Shock (Rising Sunlight)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_searinglight.jpg", 
     "Holy Shock (Divine Toll)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_searinglight.jpg", 

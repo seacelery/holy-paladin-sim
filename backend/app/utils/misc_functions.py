@@ -270,6 +270,21 @@ def update_spell_data_casts(spell_breakdown, spell_name, mana_spent=None, holy_p
         spell_data["holy_power_wasted"] += holy_power_wasted
         
 def update_spell_holy_power_gain(spell_breakdown, spell_name, holy_power_gained=None):
+    if spell_name not in spell_breakdown:
+        spell_breakdown[spell_name] = {
+            "total_healing": 0,
+            "casts": 0,
+            "hits": 0,
+            "targets": {},
+            "crits": 0,
+            "mana_spent": 0,
+            "mana_gained": 0,
+            "holy_power_gained": 0,
+            "holy_power_spent": 0,
+            "holy_power_wasted": 0,
+            "sub_spells": {}
+        }
+    
     if holy_power_gained:
         spell_breakdown[spell_name]["holy_power_gained"] += holy_power_gained
         

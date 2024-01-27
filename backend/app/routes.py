@@ -83,12 +83,14 @@ def run_simulation_route():
 
     paladin, healing_targets = import_character(character_name, realm)
     
-    if "race" in session["modifiable_data"]:
-        paladin.update_race(session["modifiable_data"]["race"])
-    if "class_talents" in session["modifiable_data"]:
-        paladin.update_class_talents(session["modifiable_data"]["class_talents"])
-    if "spec_talents" in session["modifiable_data"]:
-        paladin.update_spec_talents(session["modifiable_data"]["spec_talents"])
+    print(session["modifiable_data"])
+    
+    modifiable_data = session.get("modifiable_data", {})
+    paladin.update_character(
+        race=modifiable_data.get("race"),
+        class_talents=modifiable_data.get("class_talents"),
+        spec_talents=modifiable_data.get("spec_talents")
+    )
         
     simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations)
 

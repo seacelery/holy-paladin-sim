@@ -42,4 +42,13 @@ class TouchOfLight(Spell):
     
     def __init__(self, caster):
         super().__init__("Touch of Light")
-        
+ 
+ 
+class EmbraceOfAkunda(Spell):
+    
+    SPELL_ID = 292359
+    SPELL_POWER_COEFFICIENT = 1.04 * 0.66
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Embrace of Akunda")

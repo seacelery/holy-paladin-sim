@@ -523,7 +523,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
 
         if (firstRowCells.length === headerCells.length) {
             for (let i = 0; i < headerCells.length; i++) {
-                headerCells[i].style.width = `${firstRowCells[i].offsetWidth}px`;
+                headerCells[i].style.width = `${firstRowCells[i].offsetWidth - 0.5}px`;
             };
         };
     };

@@ -15,6 +15,7 @@
 # seal of might gives 3% mastery per point for reasons??
 # light's hammer bad fix on casts vs hits
 # it's slow
+# touch of light weird rppm interaction?
 
 # options to include
 # heals on beacons, light of dawn targets hit, resplendent, mastery effectiveness, overheal for overflowing and reclamation

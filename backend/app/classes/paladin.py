@@ -4,8 +4,9 @@ import copy
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
+from .spells_misc import ArcaneTorrent
 from .spells_damage import Judgment, CrusaderStrike
-from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons
+from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
@@ -81,6 +82,14 @@ class Paladin:
             
             self.haste, self.crit, self.mastery, self.versatility = self.convert_stat_ratings_to_percent(self.stats.ratings)
             # print(self.haste, self.crit, self.mastery, self.versatility)
+            
+            # initialise base stats for use in race changes
+            self.base_spell_power = self.get_effective_spell_power(self.spell_power)
+            self.base_haste = self.haste
+            self.base_crit = self.crit
+            self.base_mastery = self.mastery
+            self.base_versatility = self.versatility
+            self.base_max_health = self.max_health
         else:
             self.spell_power = 9340
             self.haste = 22.98
@@ -94,11 +103,20 @@ class Paladin:
         
         print(f"Haste: {self.haste}, Crit: {self.crit}, Mastery: {self.mastery}, Vers: {self.versatility}")
         
-        self.haste_multiplier = (self.haste / 100) + 1
-        self.crit_multiplier = (self.crit / 100) + 1
-        self.mastery_multiplier = (self.mastery / 100) + 1
-        self.versatility_multiplier = (self.versatility / 100) + 1
+        # self.haste_multiplier = (self.haste / 100) + 1
+        # self.crit_multiplier = (self.crit / 100) + 1
+        # self.mastery_multiplier = (self.mastery / 100) + 1
+        # self.versatility_multiplier = (self.versatility / 100) + 1
         # print(self.haste_multiplier, self.crit_multiplier, self.mastery_multiplier, self.versatility_multiplier)
+        
+        # initialise abilities
+        self.abilities = {}      
+        self.load_abilities_based_on_talents()
+        
+        # initialise stats with racials
+        self.update_stats_with_racials()
+        self.crit_damage_modifier = 1
+        self.crit_healing_modifier = 1
         
         self.mastery_effectiveness = 1
     
@@ -107,9 +125,6 @@ class Paladin:
         self.base_global_cooldown = 1.5
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
         self.global_cooldown = 0
-        
-        self.abilities = {}      
-        self.load_abilities_based_on_talents()
         
         self.holy_power = 0
         self.max_holy_power = 5
@@ -142,6 +157,7 @@ class Paladin:
         self.active_auras = {}
         self.active_summons = {}
         self.time_since_last_rppm_proc = {}
+        self.time_since_last_rppm_proc_attempt = {}
         self.healing_multiplier = 1
         self.damage_multiplier = 1
         
@@ -182,48 +198,83 @@ class Paladin:
         current_state = copy.deepcopy(self.initial_state)
         self.__dict__.update(current_state.__dict__)
         
-    # update methods used in routes.py
+    # update properties methods used in routes.py
+    def update_character(self, race=None, class_talents=None, spec_talents=None):
+        if race:
+            self.update_race(race)
+        if class_talents:
+            self.update_class_talents(class_talents)
+        if spec_talents:
+            self.update_spec_talents(spec_talents)
+        
+        self.update_abilities()
+    
     def update_race(self, new_race):
         self.race = new_race
-        
-        if self.race == "Human":
-            self.haste *= 1.02
-            self.crit *= 1.02
-            self.mastery *= 1.02
-            self.versatility *= 1.02
-        elif self.race == "Blood Elf":
-            self.healing_multiplier = 20
     
     def update_class_talents(self, talents):
         for talent_name, new_rank in talents.items():
             for row in self.class_talents.values():
                 if talent_name in row:
                     row[talent_name]["ranks"]["current rank"] = new_rank 
-        self.load_abilities_based_on_talents()
         
     def update_spec_talents(self, talents):
-        for talent_name, new_rank in talents.items():
+        for talent_name, new_rank in talents.items(): 
             for row in self.spec_talents.values():
                 if talent_name in row:
                     row[talent_name]["ranks"]["current rank"] = new_rank 
+    
+    # update loadout based on updated properties                
+    def update_abilities(self):
         self.load_abilities_based_on_talents()
-    
-    def update_hasted_cooldowns_with_haste_changes(self):
-        for ability in self.abilities.values():
-            if ability.hasted_cooldown and ability.original_cooldown is not None:
-                elapsed_cooldown = ability.original_cooldown - ability.remaining_cooldown
-                ability.remaining_cooldown = ability.calculate_cooldown(self) - elapsed_cooldown * (ability.calculate_cooldown(self) / ability.original_cooldown)
-                
-    def check_cooldowns(self):
-        spell_cooldowns = {}
+        self.update_abilities_with_racials()
+        self.update_stats_with_racials()
         
-        for ability_name, ability in self.abilities.items():
-            spell_cooldowns[ability_name] = {"remaining_cooldown": ability.remaining_cooldown, "base_cooldown": ability.original_cooldown, 
-                                             "current_charges": ability.current_charges, "max_charges": ability.max_charges}
-            
-        return spell_cooldowns
-            
+    def update_stats_with_racials(self):
+        
+        # reset stats
+        self.spell_power = self.base_spell_power
+        self.haste = self.base_haste
+        self.crit = self.base_crit
+        self.mastery = self.base_mastery
+        self.versatility = self.base_versatility
+        self.crit_damage_modifier = 1
+        self.crit_healing_modifier = 1
+        self.max_health = self.base_max_health
+        
+        # update stats based on race
+        if self.race == "Human":
+            self.haste = (self.base_haste - 4) * 1.02 + 4
+            self.crit = (self.base_crit - 9) * 1.02 + 9
+            self.mastery = (self.base_mastery - 6 - 12) * 1.02 + 6 + 12
+            self.versatility = self.base_versatility * 1.02
+        elif self.race == "Dwarf":
+            self.crit_damage_modifier += 0.02
+            self.crit_healing_modifier += 0.02
+        elif self.race == "Draenei":
+            self.spell_power += (113 * 1.05 * 1.04)
+        elif self.race == "Lightforged Draenei":
+            pass
+        elif self.race == "Dark Iron Dwarf":
+            pass
+        elif self.race == "Blood Elf":
+            self.crit = self.base_crit + 1  
+        elif self.race == "Tauren":
+            self.crit_damage_modifier += 0.02
+            self.crit_healing_modifier += 0.02
+            self.max_health += 197 * 20
+        
+        self.haste_multiplier = (self.haste / 100) + 1
+        self.crit_multiplier = (self.crit / 100) + 1
+        self.mastery_multiplier = (self.mastery / 100) + 1
+        self.versatility_multiplier = (self.versatility / 100) + 1 
     
+    def update_abilities_with_racials(self):
+        if self.race == "Blood Elf":
+            self.abilities["Arcane Torrent"] = ArcaneTorrent(self) 
+        elif self.race == "Dark Iron Dwarf":
+            self.abilities["Fireblood"] = FirebloodSpell(self)
+        
     def load_abilities_based_on_talents(self):
         self.abilities = {
                             "Wait": Wait(),
@@ -275,8 +326,27 @@ class Paladin:
 
         return False
     
-    def get_effective_spell_power(self):
-        spell_power = self.spell_power
+    # misc simulation functions 
+    def update_hasted_cooldowns_with_haste_changes(self):
+        for ability in self.abilities.values():
+            if ability.hasted_cooldown and ability.original_cooldown is not None:
+                elapsed_cooldown = ability.original_cooldown - ability.remaining_cooldown
+                ability.remaining_cooldown = ability.calculate_cooldown(self) - elapsed_cooldown * (ability.calculate_cooldown(self) / ability.original_cooldown)
+                
+    def check_cooldowns(self):
+        spell_cooldowns = {}
+        
+        for ability_name, ability in self.abilities.items():
+            spell_cooldowns[ability_name] = {"remaining_cooldown": ability.remaining_cooldown, "base_cooldown": ability.original_cooldown, 
+                                             "current_charges": ability.current_charges, "max_charges": ability.max_charges}
+            
+        return spell_cooldowns
+    
+    def get_effective_spell_power(self, spell_power):
+        # 5% from plate armour bonus
+        spell_power *= 1.05
+        
+        # seal of might bonus
         if self.is_talent_active("Seal of Might") and self.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 1:
             return spell_power * 1.02
         elif self.is_talent_active("Seal of Might") and self.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 2:
@@ -285,7 +355,17 @@ class Paladin:
             
     def receive_self_heal(self, amount):
         self.self_healing += amount
-   
+        
+    def update_gcd(self, tick_rate):     
+        self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
+           
+        if self.global_cooldown > 0:
+            self.global_cooldown = max(0, self.global_cooldown - tick_rate)
+            
+    def set_beacon_targets(self, beacon_targets):
+        self.beacon_targets = beacon_targets
+    
+    # handle auras and summons on self
     def apply_summon(self, summon, current_time):
         self.active_summons[summon.name] = summon
         self.events.append(f"{format_time(current_time)}: {summon.name} created: {summon.duration}s")
@@ -325,16 +405,8 @@ class Paladin:
             append_aura_removed_event(self.events, buff.name, self, self, current_time, duration=self.active_auras[buff.name].duration)
             
             update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "expired")
-        
-    def set_beacon_targets(self, beacon_targets):
-        self.beacon_targets = beacon_targets
     
-    def update_gcd(self, tick_rate):     
-        self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
-           
-        if self.global_cooldown > 0:
-            self.global_cooldown = max(0, self.global_cooldown - tick_rate)
-        
+    # functions for parsing gear and loadout    
     def parse_stats(self, stats_data):
         ratings = {
             "health": stats_data["health"],
@@ -442,21 +514,13 @@ class Paladin:
         return_gem_stats(self, gems_from_equipment, stat_values_from_equipment)
          
         stat_values_from_equipment["intellect"] += 2089
-        stat_values_from_equipment["intellect"] *= 1.05
+        # stat_values_from_equipment["intellect"] *= 1.05
         
         stat_values_from_equipment["stamina"] += 3848
         if self.is_talent_active("Sanctified Plates") and self.class_talents["row6"]["Sanctified Plates"]["ranks"]["current rank"] == 1:
             stat_values_from_equipment["stamina"] *= 1.03
         elif self.is_talent_active("Sanctified Plates") and self.class_talents["row6"]["Sanctified Plates"]["ranks"]["current rank"] == 2:
             stat_values_from_equipment["stamina"] *= 1.06
-        
-        if self.race == "Human":
-            stat_values_from_equipment["haste"] *= 1.02
-            stat_values_from_equipment["crit"] *= 1.02
-            stat_values_from_equipment["mastery"] *= 1.02
-            stat_values_from_equipment["versatility"] *= 1.02
-        elif self.race == "Blood Elf":
-            self.healing_multiplier = 20
         
         return stat_values_from_equipment, bonus_effect_enchants
     

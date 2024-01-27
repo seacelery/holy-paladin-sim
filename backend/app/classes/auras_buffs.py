@@ -288,10 +288,10 @@ class SophicDevotion(Buff):
         super().__init__("Sophic Devotion", 15, base_duration=15)
         
     def apply_effect(self, caster, current_time=None):
-        caster.spell_power += 932
+        caster.spell_power += caster.get_effective_spell_power(932)
         
     def remove_effect(self, caster, current_time=None):
-        caster.spell_power -= 932
+        caster.spell_power -= caster.get_effective_spell_power(932)
  
  
 # target buffs   
@@ -365,3 +365,30 @@ class BlessingOfSpring(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.healing_multiplier /= 1.15
+        
+
+class EmbraceOfPaku(Buff):
+    
+    BASE_PPM = 1
+    
+    def __init__(self):
+        super().__init__("Embrace of Pa'ku", 12, base_duration=12)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.crit += 4
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.crit -= 4
+        
+
+class FirebloodBuff(Buff):
+    
+    # TODO add an option for removing debuffs
+    def __init__(self):
+        super().__init__("Fireblood", 8, base_duration=8)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(875)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(875)
