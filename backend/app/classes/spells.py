@@ -120,7 +120,7 @@ class Spell:
         self_auras, target_auras, total_target_aura_counts, spell_cooldowns = self.collect_priority_breakdown_data(caster, targets)
         
         # add spells that trigger other spells as a cast event and don't cost mana
-        if self.name in ["Daybreak", "Arcane Torrent"]:
+        if self.name in ["Daybreak", "Arcane Torrent", "Gift of the Naaru"]:
             update_spell_data_casts(caster.ability_breakdown, self.name, self.get_mana_cost(caster), self.holy_power_gain, self.holy_power_cost)
             update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts)
             
@@ -195,17 +195,7 @@ class Spell:
                 append_spell_heal_event(caster.events, self.name, caster, target, ability_healing, current_time, is_crit, spends_mana=True)   
                 append_spell_cast_event(caster.ability_cast_events, self.name, caster, current_time, target)    
                 
-                # handle beacon healing
-                beacon_healing = calculate_beacon_healing(self.name, healing_value)
-                for beacon_target in caster.beacon_targets:
-                    if target != beacon_target:
-                        beacon_target.receive_beacon_heal(beacon_healing)
-                        caster.healing_by_ability["Beacon of Light"] = caster.healing_by_ability.get("Beacon of Light", 0) + beacon_healing    
-                        
-                        update_spell_data_beacon_heals(caster.ability_breakdown, beacon_target, beacon_healing, self.name)
-                        
-                        # append_spell_heal_event(caster.events, "beacon", caster, beacon_target, beacon_healing, current_time, False, spends_mana=False)   
-                        append_spell_beacon_event(caster.beacon_events, self.name, caster, beacon_target, healing_value, beacon_healing, current_time)   
+                caster.handle_beacon_healing(self.name, target, healing_value, current_time)
                    
             if self.healing_target_count > 1:
                 caster.healing_sequence.append(multi_target_healing)   
@@ -312,7 +302,7 @@ class Spell:
             update_target_buff_data(caster.target_buff_breakdown, new_buff.name, current_time, "applied", target.name, new_buff.duration, new_buff.current_stacks)
 
         longest_reverberation_duration = max(buff.duration for buff in target.target_active_buffs["Holy Reverberation"])
-        caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
+        caster.events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
         
     def try_trigger_rppm_effects(self, caster, targets, current_time):
         from .spells_passives import TouchOfLight, EmbraceOfAkunda

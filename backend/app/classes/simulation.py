@@ -204,6 +204,7 @@ class Simulation:
             ("Blessing of the Seasons", lambda: True),
             ("Arcane Torrent", lambda: self.paladin.race == "Blood Elf"),
             ("Fireblood", lambda: self.paladin.race == "Dark Iron Dwarf"),
+            ("Gift of the Naaru", lambda: self.paladin.race == "Draenei"),
             ("Avenging Wrath", lambda: True),
             ("Light's Hammer", lambda: True),
             ("Tyr's Deliverance", lambda: True),
@@ -218,8 +219,10 @@ class Simulation:
             
             
             ("Holy Light", lambda: True),
-            # ("Holy Shock", lambda: True),
-            # ("Divine Toll", lambda: True)
+            ("Holy Shock", lambda: True),
+            ("Divine Toll", lambda: True),
+            ("Daybreak", lambda: True),
+            ("Holy Shock", lambda: True),
         ]  
         
         if self.priority_list:
@@ -316,7 +319,7 @@ class Simulation:
                 expired_buffs.append(buff_name)
                   
         for buff_name in expired_buffs:
-            append_aura_removed_event(self.paladin.buff_events, buff_name, self.paladin, self.paladin, self.elapsed_time)
+            append_aura_removed_event(self.paladin.events, buff_name, self.paladin, self.paladin, self.elapsed_time)
             
             if buff_name == "Tyr's Deliverance (self)":
                 self.paladin.active_auras["Tyr's Deliverance (self)"].trigger_partial_tick(self.paladin, self.elapsed_time)
@@ -343,16 +346,30 @@ class Simulation:
                 new_buff_instances = []
                 for buff in buff_instances:
                     if isinstance(buff, HoT):
-                        buff.update_tick_interval(self.paladin)
                         buff.time_until_next_tick -= self.tick_rate
                         
+                        # handle specific case of holy reverberation's behaviour
                         if buff_name == "Holy Reverberation" and first_instance_tick_time <= 0 and target.target_active_buffs["Holy Reverberation"][0].time_until_next_tick <= 0:
                             buff.process_tick(self.paladin, target, self.elapsed_time, buff_instances)
+                            
                             # reset the tick timing based on the first instance
                             for instance in target.target_active_buffs["Holy Reverberation"]:
                                 instance.time_until_next_tick = instance.base_tick_interval / self.paladin.haste_multiplier
                                 instance.previous_tick_time = self.elapsed_time
-
+                        
+                        # handle regular heal over time effects       
+                        elif target.target_active_buffs[buff_name][0].time_until_next_tick <= 0:
+                            buff.process_tick(self.paladin, target, self.elapsed_time, buff_instances)
+                            
+                            if buff_name == "Holy Reverberation":
+                                for instance in target.target_active_buffs["Holy Reverberation"]:
+                                    instance.time_until_next_tick = instance.base_tick_interval / self.paladin.haste_multiplier
+                                    instance.previous_tick_time = self.elapsed_time
+                            elif buff.hasted:
+                                buff.time_until_next_tick = buff.base_tick_interval / self.paladin.haste_multiplier
+                            else:
+                                buff.time_until_next_tick = buff.base_tick_interval
+            
                     buff.duration -= self.tick_rate
                     if buff.duration > 0:
                         new_buff_instances.append(buff)
@@ -370,8 +387,8 @@ class Simulation:
                             longest_reverberation_duration = max(buff_instance.duration for buff_instance in target.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in target.target_active_buffs and target.target_active_buffs["Holy Reverberation"] else None
                             if "Holy Reverberation" in target.target_active_buffs:
                                 if len(target.target_active_buffs["Holy Reverberation"]) > 0:
-                                    self.paladin.buff_events.append(f"{format_time(self.elapsed_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
-                        append_aura_removed_event(self.paladin.buff_events, buff_name, self.paladin, target, self.elapsed_time)
+                                    self.paladin.events.append(f"{format_time(self.elapsed_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
+                        append_aura_removed_event(self.paladin.events, buff_name, self.paladin, target, self.elapsed_time)
                         del target.target_active_buffs[buff_name]
                         
                         update_target_buff_data(self.paladin.target_buff_breakdown, buff_name, self.elapsed_time, "expired", target.name)
@@ -397,7 +414,7 @@ class Simulation:
                 else:
                     if debuff_name in target.target_active_debuffs:
                         self.paladin.events.append(f"{self.elapsed_time}: {debuff_name} REMOVING")
-                        append_aura_removed_event(self.paladin.buff_events, debuff_name, self.paladin, target, self.elapsed_time)
+                        append_aura_removed_event(self.paladin.events, debuff_name, self.paladin, target, self.elapsed_time)
                         del target.target_active_debuffs[debuff_name]
     
     def decrement_summons(self):
@@ -1001,7 +1018,8 @@ class Simulation:
         
         # pp.pprint(average_awakening_counts)
         # pp.pprint(average_ability_breakdown)
-        # pp.pprint(self.paladin.events)
+        pp.pprint(self.paladin.events)
+        # pp.pprint(self.paladin.buff_events)
         # pp.pprint(self.paladin.priority_breakdown)
         # pp.pprint(average_ability_breakdown)
         

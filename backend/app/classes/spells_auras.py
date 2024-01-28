@@ -1,7 +1,7 @@
 import random
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff
+from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff
 from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts, update_spell_data_initialise_spell
 
 # APPLIES BUFFS   
@@ -128,9 +128,23 @@ class FirebloodSpell(Spell):
     BASE_COOLDOWN = 120
     
     def __init__(self, caster):
-        super().__init__("Fireblood", cooldown=BlessingOfTheSeasons.BASE_COOLDOWN, off_gcd=True)
+        super().__init__("Fireblood", cooldown=FirebloodSpell.BASE_COOLDOWN, off_gcd=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             caster.apply_buff_to_self(FirebloodBuff(), current_time)
+            
+
+class GiftOfTheNaaruSpell(Spell):
+    
+    SPELL_ID = 121093
+    BASE_COOLDOWN = 180
+    
+    def __init__(self, caster):
+        super().__init__("Gift of the Naaru", cooldown=GiftOfTheNaaruSpell.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            targets[0].apply_buff_to_target(GiftOfTheNaaruBuff(caster), current_time, caster=caster)

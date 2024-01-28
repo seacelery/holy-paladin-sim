@@ -1,12 +1,13 @@
 import pprint
 import copy
 
-from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data
+from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
+from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
 from .spells_misc import ArcaneTorrent
 from .spells_damage import Judgment, CrusaderStrike
-from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell
+from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
@@ -274,6 +275,8 @@ class Paladin:
             self.abilities["Arcane Torrent"] = ArcaneTorrent(self) 
         elif self.race == "Dark Iron Dwarf":
             self.abilities["Fireblood"] = FirebloodSpell(self)
+        elif self.race == "Draenei":
+            self.abilities["Gift of the Naaru"] = GiftOfTheNaaruSpell(self)
         
     def load_abilities_based_on_talents(self):
         self.abilities = {
@@ -355,6 +358,21 @@ class Paladin:
             
     def receive_self_heal(self, amount):
         self.self_healing += amount
+        
+    def handle_beacon_healing(self, spell_name, target, initial_heal, current_time, spell_display_name=None):      
+        if spell_name not in beacon_transfer_rates_single_beacon or spell_name not in beacon_transfer_rates_double_beacon:
+            return
+        
+        beacon_healing = calculate_beacon_healing(spell_name, initial_heal)
+        
+        for beacon_target in self.beacon_targets:
+            if target != beacon_target:
+                beacon_target.receive_beacon_heal(beacon_healing)
+                self.healing_by_ability["Beacon of Light"] = self.healing_by_ability.get("Beacon of Light", 0) + beacon_healing    
+                
+                update_spell_data_beacon_heals(self.ability_breakdown, beacon_target, beacon_healing, spell_display_name if spell_display_name else spell_name)
+                
+                append_spell_beacon_event(self.beacon_events, spell_display_name if spell_display_name else spell_name, self, beacon_target, initial_heal, beacon_healing, current_time)   
         
     def update_gcd(self, tick_rate):     
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier

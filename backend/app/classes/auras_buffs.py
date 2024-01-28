@@ -1,27 +1,28 @@
 import random
 
 from .auras import Buff
-from ..utils.misc_functions import append_spell_heal_event, format_time, update_mana_gained, update_self_buff_data
+from ..utils.misc_functions import append_spell_heal_event, format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
+from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
 
 
 class HoT(Buff):
     
-    def __init__(self, name, duration, base_duration, base_tick_interval, initial_haste_multiplier, current_stacks=1, max_stacks=1):
+    def __init__(self, name, duration, base_duration, base_tick_interval, initial_haste_multiplier, current_stacks=1, max_stacks=1, hasted=True):
         super().__init__(name, duration, base_duration, current_stacks=current_stacks, max_stacks=max_stacks) 
         self.base_tick_interval = base_tick_interval 
         self.time_until_next_tick = base_tick_interval
         self.total_ticks = 0
         self.previous_haste_multiplier = initial_haste_multiplier
         self.previous_tick_time = 0
+        self.hasted = hasted
         
     def add_stack(self, new_buff_instance):
         self.buff_instances.append(new_buff_instance)
-    
-    def update_tick_interval(self, caster):
-        pass
         
     def process_tick(self, caster, target, current_time, buff_instances, is_partial_tick=False):
-        # heal_value, is_crit = self.calculate_tick_healing(caster)
+        if is_partial_tick and not self.hasted:
+            return
+        
         total_heal_value, is_crit = self.calculate_tick_healing(caster) 
         total_heal_value *= len(buff_instances)
         
@@ -30,19 +31,29 @@ class HoT(Buff):
         
         if is_partial_tick:
             total_heal_value *= (current_time - self.previous_tick_time) / (self.base_tick_interval / caster.haste_multiplier)
+            
         target.receive_heal(total_heal_value)
-        if is_crit:
+        
+        caster.handle_beacon_healing(self.name, target, total_heal_value, current_time)
+        
+        if is_crit and self.name == "Holy Reverberation":
             caster.events.append(f"{format_time(current_time)}: Holy Reverberation crit healed {target.name} for {round(total_heal_value)}")
-        else:
+        elif self.name == "Holy Reverberation":
             caster.events.append(f"{format_time(current_time)}: Holy Reverberation healed {target.name} for {round(total_heal_value)}")
+            
         self.total_ticks += 1 if not is_partial_tick else self.time_until_next_tick / self.base_tick_interval
         
+        update_spell_data_heals(caster.ability_breakdown, self.name, target, total_heal_value, is_crit)
         
-    def calculate_tick_healing(self, caster):
+        
+    def calculate_tick_healing(self, caster, flat_heal_amount=0):
         # spell_power = caster.stats.ratings["intellect"]
         spell_power = 9340
         
-        total_healing = spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier
+        if flat_heal_amount > 0:
+            total_healing = flat_heal_amount
+        else:
+            total_healing = spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier
         
         mastery_multiplier = 1 + (caster.mastery_multiplier - 1) * caster.mastery_effectiveness
         versatility_multiplier = caster.versatility_multiplier
@@ -60,6 +71,24 @@ class HoT(Buff):
             is_crit = True
 
         return healing_per_tick, is_crit
+
+
+# class GiftOfTheNaaruBuff(HoT):
+    
+#     SPELL_POWER_COEFFICIENT = 0
+    
+#     def __init__(self, caster):
+#         super().__init__("Gift of the Naaru", 5, base_duration=5, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier)
+#         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
+
+class GiftOfTheNaaruBuff(HoT):
+    
+    SPELL_POWER_COEFFICIENT = 1
+    
+    def __init__(self, caster):
+        super().__init__("Gift of the Naaru", 5, base_duration=5, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier, hasted=False)
+        self.time_until_next_tick = self.base_tick_interval
+        
         
 class HolyReverberation(HoT):
     

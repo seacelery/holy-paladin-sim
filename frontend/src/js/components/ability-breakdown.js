@@ -103,10 +103,14 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     // leave cells blank for certain spells
     // "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", 
     const excludedSpells = ["Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)"];
-    const excludedSpellsOnlyManaAndCasts = ["Blessing of the Seasons", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", "Divine Favor", "Avenging Wrath", "Arcane Torrent"];
+    // displays only casts and resource gains
+    const excludedSpellsOnlyResourcesAndCasts = ["Blessing of the Seasons", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", "Divine Favor", "Avenging Wrath", "Arcane Torrent"];
+    // displays casts with average as healing divided by casts
     const excludedSpellsCasts = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", 
                                  "Judgment of Light", "Greater Judgment", "Touch of Light", "Afterimage", "Glimmer of Light", "Glimmer of Light (Glistening Radiance (Light of Dawn))",
-                                 "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda"];
+                                 "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda", "Holy Reverberation"];
+    // displays casts with average as healing divided by hits
+    const excludedSpellsCastsAverageHits = ["Gift of the Naaru"];
     const excludedSpellsCrit = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", 
                                 "Crusader Strike", "Judgment", "Daybreak", "Divine Toll"];
 
@@ -388,7 +392,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         
         const percentHealingCell = row.insertCell();
         percentHealingCell.className = "table-cell-right healing-percent-cell";
-        if (excludedSpellsOnlyManaAndCasts.includes(spellName)) {
+        if (excludedSpellsOnlyResourcesAndCasts.includes(spellName)) {
             percentHealingCell.textContent = "";
         } else {
             percentHealingCell.textContent = Number(formatNumbersNoRounding(((spellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
@@ -396,7 +400,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         
         const healingCell = row.insertCell();
         healingCell.className = "table-cell-right healing-cell";
-        if (excludedSpellsOnlyManaAndCasts.includes(spellName)) {
+        if (excludedSpellsOnlyResourcesAndCasts.includes(spellName)) {
             healingCell.textContent = "";
         } else {
             healingCell.textContent = formatNumbers(spellData.total_healing);
@@ -404,7 +408,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         
         const HPSCell = row.insertCell();
         HPSCell.className = "table-cell-right HPS-cell";
-        if (excludedSpellsOnlyManaAndCasts.includes(spellName)) {
+        if (excludedSpellsOnlyResourcesAndCasts.includes(spellName)) {
             HPSCell.textContent = "";
         } else {
             HPSCell.textContent = formatNumbers(spellData.total_healing / encounterLength);
@@ -423,9 +427,9 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         const avgCastsCell = row.insertCell();
         avgCastsCell.className = "table-cell-right";
 
-        if (excludedSpellsCasts.includes(spellName)) {
+        if (excludedSpellsCasts.includes(spellName) || excludedSpellsCastsAverageHits.includes(spellName)) {
             avgCastsCell.textContent = formatNumbers(spellData.total_healing / spellData.hits);
-        } else if (excludedSpellsOnlyManaAndCasts.includes(spellName)) {
+        } else if (excludedSpellsOnlyResourcesAndCasts.includes(spellName)) {
             avgCastsCell.textContent = "";
         } else {
             avgCastsCell.textContent = formatNumbers(spellData.total_healing / spellData.casts);
@@ -437,7 +441,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
         const critPercentCell = row.insertCell();
         critPercentCell.className = "table-cell-right";
-        if (excludedSpellsCrit.includes(spellName) || excludedSpellsOnlyManaAndCasts.includes(spellName)) {
+        if (excludedSpellsCrit.includes(spellName) || excludedSpellsOnlyResourcesAndCasts.includes(spellName)) {
             critPercentCell.textContent = "";
         } else {
             critPercentCell.textContent = (spellData.crit_percent).toFixed(1) + "%";
@@ -634,7 +638,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
             const percentHealingCell = subRow.insertCell();
             percentHealingCell.className = "table-sub-cell-right healing-percent-cell";
-            if (excludedSpellsOnlyManaAndCasts.includes(subSpellName)) {
+            if (excludedSpellsOnlyResourcesAndCasts.includes(subSpellName)) {
                 percentHealingCell.textContent = "";
             } else {
                 percentHealingCell.textContent = Number(formatNumbersNoRounding(((subSpellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
@@ -642,7 +646,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             
             const healingCell = subRow.insertCell();
             healingCell.className = "table-sub-cell-right healing-cell";
-            if (excludedSpellsOnlyManaAndCasts.includes(subSpellName)) {
+            if (excludedSpellsOnlyResourcesAndCasts.includes(subSpellName)) {
                 healingCell.textContent = "";
             } else {
                 healingCell.textContent = formatNumbers(subSpellData.total_healing);
@@ -650,7 +654,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
             const HPSCell = subRow.insertCell();
             HPSCell.className = "table-sub-cell-right HPS-cell";
-            if (excludedSpellsOnlyManaAndCasts.includes(subSpellName)) {
+            if (excludedSpellsOnlyResourcesAndCasts.includes(subSpellName)) {
                 HPSCell.textContent = "";
             } else {
                 HPSCell.textContent = formatNumbers(subSpellData.total_healing / encounterLength);
@@ -670,9 +674,9 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             const avgCastsCell = subRow.insertCell();
             avgCastsCell.className = "table-sub-cell-right";
 
-            if (excludedSpellsCasts.includes(subSpellName) ) {
+            if (excludedSpellsCasts.includes(subSpellName) || excludedSpellsCastsAverageHits.includes(spellName)) {
                 avgCastsCell.textContent = formatNumbers(subSpellData.total_healing / subSpellData.hits);
-            } else if (excludedSpellsOnlyManaAndCasts.includes(subSpellName)) {
+            } else if (excludedSpellsOnlyResourcesAndCasts.includes(subSpellName)) {
                 avgCastsCell.textContent = "";
             } else {
                 avgCastsCell.textContent = formatNumbers(subSpellData.total_healing / subSpellData.casts);
@@ -685,7 +689,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             const critPercentCell = subRow.insertCell();
             critPercentCell.className = "table-sub-cell-right";
 
-            if (excludedSpellsCrit.includes(subSpellName) || (excludedSpellsOnlyManaAndCasts.includes(subSpellName))) {
+            if (excludedSpellsCrit.includes(subSpellName) || (excludedSpellsOnlyResourcesAndCasts.includes(subSpellName))) {
                 critPercentCell.textContent = "";
             } else {
                 critPercentCell.textContent = (subSpellData.crit_percent).toFixed(1) + "%";
