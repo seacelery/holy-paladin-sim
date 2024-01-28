@@ -844,6 +844,7 @@ tr {
     position: relative;
     padding-left: 5px;
     padding-top: 1px;
+    margin-left: 0.5px;
 
     min-width: 350px;
     height: 35px;
@@ -883,9 +884,10 @@ tr {
 }
 
 .table-sub-sub-cell-left {
-    padding-left: 5px;
     position: relative;
+    padding-left: 5px;
     padding-top: 1px;
+    margin-left: 0.5px;
 
     min-width: 350px;
     height: 35px;
@@ -958,6 +960,10 @@ tr {
 
 .healing-cell, .HPS-cell {
     color: var(--healing-font);
+}
+
+.healing-percent-cell {
+    max-width: 75px;
 }
 
 .mana-spent-cell, .mana-gained-cell {

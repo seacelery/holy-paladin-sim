@@ -391,13 +391,13 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
                     const manaGainedCell = subRow.insertCell();
                     manaGainedCell.className = "table-sub-cell-right mana-gained-cell";
                     if (subSpellData.mana_gained > 0) {
-                        manaGainedCell.textContent = "+" + Math.round(subSpellData.mana_gained);
+                        manaGainedCell.textContent = "+" + formatNumbers(subSpellData.mana_gained);
                     };
                     
                     const manaSpentCell = subRow.insertCell();
                     manaSpentCell.className = "table-sub-cell-right mana-spent-cell";
                     if (subSpellData.mana_spent > 0) {
-                        manaSpentCell.textContent = "-" + Math.round(subSpellData.mana_spent);
+                        manaSpentCell.textContent = "-" + formatNumbers(subSpellData.mana_spent);
                     };
                 };
 
