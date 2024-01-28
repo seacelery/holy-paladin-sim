@@ -46,23 +46,24 @@ class HoT(Buff):
         update_spell_data_heals(caster.ability_breakdown, self.name, target, total_heal_value, is_crit)
         
         
-    def calculate_tick_healing(self, caster, flat_heal_amount=0):
+    def calculate_tick_healing(self, caster):
         # spell_power = caster.stats.ratings["intellect"]
         spell_power = 9340
         
-        if flat_heal_amount > 0:
-            total_healing = flat_heal_amount
-        else:
-            total_healing = spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier
+        total_healing = spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier
         
         mastery_multiplier = 1 + (caster.mastery_multiplier - 1) * caster.mastery_effectiveness
         versatility_multiplier = caster.versatility_multiplier
         total_healing *= mastery_multiplier * versatility_multiplier
 
-        number_of_ticks = self.base_duration / (self.base_tick_interval / caster.haste_multiplier)
-        if number_of_ticks > 1:
-            total_healing *= caster.haste_multiplier
-        healing_per_tick = total_healing / number_of_ticks
+        if self.hasted:
+            number_of_ticks = self.base_duration / (self.base_tick_interval / caster.haste_multiplier)
+            if number_of_ticks > 1:
+                total_healing *= caster.haste_multiplier
+            healing_per_tick = total_healing / number_of_ticks
+        else:
+            number_of_ticks = self.base_duration / self.base_tick_interval
+            healing_per_tick = total_healing / number_of_ticks
         
         is_crit = False
         crit_chance = caster.crit
@@ -83,12 +84,23 @@ class HoT(Buff):
 
 class GiftOfTheNaaruBuff(HoT):
     
-    SPELL_POWER_COEFFICIENT = 1
-    
     def __init__(self, caster):
         super().__init__("Gift of the Naaru", 5, base_duration=5, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier, hasted=False)
         self.time_until_next_tick = self.base_tick_interval
         
+    def calculate_tick_healing(self, caster):
+        total_healing = caster.max_health * 0.2
+        
+        number_of_ticks = self.base_duration / self.base_tick_interval
+        healing_per_tick = total_healing / number_of_ticks
+        
+        is_crit = False
+        crit_chance = caster.crit
+        random_num = random.random() * 100
+        if random_num <= crit_chance:
+            is_crit = True
+
+        return healing_per_tick, is_crit
         
 class HolyReverberation(HoT):
     

@@ -120,6 +120,7 @@ class Paladin:
         self.crit_healing_modifier = 1
         
         self.mastery_effectiveness = 1
+        print(self.max_health)
     
         self.buffs = buffs
         
