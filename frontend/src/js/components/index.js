@@ -436,35 +436,42 @@ iterationsValue.addEventListener("input", (e) => {
 
 // encounter length slider
 const encounterLengthSlider = document.getElementById("encounter-length-option");
-const encounterLengthValue = document.getElementById("encounter-length-value");
+const encounterLengthMinutes = document.getElementById("encounter-length-minutes");
+const encounterLengthSeconds = document.getElementById("encounter-length-seconds");
 const baseMaxEncounterLength = 600;
 
-// initial value setup
-const seconds = parseInt(encounterLengthSlider.value, 10);
-const minutes = Math.floor(seconds / 60);
-const remainingSeconds = seconds % 60;
-encounterLengthValue.textContent = `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+const updateEncounterLengthDisplay = (secondsValue) => {
+    const minutes = Math.floor(secondsValue / 60);
+    const seconds = secondsValue % 60;
+    encounterLengthMinutes.textContent = minutes;
+    encounterLengthSeconds.textContent = seconds.toString().padStart(2, '0');
+};
+
+// initial display
+updateEncounterLengthDisplay(parseInt(encounterLengthSlider.value, 10));
 
 encounterLengthSlider.addEventListener("input", () => {
     encounterLengthSlider.max = baseMaxEncounterLength;
-    const seconds = parseInt(encounterLengthSlider.value, 10);
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    encounterLengthValue.textContent = `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    updateEncounterLengthDisplay(parseInt(encounterLengthSlider.value, 10));
 });
 
-makeFieldEditable(encounterLengthValue, 30, encounterLengthSlider);
+makeFieldEditable(encounterLengthMinutes, { charLimit: 2 });
+makeFieldEditable(encounterLengthSeconds, { charLimit: 2 });
 
-encounterLengthValue.addEventListener("input", (e) => {
-    encounterLengthSlider.max = baseMaxEncounterLength;
-    const [minutes, seconds] = encounterLengthValue.textContent.split(":").map(num => parseInt(num, 10));
-    let newValue = (minutes * 60) + seconds;
+[encounterLengthMinutes, encounterLengthSeconds].forEach(field => {
+    field.addEventListener("input", (e) => {
+        const minutes = parseInt(encounterLengthMinutes.textContent, 10) || 0;
+        const seconds = parseInt(encounterLengthSeconds.textContent, 10) || 0;
+        let totalSeconds = (minutes * 60) + seconds;
 
-    if (newValue > baseMaxEncounterLength) {
-        encounterLengthSlider.max = newValue;
-    };
+        if (totalSeconds > baseMaxEncounterLength) {
+            encounterLengthSlider.max = totalSeconds;
+        } else {
+            encounterLengthSlider.max = baseMaxEncounterLength;
+        };
 
-    encounterLengthSlider.value = newValue;
+        encounterLengthSlider.value = totalSeconds;
+    });
 });
 
 // initialise tabs for primary navbar

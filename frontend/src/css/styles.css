@@ -216,9 +216,7 @@ body {
     display: flex;
     margin-bottom: 15px;
 
-    justify-content: space-between;
-
-    
+    justify-content: space-between;    
 }
 
 .option-container input {
@@ -295,6 +293,23 @@ body {
     font-size: 14px;
 
     color: var(--light-font-colour)
+}
+
+.slider-value-time, .slider-value-time-divider {
+    margin-top: -8px;
+    margin-bottom: 5px;
+
+    transform: translateX(-2px);
+
+    text-align: center;
+    font-size: 14px;
+
+    color: var(--light-font-colour)
+}
+
+#encounter-length-minutes {
+    min-width: 18px;
+    text-align: right;
 }
 
 #race-filter {

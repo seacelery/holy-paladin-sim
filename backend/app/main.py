@@ -16,6 +16,7 @@
 # light's hammer bad fix on casts vs hits
 # it's slow
 # touch of light weird rppm interaction?
+# reset priority on tab swap to remove lag
 
 # options to include
 # heals on beacons, light of dawn targets hit, resplendent, mastery effectiveness, overheal for overflowing and reclamation
