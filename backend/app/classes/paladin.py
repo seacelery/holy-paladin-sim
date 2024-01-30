@@ -31,7 +31,7 @@ class Talents:
 
 class Paladin:
     
-    def __init__(self, name, character_data=None, stats_data=None, talent_data=None, equipment_data=None, buffs=None, potential_healing_targets=None):
+    def __init__(self, name, character_data=None, stats_data=None, talent_data=None, equipment_data=None, buffs=None, consumables=None, potential_healing_targets=None):
         self.character_data = character_data if character_data else None
         self.race = self.character_data["race"]["name"] if self.character_data else None
         self.name = name[0].upper() + name[1:]
@@ -123,6 +123,7 @@ class Paladin:
         print(self.max_health)
     
         self.buffs = buffs
+        self.consumables = consumables
         
         self.base_global_cooldown = 1.5
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier

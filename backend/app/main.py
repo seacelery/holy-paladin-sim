@@ -53,8 +53,8 @@ def import_character(character_name, realm):
     
     return paladin, healing_targets
     
-def initialise_simulation(paladin, healing_targets, encounter_length, iterations):
-    simulation = Simulation(paladin, healing_targets, encounter_length, iterations, access_token)
+def initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time):
+    simulation = Simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, access_token)
     return simulation
     
 def run_simulation(simulation):
@@ -62,5 +62,5 @@ def run_simulation(simulation):
     
 if __name__ == "__main__":
     paladin, healing_targets = import_character("daisu", "aszune")
-    simulation = initialise_simulation(paladin, healing_targets, 30, 1)
+    simulation = initialise_simulation(paladin, healing_targets, encounter_length=30, iterations=1, time_warp_time=0)
     run_simulation(simulation)

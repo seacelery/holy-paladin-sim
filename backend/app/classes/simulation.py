@@ -10,7 +10,7 @@ from flask_socketio import emit
 from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget
-from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, TimeWarp
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
 from ..utils.battlenet_api import get_spell_icon_data, get_access_token
 from ..utils import cache
@@ -20,7 +20,9 @@ pp = pprint.PrettyPrinter(width=200)
 
 class Simulation:
     
-    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, access_token, priority_list=None):
+    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, access_token, priority_list=None):
+
+        self.access_token = access_token
 
         self.paladin = paladin
         self.healing_targets_list = healing_targets_list
@@ -34,31 +36,49 @@ class Simulation:
         self.tick_rate = 0.05
         self.abilities = paladin.abilities
         
+        self.time_warp_time = time_warp_time
+        self.time_warp_recharge_timer = 0
+        self.time_warp_recharging = False
+        
         self.times_direct_healed = {}
         self.previous_ability = None
-        
-        self.access_token = access_token
         
         self.time_since_last_check = 0
         self.previous_total_healing = 0
         self.aura_healing = {}
         self.aura_instances = {}
         
+        # apply beacon of light at the start of the simulation
         for target in self.paladin.beacon_targets:
             target.apply_buff_to_target(BeaconOfLightBuff(), self.elapsed_time, caster=self.paladin)
-            
+        
+        # testing
         self.test_time_since_last = 0
         
+        # the copy is used at the start of each simulation
         self.initial_state = copy.deepcopy(self)
                 
     def simulate(self):
         while self.elapsed_time < self.encounter_length:
+            
+            # handle time warp
+            if self.elapsed_time > self.time_warp_time and not self.time_warp_recharging:
+                self.paladin.apply_buff_to_self(TimeWarp(), self.elapsed_time)
+                self.time_warp_recharging = True
+            if self.time_warp_recharging:
+                self.time_warp_recharge_timer += self.tick_rate
+            if self.time_warp_recharge_timer >= 600:
+                self.time_warp_recharge_timer = 0
+                self.time_warp_recharging = False
+            
+            # handle cast time spells
             if self.paladin.currently_casting is not None:
                 self.paladin.remaining_cast_time -= self.tick_rate
                 if self.paladin.remaining_cast_time <= 0:
                     self.complete_cast(self.paladin, self.elapsed_time)
                     self.paladin.currently_casting = None
             
+            # increment effects that trigger other effects
             if "Divine Resonance" in self.paladin.active_auras:
                 self.paladin.active_auras["Divine Resonance"].increment_divine_resonance(self.paladin, self.elapsed_time, self.tick_rate)      
             if "Tyr's Deliverance (self)" in self.paladin.active_auras:
@@ -92,6 +112,7 @@ class Simulation:
                 # pp.pprint(self.paladin.active_auras)
                 self.test_time_since_last = 0
             
+            # for display purposes
             self.time_since_last_check += self.tick_rate
             if self.time_since_last_check >= 0.05:
                 self.check_buff_counts()

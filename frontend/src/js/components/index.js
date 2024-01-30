@@ -10,6 +10,7 @@ import { createCooldownsBreakdown } from "./cooldowns-breakdown.js";
 import { handleTabs } from "./simulation-options-tabs.js";
 import { setSimulationOptionsFromImportedData } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
+import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable } from "../utils/misc-functions.js";
 
 // window.addEventListener("mouseover", (e) => {
 //     console.log(e.target)
@@ -35,36 +36,6 @@ const createElement = (elementName, className = null, id = null) => {
     return element;
 };
 
-const formatNumbers = (number) => {
-    return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
-
-const formatNumbersNoRounding = (number) => {
-    const parts = number.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return parts.join(".");
-};
-
-const formatThousands = (number) => {
-    if (number >= 1000) {
-        return (number / 1000).toFixed(1) + "K";
-    } else {
-        return number.toString();
-    };
-};
-
-const formatTime = (seconds) => {
-    let minutes = Math.floor(seconds / 60);
-    let remainingSeconds = Math.round(seconds % 60);
-
-    if (remainingSeconds === 60) {
-        minutes += 1;
-        remainingSeconds = 0;
-    };
-
-    return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
-};
-
 // socket to allow the server to send updates while the simulation is ongoing
 const socket = io("http://localhost:5000");
 
@@ -82,7 +53,9 @@ socket.on("connect_error", (error) => {
 
 let savedDataTimeout;
 let containerCount = 0;
-let iterations = 0;
+let encounterLength = 30;
+let iterations = 1;
+let lastSliderChange = null;
 let isSimulationRunning = false;
 
 // save states for use in separate priority breakdowns
@@ -128,7 +101,7 @@ const importCharacter = async () => {
     })
     .then(response => response.json())
     .then(data => {
-        updateUIAfterImport(data)
+        updateUIAfterImport(data);
     })
     .catch(error => { console.error("Error:", error);
                     if (!characterName) {
@@ -188,14 +161,23 @@ const playCheckmarkAnimation = () => {
 };
 
 const runSimulation = async () => {
-    const encounterLength = document.getElementById("encounter-length-option").value;
-    iterations = document.getElementById("iterations-option").value;
+    encounterLength = document.getElementById("encounter-length-option").value;
+
+    if (lastSliderChange === "Slider") {
+        iterations = roundIterations(document.getElementById("iterations-option").value);
+    } else {
+        iterations = document.getElementById("iterations-option").value;
+    };
+    
+    console.log("iterations", iterations)
+    const timeWarpTime = document.getElementById("time-warp-time").value;
 
     simulationProgressBarContainer.style.opacity = "100";
 
     isSimulationRunning = true;
 
-    return fetch(`http://127.0.0.1:5000/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}`, {
+    return fetch(`http://127.0.0.1:5000/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}&
+                  time_warp_time=${timeWarpTime}`, {
         credentials: "include"
     })
     .then(response => response.json())
@@ -256,15 +238,7 @@ const createSimulationResults = (simulationData) => {
     };
 
     // allow editing of title
-    resultText.addEventListener("click", function() {
-        this.setAttribute("contenteditable", "true");
-        this.focus();
-    });
-    
-    // stop editing when you click outside
-    resultText.addEventListener("blur", function() {
-        this.removeAttribute("contenteditable");
-    });
+    makeFieldEditable(resultText);
     leftSideContainer.appendChild(resultText);
 
     // add a display for hps, encounter length, and iterations
@@ -278,7 +252,6 @@ const createSimulationResults = (simulationData) => {
     resultDetailsContainer.appendChild(resultEncounterLength);
 
     const resultIterations = createElement("div", `result-details-iterations-${containerCount}`, null);
-    const iterationsText = simulationData.simulation_details.iterations > 1 ? "iterations" : "iteration";
     resultIterations.innerHTML = `<span>Iterations: </span><span style="color: var(--paladin-font)">${simulationData.simulation_details.iterations}</span>`
     
     resultDetailsContainer.appendChild(resultIterations);
@@ -375,9 +348,9 @@ const createSimulationResults = (simulationData) => {
 };
 
 // update the paladin class when attributes are changed
-const handleRaceChange = () => {
+const handleRaceChange = (race) => {
     updateCharacter({
-        race: raceOption.value
+        race: race
     });
 };
 
@@ -393,7 +366,106 @@ const updateUIAfterImport = (data) => {
 importButton.addEventListener("click", importCharacter);
 simulationProgressBarContainer.addEventListener("click", runSimulation);
 
-raceOption.addEventListener("change", handleRaceChange);
+const raceImages = document.querySelectorAll(".race-image");
+raceImages.forEach(image => {
+    image.classList.add("race-unselected");
+    image.classList.remove("race-selected");
+    image.addEventListener("click", (e) => {
+
+        raceImages.forEach(img => {
+            img.classList.add("race-unselected");
+            img.classList.remove("race-selected");
+        });
+
+        const race = e.target.getAttribute("data-race");
+        handleRaceChange(race);
+        image.classList.remove("race-unselected");
+        image.classList.add("race-selected");
+    });
+});
+
+// option sliders
+const updateSliderStep = (value, slider, sliderText) => {
+    if (value < 100) {
+        slider.step = 1;
+        sliderText.textContent = value;
+    } else {
+        slider.step = 50;
+        sliderText.textContent = roundIterations(value);
+    };
+};
+
+const roundIterations = (number) => {
+    if (number < 100) {
+        return number
+    } else {
+        return Math.round(number / 10) * 10;
+    };
+};
+
+// iterations slider
+const iterationsSlider = document.getElementById("iterations-option");
+const iterationsValue = document.getElementById("iterations-value");
+const baseMaxIterations = 1000;
+
+iterationsSlider.addEventListener("input", () => {
+    encounterLengthSlider.max = baseMaxIterations;
+
+    const value = iterationsSlider.value
+    updateSliderStep(value, iterationsSlider, iterationsValue);
+    lastSliderChange = "Slider";
+});
+iterationsValue.textContent = iterationsSlider.value;
+makeFieldEditable(iterationsValue, 1, iterationsSlider);
+
+iterationsValue.addEventListener("input", (e) => {
+    encounterLengthSlider.max = baseMaxIterations;
+
+    // reset step to 1 to allow setting any number
+    iterationsSlider.step = 1;
+    let newValue = Number(iterationsValue.textContent);
+
+    if (newValue > baseMaxIterations) {
+        iterationsSlider.max = newValue;
+    };
+
+    iterationsSlider.value = newValue;
+    lastSliderChange = "Value";
+
+});
+
+// encounter length slider
+const encounterLengthSlider = document.getElementById("encounter-length-option");
+const encounterLengthValue = document.getElementById("encounter-length-value");
+const baseMaxEncounterLength = 600;
+
+// initial value setup
+const seconds = parseInt(encounterLengthSlider.value, 10);
+const minutes = Math.floor(seconds / 60);
+const remainingSeconds = seconds % 60;
+encounterLengthValue.textContent = `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+
+encounterLengthSlider.addEventListener("input", () => {
+    encounterLengthSlider.max = baseMaxEncounterLength;
+    const seconds = parseInt(encounterLengthSlider.value, 10);
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    encounterLengthValue.textContent = `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+});
+
+makeFieldEditable(encounterLengthValue, 30, encounterLengthSlider);
+
+encounterLengthValue.addEventListener("input", (e) => {
+    encounterLengthSlider.max = baseMaxEncounterLength;
+    const [minutes, seconds] = encounterLengthValue.textContent.split(":").map(num => parseInt(num, 10));
+    let newValue = (minutes * 60) + seconds;
+
+    if (newValue > baseMaxEncounterLength) {
+        encounterLengthSlider.max = newValue;
+    };
+
+    encounterLengthSlider.value = newValue;
+});
 
 // initialise tabs for primary navbar
 handleTabs(`options-navbar-1`, "options-tab-content");

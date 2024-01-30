@@ -148,3 +148,17 @@ class GiftOfTheNaaruSpell(Spell):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             targets[0].apply_buff_to_target(GiftOfTheNaaruBuff(caster), current_time, caster=caster)
+            
+
+# class TimeWarp(Spell):
+    
+    
+#     BASE_COOLDOWN = 300
+    
+#     def __init__(self, caster):
+#         super().__init__("Time Warp", cooldown=TimeWarp.BASE_COOLDOWN, off_gcd=True)
+        
+#     def cast_healing_spell(self, caster, targets, current_time, is_heal):
+#         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
+#         if cast_success:
+#             caster.apply_buff_to_self(TimeWarpBuff(), current_time, caster=caster)

@@ -43,7 +43,7 @@
                 <div id="options-tab" class="options-tab active">Options</div>
                 <div id="talents-tab" class="options-tab inactive">Talents</div>
                 <div id="equipment-tab" class="options-tab inactive">Equipment</div>
-                <div id="buffs-tab" class="options-tab inactive">Buffs</div>
+                <div id="buffs-tab" class="options-tab inactive">Buffs & Consumables</div>
                 <div id="priority-list-tab" class="options-tab inactive">Priority List</div>
                 
             </nav>
@@ -54,34 +54,53 @@
                         <div class="options-half options-half-left">
                             <div class="option-container">
                                 <label for="iterations-option" id="iterations-option-label" class="options-option-label">Iterations:</label>
-                                <input id="iterations-option" class="options-option" value="1">
+                                <div id="iterations-slider-container" class="slider-container">
+                                    <div id="iterations-value-container" class="slider-value-container">
+                                        <div id="iterations-value" class="slider-value">1</div>
+                                    </div>
+                                    <input type="range" id="iterations-option" class="options-option option-slider" value="1" min="1" max="1001" step="1">                              
+                                </div>                              
                             </div>
+
+                            <!-- <div class="option-container">
+                                <label for="encounter-length-option" id="encounter-length-option-label" class="options-option-label">Encounter Length:</label>
+                                <input id="encounter-length-option" class="options-option" value="30">
+                            </div> -->
 
                             <div class="option-container">
                                 <label for="encounter-length-option" id="encounter-length-option-label" class="options-option-label">Encounter Length:</label>
-                                <input id="encounter-length-option" class="options-option" value="30">
+                                <div id="encounter-length-slider-container" class="slider-container">
+                                    <div id="encounter-length-value-container" class="slider-value-container">
+                                        <div id="encounter-length-value" class="slider-value">1</div>
+                                    </div>
+                                    <input type="range" id="encounter-length-option" class="options-option option-slider" value="30" min="1" max="600" step="1">                              
+                                </div>                              
                             </div>
 
                             <div class="option-container">
-                                <label for="race-filter" id="race-filter-label" class="options-option-label">Race:</label>
-                                <select id="race-filter" class="options-option">
-                                    <option class="race-filter-option" value="Human">Human</option>
-                                    <option class="race-filter-option" value="Dwarf">Dwarf</option>
-                                    <option class="race-filter-option" value="Dark Iron Dwarf">Dark Iron Dwarf</option>
-                                    <option class="race-filter-option" value="Draenei">Draenei</option>
-                                    <option class="race-filter-option" value="Lightforged Draenei">Lightforged Draenei</option>
-                                    <option class="race-filter-option" value="Blood Elf">Blood Elf</option>
-                                    <option class="race-filter-option" value="Tauren">Tauren</option>
-                                    <option class="race-filter-option" value="Zandalari Troll">Zandalari Troll</option>
-                                </select>
+                                <div id="race-filter-label" class="options-option-label">Race:</div>
+                                <div id="race-filter-container" class="options-option-container">
+                                    <img class="race-image" data-race="Human" src="https://render.worldofwarcraft.com/eu/icons/56/race_human_female.jpg">
+                                    <img class="race-image" data-race="Dwarf" src="https://render.worldofwarcraft.com/eu/icons/56/race_dwarf_female.jpg">
+                                    <img class="race-image" data-race="Dark Iron Dwarf" src="https://wow.zamimg.com/images/wow/icons/large/race_darkirondwarf_female.jpg">
+                                    <img class="race-image" data-race="Draenei" src="https://render.worldofwarcraft.com/eu/icons/56/race_draenei_female.jpg">
+                                    <img class="race-image" data-race="Lightforged Draenei" src="https://wow.zamimg.com/images/wow/icons/large/race_lightforgeddraenei_female.jpg">
+                                    <img class="race-image" data-race="Blood Elf" src="https://render.worldofwarcraft.com/eu/icons/56/race_blood-elf_female.jpg">
+                                    <img class="race-image" data-race="Tauren" src="https://render.worldofwarcraft.com/eu/icons/56/race_tauren_female.jpg">
+                                    <img class="race-image" data-race="Zandalari Troll" src="https://wow.zamimg.com/images/wow/icons/large/race_zandalaritroll_female.jpg">
+                                </div>
                             </div>
                         </div>    
+
+                        <div class="options-half options-half-center">
+                            <div class="option-container">
+                                <label for="time-warp-time" id="time-warp-time-label" class="options-option-label">Time Warp Timer:</label>
+                                <input id="time-warp-time" class="options-option" value="0">
+                            </div>
+                        </div>
                         
                         <div class="options-half options-half-right">
-                            <div class="option-container">
-                                <label class="options-option-label">Something:</label>
-                                <input class="options-option">
-                            </div>
+                            
                         </div>
                     </div>
                     

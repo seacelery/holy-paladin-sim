@@ -56,6 +56,7 @@ body {
     padding: 11px 0 11px 0;
     display: flex;
     justify-content: center;
+    align-items: center;
 
     width: 68%;
 
@@ -66,7 +67,7 @@ body {
 }
 
 .character-input-label {
-    padding: 4px 10px 0 0;
+    padding: 9px 10px 0 0;
 
     font-size: 17px;
     color: var(--light-font-colour);
@@ -90,7 +91,7 @@ body {
 
 #character-region-input {
     width: 50px;
-    padding-left: 5px;
+    padding-left: 0px;
     height: 27px;
 }
 
@@ -129,7 +130,6 @@ body {
 #options-navbar-1, [id^="results-navbar-"], [id^="buffs-line-graph-navbar-"] {
     display: inline-flex;
 
-    border-bottom: 1px solid var(--border-colour-3);
     border-radius: 3px;
     border-bottom-right-radius: 0px;
 
@@ -185,6 +185,7 @@ body {
     height: 600px;
 
     border-right: 1px solid var(--border-colour-3);
+    border-top: 1px solid var(--border-colour-3);
     border-radius: 3px;
 
     background-color: var(--panel-colour);
@@ -213,14 +214,11 @@ body {
 
 .option-container {
     display: flex;
+    margin-bottom: 15px;
 
     justify-content: space-between;
 
-    margin-bottom: 10px;
-}
-
-.option-container label {
-    margin-right: 10px; /* Adjust spacing between label and input */
+    
 }
 
 .option-container input {
@@ -231,10 +229,10 @@ body {
     display: block;
 
     margin-right: 130px;
-    padding-left: 3px;
+    padding-left: 6px;
 
-    max-width: 115px;
-    width: 115px;
+    max-width: 200px;
+    width: 175px;
     height: 25px;
 
     border: 1px solid var(--border-colour-3);
@@ -244,13 +242,91 @@ body {
 }
 
 .options-option-label {
+    margin-right: 10px;
     padding-right: 5px;
+    min-width: 160px;
 
     color: var(--light-font-colour);
 }
 
+#iterations-option-label, #encounter-length-option-label {
+    display: flex;
+    align-items: center;
+}
+
+.option-slider { 
+    -webkit-appearance: none;
+    appearance: none;
+    height: 5px;
+
+    width: 200px;
+
+    background: var(--panel-colour-2);
+}
+
+.option-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: var(--paladin-font);
+    cursor: pointer;
+    border-radius: 20px;
+  }
+
+.slider-container, .options-option-container {
+    width: 100%;
+}
+
+.slider-value-container {
+    display: flex;
+    justify-content: center;
+
+    width: 200px;
+}
+
+.slider-value {
+    margin-top: -8px;
+    margin-bottom: 5px;
+
+    width: 50px;
+
+    text-align: center;
+    font-size: 14px;
+
+    color: var(--light-font-colour)
+}
+
+#race-filter {
+    padding-left: 3px;
+}
+
 .race-filter-option {
     min-width: 200px;
+}
+
+#race-filter-container {
+    display: grid;
+    grid-template-columns: 49px 49px 49px 49px;
+    gap: 2px;
+}
+
+.race-image {
+    width: 49px;
+    height: 49px;
+
+    border: 1px solid var(--border-colour-3);
+    border-radius: 2px;
+}
+
+.race-selected {
+    border: 1px solid var(--paladin-font);
+    filter: grayscale(0);
+}
+
+.race-unselected {
+    border: 1px solid var(--border-colour-3);
+    filter: grayscale(1);
 }
 
 #all-talents-container {

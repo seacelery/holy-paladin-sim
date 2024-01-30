@@ -433,3 +433,17 @@ class FirebloodBuff(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.spell_power -= caster.get_effective_spell_power(875)
+        
+        
+class TimeWarp(Buff):
+    
+    def __init__(self):
+        super().__init__("Time Warp", 40, base_duration=40)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.haste_multiplier *= 1.3
+        caster.update_hasted_cooldowns_with_haste_changes()
+    
+    def remove_effect(self, caster, current_time=None):
+        caster.haste_multiplier /= 1.3
+        caster.update_hasted_cooldowns_with_haste_changes()

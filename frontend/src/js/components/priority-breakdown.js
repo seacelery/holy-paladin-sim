@@ -127,7 +127,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
 
     // hardcode the order and exclude certain spells
     const cooldownModalIconOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Avenging Wrath", "Daybreak", 
-                            "Divine Toll", "Tyr's Deliverance", "Blessing of the Seasons", "Divine Favor",];
+                                    "Divine Toll", "Tyr's Deliverance", "Blessing of the Seasons", "Divine Favor"];
     const excludedCooldowns = ["Flash of Light", "Holy Light", "Word of Glory", "Light of Dawn", "Wait",]
 
     for (const timestamp in priorityData) {
@@ -327,7 +327,9 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
 
             // select the order for each row
             const generatorRowOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath"];
-            const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Tyr's Deliverance", "Light's Hammer", "Blessing of the Seasons", "Divine Favor",];
+            const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Tyr's Deliverance", 
+                                           "Light's Hammer", "Blessing of the Seasons", "Divine Favor", "Arcane Torrent",
+                                           "Fireblood", "Gift of the Naaru"];
 
             // only append if the cooldown is actually present in the current simulation
             generatorRowOrder.forEach(cooldownName => {

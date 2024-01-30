@@ -80,6 +80,7 @@ def run_simulation_route():
 
     encounter_length = request.args.get("encounter_length", default=60, type=int)
     iterations = request.args.get("iterations", default=1, type=int)
+    time_warp_time = request.args.get("time_warp_time", default=0, type=int)
 
     paladin, healing_targets = import_character(character_name, realm)
     
@@ -92,7 +93,7 @@ def run_simulation_route():
         spec_talents=modifiable_data.get("spec_talents")
     )
         
-    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations)
+    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time)
 
     # pp.pprint(paladin.class_talents)
     results = run_simulation(simulation)
