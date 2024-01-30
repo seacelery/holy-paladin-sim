@@ -5,7 +5,7 @@ from ..utils.misc_functions import format_time, append_aura_applied_event, appen
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
-from .spells_misc import ArcaneTorrent
+from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion
 from .spells_damage import Judgment, CrusaderStrike
 from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
@@ -288,6 +288,8 @@ class Paladin:
                             "Crusader Strike": CrusaderStrike(self),
                             "Judgment": Judgment(self),
                             "Word of Glory": WordOfGlory(self),
+                            "Aerated Mana Potion": AeratedManaPotion(self),
+                            "Potion": Potion(self)
         }     
         
         if self.is_talent_active("Holy Shock"):

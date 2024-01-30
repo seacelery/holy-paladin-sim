@@ -329,7 +329,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const generatorRowOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath"];
             const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Tyr's Deliverance", 
                                            "Light's Hammer", "Blessing of the Seasons", "Divine Favor", "Arcane Torrent",
-                                           "Fireblood", "Gift of the Naaru"];
+                                           "Fireblood", "Gift of the Naaru", "Aerated Mana Potion"];
 
             // only append if the cooldown is actually present in the current simulation
             generatorRowOrder.forEach(cooldownName => {

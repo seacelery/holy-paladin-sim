@@ -221,6 +221,7 @@ class Simulation:
         non_beacon_targets = [target for target in self.healing_targets_list if not isinstance(target, BeaconOfLight)]
     
         priority_list = [
+            ("Aerated Mana Potion", lambda: ((self.elapsed_time >= 50 and self.elapsed_time < 55) or (self.elapsed_time >= 410 and self.elapsed_time < 415)) and self.paladin.abilities["Potion"].check_potion_cooldown(self.elapsed_time)),
             ("Divine Toll", lambda: self.previous_ability == "Daybreak"),
             ("Blessing of the Seasons", lambda: True),
             ("Arcane Torrent", lambda: self.paladin.race == "Blood Elf"),
