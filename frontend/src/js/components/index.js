@@ -354,9 +354,22 @@ const handleRaceChange = (race) => {
     });
 };
 
+let currentConsumables = {
+    flask: "",
+    augment_rune: ""
+};
+
 const handleConsumableChange = (consumable) => {
+    // Update the current state based on the consumable type
+    if (consumable.flask !== undefined) {
+        currentConsumables.flask = consumable.flask;
+    } else if (consumable.augment_rune !== undefined) {
+        currentConsumables.augment_rune = consumable.augment_rune;
+    }
+
+    // Send the updated state
     updateCharacter({
-        consumables: consumable
+        consumables: currentConsumables
     });
 };
 
@@ -395,16 +408,46 @@ flaskImages.forEach(image => {
     image.classList.add("flask-unselected");
     image.classList.remove("flask-selected");
     image.addEventListener("click", (e) => {
-
-        flaskImages.forEach(img => {
-            img.classList.add("flask-unselected");
-            img.classList.remove("flask-selected");
-        });
-
         const flask = e.target.getAttribute("data-flask");
-        handleConsumableChange({"flask": flask});
-        image.classList.remove("flask-unselected");
-        image.classList.add("flask-selected");
+
+        if (e.target.classList.contains("flask-selected")) {
+            e.target.classList.add("flask-unselected");
+            e.target.classList.remove("flask-selected");
+            handleConsumableChange({"flask": ""});
+        } else {
+            flaskImages.forEach(img => {
+                img.classList.add("flask-unselected");
+                img.classList.remove("flask-selected");
+            });
+
+            handleConsumableChange({"flask": flask});
+            e.target.classList.remove("flask-unselected");
+            e.target.classList.add("flask-selected");
+        };
+    });
+});
+
+const augmentRuneImages = document.querySelectorAll(".augment-rune-image");
+augmentRuneImages.forEach(image => {
+    image.classList.add("augment-rune-unselected");
+    image.classList.remove("augment-rune-selected");
+    image.addEventListener("click", (e) => {
+        const augmentRune = e.target.getAttribute("data-augment-rune");
+
+        if (e.target.classList.contains("augment-rune-selected")) {
+            e.target.classList.add("augment-rune-unselected");
+            e.target.classList.remove("augment-rune-selected");
+            handleConsumableChange({"augment_rune": ""});
+        } else {
+            augmentRuneImages.forEach(img => {
+                img.classList.add("augment-rune-unselected");
+                img.classList.remove("augment-rune-selected");
+            });
+           
+            handleConsumableChange({"augment_rune": augmentRune});
+            image.classList.remove("augment-rune-unselected");
+            image.classList.add("augment-rune-selected");
+        };
     });
 });
 

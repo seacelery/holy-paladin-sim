@@ -451,7 +451,8 @@ class TimeWarp(Buff):
         caster.update_hasted_cooldowns_with_haste_changes()
         
         
-# consumables
+## consumables
+# potions
 class ElementalPotionOfUltimatePowerBuff(Buff):
     
     def __init__(self):
@@ -464,6 +465,7 @@ class ElementalPotionOfUltimatePowerBuff(Buff):
         caster.spell_power -= caster.get_effective_spell_power(886)
         
 
+# phials
 class PhialOfTepidVersatility(Buff):
     
     def __init__(self):
@@ -491,13 +493,16 @@ def apply_elemental_chaos_aura(caster, current_time):
                 break
             
         chosen_aura_class = random.choice(elemental_chaos_auras)
+        # print(f"{chosen_aura_class} chosen, {current_time}")
 
         if existing_buff and isinstance(existing_buff, chosen_aura_class):
             existing_buff.reapply_self(caster, current_time)          
         else:
             chosen_aura = chosen_aura_class()
+            # print("APPLYING ELEMENTAL CHAOS AURA")
             caster.apply_buff_to_self(chosen_aura, current_time)
         
+              
 class PhialOfElementalChaos(Buff):
     
     def __init__(self):
@@ -526,6 +531,7 @@ class ElementalChaosAir(Buff):
         new_buff = self.__class__()
         caster.apply_buff_to_self(new_buff, current_time, reapply=True)
         
+        
 class ElementalChaosFire(Buff):
     
     def __init__(self):
@@ -543,7 +549,7 @@ class ElementalChaosFire(Buff):
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
         caster.apply_buff_to_self(new_buff, current_time, reapply=True)
-        
+
 
 class ElementalChaosFrost(Buff):
     
@@ -579,3 +585,16 @@ class ElementalChaosEarth(Buff):
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
         caster.apply_buff_to_self(new_buff, current_time, reapply=True)
+        
+
+# augment runes
+class DraconicAugmentRune(Buff):
+    
+    def __init__(self):
+        super().__init__("Draconic Augment Rune", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(87)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(87)

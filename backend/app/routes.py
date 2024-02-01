@@ -30,9 +30,7 @@ def import_character_route():
 
     paladin, healing_targets = import_character(character_name, realm)
     
-    paladin.reset_state()
-    # print("Talents")
-    # pp.pprint(paladin.class_talents)
+    # paladin.reset_state()
     
     session["character_name"] = character_name
     session["realm"] = realm

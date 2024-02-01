@@ -50,7 +50,8 @@ const buffsToIconsMap = {
     "Elemental Chaos: Fire": "https://render.worldofwarcraft.com/eu/icons/56/ability_mage_livingbomb.jpg",
     "Elemental Chaos: Earth": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_volatileearth.jpg",
     "Elemental Chaos: Frost": "https://wow.zamimg.com/images/wow/icons/large/spell_frost_ice-shards.jpg",
-    "Iced Phial of Corrupting Rage": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_red.jpg"
+    "Iced Phial of Corrupting Rage": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_red.jpg",
+    "Draconic Augment Rune": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting3_rainbowprism_color2.jpg",
 }; 
 
 export { buffsToIconsMap };

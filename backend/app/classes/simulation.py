@@ -109,7 +109,10 @@ class Simulation:
                 # print(f"time: {self.elapsed_time}, healing: {self.paladin.healing_multiplier}, crit: {self.paladin.crit}")
                 
                 # print(f"time: {self.elapsed_time}" )
+                # for aura in self.paladin.active_auras:
+                #     print(self.elapsed_time, aura, self.paladin.active_auras[aura].duration)
                 # pp.pprint(self.paladin.active_auras)
+                # self.paladin.print_stats(self.elapsed_time)
                 self.test_time_since_last = 0
             
             # for display purposes
@@ -576,6 +579,7 @@ class Simulation:
             emit('iteration_update', {'iteration': i + 1}, broadcast=True, namespace='/')
             self.paladin.reset_state()
             self.reset_simulation()
+            self.paladin.apply_consumables()
             
             # only record some data on the last iteration
             if i == self.iterations - 1:

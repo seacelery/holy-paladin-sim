@@ -326,7 +326,7 @@ body {
     gap: 2px;
 }
 
-.race-image, .flask-image {
+.race-image, .flask-image, .augment-rune-image {
     width: 49px;
     height: 49px;
 
@@ -334,12 +334,12 @@ body {
     border-radius: 2px;
 }
 
-.race-selected, .flask-selected {
+.race-selected, .flask-selected, .augment-rune-selected {
     border: 1px solid var(--paladin-font);
     filter: grayscale(0);
 }
 
-.race-unselected, .flask-unselected {
+.race-unselected, .flask-unselected, .augment-rune-unselected {
     border: 1px solid var(--border-colour-3);
     filter: grayscale(1);
 }

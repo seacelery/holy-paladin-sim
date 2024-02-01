@@ -3,7 +3,7 @@ import copy
 
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
-from .auras_buffs import PhialOfTepidVersatility, PhialOfElementalChaos
+from .auras_buffs import PhialOfTepidVersatility, PhialOfElementalChaos, DraconicAugmentRune
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
@@ -106,6 +106,9 @@ class Paladin:
         
         print(f"Haste: {self.haste}, Crit: {self.crit}, Mastery: {self.mastery}, Vers: {self.versatility}")
         
+        self.crit_damage_modifier = 1
+        self.crit_healing_modifier = 1
+        
         # self.haste_multiplier = (self.haste / 100) + 1
         # self.crit_multiplier = (self.crit / 100) + 1
         # self.mastery_multiplier = (self.mastery / 100) + 1
@@ -115,6 +118,7 @@ class Paladin:
         # initialise raid buffs & consumables
         self.buffs = buffs
         self.consumables = {}
+        self.initial_consumables = {}
         
         # initialise abilities
         self.abilities = {}      
@@ -122,8 +126,7 @@ class Paladin:
         
         # initialise stats with racials
         self.update_stats_with_racials()
-        self.crit_damage_modifier = 1
-        self.crit_healing_modifier = 1
+        
         
         self.mastery_effectiveness = 1
         print(self.max_health)
@@ -196,12 +199,8 @@ class Paladin:
         self.holy_power_timeline = {0: 0}
         self.mana_breakdown = {}
         self.holy_power_breakdown = {}
-        self.priority_breakdown = {}
+        self.priority_breakdown = {} 
         
-        # self.apply_consumables()
-        
-        self.initial_state = copy.deepcopy(self)
-    
     def reset_state(self):
         current_state = copy.deepcopy(self.initial_state)
         self.__dict__.update(current_state.__dict__)
@@ -218,11 +217,15 @@ class Paladin:
             self.update_spec_talents(spec_talents)
         
         self.update_abilities()
+        self.initial_state = copy.deepcopy(self)
         
     def update_consumables(self, new_consumables):
-        if new_consumables["flask"]:
+        if "flask" in new_consumables:
             self.consumables["flask"] = new_consumables["flask"]
-        self.apply_consumables()
+            self.initial_consumables["flask"] = new_consumables["flask"]
+        if "augment_rune" in new_consumables:
+            self.consumables["augment_rune"] = new_consumables["augment_rune"]
+            self.initial_consumables["augment_rune"] = new_consumables["augment_rune"]
     
     def update_race(self, new_race):
         self.race = new_race
@@ -241,14 +244,25 @@ class Paladin:
     
     # update loadout based on updated properties 
     def apply_consumables(self):
-        flask_name_split = self.consumables["flask"].split()
-        for i, word in enumerate(flask_name_split):
-            if word.lower() == "of":
-                flask_name_split[i] = word.capitalize()
-        flask_name = "".join(flask_name_split)
+        consumable_buffs = []
         
-        flask_class = globals().get(flask_name)
-        self.apply_buff_to_self(flask_class(), 0)
+        for consumable_type, consumable_name in self.consumables.items():
+            if consumable_name:  # Check if the consumable name is not empty
+                if consumable_type == "flask":
+                    flask_name_split = consumable_name.split()
+                    for i, word in enumerate(flask_name_split):
+                        if word.lower() == "of":
+                            flask_name_split[i] = word.capitalize()
+                    consumable_name_formatted = "".join(flask_name_split)
+                else:
+                    consumable_name_formatted = "".join(consumable_name.split())
+
+                consumable_class = globals().get(consumable_name_formatted)
+                if consumable_class:
+                    consumable_buffs.append(consumable_class)
+        
+        for buff in consumable_buffs:
+            self.apply_buff_to_self(buff(), 0)
                    
     def update_abilities(self):
         self.load_abilities_based_on_talents()
@@ -273,8 +287,6 @@ class Paladin:
         self.crit = self.base_crit
         self.mastery = self.base_mastery
         self.versatility = self.base_versatility
-        self.crit_damage_modifier = 1
-        self.crit_healing_modifier = 1
         self.max_health = self.base_max_health
         
         # update stats based on race
@@ -367,6 +379,9 @@ class Paladin:
         return False
     
     # misc simulation functions 
+    def print_stats(self, current_time):
+        print(f"{round(current_time, 2)}: sp {self.spell_power}, haste {round(self.base_haste, 2)}, crit {round(self.base_crit, 2)}, mast {round(self.base_mastery, 2)}, vers {round(self.base_versatility, 2)}, crit heal {round(self.crit_healing_modifier, 2)}")
+    
     def update_hasted_cooldowns_with_haste_changes(self):
         for ability in self.abilities.values():
             if ability.hasted_cooldown and ability.original_cooldown is not None:

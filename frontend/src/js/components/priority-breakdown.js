@@ -128,7 +128,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     // hardcode the order and exclude certain spells
     const cooldownModalIconOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Avenging Wrath", "Daybreak", 
                                     "Divine Toll", "Tyr's Deliverance", "Blessing of the Seasons", "Divine Favor"];
-    const excludedCooldowns = ["Flash of Light", "Holy Light", "Word of Glory", "Light of Dawn", "Wait",]
+    const excludedCooldowns = ["Flash of Light", "Holy Light", "Word of Glory", "Light of Dawn", "Wait", "Potion"]
 
     for (const timestamp in priorityData) {
         const cooldownsData = priorityData[timestamp].remaining_cooldowns;
