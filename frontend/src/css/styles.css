@@ -320,13 +320,13 @@ body {
     min-width: 200px;
 }
 
-#race-filter-container {
+.options-option-container {
     display: grid;
     grid-template-columns: 49px 49px 49px 49px;
     gap: 2px;
 }
 
-.race-image {
+.race-image, .flask-image {
     width: 49px;
     height: 49px;
 
@@ -334,12 +334,12 @@ body {
     border-radius: 2px;
 }
 
-.race-selected {
+.race-selected, .flask-selected {
     border: 1px solid var(--paladin-font);
     filter: grayscale(0);
 }
 
-.race-unselected {
+.race-unselected, .flask-unselected {
     border: 1px solid var(--border-colour-3);
     filter: grayscale(1);
 }

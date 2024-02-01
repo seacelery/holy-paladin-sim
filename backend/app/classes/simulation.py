@@ -222,6 +222,7 @@ class Simulation:
     
         priority_list = [
             ("Aerated Mana Potion", lambda: ((self.elapsed_time >= 50 and self.elapsed_time < 55) or (self.elapsed_time >= 410 and self.elapsed_time < 415)) and self.paladin.abilities["Potion"].check_potion_cooldown(self.elapsed_time)),
+            ("Elemental Potion of Ultimate Power", lambda: ((self.elapsed_time >= 55 and self.elapsed_time < 60) or (self.elapsed_time >= 390 and self.elapsed_time < 395)) and self.paladin.abilities["Potion"].check_potion_cooldown(self.elapsed_time)),
             ("Divine Toll", lambda: self.previous_ability == "Daybreak"),
             ("Blessing of the Seasons", lambda: True),
             ("Arcane Torrent", lambda: self.paladin.race == "Blood Elf"),
@@ -230,7 +231,7 @@ class Simulation:
             ("Avenging Wrath", lambda: True),
             ("Light's Hammer", lambda: True),
             ("Tyr's Deliverance", lambda: True),
-            ("Divine Favor", lambda: True),
+            ("Divine Favor", lambda: self.elapsed_time > 35),
             ("Light of Dawn", lambda: self.paladin.holy_power == 5),
             ("Daybreak", lambda: self.elapsed_time >= 12),
             ("Holy Shock", lambda: True),
@@ -350,10 +351,13 @@ class Simulation:
                 self.paladin.apply_buff_to_self(AvengingWrathAwakening(), self.elapsed_time)
                 self.paladin.awakening_queued = False
 
-            self.paladin.active_auras[buff_name].remove_effect(self.paladin)
-            del self.paladin.active_auras[buff_name]
-                         
-            update_self_buff_data(self.paladin.self_buff_breakdown, buff_name, self.elapsed_time, "expired")
+            self.paladin.active_auras[buff_name].remove_effect(self.paladin, self.elapsed_time)
+            
+            # if the remove effect method refreshes the buff duration, then don't remove it
+            if self.paladin.active_auras[buff_name].duration <= 0:
+                del self.paladin.active_auras[buff_name]    
+                update_self_buff_data(self.paladin.self_buff_breakdown, buff_name, self.elapsed_time, "expired")
+                
             # print(f"new crit %: {self.paladin.crit}")
         
     def decrement_buffs_on_targets(self):
@@ -581,8 +585,6 @@ class Simulation:
             
             self.update_final_cooldowns_breakdown_times()
             
-            
-            
             ability_breakdown = self.paladin.ability_breakdown
             self_buff_breakdown = self.paladin.self_buff_breakdown
             target_buff_breakdown = self.paladin.target_buff_breakdown
@@ -593,8 +595,6 @@ class Simulation:
             mana_timeline = self.paladin.mana_timeline
             holy_power_timeline = self.paladin.holy_power_timeline
             cooldowns_breakdown = self.aura_healing
-            
-            
             
             # pp.pprint(self.paladin.events)           
             # pp.pprint(ability_breakdown)
@@ -1040,10 +1040,11 @@ class Simulation:
         
         # pp.pprint(average_awakening_counts)
         # pp.pprint(average_ability_breakdown)
-        pp.pprint(self.paladin.events)
+        # pp.pprint(self.paladin.events)
         # pp.pprint(self.paladin.buff_events)
         # pp.pprint(self.paladin.priority_breakdown)
         # pp.pprint(average_ability_breakdown)
+        # pp.pprint(self.paladin.self_buff_breakdown)
         
         full_results = {
             "healing_timeline": adjusted_average_healing_timeline,

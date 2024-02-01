@@ -3,9 +3,10 @@ import copy
 
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
+from .auras_buffs import PhialOfTepidVersatility, PhialOfElementalChaos
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
-from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion
+from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
 from .spells_damage import Judgment, CrusaderStrike
 from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
@@ -66,6 +67,7 @@ class Paladin:
         if equipment_data:
             self.equipment = self.parse_equipment(equipment_data)
             formatted_equipment_data = self.calculate_stats_from_equipment(self.equipment)
+            print(formatted_equipment_data)
             self.stats = Stats(formatted_equipment_data[0], self.convert_stat_ratings_to_percent(formatted_equipment_data[0]))
             self.bonus_enchants = formatted_equipment_data[1]
             print(self.stats.ratings)
@@ -110,6 +112,10 @@ class Paladin:
         # self.versatility_multiplier = (self.versatility / 100) + 1
         # print(self.haste_multiplier, self.crit_multiplier, self.mastery_multiplier, self.versatility_multiplier)
         
+        # initialise raid buffs & consumables
+        self.buffs = buffs
+        self.consumables = {}
+        
         # initialise abilities
         self.abilities = {}      
         self.load_abilities_based_on_talents()
@@ -121,9 +127,6 @@ class Paladin:
         
         self.mastery_effectiveness = 1
         print(self.max_health)
-    
-        self.buffs = buffs
-        self.consumables = consumables
         
         self.base_global_cooldown = 1.5
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
@@ -195,6 +198,8 @@ class Paladin:
         self.holy_power_breakdown = {}
         self.priority_breakdown = {}
         
+        # self.apply_consumables()
+        
         self.initial_state = copy.deepcopy(self)
     
     def reset_state(self):
@@ -202,7 +207,9 @@ class Paladin:
         self.__dict__.update(current_state.__dict__)
         
     # update properties methods used in routes.py
-    def update_character(self, race=None, class_talents=None, spec_talents=None):
+    def update_character(self, race=None, class_talents=None, spec_talents=None, consumables=None):
+        if consumables:
+            self.update_consumables(consumables)
         if race:
             self.update_race(race)
         if class_talents:
@@ -211,6 +218,11 @@ class Paladin:
             self.update_spec_talents(spec_talents)
         
         self.update_abilities()
+        
+    def update_consumables(self, new_consumables):
+        if new_consumables["flask"]:
+            self.consumables["flask"] = new_consumables["flask"]
+        self.apply_consumables()
     
     def update_race(self, new_race):
         self.race = new_race
@@ -227,11 +239,31 @@ class Paladin:
                 if talent_name in row:
                     row[talent_name]["ranks"]["current rank"] = new_rank 
     
-    # update loadout based on updated properties                
+    # update loadout based on updated properties 
+    def apply_consumables(self):
+        flask_name_split = self.consumables["flask"].split()
+        for i, word in enumerate(flask_name_split):
+            if word.lower() == "of":
+                flask_name_split[i] = word.capitalize()
+        flask_name = "".join(flask_name_split)
+        
+        flask_class = globals().get(flask_name)
+        self.apply_buff_to_self(flask_class(), 0)
+                   
     def update_abilities(self):
         self.load_abilities_based_on_talents()
         self.update_abilities_with_racials()
         self.update_stats_with_racials()
+    
+    def get_percent_from_stat_rating(self, stat, stat_rating):
+        if stat == "Haste":
+            return (stat_rating / 170) * 1.04
+        if stat == "Crit":
+            return (stat_rating / 180)
+        if stat == "Mastery":
+            return (stat_rating / 120)
+        if stat == "Versatility":
+            return (stat_rating / 205)
         
     def update_stats_with_racials(self):
         
@@ -289,6 +321,7 @@ class Paladin:
                             "Judgment": Judgment(self),
                             "Word of Glory": WordOfGlory(self),
                             "Aerated Mana Potion": AeratedManaPotion(self),
+                            "Elemental Potion of Ultimate Power": ElementalPotionOfUltimatePowerPotion(self),
                             "Potion": Potion(self)
         }     
         
@@ -393,9 +426,10 @@ class Paladin:
         self.events.append(f"{format_time(current_time)}: {summon.name} created: {summon.duration}s")
         summon.apply_effect(self, current_time)
    
-    def apply_buff_to_self(self, buff, current_time, stacks_to_apply=1, max_stacks=1):
+    def apply_buff_to_self(self, buff, current_time, stacks_to_apply=1, max_stacks=1, reapply=False):
         # print(f"{buff.name} applied at {current_time}")     
-        if buff.name in self.active_auras:
+        if buff.name in self.active_auras and not reapply:
+            append_aura_applied_event(self.events, f"{self.active_auras[buff.name].name} reapplied", self, self, current_time, self.active_auras[buff.name].duration)
             if buff.current_stacks < max_stacks:
                 buff.current_stacks += stacks_to_apply
                 buff.duration = buff.base_duration
@@ -403,6 +437,7 @@ class Paladin:
         else:
             self.active_auras[buff.name] = buff
             buff.apply_effect(self, current_time)
+            append_aura_applied_event(self.events, self.active_auras[buff.name].name, self, self, current_time, self.active_auras[buff.name].duration)
         
         buff.times_applied += 1
         update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "applied", buff.duration, buff.current_stacks)

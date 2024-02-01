@@ -37,13 +37,14 @@ def import_character_route():
     session["character_name"] = character_name
     session["realm"] = realm
     
-    session["modifiable_data"] = {"class_talents": {}, "spec_talents": {}, "race": ""}
+    session["modifiable_data"] = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}}
 
     return jsonify({
         "message": f"Character imported successfully, {character_name}, {realm}",
         "class_talents": paladin.class_talents,
         "spec_talents": paladin.spec_talents,
         "race": paladin.race,
+        "consumable": paladin.consumables
     })
 
 @main.route("/update_character", methods=["POST"])
@@ -90,7 +91,8 @@ def run_simulation_route():
     paladin.update_character(
         race=modifiable_data.get("race"),
         class_talents=modifiable_data.get("class_talents"),
-        spec_talents=modifiable_data.get("spec_talents")
+        spec_talents=modifiable_data.get("spec_talents"),
+        consumables=modifiable_data.get("consumables")
     )
         
     simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time)

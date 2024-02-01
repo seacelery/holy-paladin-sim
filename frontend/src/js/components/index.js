@@ -354,6 +354,12 @@ const handleRaceChange = (race) => {
     });
 };
 
+const handleConsumableChange = (consumable) => {
+    updateCharacter({
+        consumables: consumable
+    });
+};
+
 // update displayed information based on imported character
 const updateUIAfterImport = (data) => {
     console.log(data);
@@ -381,6 +387,24 @@ raceImages.forEach(image => {
         handleRaceChange(race);
         image.classList.remove("race-unselected");
         image.classList.add("race-selected");
+    });
+});
+
+const flaskImages = document.querySelectorAll(".flask-image");
+flaskImages.forEach(image => {
+    image.classList.add("flask-unselected");
+    image.classList.remove("flask-selected");
+    image.addEventListener("click", (e) => {
+
+        flaskImages.forEach(img => {
+            img.classList.add("flask-unselected");
+            img.classList.remove("flask-selected");
+        });
+
+        const flask = e.target.getAttribute("data-flask");
+        handleConsumableChange({"flask": flask});
+        image.classList.remove("flask-unselected");
+        image.classList.add("flask-selected");
     });
 });
 

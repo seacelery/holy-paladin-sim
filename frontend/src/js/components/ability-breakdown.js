@@ -102,9 +102,9 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
     // leave cells blank for certain spells
     // "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", 
-    const excludedSpells = ["Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)"];
+    const excludedSpells = ["Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", "Aerated Mana Potion"];
     // displays only casts and resource gains
-    const excludedSpellsOnlyResourcesAndCasts = ["Blessing of the Seasons", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", "Divine Favor", "Avenging Wrath", "Arcane Torrent"];
+    const excludedSpellsOnlyResourcesAndCasts = ["Blessing of the Seasons", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", "Divine Favor", "Avenging Wrath", "Arcane Torrent", "Aerated Mana Potion"];
     // displays casts with average as healing divided by casts
     const excludedSpellsCasts = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", 
                                  "Judgment of Light", "Greater Judgment", "Touch of Light", "Afterimage", "Glimmer of Light", "Glimmer of Light (Glistening Radiance (Light of Dawn))",

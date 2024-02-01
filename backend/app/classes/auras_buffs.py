@@ -160,6 +160,8 @@ class DivineFavorBuff(Buff):
         super().__init__("Divine Favor", 10000)
         
     def apply_effect(self, caster, current_time=None):
+        # for aura in caster.active_auras:
+        #     print(current_time, aura, caster.active_auras[aura].duration, caster.active_auras[aura].current_stacks)
         if "Holy Light" in caster.abilities:
             caster.abilities["Holy Light"].spell_healing_modifier *= 1.6
             caster.abilities["Holy Light"].cast_time_modifier *= 0.7
@@ -447,3 +449,133 @@ class TimeWarp(Buff):
     def remove_effect(self, caster, current_time=None):
         caster.haste_multiplier /= 1.3
         caster.update_hasted_cooldowns_with_haste_changes()
+        
+        
+# consumables
+class ElementalPotionOfUltimatePowerBuff(Buff):
+    
+    def __init__(self):
+        super().__init__("Elemental Potion of Ultimate Power", 30, base_duration=30)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(886)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(886)
+        
+
+class PhialOfTepidVersatility(Buff):
+    
+    def __init__(self):
+        super().__init__("Phial of Tepid Versatility", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_versatility += 745 / 205
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_versatility -= 745 / 205
+        
+        
+def apply_elemental_chaos_aura(caster, current_time):
+        elemental_chaos_auras = [
+            ElementalChaosAir,
+            ElementalChaosEarth, 
+            ElementalChaosFire,
+            ElementalChaosFrost
+        ]
+        
+        existing_buff = None
+        for aura in caster.active_auras.values():
+            if isinstance(aura, tuple(elemental_chaos_auras)):
+                existing_buff = aura
+                break
+            
+        chosen_aura_class = random.choice(elemental_chaos_auras)
+
+        if existing_buff and isinstance(existing_buff, chosen_aura_class):
+            existing_buff.reapply_self(caster, current_time)          
+        else:
+            chosen_aura = chosen_aura_class()
+            caster.apply_buff_to_self(chosen_aura, current_time)
+        
+class PhialOfElementalChaos(Buff):
+    
+    def __init__(self):
+        super().__init__("Phial of Elemental Chaos", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        apply_elemental_chaos_aura(caster, 0)
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+        
+        
+class ElementalChaosAir(Buff):
+    
+    def __init__(self):
+        super().__init__("Elemental Chaos: Air", 60, base_duration=60)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_haste += caster.get_percent_from_stat_rating("Haste", 652)
+        
+    def remove_effect(self, caster, current_time):
+        caster.base_haste -= caster.get_percent_from_stat_rating("Haste", 652)
+        apply_elemental_chaos_aura(caster, current_time)
+        
+    def reapply_self(self, caster, current_time):
+        new_buff = self.__class__()
+        caster.apply_buff_to_self(new_buff, current_time, reapply=True)
+        
+class ElementalChaosFire(Buff):
+    
+    def __init__(self):
+        super().__init__("Elemental Chaos: Fire", 60, base_duration=60)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_crit += caster.get_percent_from_stat_rating("Crit", 652)
+        caster.crit_damage_modifier += 0.02
+        
+    def remove_effect(self, caster, current_time):
+        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", 652)
+        caster.crit_damage_modifier -= 0.02
+        apply_elemental_chaos_aura(caster, current_time)
+        
+    def reapply_self(self, caster, current_time):
+        new_buff = self.__class__()
+        caster.apply_buff_to_self(new_buff, current_time, reapply=True)
+        
+
+class ElementalChaosFrost(Buff):
+    
+    def __init__(self):
+        super().__init__("Elemental Chaos: Frost", 60, base_duration=60)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_versatility += caster.get_percent_from_stat_rating("Versatility", 652)
+        caster.crit_healing_modifier += 0.02
+        
+    def remove_effect(self, caster, current_time):
+        caster.base_versatility -= caster.get_percent_from_stat_rating("Versatility", 652)
+        caster.crit_healing_modifier -= 0.02
+        apply_elemental_chaos_aura(caster, current_time)
+        
+    def reapply_self(self, caster, current_time):
+        new_buff = self.__class__()
+        caster.apply_buff_to_self(new_buff, current_time, reapply=True)
+        
+
+class ElementalChaosEarth(Buff):
+    
+    def __init__(self):
+        super().__init__("Elemental Chaos: Earth", 60, base_duration=60)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_mastery += caster.get_percent_from_stat_rating("Mastery", 652)
+        
+    def remove_effect(self, caster, current_time):
+        caster.base_mastery -= caster.get_percent_from_stat_rating("Mastery", 652)
+        apply_elemental_chaos_aura(caster, current_time)
+        
+    def reapply_self(self, caster, current_time):
+        new_buff = self.__class__()
+        caster.apply_buff_to_self(new_buff, current_time, reapply=True)

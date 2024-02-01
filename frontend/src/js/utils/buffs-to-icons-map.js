@@ -41,6 +41,16 @@ const buffsToIconsMap = {
     "Tyr's Deliverance (self)": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_2h_artifactsilverhand_d_01.jpg",
     "Tyr's Deliverance (target)": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_2h_artifactsilverhand_d_01.jpg",
     "Unending Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holybolt.jpg",
-};
+
+    // consumables
+    "Elemental Potion of Ultimate Power": "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_dpotion_b20.jpg",
+    "Phial of Tepid Versatility": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_black.jpg",
+    "Phial of Elemental Chaos": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_orange.jpg",
+    "Elemental Chaos: Air": "https://render.worldofwarcraft.com/eu/icons/56/ability_druid_galewinds.jpg",
+    "Elemental Chaos: Fire": "https://render.worldofwarcraft.com/eu/icons/56/ability_mage_livingbomb.jpg",
+    "Elemental Chaos: Earth": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_volatileearth.jpg",
+    "Elemental Chaos: Frost": "https://wow.zamimg.com/images/wow/icons/large/spell_frost_ice-shards.jpg",
+    "Iced Phial of Corrupting Rage": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_red.jpg"
+}; 
 
 export { buffsToIconsMap };
