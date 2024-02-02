@@ -326,7 +326,38 @@ body {
     gap: 2px;
 }
 
-.race-image, .flask-image, .augment-rune-image {
+#buffs-container {
+    display: flex;
+
+    padding: 15px 0 0 15px;
+
+    font-size: 15px;
+}
+
+.option-image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.option-image-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3px;
+
+    width: 100%;
+    height: 20px;
+
+    background-color: var(--panel-colour-2);
+    border: 1px solid var(--border-colour-3);
+    color: var(--light-font-colour);
+    font-size: 10px;
+    text-align: center;
+}
+
+.race-image, .flask-image, .augment-rune-image, .food-image, .weapon-imbue-image, .raid-buff-image, .external-buff-image {
     width: 49px;
     height: 49px;
 
@@ -334,14 +365,14 @@ body {
     border-radius: 2px;
 }
 
-.race-selected, .flask-selected, .augment-rune-selected {
+.race-selected, .flask-selected, .augment-rune-selected, .food-selected, .weapon-imbue-selected, .raid-buff-selected, .external-buff-selected {
     border: 1px solid var(--paladin-font);
     filter: grayscale(0);
 }
 
-.race-unselected, .flask-unselected, .augment-rune-unselected {
+.race-unselected, .flask-unselected, .augment-rune-unselected, .food-unselected, .weapon-imbue-unselected, .raid-buff-unselected, .external-buff-unselected {
     border: 1px solid var(--border-colour-3);
-    filter: grayscale(1);
+    filter: grayscale(0.7);
 }
 
 #all-talents-container {
@@ -435,6 +466,114 @@ body {
     height: 100%;
     background-size: cover;
     clip-path: polygon(100% 100%, 0 100%, 100% 0);
+}
+
+#priority-list-container {
+    display: flex;
+
+    padding: 25px 0 0 25px;
+
+    font-size: 15px;
+}
+
+#priority-list-list-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#priority-list-headers {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+#priority-list-header-ability {
+    margin-left: 50px;
+    width: 155px;
+
+    color: var(--light-font-colour);
+    font-size: 16px;
+}
+
+.priority-list-header-condition {
+    color: var(--light-font-colour);
+    font-size: 16px;
+}
+
+.priority-list-item-container {
+    display: flex;
+    margin-top: 5px;
+}
+
+.priority-list-item-icon {
+    margin-right: 5px;
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid var(--border-colour-3);
+}
+
+.priority-list-item-ability {
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+
+    width: 150px;
+    height: 40px;
+
+    border: 1px solid var(--border-colour-3);
+
+    background-color: var(--panel-colour-2);
+}
+
+.priority-list-item-ability-text {
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--panel-colour-2);
+    border: none;
+    color: var(--light-font-colour);
+    font-size: 16px;
+}
+
+.priority-list-item-condition {
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    margin-left: 5px;
+
+    height: 40px;
+
+    border: 1px solid var(--border-colour-3);
+
+    background-color: var(--panel-colour-2);
+}
+
+.priority-list-item-condition-text {
+    min-width: 100px;
+    height: 100%;
+
+    background-color: var(--panel-colour-2);
+    border: none;
+    color: var(--light-font-colour);
+    font-size: 16px;
+}
+
+.priority-list-add-item, .priority-list-and-button, .priority-list-or-button, .priority-list-up-button, .priority-list-down-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    padding-left: 1px;
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid var(--border-colour-3);
+
+    background-color: var(--panel-colour-2);
+    color: var(--light-font-colour);
+    font-size: 14px;
 }
 
 #options-status-bar {

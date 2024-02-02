@@ -52,6 +52,34 @@ const buffsToIconsMap = {
     "Elemental Chaos: Frost": "https://wow.zamimg.com/images/wow/icons/large/spell_frost_ice-shards.jpg",
     "Iced Phial of Corrupting Rage": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_red.jpg",
     "Draconic Augment Rune": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting3_rainbowprism_color2.jpg",
+    "Grand Banquet of the Kalu'ak": "https://render.worldofwarcraft.com/eu/icons/56/inv_cooking_10_grandbanquet.jpg",
+    "Timely Demise": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_seedbatteredfishplate.jpg",
+    "Filet of Fangs": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_cooked_eternalblossomfish.jpg",
+    "Seamoth Surprise": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_159_fish_82.jpg",
+    "Salt-Baked Fishcake": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_deepfriedmossgill.jpg",
+    "Feisty Fish Sticks": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_164_fish_seadog.jpg",
+    "Aromatic Seafood Platter": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_drogbarstylesalmon.jpg",
+    "Sizzling Seafood Medley": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_draenor_sturgeonstew.jpg",
+    "Revenge, Served Cold": "https://render.worldofwarcraft.com/eu/icons/56/inv_cooking_100_revengeservedcold_color02.jpg",
+    "Thousandbone Tongueslicer": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_154_fish_77.jpg",
+    "Great Cerulean Sea": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_159_fish_white.jpg",
+    "Buzzing Rune": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_08.jpg",
+    "Chirping Rune": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_09.jpg",
+    "Howling Rune": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_05.jpg",
+    "Hissing Rune": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_09.jpg",
+
+    // raid buffs
+    "Arcane Intellect": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_magicalsentry.jpg",
+    "Mark of the Wild": "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_regeneration.jpg",
+    "Close to Heart": "https://render.worldofwarcraft.com/eu/icons/56/inv_offhand_1h_pvppandarias2_c_01.jpg",
+    "Retribution Aura": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusade.jpg",
+
+    // external buffs
+    "Source of Magic": "https://render.worldofwarcraft.com/eu/icons/56/ability_evoker_blue_01.jpg",
+    "Power Infusion": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_powerinfusion.jpg",
+    "Innervate": "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_lightning.jpg",
+    "Shifting Sands": "https://render.worldofwarcraft.com/eu/icons/56/ability_evoker_masterytimewalker.jpg",
+    "Ebon Might": "https://render.worldofwarcraft.com/eu/icons/56/spell_sarkareth.jpg",
 }; 
 
 export { buffsToIconsMap };

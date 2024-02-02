@@ -350,24 +350,31 @@ const createSimulationResults = (simulationData) => {
 // update the paladin class when attributes are changed
 const handleRaceChange = (race) => {
     updateCharacter({
-        race: race
+        race: race.race
     });
 };
 
 let currentConsumables = {
-    flask: "",
-    augment_rune: ""
+    flask: [],
+    food: [],
+    weapon_imbue: [],
+    augment_rune: [],
+    raid_buff: [],
+    external_buff: []
 };
 
 const handleConsumableChange = (consumable) => {
-    // Update the current state based on the consumable type
-    if (consumable.flask !== undefined) {
-        currentConsumables.flask = consumable.flask;
-    } else if (consumable.augment_rune !== undefined) {
-        currentConsumables.augment_rune = consumable.augment_rune;
-    }
+    const attributeKey = Object.keys(consumable)[0];
+    let attributeValue = consumable[attributeKey];
 
-    // Send the updated state
+    if (consumable.remove) {
+        currentConsumables[attributeKey] = currentConsumables[attributeKey].filter(item => item !== attributeValue);
+    } else {
+        if (!currentConsumables[attributeKey].includes(attributeValue)) {
+            currentConsumables[attributeKey].push(attributeValue);
+        };
+    };
+
     updateCharacter({
         consumables: currentConsumables
     });
@@ -385,71 +392,71 @@ const updateUIAfterImport = (data) => {
 importButton.addEventListener("click", importCharacter);
 simulationProgressBarContainer.addEventListener("click", runSimulation);
 
-const raceImages = document.querySelectorAll(".race-image");
-raceImages.forEach(image => {
-    image.classList.add("race-unselected");
-    image.classList.remove("race-selected");
-    image.addEventListener("click", (e) => {
+// allows options images to be clicked to change/toggle options
+const handleOptionImages = (images, attribute, optionType, toggle = false, multipleAllowed = false) => {
+    const formattedAttribute = attribute.replaceAll("-", "_");
 
-        raceImages.forEach(img => {
-            img.classList.add("race-unselected");
-            img.classList.remove("race-selected");
+    const handlerFunctions = {
+        consumable: handleConsumableChange,
+        race: handleRaceChange,
+    };
+
+    const handlerFunction = handlerFunctions[optionType];
+
+    images.forEach(image => {
+        image.classList.add(`${attribute}-unselected`);
+        image.classList.remove(`${attribute}-selected`);
+        image.addEventListener("click", (e) => {
+            const attributeName = e.target.getAttribute(`data-${attribute}`);
+            const isSelected = e.target.classList.contains(`${attribute}-selected`);
+
+            if (multipleAllowed) {
+                e.target.classList.toggle(`${attribute}-selected`);
+                e.target.classList.toggle(`${attribute}-unselected`);
+                handlerFunction({[formattedAttribute]: attributeName, remove: isSelected});
+            } else {
+                if (isSelected && toggle) {
+                    e.target.classList.add(`${attribute}-unselected`);
+                    e.target.classList.remove(`${attribute}-selected`);
+                    handlerFunction({[formattedAttribute]: attributeName, remove: true});
+                } else {
+                    images.forEach(img => {
+                        if (img.classList.contains(`${attribute}-selected`)) {
+                            const prevAttributeName = img.getAttribute(`data-${attribute}`);
+                            handlerFunction({[formattedAttribute]: prevAttributeName, remove: true});
+                            img.classList.add(`${attribute}-unselected`);
+                            img.classList.remove(`${attribute}-selected`);
+                        };
+                    });
+                    e.target.classList.remove(`${attribute}-unselected`);
+                    e.target.classList.add(`${attribute}-selected`);
+                    handlerFunction({[formattedAttribute]: attributeName});
+                };
+            };
         });
-
-        const race = e.target.getAttribute("data-race");
-        handleRaceChange(race);
-        image.classList.remove("race-unselected");
-        image.classList.add("race-selected");
     });
-});
+};
+
+const raceImages = document.querySelectorAll(".race-image");
+handleOptionImages(raceImages, "race", "race");
 
 const flaskImages = document.querySelectorAll(".flask-image");
-flaskImages.forEach(image => {
-    image.classList.add("flask-unselected");
-    image.classList.remove("flask-selected");
-    image.addEventListener("click", (e) => {
-        const flask = e.target.getAttribute("data-flask");
+handleOptionImages(flaskImages, "flask", "consumable", true);
 
-        if (e.target.classList.contains("flask-selected")) {
-            e.target.classList.add("flask-unselected");
-            e.target.classList.remove("flask-selected");
-            handleConsumableChange({"flask": ""});
-        } else {
-            flaskImages.forEach(img => {
-                img.classList.add("flask-unselected");
-                img.classList.remove("flask-selected");
-            });
+const foodImages = document.querySelectorAll(".food-image");
+handleOptionImages(foodImages, "food", "consumable", true);
 
-            handleConsumableChange({"flask": flask});
-            e.target.classList.remove("flask-unselected");
-            e.target.classList.add("flask-selected");
-        };
-    });
-});
+const weaponImbueImages = document.querySelectorAll(".weapon-imbue-image");
+handleOptionImages(weaponImbueImages, "weapon-imbue", "consumable", true);
 
 const augmentRuneImages = document.querySelectorAll(".augment-rune-image");
-augmentRuneImages.forEach(image => {
-    image.classList.add("augment-rune-unselected");
-    image.classList.remove("augment-rune-selected");
-    image.addEventListener("click", (e) => {
-        const augmentRune = e.target.getAttribute("data-augment-rune");
+handleOptionImages(augmentRuneImages, "augment-rune", "consumable", true);
 
-        if (e.target.classList.contains("augment-rune-selected")) {
-            e.target.classList.add("augment-rune-unselected");
-            e.target.classList.remove("augment-rune-selected");
-            handleConsumableChange({"augment_rune": ""});
-        } else {
-            augmentRuneImages.forEach(img => {
-                img.classList.add("augment-rune-unselected");
-                img.classList.remove("augment-rune-selected");
-            });
-           
-            handleConsumableChange({"augment_rune": augmentRune});
-            image.classList.remove("augment-rune-unselected");
-            image.classList.add("augment-rune-selected");
-        };
-    });
-});
+const raidBuffImages = document.querySelectorAll(".raid-buff-image");
+handleOptionImages(raidBuffImages, "raid-buff", "consumable", true, true);
+
+const externalBuffImages = document.querySelectorAll(".external-buff-image");
+handleOptionImages(externalBuffImages, "external-buff", "consumable", true, true);
 
 // option sliders
 const updateSliderStep = (value, slider, sliderText) => {
@@ -473,10 +480,10 @@ const roundIterations = (number) => {
 // iterations slider
 const iterationsSlider = document.getElementById("iterations-option");
 const iterationsValue = document.getElementById("iterations-value");
-const baseMaxIterations = 1000;
+const baseMaxIterations = 1001;
 
 iterationsSlider.addEventListener("input", () => {
-    encounterLengthSlider.max = baseMaxIterations;
+    iterationsSlider.max = baseMaxIterations;
 
     const value = iterationsSlider.value
     updateSliderStep(value, iterationsSlider, iterationsValue);
@@ -486,7 +493,7 @@ iterationsValue.textContent = iterationsSlider.value;
 makeFieldEditable(iterationsValue, 1, iterationsSlider);
 
 iterationsValue.addEventListener("input", (e) => {
-    encounterLengthSlider.max = baseMaxIterations;
+    iterationsSlider.max = baseMaxIterations;
 
     // reset step to 1 to allow setting any number
     iterationsSlider.step = 1;
@@ -498,7 +505,6 @@ iterationsValue.addEventListener("input", (e) => {
 
     iterationsSlider.value = newValue;
     lastSliderChange = "Value";
-
 });
 
 // encounter length slider

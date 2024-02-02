@@ -585,8 +585,202 @@ class ElementalChaosEarth(Buff):
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
         caster.apply_buff_to_self(new_buff, current_time, reapply=True)
+    
+
+# food
+class GrandBanquetOfTheKaluakFood(Buff):
+    
+    def __init__(self):
+        super().__init__("Grand Banquet of the Kalu'ak", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(75)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(75)
+
+
+class TimelyDemiseFood(Buff):
+    
+    def __init__(self):
+        super().__init__("Timely Demise", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_haste += caster.get_percent_from_stat_rating("Haste", 105)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_haste -= caster.get_percent_from_stat_rating("Haste", 105)
+        
+        
+class FiletOfFangsFood(Buff):
+    
+    def __init__(self):
+        super().__init__("Filet of Fangs", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_crit += caster.get_percent_from_stat_rating("Crit", 105)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", 105)
+        
+        
+class SeamothSurpriseFood(Buff):
+    
+    def __init__(self):
+        super().__init__("Seamoth Surprise", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_versatility += caster.get_percent_from_stat_rating("Versatility", 105)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_versatility -= caster.get_percent_from_stat_rating("Versatility", 105)
+
+
+class SaltBakedFishcakeFood(Buff):
+    
+    def __init__(self):
+        super().__init__("Salt-Baked Fishcake", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_mastery += caster.get_percent_from_stat_rating("Mastery", 105)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_mastery -= caster.get_percent_from_stat_rating("Mastery", 105)
+        
+        
+class FeistyFishSticksFood(Buff):
+    
+    def __init__(self):
+        super().__init__("Feisty Fish Sticks", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_crit += caster.get_percent_from_stat_rating("Crit", 67)
+        caster.base_haste += caster.get_percent_from_stat_rating("Haste", 67)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", 67)
+        caster.base_haste -= caster.get_percent_from_stat_rating("Haste", 67)
         
 
+class AromaticSeafoodPlatterFood(Buff):
+    
+    def __init__(self):
+        super().__init__("Aromatic Seafood Platter", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_versatility += caster.get_percent_from_stat_rating("Versatility", 67)
+        caster.base_haste += caster.get_percent_from_stat_rating("Haste", 67)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_versatility -= caster.get_percent_from_stat_rating("Versatility", 67)
+        caster.base_haste -= caster.get_percent_from_stat_rating("Haste", 67)
+
+
+class SizzlingSeafoodMedleyFood(Buff):
+    
+    def __init__(self):
+        super().__init__("Sizzling Seafood Medley", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_mastery += caster.get_percent_from_stat_rating("Mastery", 67)
+        caster.base_haste += caster.get_percent_from_stat_rating("Haste", 67)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_mastery -= caster.get_percent_from_stat_rating("Mastery", 67)
+        caster.base_haste -= caster.get_percent_from_stat_rating("Haste", 67)
+        
+        
+class RevengeServedColdFood(Buff):
+    
+    def __init__(self):
+        super().__init__("Revenge, Served Cold", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_crit += caster.get_percent_from_stat_rating("Crit", 67)
+        caster.base_versatility += caster.get_percent_from_stat_rating("Versatility", 67)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", 67)
+        caster.base_versatility -= caster.get_percent_from_stat_rating("Versatility", 67)
+        
+        
+class ThousandboneTongueslicerFood(Buff):
+    
+    def __init__(self):
+        super().__init__("Thousandbone Tongueslicer", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_crit += caster.get_percent_from_stat_rating("Crit", 67)
+        caster.base_mastery += caster.get_percent_from_stat_rating("Mastery", 67)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", 67)
+        caster.base_mastery -= caster.get_percent_from_stat_rating("Mastery", 67)
+
+
+class GreatCeruleanSeaFood(Buff):
+    
+    def __init__(self):
+        super().__init__("Great Cerulean Sea", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_versatility += caster.get_percent_from_stat_rating("Versatility", 67)
+        caster.base_mastery += caster.get_percent_from_stat_rating("Mastery", 67)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_versatility -= caster.get_percent_from_stat_rating("Versatility", 67)
+        caster.base_mastery -= caster.get_percent_from_stat_rating("Mastery", 67)
+        
+        
+# weapon imbues
+class BuzzingRune(Buff):
+    
+    def __init__(self):
+        super().__init__("Buzzing Rune", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_crit += caster.get_percent_from_stat_rating("Crit", 310)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", 310)
+
+
+class ChirpingRune(Buff):
+    
+    def __init__(self):
+        super().__init__("Chirping Rune", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+        
+
+class HowlingRune(Buff):
+    
+    def __init__(self):
+        super().__init__("Howling Rune", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_haste += caster.get_percent_from_stat_rating("Haste", 310)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_haste -= caster.get_percent_from_stat_rating("Haste", 310)
+        
+
+class HissingRune(Buff):
+    
+    def __init__(self):
+        super().__init__("Hissing Rune", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_mastery += caster.get_percent_from_stat_rating("Mastery", 310)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_mastery -= caster.get_percent_from_stat_rating("Mastery", 310)
+        
+        
 # augment runes
 class DraconicAugmentRune(Buff):
     
@@ -598,3 +792,65 @@ class DraconicAugmentRune(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.spell_power -= caster.get_effective_spell_power(87)
+        
+        
+# RAID BUFFS
+class ArcaneIntellect(Buff):
+    
+    def __init__(self):
+        super().__init__("Arcane Intellect", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power *= 1.05
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power /= 1.05
+        
+        
+class MarkOfTheWild(Buff):
+    
+    def __init__(self):
+        super().__init__("Mark of the Wild", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.base_versatility += 3
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_versatility -= 3
+        
+
+class CloseToHeart(Buff):
+    
+    def __init__(self):
+        super().__init__("Close to Heart", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+    
+class RetributionAura(Buff):
+    
+    def __init__(self):
+        super().__init__("Retribution Aura", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+        
+        
+# EXTERNAL BUFFS
+class SourceOfMagic(Buff):
+    
+    def __init__(self):
+        super().__init__("Source of Magic", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass

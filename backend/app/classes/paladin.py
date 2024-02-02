@@ -3,7 +3,7 @@ import copy
 
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
-from .auras_buffs import PhialOfTepidVersatility, PhialOfElementalChaos, DraconicAugmentRune
+from .auras_buffs import PhialOfTepidVersatility, PhialOfElementalChaos, DraconicAugmentRune, GrandBanquetOfTheKaluakFood, TimelyDemiseFood, FiletOfFangsFood, SeamothSurpriseFood, SaltBakedFishcakeFood, FeistyFishSticksFood, AromaticSeafoodPlatterFood, SizzlingSeafoodMedleyFood, RevengeServedColdFood, ThousandboneTongueslicerFood, GreatCeruleanSeaFood, BuzzingRune, ChirpingRune, HowlingRune, HissingRune, ArcaneIntellect, MarkOfTheWild, CloseToHeart, RetributionAura, SourceOfMagic
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
@@ -226,6 +226,18 @@ class Paladin:
         if "augment_rune" in new_consumables:
             self.consumables["augment_rune"] = new_consumables["augment_rune"]
             self.initial_consumables["augment_rune"] = new_consumables["augment_rune"]
+        if "food" in new_consumables:
+            self.consumables["food"] = new_consumables["food"]
+            self.initial_consumables["food"] = new_consumables["food"]
+        if "weapon_imbue" in new_consumables:
+            self.consumables["weapon_imbue"] = new_consumables["weapon_imbue"]
+            self.initial_consumables["weapon_imbue"] = new_consumables["weapon_imbue"]
+        if "raid_buff" in new_consumables:
+            self.consumables["raid_buff"] = new_consumables["raid_buff"]
+            self.initial_consumables["raid_buff"] = new_consumables["raid_buff"]
+        if "external_buff" in new_consumables:
+            self.consumables["external_buff"] = new_consumables["external_buff"]
+            self.initial_consumables["external_buff"] = new_consumables["external_buff"]
     
     def update_race(self, new_race):
         self.race = new_race
@@ -246,20 +258,23 @@ class Paladin:
     def apply_consumables(self):
         consumable_buffs = []
         
-        for consumable_type, consumable_name in self.consumables.items():
-            if consumable_name:  # Check if the consumable name is not empty
-                if consumable_type == "flask":
-                    flask_name_split = consumable_name.split()
-                    for i, word in enumerate(flask_name_split):
-                        if word.lower() == "of":
-                            flask_name_split[i] = word.capitalize()
-                    consumable_name_formatted = "".join(flask_name_split)
-                else:
-                    consumable_name_formatted = "".join(consumable_name.split())
+        for consumable_type, consumable_list in self.consumables.items():
+            if consumable_list:
+                for consumable_name in consumable_list:
+                    consumable_name_split = consumable_name.split()
+                    for i, word in enumerate(consumable_name_split):
+                        if word.lower() in ["of", "the", "to"]:
+                            consumable_name_split[i] = word.capitalize()
+                        consumable_name_split[i] = consumable_name_split[i].replace("'", "").replace("-", "").replace(",", "")
 
-                consumable_class = globals().get(consumable_name_formatted)
-                if consumable_class:
-                    consumable_buffs.append(consumable_class)
+                    if consumable_type == "food":  
+                        consumable_name_formatted = "".join(consumable_name_split) + "Food"
+                    else:
+                        consumable_name_formatted = "".join(consumable_name_split)
+
+                    consumable_class = globals().get(consumable_name_formatted)
+                    if consumable_class:
+                        consumable_buffs.append(consumable_class)
         
         for buff in consumable_buffs:
             self.apply_buff_to_self(buff(), 0)
@@ -279,8 +294,7 @@ class Paladin:
         if stat == "Versatility":
             return (stat_rating / 205)
         
-    def update_stats_with_racials(self):
-        
+    def update_stats_with_racials(self):   
         # reset stats
         self.spell_power = self.base_spell_power
         self.haste = self.base_haste
@@ -310,6 +324,8 @@ class Paladin:
             self.crit_damage_modifier += 0.02
             self.crit_healing_modifier += 0.02
             self.max_health += 197 * 20
+        elif self.race == "Zandalari Troll":
+            pass
         
         self.haste_multiplier = (self.haste / 100) + 1
         self.crit_multiplier = (self.crit / 100) + 1
