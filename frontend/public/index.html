@@ -210,46 +210,64 @@
                         <div id="priority-list-list-container">
                             <div id="priority-list-headers">
                                 <div id="priority-list-header-ability">Ability</div>
-                                <div class="priority-list-header-condition">Condition</div>
+                                <div class="priority-list-header-condition">Conditions</div>
                             </div>
 
-                            <div class="priority-list-item-container">
-                                <div class="priority-list-item-icon-container">
-                                    <img class="priority-list-item-icon" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg">
-                                </div>
-                                <div class="priority-list-item-ability">
-                                    <input class="priority-list-item-ability-text">
-                                </div>
+                            <div id="priority-list-divider"></div>
 
-                                <div class="priority-list-item-condition">
-                                    <input class="priority-list-item-condition-text">
-                                </div>
+                            <div id="priority-list-items-container">
+                                <div class="priority-list-item-container">
+                                    <div class="priority-list-item-number">0</div>
 
-                                <div class="priority-list-and-button">
-                                    AND
-                                </div>
+                                    <div class="priority-list-item-icon-container">
+                                        <img class="priority-list-item-icon" id="priority-list-item-icon" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg">
+                                    </div>
+                                    <div class="priority-list-item-ability">
+                                        <input class="priority-list-item-ability-text" id="priority-list-item-ability-text">
+                                    </div>
+    
+                                    <div class="priority-list-item-condition">
+                                        <textarea class="priority-list-item-condition-text"></textarea>
+                                    </div>
+    
+                                    <div class="priority-list-buttons-container">
+                                        <div class="priority-list-and-button priority-list-button">
+                                            AND
+                                        </div>
+        
+                                        <div class="priority-list-or-button priority-list-button">
+                                            OR
+                                        </div>
+                                    </div>
+                                     
+                                    <div class="priority-list-buttons-container">
+                                        <div class="priority-list-up-button priority-list-button">
+                                            <i class="fa-solid fa-arrow-up"></i>
+                                        </div>
+        
+                                        <div class="priority-list-down-button priority-list-button">
+                                            <i class="fa-solid fa-arrow-down"></i>
+                                        </div>
+                                    </div>
 
-                                <div class="priority-list-or-button">
-                                    OR
+                                    <div class="priority-list-buttons-container">
+                                        <div class="priority-list-add-item priority-list-button">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </div>
+    
+                                        <div class="priority-list-delete-item priority-list-button">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="priority-list-item-handle" id="priority-list-item-handle">
+                                        <i class="fa-solid fa-grip"></i>
+                                    </div>
                                 </div>
-
-                                <div class="priority-list-up-button">
-                                    <i class="fa-solid fa-arrow-up"></i>
-                                </div>
-
-                                <div class="priority-list-down-button">
-                                    <i class="fa-solid fa-arrow-down"></i>
-                                </div>
-
-                                <div class="priority-list-add-item">
-                                    <i class="fa-solid fa-plus"></i>
-                                </div>
-                            </div>
-                            
+                            </div>    
                         </div>
                     </div>
-                </div>
-                
+                </div>               
             </div>
 
             <div id="options-status-bar">

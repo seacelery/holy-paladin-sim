@@ -9,6 +9,34 @@ from flask_socketio import emit
 main = Blueprint("main", __name__)
 pp = pprint.PrettyPrinter(width=200)
 
+# default_priority_list = [
+#     ("Aerated Mana Potion", "((self.elapsed_time >= 50 and self.elapsed_time < 55) or (self.elapsed_time >= 410 and self.elapsed_time < 415)) and self.paladin.abilities['Potion'].check_potion_cooldown(self.elapsed_time)"),
+#     ("Elemental Potion of Ultimate Power", "((self.elapsed_time >= 55 and self.elapsed_time < 60) or (self.elapsed_time >= 390 and self.elapsed_time < 395)) and self.paladin.abilities['Potion'].check_potion_cooldown(self.elapsed_time)"),
+#     ("Divine Toll", "self.previous_ability == 'Daybreak'"),
+#     ("Blessing of the Seasons", "True"),
+#     ("Arcane Torrent", "self.paladin.race == 'Blood Elf'"),
+#     ("Fireblood", "self.paladin.race == 'Dark Iron Dwarf'"),
+#     ("Gift of the Naaru", "self.paladin.race == 'Draenei'"),
+#     ("Avenging Wrath", "True"),
+#     ("Light's Hammer", "True"),
+#     ("Tyr's Deliverance", "True"),
+#     ("Divine Favor", "self.elapsed_time > 35"),
+#     ("Light of Dawn", "self.paladin.holy_power == 5"),
+#     ("Daybreak", "self.elapsed_time >= 12"),
+#     ("Holy Shock", "True"),
+#     ("Judgment", "True"),
+#     ("Crusader Strike", "True"),
+#     ("Holy Light", "True"),
+#     ("Holy Shock", "True"),
+#     ("Divine Toll", "True"),
+#     ("Daybreak", "True"),
+# ]  
+
+default_priority_list = [
+    ("Holy Shock 💀 cooldown < 2"),
+    ("Judgment 💀 cooldown < 5")
+]
+
 @socketio.on('my event')
 def handle_my_custom_event(json):
     print('received json: ' + str(json))
@@ -93,7 +121,7 @@ def run_simulation_route():
         consumables=modifiable_data.get("consumables")
     )
         
-    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time)
+    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, default_priority_list)
 
     # pp.pprint(paladin.class_talents)
     results = run_simulation(simulation)

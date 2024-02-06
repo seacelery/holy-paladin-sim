@@ -25,7 +25,7 @@
     --holy-power-loss: rgb(214, 101, 101);
     --mana: #76afdd;
 
-    --subrow-arrow-colour: #cca1ddc9;
+    --subrow-arrow-colour: #cca1ddef;
     --subrow-arrow-colour-hover: #c8add3c9;
     --subrow-arrow-colour-active: #c790ddc9;
     --sorting-arrow-colour: #91fcd8c9;
@@ -52,7 +52,7 @@ body {
 
 /* character import bar */
 #import-character-container {
-    margin: 50px auto 20px auto;
+    margin: 50px auto 30px auto;
     padding: 11px 0 11px 0;
     display: flex;
     justify-content: center;
@@ -470,45 +470,72 @@ body {
 
 #priority-list-container {
     display: flex;
-
+    
     padding: 25px 0 0 25px;
 
     font-size: 15px;
 }
 
 #priority-list-list-container {
-    display: flex;
-    flex-direction: column;
+    display: block;
+    width: 100%;
 }
 
 #priority-list-headers {
     display: flex;
-    margin-bottom: 8px;
 }
 
 #priority-list-header-ability {
-    margin-left: 50px;
-    width: 155px;
+    margin-left: 97px;
+    padding: 5px;
+    padding-left: 8px;
+
+    width: 150px;
 
     color: var(--light-font-colour);
     font-size: 16px;
 }
 
 .priority-list-header-condition {
+    margin-left: 3px;
+    padding: 5px;
+    padding-left: 8px;
+
+    width: 165px;
+    
     color: var(--light-font-colour);
     font-size: 16px;
+}
+
+#priority-list-divider {
+    height: 1px;
+    margin-left: 3px;
+    margin-bottom: 10px;
+
+    width: calc(100% - 30px);
+
+    background-color: var(--border-colour-3);
+}
+
+.dragging {
+    opacity: 0.5;
+    cursor: move !important;
 }
 
 .priority-list-item-container {
     display: flex;
     margin-top: 5px;
+
+    min-width: 60%;
+
+    padding: 3px;
 }
 
 .priority-list-item-icon {
     margin-right: 5px;
 
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
 
     border: 1px solid var(--border-colour-3);
 }
@@ -518,8 +545,9 @@ body {
     align-items: center;
     padding-left: 8px;
 
-    width: 150px;
-    height: 40px;
+    min-width: 150px;
+    max-width: 150px;
+    height: 42px;
 
     border: 1px solid var(--border-colour-3);
 
@@ -533,16 +561,20 @@ body {
     background-color: var(--panel-colour-2);
     border: none;
     color: var(--light-font-colour);
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .priority-list-item-condition {
     display: flex;
     align-items: center;
-    padding-left: 8px;
+    flex-grow: 1;
+    padding-left: 7px;
+    
     margin-left: 5px;
 
-    height: 40px;
+    min-width: 165px;
+    max-width: 165px;
+    min-height: 40px;
 
     border: 1px solid var(--border-colour-3);
 
@@ -550,30 +582,132 @@ body {
 }
 
 .priority-list-item-condition-text {
-    min-width: 100px;
-    height: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 3px;
 
-    background-color: var(--panel-colour-2);
+    resize: none;
+    word-wrap: break-word;
+    min-height: 40px;
+    max-height: 40px;
+    width: 100%;
+    
     border: none;
+    outline: none;
+    
+    line-height: 40px;
     color: var(--light-font-colour);
-    font-size: 16px;
+    font-size: 13.5px;
+    background-color: var(--panel-colour-2);
 }
 
-.priority-list-add-item, .priority-list-and-button, .priority-list-or-button, .priority-list-up-button, .priority-list-down-button {
+.priority-list-button, .priority-list-item-number, .priority-list-item-handle {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 5px;
     padding-left: 1px;
 
-    width: 40px;
-    height: 40px;
+    min-width: 42px;
+    width: 42px;
+    height: 42px;
 
     border: 1px solid var(--border-colour-3);
 
     background-color: var(--panel-colour-2);
     color: var(--light-font-colour);
     font-size: 14px;
+}
+
+.priority-list-item-number {
+    margin-left: 0;
+    margin-right: 5px;
+
+    font-size: 17px;
+}
+
+.priority-list-button, .priority-list-item-handle {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.buttons-visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.buttons-dragging {
+    opacity: 1;
+}
+
+.priority-list-and-button, .priority-list-or-button {
+    padding-top: 3px;
+
+    font-size: 13px;
+}
+
+.priority-list-and-button {
+    color: var(--paladin-font);
+}
+
+.priority-list-permanent-and-button {
+    color: var(--paladin-font);
+    opacity: 1;
+}
+
+.priority-list-or-button {
+    color: var(--mana);
+}
+
+.priority-list-permanent-or-button {
+    color: var(--mana);
+    opacity: 1;
+}
+
+.priority-list-permanent-and-button:hover, .priority-list-permanent-or-button:hover {
+    cursor: initial !important;
+}
+
+.priority-list-and-button, .priority-list-or-button, .priority-list-add-item, .priority-list-delete-item {
+    height: 21px;
+}
+
+.priority-list-buttons-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.priority-list-up-button, .priority-list-down-button {
+    height: 21px;
+
+    color: var(--subrow-arrow-colour);
+}
+
+.priority-list-add-item {
+    color: var(--healing-font);
+}
+
+.priority-list-delete-item {
+    font-size: 16px;
+    color: var(--red-font);
+}
+
+.priority-list-item-handle {
+    border: none;
+    background-color: var(--panel-colour);
+    margin-left: 0px;
+
+    font-size: 26px;
+    color: var(--panel-colour-6);
+}
+
+.priority-list-item-handle:hover {
+    cursor: pointer;
+}
+
+.priority-list-button:hover {
+    cursor: pointer;
+    user-select: none;
 }
 
 #options-status-bar {

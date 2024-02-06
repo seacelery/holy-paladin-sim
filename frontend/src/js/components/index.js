@@ -7,6 +7,7 @@ import { createBuffsBreakdown } from "./buffs-breakdown.js";
 import { createResourcesBreakdown } from "./resources-breakdown.js";
 import { createPriorityBreakdown } from "./priority-breakdown.js";
 import { createCooldownsBreakdown } from "./cooldowns-breakdown.js";
+import { createPriorityListDisplay } from "./priority-list-display.js";
 import { handleTabs } from "./simulation-options-tabs.js";
 import { setSimulationOptionsFromImportedData } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
@@ -116,6 +117,7 @@ const importCharacter = async () => {
 
 const updateCharacter = async (data) => {
     const savedData = document.getElementById("saved-data-status");
+    console.log(data)
     
     const handleSavedDataStatus = () => {
         savedData.style.opacity = 1
@@ -364,8 +366,11 @@ let currentConsumables = {
 };
 
 const handleConsumableChange = (consumable) => {
+    console.log(consumable)
     const attributeKey = Object.keys(consumable)[0];
+    console.log(attributeKey)
     let attributeValue = consumable[attributeKey];
+    console.log(attributeValue)
 
     if (consumable.remove) {
         currentConsumables[attributeKey] = currentConsumables[attributeKey].filter(item => item !== attributeValue);
@@ -374,6 +379,8 @@ const handleConsumableChange = (consumable) => {
             currentConsumables[attributeKey].push(attributeValue);
         };
     };
+
+    console.log(currentConsumables)
 
     updateCharacter({
         consumables: currentConsumables
@@ -396,43 +403,40 @@ simulationProgressBarContainer.addEventListener("click", runSimulation);
 const handleOptionImages = (images, attribute, optionType, toggle = false, multipleAllowed = false) => {
     const formattedAttribute = attribute.replaceAll("-", "_");
 
-    const handlerFunctions = {
-        consumable: handleConsumableChange,
-        race: handleRaceChange,
-    };
-
-    const handlerFunction = handlerFunctions[optionType];
-
     images.forEach(image => {
         image.classList.add(`${attribute}-unselected`);
         image.classList.remove(`${attribute}-selected`);
         image.addEventListener("click", (e) => {
             const attributeName = e.target.getAttribute(`data-${attribute}`);
             const isSelected = e.target.classList.contains(`${attribute}-selected`);
-
+    
             if (multipleAllowed) {
-                e.target.classList.toggle(`${attribute}-selected`);
-                e.target.classList.toggle(`${attribute}-unselected`);
-                handlerFunction({[formattedAttribute]: attributeName, remove: isSelected});
+                if (isSelected) {
+                    currentConsumables[formattedAttribute] = currentConsumables[formattedAttribute].filter(item => item !== attributeName);
+                } else {
+                    currentConsumables[formattedAttribute].push(attributeName);
+                };
             } else {
                 if (isSelected && toggle) {
-                    e.target.classList.add(`${attribute}-unselected`);
-                    e.target.classList.remove(`${attribute}-selected`);
-                    handlerFunction({[formattedAttribute]: attributeName, remove: true});
+                    currentConsumables[formattedAttribute] = currentConsumables[formattedAttribute].filter(item => item !== attributeName);
                 } else {
-                    images.forEach(img => {
-                        if (img.classList.contains(`${attribute}-selected`)) {
-                            const prevAttributeName = img.getAttribute(`data-${attribute}`);
-                            handlerFunction({[formattedAttribute]: prevAttributeName, remove: true});
-                            img.classList.add(`${attribute}-unselected`);
-                            img.classList.remove(`${attribute}-selected`);
+                    currentConsumables[formattedAttribute] = [attributeName];
+                    
+                    images.forEach(prevImage => {
+                        if (prevImage !== e.target) {
+                            prevImage.classList.remove(`${attribute}-selected`);
+                            prevImage.classList.add(`${attribute}-unselected`);
                         };
                     });
-                    e.target.classList.remove(`${attribute}-unselected`);
-                    e.target.classList.add(`${attribute}-selected`);
-                    handlerFunction({[formattedAttribute]: attributeName});
                 };
             };
+    
+            e.target.classList.toggle(`${attribute}-selected`, !isSelected);
+            e.target.classList.toggle(`${attribute}-unselected`, isSelected);
+    
+            updateCharacter({
+                consumables: currentConsumables
+            });
         });
     });
 };
@@ -517,10 +521,10 @@ const updateEncounterLengthDisplay = (secondsValue) => {
     const minutes = Math.floor(secondsValue / 60);
     const seconds = secondsValue % 60;
     encounterLengthMinutes.textContent = minutes;
-    encounterLengthSeconds.textContent = seconds.toString().padStart(2, '0');
+    encounterLengthSeconds.textContent = seconds.toString().padStart(2, "0");
 };
 
-// initial display
+// initial encounter length display
 updateEncounterLengthDisplay(parseInt(encounterLengthSlider.value, 10));
 
 encounterLengthSlider.addEventListener("input", () => {
@@ -545,6 +549,13 @@ makeFieldEditable(encounterLengthSeconds, { charLimit: 2 });
 
         encounterLengthSlider.value = totalSeconds;
     });
+});
+
+// priority list display
+createPriorityListDisplay();
+// prevent forbidden cursor
+document.addEventListener("dragenter", (e) => {
+    e.preventDefault();
 });
 
 // initialise tabs for primary navbar

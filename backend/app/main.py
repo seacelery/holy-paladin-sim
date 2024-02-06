@@ -54,8 +54,8 @@ def import_character(character_name, realm):
     
     return paladin, healing_targets
     
-def initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time):
-    simulation = Simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, access_token)
+def initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list=None):
+    simulation = Simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, access_token)
     return simulation
     
 def run_simulation(simulation):
@@ -63,5 +63,10 @@ def run_simulation(simulation):
     
 if __name__ == "__main__":
     paladin, healing_targets = import_character("daisu", "aszune")
+    # default_priority_list = [
+    #         ("Aerated Mana Potion", "((self.elapsed_time >= 50 and self.elapsed_time < 55) or (self.elapsed_time >= 410 and self.elapsed_time < 415)) and self.paladin.abilities['Potion'].check_potion_cooldown(self.elapsed_time)"),
+    #         ("Holy Shock", "True"),
+    #     ]  
+    
     simulation = initialise_simulation(paladin, healing_targets, encounter_length=30, iterations=1, time_warp_time=0)
     run_simulation(simulation)

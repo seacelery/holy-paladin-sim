@@ -14,13 +14,14 @@ from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrat
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
 from ..utils.battlenet_api import get_spell_icon_data, get_access_token
 from ..utils import cache
+from .priority_list_dsl import parse_condition, condition_to_lambda
 
 pp = pprint.PrettyPrinter(width=200)
 
 
 class Simulation:
     
-    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, access_token, priority_list=None):
+    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, access_token):
 
         self.access_token = access_token
 
@@ -30,7 +31,39 @@ class Simulation:
         self.encounter_length = encounter_length
         self.elapsed_time = 0
         self.iterations = iterations
-        self.priority_list = priority_list
+        self.priority_list = []
+
+        for item in priority_list:
+            action_name, attribute, operator, value = parse_condition(item, self.paladin.abilities)
+            self.priority_list.append((action_name, condition_to_lambda(action_name, attribute, operator, value)))
+        print(self.priority_list)
+        
+        # self.priority_list = [
+        #     ("Aerated Mana Potion", lambda: ((self.elapsed_time >= 50 and self.elapsed_time < 55) or (self.elapsed_time >= 410 and self.elapsed_time < 415)) and self.paladin.abilities["Potion"].check_potion_cooldown(self.elapsed_time)),
+        #     ("Elemental Potion of Ultimate Power", lambda: ((self.elapsed_time >= 55 and self.elapsed_time < 60) or (self.elapsed_time >= 390 and self.elapsed_time < 395)) and self.paladin.abilities["Potion"].check_potion_cooldown(self.elapsed_time)),
+        #     ("Divine Toll", lambda: self.previous_ability == "Daybreak"),
+        #     ("Blessing of the Seasons", lambda: True),
+        #     ("Arcane Torrent", lambda: self.paladin.race == "Blood Elf"),
+        #     ("Fireblood", lambda: self.paladin.race == "Dark Iron Dwarf"),
+        #     ("Gift of the Naaru", lambda: self.paladin.race == "Draenei"),
+        #     ("Avenging Wrath", lambda: True),
+        #     ("Light's Hammer", lambda: True),
+        #     ("Tyr's Deliverance", lambda: True),
+        #     ("Divine Favor", lambda: self.elapsed_time > 35),
+        #     ("Light of Dawn", lambda: self.paladin.holy_power == 5),
+        #     ("Daybreak", lambda: self.elapsed_time >= 12),
+        #     ("Holy Shock", lambda: True),
+            
+        #     # ("Word of Glory", lambda: True),
+        #     ("Judgment", lambda: True),
+        #     ("Crusader Strike", lambda: True),
+            
+        #     ("Holy Light", lambda: True),
+        #     ("Holy Shock", lambda: True),
+        #     ("Divine Toll", lambda: True),
+        #     ("Daybreak", lambda: True),
+        #     ("Holy Shock", lambda: True),
+        # ]  
         
         # make tick rate smaller for better hot accuracy
         self.tick_rate = 0.05
@@ -222,39 +255,8 @@ class Simulation:
             return
         
         non_beacon_targets = [target for target in self.healing_targets_list if not isinstance(target, BeaconOfLight)]
-    
-        priority_list = [
-            ("Aerated Mana Potion", lambda: ((self.elapsed_time >= 50 and self.elapsed_time < 55) or (self.elapsed_time >= 410 and self.elapsed_time < 415)) and self.paladin.abilities["Potion"].check_potion_cooldown(self.elapsed_time)),
-            ("Elemental Potion of Ultimate Power", lambda: ((self.elapsed_time >= 55 and self.elapsed_time < 60) or (self.elapsed_time >= 390 and self.elapsed_time < 395)) and self.paladin.abilities["Potion"].check_potion_cooldown(self.elapsed_time)),
-            ("Divine Toll", lambda: self.previous_ability == "Daybreak"),
-            ("Blessing of the Seasons", lambda: True),
-            ("Arcane Torrent", lambda: self.paladin.race == "Blood Elf"),
-            ("Fireblood", lambda: self.paladin.race == "Dark Iron Dwarf"),
-            ("Gift of the Naaru", lambda: self.paladin.race == "Draenei"),
-            ("Avenging Wrath", lambda: True),
-            ("Light's Hammer", lambda: True),
-            ("Tyr's Deliverance", lambda: True),
-            ("Divine Favor", lambda: self.elapsed_time > 35),
-            ("Light of Dawn", lambda: self.paladin.holy_power == 5),
-            ("Daybreak", lambda: self.elapsed_time >= 12),
-            ("Holy Shock", lambda: True),
-            
-            # ("Word of Glory", lambda: True),
-            ("Judgment", lambda: True),
-            ("Crusader Strike", lambda: True),
-            
-            
-            ("Holy Light", lambda: True),
-            ("Holy Shock", lambda: True),
-            ("Divine Toll", lambda: True),
-            ("Daybreak", lambda: True),
-            ("Holy Shock", lambda: True),
-        ]  
         
-        if self.priority_list:
-            priority_list = self.priority_list
-        
-        for ability_name, condition in priority_list:    
+        for ability_name, condition in self.priority_list:    
             if ability_name in self.abilities and condition():
                 ability = self.abilities[ability_name]
                 if ability.can_cast(self.paladin, self.elapsed_time):                    
