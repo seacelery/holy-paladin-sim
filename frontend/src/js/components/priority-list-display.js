@@ -1,4 +1,4 @@
-import { createElement } from "./index.js";
+import { createElement, updatePriorityList } from "./index.js";
 import { spellToIconsMap } from "../utils/spell-to-icons-map.js";
 
 let draggedItem = null;
@@ -34,9 +34,12 @@ const createPriorityListItem = (index) => {
 
         if (spellToIconsMap.hasOwnProperty(abilityText)) {
             priorityListItemIcon.src = spellToIconsMap[abilityText];
+            e.target.value = abilityText;
         } else {
             priorityListItemIcon.src = "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg";
         };
+
+        updatePriorityList();
     });
     priorityListItemAbility.appendChild(priorityListItemAbilityText);
     priorityListItemContainer.appendChild(priorityListItemAbility);
@@ -130,7 +133,7 @@ const adjustTextareaHeight = (element, originalLineHeight) => {
     if (numberOfLines <= 1) {
         element.style.lineHeight = "40px";
     } else {
-        element.style.lineHeight = "19px";
+        element.style.lineHeight = "20px";
     };
 };
 
@@ -195,6 +198,7 @@ const handleDragEnd = (e) => {
         handle.classList.remove("buttons-dragging");
     });
     updateIndices();
+    updatePriorityList();
 };
 
 const createPriorityListDisplay = () => {
@@ -224,8 +228,15 @@ const createPriorityListDisplay = () => {
         } else {
             firstPriorityListItemIcon.src = "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg";
         };
+
+        updatePriorityList();
     });
 
+    const firstPriorityListItemConditionText = document.getElementById("priority-list-item-condition-text");
+    firstPriorityListItemConditionText.addEventListener("input", (e) => {
+        updatePriorityList();
+    });
+    
     const firstPriorityListItemHandle = document.getElementById("priority-list-item-handle");
     firstPriorityListItemContainer.forEach(item => {
         firstPriorityListItemHandle.setAttribute("draggable", true);
@@ -274,6 +285,7 @@ const createPriorityListDisplay = () => {
             const originalLineHeight = parseInt(window.getComputedStyle(priorityListItemConditionText).lineHeight);
             priorityListItemConditionText.addEventListener("input", () => {
                 adjustTextareaHeight(priorityListItemConditionText, originalLineHeight);
+                updatePriorityList();
             });
             adjustTextareaHeight(priorityListItemConditionText, originalLineHeight);
         };
@@ -304,6 +316,7 @@ const createPriorityListDisplay = () => {
             const originalLineHeight = parseInt(window.getComputedStyle(priorityListItemConditionText).lineHeight);
             priorityListItemConditionText.addEventListener("input", () => {
                 adjustTextareaHeight(priorityListItemConditionText, originalLineHeight);
+                updatePriorityList();
             });
             adjustTextareaHeight(priorityListItemConditionText, originalLineHeight);
         };
@@ -322,6 +335,7 @@ const createPriorityListDisplay = () => {
                 const originalLineHeight = parseInt(window.getComputedStyle(field).lineHeight);
                 field.addEventListener("input", () => {
                     adjustTextareaHeight(field, originalLineHeight);
+                    updatePriorityList();
                 });
                 adjustTextareaHeight(field, originalLineHeight);
             });
@@ -355,6 +369,7 @@ const createPriorityListDisplay = () => {
                 updateIndices();
             };
         };
+        updatePriorityList();
     });
 
     // adjust text area

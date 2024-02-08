@@ -1,5 +1,6 @@
 import sys
 import pprint
+import json
 
 from flask import Blueprint, request, jsonify, session
 from app.main import import_character, run_simulation, initialise_simulation
@@ -33,8 +34,16 @@ pp = pprint.PrettyPrinter(width=200)
 # ]  
 
 default_priority_list = [
-    ("Holy Shock 💀 cooldown < 2"),
-    ("Judgment 💀 cooldown < 5")
+    ("Holy Shock | Holy Shock charges = 2"),
+    ("Arcane Torrent | Race = Blood Elf"),
+    ("Judgment | Infusion of Light duration < 5"),
+    # ("Flash of Light 💀 Phial of Tepid Versatility active 💀 and 💀 Mana > 90% 💀 or 💀 Phial of Elemental Chaos active"),
+    # ("Daybreak 💀 Time > 50"),
+    # ("Light of Dawn 💀 Holy Power = 5"),
+    # ("Holy Light 💀 Holy Shock charges = 0"),
+    
+    # ("Holy Shock 💀 cooldown < 2"),
+    # ("Holy Shock 💀 Judgment cooldown > 3")
 ]
 
 @socketio.on('my event')
@@ -108,6 +117,11 @@ def run_simulation_route():
     encounter_length = request.args.get("encounter_length", default=60, type=int)
     iterations = request.args.get("iterations", default=1, type=int)
     time_warp_time = request.args.get("time_warp_time", default=0, type=int)
+    priority_list_json = request.args.get("priority_list", default="")
+    if priority_list_json:
+        priority_list = json.loads(priority_list_json)
+    else:
+        priority_list = default_priority_list
 
     paladin, healing_targets = import_character(character_name, realm)
     
@@ -121,7 +135,7 @@ def run_simulation_route():
         consumables=modifiable_data.get("consumables")
     )
         
-    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, default_priority_list)
+    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list)
 
     # pp.pprint(paladin.class_talents)
     results = run_simulation(simulation)

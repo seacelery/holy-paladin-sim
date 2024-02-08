@@ -34,8 +34,10 @@ class Simulation:
         self.priority_list = []
 
         for item in priority_list:
-            action_name, attribute, operator, value = parse_condition(item, self.paladin.abilities)
-            self.priority_list.append((action_name, condition_to_lambda(action_name, attribute, operator, value)))
+            print(priority_list)
+            action_name, parsed_conditions = parse_condition(item)
+            bound_condition_lambda = condition_to_lambda(parsed_conditions).__get__(self, Simulation)
+            self.priority_list.append((action_name, bound_condition_lambda))
         print(self.priority_list)
         
         # self.priority_list = [
@@ -64,6 +66,10 @@ class Simulation:
         #     ("Daybreak", lambda: True),
         #     ("Holy Shock", lambda: True),
         # ]  
+        
+        # self.priority_list = [
+        #     ("Flash of Light", lambda: "Phial of Tepid Versatility" in self.paladin.active_auras and self.paladin.mana > 250000 or "Phial of Elemental Chaos" in self.paladin.active_auras)
+        # ]
         
         # make tick rate smaller for better hot accuracy
         self.tick_rate = 0.05

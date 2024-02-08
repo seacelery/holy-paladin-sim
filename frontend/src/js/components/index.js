@@ -178,8 +178,10 @@ const runSimulation = async () => {
 
     isSimulationRunning = true;
 
+    const priorityListJson = encodeURIComponent(JSON.stringify(priorityList));
+
     return fetch(`http://127.0.0.1:5000/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}&
-                  time_warp_time=${timeWarpTime}`, {
+                  time_warp_time=${timeWarpTime}&priority_list=${priorityListJson}`, {
         credentials: "include"
     })
     .then(response => response.json())
@@ -350,12 +352,6 @@ const createSimulationResults = (simulationData) => {
 };
 
 // update the paladin class when attributes are changed
-const handleRaceChange = (race) => {
-    updateCharacter({
-        race: race.race
-    });
-};
-
 let currentConsumables = {
     flask: [],
     food: [],
@@ -363,28 +359,6 @@ let currentConsumables = {
     augment_rune: [],
     raid_buff: [],
     external_buff: []
-};
-
-const handleConsumableChange = (consumable) => {
-    console.log(consumable)
-    const attributeKey = Object.keys(consumable)[0];
-    console.log(attributeKey)
-    let attributeValue = consumable[attributeKey];
-    console.log(attributeValue)
-
-    if (consumable.remove) {
-        currentConsumables[attributeKey] = currentConsumables[attributeKey].filter(item => item !== attributeValue);
-    } else {
-        if (!currentConsumables[attributeKey].includes(attributeValue)) {
-            currentConsumables[attributeKey].push(attributeValue);
-        };
-    };
-
-    console.log(currentConsumables)
-
-    updateCharacter({
-        consumables: currentConsumables
-    });
 };
 
 // update displayed information based on imported character
@@ -410,33 +384,49 @@ const handleOptionImages = (images, attribute, optionType, toggle = false, multi
             const attributeName = e.target.getAttribute(`data-${attribute}`);
             const isSelected = e.target.classList.contains(`${attribute}-selected`);
     
-            if (multipleAllowed) {
-                if (isSelected) {
-                    currentConsumables[formattedAttribute] = currentConsumables[formattedAttribute].filter(item => item !== attributeName);
+            if (optionType === "consumable") {
+                if (multipleAllowed) {
+                    if (isSelected) {
+                        currentConsumables[formattedAttribute] = currentConsumables[formattedAttribute].filter(item => item !== attributeName);
+                    } else {
+                        currentConsumables[formattedAttribute].push(attributeName);
+                    };
                 } else {
-                    currentConsumables[formattedAttribute].push(attributeName);
+                    if (isSelected && toggle) {
+                        currentConsumables[formattedAttribute] = currentConsumables[formattedAttribute].filter(item => item !== attributeName);
+                    } else {
+                        currentConsumables[formattedAttribute] = [attributeName];
+                        
+                        images.forEach(prevImage => {
+                            if (prevImage !== e.target) {
+                                prevImage.classList.remove(`${attribute}-selected`);
+                                prevImage.classList.add(`${attribute}-unselected`);
+                            };
+                        });
+                    };
                 };
-            } else {
-                if (isSelected && toggle) {
-                    currentConsumables[formattedAttribute] = currentConsumables[formattedAttribute].filter(item => item !== attributeName);
-                } else {
-                    currentConsumables[formattedAttribute] = [attributeName];
-                    
-                    images.forEach(prevImage => {
-                        if (prevImage !== e.target) {
-                            prevImage.classList.remove(`${attribute}-selected`);
-                            prevImage.classList.add(`${attribute}-unselected`);
-                        };
-                    });
-                };
-            };
-    
-            e.target.classList.toggle(`${attribute}-selected`, !isSelected);
-            e.target.classList.toggle(`${attribute}-unselected`, isSelected);
-    
-            updateCharacter({
-                consumables: currentConsumables
-            });
+        
+                e.target.classList.toggle(`${attribute}-selected`, !isSelected);
+                e.target.classList.toggle(`${attribute}-unselected`, isSelected);
+        
+                updateCharacter({
+                    consumables: currentConsumables
+                });
+            } else if (optionType === "race") {
+                updateCharacter({
+                    race: attributeName
+                });
+                        
+                images.forEach(prevImage => {
+                    if (prevImage !== e.target) {
+                        prevImage.classList.remove(`${attribute}-selected`);
+                        prevImage.classList.add(`${attribute}-unselected`);
+                    };
+                });
+
+                e.target.classList.add(`${attribute}-selected`, !isSelected);
+                e.target.classList.remove(`${attribute}-unselected`, isSelected);
+            };       
         });
     });
 };
@@ -558,7 +548,43 @@ document.addEventListener("dragenter", (e) => {
     e.preventDefault();
 });
 
+let priorityList = [];
+
+const updatePriorityList = () => {
+    const priorityListItemContainers = document.querySelectorAll(".priority-list-item-container");
+    priorityList = [];
+
+    priorityListItemContainers.forEach(container => {
+        let priorityString = "";
+
+        const abilityInput = container.querySelector(".priority-list-item-ability-text");
+        if (abilityInput) {
+            priorityString += abilityInput.value;
+        }
+
+        const conditionElements = container.querySelectorAll(".priority-list-item-condition, .priority-list-permanent-and-button, .priority-list-permanent-or-button");
+        conditionElements.forEach((element, index) => {
+            if (element.classList.contains("priority-list-item-condition")) {
+                const conditionText = element.querySelector(".priority-list-item-condition-text").value;
+                if (conditionText) {
+                    priorityString += ` | ${conditionText}`;
+                };
+            } else if (element.classList.contains("priority-list-permanent-and-button")) {
+                priorityString += " | and";
+            } else if (element.classList.contains("priority-list-permanent-or-button")) {
+                priorityString += " | or";
+            };
+        });
+
+        // priorityString = "(" + priorityString + ")";
+
+        priorityList.push(priorityString);
+    });
+
+    console.log(priorityList);
+};
+
 // initialise tabs for primary navbar
 handleTabs(`options-navbar-1`, "options-tab-content");
 
-export { updateCharacter, formatNumbers, formatNumbersNoRounding, formatThousands, formatTime, createElement };
+export { updateCharacter, formatNumbers, formatNumbersNoRounding, formatThousands, formatTime, createElement, updatePriorityList };
