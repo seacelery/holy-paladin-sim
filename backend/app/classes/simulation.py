@@ -34,10 +34,9 @@ class Simulation:
         self.priority_list = []
 
         for item in priority_list:
-            print(priority_list)
             action_name, parsed_conditions = parse_condition(item)
-            bound_condition_lambda = condition_to_lambda(parsed_conditions).__get__(self, Simulation)
-            self.priority_list.append((action_name, bound_condition_lambda))
+            condition_lambda = condition_to_lambda(self, parsed_conditions)
+            self.priority_list.append((action_name, condition_lambda))
         print(self.priority_list)
         
         # self.priority_list = [
@@ -96,7 +95,7 @@ class Simulation:
         
         # the copy is used at the start of each simulation
         self.initial_state = copy.deepcopy(self)
-                
+               
     def simulate(self):
         while self.elapsed_time < self.encounter_length:
             

@@ -18,7 +18,7 @@ const createPriorityListItem = (index) => {
     priorityListItemContainer.appendChild(priorityListItemIconContainer);
 
     const priorityListItemAbility = createElement("div", "priority-list-item-ability", null);
-    const priorityListItemAbilityText = createElement("input", "priority-list-item-ability-text", null);
+    const priorityListItemAbilityText = createElement("textarea", "priority-list-item-ability-text", null);
     priorityListItemAbilityText.addEventListener("input", (e) => {
         let abilityText = e.target.value.split(" ");
         
@@ -41,6 +41,7 @@ const createPriorityListItem = (index) => {
 
         updatePriorityList();
     });
+
     priorityListItemAbility.appendChild(priorityListItemAbilityText);
     priorityListItemContainer.appendChild(priorityListItemAbility);
 
@@ -330,6 +331,17 @@ const createPriorityListDisplay = () => {
             const newListItem = createPriorityListItem(index + 1);
             priorityListItemsContainer.insertBefore(newListItem, item.nextSibling);
             updateIndices();
+
+            const newAbilityTextField = newListItem.querySelectorAll(".priority-list-item-ability-text");
+            newAbilityTextField.forEach(field => {
+                const originalLineHeight = parseInt(window.getComputedStyle(field).lineHeight);
+                field.addEventListener("input", () => {
+                    adjustTextareaHeight(field, originalLineHeight);
+                    updatePriorityList();
+                });
+                adjustTextareaHeight(field, originalLineHeight);
+            });
+
             const newConditionTextField = newListItem.querySelectorAll(".priority-list-item-condition-text");
             newConditionTextField.forEach(field => {
                 const originalLineHeight = parseInt(window.getComputedStyle(field).lineHeight);
@@ -373,6 +385,14 @@ const createPriorityListDisplay = () => {
     });
 
     // adjust text area
+    document.querySelectorAll(".priority-list-item-ability-text").forEach((element) => {
+        const originalLineHeight = parseInt(window.getComputedStyle(element).lineHeight);
+        element.addEventListener("input", () => {
+            adjustTextareaHeight(element, originalLineHeight);
+        });
+        adjustTextareaHeight(element, originalLineHeight);
+    });
+
     document.querySelectorAll(".priority-list-item-condition-text").forEach((element) => {
         const originalLineHeight = parseInt(window.getComputedStyle(element).lineHeight);
         element.addEventListener("input", () => {

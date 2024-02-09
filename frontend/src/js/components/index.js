@@ -576,13 +576,29 @@ const updatePriorityList = () => {
             };
         });
 
-        // priorityString = "(" + priorityString + ")";
-
         priorityList.push(priorityString);
     });
 
     console.log(priorityList);
 };
+
+const priorityListCopyButton = document.getElementById("priority-list-copy-icon");
+priorityListCopyButton.addEventListener("click", () => {
+    const priorityListString = priorityList.join("\n"); 
+
+    navigator.clipboard.writeText(priorityListString).then(() => {
+        console.log('Priority list copied to clipboard successfully!');
+    }).catch(err => {
+        console.error('Failed to copy priority list to clipboard: ', err);
+    });
+});
+
+const priorityListPasteButton = document.getElementById("priority-list-paste-icon");
+const priorityListPasteModal = document.getElementById("priority-list-paste-modal");
+priorityListPasteModal.style.display = "none";
+priorityListPasteButton.addEventListener("click", () => {
+    priorityListPasteModal.style.display = priorityListPasteModal.style.display === "none" ? "flex" : "none";
+});
 
 // initialise tabs for primary navbar
 handleTabs(`options-navbar-1`, "options-tab-content");

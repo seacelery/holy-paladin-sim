@@ -212,7 +212,13 @@
                                 <div id="priority-list-header-ability">Ability</div>
                                 <div class="priority-list-header-condition">Conditions</div>
                                 <div id="priority-list-info">
-                                    <i class="fa-solid fa-circle-question"></i>
+                                    <i class="fa-solid fa-copy" id="priority-list-copy-icon"></i>
+                                    <i class="fa-solid fa-paste" id="priority-list-paste-icon"></i>
+                                    <i class="fa-solid fa-circle-question" id="priority-list-info-icon"></i>
+                                </div>
+                                <div id="priority-list-paste-modal">
+                                    <div id="priority-list-paste-modal-header">Paste your priority list</div>
+                                    <textarea id="priority-list-paste-modal-textarea"></textarea>
                                 </div>
                             </div>
 
@@ -226,7 +232,7 @@
                                         <img class="priority-list-item-icon" id="priority-list-item-icon" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg">
                                     </div>
                                     <div class="priority-list-item-ability">
-                                        <input class="priority-list-item-ability-text" id="priority-list-item-ability-text">
+                                        <textarea class="priority-list-item-ability-text" id="priority-list-item-ability-text"></textarea>
                                     </div>
     
                                     <div class="priority-list-item-condition">

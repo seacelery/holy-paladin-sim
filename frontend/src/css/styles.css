@@ -470,6 +470,7 @@ body {
 
 #priority-list-container {
     display: flex;
+    position: relative;
     
     padding: 25px 0 0 25px;
 
@@ -507,6 +508,61 @@ body {
     font-size: 16px;
 }
 
+#priority-list-paste-icon, #priority-list-copy-icon {
+    margin-right: 15px;
+}
+
+#priority-list-info-icon:hover, #priority-list-paste-icon:hover, #priority-list-copy-icon:hover {
+    cursor: pointer;
+    user-select: none;
+
+    color: var(--paladin-font);
+    transition: color 0.1s ease-in-out;
+}
+
+#priority-list-paste-modal {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 35px;
+
+    height: 550px;
+}
+
+#priority-list-paste-modal-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 50px;
+
+    border: 1px solid var(--border-colour-3);
+    border-bottom: none;
+
+    background-color: var(--panel-colour-2);
+    color: var(--light-font-colour);
+    font-size: 18px;
+}
+
+#priority-list-paste-modal-textarea {
+    width: 60%;
+    height: 450px;
+    padding: 10px;
+
+    outline: none;
+    resize: none;
+
+    border: 1px solid var(--border-colour-3);
+
+    background-color: var(--panel-colour-2);
+    color: var(--light-font-colour);
+    font-size: 16px;
+}
+
 #priority-list-info {
     display: flex;
     justify-content: center;
@@ -517,14 +573,6 @@ body {
 
     color: var(--light-font-colour);
     font-size: 24px;
-}
-
-#priority-list-info:hover {
-    cursor: pointer;
-    user-select: none;
-
-    color: var(--paladin-font);
-    transition: color 0.1s ease-in-out;
 }
 
 #priority-list-divider {
@@ -575,13 +623,34 @@ body {
 }
 
 .priority-list-item-ability-text {
-    width: 100%;
-    height: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 3px;
 
-    background-color: var(--panel-colour-2);
+    resize: none;
+    word-wrap: break-word;
+    min-height: 40px;
+    max-height: 40px;
+    width: 100%;
+    
     border: none;
+    outline: none;
+    
+    line-height: 40px;
     color: var(--light-font-colour);
-    font-size: 14px;
+    font-size: 13.5px;
+    background-color: var(--panel-colour-2);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px var(--panel-colour-2) inset !important;
+}
+
+input:-webkit-autofill{
+    -webkit-text-fill-color: var(--light-font-colour) !important;
 }
 
 .priority-list-item-condition {

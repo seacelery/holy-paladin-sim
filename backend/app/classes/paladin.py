@@ -278,7 +278,12 @@ class Paladin:
         
         for buff in consumable_buffs:
             self.apply_buff_to_self(buff(), 0)
-                   
+        
+        # reinitialise potions    
+        self.abilities["Potion"] = Potion(self)
+        self.abilities["Aerated Mana Potion"] = AeratedManaPotion(self)
+        self.abilities["Elemental Potion of Ultimate Power"] = ElementalPotionOfUltimatePowerPotion(self)
+                           
     def update_abilities(self):
         self.load_abilities_based_on_talents()
         self.update_abilities_with_racials()
