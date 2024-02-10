@@ -1,4 +1,4 @@
-import { createElement, updatePriorityList } from "./index.js";
+import { createElement, updatePriorityList, priorityList, priorityListPastedCode } from "./index.js";
 import { spellToIconsMap } from "../utils/spell-to-icons-map.js";
 
 let draggedItem = null;
@@ -128,8 +128,8 @@ const updateIndices = () => {
 const adjustTextareaHeight = (element, originalLineHeight) => {
     element.style.lineHeight = originalLineHeight + "px";
 
-    var lineHeight = parseInt(window.getComputedStyle(element).lineHeight);
-    var numberOfLines = element.scrollHeight / lineHeight;
+    let lineHeight = parseInt(window.getComputedStyle(element).lineHeight);
+    let numberOfLines = element.scrollHeight / lineHeight;
 
     if (numberOfLines <= 1) {
         element.style.lineHeight = "40px";
@@ -273,11 +273,12 @@ const createPriorityListDisplay = () => {
             const priorityListItemConditionText = createElement("textarea", "priority-list-item-condition-text", null);
             priorityListItemCondition.appendChild(priorityListItemConditionText);
 
-            const priorityListAndButton = createElement("div", "priority-list-permanent-and-button priority-list-button", null);
+            const priorityListAndButton = createElement("div", "priority-list-permanent-and-button priority-list-button priority-list-permanent-button", null);
             priorityListAndButton.textContent = "AND";
             priorityListAndButton.addEventListener("click", () => {
                 priorityListItemCondition.remove();
                 priorityListAndButton.remove();
+                updatePriorityList();
             });
 
             item.insertBefore(priorityListItemCondition, lastCondition.nextSibling);
@@ -304,11 +305,12 @@ const createPriorityListDisplay = () => {
             const priorityListItemConditionText = createElement("textarea", "priority-list-item-condition-text", null);
             priorityListItemCondition.appendChild(priorityListItemConditionText);
 
-            const priorityListOrButton = createElement("div", "priority-list-permanent-or-button priority-list-button", null);
+            const priorityListOrButton = createElement("div", "priority-list-permanent-or-button priority-list-button priority-list-permanent-button", null);
             priorityListOrButton.textContent = "OR";
             priorityListOrButton.addEventListener("click", () => {
                 priorityListItemCondition.remove();
                 priorityListOrButton.remove();
+                updatePriorityList();
             });
 
             item.insertBefore(priorityListItemCondition, lastCondition.nextSibling);
@@ -402,5 +404,104 @@ const createPriorityListDisplay = () => {
     });
 };
 
+const convertPasteToPriorityList = (pastedCode) => {
+    if (typeof pastedCode !== 'string' && !(pastedCode instanceof String)) return;
+    
+    const lines = pastedCode.split('\n');
+    const priorityListItemsContainer = document.getElementById("priority-list-items-container");
+    priorityListItemsContainer.innerHTML = "";
+    for (const line in lines) {
+        const lineData = lines[line];
+        const pieces = lineData.split("|");
+        const newItem = createPriorityListItem();
 
-export { createPriorityListItem, updateIndices, adjustTextareaHeight, setDraggedItem, handleDragStart, handleDragEnd, handleDragOver, handleDrop, createPriorityListDisplay };
+        for (const piece in pieces) {
+            const pieceData = pieces[piece].trim();
+            if (pieceData == pieces[0].trim()) {
+                const abilityText = newItem.querySelector(".priority-list-item-ability-text");
+                const abilityIcon = newItem.querySelector(".priority-list-item-icon");
+                abilityText.textContent = pieceData;
+
+                if (spellToIconsMap.hasOwnProperty(abilityText.textContent)) {
+                    abilityIcon.src = spellToIconsMap[abilityText.textContent];
+                } else {
+                    abilityIcon.src = "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg";
+                };
+
+                abilityText.addEventListener("input", () => {
+                    adjustTextareaHeight(abilityText, 40);
+                    updatePriorityList();
+                });
+
+                if (abilityText.textContent.length > 25) {
+                    adjustTextareaHeight(abilityText, 40);
+                };
+
+            } else if (pieceData == pieces[1].trim()) {
+                const conditionText = newItem.querySelector(".priority-list-item-condition-text");
+                
+                conditionText.textContent = pieceData;
+                conditionText.addEventListener("input", () => {
+                    adjustTextareaHeight(conditionText, 40);
+                    updatePriorityList();
+                });
+                if (conditionText.textContent.length > 25) {
+                    adjustTextareaHeight(conditionText, 40);
+                };
+
+            } else if (pieceData === "and") {
+                const currentConditions = newItem.querySelectorAll(".priority-list-item-condition");
+                const lastCondition = currentConditions.length > 0 ? currentConditions[currentConditions.length - 1] : null;
+
+                const priorityListAndButton = createElement("div", "priority-list-permanent-and-button priority-list-button priority-list-permanent-button", null);
+                priorityListAndButton.textContent = "AND";
+                priorityListAndButton.addEventListener("click", () => {
+                    lastCondition.remove();
+                    priorityListAndButton.remove();
+                    updatePriorityList();
+                });
+
+                newItem.insertBefore(priorityListAndButton, lastCondition.nextSibling);
+
+            } else if (pieceData === "or") {
+                const currentConditions = newItem.querySelectorAll(".priority-list-item-condition");
+                const lastCondition = currentConditions.length > 0 ? currentConditions[currentConditions.length - 1] : null;
+
+                const priorityListOrButton = createElement("div", "priority-list-permanent-or-button priority-list-button priority-list-permanent-button", null);
+                priorityListOrButton.textContent = "OR";
+                priorityListOrButton.addEventListener("click", () => {
+                    lastCondition.remove();
+                    priorityListOrButton.remove();
+                    updatePriorityList();
+                });
+
+                newItem.insertBefore(priorityListOrButton, lastCondition.nextSibling);
+
+            } else {
+                const priorityListItemCondition = createElement("div", "priority-list-item-condition", null);
+                const priorityListItemConditionText = createElement("textarea", "priority-list-item-condition-text", null);
+                priorityListItemConditionText.textContent = pieceData;
+                priorityListItemCondition.appendChild(priorityListItemConditionText);
+
+                const currentOperators = newItem.querySelectorAll(".priority-list-permanent-button");
+                const lastCondition = currentOperators.length > 0 ? currentOperators[currentOperators.length - 1] : null;
+
+                newItem.insertBefore(priorityListItemCondition, lastCondition.nextSibling);
+
+                priorityListItemConditionText.addEventListener("input", () => {
+                    adjustTextareaHeight(priorityListItemConditionText, 40);
+                    updatePriorityList();
+                });
+                if (priorityListItemConditionText.textContent.length > 25) {
+                    adjustTextareaHeight(priorityListItemConditionText, 40);
+                };
+            };
+        };
+
+        priorityListItemsContainer.appendChild(newItem);
+        updateIndices();
+        updatePriorityList();
+    };
+};
+
+export { createPriorityListItem, updateIndices, adjustTextareaHeight, setDraggedItem, handleDragStart, handleDragEnd, handleDragOver, handleDrop, createPriorityListDisplay, convertPasteToPriorityList };

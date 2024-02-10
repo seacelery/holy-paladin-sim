@@ -26,7 +26,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             return `${minutes}:0${String(remainingSeconds).padStart(2, '0')}`;
         } else if (remainingSeconds > 10) {
             return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
-        }
+        };
     };
 
     // aura overlay starts from nothing and fills clockwise
@@ -106,8 +106,6 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             });
             playerAurasModalContainer.appendChild(playerAurasModalIconContainer);
         };
-        
-        
     });      
     playerAurasFilterModal.appendChild(playerAurasModalContainer);
 

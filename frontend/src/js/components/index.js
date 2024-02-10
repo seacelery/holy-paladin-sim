@@ -7,7 +7,7 @@ import { createBuffsBreakdown } from "./buffs-breakdown.js";
 import { createResourcesBreakdown } from "./resources-breakdown.js";
 import { createPriorityBreakdown } from "./priority-breakdown.js";
 import { createCooldownsBreakdown } from "./cooldowns-breakdown.js";
-import { createPriorityListDisplay } from "./priority-list-display.js";
+import { createPriorityListDisplay, convertPasteToPriorityList } from "./priority-list-display.js";
 import { handleTabs } from "./simulation-options-tabs.js";
 import { setSimulationOptionsFromImportedData } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
@@ -543,6 +543,7 @@ makeFieldEditable(encounterLengthSeconds, { charLimit: 2 });
 
 // priority list display
 createPriorityListDisplay();
+
 // prevent forbidden cursor
 document.addEventListener("dragenter", (e) => {
     e.preventDefault();
@@ -578,8 +579,7 @@ const updatePriorityList = () => {
 
         priorityList.push(priorityString);
     });
-
-    console.log(priorityList);
+    priorityListPastedCode = priorityList
 };
 
 const priorityListCopyButton = document.getElementById("priority-list-copy-icon");
@@ -595,12 +595,28 @@ priorityListCopyButton.addEventListener("click", () => {
 
 const priorityListPasteButton = document.getElementById("priority-list-paste-icon");
 const priorityListPasteModal = document.getElementById("priority-list-paste-modal");
+const priorityListPasteModalTextarea = document.getElementById("priority-list-paste-modal-textarea");
 priorityListPasteModal.style.display = "none";
 priorityListPasteButton.addEventListener("click", () => {
     priorityListPasteModal.style.display = priorityListPasteModal.style.display === "none" ? "flex" : "none";
+    const priorityListString = priorityList.join("\n"); 
+    priorityListPasteModalTextarea.value = priorityListString;
+});
+
+let priorityListPastedCode = "";
+priorityListPasteModalTextarea.addEventListener("input", (e) => {
+    priorityListPastedCode = e.target.value;
+});
+
+document.addEventListener("click", (e) => {
+    if (!priorityListPasteModal.contains(e.target) && e.target !== priorityListPasteButton && priorityListPasteModal.style.display !== "none") {
+        priorityListPasteModal.style.display = "none";
+        convertPasteToPriorityList(priorityListPastedCode);
+        updatePriorityList();
+    };
 });
 
 // initialise tabs for primary navbar
 handleTabs(`options-navbar-1`, "options-tab-content");
 
-export { updateCharacter, formatNumbers, formatNumbersNoRounding, formatThousands, formatTime, createElement, updatePriorityList };
+export { updateCharacter, formatNumbers, formatNumbersNoRounding, formatThousands, formatTime, createElement, updatePriorityList, priorityList, priorityListPastedCode };
