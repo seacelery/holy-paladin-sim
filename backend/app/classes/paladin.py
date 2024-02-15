@@ -413,6 +413,8 @@ class Paladin:
         spell_cooldowns = {}
         
         for ability_name, ability in self.abilities.items():
+            if ability.current_charges == ability.max_charges:
+                ability.remaining_cooldown = 0
             spell_cooldowns[ability_name] = {"remaining_cooldown": ability.remaining_cooldown, "base_cooldown": ability.original_cooldown, 
                                              "current_charges": ability.current_charges, "max_charges": ability.max_charges}
             

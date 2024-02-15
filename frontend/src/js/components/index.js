@@ -7,7 +7,7 @@ import { createBuffsBreakdown } from "./buffs-breakdown.js";
 import { createResourcesBreakdown } from "./resources-breakdown.js";
 import { createPriorityBreakdown } from "./priority-breakdown.js";
 import { createCooldownsBreakdown } from "./cooldowns-breakdown.js";
-import { createPriorityListDisplay, convertPasteToPriorityList } from "./priority-list-display.js";
+import { createPriorityListDisplay, priorityList } from "./priority-list-display.js";
 import { handleTabs } from "./simulation-options-tabs.js";
 import { setSimulationOptionsFromImportedData } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
@@ -549,74 +549,7 @@ document.addEventListener("dragenter", (e) => {
     e.preventDefault();
 });
 
-let priorityList = [];
-
-const updatePriorityList = () => {
-    const priorityListItemContainers = document.querySelectorAll(".priority-list-item-container");
-    priorityList = [];
-
-    priorityListItemContainers.forEach(container => {
-        let priorityString = "";
-
-        const abilityInput = container.querySelector(".priority-list-item-ability-text");
-        if (abilityInput) {
-            priorityString += abilityInput.value;
-        }
-
-        const conditionElements = container.querySelectorAll(".priority-list-item-condition, .priority-list-permanent-and-button, .priority-list-permanent-or-button");
-        conditionElements.forEach((element, index) => {
-            if (element.classList.contains("priority-list-item-condition")) {
-                const conditionText = element.querySelector(".priority-list-item-condition-text").value;
-                if (conditionText) {
-                    priorityString += ` | ${conditionText}`;
-                };
-            } else if (element.classList.contains("priority-list-permanent-and-button")) {
-                priorityString += " | and";
-            } else if (element.classList.contains("priority-list-permanent-or-button")) {
-                priorityString += " | or";
-            };
-        });
-
-        priorityList.push(priorityString);
-    });
-    priorityListPastedCode = priorityList
-};
-
-const priorityListCopyButton = document.getElementById("priority-list-copy-icon");
-priorityListCopyButton.addEventListener("click", () => {
-    const priorityListString = priorityList.join("\n"); 
-
-    navigator.clipboard.writeText(priorityListString).then(() => {
-        console.log('Priority list copied to clipboard successfully!');
-    }).catch(err => {
-        console.error('Failed to copy priority list to clipboard: ', err);
-    });
-});
-
-const priorityListPasteButton = document.getElementById("priority-list-paste-icon");
-const priorityListPasteModal = document.getElementById("priority-list-paste-modal");
-const priorityListPasteModalTextarea = document.getElementById("priority-list-paste-modal-textarea");
-priorityListPasteModal.style.display = "none";
-priorityListPasteButton.addEventListener("click", () => {
-    priorityListPasteModal.style.display = priorityListPasteModal.style.display === "none" ? "flex" : "none";
-    const priorityListString = priorityList.join("\n"); 
-    priorityListPasteModalTextarea.value = priorityListString;
-});
-
-let priorityListPastedCode = "";
-priorityListPasteModalTextarea.addEventListener("input", (e) => {
-    priorityListPastedCode = e.target.value;
-});
-
-document.addEventListener("click", (e) => {
-    if (!priorityListPasteModal.contains(e.target) && e.target !== priorityListPasteButton && priorityListPasteModal.style.display !== "none") {
-        priorityListPasteModal.style.display = "none";
-        convertPasteToPriorityList(priorityListPastedCode);
-        updatePriorityList();
-    };
-});
-
 // initialise tabs for primary navbar
 handleTabs(`options-navbar-1`, "options-tab-content");
 
-export { updateCharacter, formatNumbers, formatNumbersNoRounding, formatThousands, formatTime, createElement, updatePriorityList, priorityList, priorityListPastedCode };
+export { updateCharacter, formatNumbers, formatNumbersNoRounding, formatThousands, formatTime, createElement };

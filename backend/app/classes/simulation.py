@@ -141,6 +141,9 @@ class Simulation:
             self.decrement_summons()
             self.regen_mana()
             
+            
+            # print(self.elapsed_time, self.paladin.abilities["Holy Shock"].remaining_cooldown, self.paladin.abilities["Holy Shock"].current_charges)
+            
             # TESTING ONLY
             self.test_time_since_last += self.tick_rate
             if self.test_time_since_last > 1:

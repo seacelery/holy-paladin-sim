@@ -508,16 +508,87 @@ body {
     font-size: 16px;
 }
 
-#priority-list-paste-icon, #priority-list-copy-icon {
+#priority-list-paste-icon, #priority-list-copy-icon, #priority-list-presets-icon {
     margin-right: 15px;
 }
 
-#priority-list-info-icon:hover, #priority-list-paste-icon:hover, #priority-list-copy-icon:hover {
+#priority-list-info-icon:hover, #priority-list-paste-icon:hover, #priority-list-copy-icon:hover, #priority-list-presets-icon:hover {
     cursor: pointer;
     user-select: none;
 
     color: var(--paladin-font);
     transition: color 0.1s ease-in-out;
+}
+
+#priority-list-presets-modal {
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: auto;
+    right: 0;
+    bottom: 0;
+    top: 325px;
+    margin: auto;
+    margin-right: 27px;
+
+    width: 25%;
+    height: 550px;
+}
+
+#priority-list-presets-modal-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+
+    border: 1px solid var(--border-colour-3);
+    border-bottom: none;
+
+    background-color: var(--panel-colour-2);
+    color: var(--light-font-colour);
+    font-size: 18px;
+}
+
+#priority-list-presets-modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: 450px;
+    padding: 10px;
+
+    outline: none;
+    resize: none;
+
+    border: 1px solid var(--border-colour-3);
+
+    background-color: var(--panel-colour-2);
+    color: var(--light-font-colour);
+    font-size: 16px;
+}
+
+.priority-list-preset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+
+    width: 95%;
+    height: 50px;
+
+    background-color: var(--panel-colour-5);
+    border: 1px solid var(--border-colour-3);
+}
+
+.priority-list-preset:hover {
+    cursor: pointer;
+    user-select: none;
+    background-color: var(--panel-colour-3);
 }
 
 #priority-list-paste-modal {
@@ -530,11 +601,11 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    top: 285px;
+    top: 320px;
     margin: auto;
 
     width: 60%;
-    height: 550px;
+    height: 515px;
 }
 
 #priority-list-paste-modal-header {
@@ -577,6 +648,45 @@ body {
 
     color: var(--light-font-colour);
     font-size: 24px;
+}
+
+#priority-list-info-modal {
+    z-index: 2;
+    display: none;
+}
+
+#priority-list-info-modal-container {
+    padding: 10px;
+    position: absolute;
+    left: auto;
+    right: 0;
+    bottom: 0;
+    top: 325px;
+    margin: auto;
+    margin-right: 27px;
+
+    width: 25%;
+    height: 515px;
+    overflow: auto;
+   
+    border: 1px solid var(--border-colour-3);
+
+    background-color: var(--panel-colour-2);
+
+    color: var(--light-font-colour);
+    font-size: 14px;
+}
+
+.aligned {
+    vertical-align: bottom;
+}
+
+#info-modal-divider {
+    height: 1px;
+    margin-bottom: 5px;
+    width: 75px;
+
+    background-color: var(--border-colour-3);
 }
 
 #priority-list-divider {
@@ -765,6 +875,12 @@ input:-webkit-autofill{
 
 .priority-list-and-button, .priority-list-or-button, .priority-list-add-item, .priority-list-delete-item {
     height: 21px;
+}
+
+.priority-list-button-disabled {
+    cursor: not-allowed !important;
+    filter: grayscale(1);
+    pointer-events: none;
 }
 
 .priority-list-buttons-container {
@@ -2034,7 +2150,7 @@ tr {
 
 ::-webkit-scrollbar-thumb {
     border: 2px solid var(--panel-colour-6);
-    border-left: 5px solid var(--panel-colour-6);
+    border-left: 4px solid var(--panel-colour-6);
     border-radius: 2px;
 
     background: var(--border-colour-3);

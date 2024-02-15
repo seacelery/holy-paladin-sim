@@ -1,4 +1,4 @@
-import { createElement, updatePriorityList, priorityList, priorityListPastedCode } from "./index.js";
+import { createElement } from "./index.js";
 import { spellToIconsMap } from "../utils/spell-to-icons-map.js";
 
 let draggedItem = null;
@@ -334,6 +334,12 @@ const createPriorityListDisplay = () => {
             priorityListItemsContainer.insertBefore(newListItem, item.nextSibling);
             updateIndices();
 
+            const deleteButtons = document.querySelectorAll(".priority-list-delete-item");
+            const disableDeleteButton = priorityListItemsContainer.children.length <= 1;
+            deleteButtons.forEach(button => {
+                button.classList.toggle("priority-list-button-disabled", disableDeleteButton);
+            });
+
             const newAbilityTextField = newListItem.querySelectorAll(".priority-list-item-ability-text");
             newAbilityTextField.forEach(field => {
                 const originalLineHeight = parseInt(window.getComputedStyle(field).lineHeight);
@@ -361,6 +367,14 @@ const createPriorityListDisplay = () => {
         if (event.target.classList.contains("priority-list-delete-item") || event.target.parentNode.classList.contains("priority-list-delete-item")) {
             const item = event.target.closest(".priority-list-item-container");
             priorityListItemsContainer.removeChild(item);
+
+            const deleteButtons = document.querySelectorAll(".priority-list-delete-item");
+            const disableDeleteButton = priorityListItemsContainer.children.length <= 1;
+
+            deleteButtons.forEach(button => {
+                button.classList.toggle("priority-list-button-disabled", disableDeleteButton);
+            });
+
             updateIndices();
         };
     });
@@ -407,7 +421,7 @@ const createPriorityListDisplay = () => {
 const convertPasteToPriorityList = (pastedCode) => {
     if (typeof pastedCode !== 'string' && !(pastedCode instanceof String)) return;
     
-    const lines = pastedCode.split('\n');
+    const lines = pastedCode.split("\n");
     const priorityListItemsContainer = document.getElementById("priority-list-items-container");
     priorityListItemsContainer.innerHTML = "";
     for (const line in lines) {
@@ -504,4 +518,127 @@ const convertPasteToPriorityList = (pastedCode) => {
     };
 };
 
-export { createPriorityListItem, updateIndices, adjustTextareaHeight, setDraggedItem, handleDragStart, handleDragEnd, handleDragOver, handleDrop, createPriorityListDisplay, convertPasteToPriorityList };
+let priorityList = [];
+let priorityListPastedCode = "";
+
+const updatePriorityList = () => {
+    const priorityListItemContainers = document.querySelectorAll(".priority-list-item-container");
+    priorityList = [];
+
+    priorityListItemContainers.forEach(container => {
+        let priorityString = "";
+
+        const abilityInput = container.querySelector(".priority-list-item-ability-text");
+        if (abilityInput) {
+            priorityString += abilityInput.value;
+        }
+
+        const conditionElements = container.querySelectorAll(".priority-list-item-condition, .priority-list-permanent-and-button, .priority-list-permanent-or-button");
+        conditionElements.forEach((element, index) => {
+            if (element.classList.contains("priority-list-item-condition")) {
+                const conditionText = element.querySelector(".priority-list-item-condition-text").value;
+                if (conditionText) {
+                    priorityString += ` | ${conditionText}`;
+                };
+            } else if (element.classList.contains("priority-list-permanent-and-button")) {
+                priorityString += " | and";
+            } else if (element.classList.contains("priority-list-permanent-or-button")) {
+                priorityString += " | or";
+            };
+        });
+
+        priorityList.push(priorityString);
+    });
+    priorityListPastedCode = priorityList
+};
+
+const priorityListCopyButton = document.getElementById("priority-list-copy-icon");
+priorityListCopyButton.addEventListener("click", () => {
+    const priorityListString = priorityList.join("\n"); 
+
+    navigator.clipboard.writeText(priorityListString).then(() => {
+        console.log("Priority list copied to clipboard");
+    }).catch(err => {
+        console.error("Failed to copy priority list to clipboard: ", err);
+    });
+});
+
+const priorityListPresetsButton = document.getElementById("priority-list-presets-icon");
+const priorityListPresetsModal = document.getElementById("priority-list-presets-modal");
+priorityListPresetsModal.style.display = "none";
+priorityListPresetsButton.addEventListener("mousedown", () => {
+    priorityListPresetsModal.style.display = priorityListPresetsModal.style.display === "none" ? "flex" : "none";
+    if (priorityListPasteModal.style.display !== "none") {
+        priorityListPasteModal.style.display = "none";
+    };
+    if (priorityListInfoModal.style.display !== "none") {
+        priorityListInfoModal.style.display = "none";
+    };
+});
+
+const standardPreset = document.getElementById("standard-preset");
+standardPreset.addEventListener("click", () => {
+    priorityList = "Holy Shock | Holy Shock charges = 2\nArcane Torrent | Race = Blood Elf\nJudgment | Infusion of Light duration < 5",
+    convertPasteToPriorityList(priorityList);
+    updatePriorityList();
+});
+
+const priorityListPasteButton = document.getElementById("priority-list-paste-icon");
+const priorityListPasteModal = document.getElementById("priority-list-paste-modal");
+const priorityListPasteModalTextarea = document.getElementById("priority-list-paste-modal-textarea");
+priorityListPasteModal.style.display = "none";
+priorityListPasteButton.addEventListener("mousedown", () => {
+    priorityListPasteModal.style.display = priorityListPasteModal.style.display === "none" ? "flex" : "none";
+    const priorityListString = priorityList.join("\n"); 
+    priorityListPasteModalTextarea.value = priorityListString;
+    if (priorityListPresetsModal.style.display !== "none") {
+        priorityListPresetsModal.style.display = "none";
+    };
+    if (priorityListInfoModal.style.display !== "none") {
+        priorityListInfoModal.style.display = "none";
+    };
+});
+
+priorityListPasteModalTextarea.addEventListener("input", (e) => {
+    priorityListPastedCode = e.target.value;
+});
+
+document.addEventListener("mousedown", (e) => {
+    if (!priorityListPasteModal.contains(e.target) && e.target !== priorityListPasteButton && priorityListPasteModal.style.display !== "none") {
+        priorityListPasteModal.style.display = "none";
+        convertPasteToPriorityList(priorityListPastedCode);
+        updatePriorityList();
+    };
+});
+
+const priorityListInfoButton = document.getElementById("priority-list-info-icon");
+const priorityListInfoModal = document.getElementById("priority-list-info-modal");
+priorityListInfoModal.style.display = "none";
+priorityListInfoButton.addEventListener("mousedown", () => {
+    priorityListInfoModal.style.display = priorityListInfoModal.style.display === "none" ? "flex" : "none";
+    if (priorityListPresetsModal.style.display !== "none") {
+        priorityListPresetsModal.style.display = "none";
+    };
+    if (priorityListPasteModal.style.display !== "none") {
+        priorityListPasteModal.style.display = "none";
+    };
+});
+
+const priorityListInfoModalContainer = document.getElementById("priority-list-info-modal-container");
+priorityListInfoModalContainer.innerHTML = `
+    Conditions<div id="info-modal-divider"></div>
+    Time<br>Fight length<br>Mana<br>Holy Power<br>Ability name cooldown<br>Ability name charges<br>Buff name active/not active<br>Buff name duration<br>Buff name stacks
+    <br><br>Operations<div id="info-modal-divider"></div>
+    Condition = or <span class="aligned">!=</span> Value<br>
+    Condition &gt; or <span class="aligned">&gt;=</span> Value<br>
+    Condition &lt; or <span class="aligned">&lt;=</span> Value<br>
+    Value &lt; or <span class="aligned">&lt;=</span> Condition &lt; or <span class="aligned">&lt;=</span> Value
+    <br><br>Examples<br><div id="info-modal-divider"></div>
+    Infusion of Light stacks = 2<br>
+    Mana &lt;= 50%<br>
+    30 < Time <= 40<br>
+    Beacon of Virtue cooldown <= 3 * GCD
+`;
+
+
+export { createPriorityListItem, updateIndices, adjustTextareaHeight, setDraggedItem, handleDragStart, handleDragEnd, handleDragOver, handleDrop, createPriorityListDisplay, convertPasteToPriorityList, priorityList };

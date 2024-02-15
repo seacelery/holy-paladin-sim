@@ -212,14 +212,28 @@
                                 <div id="priority-list-header-ability">Ability</div>
                                 <div class="priority-list-header-condition">Conditions</div>
                                 <div id="priority-list-info">
+                                    <i class="fa-solid fa-list" id="priority-list-presets-icon"></i>
                                     <i class="fa-solid fa-copy" id="priority-list-copy-icon"></i>
                                     <i class="fa-solid fa-paste" id="priority-list-paste-icon"></i>
                                     <i class="fa-solid fa-circle-question" id="priority-list-info-icon"></i>
                                 </div>
+
+                                <div id="priority-list-presets-modal">
+                                    <div id="priority-list-presets-modal-header">Presets</div>
+                                    <div id="priority-list-presets-modal-container">
+                                        <div id="standard-preset" class="priority-list-preset">Beacon of Faith</div>
+                                        <div id="second-preset" class="priority-list-preset">Beacon of Virtue</div>
+                                    </div>
+                                </div>
+
                                 <div id="priority-list-paste-modal">
                                     <div id="priority-list-paste-modal-header">Paste your priority list</div>
                                     <textarea id="priority-list-paste-modal-textarea"></textarea>
-                                </div>
+                                </div>      
+                                
+                                <div id="priority-list-info-modal">
+                                    <div id="priority-list-info-modal-container"></div>
+                                </div>  
                             </div>
 
                             <div id="priority-list-divider"></div>
@@ -264,7 +278,7 @@
                                             <i class="fa-solid fa-plus"></i>
                                         </div>
     
-                                        <div class="priority-list-delete-item priority-list-button">
+                                        <div id="priority-list-delete-item" class="priority-list-delete-item priority-list-button priority-list-button-disabled">
                                             <i class="fa-solid fa-xmark"></i>
                                         </div>
                                     </div>

@@ -5,6 +5,7 @@ import { cooldownFilterState } from './index.js';
 import { playerAurasFilterState } from './index.js';
 
 const createPriorityBreakdown = (simulationData, containerCount) => {
+    console.log(simulationData)
     const formatPriorityTime = (seconds) => {
         let minutes = Math.floor(seconds / 60);
         let remainingSeconds = (seconds % 60).toFixed(2);
@@ -24,7 +25,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
 
         if (remainingSeconds < 10) {
             return `${minutes}:0${String(remainingSeconds).padStart(2, '0')}`;
-        } else if (remainingSeconds > 10) {
+        } else if (remainingSeconds >= 10) {
             return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
         };
     };
