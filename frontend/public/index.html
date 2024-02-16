@@ -184,22 +184,88 @@
                             <div class="option-container">
                                 <div class="options-option-label">External Buffs:</div>
                                 <div class="options-option-container">
-                                    <div class="option-image-container">
+                                    <div class="option-image-container" id="power-infusion-container">
                                         <img class="external-buff-image" data-external-buff="Power Infusion" src="https://render.worldofwarcraft.com/eu/icons/56/spell_holy_powerinfusion.jpg">
-                                        <div class="option-image-button">
-                                            <i class="fa-solid fa-plus"></i>
+                                        <div class="option-image-double-buttons">
+                                            <div class="option-image-button" id="power-infusion-repeat-button" style="display:none">
+                                                <i class="fa-solid fa-repeat"></i>
+                                            </div>
+                                            <div class="option-image-button" id="power-infusion-add-timer-button" style="display:none">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </div>
+                                        </div>                                     
+                                        <div class="option-image-button power-infusion-timer" style="display:none">
+                                            <input class="external-buff-timer-input" value="0">
                                         </div>
+                                        
                                     </div>
-                                    <div class="option-image-container">
+                                    <div class="option-image-container" id="innervate-container">
                                         <img class="external-buff-image" data-external-buff="Innervate" src="https://render.worldofwarcraft.com/eu/icons/56/spell_nature_lightning.jpg">
-                                        <div class="option-image-button">
-                                            <i class="fa-solid fa-plus"></i>
+                                        <div class="option-image-double-buttons">
+                                            <div class="option-image-button" id="innervate-repeat-button" style="display:none">
+                                                <i class="fa-solid fa-repeat"></i>
+                                            </div>
+                                            <div class="option-image-button" id="innervate-add-timer-button" style="display:none">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </div>
+                                        </div> 
+                                        <div class="option-image-button innervate-timer" style="display:none">
+                                            <input class="external-buff-timer-input" value="0">
                                         </div>
                                     </div>
                                     
                                     <img class="external-buff-image" data-external-buff="Source of Magic" src="https://render.worldofwarcraft.com/eu/icons/56/ability_evoker_blue_01.jpg">            
                                     
                                 </div>
+                                <!-- <div id="external-buff-timers-container">
+                                    <div class="external-buff-timer-container">
+                                        <div class="external-buff-left">
+                                            <div class="external-buff-name">Power Infusion:</div>
+                                        </div>
+                                        <div class="external-buff-right">
+                                            <div class="external-buff-options">
+                                                <div class="external-buff-checkbox">
+                                                    <input class="external-buff-checkbox-input" type="checkbox" checked="true">
+                                                    <div class="external-buff-checkbox-text">Automatic</div>
+                                                </div>
+
+                                                <div class="external-buff-timers">
+                                                    <div class="external-buff-timer">
+                                                        <input class="external-buff-timer-input">
+                                                    </div>
+                                                    <div class="external-buff-add-timer-button">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="external-buff-timer-container">
+                                        <div class="external-buff-left">
+                                            <div class="external-buff-name">Innervate:</div>
+                                        </div>
+                                        <div class="external-buff-right">
+                                            <div class="external-buff-options">
+                                                <div class="external-buff-checkbox">
+                                                    <input class="external-buff-checkbox-input" type="checkbox" checked="true">
+                                                    <div class="external-buff-checkbox-text">Automatic</div>
+                                                </div>
+
+                                                <div class="external-buff-timers">
+                                                    <div class="external-buff-timer">
+                                                        <input class="external-buff-timer-input">
+                                                    </div>
+                                                    <div class="external-buff-add-timer-button">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
                             </div>
                         </div>
                         

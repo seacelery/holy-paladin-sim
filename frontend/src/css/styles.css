@@ -213,6 +213,7 @@ body {
 }
 
 .option-container {
+    position: relative;
     display: flex;
     margin-bottom: 15px;
 
@@ -323,7 +324,7 @@ body {
 .options-option-container {
     display: grid;
     grid-template-columns: 49px 49px 49px 49px;
-    gap: 2px;
+    gap: 4px;
 }
 
 #buffs-container {
@@ -337,7 +338,6 @@ body {
 .option-image-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
@@ -353,7 +353,7 @@ body {
     background-color: var(--panel-colour-2);
     border: 1px solid var(--border-colour-3);
     color: var(--light-font-colour);
-    font-size: 10px;
+    font-size: 13px;
     text-align: center;
 }
 
@@ -373,6 +373,32 @@ body {
 .race-unselected, .flask-unselected, .augment-rune-unselected, .food-unselected, .weapon-imbue-unselected, .raid-buff-unselected, .external-buff-unselected {
     border: 1px solid var(--border-colour-3);
     filter: grayscale(0.7);
+}
+
+.external-buff-timer-input {
+    flex-grow: 0 !important;
+    width: 100%;
+    text-align: center;
+
+    background-color: var(--panel-colour-2);
+    outline: none;
+    border: none;
+
+    color: var(--light-font-colour);
+}
+
+.option-image-double-buttons {
+    display: flex;
+    width: 100%;
+}
+
+.option-image-double-buttons:hover {
+    cursor: pointer;
+}
+
+.external-buff-repeating {
+    border: 1px solid var(--paladin-font);
+    color: var(--paladin-font)
 }
 
 #all-talents-container {

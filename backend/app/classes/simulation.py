@@ -108,6 +108,9 @@ class Simulation:
             if self.time_warp_recharge_timer >= 600:
                 self.time_warp_recharge_timer = 0
                 self.time_warp_recharging = False
+                
+            # handle external buffs
+            self.paladin.check_external_buff_timers(self.elapsed_time)
             
             # handle cast time spells
             if self.paladin.currently_casting is not None:

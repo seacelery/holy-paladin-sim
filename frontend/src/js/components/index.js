@@ -64,7 +64,6 @@ export let cooldownFilterState = {};
 export let playerAurasFilterState = {};
 
 const importButton = document.getElementById("import-button");
-const raceOption = document.getElementById("race-filter");
 
 const simulationName = document.getElementById("simulation-name-text-input");
 simulationName.value = "Simulation 1";
@@ -358,7 +357,7 @@ let currentConsumables = {
     weapon_imbue: [],
     augment_rune: [],
     raid_buff: [],
-    external_buff: []
+    external_buff: {}
 };
 
 // update displayed information based on imported character
@@ -376,6 +375,7 @@ simulationProgressBarContainer.addEventListener("click", runSimulation);
 // allows options images to be clicked to change/toggle options
 const handleOptionImages = (images, attribute, optionType, toggle = false, multipleAllowed = false) => {
     const formattedAttribute = attribute.replaceAll("-", "_");
+    console.log(formattedAttribute)
 
     images.forEach(image => {
         image.classList.add(`${attribute}-unselected`);
@@ -385,33 +385,66 @@ const handleOptionImages = (images, attribute, optionType, toggle = false, multi
             const isSelected = e.target.classList.contains(`${attribute}-selected`);
     
             if (optionType === "consumable") {
-                if (multipleAllowed) {
-                    if (isSelected) {
-                        currentConsumables[formattedAttribute] = currentConsumables[formattedAttribute].filter(item => item !== attributeName);
-                    } else {
-                        currentConsumables[formattedAttribute].push(attributeName);
-                    };
-                } else {
-                    if (isSelected && toggle) {
-                        currentConsumables[formattedAttribute] = currentConsumables[formattedAttribute].filter(item => item !== attributeName);
-                    } else {
-                        currentConsumables[formattedAttribute] = [attributeName];
-                        
-                        images.forEach(prevImage => {
-                            if (prevImage !== e.target) {
-                                prevImage.classList.remove(`${attribute}-selected`);
-                                prevImage.classList.add(`${attribute}-unselected`);
-                            };
+                if (formattedAttribute === "external_buff") {
+                    const buffName = attributeName.replaceAll(" ", "-").toLowerCase();
+                    const buffTimers = document.querySelectorAll(`.${buffName}-timer`);
+                    const repeatButton = document.getElementById(`${buffName}-repeat-button`);
+                    const addTimerButton = document.getElementById(`${buffName}-add-timer-button`);
+                    if (!isSelected) {
+                        currentConsumables[formattedAttribute][attributeName] = [];
+                        updateTimerValues(attributeName);
+
+                        buffTimers.forEach(timer => {
+                            timer.style.display = "flex";
                         });
+                        repeatButton.style.display = "flex";
+                        addTimerButton.style.display = "flex";
+                    } else {
+                        delete currentConsumables[formattedAttribute][attributeName];
+                        updateCharacter({
+                            consumables: currentConsumables
+                        });
+                        
+                        buffTimers.forEach(timer => {
+                            timer.style.display = "none";
+                        });
+                        repeatButton.style.display = "none";
+                        addTimerButton.style.display = "none";
                     };
+                  
+                    e.target.classList.toggle(`${attribute}-selected`, !isSelected);
+                    e.target.classList.toggle(`${attribute}-unselected`, isSelected);
+                } else {
+                    if (multipleAllowed) {
+                        if (isSelected) {
+                            currentConsumables[formattedAttribute] = currentConsumables[formattedAttribute].filter(item => item !== attributeName);
+                        } else {
+                            console.log(currentConsumables[formattedAttribute])
+                            console.log(attributeName)
+                            currentConsumables[formattedAttribute].push(attributeName);
+                        };
+                    } else {
+                        if (isSelected && toggle) {
+                            currentConsumables[formattedAttribute] = currentConsumables[formattedAttribute].filter(item => item !== attributeName);
+                        } else {
+                            currentConsumables[formattedAttribute] = [attributeName];
+                            
+                            images.forEach(prevImage => {
+                                if (prevImage !== e.target) {
+                                    prevImage.classList.remove(`${attribute}-selected`);
+                                    prevImage.classList.add(`${attribute}-unselected`);
+                                };
+                            });
+                        };
+                    };
+            
+                    e.target.classList.toggle(`${attribute}-selected`, !isSelected);
+                    e.target.classList.toggle(`${attribute}-unselected`, isSelected);
+            
+                    updateCharacter({
+                        consumables: currentConsumables
+                    });
                 };
-        
-                e.target.classList.toggle(`${attribute}-selected`, !isSelected);
-                e.target.classList.toggle(`${attribute}-unselected`, isSelected);
-        
-                updateCharacter({
-                    consumables: currentConsumables
-                });
             } else if (optionType === "race") {
                 updateCharacter({
                     race: attributeName
@@ -451,6 +484,99 @@ handleOptionImages(raidBuffImages, "raid-buff", "consumable", true, true);
 
 const externalBuffImages = document.querySelectorAll(".external-buff-image");
 handleOptionImages(externalBuffImages, "external-buff", "consumable", true, true);
+
+// handle external buff timers
+const updateTimerValues = (buffName) => {
+    if (!currentConsumables["external_buff"].hasOwnProperty(buffName)) {
+        return;
+    };
+
+    const formattedBuffName = buffName.replaceAll(" ", "-").toLowerCase();
+    const timerInputs = document.querySelectorAll(`.${formattedBuffName}-timer .external-buff-timer-input`);
+    const values = Array.from(timerInputs).map(input => input.value);
+
+    currentConsumables["external_buff"][buffName] = values;
+
+    updateCharacter({
+        consumables: currentConsumables
+    });
+};
+
+const createExternalBuffTimers = (buffName, buffCooldown) => {
+    const formattedBuffName = buffName.replaceAll(" ", "-").toLowerCase();
+
+    const container = document.getElementById(`${formattedBuffName}-container`);
+    const repeatButton = document.getElementById(`${formattedBuffName}-repeat-button`);
+    const addTimerButton = document.getElementById(`${formattedBuffName}-add-timer-button`);
+    const firstTimerInput = container.querySelectorAll(".external-buff-timer-input")[0];
+    firstTimerInput.addEventListener("input", (e) => {
+        if (!repeatButton.classList.contains("external-buff-repeating")) {
+            updateTimerValues(buffName);
+        } else {
+            const maxValue = 600;
+            const firstTimerInputValue = parseFloat(firstTimerInput.value);
+            currentConsumables["external_buff"][buffName] = [firstTimerInputValue];
+
+            let nextTimerValue = parseFloat(firstTimerInputValue) + buffCooldown;
+            while (nextTimerValue <= maxValue) {
+                console.log("awaw")
+                currentConsumables["external_buff"][buffName].push(nextTimerValue);
+                nextTimerValue += buffCooldown;
+            };
+
+            updateCharacter({
+                consumables: currentConsumables
+            });
+        };
+    });
+
+    repeatButton.addEventListener("click", () => {
+        repeatButton.classList.toggle("external-buff-repeating");
+        addTimerButton.style.pointerEvents = repeatButton.classList.contains("external-buff-repeating") ? "none" : "all";
+        addTimerButton.style.color = repeatButton.classList.contains("external-buff-repeating") ? "#808080" : "var(--light-font-colour)";
+        const timers = container.querySelectorAll(`.${formattedBuffName}-timer`);
+        timers.forEach((timer, index) => {
+            if (index > 0) {
+                timer.style.display = repeatButton.classList.contains("external-buff-repeating") ? "none" : "flex";
+            };
+        });
+
+        if (repeatButton.classList.contains("external-buff-repeating")) {
+
+            const maxValue = 600;
+            const firstTimerInputValue = parseFloat(firstTimerInput.value);
+            currentConsumables["external_buff"][buffName] = [firstTimerInputValue];
+
+            let nextTimerValue = parseFloat(firstTimerInputValue) + buffCooldown;
+            while (nextTimerValue <= maxValue) {
+                currentConsumables["external_buff"][buffName].push(nextTimerValue);
+                nextTimerValue += buffCooldown;
+            };
+
+            updateCharacter({
+                consumables: currentConsumables
+            });
+        } else {
+            updateTimerValues(buffName);
+        };
+    });
+
+    let value = 0;
+    addTimerButton.addEventListener("click", () => {
+        const timer = createElement("div", `option-image-button ${formattedBuffName}-timer`, null);
+        const timerInput = createElement("input", "external-buff-timer-input", null);
+        timerInput.value = value += buffCooldown;
+        timerInput.addEventListener("input", (e) => {
+            updateTimerValues(buffName);
+        });
+        timer.appendChild(timerInput);
+        container.appendChild(timer);
+        updateTimerValues(buffName);
+    });
+};
+
+createExternalBuffTimers("Power Infusion", 120);
+createExternalBuffTimers("Innervate", 180);
 
 // option sliders
 const updateSliderStep = (value, slider, sliderText) => {

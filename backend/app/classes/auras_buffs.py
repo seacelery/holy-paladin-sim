@@ -854,3 +854,27 @@ class SourceOfMagic(Buff):
         
     def remove_effect(self, caster, current_time=None):
         pass
+    
+
+class PowerInfusion(Buff):
+    def __init__(self):
+        super().__init__("Power Infusion", 15, base_duration=15)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.haste_multiplier *= 1.2
+        caster.update_hasted_cooldowns_with_haste_changes()
+    
+    def remove_effect(self, caster, current_time=None):
+        caster.haste_multiplier /= 1.2
+        caster.update_hasted_cooldowns_with_haste_changes()
+        
+        
+class Innervate(Buff):
+    def __init__(self):
+        super().__init__("Innervate", 8, base_duration=8)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.innervate_active = True
+    
+    def remove_effect(self, caster, current_time=None):
+        caster.innervate_active = False

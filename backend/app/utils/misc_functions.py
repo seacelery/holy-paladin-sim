@@ -1,15 +1,5 @@
 from .beacon_transfer_rates import *
 
-# def apply_holy_reverberation(caster, target, current_time, buff):
-#     print(buff)
-#     target.apply_buff_to_target(buff, current_time)
-                
-#     longest_reverberation_duration = max(buff_instance.duration for buff_instance in target.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in target.target_active_buffs and target.target_active_buffs["Holy Reverberation"] else None
-#     if "Holy Reverberation" in target.target_active_buffs:
-#         if len(target.target_active_buffs["Holy Reverberation"]) > 0:
-#             caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
-#         del target.target_active_buffs["Glimmer of Light"]
-
 
 # formatting
 def format_time(time):
@@ -19,10 +9,7 @@ def get_timestamp(event):
     timestamp_string = event.split(": ")[0]
     return float(timestamp_string)
 
-
 # calculations & increments
-
-
 def calculate_beacon_healing(spell_name, amount):
     return amount * beacon_transfer_rates_double_beacon.get(spell_name, 0)
 
@@ -37,12 +24,6 @@ def increment_holy_power(ability, caster):
     
 def add_to_holy_power_by_ability(dict, ability, caster):
     caster.holy_power_by_ability[ability.name] = caster.holy_power_by_ability.get(ability.name, 0) + ability.holy_power_gain
-    
-# def increment_blessing_of_dawn_counter(caster, current_time):
-#     caster.blessing_of_dawn_counter += 1
-#     if caster.blessing_of_dawn_counter == 3:
-#         caster.apply_buff_to_self(BlessingOfDawn(), current_time)
-
 
 # data tracking functions
 def append_spell_heal_event(array, spell_name, caster, target, amount, current_time, is_crit, spends_mana=False, is_absorb=False):

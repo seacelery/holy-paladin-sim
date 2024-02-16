@@ -1,9 +1,10 @@
 import pprint
 import copy
+import heapq
 
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
+from ..utils.buff_class_map import buff_class_map
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
-from .auras_buffs import PhialOfTepidVersatility, PhialOfElementalChaos, DraconicAugmentRune, GrandBanquetOfTheKaluakFood, TimelyDemiseFood, FiletOfFangsFood, SeamothSurpriseFood, SaltBakedFishcakeFood, FeistyFishSticksFood, AromaticSeafoodPlatterFood, SizzlingSeafoodMedleyFood, RevengeServedColdFood, ThousandboneTongueslicerFood, GreatCeruleanSeaFood, BuzzingRune, ChirpingRune, HowlingRune, HissingRune, ArcaneIntellect, MarkOfTheWild, CloseToHeart, RetributionAura, SourceOfMagic
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
@@ -63,6 +64,7 @@ class Paladin:
         self.mana = self.base_mana
         self.max_mana = self.base_mana
         self.mana_regen_per_second = 2000
+        self.innervate_active = False
         
         if equipment_data:
             self.equipment = self.parse_equipment(equipment_data)
@@ -127,7 +129,6 @@ class Paladin:
         # initialise stats with racials
         self.update_stats_with_racials()
         
-        
         self.mastery_effectiveness = 1
         print(self.max_health)
         
@@ -181,6 +182,8 @@ class Paladin:
         self.afterimage_counter = 0
         self.awakening_queued = False
         self.holy_shock_resets = 0
+        self.external_buff_timers = {}
+        self.timers_priority_queue = []
         
         # for reclamation
         self.average_raid_health_percentage = 0.7
@@ -259,22 +262,21 @@ class Paladin:
         consumable_buffs = []
         
         for consumable_type, consumable_list in self.consumables.items():
-            if consumable_list:
+            if consumable_list:                
                 for consumable_name in consumable_list:
-                    consumable_name_split = consumable_name.split()
-                    for i, word in enumerate(consumable_name_split):
-                        if word.lower() in ["of", "the", "to"]:
-                            consumable_name_split[i] = word.capitalize()
-                        consumable_name_split[i] = consumable_name_split[i].replace("'", "").replace("-", "").replace(",", "")
-
-                    if consumable_type == "food":  
-                        consumable_name_formatted = "".join(consumable_name_split) + "Food"
-                    else:
-                        consumable_name_formatted = "".join(consumable_name_split)
-
-                    consumable_class = globals().get(consumable_name_formatted)
-                    if consumable_class:
-                        consumable_buffs.append(consumable_class)
+                    if consumable_type == "external_buff":
+                        external_buff_timers = consumable_list[consumable_name]
+                        self.external_buff_timers[consumable_name] = external_buff_timers
+                    
+                    if consumable_type != "external_buff":
+                        consumable_class = buff_class_map.get(consumable_name)
+                        if consumable_class:
+                            consumable_buffs.append(consumable_class)   
+                            
+                for buff, timers in self.external_buff_timers.items():
+                    for timer in timers:
+                        if timer != "":
+                            heapq.heappush(self.timers_priority_queue, (float(timer), buff))                
         
         for buff in consumable_buffs:
             self.apply_buff_to_self(buff(), 0)
@@ -419,6 +421,13 @@ class Paladin:
                                              "current_charges": ability.current_charges, "max_charges": ability.max_charges}
             
         return spell_cooldowns
+    
+    def check_external_buff_timers(self, current_time):
+        while self.timers_priority_queue and current_time >= self.timers_priority_queue[0][0]:
+            timer, buff = heapq.heappop(self.timers_priority_queue)
+            buff_class = buff_class_map.get(buff)
+            print(f"applying {buff} at {current_time}")
+            self.apply_buff_to_self(buff_class(), timer)
     
     def get_effective_spell_power(self, spell_power):
         # 5% from plate armour bonus

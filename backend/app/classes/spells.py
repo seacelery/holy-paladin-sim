@@ -111,6 +111,13 @@ class Spell:
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         if not self.can_cast(caster):         
             return False
+
+        if caster.innervate_active:
+            self.mana_cost = 0
+        elif self.name in ["Word of Glory", "Light of Dawn"] and "Divine Purpose" in caster.active_auras:
+            self.mana_cost = 0
+        else:
+            self.mana_cost = self.MANA_COST
         
         spell_crit = False
         heal_amount = 0
