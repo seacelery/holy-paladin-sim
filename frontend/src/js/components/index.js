@@ -357,7 +357,8 @@ let currentConsumables = {
     weapon_imbue: [],
     augment_rune: [],
     raid_buff: [],
-    external_buff: {}
+    external_buff: {},
+    potion: []
 };
 
 // update displayed information based on imported character
@@ -385,16 +386,16 @@ const handleOptionImages = (images, attribute, optionType, toggle = false, multi
             const isSelected = e.target.classList.contains(`${attribute}-selected`);
     
             if (optionType === "consumable") {
-                if (formattedAttribute === "external_buff") {
-                    const buffName = attributeName.replaceAll(" ", "-").toLowerCase();
-                    const buffTimers = document.querySelectorAll(`.${buffName}-timer`);
-                    const repeatButton = document.getElementById(`${buffName}-repeat-button`);
-                    const addTimerButton = document.getElementById(`${buffName}-add-timer-button`);
+                if (formattedAttribute === "external_buff" || formattedAttribute === "potion") {
+                    const name = attributeName.replaceAll(" ", "-").toLowerCase();
+                    const timers = document.querySelectorAll(`.${name}-timer`);
+                    const repeatButton = document.getElementById(`${name}-repeat-button`);
+                    const addTimerButton = document.getElementById(`${name}-add-timer-button`);
                     if (!isSelected) {
                         currentConsumables[formattedAttribute][attributeName] = [];
-                        updateTimerValues(attributeName);
+                        updateTimerValues(attributeName, formattedAttribute);
 
-                        buffTimers.forEach(timer => {
+                        timers.forEach(timer => {
                             timer.style.display = "flex";
                         });
                         repeatButton.style.display = "flex";
@@ -405,7 +406,7 @@ const handleOptionImages = (images, attribute, optionType, toggle = false, multi
                             consumables: currentConsumables
                         });
                         
-                        buffTimers.forEach(timer => {
+                        timers.forEach(timer => {
                             timer.style.display = "none";
                         });
                         repeatButton.style.display = "none";
@@ -485,17 +486,21 @@ handleOptionImages(raidBuffImages, "raid-buff", "consumable", true, true);
 const externalBuffImages = document.querySelectorAll(".external-buff-image");
 handleOptionImages(externalBuffImages, "external-buff", "consumable", true, true);
 
-// handle external buff timers
-const updateTimerValues = (buffName) => {
-    if (!currentConsumables["external_buff"].hasOwnProperty(buffName)) {
+const potionImages = document.querySelectorAll(".potion-image");
+handleOptionImages(potionImages, "potion", "consumable", true, true);
+
+// handle external buff & potion timers
+const updateTimerValues = (name, consumableType) => {
+    console.log(consumableType)
+    if (!currentConsumables[consumableType].hasOwnProperty(name)) {
         return;
     };
 
-    const formattedBuffName = buffName.replaceAll(" ", "-").toLowerCase();
-    const timerInputs = document.querySelectorAll(`.${formattedBuffName}-timer .external-buff-timer-input`);
+    const formattedName = name.replaceAll(" ", "-").toLowerCase();
+    const timerInputs = document.querySelectorAll(`.${formattedName}-timer .${consumableType.replaceAll("_","-")}-timer-input`);
     const values = Array.from(timerInputs).map(input => input.value);
 
-    currentConsumables["external_buff"][buffName] = values;
+    currentConsumables[consumableType][name] = values;
 
     updateCharacter({
         consumables: currentConsumables
@@ -511,7 +516,7 @@ const createExternalBuffTimers = (buffName, buffCooldown) => {
     const firstTimerInput = container.querySelectorAll(".external-buff-timer-input")[0];
     firstTimerInput.addEventListener("input", (e) => {
         if (!repeatButton.classList.contains("external-buff-repeating")) {
-            updateTimerValues(buffName);
+            updateTimerValues(buffName, "external_buff");
         } else {
             const maxValue = 600;
             const firstTimerInputValue = parseFloat(firstTimerInput.value);
@@ -557,7 +562,7 @@ const createExternalBuffTimers = (buffName, buffCooldown) => {
                 consumables: currentConsumables
             });
         } else {
-            updateTimerValues(buffName);
+            updateTimerValues(buffName, "external_buff");
         };
     });
 
@@ -567,16 +572,95 @@ const createExternalBuffTimers = (buffName, buffCooldown) => {
         const timerInput = createElement("input", "external-buff-timer-input", null);
         timerInput.value = value += buffCooldown;
         timerInput.addEventListener("input", (e) => {
-            updateTimerValues(buffName);
+            updateTimerValues(buffName, "external_buff");
         });
         timer.appendChild(timerInput);
         container.appendChild(timer);
-        updateTimerValues(buffName);
+        updateTimerValues(buffName, "external_buff");
     });
 };
 
 createExternalBuffTimers("Power Infusion", 120);
 createExternalBuffTimers("Innervate", 180);
+
+const createPotionTimers = (potionName, potionCooldown) => {
+    const formattedPotionName = potionName.replaceAll(" ", "-").toLowerCase();
+    console.log(formattedPotionName)
+
+    const container = document.getElementById(`${formattedPotionName}-container`);
+    const repeatButton = document.getElementById(`${formattedPotionName}-repeat-button`);
+    console.log(repeatButton)
+    const addTimerButton = document.getElementById(`${formattedPotionName}-add-timer-button`);
+    const firstTimerInput = container.querySelectorAll(".potion-timer-input")[0];
+    firstTimerInput.addEventListener("input", (e) => {
+        if (!repeatButton.classList.contains("potion-repeating")) {
+            updateTimerValues(potionName, "potion");
+        } else {
+            const maxValue = 600;
+            const firstTimerInputValue = parseFloat(firstTimerInput.value);
+            currentConsumables["potion"][potionName] = [firstTimerInputValue];
+
+            let nextTimerValue = parseFloat(firstTimerInputValue) + potionCooldown;
+            while (nextTimerValue <= maxValue) {
+                console.log("awaw")
+                currentConsumables["potion"][potionName].push(nextTimerValue);
+                nextTimerValue += potionCooldown;
+            };
+
+            updateCharacter({
+                consumables: currentConsumables
+            });
+        };
+    });
+
+    repeatButton.addEventListener("click", () => {
+        repeatButton.classList.toggle("potion-repeating");
+        addTimerButton.style.pointerEvents = repeatButton.classList.contains("potion-repeating") ? "none" : "all";
+        addTimerButton.style.color = repeatButton.classList.contains("potion-repeating") ? "#808080" : "var(--light-font-colour)";
+        const timers = container.querySelectorAll(`.${formattedPotionName}-timer`);
+        timers.forEach((timer, index) => {
+            if (index > 0) {
+                timer.style.display = repeatButton.classList.contains("potion-repeating") ? "none" : "flex";
+            };
+        });
+
+        if (repeatButton.classList.contains("potion-repeating")) {
+
+            const maxValue = 600;
+            const firstTimerInputValue = parseFloat(firstTimerInput.value);
+            currentConsumables["potion"][potionName] = [firstTimerInputValue];
+
+            let nextTimerValue = parseFloat(firstTimerInputValue) + potionCooldown;
+            while (nextTimerValue <= maxValue) {
+                currentConsumables["potion"][potionName].push(nextTimerValue);
+                nextTimerValue += potionCooldown;
+            };
+
+            updateCharacter({
+                consumables: currentConsumables
+            });
+        } else {
+            updateTimerValues(potionName, "potion");
+        };
+    });
+
+    let value = 0;
+    addTimerButton.addEventListener("click", () => {
+        const timer = createElement("div", `option-image-button ${formattedPotionName}-timer`, null);
+        const timerInput = createElement("input", "potion-timer-input", null);
+        timerInput.value = value += potionCooldown;
+        timerInput.addEventListener("input", (e) => {
+            updateTimerValues(potionName, "potion");
+        });
+        timer.appendChild(timerInput);
+        container.appendChild(timer);
+        updateTimerValues(potionName, "potion");
+    });
+};
+
+createPotionTimers("Aerated Mana Potion", 300);
+createPotionTimers("Elemental Potion of Ultimate Power", 300);
+
 
 // option sliders
 const updateSliderStep = (value, slider, sliderText) => {

@@ -357,7 +357,7 @@ body {
     text-align: center;
 }
 
-.race-image, .flask-image, .augment-rune-image, .food-image, .weapon-imbue-image, .raid-buff-image, .external-buff-image {
+.race-image, .flask-image, .augment-rune-image, .food-image, .weapon-imbue-image, .raid-buff-image, .external-buff-image, .potion-image {
     width: 49px;
     height: 49px;
 
@@ -365,17 +365,17 @@ body {
     border-radius: 2px;
 }
 
-.race-selected, .flask-selected, .augment-rune-selected, .food-selected, .weapon-imbue-selected, .raid-buff-selected, .external-buff-selected {
+.race-selected, .flask-selected, .augment-rune-selected, .food-selected, .weapon-imbue-selected, .raid-buff-selected, .external-buff-selected, .potion-selected {
     border: 1px solid var(--paladin-font);
     filter: grayscale(0);
 }
 
-.race-unselected, .flask-unselected, .augment-rune-unselected, .food-unselected, .weapon-imbue-unselected, .raid-buff-unselected, .external-buff-unselected {
+.race-unselected, .flask-unselected, .augment-rune-unselected, .food-unselected, .weapon-imbue-unselected, .raid-buff-unselected, .external-buff-unselected, .potion-unselected {
     border: 1px solid var(--border-colour-3);
     filter: grayscale(0.7);
 }
 
-.external-buff-timer-input {
+.external-buff-timer-input, .potion-timer-input {
     flex-grow: 0 !important;
     width: 100%;
     text-align: center;
@@ -396,7 +396,7 @@ body {
     cursor: pointer;
 }
 
-.external-buff-repeating {
+.external-buff-repeating, .potion-repeating {
     border: 1px solid var(--paladin-font);
     color: var(--paladin-font)
 }
