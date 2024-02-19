@@ -69,6 +69,11 @@ class Spell:
         if not self.can_cast(caster):         
             return False
         
+        if caster.innervate_active:
+            self.mana_cost = 0
+        else:
+            self.mana_cost = getattr(self, "MANA_COST", 0)
+        
         spell_crit = False
         
         self.try_trigger_rppm_effects(caster, targets, current_time)
@@ -117,7 +122,7 @@ class Spell:
         elif self.name in ["Word of Glory", "Light of Dawn"] and "Divine Purpose" in caster.active_auras:
             self.mana_cost = 0
         else:
-            self.mana_cost = self.MANA_COST
+            self.mana_cost = getattr(self, "MANA_COST", 0)
         
         spell_crit = False
         heal_amount = 0

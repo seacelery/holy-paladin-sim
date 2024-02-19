@@ -419,6 +419,8 @@ const createPriorityListDisplay = () => {
 };
 
 const convertPasteToPriorityList = (pastedCode) => {
+    console.log("pasted code")
+    console.log(pastedCode)
     if (typeof pastedCode !== 'string' && !(pastedCode instanceof String)) return;
     
     const lines = pastedCode.split("\n");
@@ -578,8 +580,8 @@ priorityListPresetsButton.addEventListener("mousedown", () => {
 
 const standardPreset = document.getElementById("standard-preset");
 standardPreset.addEventListener("click", () => {
-    priorityList = "Holy Shock | Holy Shock charges = 2\nArcane Torrent | Race = Blood Elf\nJudgment | Infusion of Light duration < 5",
-    convertPasteToPriorityList(priorityList);
+    priorityListPastedCode = "Holy Shock | Holy Shock charges = 2\nArcane Torrent | Race = Blood Elf\nJudgment | Infusion of Light duration < 5",
+    convertPasteToPriorityList(priorityListPastedCode);
     updatePriorityList();
 });
 
@@ -640,5 +642,35 @@ priorityListInfoModalContainer.innerHTML = `
     Beacon of Virtue cooldown <= 3 * GCD
 `;
 
+const addPotionToPriorityList = (potionName, potionTimers) => {
+    const potionRegex = new RegExp(`${potionName} \\| Timers = \\[(\\d*(?:\\.\\d+)?(?:,\\s*\\d*(?:\\.\\d+)?)*)\\]`, "g");
+    
+    let priorityListJoined = "";
+    if (!priorityListPastedCode) {
+        priorityListJoined = "";
+    } else {
+        priorityListJoined = priorityListPastedCode.join("\n");
+    };
 
-export { createPriorityListItem, updateIndices, adjustTextareaHeight, setDraggedItem, handleDragStart, handleDragEnd, handleDragOver, handleDrop, createPriorityListDisplay, convertPasteToPriorityList, priorityList };
+    if (!priorityListJoined.includes(potionName)) {
+        priorityListPastedCode = `${potionName} | Timers = [${potionTimers.join(", ")}]\n` + priorityListJoined;
+    } else {
+        console.log("a")
+        console.log(potionTimers)
+        priorityListPastedCode = priorityListJoined.replace(potionRegex, `${potionName} | Timers = [${potionTimers.join(", ")}]`)
+    };
+    
+    convertPasteToPriorityList(priorityListPastedCode);
+    updatePriorityList();
+};
+
+const removePotionFromPriorityList = (potionName) => {
+    const potionRegex = new RegExp(`^.*${potionName} \\| Timers = \\[(\\d+(?:\\.\\d+)?(?:,\\s*\\d+(?:\\.\\d+)?)*)\\].*(\r?\n|\r)?`, "gm");
+    const priorityListJoined = priorityListPastedCode.join("\n");
+    const updatedPriorityList = priorityListJoined.replace(potionRegex, "");
+
+    convertPasteToPriorityList(updatedPriorityList);
+    updatePriorityList();
+};
+
+export { createPriorityListItem, updateIndices, adjustTextareaHeight, setDraggedItem, handleDragStart, handleDragEnd, handleDragOver, handleDrop, createPriorityListDisplay, convertPasteToPriorityList, priorityList, addPotionToPriorityList, removePotionFromPriorityList, updatePriorityList };

@@ -7,7 +7,7 @@ import { createBuffsBreakdown } from "./buffs-breakdown.js";
 import { createResourcesBreakdown } from "./resources-breakdown.js";
 import { createPriorityBreakdown } from "./priority-breakdown.js";
 import { createCooldownsBreakdown } from "./cooldowns-breakdown.js";
-import { createPriorityListDisplay, priorityList } from "./priority-list-display.js";
+import { createPriorityListDisplay, priorityList, addPotionToPriorityList, updatePriorityList, removePotionFromPriorityList } from "./priority-list-display.js";
 import { handleTabs } from "./simulation-options-tabs.js";
 import { setSimulationOptionsFromImportedData } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
@@ -358,7 +358,7 @@ let currentConsumables = {
     augment_rune: [],
     raid_buff: [],
     external_buff: {},
-    potion: []
+    potion: {}
 };
 
 // update displayed information based on imported character
@@ -400,6 +400,7 @@ const handleOptionImages = (images, attribute, optionType, toggle = false, multi
                         });
                         repeatButton.style.display = "flex";
                         addTimerButton.style.display = "flex";
+                        updatePriorityList();
                     } else {
                         delete currentConsumables[formattedAttribute][attributeName];
                         updateCharacter({
@@ -411,6 +412,7 @@ const handleOptionImages = (images, attribute, optionType, toggle = false, multi
                         });
                         repeatButton.style.display = "none";
                         addTimerButton.style.display = "none";
+                        removePotionFromPriorityList(attributeName);
                     };
                   
                     e.target.classList.toggle(`${attribute}-selected`, !isSelected);
@@ -505,6 +507,13 @@ const updateTimerValues = (name, consumableType) => {
     updateCharacter({
         consumables: currentConsumables
     });
+
+    if (consumableType === "potion") {
+        console.log(currentConsumables["potion"])
+        for (const potion in currentConsumables["potion"]) {
+            addPotionToPriorityList(potion, currentConsumables["potion"][potion]);
+        };
+    };
 };
 
 const createExternalBuffTimers = (buffName, buffCooldown) => {
@@ -660,7 +669,6 @@ const createPotionTimers = (potionName, potionCooldown) => {
 
 createPotionTimers("Aerated Mana Potion", 300);
 createPotionTimers("Elemental Potion of Ultimate Power", 300);
-
 
 // option sliders
 const updateSliderStep = (value, slider, sliderText) => {
