@@ -419,8 +419,6 @@ const createPriorityListDisplay = () => {
 };
 
 const convertPasteToPriorityList = (pastedCode) => {
-    console.log("pasted code")
-    console.log(pastedCode)
     if (typeof pastedCode !== 'string' && !(pastedCode instanceof String)) return;
     
     const lines = pastedCode.split("\n");
@@ -655,8 +653,6 @@ const addPotionToPriorityList = (potionName, potionTimers) => {
     if (!priorityListJoined.includes(potionName)) {
         priorityListPastedCode = `${potionName} | Timers = [${potionTimers.join(", ")}]\n` + priorityListJoined;
     } else {
-        console.log("a")
-        console.log(potionTimers)
         priorityListPastedCode = priorityListJoined.replace(potionRegex, `${potionName} | Timers = [${potionTimers.join(", ")}]`)
     };
     

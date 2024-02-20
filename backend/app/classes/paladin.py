@@ -1,6 +1,8 @@
 import pprint
 import copy
 import heapq
+import os
+from dotenv import load_dotenv
 
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
 from ..utils.buff_class_map import buff_class_map
@@ -13,6 +15,12 @@ from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceS
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
+from .api_client import APIClient
+
+load_dotenv()
+
+client_id = os.getenv("CLIENT_ID")
+client_secret = os.getenv("CLIENT_SECRET")
 
 pp = pprint.PrettyPrinter(width=200)
 
@@ -68,6 +76,7 @@ class Paladin:
         
         if equipment_data:
             self.equipment = self.parse_equipment(equipment_data)
+            # pp.pprint(self.equipment)
             formatted_equipment_data = self.calculate_stats_from_equipment(self.equipment)
             print(formatted_equipment_data)
             self.stats = Stats(formatted_equipment_data[0], self.convert_stat_ratings_to_percent(formatted_equipment_data[0]))
@@ -535,6 +544,7 @@ class Paladin:
         return Stats(ratings, percentages)
     
     def parse_equipment(self, equipment_data):
+        # pp.pprint(equipment_data)
         equipment = {}
         
         equipped_items = equipment_data["equipped_items"]
@@ -549,11 +559,15 @@ class Paladin:
             item_id = item['item']['id']
             item_name = item["name"]["en_GB"]
             item_level = item["level"]["value"]
+            media_reference_url = item["media"]["key"]["href"]
+            api_client = APIClient()
+            item_icon = api_client.get_item_media(media_reference_url)["assets"][0]["value"]
+            print(item_icon)
             
             stats_dict = {}
             
-            equipment[item_slot] = { "name": item_name, "item level": item_level, "stats": stats_dict, "item ID": item_id }
-            # print(f"Item: {item_name}, Slot: {item_slot}, Item Level: {item_level}, Item ID: {item_id}")
+            equipment[item_slot] = { "name": item_name, "item level": item_level, "stats": stats_dict, "item ID": item_id, "item icon": item_icon }
+            
             if "stats" in item:
                 for stat in item["stats"]:
                     stat_type = stat["type"]["type"].lower()
@@ -561,7 +575,6 @@ class Paladin:
                     if stat_type not in ["strength", "agility"]:
                         stat_value = stat["value"]
                         stats_dict[stat_type] = stat_value
-                        # print(f" Stat: {stat_type}, Value: {stat_value}")
                         
             enchantments = item.get("enchantments", [])
             item_enchantments = [enchantment["display_string"]["en_GB"] for enchantment in enchantments]
@@ -589,7 +602,7 @@ class Paladin:
                 if old_key in stats:
                     stats[new_key] = stats.pop(old_key)
                 
-        # pp.pprint(equipment)
+        pp.pprint(equipment)
         # print(total_stat_values)
         return equipment
   

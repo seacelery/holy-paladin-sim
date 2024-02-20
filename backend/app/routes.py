@@ -10,40 +10,10 @@ from flask_socketio import emit
 main = Blueprint("main", __name__)
 pp = pprint.PrettyPrinter(width=200)
 
-# default_priority_list = [
-#     ("Aerated Mana Potion", "((self.elapsed_time >= 50 and self.elapsed_time < 55) or (self.elapsed_time >= 410 and self.elapsed_time < 415)) and self.paladin.abilities['Potion'].check_potion_cooldown(self.elapsed_time)"),
-#     ("Elemental Potion of Ultimate Power", "((self.elapsed_time >= 55 and self.elapsed_time < 60) or (self.elapsed_time >= 390 and self.elapsed_time < 395)) and self.paladin.abilities['Potion'].check_potion_cooldown(self.elapsed_time)"),
-#     ("Divine Toll", "self.previous_ability == 'Daybreak'"),
-#     ("Blessing of the Seasons", "True"),
-#     ("Arcane Torrent", "self.paladin.race == 'Blood Elf'"),
-#     ("Fireblood", "self.paladin.race == 'Dark Iron Dwarf'"),
-#     ("Gift of the Naaru", "self.paladin.race == 'Draenei'"),
-#     ("Avenging Wrath", "True"),
-#     ("Light's Hammer", "True"),
-#     ("Tyr's Deliverance", "True"),
-#     ("Divine Favor", "self.elapsed_time > 35"),
-#     ("Light of Dawn", "self.paladin.holy_power == 5"),
-#     ("Daybreak", "self.elapsed_time >= 12"),
-#     ("Holy Shock", "True"),
-#     ("Judgment", "True"),
-#     ("Crusader Strike", "True"),
-#     ("Holy Light", "True"),
-#     ("Holy Shock", "True"),
-#     ("Divine Toll", "True"),
-#     ("Daybreak", "True"),
-# ]  
-
 default_priority_list = [
     ("Holy Shock | Holy Shock charges = 2"),
     ("Arcane Torrent | Race = Blood Elf"),
     ("Judgment | Infusion of Light duration < 5"),
-    # ("Flash of Light 💀 Phial of Tepid Versatility active 💀 and 💀 Mana > 90% 💀 or 💀 Phial of Elemental Chaos active"),
-    # ("Daybreak 💀 Time > 50"),
-    # ("Light of Dawn 💀 Holy Power = 5"),
-    # ("Holy Light 💀 Holy Shock charges = 0"),
-    
-    # ("Holy Shock 💀 cooldown < 2"),
-    # ("Holy Shock 💀 Judgment cooldown > 3")
 ]
 
 @socketio.on('my event')
@@ -72,14 +42,15 @@ def import_character_route():
     session["character_name"] = character_name
     session["realm"] = realm
     
-    session["modifiable_data"] = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}}
+    session["modifiable_data"] = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}, "equipment": {}}
 
     return jsonify({
         "message": f"Character imported successfully, {character_name}, {realm}",
         "class_talents": paladin.class_talents,
         "spec_talents": paladin.spec_talents,
         "race": paladin.race,
-        "consumable": paladin.consumables
+        "consumable": paladin.consumables,
+        "equipment": paladin.equipment
     })
 
 @main.route("/update_character", methods=["POST"])
@@ -118,6 +89,7 @@ def run_simulation_route():
     iterations = request.args.get("iterations", default=1, type=int)
     time_warp_time = request.args.get("time_warp_time", default=0, type=int)
     priority_list_json = request.args.get("priority_list", default="")
+    
     if priority_list_json:
         priority_list = json.loads(priority_list_json)
     else:

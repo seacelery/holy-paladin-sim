@@ -101,6 +101,7 @@ const importCharacter = async () => {
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data)
         updateUIAfterImport(data);
     })
     .catch(error => { console.error("Error:", error);
@@ -376,7 +377,6 @@ simulationProgressBarContainer.addEventListener("click", runSimulation);
 // allows options images to be clicked to change/toggle options
 const handleOptionImages = (images, attribute, optionType, toggle = false, multipleAllowed = false) => {
     const formattedAttribute = attribute.replaceAll("-", "_");
-    console.log(formattedAttribute)
 
     images.forEach(image => {
         image.classList.add(`${attribute}-unselected`);
@@ -422,8 +422,6 @@ const handleOptionImages = (images, attribute, optionType, toggle = false, multi
                         if (isSelected) {
                             currentConsumables[formattedAttribute] = currentConsumables[formattedAttribute].filter(item => item !== attributeName);
                         } else {
-                            console.log(currentConsumables[formattedAttribute])
-                            console.log(attributeName)
                             currentConsumables[formattedAttribute].push(attributeName);
                         };
                     } else {
@@ -493,7 +491,6 @@ handleOptionImages(potionImages, "potion", "consumable", true, true);
 
 // handle external buff & potion timers
 const updateTimerValues = (name, consumableType) => {
-    console.log(consumableType)
     if (!currentConsumables[consumableType].hasOwnProperty(name)) {
         return;
     };
@@ -509,7 +506,6 @@ const updateTimerValues = (name, consumableType) => {
     });
 
     if (consumableType === "potion") {
-        console.log(currentConsumables["potion"])
         for (const potion in currentConsumables["potion"]) {
             addPotionToPriorityList(potion, currentConsumables["potion"][potion]);
         };
@@ -533,7 +529,6 @@ const createExternalBuffTimers = (buffName, buffCooldown) => {
 
             let nextTimerValue = parseFloat(firstTimerInputValue) + buffCooldown;
             while (nextTimerValue <= maxValue) {
-                console.log("awaw")
                 currentConsumables["external_buff"][buffName].push(nextTimerValue);
                 nextTimerValue += buffCooldown;
             };
@@ -594,11 +589,9 @@ createExternalBuffTimers("Innervate", 180);
 
 const createPotionTimers = (potionName, potionCooldown) => {
     const formattedPotionName = potionName.replaceAll(" ", "-").toLowerCase();
-    console.log(formattedPotionName)
 
     const container = document.getElementById(`${formattedPotionName}-container`);
     const repeatButton = document.getElementById(`${formattedPotionName}-repeat-button`);
-    console.log(repeatButton)
     const addTimerButton = document.getElementById(`${formattedPotionName}-add-timer-button`);
     const firstTimerInput = container.querySelectorAll(".potion-timer-input")[0];
     firstTimerInput.addEventListener("input", (e) => {
@@ -611,7 +604,6 @@ const createPotionTimers = (potionName, potionCooldown) => {
 
             let nextTimerValue = parseFloat(firstTimerInputValue) + potionCooldown;
             while (nextTimerValue <= maxValue) {
-                console.log("awaw")
                 currentConsumables["potion"][potionName].push(nextTimerValue);
                 nextTimerValue += potionCooldown;
             };

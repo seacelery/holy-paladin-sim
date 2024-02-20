@@ -1,5 +1,12 @@
 import requests
 import pprint
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+client_id = os.getenv("CLIENT_ID")
+client_secret = os.getenv("CLIENT_SECRET")
 
 pp = pprint.PrettyPrinter(width=200)
 
@@ -33,11 +40,6 @@ def get_item_info(access_token, item_id):
     response = requests.get(url)
     return response.json()
 
-# def get_item_info(access_token, item_id):
-#     url = f"https://eu.api.blizzard.com/data/wow/search/item?locale=en_GB&access_token={access_token}&namespace=static-10.2.0_51825-eu&item=smoldering-seedling"
-#     response = requests.get(url)
-#     return response.json()
-
 def get_race_info(access_token, playableRaceId=None):
     url = f"https://eu.api.blizzard.com/data/wow/playable-race/index?locale=en_GB&access_token={access_token}&namespace=static-10.2.0_51825-eu"
     response = requests.get(url)
@@ -48,24 +50,22 @@ def get_specific_race_info(access_token, playableRaceId):
     response = requests.get(url)
     return response.json()
 
-
 def get(access_token, url_start):
     url = url_start + f"&local=en_GB&access_token={access_token}"
     response = requests.get(url)
     return response.json()
     
+def get_item_media(access_token, url_start):
+    url = url_start + f"&local=en_GB&access_token={access_token}"
+    response = requests.get(url)
+    return response.json()
 
-client_id = "57cdb961fae04b8f9dc4d3caea3716db"
-client_secret = "rIIdFk2In9dQfBUxbPmH6ee4DDDO6oUV"
 access_token = get_access_token(client_id, client_secret)
 
-# spell_ids = [20473,85222,85673,287269,375576,53563,82326,19750,114158,35395,20271,414127,392902,403042,183778,231644,385349,]
-# for id in spell_ids:
-#     icon = get_icon_from_spell_info(access_token, id)
-#     print(icon)
+pp.pprint(get_item_media(access_token, "https://eu.api.blizzard.com/data/wow/media/item/195475?namespace=static-10.2.5_52554-eu"))
     
-pp.pprint(get_race_info(access_token))#
-pp.pprint(get_specific_race_info(access_token, 30))
+# pp.pprint(get_race_info(access_token))#
+# pp.pprint(get_specific_race_info(access_token, 30))
 
 # pp.pprint(get(access_token, 'https://eu.api.blizzard.com/data/wow/playable-race/30?namespace=static-10.2.0_51825-eu'))
 

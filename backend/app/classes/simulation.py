@@ -12,7 +12,6 @@ from collections import defaultdict
 from .target import Target, BeaconOfLight, EnemyTarget
 from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, TimeWarp
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
-from ..utils.battlenet_api import get_spell_icon_data, get_access_token
 from ..utils import cache
 from .priority_list_dsl import parse_condition, condition_to_lambda
 
@@ -478,15 +477,6 @@ class Simulation:
             self.paladin.mana = self.paladin.max_mana
         else:
             self.paladin.mana += self.paladin.mana_regen_per_second * self.tick_rate
-    
-    def add_spell_icons(self):
-        for spell_id, spell_name in self.get_spell_ids().items():
-            if spell_id not in self.spell_icons:
-                spell_icon_data = cache.cached_get_spell_icon_data(self.access_token, spell_id)
-                try:
-                    self.spell_icons[spell_id] = spell_icon_data["assets"][0]["value"]
-                except:
-                    print(f"Spell: {spell_name} not found")
     
     def update_final_cooldowns_breakdown_times(self):
         for aura, instances in self.aura_healing.items():

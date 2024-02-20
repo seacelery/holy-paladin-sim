@@ -82,7 +82,6 @@ def parse_condition(condition_str):
                 
             elif "Time " in part or "time " in part:              
                 if re.search(r"gcd", part) and any(op in part for op in ["*", "+"]):
-                    print(part)
                     pattern = r"(\d+(?:\.\d+)?\s*[*+]\s*[gG][cC][dD]|[gG][cC][dD]|\d+(?:\.\d+)?)\s*([><=!]+)\s*[tT]ime\s*([><=!]+)\s*(\d+(?:\.\d+)?\s*[*+]\s*[gG][cC][dD]|[gG][cC][dD]|\d+(?:\.\d+)?)"
                     match = re.match(pattern, part, flags=re.IGNORECASE)
                     condition["first_value"], condition["first_operator"], condition["second_operator"], condition["second_value"] = match.groups()
@@ -120,7 +119,6 @@ def parse_condition(condition_str):
                 condition["value"] = part_split[3]
                 
             elif "duration " in part:
-                print("b")
                 if re.search(r"gcd", part) and any(op in part for op in ["*", "+"]):
                     pattern = r"([\w\s]+)\s+[dD]uration\s*([><=!]+)\s*(\d+(?:\.\d+)?\s*[*+]\s*[gG][cC][dD]|[gG][cC][dD])"
                     match = re.match(pattern, part, flags=re.IGNORECASE)
@@ -230,8 +228,6 @@ def condition_to_lambda(sim_instance, all_conditions):
                     gcd_value = sim_instance.paladin.global_cooldown
                     value = evaluate_gcd(gcd_value, operator_value, operator)
                     condition["second_value"] = value
-    
-                # print(f'{sim_instance.elapsed_time}, {condition["first_value"]}, {condition["second_value"]}')
                 
                 if condition["keyword"].lower() == "timers":
                     result = False
