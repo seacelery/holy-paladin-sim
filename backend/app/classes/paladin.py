@@ -562,11 +562,10 @@ class Paladin:
             media_reference_url = item["media"]["key"]["href"]
             api_client = APIClient()
             item_icon = api_client.get_item_media(media_reference_url)["assets"][0]["value"]
-            print(item_icon)
             
             stats_dict = {}
             
-            equipment[item_slot] = { "name": item_name, "item level": item_level, "stats": stats_dict, "item ID": item_id, "item icon": item_icon }
+            equipment[item_slot] = { "name": item_name, "item_level": item_level, "stats": stats_dict, "item_ID": item_id, "item_icon": item_icon }
             
             if "stats" in item:
                 for stat in item["stats"]:

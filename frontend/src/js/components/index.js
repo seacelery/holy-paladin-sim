@@ -11,6 +11,7 @@ import { createPriorityListDisplay, priorityList, addPotionToPriorityList, updat
 import { handleTabs } from "./simulation-options-tabs.js";
 import { setSimulationOptionsFromImportedData } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
+import { updateEquipmentFromImportedData } from "./equipment-options.js";
 import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable } from "../utils/misc-functions.js";
 
 // window.addEventListener("mouseover", (e) => {
@@ -368,6 +369,7 @@ const updateUIAfterImport = (data) => {
     setSimulationOptionsFromImportedData(data);
 
     updateTalentsFromImportedData(data);
+    updateEquipmentFromImportedData(data);
 };
 
 // event listeners

@@ -97,7 +97,7 @@ def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):
         elif gem == "Zen Neltharite":
             stat_values_from_equipment["mastery"] += 70
             stat_values_from_equipment["versatility"] += 33
-        elif gem == "Keen Neltharite":
+        elif gem == "Fractured Neltharite":
             stat_values_from_equipment["mastery"] += 88
             
         elif gem == "Crafty Alexstraszite":

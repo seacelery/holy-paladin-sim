@@ -12,7 +12,6 @@ from collections import defaultdict
 from .target import Target, BeaconOfLight, EnemyTarget
 from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, TimeWarp
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
-from ..utils import cache
 from .priority_list_dsl import parse_condition, condition_to_lambda
 
 pp = pprint.PrettyPrinter(width=200)
