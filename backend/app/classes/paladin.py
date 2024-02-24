@@ -707,5 +707,3 @@ class Paladin:
                     active_spec_talents[talent_row][talent_name]["ranks"]["current rank"] = spec_talents[talent_name]
                     
         return Talents(active_class_talents, active_spec_talents)
-    
-

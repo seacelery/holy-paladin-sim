@@ -1,7 +1,11 @@
 import { createElement } from "./index.js";
 import { itemsToIconsMap } from "../utils/items-to-icons-map.js";
+import { generateItem } from "../utils/item-level-calculations/generate-item.js";
+import { itemSlotsMap } from "../utils/item-slots-map.js";
+import itemData from "../utils/data/item_data.js";
 
 const updateEquipmentFromImportedData = (data) => {
+    // left half
     const equipmentData = data["equipment"];
 
     let tier16Counter = 0;
@@ -25,6 +29,7 @@ const updateEquipmentFromImportedData = (data) => {
 
         const itemLevelDisplay = itemSlotContainer.querySelector(`.item-slot-item-level`);
         itemLevelDisplay.textContent = itemLevel;
+        itemLevelDisplay.style.display = "flex";
         itemLevelDisplay.style.border = "1px solid var(--rarity-epic)";
         itemLevelDisplay.style.borderTop = "none";
 
@@ -127,17 +132,135 @@ const updateEquipmentFromImportedData = (data) => {
             tier16Counter += 1;
         };
         itemSlotInfo.appendChild(bonusesDisplay);
+
+        // const itemSlotHover = itemSlotContainer.querySelector(`.item-slot-hover`);
+        // itemSlotHover.style.height = "calc(100% + 15px)";
     };
 
     const equippedItemsInfo = document.getElementById("equipped-items-info");
     if (tier16Counter) {
         const tier16Container = createElement("div", "item-slot-tier", null);
-        tier16Container.innerHTML = `<span style="color: var(--paladin-font)">Tier 16</span> <span style="color: var(--sorting-arrow-colour)">${tier16Counter}/5</span>`;
+        let tier16Colour = tier16Counter >= 4 ? "var(--sorting-arrow-colour)" : "var(--red-font-hover)";
+        tier16Container.innerHTML = `<span style="color: var(--paladin-font)">Tier 16</span> <span style="color: ${tier16Colour}">${tier16Counter}/5</span>`;
         equippedItemsInfo.appendChild(tier16Container);
     };
     const embellishmentsContainer = createElement("div", "item-slot-embellishments", null);
-    embellishmentsContainer.innerHTML = `<span style="color: var(--subrow-arrow-colour)">Embellishments</span> <span style="color: var(--red-font-hover)">${embellishmentCounter}/2</span>`;
+    let embellishmentColour = embellishmentCounter >= 2 ? "var(--sorting-arrow-colour)" : "var(--red-font-hover)";
+    embellishmentsContainer.innerHTML = `<span style="color: var(--paladin-font)">Embellishments</span> <span style="color: ${embellishmentColour}">${embellishmentCounter}/2</span>`;
     equippedItemsInfo.appendChild(embellishmentsContainer);
+
+    // right half
+    const statsData = data["stats"];
+    console.log(statsData)
+    for (const stat in statsData) {
+        if (["haste", "crit", "versatility", "mastery"].includes(stat)) {
+            const statContainer = document.getElementById(`equipped-items-stats-${stat}`);
+            console.log(statContainer)
+            const statValue = statContainer.querySelector(".equipped-items-stat-value");
+
+            const statPercent = `${stat}_percent`;
+            statValue.textContent = `${statsData[stat]} / ${statsData[statPercent].toFixed(2)}%`;
+        } else if (["intellect", "leech", "health", "mana"].includes(stat)) {
+            const statContainer = document.getElementById(`equipped-items-stats-${stat}`);
+            console.log(statContainer)
+            const statValue = statContainer.querySelector(".equipped-items-stat-value");
+            statValue.textContent = statsData[stat];
+        };
+    };
 };
 
-export { updateEquipmentFromImportedData };
+const initialiseEquipment = () => {
+    const updateEquippedItemDisplay = (itemSlot, itemSlots) => {
+        const currentEquippedIcon = document.getElementById("current-equipped-item-icon");
+
+        itemSlots.forEach(itemSlot => {
+            itemSlot.querySelector(".item-slot-hover").classList.remove("item-slot-selected");
+            itemSlot.querySelector(".item-slot-hover").style.backgroundColor = "var(--tooltip-colour)";
+        })
+        itemSlot.querySelector(".item-slot-hover").classList.add("item-slot-selected");
+        itemSlot.querySelector(".item-slot-hover").style.backgroundColor = "var(--panel-colour-5)";
+
+        const selectedItemIcon = itemSlot.querySelector(".item-slot-icon");
+        currentEquippedIcon.src = selectedItemIcon.src;
+        currentEquippedIcon.style.filter = "grayscale(0)";
+        currentEquippedIcon.style.opacity = "1";
+    };
+
+    const itemSlotDropdown = document.getElementById("equipped-items-edit-choose-slot-dropdown");
+
+    const itemSlots = document.querySelectorAll(".item-slot");
+    itemSlots.forEach(itemSlot => {
+        itemSlot.addEventListener("click", () => {
+            updateEquippedItemDisplay(itemSlot, itemSlots);
+            const dataItemSlot = itemSlot.getAttribute("data-item-slot");
+            itemSlotDropdown.value = dataItemSlot;
+        });
+    });
+
+    itemSlotDropdown.addEventListener("change", (e) => {
+        const slotName = e.target.value.toLowerCase();
+        const itemSlot = document.getElementById(`item-slot-${itemSlotsMap[slotName]}`);
+        updateEquippedItemDisplay(itemSlot, itemSlots);
+    });
+
+    const generateSearchResults = () => {
+        const searchInput = itemSearch.value.toLowerCase();
+        const filteredData = itemData.filter(item => item.name.toLowerCase().includes(searchInput));
+        itemSuggestions.innerHTML = "";
+        itemSuggestions.style.display = "block";
+
+        if (searchInput === "") {
+            itemSuggestions.style.display = "none";
+            return;
+        };
+
+        filteredData.forEach(item => {
+            const itemContainer = createElement("div", "item-search-suggestion-container", null);
+
+            const itemSuggestion = createElement("div", "item-search-suggestion", null);
+            itemSuggestion.textContent = item.name;
+            itemSuggestion.addEventListener("click", () => {
+                itemSearch.value = item.name;
+                itemSuggestions.innerHTML = "";
+            });
+
+            if (filteredData.length <= 6) {
+                itemSuggestion.style.borderRight = "none";
+            } else {
+                itemSuggestion.style.borderRight = "1px solid var(--border-colour-3)";
+            }
+
+            const itemIcon = createElement("img", "item-search-icon", null);
+            itemIcon.src = item.icon;
+
+            itemContainer.appendChild(itemIcon);
+            itemContainer.appendChild(itemSuggestion);
+            itemSuggestions.appendChild(itemContainer);
+        });
+    };
+
+    const itemSearch = document.getElementById("new-equipped-item-search");
+    const itemSuggestions = document.getElementById("item-search-suggestions");
+
+    itemSearch.addEventListener("input", () => {
+        generateSearchResults();
+    });
+
+    itemSearch.addEventListener("click", () => {
+        generateSearchResults();
+    });
+
+    document.addEventListener("click", (e) => {
+        if (e.target !== itemSearch) {
+            itemSuggestions.innerHTML = "";
+            itemSuggestions.style.display = "none";
+        };
+    });
+
+    const replaceItemButton = document.getElementById("replace-item-button");
+    replaceItemButton.addEventListener("click", () => {
+        console.log(itemSearch.value)
+    });
+};
+
+export { updateEquipmentFromImportedData, initialiseEquipment };

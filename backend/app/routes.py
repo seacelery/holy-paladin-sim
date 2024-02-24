@@ -50,7 +50,10 @@ def import_character_route():
         "spec_talents": paladin.spec_talents,
         "race": paladin.race,
         "consumable": paladin.consumables,
-        "equipment": paladin.equipment
+        "equipment": paladin.equipment,
+        "stats": {"haste": round(paladin.haste_rating), "crit": round(paladin.crit_rating), "mastery": round(paladin.mastery_rating), "versatility": round(paladin.versatility_rating), 
+                  "intellect": round(paladin.spell_power), "health": round(paladin.max_health), "leech": round(paladin.leech), "mana": round(paladin.max_mana),
+                  "haste_percent": round(paladin.haste, 2), "crit_percent": round(paladin.crit, 2), "mastery_percent": round(paladin.mastery, 2), "versatility_percent": round(paladin.versatility, 2)}
     })
 
 @main.route("/update_character", methods=["POST"])
