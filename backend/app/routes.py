@@ -3,7 +3,7 @@ import pprint
 import json
 
 from flask import Blueprint, request, jsonify, session
-from app.main import import_character, run_simulation, initialise_simulation
+from app.main import import_character, run_simulation, initialise_simulation, fetch_updated_data
 from app.socketio_setup import socketio
 from flask_socketio import emit
 
@@ -16,10 +16,10 @@ default_priority_list = [
     ("Judgment | Infusion of Light duration < 5"),
 ]
 
-@socketio.on('my event')
+@socketio.on("my event")
 def handle_my_custom_event(json):
-    print('received json: ' + str(json))
-    emit('my response', {'data': 'got it!'})
+    print("received json: " + str(json))
+    emit("my response", {"data": "got it!"})
 
 def log_session_size():
     session_keys_count = len(session.keys())
@@ -52,8 +52,38 @@ def import_character_route():
         "consumable": paladin.consumables,
         "equipment": paladin.equipment,
         "stats": {"haste": round(paladin.haste_rating), "crit": round(paladin.crit_rating), "mastery": round(paladin.mastery_rating), "versatility": round(paladin.versatility_rating), 
-                  "intellect": round(paladin.spell_power), "health": round(paladin.max_health), "leech": round(paladin.leech), "mana": round(paladin.max_mana),
-                  "haste_percent": round(paladin.haste, 2), "crit_percent": round(paladin.crit, 2), "mastery_percent": round(paladin.mastery, 2), "versatility_percent": round(paladin.versatility, 2)}
+                  "intellect": round(paladin.spell_power), "health": round(paladin.max_health), "leech": round(paladin.leech_rating), "mana": round(paladin.max_mana),
+                  "haste_percent": round(paladin.haste, 2), "crit_percent": round(paladin.crit, 2), "mastery_percent": round(paladin.mastery, 2), 
+                  "versatility_percent": round(paladin.versatility, 2), "leech_percent": round(paladin.leech, 2)}
+    })
+    
+@main.route("/fetch_updated_data", methods=["GET"])
+def fetch_updated_stats_route():
+    character_name = request.args.get("character_name")
+    realm = request.args.get("realm")
+    custom_equipment = request.args.get("custom_equipment")
+
+    paladin, healing_targets = import_character(character_name, realm)
+    modifiable_data = session.get("modifiable_data", {})
+    paladin.update_character(
+        race=modifiable_data.get("race"),
+        class_talents=modifiable_data.get("class_talents"),
+        spec_talents=modifiable_data.get("spec_talents"),
+        consumables=modifiable_data.get("consumables")
+    )
+    paladin.update_equipment(custom_equipment)
+    
+    return jsonify({
+        "message": f"Character imported successfully, {character_name}, {realm}",
+        "class_talents": paladin.class_talents,
+        "spec_talents": paladin.spec_talents,
+        "race": paladin.race,
+        "consumable": paladin.consumables,
+        "equipment": paladin.equipment,
+        "stats": {"haste": round(paladin.haste_rating), "crit": round(paladin.crit_rating), "mastery": round(paladin.mastery_rating), "versatility": round(paladin.versatility_rating), 
+                  "intellect": round(paladin.spell_power), "health": round(paladin.max_health), "leech": round(paladin.leech_rating), "mana": round(paladin.max_mana),
+                  "haste_percent": round(paladin.haste, 2), "crit_percent": round(paladin.crit, 2), "mastery_percent": round(paladin.mastery, 2), 
+                  "versatility_percent": round(paladin.versatility, 2), "leech_percent": round(paladin.leech, 2)}
     })
 
 @main.route("/update_character", methods=["POST"])
@@ -92,6 +122,7 @@ def run_simulation_route():
     iterations = request.args.get("iterations", default=1, type=int)
     time_warp_time = request.args.get("time_warp_time", default=0, type=int)
     priority_list_json = request.args.get("priority_list", default="")
+    custom_equipment = request.args.get("custom_equipment")
     
     if priority_list_json:
         priority_list = json.loads(priority_list_json)
@@ -110,7 +141,7 @@ def run_simulation_route():
         consumables=modifiable_data.get("consumables")
     )
         
-    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list)
+    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, custom_equipment)
 
     # pp.pprint(paladin.class_talents)
     results = run_simulation(simulation)

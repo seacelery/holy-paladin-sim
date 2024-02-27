@@ -17,17 +17,17 @@ def convert_enchants_to_stats(enchants_list):
     return formatted_enchants
 
 def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, stat_values_from_equipment):
+    mana_encount_count = 0
+    
     for enchant in formatted_enchants:
         if enchant == "Waking Stats":
             stat_values_from_equipment["intellect"] += 150
         elif enchant == "Reserve of Intellect":
             stat_values_from_equipment["intellect"] += 111
-            player.max_mana += player.base_mana * 0.05
-            player.mana += player.base_mana * 0.05
+            mana_encount_count += 1
         elif enchant == "+177 Intellect & +5% Mana":
             stat_values_from_equipment["intellect"] += 177
-            player.max_mana += player.base_mana * 0.05
-            player.mana += player.base_mana * 0.05
+            mana_encount_count += 1
         elif enchant == "+177 Intellect & 131 Stamina":
             stat_values_from_equipment["intellect"] += 177
             stat_values_from_equipment["stamina"] += 131
@@ -58,6 +58,10 @@ def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, sta
             bonus_effect_enchants.append("Frozen Devotion")
         elif enchant == "Incandescent Essence":
             bonus_effect_enchants.append("Incandescent Essence")
+           
+    if mana_encount_count > 0: 
+        player.max_mana = player.base_mana + player.base_mana * mana_encount_count * 0.05
+        player.mana = player.base_mana + player.base_mana * mana_encount_count * 0.05
             
     return stat_values_from_equipment, bonus_effect_enchants
 

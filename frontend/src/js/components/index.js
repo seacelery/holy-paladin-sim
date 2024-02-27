@@ -11,7 +11,7 @@ import { createPriorityListDisplay, priorityList, addPotionToPriorityList, updat
 import { handleTabs } from "./simulation-options-tabs.js";
 import { setSimulationOptionsFromImportedData } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
-import { updateEquipmentFromImportedData, initialiseEquipment } from "./equipment-options.js";
+import { updateEquipmentFromImportedData, initialiseEquipment, generateFullItemData } from "./equipment-options.js";
 import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable } from "../utils/misc-functions.js";
 
 // window.addEventListener("mouseover", (e) => {
@@ -94,8 +94,8 @@ const importCharacter = async () => {
     let characterName = document.getElementById("character-name-input").value.toLowerCase();
     let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
 
-    characterName = "daisu";
-    characterRealm = "aszune";
+    // characterName = "daisu";
+    // characterRealm = "aszune";
 
     return fetch(`http://127.0.0.1:5000/import_character?character_name=${characterName}&realm=${characterRealm}`, {
         credentials: "include"
@@ -104,6 +104,32 @@ const importCharacter = async () => {
     .then(data => {
         console.log(data)
         updateUIAfterImport(data);
+    })
+    .catch(error => { console.error("Error:", error);
+                    if (!characterName) {
+                        window.alert(`Character name missing`)
+                    } else if (!characterRealm) {
+                        window.alert(`Character realm missing`)
+                    } else {
+                        window.alert(`Character not found`)
+                    };          
+    });
+};
+
+const updateStats = async () => {
+    let characterName = document.getElementById("character-name-input").value.toLowerCase();
+    let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
+
+    // characterName = "daisu";
+    // characterRealm = "aszune";
+    const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
+
+    return fetch(`http://127.0.0.1:5000/fetch_updated_data?character_name=${characterName}&realm=${characterRealm}&custom_equipment=${customEquipment}`, {
+        credentials: "include"
+    })
+    .then(response => response.json())
+    .then(data => {
+        updateEquipmentFromImportedData(data);
     })
     .catch(error => { console.error("Error:", error);
                     if (!characterName) {
@@ -143,6 +169,7 @@ const updateCharacter = async (data) => {
     .then(data => {
         console.log(data);
         handleSavedDataStatus();
+        updateStats();
     })
     .catch(error => console.error("Error:", error));
 };
@@ -181,8 +208,10 @@ const runSimulation = async () => {
 
     const priorityListJson = encodeURIComponent(JSON.stringify(priorityList));
 
+    const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
+
     return fetch(`http://127.0.0.1:5000/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}&
-                  time_warp_time=${timeWarpTime}&priority_list=${priorityListJson}`, {
+                  time_warp_time=${timeWarpTime}&priority_list=${priorityListJson}&custom_equipment=${customEquipment}`, {
         credentials: "include"
     })
     .then(response => response.json())
@@ -767,4 +796,4 @@ document.addEventListener("dragenter", (e) => {
 // initialise tabs for primary navbar
 handleTabs(`options-navbar-1`, "options-tab-content");
 
-export { updateCharacter, formatNumbers, formatNumbersNoRounding, formatThousands, formatTime, createElement };
+export { updateCharacter, formatNumbers, formatNumbersNoRounding, formatThousands, formatTime, createElement, updateStats };

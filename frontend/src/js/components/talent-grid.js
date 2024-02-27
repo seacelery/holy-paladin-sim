@@ -1,5 +1,5 @@
 import { baseClassTalents, baseSpecTalents } from "../utils/base-talents.js";
-import { updateCharacter } from "./index.js";
+import { updateCharacter, updateStats } from "./index.js";
 import { talentsToIcons } from "../utils/talents-to-icons-map.js";
 
 const classTalents = [

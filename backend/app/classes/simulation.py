@@ -19,7 +19,7 @@ pp = pprint.PrettyPrinter(width=200)
 
 class Simulation:
     
-    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, access_token):
+    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, access_token):
 
         self.access_token = access_token
 
@@ -30,6 +30,8 @@ class Simulation:
         self.elapsed_time = 0
         self.iterations = iterations
         self.priority_list = []
+        self.custom_equipment = custom_equipment
+        self.paladin.update_equipment(custom_equipment)
 
         for item in priority_list:
             action_name, parsed_conditions = parse_condition(item)

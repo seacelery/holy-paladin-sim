@@ -2,6 +2,7 @@ import pprint
 import copy
 import heapq
 import os
+import json
 from dotenv import load_dotenv
 
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
@@ -78,7 +79,7 @@ class Paladin:
             self.equipment = self.parse_equipment(equipment_data)
             # pp.pprint(self.equipment)
             formatted_equipment_data = self.calculate_stats_from_equipment(self.equipment)
-            print(formatted_equipment_data)
+            # print(formatted_equipment_data)
             self.stats = Stats(formatted_equipment_data[0], self.convert_stat_ratings_to_percent(formatted_equipment_data[0]))
             self.bonus_enchants = formatted_equipment_data[1]
             print(self.stats.ratings)
@@ -91,10 +92,10 @@ class Paladin:
             self.mastery_rating = self.stats.ratings["mastery"]
             self.versatility_rating = self.stats.ratings["versatility"]
             self.max_health = self.stats.ratings["stamina"] * 20
-            self.leech = self.stats.ratings["leech"]
+            self.leech_rating = self.stats.ratings["leech"]
             # print(self.haste_rating, self.crit_rating, self.mastery_rating, self.versatility_rating)
             
-            self.haste, self.crit, self.mastery, self.versatility = self.convert_stat_ratings_to_percent(self.stats.ratings)
+            self.haste, self.crit, self.mastery, self.versatility, self.leech = self.convert_stat_ratings_to_percent(self.stats.ratings)
             # print(self.haste, self.crit, self.mastery, self.versatility)
             
             # initialise base stats for use in race changes
@@ -104,6 +105,11 @@ class Paladin:
             self.base_mastery = self.mastery
             self.base_versatility = self.versatility
             self.base_max_health = self.max_health
+            
+            self.base_haste_rating = self.haste_rating
+            self.base_crit_rating = self.crit_rating
+            self.base_mastery_rating = self.mastery_rating
+            self.base_versatility_rating = self.versatility_rating
         else:
             self.spell_power = 9340
             self.haste = 22.98
@@ -265,6 +271,38 @@ class Paladin:
             for row in self.spec_talents.values():
                 if talent_name in row:
                     row[talent_name]["ranks"]["current rank"] = new_rank 
+                    
+    def update_equipment(self, equipment_data):
+        self.equipment = json.loads(equipment_data)
+        formatted_equipment_data = self.calculate_stats_from_equipment(self.equipment)
+        self.stats = Stats(formatted_equipment_data[0], self.convert_stat_ratings_to_percent(formatted_equipment_data[0]))
+        self.bonus_enchants = formatted_equipment_data[1]
+        print(self.stats.ratings)
+        
+        self.spell_power = self.stats.ratings["intellect"]
+        print(self.spell_power)
+        
+        self.haste_rating = self.stats.ratings["haste"]
+        self.crit_rating = self.stats.ratings["crit"]
+        self.mastery_rating = self.stats.ratings["mastery"]
+        self.versatility_rating = self.stats.ratings["versatility"]
+        self.max_health = self.stats.ratings["stamina"] * 20
+        self.leech_rating = self.stats.ratings["leech"]
+        # print(self.haste_rating, self.crit_rating, self.mastery_rating, self.versatility_rating)
+        
+        self.haste, self.crit, self.mastery, self.versatility, self.leech = self.convert_stat_ratings_to_percent(self.stats.ratings)
+        # print(self.haste, self.crit, self.mastery, self.versatility)
+        
+        # initialise base stats for use in race changes
+        self.base_spell_power = self.get_effective_spell_power(self.spell_power)
+        self.base_haste = self.haste
+        self.base_crit = self.crit
+        self.base_mastery = self.mastery
+        self.base_versatility = self.versatility
+        self.base_max_health = self.max_health
+        
+        self.update_stats_with_racials()
+        self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
     
     # update loadout based on updated properties 
     def apply_consumables(self):
@@ -319,12 +357,26 @@ class Paladin:
         self.versatility = self.base_versatility
         self.max_health = self.base_max_health
         
+        self.haste_rating = self.base_haste_rating
+        self.crit_rating = self.base_crit_rating
+        self.mastery_rating = self.base_mastery_rating
+        self.versatility_rating = self.base_versatility_rating
+        
         # update stats based on race
         if self.race == "Human":
-            self.haste = (self.base_haste - 4) * 1.02 + 4
-            self.crit = (self.base_crit - 9) * 1.02 + 9
-            self.mastery = (self.base_mastery - 6 - 12) * 1.02 + 6 + 12
-            self.versatility = self.base_versatility * 1.02
+            # self.haste = (self.base_haste - 4) * 1.02 + 4
+            # self.crit = (self.base_crit - 9) * 1.02 + 9
+            # self.mastery = (self.base_mastery - 6 - 12) * 1.02 + 6 + 12
+            # self.versatility = self.base_versatility * 1.02
+            
+            self.haste_rating = self.base_haste_rating * 1.02
+            self.crit_rating = self.base_crit_rating * 1.02
+            self.mastery_rating = self.base_mastery_rating * 1.02
+            self.versatility_rating = self.base_versatility_rating * 1.02
+            
+            self.haste, self.crit, self.mastery, self.versatility, self.leech = self.convert_stat_ratings_to_percent({"haste": self.haste_rating, "crit": self.crit_rating, 
+                                                                                                                      "mastery": self.mastery_rating, "versatility": self.versatility_rating, 
+                                                                                                                      "leech": self.leech_rating})
         elif self.race == "Dwarf":
             self.crit_damage_modifier += 0.02
             self.crit_healing_modifier += 0.02
@@ -559,13 +611,16 @@ class Paladin:
             item_id = item['item']['id']
             item_name = item["name"]["en_GB"]
             item_level = item["level"]["value"]
+            limit = item.get("limit_category", {}).get("en_GB")
+            item_quality = item.get("quality").get("name").get("en_GB")
+            effects = []
             media_reference_url = item["media"]["key"]["href"]
             api_client = APIClient()
             item_icon = api_client.get_item_media(media_reference_url)["assets"][0]["value"]
             
             stats_dict = {}
             
-            equipment[item_slot] = { "name": item_name, "item_level": item_level, "stats": stats_dict, "item_ID": item_id, "item_icon": item_icon }
+            equipment[item_slot] = { "name": item_name, "item_level": item_level, "stats": stats_dict, "item_id": item_id, "item_icon": item_icon, "quality": item_quality, "limit": limit, "effects": effects }
             
             if "stats" in item:
                 for stat in item["stats"]:
@@ -585,7 +640,13 @@ class Paladin:
             if item_gems:
                 equipment[item_slot]["gems"] = item_gems
                 
-            # print()
+            for effect in item.get("spells", []):
+                effect_data = {
+                    "name": effect.get("spell", {}).get("name", {}).get("en_GB", "Unknown effect name"),
+                    "id": effect.get("spell", {}).get("id", "No ID"),
+                    "description": effect.get("description", {}).get("en_GB", "No description")
+                }
+                equipment[item_slot]["effects"].append(effect_data)
 
         # rename stats
         rename_dict = {
@@ -601,7 +662,7 @@ class Paladin:
                 if old_key in stats:
                     stats[new_key] = stats.pop(old_key)
                 
-        pp.pprint(equipment)
+        # pp.pprint(equipment)
         # print(total_stat_values)
         return equipment
   
@@ -613,16 +674,19 @@ class Paladin:
         
         for item_slot, item_data in equipment.items():
             stats = item_data.get("stats", {})
-            for stat in stats:
-                stat_values_from_equipment[stat] = stat_values_from_equipment.get(stat, 0) + stats[stat]
-                
+            if stats:
+                for stat in stats:
+                    stat_values_from_equipment[stat] = stat_values_from_equipment.get(stat, 0) + stats[stat]
+            
             enchants = item_data.get("enchantments", {})
-            for enchant in enchants:
-                enchants_from_equipment.append(enchant)
-                
+            if enchants:
+                for enchant in enchants:
+                    enchants_from_equipment.append(enchant)
+            
             gems = item_data.get("gems", {})
-            for gem in gems:
-                gems_from_equipment.append(gem)
+            if gems:
+                for gem in gems:
+                    gems_from_equipment.append(gem)
                 
         formatted_enchants = convert_enchants_to_stats(enchants_from_equipment)
         
@@ -645,11 +709,13 @@ class Paladin:
         crit_rating = stat_values["crit"]
         mastery_rating = stat_values["mastery"]
         versatility_rating = stat_values["versatility"]
+        leech_rating = stat_values["leech"]
         
         haste_rating_per_percent = 170
         crit_rating_per_percent = 180
         mastery_rating_per_percent = 120
         versatility_rating_per_percent = 205
+        leech_rating_per_percent = 148
         
         # 2% haste per point from seal of alacrity, multiplicative
         haste_percent = haste_rating / haste_rating_per_percent
@@ -676,7 +742,9 @@ class Paladin:
             
         versatility_percent = versatility_rating / versatility_rating_per_percent
         
-        return haste_percent, crit_percent, mastery_percent, versatility_percent
+        leech_percent = leech_rating / leech_rating_per_percent
+        
+        return haste_percent, crit_percent, mastery_percent, versatility_percent, leech_percent
     
     def parse_talents(self, talent_data):
         class_talents = {}
