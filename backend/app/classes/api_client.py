@@ -16,7 +16,6 @@ class APIClient:
     def _get_access_token():
         url = "https://eu.battle.net/oauth/token"
         APIClient.api_call_count += 1
-        # print("API CALL COUNT", APIClient.api_call_count)
         response = requests.post(url, data={'grant_type': 'client_credentials'}, auth=(CLIENT_ID, CLIENT_SECRET))
         return response.json()["access_token"]
 

@@ -301,8 +301,14 @@ class Paladin:
         self.base_versatility = self.versatility
         self.base_max_health = self.max_health
         
+        self.base_haste_rating = self.haste_rating
+        self.base_crit_rating = self.crit_rating
+        self.base_mastery_rating = self.mastery_rating
+        self.base_versatility_rating = self.versatility_rating
+        
         self.update_stats_with_racials()
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
+        print("a", self.mastery, self.mastery_rating)
     
     # update loadout based on updated properties 
     def apply_consumables(self):

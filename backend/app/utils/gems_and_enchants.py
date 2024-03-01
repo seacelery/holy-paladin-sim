@@ -65,8 +65,12 @@ def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, sta
             
     return stat_values_from_equipment, bonus_effect_enchants
 
-def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):    
+def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):   
+    print("checking gems") 
+    count = 0
     for gem in gems_from_equipment:
+        count += 1
+        print(gem, count)
         if gem == "Resplendent Illimited Diamond":
             stat_values_from_equipment["intellect"] += 75
             stat_values_from_equipment["versatility"] += 66
@@ -127,5 +131,6 @@ def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):
             stat_values_from_equipment["mastery"] += 33
         elif gem == "Stormy Malygite":
             stat_values_from_equipment["versatility"] += 88
+    print(stat_values_from_equipment)
         
     return stat_values_from_equipment

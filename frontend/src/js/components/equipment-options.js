@@ -1,17 +1,28 @@
 import { createElement, updateStats } from "./index.js";
 import { itemsToIconsMap, groupedGems } from "../utils/items-to-icons-map.js";
-import { generateItem } from "../utils/item-level-calculations/generate-item.js";
-import { itemSlotsMap } from "../utils/item-slots-map.js";
-import { itemSlotBonuses } from "../utils/item-level-calculations/item-slot-bonuses.js";
+import { generateItemStats } from "../utils/item-level-calculations/generate-item-stats.js";
+import { itemSlotsMap, blizzardItemSlotsMap } from "../utils/item-slots-map.js";
+import { itemSlotBonuses, embellishmentsData, embellishmentItems, craftedItems } from "../utils/item-level-calculations/item-slot-bonuses.js";
 import itemData from "../utils/data/item_data.js";
 
+const updateBlurListener = (element, listener) => {
+    const blurHandler = () => {
+        listener();
+    };
+
+    if (element.hasBlurListener) {
+        element.removeEventListener("blur", element._blurHandler);
+    };
+
+    element._blurHandler = blurHandler;
+    element.addEventListener("blur", element._blurHandler);
+    element.hasBlurListener = true;
+};
+
 const updateEquipmentFromImportedData = (data) => {
-    console.log(data)
     // left half
     const equipmentData = data["equipment"];
-    console.log(equipmentData)
-    let updatedEquipmentData = JSON.parse(JSON.stringify(equipmentData));
-    console.log(updatedEquipmentData)
+    // console.log(equipmentData)
 
     let tierS1Counter = 0;
     let tierS2Counter = 0;
@@ -55,47 +66,6 @@ const updateEquipmentFromImportedData = (data) => {
             itemSlotInfoContainer.appendChild(itemNameDisplay);
         };
 
-        // if (itemStats) {
-        //     const mainStatContainer = createElement("div", "item-slot-main-stat-container", null);
-        //     for (let stat in itemStats) {
-        //         if (stat === "intellect") {
-        //             console.log(stat)
-        //             const statNumber = itemStats[stat];
-        //             stat = stat.charAt(0).toUpperCase() + stat.slice(1);
-        //             const statContainer = createElement("div", "item-slot-stat-container", null);
-        //             const statName = createElement("div", "item-slot-stat-name", null);
-        //             statName.textContent = stat;
-        //             const statValue = createElement("div", "item-slot-stat-value", null);
-        //             statValue.textContent = statNumber;
-
-        //             statContainer.appendChild(statValue);
-        //             statContainer.appendChild(statName);
-
-        //             mainStatContainer.appendChild(statContainer);
-        //         };        
-        //     };
-
-        //     const secondaryStatsContainer = createElement("div", "item-slot-secondary-stats-container", null);
-        //     for (let stat in itemStats) {
-        //         if (stat !== "intellect" && stat !== "stamina" && stat !== "leech" && stat !== "avoidance") {
-        //             const statNumber = itemStats[stat];
-        //             stat = stat.charAt(0).toUpperCase() + stat.slice(1);
-        //             const statContainer = createElement("div", "item-slot-stat-container", null);
-        //             const statName = createElement("div", "item-slot-stat-name", null);
-        //             statName.textContent = stat;
-        //             const statValue = createElement("div", "item-slot-stat-value", null);
-        //             statValue.textContent = statNumber;
-
-        //             statContainer.appendChild(statValue);
-        //             statContainer.appendChild(statName);                  
-
-        //             secondaryStatsContainer.appendChild(statContainer);
-        //         };        
-        //     };
-        //     itemSlotInfo.appendChild(mainStatContainer);
-        //     itemSlotInfo.appendChild(secondaryStatsContainer);
-        // };
-
         if (itemEnchants) {
             for (const enchant in itemEnchants) {
                 let enchantText = itemEnchants[enchant];
@@ -104,7 +74,16 @@ const updateEquipmentFromImportedData = (data) => {
                     formattedEnchantText = formattedEnchantText[1].split("|")[0];
                 };
 
-                if (formattedEnchantText.includes("Flexweave Underlay") || formattedEnchantText.includes("Personal Space Amplifier")) {
+                const excludedEnchants = [
+                    "Flexweave Underlay",
+                    "Personal Space Amplifier",
+                    "Hissing Rune",
+                    "Howling Rune",
+                    "Chirping Rune",
+                    "Buzzing Rune"
+                ];
+
+                if (excludedEnchants.includes(formattedEnchantText[0])) {
                     continue
                 };
                 
@@ -139,16 +118,17 @@ const updateEquipmentFromImportedData = (data) => {
             };
         };
 
-        if (itemCategory) {
+        if (itemCategory && itemEffects.length > 0) {
             const itemCategoryDisplay = createElement("div", "item-slot-category", null);
             const itemCategoryText = itemCategory.replace("Unique-Equipped: ", "")
                                                  .replace("Embellished", "Embellishment")
                                                  .replace(/\s\(\d+\)/g, "");
+
             if (itemEffects && itemCategory.includes("Embellished")) {
                 itemCategoryDisplay.textContent = `${itemCategoryText}: ${itemEffects[0]["name"]}`;
             } else {
                 itemCategoryDisplay.textContent = itemCategoryText;
-            };          
+            };    
             
             itemSlotInfoContainer.appendChild(itemCategoryDisplay);            
         };
@@ -191,19 +171,15 @@ const updateEquipmentFromImportedData = (data) => {
 
     // right half
     const statsData = data["stats"];
-    console.log(statsData)
     for (const stat in statsData) {
-        console.log(statsData)
         if (["haste", "crit", "versatility", "mastery", "leech"].includes(stat)) {
             const statContainer = document.getElementById(`equipped-items-stats-${stat}`);
-            console.log(statContainer)
             const statValue = statContainer.querySelector(".equipped-items-stat-value");
 
             const statPercent = `${stat}_percent`;
             statValue.textContent = `${statsData[stat]} / ${statsData[statPercent].toFixed(2)}%`;
         } else if (["intellect", "health", "mana"].includes(stat)) {
             const statContainer = document.getElementById(`equipped-items-stats-${stat}`);
-            console.log(statContainer)
             const statValue = statContainer.querySelector(".equipped-items-stat-value");
             statValue.textContent = statsData[stat];
         };
@@ -218,112 +194,148 @@ const generateFullItemData = () => {
         const slotType = itemSlot.getAttribute("data-item-slot");
         fullItemData["equipment"][itemSlotsMap[slotType.toLowerCase()]] = slotData;
     });
-    console.log("updated item data")
-    console.log(fullItemData)
+    // console.log("updated item data")
+    // console.log(fullItemData)
     updateEquipmentFromImportedData(fullItemData);
     return fullItemData;
+};
+
+const clearNewItem = () => {
+    const newItemIcon = document.getElementById("new-equipped-item-icon");
+    const newItemLevel = document.getElementById("new-item-item-level");
+    const itemSearch = document.getElementById("new-equipped-item-search");
+    const newItemInfoContainer = document.getElementById("new-equipped-item-info-container");
+    const newItemInfo = document.getElementById("new-equipped-item-info");
+    const replaceItemButton = document.getElementById("replace-item-button");
+
+    newItemInfo.innerHTML = "";
+
+    newItemIcon.src = "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg";
+    newItemIcon.style.opacity = 0.2;
+    newItemIcon.style.filter = "grayscale(1)";
+
+    newItemLevel.textContent = "";
+    newItemLevel.style.color = "var(--light-font-colour)";
+    newItemLevel.style.borderTop = `1px solid var(--border-colour-3)`;
+
+    itemSearch.style.color = "var(--light-font-colour)";
+    itemSearch.style.border = `1px solid var(--border-colour-3)`;
+    itemSearch.style.borderBottom = "none";
+    itemSearch.value = "";
+
+    newItemInfoContainer.style.border = `1px solid var(--border-colour-3)`;
+
+    newItemInfo.style.borderLeft = `1px solid var(--border-colour-3)`;
+    replaceItemButton.style.borderTop = `1px solid var(--border-colour-3)`;
+    replaceItemButton.style.borderRight = `1px solid var(--border-colour-3)`;
 };
 
 const initialiseEquipment = () => {
     const updateEquippedItemDisplay = (itemSlot, itemSlots) => {
         const currentEquippedIcon = document.getElementById("current-equipped-item-icon");
         const currentItemLevel = document.getElementById("equipped-item-item-level");
+        currentItemLevel.contentEditable = true;
+        currentItemLevel.style.outline = "none";
         const currentItemTitle = document.getElementById("current-equipped-item-title");
         const currentItemInfoContainer = document.getElementById("current-equipped-item-info-container");
         const currentItemInfo = document.getElementById("current-equipped-item-info");
 
-        console.log(itemSlot)
-        console.log(itemSlot.getAttribute("data-item-data"))    
         const itemSlotData = JSON.parse(itemSlot.getAttribute("data-item-data"));
 
         const updateItemData = (property, new_value) => {
+            if (new_value[0]?.type === "embellishment") {
+                itemSlotData["limit"] = "Unique-Equipped: Embellished (2)";
+            };
             itemSlotData[property] = new_value;
             itemSlot.setAttribute("data-item-data", JSON.stringify(itemSlotData))
             generateFullItemData();
             updateStats();
         };
 
-        itemSlots.forEach(itemSlot => {
-            itemSlot.querySelector(".item-slot-hover").classList.remove("item-slot-selected");
-            itemSlot.querySelector(".item-slot-hover").style.backgroundColor = "var(--tooltip-colour)";
-        })
-        itemSlot.querySelector(".item-slot-hover").classList.add("item-slot-selected");
-        itemSlot.querySelector(".item-slot-hover").style.backgroundColor = "var(--panel-colour-5)";
+        const currentItemLevelBlur = () => {
+            let fullItemData = generateFullItemData();
+            const newItemLevel = currentItemLevel.textContent;
+            const currentItemSlot = itemSlotsMap[itemSlot.getAttribute("data-item-slot").toLowerCase()];
+            console.log("Generating with:", itemSlotData.stats, currentItemSlot, newItemLevel)
+            const newStats = generateItemStats(itemSlotData.stats, currentItemSlot, newItemLevel);
+            fullItemData.equipment[currentItemSlot].stats = newStats;
+            fullItemData.equipment[currentItemSlot].item_level = newItemLevel;
+            updateEquipmentFromImportedData(fullItemData);
+            updateEquippedItemDisplay(itemSlot, itemSlots);
+            updateStats();
+        };
 
-        const itemName = itemSlotData.name;
-        const itemLevel = itemSlotData.item_level;
-        const itemIcon = itemSlotData.item_icon;
-        const rarityColour = `var(--rarity-${itemSlotData.quality.toLowerCase()})`;
+        updateBlurListener(currentItemLevel, currentItemLevelBlur);
 
-        currentEquippedIcon.src = itemIcon;
-        currentEquippedIcon.style.filter = "grayscale(0)";
-        currentEquippedIcon.style.opacity = "1";
-
-        currentItemLevel.textContent = itemLevel;
-        currentItemLevel.style.color = rarityColour;
-        currentItemLevel.style.borderTop = `1px solid ${rarityColour}`;
-
-        currentItemTitle.style.border = `1px solid ${rarityColour}`;
-        currentItemTitle.style.borderBottom = "none";
-        currentItemTitle.innerHTML = `<span>Currently equipped: </span><span style="color: ${rarityColour}">${itemName}</span>`;
-
-        currentItemInfoContainer.style.border = `1px solid ${rarityColour}`;
-        
-        currentItemInfo.style.borderLeft = `1px solid ${rarityColour}`;
-
-        const jewelleryItemSlots = ["Necklace", "Ring 1", "Ring 2"];
-        const miscItemSlots = ["Trinket 1", "Trinket 2"];
-        const selectedItemSlot = itemSlot.getAttribute("data-item-slot");
-
-        if (jewelleryItemSlots.includes(selectedItemSlot)) {
-            return
-        } else if (miscItemSlots.includes(selectedItemSlot)) {
-            return
-        } else {
-            currentItemInfo.innerHTML = "";
-            const currentItemLeftContainer = createElement("div", "current-equipped-item-info-left", null);      
-            currentItemInfo.appendChild(currentItemLeftContainer);
-            const currentItemRightContainer = createElement("div", "current-equipped-item-info-right", null);
-            currentItemInfo.appendChild(currentItemRightContainer);
-            // left
+        const createStatsDisplay = () => {
             const currentItemStats = itemSlotData.stats;
             const secondaryStats = ["haste", "versatility", "mastery", "crit"].filter(stat => currentItemStats.hasOwnProperty(stat))
                                                                               .sort((a, b) => currentItemStats[b] - currentItemStats[a])
                                                                               .map(stat => {
                                                                                 return {name: stat, value: currentItemStats[stat]}
-                                                                              })                                                                 
+                                                                              });                                                             
 
-            const currentItemDetails = [
-                {id: "current-equipped-item-intellect", text: `+${itemSlotData.stats["intellect"]} Intellect`, colour: "var(--stat-intellect)"},
-                {id: "current-equipped-item-stat-one", text: `+${secondaryStats[0]["value"]} ${secondaryStats[0]["name"].charAt(0).toUpperCase()}${secondaryStats[0]["name"].slice(1)}`, colour: `var(--stat-${secondaryStats[0]["name"]})`},
-                {id: "current-equipped-item-stat-two", text: `+${secondaryStats[1]["value"]} ${secondaryStats[1]["name"].charAt(0).toUpperCase()}${secondaryStats[1]["name"].slice(1)}`, colour: `var(--stat-${secondaryStats[1]["name"]})`},
-                {id: "current-equipped-item-leech", text: itemSlotData.stats["leech"] ? `+${itemSlotData.stats["leech"]} Leech` : "", colour: "var(--leech-font)"},
-            ];
-            currentItemDetails.forEach(item => {
-                const field = createElement("div", "current-equipped-item-field-left", item.id);
+            const currentItemDetails = [];  
+            if (itemSlotData.stats["intellect"]) {
+                currentItemDetails.push({
+                    id: `current-equipped-item-intellect`,
+                    text: `+${itemSlotData.stats["intellect"]} Intellect`,
+                    colour: "var(--stat-intellect)"
+                });
+            };                                                      
+            secondaryStats.forEach((stat, index) => {
+                currentItemDetails.push({
+                    id: `current-equipped-item-stat-${index + 1}`,
+                    text: `+${stat.value} ${stat.name.charAt(0).toUpperCase()}${stat.name.slice(1)}`,
+                    colour: `var(--stat-${stat.name})`
+                });
+            });
+            
+            if (itemSlotData.stats["leech"]) {
+                currentItemDetails.push({
+                    id: `current-equipped-item-leech`,
+                    text: `+${itemSlotData.stats["leech"]} Leech`,
+                    colour: "var(--leech-font)"
+                });
+            };
+
+            const itemDetailsLength = currentItemDetails.length;
+            if (itemDetailsLength < 4) {
+                for (let i = 0; i < 4 - itemDetailsLength; i++) {
+                    currentItemDetails.push({ id: "", text: "", colour: "" });
+                };
+            };
+
+            currentItemDetails.forEach((item, index) => {
+                const field = createElement("div", "current-equipped-item-field-left",null);
+                field.id = `current-equipped-item-field-left-${index};`
                 field.textContent = item.text;
                 field.style.color = item.colour;
                 currentItemLeftContainer.appendChild(field);
             });
+        };
 
-            // right
-            // enchants
+        const createItemBonusesDisplay = () => {
             const currentItemEnchantSelect = createElement("div", "current-equipped-item-field-right", "current-equipped-item-enchants");
             const defaultEnchantOption = createElement("div", "current-equipped-item-default-enchant-option", null);
-            if (itemSlotData["enchantments"]) {
+            if (itemSlotData["enchantments"] && itemSlotData["enchantments"].length > 0) {
                 defaultEnchantOption.textContent = itemSlotData["enchantments"][0].split("|")[0];
                 defaultEnchantOption.style.color = "var(--rarity-uncommon)";
+            } else if (itemSlotData["enchantments"] && itemSlotData["enchantments"].length == 0) {
+                defaultEnchantOption.textContent = "No enchant";
+                defaultEnchantOption.style.color = "var(--rarity-common)";
             } else {
                 defaultEnchantOption.textContent = "No enchants available";
-                defaultEnchantOption.style.color = "var(--light-font-colour)";
+                defaultEnchantOption.style.color = "var(--rarity-poor)";
             };
-            
             currentItemEnchantSelect.appendChild(defaultEnchantOption);
 
             const enchantOptions = createElement("div", "current-equipped-item-enchant-options", null);
             currentItemEnchantSelect.appendChild(enchantOptions);
             currentItemEnchantSelect.addEventListener("click", () => {
-                enchantOptions.style.display = enchantOptions.style.display === "flex" ? "none" : "flex";
+                if (itemSlotData["enchantments"]) {
+                    enchantOptions.style.display = enchantOptions.style.display === "flex" ? "none" : "flex";
+                };         
             });
 
             itemSlotBonuses[selectedItemSlot]["enchants"].forEach(enchant => {
@@ -336,6 +348,7 @@ const initialiseEquipment = () => {
                     if (enchantOption.textContent === "No enchant") {
                         defaultEnchantOption.textContent = `${enchantOption.textContent}`;
                         defaultEnchantOption.style.color = "var(--light-font-colour)";
+                        updatedEnchantData = [];
                     } else {
                         defaultEnchantOption.textContent = `Enchanted: ${enchantOption.textContent}`;
                         defaultEnchantOption.style.color = "var(--rarity-uncommon)";
@@ -392,6 +405,18 @@ const initialiseEquipment = () => {
                     modalGemIcon.src = gemIcon;
                     modalGemIcon.style.border = `1px solid var(--stat-${gemStatOne.replace(/\+\d+\s+/, "").toLowerCase()})`;
                     modalGemContainer.appendChild(modalGemIcon);
+                    modalGemContainer.addEventListener("click", () => {
+                        let newGemData = [];
+                        if (itemSlotData["gems"]) {
+                            newGemData = [...itemSlotData["gems"]];
+                            newGemData.push(gemName);
+                            updateItemData("gems", newGemData);
+                        } else {
+                            newGemData.push(gemName);
+                            updateItemData("gems", newGemData);
+                        };
+                        updateEquippedItemDisplay(itemSlot, itemSlots);
+                    });
 
                     const modalGemTooltip = createElement("div", "gem-modal-tooltip", null);
                     modalGemTooltip.style.display = "none";
@@ -424,13 +449,15 @@ const initialiseEquipment = () => {
                     modalGemContainer.addEventListener("mouseleave", () => {
                         modalGemTooltip.style.display = "none";
                     });
+                    modalGemContainer.addEventListener("click", () => {
+                        modalGemTooltip.style.display = "none";
+                    });
 
                     row.appendChild(modalGemContainer);
                 });
 
                 addGemModal.appendChild(row);
             });
-
             currentItemGemsContainer.appendChild(addGemContainer);
 
             const gemsData = itemSlotData["gems"];
@@ -442,12 +469,164 @@ const initialiseEquipment = () => {
                     currentItemGemContainer.appendChild(currentItemGemIcon);
 
                     currentItemGemContainer.addEventListener("click", () => {
-                        currentItemGemContainer.remove()
+                        currentItemGemContainer.remove();
+                        if (itemSlotData["gems"]) {
+                            const indexToRemove = itemSlotData["gems"].findIndex(gemToRemove => gemToRemove === gem);
+                            
+                            if (indexToRemove !== -1) {
+                                itemSlotData["gems"].splice(indexToRemove, 1);
+                                updateItemData("gems", itemSlotData["gems"]);
+                            };
+                        };
+                        updateEquippedItemDisplay(itemSlot, itemSlots);
                     });
 
                     currentItemGemsContainer.insertBefore(currentItemGemContainer, addGemContainer);
                 });
             };
+
+            // embellishments
+            const currentItemEmbellishmentSelect = createElement("div", "current-equipped-item-field-right-double", "current-equipped-item-embellishments");
+            const defaultEmbellishmentOption = createElement("div", "current-equipped-item-default-embellishment-option", null);
+            if (itemSlotData["effects"].length > 0 && (craftedItems[itemSlotData.name] || embellishmentItems[itemSlotData.name])) {
+                defaultEmbellishmentOption.textContent = `Embellishment: ${itemSlotData["effects"][0].name}`;
+                defaultEmbellishmentOption.style.color = "var(--mana)";
+            } else if (craftedItems[itemSlotData.name] || embellishmentItems[itemSlotData.name]) {
+                defaultEmbellishmentOption.textContent = `No embellishment`;
+                defaultEmbellishmentOption.style.color = "var(--light-font-colour)";
+            } else {
+                defaultEmbellishmentOption.textContent = `No embellishments available`;
+                defaultEmbellishmentOption.style.color = "var(--rarity-poor)";
+            };
+            currentItemEmbellishmentSelect.appendChild(defaultEmbellishmentOption);
+
+            const embellishmentOptions = createElement("div", "current-equipped-item-embellishment-options", null);
+            currentItemEmbellishmentSelect.appendChild(embellishmentOptions);
+            currentItemEmbellishmentSelect.addEventListener("click", () => {
+                if (craftedItems[itemSlotData.name] || embellishmentItems[itemSlotData.name]) {
+                    embellishmentOptions.style.display = embellishmentOptions.style.display === "flex" ? "none" : "flex";
+                };
+            });
+
+            if (craftedItems[itemSlotData.name]) {
+                for (const embellishment in itemSlotBonuses[selectedItemSlot]["embellishments"]) {
+                    const embellishmentOption = createElement("div", "current-equipped-item-embellishment-option", null);
+                    embellishmentOption.textContent = embellishment;
+                    embellishmentOptions.appendChild(embellishmentOption);
+    
+                    embellishmentOption.addEventListener("click", () => {
+                        let updatedEmbellishmentData = null;
+                        if (embellishmentOption.textContent === "No embellishment") {
+                            defaultEmbellishmentOption.textContent = `${embellishmentOption.textContent}`;
+                            defaultEmbellishmentOption.style.color = "var(--light-font-colour)";
+                            updatedEmbellishmentData = [];
+                        } else {
+                            defaultEmbellishmentOption.textContent = `Embellishment: ${embellishmentOption.textContent}`;
+                            defaultEmbellishmentOption.style.color = "var(--rarity-uncommon)";
+                            updatedEmbellishmentData = [{"name": embellishmentsData[embellishment].name, "description": embellishmentsData[embellishment].description, "id": embellishmentsData[embellishment].id, "type": embellishmentsData[embellishment].type}];
+                        };
+                        updateItemData("effects", updatedEmbellishmentData);
+                        updateEquippedItemDisplay(itemSlot, itemSlots);
+                    });
+                };
+            };   
+            currentItemRightContainer.appendChild(currentItemEmbellishmentSelect);
+        };
+
+        const createTrinketBonusesDisplay = () => {
+            const currentTrinketEffectField = createElement("div", "current-equipped-item-field-right-trinket", "current-equipped-item-trinket-effects-0");
+            const currentTrinketEffect = createElement("div", "current-equipped-item-trinket-effect", null);
+            if (itemSlotData["effects"].length > 0) {
+                currentTrinketEffect.textContent = `${itemSlotData["effects"][0].description}`;
+                currentTrinketEffect.style.color = "var(--mana)";
+            } else {
+                currentTrinketEffect.textContent = `No effect`;
+                currentTrinketEffect.style.color = "var(--rarity-poor)";
+            };
+            currentTrinketEffectField.appendChild(currentTrinketEffect);
+            currentItemRightContainer.appendChild(currentTrinketEffectField);
+        };
+
+        itemSlots.forEach(itemSlot => {
+            itemSlot.querySelector(".item-slot-hover").classList.remove("item-slot-selected");
+            itemSlot.querySelector(".item-slot-hover").style.backgroundColor = "var(--tooltip-colour)";
+        })
+        itemSlot.querySelector(".item-slot-hover").classList.add("item-slot-selected");
+        itemSlot.querySelector(".item-slot-hover").style.backgroundColor = "var(--panel-colour-5)";
+
+        const itemName = itemSlotData.name;
+        const itemLevel = itemSlotData.item_level;
+        const itemIcon = itemSlotData.item_icon;
+        const rarityColour = `var(--rarity-${itemSlotData.quality.toLowerCase()})`;
+
+        currentEquippedIcon.src = itemIcon;
+        currentEquippedIcon.style.filter = "grayscale(0)";
+        currentEquippedIcon.style.opacity = "1";
+
+        if (!itemSlotData.item_id) return;
+
+        currentItemLevel.textContent = itemLevel;
+        currentItemLevel.style.color = rarityColour;
+        currentItemLevel.style.borderTop = `1px solid ${rarityColour}`;
+
+        currentItemTitle.style.border = `1px solid ${rarityColour}`;
+        currentItemTitle.style.borderBottom = "none";
+        currentItemTitle.innerHTML = `<span>Currently equipped: </span><span style="color: ${rarityColour}">${itemName}</span>`;
+
+        currentItemInfoContainer.style.border = `1px solid ${rarityColour}`;
+        
+        currentItemInfo.style.borderLeft = `1px solid ${rarityColour}`;
+
+        const jewelleryItemSlots = ["Necklace", "Ring 1", "Ring 2"];
+        const miscItemSlots = ["Trinket 1", "Trinket 2"];
+        const selectedItemSlot = itemSlot.getAttribute("data-item-slot");
+
+        currentItemInfo.innerHTML = "";
+        
+        const currentItemLeftContainer = createElement("div", "current-equipped-item-info-left", null);      
+        currentItemInfo.appendChild(currentItemLeftContainer);
+        const currentItemRightContainer = createElement("div", "current-equipped-item-info-right", null);
+        currentItemInfo.appendChild(currentItemRightContainer);
+
+        if (jewelleryItemSlots.includes(selectedItemSlot)) {
+            // left
+            createStatsDisplay();
+
+            // right
+            createItemBonusesDisplay();
+
+        } else if (miscItemSlots.includes(selectedItemSlot)) {
+            // left
+            createStatsDisplay();
+
+            // right
+            createTrinketBonusesDisplay();
+        } else {
+            // left
+            createStatsDisplay();
+
+            // right
+            createItemBonusesDisplay();
+        };
+
+        currentItemInfo.querySelectorAll(".current-equipped-item-field-left").forEach(item => {
+            item.style.borderBottom = `1px solid ${rarityColour}`;
+        });
+        currentItemInfo.querySelectorAll(".current-equipped-item-field-right").forEach(item => {
+            item.style.borderBottom = `1px solid ${rarityColour}`;
+        });
+        currentItemInfo.querySelectorAll(".current-equipped-item-enchant-options").forEach(item => {
+            item.style.border = `1px solid ${rarityColour}`;
+        });
+        currentItemInfo.querySelectorAll(".current-equipped-item-embellishment-options").forEach(item => {
+            item.style.border = `1px solid ${rarityColour}`;
+        });     
+        currentItemInfo.querySelector(".current-equipped-item-info-left").style.borderRight = `1px solid ${rarityColour}`;
+        if (currentItemInfo.querySelector(".current-equipped-item-default-enchant-option")) {
+            currentItemInfo.querySelector(".current-equipped-item-default-enchant-option").style.borderBottom = `1px solid ${rarityColour}`;
+        };
+        if (currentItemInfo.querySelector(".current-equipped-item-default-embellishment-option")) {
+            currentItemInfo.querySelector(".current-equipped-item-default-embellishment-option").style.borderBottom = `1px solid ${rarityColour}`;
         };
     };
 
@@ -460,6 +639,7 @@ const initialiseEquipment = () => {
             updateEquippedItemDisplay(itemSlot, itemSlots);
             const dataItemSlot = itemSlot.getAttribute("data-item-slot");
             itemSlotDropdown.value = dataItemSlot;
+            clearNewItem();
         });
     });
 
@@ -467,12 +647,411 @@ const initialiseEquipment = () => {
         const slotName = e.target.value.toLowerCase();
         const itemSlot = document.getElementById(`item-slot-${itemSlotsMap[slotName]}`);
         updateEquippedItemDisplay(itemSlot, itemSlots);
+        clearNewItem();
     });
 
     // item search
+    let currentItemSuggestion = "";
+    let finalNewItemData = {};
+
     const generateSearchResults = () => {
+        const updateNewItemDisplay = (item) => {
+            finalNewItemData = item;
+
+            const newItemIcon = document.getElementById("new-equipped-item-icon");
+            const newItemLevel = document.getElementById("new-item-item-level");
+            const itemSearch = document.getElementById("new-equipped-item-search");
+            const newItemInfoContainer = document.getElementById("new-equipped-item-info-container");
+            const newItemInfo = document.getElementById("new-equipped-item-info");
+
+            const rarityColour = `var(--rarity-${item.quality.toLowerCase()})`;
+            newItemIcon.src = item.icon;
+            newItemIcon.style.opacity = 1;
+            newItemIcon.style.filter = "grayscale(0)";
+
+            newItemLevel.textContent = item.base_item_level;
+            newItemLevel.style.color = rarityColour;
+            newItemLevel.style.borderTop = `1px solid ${rarityColour}`;
+
+            itemSearch.style.color = rarityColour;
+            itemSearch.style.border = `1px solid ${rarityColour}`;
+            itemSearch.style.borderBottom = "none";
+
+            newItemInfoContainer.style.border = `1px solid ${rarityColour}`;
+        
+            newItemInfo.style.borderLeft = `1px solid ${rarityColour}`;
+            replaceItemButton.style.borderTop = `1px solid ${rarityColour}`;
+            replaceItemButton.style.borderRight = `1px solid ${rarityColour}`;
+
+            newItemInfo.innerHTML = "";
+            const newItemLeftContainer = createElement("div", "new-equipped-item-info-left", null);      
+            newItemInfo.appendChild(newItemLeftContainer);
+            const newItemRightContainer = createElement("div", "new-equipped-item-info-right", null);
+            newItemInfo.appendChild(newItemRightContainer);
+
+            // stats
+            const createNewItemStatsDisplay = () => {
+                const newItemStats = item.stats;
+                
+                const secondaryStats = ["Haste", "Versatility", "Mastery", "Critical Strike"].filter(stat => newItemStats.hasOwnProperty(stat))
+                                                                                .sort((a, b) => newItemStats[b] - newItemStats[a])
+                                                                                .map(stat => {
+                                                                                    return {name: stat, value: newItemStats[stat]}
+                                                                                });                                                             
+
+                const newItemDetails = [];  
+                if (item.stats["Intellect"]) {
+                    newItemDetails.push({
+                        id: `new-equipped-item-intellect`,
+                        text: `+${item.stats["Intellect"]} Intellect`,
+                        colour: "var(--stat-intellect)"
+                    });
+                };                                                      
+                secondaryStats.forEach((stat, index) => {
+                    if (stat.name === "Critical Strike") {
+                        stat.name = "Crit";
+                    };
+                    newItemDetails.push({
+                        id: `new-equipped-item-stat-${index + 1}`,
+                        text: `+${stat.value} ${stat.name.charAt(0).toUpperCase()}${stat.name.slice(1)}`,
+                        colour: `var(--stat-${stat.name.toLowerCase()})`
+                    });
+                });
+                
+                if (item.stats["leech"]) {
+                    newItemDetails.push({
+                        id: `newt-equipped-item-leech`,
+                        text: `+${item.stats["leech"]} Leech`,
+                        colour: "var(--leech-font)"
+                    });
+                };
+
+                const itemDetailsLength = newItemDetails.length;
+                if (itemDetailsLength < 4) {
+                    for (let i = 0; i < 4 - itemDetailsLength; i++) {
+                        newItemDetails.push({ id: "", text: "", colour: "" });
+                    };
+                };
+
+                newItemDetails.forEach(item => {
+                    const field = createElement("div", "new-equipped-item-field-left", item.id);
+                    field.textContent = item.text;
+                    field.style.color = item.colour;
+                    newItemLeftContainer.appendChild(field);
+                });
+            };
+
+            const selectedItemSlot = document.getElementById("equipped-items-edit-choose-slot-dropdown").value;
+
+            const createNewItemBonusesDisplay = () => {
+                const availableEnchants = itemSlotBonuses[selectedItemSlot]["enchants"];
+        
+                const newItemEnchantSelect = createElement("div", "new-equipped-item-field-right", "new-equipped-item-enchants");
+                const defaultEnchantOption = createElement("div", "new-equipped-item-default-enchant-option", null);
+                if (availableEnchants.length > 0) {
+                    defaultEnchantOption.textContent = "No enchant";
+                    defaultEnchantOption.style.color = "var(--rarity-common)";
+                } else {
+                    defaultEnchantOption.textContent = "No enchants available";
+                    defaultEnchantOption.style.color = "var(--rarity-poor)";
+                };
+                newItemEnchantSelect.appendChild(defaultEnchantOption);
+
+                const enchantOptions = createElement("div", "new-equipped-item-enchant-options", null);
+                newItemEnchantSelect.appendChild(enchantOptions);
+                newItemEnchantSelect.addEventListener("click", () => {
+                    if (defaultEnchantOption.textContent !== "No enchants available") {
+                        enchantOptions.style.display = enchantOptions.style.display === "flex" ? "none" : "flex";      
+                    };
+                });
+
+                availableEnchants.forEach(enchant => {
+                    const enchantOption = createElement("div", "new-equipped-item-enchant-option", null);
+                    enchantOption.textContent = enchant;
+                    enchantOptions.appendChild(enchantOption);
+
+                    enchantOption.addEventListener("click", () => {
+                        let updatedEnchantData = null;
+                        if (enchantOption.textContent === "No enchant") {
+                            defaultEnchantOption.textContent = `${enchantOption.textContent}`;
+                            defaultEnchantOption.style.color = "var(--light-font-colour)";
+                            updatedEnchantData = [];
+                        } else {
+                            defaultEnchantOption.textContent = `Enchanted: ${enchantOption.textContent}`;
+                            defaultEnchantOption.style.color = "var(--rarity-uncommon)";
+                            updatedEnchantData = [`Enchanted: ${enchantOption.textContent}`];
+                        };
+                        item["enchantments"] = updatedEnchantData;
+                    });
+                });
+                newItemRightContainer.appendChild(newItemEnchantSelect);
+
+                // gems
+                const newItemGemsField = createElement("div", "new-equipped-item-field-right new-equipped-item-gems-field", null);
+                newItemRightContainer.appendChild(newItemGemsField);
+
+                const newItemGemsContainer = createElement("div", "new-equipped-item-gems-container", null);
+                newItemGemsField.appendChild(newItemGemsContainer);
+
+                const addGemContainer = createElement("div", "new-equipped-item-add-gem-container", null);
+                const addGemButton = createElement("div", "new-equipped-item-add-gem-button", null);
+                const addGemIcon = createElement("div", "new-equipped-item-add-gem-icon fa-solid fa-plus", null);
+                addGemButton.appendChild(addGemIcon);
+                addGemContainer.appendChild(addGemButton);
+
+                // gem modal
+                const addGemModal = createElement("div", "add-gem-modal", null);
+                addGemContainer.appendChild(addGemModal);
+                addGemContainer.addEventListener("click", () => {
+                    addGemModal.style.display = addGemModal.style.display === "block" ? "none" : "block";
+                });
+
+                const secondaryStatRow = createElement("div", "gem-modal-row stat-label-row", null);
+                const statLabelsContainer = createElement("div", "stat-labels-container", null);
+                secondaryStatRow.appendChild(statLabelsContainer);
+                const statLabels = ["+Haste", "+Crit", "+Mast", "+Vers", "+Int"];
+                statLabels.forEach(label => {
+                    const container = createElement("div", "row-stat-label", null);
+                    container.textContent = label;
+                    statLabelsContainer.appendChild(container);
+                })
+                addGemModal.appendChild(secondaryStatRow);
+
+                let newGemData = [];
+                Object.values(groupedGems).forEach(group => {
+                    const row = createElement("div", "gem-modal-row", null);
+
+                    const rowLabel = createElement("div", "gem-modal-row-label", null);
+                    rowLabel.textContent = group["label"];
+                    rowLabel.style.color = `var(--stat-${group["label"].toLowerCase()})`;
+                    row.appendChild(rowLabel);
+
+                    group["gems"].forEach(([gemName, gemIcon, gemStatOne, gemStatTwo]) => {
+                        const modalGemContainer = createElement("div", "gem-modal-gem-container", null);
+                        const modalGemIcon = createElement("img", "gem-modal-gem-icon", null);
+                        modalGemIcon.src = gemIcon;
+                        modalGemIcon.style.border = `1px solid var(--stat-${gemStatOne.replace(/\+\d+\s+/, "").toLowerCase()})`;
+                        modalGemContainer.appendChild(modalGemIcon);
+                        modalGemContainer.addEventListener("click", () => {
+                            newGemData.push(gemName);
+                            item["gems"] = newGemData;
+
+                            const newItemGemContainer = createElement("div", "new-equipped-item-gem-container", null);
+                            const newItemGemIcon = createElement("img", "new-equipped-item-gem-icon", null);
+                            newItemGemIcon.src = gemIcon;
+                            newItemGemContainer.appendChild(newItemGemIcon);
+
+                            newItemGemContainer.addEventListener("click", () => {
+                                newItemGemContainer.remove();
+                                if (item["gems"]) {
+                                    const indexToRemove = item["gems"].findIndex(gemToRemove => gemToRemove === gemName);
+                                    
+                                    if (indexToRemove !== -1) {
+                                        item["gems"].splice(indexToRemove, 1);
+                                    };
+                                };
+                            });
+                            newItemGemsContainer.insertBefore(newItemGemContainer, addGemContainer);           
+                        });
+
+                        const modalGemTooltip = createElement("div", "gem-modal-tooltip", null);
+                        modalGemTooltip.style.display = "none";
+                        modalGemTooltip.style.position = "absolute";
+                        document.body.appendChild(modalGemTooltip);
+                        modalGemContainer.addEventListener("mousemove", (e) => {
+                            const xOffset = 15;
+                            const yOffset = 15;
+
+                            modalGemTooltip.style.left = e.pageX + xOffset + "px";
+                            modalGemTooltip.style.top = e.pageY + yOffset + "px";
+
+                            modalGemTooltip.style.display = "block";
+                            modalGemTooltip.style.border = `1px solid var(--stat-${gemStatOne.replace(/\+\d+\s+/, "").toLowerCase()})`;
+
+                            modalGemTooltip.innerHTML = "";
+                            const tooltipGemName = createElement("div", "gem-modal-tooltip-gem-name", null);
+                            tooltipGemName.innerHTML = `<span style="color: var(--stat-${gemStatOne.replace(/\+\d+\s+/, "").toLowerCase()})">${gemName}</span>`;
+                            
+                            const tooltipStats = createElement("div", "gem-modal-tooltip-gem-stats", null);
+                            if (gemStatTwo) {
+                                tooltipStats.innerHTML = `<span style="color: var(--stat-${gemStatOne.replace(/\+\d+\s+/, "").toLowerCase()})">${gemStatOne}</span> & <span style="color: var(--stat-${gemStatTwo.replace(/\+\d+\s+/, "").toLowerCase()})">${gemStatTwo}</span>`;
+                            } else {
+                                tooltipStats.innerHTML = `<span style="color: var(--stat-${gemStatOne.replace(/\+\d+\s+/, "").toLowerCase()})">${gemStatOne}</span>`;
+                            };
+                            
+                            modalGemTooltip.appendChild(tooltipGemName);
+                            modalGemTooltip.appendChild(tooltipStats);
+                        });
+                        modalGemContainer.addEventListener("mouseleave", () => {
+                            modalGemTooltip.style.display = "none";
+                        });
+                        modalGemContainer.addEventListener("click", () => {
+                            modalGemTooltip.style.display = "none";
+                        });
+
+                        row.appendChild(modalGemContainer);
+                    });
+
+                    addGemModal.appendChild(row);
+                });
+                newItemGemsContainer.appendChild(addGemContainer);
+
+                const gemsData = item["gems"];
+                if (gemsData) {
+                    gemsData.forEach(gem => {
+                        const newItemGemContainer = createElement("div", "new-equipped-item-gem-container", null);
+                        const newItemGemIcon = createElement("img", "new-equipped-item-gem-icon", null);
+                        newItemGemIcon.src = itemsToIconsMap[gem];
+                        newItemGemContainer.appendChild(newItemGemIcon);
+
+                        newItemGemContainer.addEventListener("click", () => {
+                            newItemGemContainer.remove();
+                            if (item["gems"]) {
+                                const indexToRemove = item["gems"].findIndex(gemToRemove => gemToRemove === gem);
+                                
+                                if (indexToRemove !== -1) {
+                                    item["gems"].splice(indexToRemove, 1);
+                                };
+                            };
+                        });
+
+                        newItemGemsContainer.insertBefore(newItemGemContainer, addGemContainer);
+                    });
+                };
+
+                // embellishments
+                const newItemEmbellishmentSelect = createElement("div", "new-equipped-item-field-right-double", "new-equipped-item-embellishments");
+                const defaultEmbellishmentOption = createElement("div", "new-equipped-item-default-embellishment-option", null);
+                if (item["effects"].length > 0 && (craftedItems[item.name] || embellishmentItems[item.name])) {
+                    defaultEmbellishmentOption.textContent = `Embellishment: ${item["effects"][0].name}`;
+                    defaultEmbellishmentOption.style.color = "var(--mana)";
+                } else if (craftedItems[item.name] || embellishmentItems[item.name]) {
+                    defaultEmbellishmentOption.textContent = `No embellishment`;
+                    defaultEmbellishmentOption.style.color = "var(--light-font-colour)";
+                } else {
+                    defaultEmbellishmentOption.textContent = `No embellishments available`;
+                    defaultEmbellishmentOption.style.color = "var(--rarity-poor)";
+                };
+                newItemEmbellishmentSelect.appendChild(defaultEmbellishmentOption);
+
+                const embellishmentOptions = createElement("div", "new-equipped-item-embellishment-options", null);
+                newItemEmbellishmentSelect.appendChild(embellishmentOptions);
+                newItemEmbellishmentSelect.addEventListener("click", () => {
+                    if (craftedItems[item.name]) {
+                        embellishmentOptions.style.display = embellishmentOptions.style.display === "flex" ? "none" : "flex";
+                    };
+                });
+
+                if (craftedItems[item.name]) {
+                    for (const embellishment in itemSlotBonuses[selectedItemSlot]["embellishments"]) {
+                        const embellishmentOption = createElement("div", "new-equipped-item-embellishment-option", null);
+                        embellishmentOption.textContent = embellishment;
+                        embellishmentOptions.appendChild(embellishmentOption);
+        
+                        embellishmentOption.addEventListener("click", () => {
+                            let updatedEmbellishmentData = null;
+                            if (embellishmentOption.textContent === "No embellishment") {
+                                defaultEmbellishmentOption.textContent = `${embellishmentOption.textContent}`;
+                                defaultEmbellishmentOption.style.color = "var(--light-font-colour)";
+                                updatedEmbellishmentData = "";
+                            } else {
+                                defaultEmbellishmentOption.textContent = `Embellishment: ${embellishmentOption.textContent}`;
+                                defaultEmbellishmentOption.style.color = "var(--mana)";
+                                updatedEmbellishmentData = {"name": embellishmentsData[embellishment].name, "description": embellishmentsData[embellishment].description, "id": embellishmentsData[embellishment].id, "type": embellishmentsData[embellishment].type};
+                            };
+                            item["effects"].push(updatedEmbellishmentData);
+                            item["limit"] = "Unique-Equipped: Embellished (2)";
+                        });
+                    };
+                };   
+                newItemRightContainer.appendChild(newItemEmbellishmentSelect);
+
+                const newItemInfo = document.getElementById("new-equipped-item-info");
+
+                newItemInfo.querySelectorAll(".new-equipped-item-field-left").forEach(item => {
+                    item.style.borderBottom = `1px solid ${rarityColour}`;
+                });
+                newItemInfo.querySelectorAll(".new-equipped-item-field-right").forEach(item => {
+                    item.style.borderBottom = `1px solid ${rarityColour}`;
+                });
+                newItemInfo.querySelectorAll(".new-equipped-item-enchant-options").forEach(item => {
+                    item.style.border = `1px solid ${rarityColour}`;
+                });
+                newItemInfo.querySelectorAll(".new-equipped-item-embellishment-options").forEach(item => {
+                    item.style.border = `1px solid ${rarityColour}`;
+                });   
+
+                newItemInfo.querySelector(".new-equipped-item-info-left").style.borderRight = `1px solid ${rarityColour}`;
+                if (newItemInfo.querySelector(".new-equipped-item-default-enchant-option")) {
+                    newItemInfo.querySelector(".new-equipped-item-default-enchant-option").style.borderBottom = `1px solid ${rarityColour}`;
+                };
+                if (newItemInfo.querySelector(".new-equipped-item-default-embellishment-option")) {
+                    newItemInfo.querySelector(".new-equipped-item-default-embellishment-option").style.borderBottom = `1px solid ${rarityColour}`;
+                };
+            };
+    
+            const createNewItemTrinketBonusesDisplay = () => {
+                const newTrinketEffectField = createElement("div", "new-equipped-item-field-right-trinket", "new-equipped-item-trinket-effects-0");
+                const newTrinketEffect = createElement("div", "new-equipped-item-trinket-effect", null);
+                if (item["effects"].length > 0) {
+                    newTrinketEffect.textContent = `${item["effects"][0].description}`;
+                    newTrinketEffect.style.color = "var(--mana)";
+                } else {
+                    newTrinketEffect.textContent = `No effect`;
+                    newTrinketEffect.style.color = "var(--rarity-poor)";
+                };
+                newTrinketEffectField.appendChild(newTrinketEffect);
+                newItemRightContainer.appendChild(newTrinketEffectField);
+
+                const newItemInfo = document.getElementById("new-equipped-item-info");
+
+                newItemInfo.querySelectorAll(".new-equipped-item-field-left").forEach(item => {
+                    item.style.borderBottom = `1px solid ${rarityColour}`;
+                });
+            };
+
+            const jewelleryItemSlots = ["Necklace", "Ring 1", "Ring 2"];
+            const miscItemSlots = ["Trinket 1", "Trinket 2"];
+
+            if (jewelleryItemSlots.includes(selectedItemSlot)) {
+                // left
+                createNewItemStatsDisplay();
+
+                // right
+                createNewItemBonusesDisplay();
+
+            } else if (miscItemSlots.includes(selectedItemSlot)) {
+                // left
+                createNewItemStatsDisplay();
+
+                // right
+                createNewItemTrinketBonusesDisplay();
+            } else {
+                // left
+                createNewItemStatsDisplay();
+
+                // right
+                createNewItemBonusesDisplay();
+            };
+        };
+
         const searchInput = itemSearch.value.toLowerCase();
-        const filteredData = itemData.filter(item => item.name.toLowerCase().includes(searchInput));
+        const currentSlot = document.getElementById("equipped-items-edit-choose-slot-dropdown").value.toLowerCase();
+        
+        const filteredData = itemData.filter(item => {
+            const slot = item.item_slot.toLowerCase();
+            const searchMatch = item.name.toLowerCase().includes(searchInput);
+            const slotMap = blizzardItemSlotsMap[slot];
+
+            if (slot === "finger") {
+                return searchMatch && (itemSlotsMap[currentSlot] === "finger_1" || itemSlotsMap[currentSlot] === "finger_2");
+            } else if (slot === "trinket") {
+                return searchMatch && (itemSlotsMap[currentSlot] === "trinket_1" || itemSlotsMap[currentSlot] === "trinket_2");
+            } else {
+                return searchMatch && slotMap === itemSlotsMap[currentSlot];
+            };
+        });
+
         itemSuggestions.innerHTML = "";
         itemSuggestions.style.display = "block";
 
@@ -480,25 +1059,29 @@ const initialiseEquipment = () => {
             itemSuggestions.style.display = "none";
             return;
         };
-
+        
         filteredData.forEach(item => {
             const itemContainer = createElement("div", "item-search-suggestion-container", null);
 
             const itemSuggestion = createElement("div", "item-search-suggestion", null);
             itemSuggestion.textContent = item.name;
+            itemSuggestion.style.color = `var(--rarity-${item.quality.toLowerCase()})`;
             itemSuggestion.addEventListener("click", () => {
                 itemSearch.value = item.name;
                 itemSuggestions.innerHTML = "";
+                updateNewItemDisplay(item);
+                currentItemSuggestion = item;
             });
 
             if (filteredData.length <= 6) {
                 itemSuggestion.style.borderRight = "none";
             } else {
                 itemSuggestion.style.borderRight = "1px solid var(--border-colour-3)";
-            }
+            };
 
             const itemIcon = createElement("img", "item-search-icon", null);
             itemIcon.src = item.icon;
+            itemIcon.style.border = `1px solid var(--rarity-${item.quality.toLowerCase()})`;
 
             itemContainer.appendChild(itemIcon);
             itemContainer.appendChild(itemSuggestion);
@@ -511,6 +1094,7 @@ const initialiseEquipment = () => {
 
     itemSearch.addEventListener("input", () => {
         generateSearchResults();
+        itemSearch.style.color = "var(--light-font-colour)";
     });
 
     itemSearch.addEventListener("click", () => {
@@ -521,12 +1105,61 @@ const initialiseEquipment = () => {
         if (e.target !== itemSearch) {
             itemSuggestions.innerHTML = "";
             itemSuggestions.style.display = "none";
+            if (itemSearch.value !== "" && currentItemSuggestion) {
+                itemSearch.value = currentItemSuggestion.name;
+                itemSearch.style.color = `var(--rarity-${currentItemSuggestion.quality.toLowerCase()}`;
+            };
         };
     });
 
     const replaceItemButton = document.getElementById("replace-item-button");
     replaceItemButton.addEventListener("click", () => {
-        console.log(itemSearch.value)
+        const renameKeys = (data, keyMap) => {
+            const newData = {};
+            Object.keys(data).forEach(key => {
+                const newKey = keyMap[key] || key;
+                newData[newKey] = data[key];
+            });
+            return newData;
+        }
+        
+        const propertyKeyMap = {
+            "id": "item_id",
+            "icon": "item_icon",
+            "base_item_level": "item_level"
+        };
+
+        const statsKeyMap = {
+            "Intellect": "intellect",
+            "Haste": "haste",
+            "Critical Strike": "crit",
+            "Mastery": "mastery",
+            "Versatility": "versatility",
+            "Leech": "leech"
+        };
+
+        const currentSlot = document.getElementById("equipped-items-edit-choose-slot-dropdown").value.toLowerCase();
+        finalNewItemData["item_slot"] = itemSlotsMap[currentSlot];
+        clearNewItem();
+        let fullItemData = generateFullItemData();
+        const slotToReplace = finalNewItemData["item_slot"];
+
+        if (fullItemData.equipment && fullItemData.equipment[slotToReplace]) {
+            fullItemData.equipment[slotToReplace] = finalNewItemData;
+        };
+
+        finalNewItemData = renameKeys(fullItemData.equipment[itemSlotsMap[currentSlot]], propertyKeyMap);
+        finalNewItemData["stats"] = renameKeys(fullItemData.equipment[itemSlotsMap[currentSlot]]["stats"], statsKeyMap);
+        if (!finalNewItemData["enchantments"]) finalNewItemData["enchantments"] = [];
+        
+        fullItemData.equipment[slotToReplace] = finalNewItemData;
+
+        updateEquipmentFromImportedData(fullItemData);
+        const itemSlots = document.querySelectorAll(".item-slot");
+        const itemSlot = document.getElementById(`item-slot-${itemSlotsMap[currentSlot]}`);
+        itemSlot.setAttribute("data-item-data", JSON.stringify(finalNewItemData));
+        updateEquippedItemDisplay(itemSlot, itemSlots);
+        updateStats();
     });
 };
 

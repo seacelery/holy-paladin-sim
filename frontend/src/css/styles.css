@@ -870,7 +870,7 @@ body {
 
 #current-equipped-item-icon, #new-equipped-item-icon {
     width: 100px;
-    height: 100px;
+    height: calc(100px - 1px);
 
     opacity: 0.2;
 }
@@ -895,6 +895,7 @@ body {
 
 #current-equipped-item-title, #new-equipped-item-search {
     padding-left: 5px;
+    padding-top: 1px;
 
     width: 100%;
     height: 25px;
@@ -907,6 +908,11 @@ body {
     font-size: 14px;
 }
 
+#new-equipped-item-search {
+    padding-top: 0px;
+    margin-top: -1px;
+}
+
 #current-equipped-item-info, #new-equipped-item-info {
     display: flex;
 
@@ -915,16 +921,16 @@ body {
     border-left: 1px solid var(--border-colour-3);
 }
 
-.current-equipped-item-info-left {
+.current-equipped-item-info-left, .new-equipped-item-info-left {
     width: 28%;
     border-right: 1px solid var(--border-colour-3);
 }
 
-.current-equipped-item-info-right {
+.current-equipped-item-info-right, .new-equipped-item-info-right {
     width: 72%;
 }
 
-.current-equipped-item-field-left, .current-equipped-item-field-right {
+.current-equipped-item-field-left, .current-equipped-item-field-right, .current-equipped-item-field-right-double, .current-equipped-item-field-, .new-equipped-item-field-left, .new-equipped-item-field-right, .new-equipped-item-field-right-double {
     display: flex;
     align-items: center;
 
@@ -940,11 +946,11 @@ body {
     border-bottom: 1px solid var(--border-colour-3);
 }
 
-.current-equipped-item-field-left {
+.current-equipped-item-field-left, .new-equipped-item-field-left {
     padding-left: 6px;
 }
 
-.current-equipped-item-field-right {
+.current-equipped-item-field-right, .new-equipped-item-field-right {
     position: relative;
 }
 
@@ -952,24 +958,26 @@ body {
     border-bottom: none;
 }
 
-#current-equipped-item-intellect {
+.current-equipped-item-field-trinket, .new-equipped-item-field-trinket {
+    padding-top: 0px;
+    margin-top: 0px;
+    height: 100%;
+}
+
+#current-equipped-item-intellect, #new-equipped-item-intellect {
     color: var(--stat-intellect);
 }
 
-#current-equipped-item-leech {
+#current-equipped-item-leech, #new-equipped-item-leech {
     color: var(--leech-font);
 }
 
-#current-equipped-item-embellishments {
-
-}
-
-#current-equipped-item-enchants-0 {
+#current-equipped-item-enchants-0, #current-equipped-item-embellishments-0, #new-equipped-item-enchants-0, #new-equipped-item-embellishments-0 {
     position: relative;
     user-select: none;
 }
 
-.current-equipped-item-enchant-options, .current-equipped-item-embellishment-options {
+.current-equipped-item-enchant-options, .current-equipped-item-embellishment-options, .new-equipped-item-enchant-options, .new-equipped-item-embellishment-options {
     z-index: 5;
     display: none;
     flex-direction: column;
@@ -978,15 +986,19 @@ body {
     left: 0;
     right: 0;
     margin-left: -1px;
-    margin-top: -1px;
     width: calc(100% + 2px);
+    overflow: auto;
 
     overflow: auto;
     border: 1px solid var(--border-colour-3);
     background-color: var(--panel-colour-2);
 }
 
-.current-equipped-item-default-enchant-option, .current-equipped-item-default-embellishment-option {
+.current-equipped-item-embellishment-options, .new-equipped-item-embellishment-options {
+    height: 133px;
+}
+
+.current-equipped-item-default-enchant-option, .current-equipped-item-default-embellishment-option, .current-equipped-item-trinket-effect, .new-equipped-item-default-enchant-option, .new-equipped-item-default-embellishment-option, .new-equipped-item-trinket-effect {
     width: 100%;
     height: 33.5px;
 
@@ -1000,7 +1012,39 @@ body {
     color: var(--rarity-uncommon);
 }
 
-.current-equipped-item-enchant-option, .current-equipped-item-embellishment-option {
+.current-equipped-item-trinket-effect, .new-equipped-item-trinket-effect {
+    padding-bottom: 3px;
+    overflow: auto;
+}
+
+.current-equipped-item-trinket-effect::-webkit-scrollbar-thumb, .new-equipped-item-trinket-effect::-webkit-scrollbar-thumb {
+    border-left: 2px solid var(--panel-colour-6);
+}
+
+.current-equipped-item-trinket-effect, .new-equipped-item-trinket-effect {
+    height: 133px;
+    padding-top: 3px;
+    border-bottom: none;
+
+    font-size: 11px;
+    background-color: var(--tooltip-colour);
+}
+
+.current-equipped-item-trinket-effect:hover, .new-equipped-item-trinket-effect:hover {
+    cursor: auto;
+}
+
+.current-equipped-item-field-right-double, .new-equipped-item-field-right-double {
+    position: relative;
+
+    height: 67px;
+}
+
+.current-equipped-item-default-embellishment-option, .new-equipped-item-default-embellishment-option {
+    height: 67.5px;
+}
+
+.current-equipped-item-enchant-option, .current-equipped-item-embellishment-option, .new-equipped-item-enchant-option, .new-equipped-item-embellishment-option {
     width: 100%;
     height: 33.5px;
 
@@ -1008,22 +1052,22 @@ body {
     padding-top: 7px;
     cursor: pointer;
     user-select: none;
+    background-color: var(--tooltip-colour);
 }
 
-.current-equipped-item-enchant-option:hover, .current-equipped-item-embellishment-option:hover {
+.current-equipped-item-enchant-option:hover, .current-equipped-item-embellishment-option:hover, .new-equipped-item-enchant-option:hover, .new-equipped-item-embellishment-option:hover {
     background-color: var(--panel-colour-3);
 }
 
-.current-equipped-item-gems-field {
+.current-equipped-item-gems-field, .new-equipped-item-gems-field {
     position: relative;
-    border-bottom: 1px solid var(--border-colour-3) !important;
 }
 
-.current-equipped-item-gems-container {
+.current-equipped-item-gems-container, .new-equipped-item-gems-container {
     display: flex;
 }
 
-.current-equipped-item-add-gem-button {
+.current-equipped-item-add-gem-button, .new-equipped-item-add-gem-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1036,21 +1080,24 @@ body {
     background-color: var(--tooltip-colour);
 }
 
-.current-equipped-item-add-gem-button:hover {
+.current-equipped-item-add-gem-button:hover, .new-equipped-item-add-gem-button:hover {
     cursor: pointer;
     user-select: none;
+
+    background-color: var(--tooltip-colour-hover);
+    transition: background-color 0.1s ease-in-out;
 }
 
 /* .current-equipped-item-gem-container {
     position: relative;
 } */
 
-.current-equipped-item-add-gem-icon {
+.current-equipped-item-add-gem-icon, .new-equipped-item-add-gem-icon {
     font-size: 18px;
     color: var(--rarity-poor);
 }
 
-.current-equipped-item-gem-icon {
+.current-equipped-item-gem-icon, .new-equipped-item-gem-icon {
     margin-left: 3px;
 
     height: 29px;
@@ -1059,7 +1106,7 @@ body {
     border: 1px solid var(--border-colour-3);
 }
 
-.current-equipped-item-gem-icon:hover {
+.current-equipped-item-gem-icon:hover, .new-equipped-item-gem-icon:hover {
     opacity: 0.7;
     cursor: pointer;
 }
@@ -1068,7 +1115,7 @@ body {
     position: relative;
 } */
 
-.current-equipped-item-gem-modal, .add-gem-modal {
+.current-equipped-item-gem-modal, .new-equipped-item-gem-modal, .add-gem-modal {
     z-index: 10;
     display: none;
     position: absolute;
@@ -1249,7 +1296,7 @@ body {
     margin-top: -1px;
 
     width: 27px;
-    height: 28px;
+    height: 27px;
     
     border: 1px solid var(--border-colour-3);
     border-left: none;
@@ -1260,6 +1307,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: -1px;
 
     width: 18%;
     height: 25px;

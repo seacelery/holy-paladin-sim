@@ -17,4 +17,23 @@ const itemSlotsMap = {
     "trinket 2": "trinket_2"
 };
 
-export { itemSlotsMap };
+const blizzardItemSlotsMap = {
+    "head": "head",
+    "neck": "neck",
+    "shoulder": "shoulder",
+    "back": "back",
+    "hands": "hands",
+    "chest": "chest",
+    "wrist": "wrist",
+    "one-hand": "main_hand",
+    "held in off-hand": "off_hand",
+    "off hand": "off_hand",
+    "waist": "waist",
+    "finger": "finger_1",
+    "finger": "finger_2",
+    "legs": "legs",
+    "feet": "feet",
+    "trinket": "trinket_1",
+};
+
+export { itemSlotsMap, blizzardItemSlotsMap };

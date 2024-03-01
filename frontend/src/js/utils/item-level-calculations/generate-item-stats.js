@@ -1,0 +1,111 @@
+import { ratingMultiplierByItemLevel, ratingMultiplierByItemLevelRingsNeck } from "./rating-multipliers.js";
+import { itemSlotAllocations } from "./item-slot-allocations.js";
+
+const calculateStatAllocations = (stats, itemSlot) => {
+    console.log(itemSlot)
+    console.log(stats)
+    let intellectAllocated = 5259;
+    let totalSecondariesAllocated = 7000;
+    let leechAllocated = 3000;
+
+    switch(true) {
+        case ["trinket_1", "trinket_2"].includes(itemSlot):
+            intellectAllocated = 6666;
+            break;
+        case ["finger_1", "finger_2", "neck"].includes(itemSlot):
+            intellectAllocated = 0;
+            totalSecondariesAllocated = 17500;
+            break;
+        case ["main_hand"].includes(itemSlot):
+            intellectAllocated = 30629;
+            break;
+        case ["off_hand"].includes(itemSlot):
+            intellectAllocated = 16132;
+            break;
+        default:
+            break;
+    };
+
+    const statAllocations = {};
+
+    if ("intellect" in stats) {
+        statAllocations["intellect"] = intellectAllocated;
+    };
+
+    if ("leech" in stats) {
+        statAllocations["leech"] = leechAllocated;
+    };
+
+    const secondaryStats = Object.entries(stats).filter(([key]) => !["intellect", "leech", "stamina"].includes(key));
+    secondaryStats.sort((a, b) => b[1] - a[1]);
+
+    const numSecondaryStats = secondaryStats.length;
+
+    if (numSecondaryStats === 1) {
+        const [onlySecondaryName] = secondaryStats[0];
+        statAllocations[onlySecondaryName] = totalSecondariesAllocated;
+    } else if (numSecondaryStats > 1) {
+        const [highestSecondaryName, highestSecondaryValue] = secondaryStats[0];
+        const [lowestSecondaryName, lowestSecondaryValue] = secondaryStats[1];
+
+        const ratio = highestSecondaryValue / lowestSecondaryValue;
+
+        statAllocations[highestSecondaryName] = totalSecondariesAllocated / (ratio + 1) * ratio;
+        statAllocations[lowestSecondaryName] = totalSecondariesAllocated / (ratio + 1);
+    };
+
+    return statAllocations;
+};
+
+const generateItemStats = (stats, itemSlot, itemLevel) => {
+    let ratingMultiplier;
+    if (["finger_1", "finger_2", "neck"].includes(itemSlot)) {
+        ratingMultiplier = ratingMultiplierByItemLevelRingsNeck[itemLevel];
+    } else {
+        ratingMultiplier = ratingMultiplierByItemLevel[itemLevel];
+    };
+
+    let slotAllocation;
+    for (const allocation in itemSlotAllocations) {
+        if (allocation == itemLevel) {
+            switch (true) {
+                case ["head", "chest", "legs"].includes(itemSlot):
+                    slotAllocation = itemSlotAllocations[allocation]["1"];
+                    break;
+                case ["shoulder", "hands", "waist", "feet", "trinket_1", "trinket_2"].includes(itemSlot):
+                    slotAllocation = itemSlotAllocations[allocation]["2"];
+                    break;
+                case ["back", "wrist", "neck", "finger_1", "finger_2"].includes(itemSlot):
+                    slotAllocation = itemSlotAllocations[allocation]["3"];
+                    break;
+                case ["main_hand", "off_hand"].includes(itemSlot):
+                    slotAllocation = itemSlotAllocations[allocation]["4"];
+                    break;
+                default:
+                    slotAllocation = itemSlotAllocations[allocation]["1"];
+            };
+        };
+    };
+
+    const statAllocations = calculateStatAllocations(stats, itemSlot);
+
+    const finalStats = {};
+    
+    for (const stat in statAllocations) {
+        switch(true) {
+            case stat === "intellect":
+                finalStats[stat] = Math.round(slotAllocation * statAllocations[stat] * 0.0001);
+                break;
+            case ["haste", "crit", "mastery", "versatility"].includes(stat):
+                finalStats[stat] = Math.round(slotAllocation * statAllocations[stat] * 0.0001 * ratingMultiplier);
+                break;
+            case ["leech"].includes(stat):
+                finalStats[stat] = Math.round(slotAllocation * statAllocations[stat] * 0.0001 * ratingMultiplier);
+        };
+    };
+
+    console.log(finalStats)
+    return finalStats;
+};
+
+export { generateItemStats };

@@ -1,6 +1,7 @@
 // TO DOS
 // colour spell names by spell type
 // change awakening triggers on the graph using the cooldown data instead
+// talents, equipment page resizing issues
 
 import { createAbilityBreakdown } from "./ability-breakdown.js";
 import { createBuffsBreakdown } from "./buffs-breakdown.js";
