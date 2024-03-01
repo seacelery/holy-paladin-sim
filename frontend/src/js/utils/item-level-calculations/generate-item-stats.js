@@ -28,15 +28,15 @@ const calculateStatAllocations = (stats, itemSlot) => {
 
     const statAllocations = {};
 
-    if ("intellect" in stats) {
+    if ("intellect" in stats || "Intellect" in stats) {
         statAllocations["intellect"] = intellectAllocated;
     };
 
-    if ("leech" in stats) {
+    if ("leech" in stats || "Leech" in stats) {
         statAllocations["leech"] = leechAllocated;
     };
 
-    const secondaryStats = Object.entries(stats).filter(([key]) => !["intellect", "leech", "stamina"].includes(key));
+    const secondaryStats = Object.entries(stats).filter(([key]) => !["intellect", "leech", "stamina", "Intellect", "Leech", "Stamina"].includes(key));
     secondaryStats.sort((a, b) => b[1] - a[1]);
 
     const numSecondaryStats = secondaryStats.length;
@@ -93,13 +93,13 @@ const generateItemStats = (stats, itemSlot, itemLevel) => {
     
     for (const stat in statAllocations) {
         switch(true) {
-            case stat === "intellect":
+            case ["intellect", "Intellect"].includes(stat):
                 finalStats[stat] = Math.round(slotAllocation * statAllocations[stat] * 0.0001);
                 break;
-            case ["haste", "crit", "mastery", "versatility"].includes(stat):
+            case ["haste", "crit", "mastery", "versatility", "Haste", "Crit", "Mastery", "Versatility", "Critical Strike"].includes(stat):
                 finalStats[stat] = Math.round(slotAllocation * statAllocations[stat] * 0.0001 * ratingMultiplier);
                 break;
-            case ["leech"].includes(stat):
+            case ["leech", "Leech"].includes(stat):
                 finalStats[stat] = Math.round(slotAllocation * statAllocations[stat] * 0.0001 * ratingMultiplier);
         };
     };

@@ -946,6 +946,10 @@ body {
     border-bottom: 1px solid var(--border-colour-3);
 }
 
+#current-equipped-item-field-left-3 {
+    padding-top: 30px;
+}
+
 .current-equipped-item-field-left, .new-equipped-item-field-left {
     padding-left: 6px;
 }

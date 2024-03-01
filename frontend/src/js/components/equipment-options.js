@@ -109,7 +109,7 @@ const updateEquipmentFromImportedData = (data) => {
 
         if (itemStats) {
             for (let stat in itemStats) {
-                if (stat === "leech") {
+                if (stat === "leech" && itemStats[stat] > 0) {
                     const leechValue = itemStats[stat];
                     const leechContainer = createElement("div", "item-slot-leech-container", null);
                     leechContainer.textContent = "+" + leechValue + " Leech";
@@ -242,11 +242,17 @@ const initialiseEquipment = () => {
 
         const itemSlotData = JSON.parse(itemSlot.getAttribute("data-item-data"));
 
-        const updateItemData = (property, new_value) => {
+        const updateItemData = (property, new_value, subProperty = null) => {
             if (new_value[0]?.type === "embellishment") {
                 itemSlotData["limit"] = "Unique-Equipped: Embellished (2)";
             };
-            itemSlotData[property] = new_value;
+
+            if (subProperty) {
+                itemSlotData[property][subProperty] = new_value;
+            } else {
+                itemSlotData[property] = new_value;
+            };
+
             itemSlot.setAttribute("data-item-data", JSON.stringify(itemSlotData))
             generateFullItemData();
             updateStats();
@@ -256,7 +262,6 @@ const initialiseEquipment = () => {
             let fullItemData = generateFullItemData();
             const newItemLevel = currentItemLevel.textContent;
             const currentItemSlot = itemSlotsMap[itemSlot.getAttribute("data-item-slot").toLowerCase()];
-            console.log("Generating with:", itemSlotData.stats, currentItemSlot, newItemLevel)
             const newStats = generateItemStats(itemSlotData.stats, currentItemSlot, newItemLevel);
             fullItemData.equipment[currentItemSlot].stats = newStats;
             fullItemData.equipment[currentItemSlot].item_level = newItemLevel;
@@ -302,7 +307,7 @@ const initialiseEquipment = () => {
             const itemDetailsLength = currentItemDetails.length;
             if (itemDetailsLength < 4) {
                 for (let i = 0; i < 4 - itemDetailsLength; i++) {
-                    currentItemDetails.push({ id: "", text: "", colour: "" });
+                    currentItemDetails.push({ id: i, text: "", colour: "" });
                 };
             };
 
@@ -312,6 +317,37 @@ const initialiseEquipment = () => {
                 field.textContent = item.text;
                 field.style.color = item.colour;
                 currentItemLeftContainer.appendChild(field);
+
+                if (itemSlotData.stats["leech"] && item.id === "current-equipped-item-leech") {
+                    field.contentEditable = true;
+                    field.addEventListener("input", (e) => {
+                        if (e.target.innerText === "") {
+                            e.target.innerHTML = "&#8203";
+                        };
+                    });
+
+                    field.addEventListener("blur", () => {
+                        const newLeechValue = field.textContent ? parseInt(field.textContent.match(/\d+/)[0]) : 0;
+
+                        updateItemData("stats", newLeechValue, "leech");
+                        updateEquippedItemDisplay(itemSlot, itemSlots);
+                    });
+                } else if (item.id == 0) {
+                    field.contentEditable = true;
+
+                    field.addEventListener("focus", (e) => {
+                        if (e.target.innerText === "") {
+                            e.target.innerHTML = "&#8203";
+                        };
+                    });
+
+                    field.addEventListener("blur", () => {
+                        const newLeechValue = field.textContent ? parseInt(field.textContent.match(/\d+/)[0]) : 0;
+
+                        updateItemData("stats", newLeechValue, "leech");
+                        updateEquippedItemDisplay(itemSlot, itemSlots);
+                    });
+                };
             });
         };
 
@@ -672,6 +708,19 @@ const initialiseEquipment = () => {
             newItemLevel.textContent = item.base_item_level;
             newItemLevel.style.color = rarityColour;
             newItemLevel.style.borderTop = `1px solid ${rarityColour}`;
+            newItemLevel.contentEditable = true;
+            newItemLevel.style.outline = "none";
+
+            const newItemLevelBlur = () => {
+                const newItemLevelText = newItemLevel.textContent;
+                const selectedItemSlot = document.getElementById("equipped-items-edit-choose-slot-dropdown").value;
+                const newStats = generateItemStats(item.stats, itemSlotsMap[selectedItemSlot.toLowerCase()], newItemLevelText);
+                item.stats = newStats;
+                item.base_item_level = newItemLevelText;
+                updateNewItemDisplay(item);
+            };
+    
+            updateBlurListener(newItemLevel, newItemLevelBlur);
 
             itemSearch.style.color = rarityColour;
             itemSearch.style.border = `1px solid ${rarityColour}`;
@@ -700,10 +749,10 @@ const initialiseEquipment = () => {
                                                                                 });                                                             
 
                 const newItemDetails = [];  
-                if (item.stats["Intellect"]) {
+                if (item.stats["Intellect"] || item.stats["intellect"]) {
                     newItemDetails.push({
                         id: `new-equipped-item-intellect`,
-                        text: `+${item.stats["Intellect"]} Intellect`,
+                        text: `+${item.stats["Intellect"] ? item.stats["Intellect"] : item.stats["intellect"]} Intellect`,
                         colour: "var(--stat-intellect)"
                     });
                 };                                                      
@@ -733,11 +782,34 @@ const initialiseEquipment = () => {
                     };
                 };
 
-                newItemDetails.forEach(item => {
-                    const field = createElement("div", "new-equipped-item-field-left", item.id);
-                    field.textContent = item.text;
-                    field.style.color = item.colour;
+                newItemDetails.forEach(itemStat => {
+                    const field = createElement("div", "new-equipped-item-field-left", itemStat.id);
+                    field.textContent = itemStat.text;
+                    field.style.color = itemStat.colour;
                     newItemLeftContainer.appendChild(field);
+
+                    if (itemStat.id == 0) {
+                        field.contentEditable = true;
+
+                        field.addEventListener("input", (e) => {
+                            if (e.target.innerText === "") {
+                                e.target.innerHTML = "&#8203";
+                            };
+                        });
+
+                        field.addEventListener("blur", () => {
+                            const newLeechValue = field.textContent ? parseInt(field.textContent.match(/\d+/)[0]) : 0;
+                            item.stats["leech"] = newLeechValue;
+                            field.textContent = `+${item.stats["leech"]} Leech`;
+                            field.style.color = "var(--leech-font)";
+                        });
+
+                        field.addEventListener("focus", (e) => {
+                            if (e.target.innerText === "") {
+                                e.target.innerHTML = "&#8203";
+                            };
+                        });
+                    };
                 });
             };
 
