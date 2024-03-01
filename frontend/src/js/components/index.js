@@ -105,6 +105,7 @@ const importCharacter = async () => {
     .then(data => {
         console.log(data)
         updateUIAfterImport(data);
+        initialiseEquipment();
     })
     .catch(error => { console.error("Error:", error);
                     if (!characterName) {

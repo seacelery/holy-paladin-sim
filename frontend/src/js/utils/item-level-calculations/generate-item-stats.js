@@ -32,7 +32,7 @@ const calculateStatAllocations = (stats, itemSlot) => {
         statAllocations["intellect"] = intellectAllocated;
     };
 
-    if ("leech" in stats || "Leech" in stats) {
+    if (("leech" in stats && stats["leech"] > 0) || ("Leech" in stats && stats["Leech"] > 0)) {
         statAllocations["leech"] = leechAllocated;
     };
 

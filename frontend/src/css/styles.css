@@ -94,7 +94,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    width: 68%;
+    width: 1300px;
 
     border: 1px solid var(--panel-colour-4);
     border-radius: 3px;
@@ -157,7 +157,7 @@ body {
 #simulation-options-container {
     margin: 0 auto 20px auto;
 
-    width: 68%;
+    width: 1300px;
 
     border-left: 1px solid var(--border-colour-3);
     border-bottom: 1px solid var(--border-colour-3);
@@ -921,6 +921,10 @@ body {
     border-left: 1px solid var(--border-colour-3);
 }
 
+#new-equipped-item-info {
+    background-color: var(--tooltip-colour);
+}
+
 .current-equipped-item-info-left, .new-equipped-item-info-left {
     width: 28%;
     border-right: 1px solid var(--border-colour-3);
@@ -956,6 +960,10 @@ body {
 
 .current-equipped-item-field-right, .new-equipped-item-field-right {
     position: relative;
+}
+
+.new-equipped-item-field-right {
+    background-color: transparent;
 }
 
 .current-equipped-item-field-left:last-child, .current-equipped-item-field-right:last-child {
@@ -1048,6 +1056,14 @@ body {
     height: 67.5px;
 }
 
+.new-equipped-item-default-embellishment-option {
+    background-color: transparent;
+}
+
+#new-equipped-item-embellishments-0 {
+    background-color: transparent;
+}
+
 .current-equipped-item-enchant-option, .current-equipped-item-embellishment-option, .new-equipped-item-enchant-option, .new-equipped-item-embellishment-option {
     width: 100%;
     height: 33.5px;
@@ -1065,6 +1081,10 @@ body {
 
 .current-equipped-item-gems-field, .new-equipped-item-gems-field {
     position: relative;
+}
+
+.new-equipped-item-gems-field {
+    background-color: transparent;
 }
 
 .current-equipped-item-gems-container, .new-equipped-item-gems-container {
@@ -2000,7 +2020,7 @@ input:focus {
 #results-container {
     display: block;
     margin: 0 auto 100px auto;
-    width: 68%;
+    width: 1300px;
 }
 
 .result-header { 

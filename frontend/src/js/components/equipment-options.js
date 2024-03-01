@@ -1,7 +1,7 @@
 import { createElement, updateStats } from "./index.js";
 import { itemsToIconsMap, groupedGems } from "../utils/items-to-icons-map.js";
 import { generateItemStats } from "../utils/item-level-calculations/generate-item-stats.js";
-import { itemSlotsMap, blizzardItemSlotsMap } from "../utils/item-slots-map.js";
+import { itemSlotsMap, blizzardItemSlotsMap, itemSlotToDefaultIcon } from "../utils/item-slots-map.js";
 import { itemSlotBonuses, embellishmentsData, embellishmentItems, craftedItems } from "../utils/item-level-calculations/item-slot-bonuses.js";
 import itemData from "../utils/data/item_data.js";
 
@@ -16,6 +16,11 @@ const updateBlurListener = (element, listener) => {
 
     element._blurHandler = blurHandler;
     element.addEventListener("blur", element._blurHandler);
+    element.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter") return;
+        
+        element.blur();                             
+    });
     element.hasBlurListener = true;
 };
 
@@ -31,6 +36,7 @@ const updateEquipmentFromImportedData = (data) => {
 
     for (const itemSlot in equipmentData) {
         const itemSlotData = equipmentData[itemSlot];
+        console.log(itemSlotData)
 
         const itemIcon = itemSlotData["item_icon"];
         const itemLevel = itemSlotData["item_level"];
@@ -40,19 +46,22 @@ const updateEquipmentFromImportedData = (data) => {
         const itemStats = itemSlotData["stats"];
         const itemEffects = itemSlotData["effects"];
         const itemCategory = itemSlotData["limit"];
+        const itemQuality = itemSlotData["quality"];
+        const rarityColour = `var(--rarity-${itemQuality.toLowerCase()})`;
 
         const itemSlotContainer = document.getElementById(`item-slot-${itemSlot}`);
         itemSlotContainer.setAttribute("data-item-data", JSON.stringify(itemSlotData));
 
         const iconDisplay = itemSlotContainer.querySelector(`.item-slot-icon`);
         iconDisplay.src = itemIcon;
-        iconDisplay.style.border = "1px solid var(--rarity-epic)";
+        iconDisplay.style.border = `1px solid ${rarityColour}`;
 
         const itemLevelDisplay = itemSlotContainer.querySelector(`.item-slot-item-level`);
         itemLevelDisplay.textContent = itemLevel;
         itemLevelDisplay.style.display = "flex";
-        itemLevelDisplay.style.border = "1px solid var(--rarity-epic)";
+        itemLevelDisplay.style.border = `1px solid ${rarityColour}`;
         itemLevelDisplay.style.borderTop = "none";
+        itemLevelDisplay.style.color = rarityColour;
 
         const itemSlotInfo = itemSlotContainer.querySelector(`.item-slot-info`);
         itemSlotInfo.innerHTML = "";
@@ -63,6 +72,7 @@ const updateEquipmentFromImportedData = (data) => {
         if (itemName) {
             const itemNameDisplay = createElement("div", "item-slot-name", null);
             itemNameDisplay.textContent = itemName;
+            itemNameDisplay.style.color = rarityColour;
             itemSlotInfoContainer.appendChild(itemNameDisplay);
         };
 
@@ -194,8 +204,7 @@ const generateFullItemData = () => {
         const slotType = itemSlot.getAttribute("data-item-slot");
         fullItemData["equipment"][itemSlotsMap[slotType.toLowerCase()]] = slotData;
     });
-    // console.log("updated item data")
-    // console.log(fullItemData)
+
     updateEquipmentFromImportedData(fullItemData);
     return fullItemData;
 };
@@ -327,10 +336,17 @@ const initialiseEquipment = () => {
                     });
 
                     field.addEventListener("blur", () => {
-                        const newLeechValue = field.textContent ? parseInt(field.textContent.match(/\d+/)[0]) : 0;
+                        const matches = field.textContent.match(/\d+/);
+                        let newLeechValue = matches ? parseInt(matches[0]) : 0;
 
                         updateItemData("stats", newLeechValue, "leech");
                         updateEquippedItemDisplay(itemSlot, itemSlots);
+                    });
+
+                    field.addEventListener("keydown", (e) => {
+                        if (e.key !== "Enter") return;
+
+                        field.blur();                             
                     });
                 } else if (item.id == 0) {
                     field.contentEditable = true;
@@ -342,10 +358,20 @@ const initialiseEquipment = () => {
                     });
 
                     field.addEventListener("blur", () => {
-                        const newLeechValue = field.textContent ? parseInt(field.textContent.match(/\d+/)[0]) : 0;
+                        const matches = field.textContent.match(/\d+/);
+                        let newLeechValue = matches ? parseInt(matches[0]) : 0;
 
-                        updateItemData("stats", newLeechValue, "leech");
+                        if (newLeechValue > 0) {
+                            updateItemData("stats", newLeechValue, "leech");
+                        };
+                        
                         updateEquippedItemDisplay(itemSlot, itemSlots);
+                    });
+
+                    field.addEventListener("keydown", (e) => {
+                        if (e.key !== "Enter") return;
+
+                        field.blur();                             
                     });
                 };
             });
@@ -504,6 +530,54 @@ const initialiseEquipment = () => {
                     currentItemGemIcon.src = itemsToIconsMap[gem];
                     currentItemGemContainer.appendChild(currentItemGemIcon);
 
+                    const gemTooltip = createElement("div", "gem-modal-tooltip", null);
+                    gemTooltip.style.display = "none";
+                    gemTooltip.style.position = "absolute";
+                    document.body.appendChild(gemTooltip);
+
+                    let gemStatOne, gemStatTwo;
+
+                    for (const gemGroupKey in groupedGems) {
+                        const gemGroup = groupedGems[gemGroupKey];
+                        for (const gemName of gemGroup.gems) {
+                            const [currentGemName, , ...stats] = gemName;
+                            if (currentGemName === gem) {
+                                [gemStatOne, gemStatTwo] = stats;
+                            };
+                        };
+                    };
+
+                    currentItemGemContainer.addEventListener("mousemove", (e) => {
+                        const xOffset = 15;
+                        const yOffset = 15;
+
+                        gemTooltip.style.left = e.pageX + xOffset + "px";
+                        gemTooltip.style.top = e.pageY + yOffset + "px";
+
+                        gemTooltip.style.display = "block";
+                        gemTooltip.style.border = `1px solid var(--stat-${gemStatOne.replace(/\+\d+\s+/, "").toLowerCase()})`;
+
+                        gemTooltip.innerHTML = "";
+                        const tooltipGemName = createElement("div", "gem-modal-tooltip-gem-name", null);
+                        tooltipGemName.innerHTML = `<span style="color: var(--stat-${gemStatOne.replace(/\+\d+\s+/, "").toLowerCase()})">${gem}</span>`;
+                        
+                        const tooltipStats = createElement("div", "gem-modal-tooltip-gem-stats", null);
+                        if (gemStatTwo) {
+                            tooltipStats.innerHTML = `<span style="color: var(--stat-${gemStatOne.replace(/\+\d+\s+/, "").toLowerCase()})">${gemStatOne}</span> & <span style="color: var(--stat-${gemStatTwo.replace(/\+\d+\s+/, "").toLowerCase()})">${gemStatTwo}</span>`;
+                        } else {
+                            tooltipStats.innerHTML = `<span style="color: var(--stat-${gemStatOne.replace(/\+\d+\s+/, "").toLowerCase()})">${gemStatOne}</span>`;
+                        };
+                        
+                        gemTooltip.appendChild(tooltipGemName);
+                        gemTooltip.appendChild(tooltipStats);
+                    });
+                    currentItemGemContainer.addEventListener("mouseleave", () => {
+                        gemTooltip.style.display = "none";
+                    });
+                    currentItemGemContainer.addEventListener("click", () => {
+                        gemTooltip.style.display = "none";
+                    });
+
                     currentItemGemContainer.addEventListener("click", () => {
                         currentItemGemContainer.remove();
                         if (itemSlotData["gems"]) {
@@ -516,6 +590,8 @@ const initialiseEquipment = () => {
                         };
                         updateEquippedItemDisplay(itemSlot, itemSlots);
                     });
+
+                    // currentItemGemIcon.style.border = `1px solid var(--stat-${gemStatOne.replace(/\+\d+\s+/, "").toLowerCase()})`;
 
                     currentItemGemsContainer.insertBefore(currentItemGemContainer, addGemContainer);
                 });
@@ -671,11 +747,20 @@ const initialiseEquipment = () => {
 
     const itemSlots = document.querySelectorAll(".item-slot");
     itemSlots.forEach(itemSlot => {
+        if (itemSlotDropdown.value === itemSlot.getAttribute("data-item-slot")) {
+            updateEquippedItemDisplay(itemSlot, itemSlots)
+        };
+
         itemSlot.addEventListener("click", () => {
             updateEquippedItemDisplay(itemSlot, itemSlots);
+
             const dataItemSlot = itemSlot.getAttribute("data-item-slot");
             itemSlotDropdown.value = dataItemSlot;
             clearNewItem();
+
+            const newItemIcon = document.getElementById("new-equipped-item-icon");
+            newItemIcon.src = itemSlotToDefaultIcon[itemSlot.getAttribute("data-item-slot")];
+            newItemIcon.style.opacity = "1";
         });
     });
 
@@ -717,6 +802,7 @@ const initialiseEquipment = () => {
                 const newStats = generateItemStats(item.stats, itemSlotsMap[selectedItemSlot.toLowerCase()], newItemLevelText);
                 item.stats = newStats;
                 item.base_item_level = newItemLevelText;
+                console.log(item)
                 updateNewItemDisplay(item);
             };
     
@@ -798,10 +884,22 @@ const initialiseEquipment = () => {
                         });
 
                         field.addEventListener("blur", () => {
-                            const newLeechValue = field.textContent ? parseInt(field.textContent.match(/\d+/)[0]) : 0;
-                            item.stats["leech"] = newLeechValue;
-                            field.textContent = `+${item.stats["leech"]} Leech`;
-                            field.style.color = "var(--leech-font)";
+                            const matches = field.textContent.match(/\d+/);
+                            let newLeechValue = matches ? parseInt(matches[0]) : 0;
+                            
+                            if (newLeechValue > 0) {
+                                item.stats["leech"] = newLeechValue;
+                                field.textContent = `+${item.stats["leech"]} Leech`;
+                                field.style.color = "var(--leech-font)";
+                            } else {
+                                delete item.stats["leech"];
+                            };                  
+                        });
+
+                        field.addEventListener("keydown", (e) => {
+                            if (e.key !== "Enter") return;
+
+                            field.blur();                         
                         });
 
                         field.addEventListener("focus", (e) => {
@@ -820,7 +918,10 @@ const initialiseEquipment = () => {
         
                 const newItemEnchantSelect = createElement("div", "new-equipped-item-field-right", "new-equipped-item-enchants");
                 const defaultEnchantOption = createElement("div", "new-equipped-item-default-enchant-option", null);
-                if (availableEnchants.length > 0) {
+                if (item["enchantments"] && item["enchantments"].length > 0) {
+                    defaultEnchantOption.textContent = item["enchantments"][0];
+                    defaultEnchantOption.style.color = "var(--rarity-uncommon)";
+                } else if (availableEnchants.length > 0) {
                     defaultEnchantOption.textContent = "No enchant";
                     defaultEnchantOption.style.color = "var(--rarity-common)";
                 } else {
@@ -854,6 +955,7 @@ const initialiseEquipment = () => {
                             updatedEnchantData = [`Enchanted: ${enchantOption.textContent}`];
                         };
                         item["enchantments"] = updatedEnchantData;
+                        console.log(item)
                     });
                 });
                 newItemRightContainer.appendChild(newItemEnchantSelect);
@@ -1210,8 +1312,19 @@ const initialiseEquipment = () => {
             "Leech": "leech"
         };
 
+        console.log(blizzardItemSlotsMap[finalNewItemData["item_slot"].toLowerCase()])
         const currentSlot = document.getElementById("equipped-items-edit-choose-slot-dropdown").value.toLowerCase();
-        finalNewItemData["item_slot"] = itemSlotsMap[currentSlot];
+
+        const convertedItemSlot = blizzardItemSlotsMap[finalNewItemData["item_slot"].toLowerCase()];
+        const convertedCurrentSlot = itemSlotsMap[currentSlot];
+
+        if (convertedItemSlot.startsWith("trinket") && convertedCurrentSlot.startsWith("trinket")) {
+        } else if (convertedItemSlot.startsWith("finger") && convertedCurrentSlot.startsWith("finger")) {
+        } else if (convertedItemSlot !== convertedCurrentSlot) {
+            return;
+        };
+
+        finalNewItemData["item_slot"] = convertedCurrentSlot;
         clearNewItem();
         let fullItemData = generateFullItemData();
         const slotToReplace = finalNewItemData["item_slot"];
