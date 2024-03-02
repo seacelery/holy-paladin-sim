@@ -94,7 +94,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    width: 1300px;
+    width: 1320px;
 
     border: 1px solid var(--panel-colour-4);
     border-radius: 3px;
@@ -157,7 +157,7 @@ body {
 #simulation-options-container {
     margin: 0 auto 20px auto;
 
-    width: 1300px;
+    width: 1320px;
 
     border-left: 1px solid var(--border-colour-3);
     border-bottom: 1px solid var(--border-colour-3);
@@ -2020,7 +2020,7 @@ input:focus {
 #results-container {
     display: block;
     margin: 0 auto 100px auto;
-    width: 1300px;
+    width: 1320px;
 }
 
 .result-header { 

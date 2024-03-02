@@ -27,7 +27,6 @@ const updateBlurListener = (element, listener) => {
 const updateEquipmentFromImportedData = (data) => {
     // left half
     const equipmentData = data["equipment"];
-    // console.log(equipmentData)
 
     let tierS1Counter = 0;
     let tierS2Counter = 0;
@@ -36,7 +35,6 @@ const updateEquipmentFromImportedData = (data) => {
 
     for (const itemSlot in equipmentData) {
         const itemSlotData = equipmentData[itemSlot];
-        console.log(itemSlotData)
 
         const itemIcon = itemSlotData["item_icon"];
         const itemLevel = itemSlotData["item_level"];
@@ -802,7 +800,6 @@ const initialiseEquipment = () => {
                 const newStats = generateItemStats(item.stats, itemSlotsMap[selectedItemSlot.toLowerCase()], newItemLevelText);
                 item.stats = newStats;
                 item.base_item_level = newItemLevelText;
-                console.log(item)
                 updateNewItemDisplay(item);
             };
     
@@ -955,7 +952,6 @@ const initialiseEquipment = () => {
                             updatedEnchantData = [`Enchanted: ${enchantOption.textContent}`];
                         };
                         item["enchantments"] = updatedEnchantData;
-                        console.log(item)
                     });
                 });
                 newItemRightContainer.appendChild(newItemEnchantSelect);
@@ -1312,7 +1308,6 @@ const initialiseEquipment = () => {
             "Leech": "leech"
         };
 
-        console.log(blizzardItemSlotsMap[finalNewItemData["item_slot"].toLowerCase()])
         const currentSlot = document.getElementById("equipped-items-edit-choose-slot-dropdown").value.toLowerCase();
 
         const convertedItemSlot = blizzardItemSlotsMap[finalNewItemData["item_slot"].toLowerCase()];

@@ -431,8 +431,11 @@ const handleOptionImages = (images, attribute, optionType, toggle = false, multi
                         timers.forEach(timer => {
                             timer.style.display = "flex";
                         });
-                        repeatButton.style.display = "flex";
-                        addTimerButton.style.display = "flex";
+                        if (repeatButton && addTimerButton) {
+                            repeatButton.style.display = "flex";
+                            addTimerButton.style.display = "flex";
+                        };
+                        
                         updatePriorityList();
                     } else {
                         delete currentConsumables[formattedAttribute][attributeName];
@@ -524,13 +527,16 @@ handleOptionImages(potionImages, "potion", "consumable", true, true);
 
 // handle external buff & potion timers
 const updateTimerValues = (name, consumableType) => {
-    if (!currentConsumables[consumableType].hasOwnProperty(name)) {
-        return;
-    };
+    if (!currentConsumables[consumableType].hasOwnProperty(name)) return;
 
-    const formattedName = name.replaceAll(" ", "-").toLowerCase();
-    const timerInputs = document.querySelectorAll(`.${formattedName}-timer .${consumableType.replaceAll("_","-")}-timer-input`);
-    const values = Array.from(timerInputs).map(input => input.value);
+    let values = [];
+    if (!["Source of Magic"].includes(name)) {
+        const formattedName = name.replaceAll(" ", "-").toLowerCase();
+        const timerInputs = document.querySelectorAll(`.${formattedName}-timer .${consumableType.replaceAll("_","-")}-timer-input`);
+        values = Array.from(timerInputs).map(input => input.value);
+    } else {
+        values = ["0"];
+    };
 
     currentConsumables[consumableType][name] = values;
 
