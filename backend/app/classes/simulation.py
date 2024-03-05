@@ -39,7 +39,7 @@ class Simulation:
             action_name, parsed_conditions = parse_condition(item)
             condition_lambda = condition_to_lambda(self, parsed_conditions)
             self.priority_list.append((action_name, condition_lambda))
-        print(self.priority_list)
+        # print(self.priority_list)
         
         # self.priority_list = [
         #     ("Aerated Mana Potion", lambda: ((self.elapsed_time >= 50 and self.elapsed_time < 55) or (self.elapsed_time >= 410 and self.elapsed_time < 415)) and self.paladin.abilities["Potion"].check_potion_cooldown(self.elapsed_time)),

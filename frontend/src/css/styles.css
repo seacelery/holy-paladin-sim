@@ -1774,6 +1774,8 @@ input:-webkit-autofill{
 }
 
 .priority-list-permanent-or-button {
+    padding-right: 1px;
+
     color: var(--mana);
     opacity: 1;
 }

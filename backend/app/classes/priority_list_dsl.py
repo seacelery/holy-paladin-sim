@@ -2,6 +2,8 @@ import re
 
 def parse_condition(condition_str):
     parts = condition_str.split("|")
+    if len(parts) == 1:
+        parts.append("No condition")
     action_name = parts[0].strip()
 
     all_conditions = []
