@@ -219,9 +219,21 @@ class Paladin:
         self.holy_power_breakdown = {}
         self.priority_breakdown = {} 
         
+        self.stats_after_buffs = {}
+        
     def reset_state(self):
         current_state = copy.deepcopy(self.initial_state)
         self.__dict__.update(current_state.__dict__)
+        
+    def check_stats_after_buffs(self):
+        self.stats_after_buffs = {
+            "intellect": self.spell_power,
+            "haste": self.haste,
+            "crit": self.crit,
+            "mastery": self.mastery,
+            "versatility": self.versatility,
+            "vers_rating": self.base_versatility
+        }
         
     # update properties methods used in routes.py
     def update_character(self, race=None, class_talents=None, spec_talents=None, consumables=None):

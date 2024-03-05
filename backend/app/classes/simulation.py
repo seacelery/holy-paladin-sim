@@ -5,6 +5,7 @@ import sys
 import copy
 import time
 import cProfile
+import json
 from flask_socketio import emit
 
 from collections import defaultdict
@@ -29,6 +30,7 @@ class Simulation:
         self.encounter_length = encounter_length
         self.elapsed_time = 0
         self.iterations = iterations
+        self.priority_list_text = priority_list
         self.priority_list = []
         self.custom_equipment = custom_equipment
         self.paladin.update_equipment(custom_equipment)
@@ -588,7 +590,8 @@ class Simulation:
             # only record some data on the last iteration
             if i == self.iterations - 1:
                 self.paladin.last_iteration = True
-        
+                # self.paladin.check_stats_after_buffs()
+                
             self.simulate()
             
             self.update_final_cooldowns_breakdown_times()
@@ -1070,12 +1073,22 @@ class Simulation:
             "cooldowns_breakdown": full_cooldowns_breakdown_results
         }
         
+        print(self.priority_list)
+        
         simulation_details = {
             "encounter_length": self.encounter_length,
             "paladin_name": self.paladin.name,
             "iterations": self.iterations,
             "max_mana": self.paladin.max_mana,
-            "average_hps": average_hps
+            "average_hps": average_hps,
+            "equipment": self.paladin.equipment,
+            # "stats": self.paladin.stats_after_buffs
+            "stats": {"haste": round(self.paladin.haste_rating), "crit": round(self.paladin.crit_rating), "mastery": round(self.paladin.mastery_rating), "versatility": round(self.paladin.versatility_rating), 
+                  "intellect": round(self.paladin.spell_power), "health": round(self.paladin.max_health), "leech": round(self.paladin.leech_rating), "mana": round(self.paladin.max_mana),
+                  "haste_percent": round(self.paladin.haste, 2), "crit_percent": round(self.paladin.crit, 2), "mastery_percent": round(self.paladin.mastery, 2), 
+                  "versatility_percent": round(self.paladin.versatility, 2), "leech_percent": round(self.paladin.leech, 2)},
+            "talents": {"class_talents": self.paladin.class_talents, "spec_talents": self.paladin.spec_talents},
+            "priority_list": self.priority_list_text
         }
         
         # pp.pprint(average_ability_breakdown)

@@ -569,18 +569,44 @@ body {
     height: 100%;
 }
 
-#equipped-items-info {
+#equipped-items-item-level {
+    display: none;
     position: absolute;
-    right: 10px;
-    top: 10px;
-    padding-right: 5px;
-    padding-top: 5px;
+    left: 9px;
+    top: 8px;
+    padding: 5px 5px 5px 0;
 
-    height: 50px;
-    width: 200px;
+    width: 82px;
 
     font-size: 13px;
     text-align: right;
+
+    border: 1px solid var(--border-colour-3);
+
+    background-color: var(--tooltip-colour);
+}
+
+#equipped-items-item-level-text, #equipped-items-item-level-value {
+    width: 80px;
+    justify-content: center;
+    text-align: center;
+}
+
+#equipped-items-info {
+    display: none;
+    position: absolute;
+    right: 15px;
+    top: 8px;
+    padding: 5px 5px 5px 0;
+
+    width: 138px;
+
+    font-size: 13px;
+    text-align: right;
+
+    border: 1px solid var(--border-colour-3);
+
+    background-color: var(--tooltip-colour);
 }
 
 .item-slot-tier {
@@ -3356,13 +3382,239 @@ tr {
     text-align: center;
 }
 
+/* PLAYER INFO CONTENT */
+[id*="loadout-tab"] {
+    border-bottom: none;
+}
+
+[id*="loadout-content"] {
+    display: none;
+}
+
+[id^="loadout-breakdown-table-container-"] {
+    justify-content: space-between;
+    margin: 0 auto 0px auto;
+
+    width: 100%;
+    overflow: hidden;
+
+    color: var(--light-font-colour);
+}
+
+.loadout-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.loadout-container-content {
+    width: 33%;
+
+    border: 1px solid var(--border-colour-3);
+    border-radius: 5px;
+}
+
+.loadout-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 30px;
+    width: 100%;
+
+    background-color: var(--panel-colour-5);
+    border-bottom: 1px solid var(--border-colour-3);
+}
+
+.loadout-combined-talents-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.loadout-talents-container {
+    width: 214px;
+}
+
+[id^="loadout-class-talent-icon"] {
+    display: flex;
+    margin: 5px auto 5px 4px;
+
+    border: 1px solid var(--border-colour-3);
+}
+
+[id^="loadout-spec-talent-icon"] {
+    display: flex;
+    margin: 5px 4px 5px auto;
+
+    border: 1px solid var(--border-colour-3);
+}
+
+.loadout-class-talent-row {
+    display: flex;
+    justify-content: left;
+    padding: 2px;
+    width: 100%;
+
+    border-top: 1px solid var(--border-colour-3);
+}
+
+.loadout-spec-talent-row {
+    display: flex;
+    justify-content: right;
+    padding: 2px;
+
+    border-top: 1px solid var(--border-colour-3);
+}
+
+.loadout-talent-icon {
+    width: 30px;
+    height: 29px;
+    margin: 2px;
+
+    border: 1px solid var(--border-colour-3);
+}
+
+.loadout-talent-tooltip, .loadout-equipment-tooltip {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+
+    background-color: var(--panel-colour-2);
+
+    color: var(--holy-font);
+    font-size: 13px;
+
+    user-select: none;
+
+    max-width: 400px;
+
+    border: 1px solid var(--border-colour-3);
+}
+
+.loadout-equipment-tooltip-name-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.loadout-equipment-tooltip-name {
+    margin-right: 45px;
+}
+
+.loadout-equipment-tooltip-gems {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.loadout-equipment-tooltip-gem {
+    margin-right: 3px;
+
+    width: 25px;
+    height: 25px;
+
+    border: 1px solid var(--border-colour-3);
+}
+
+[id^="loadout-header-equipment"] {
+    border-bottom: none;
+}
+
+.loadout-equipment-list {
+    margin-top: 0px;
+}
+
+.loadout-equipment-item-container {
+    display: flex;
+    overflow: auto;
+
+    border-top: 1px solid var(--border-colour-3);
+}
+
+.loadout-equipment-item-container:hover {
+    background-color: var(--panel-colour-5);
+}
+
+.loadout-equipment-item-item-level {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: 4px;
+    width: 27px;
+    height: 27px;
+
+    font-size: 14px;
+}
+
+.loadout-equipment-item-icon {
+    width: 27px;
+    height: 27px;
+}
+
+.loadout-equipment-item-name {
+    padding-left: 5px;
+    padding-top: 2px;
+
+    font-size: 14px;
+}
+
+.loadout-priority-list {
+    overflow: auto;
+}
+
+.loadout-priority-container {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 3px;
+
+    margin-top: 5px;
+    padding-left: 5px;
+
+    border-bottom: 1px solid var(--border-colour-3);
+}
+
+.loadout-priority-icon {
+    margin-bottom: 4px;
+
+    width: 35px;
+    height: 35px;
+    
+    border: 1px solid var(--border-colour-3);
+}
+
+.loadout-priority-ability {
+    display: flex;
+    justify-content: left;
+    margin-top: 7px;
+    margin-left: 8px;
+    text-align: left;
+
+    overflow: auto;
+
+    min-width: 120px;
+
+    font-size: 13px;
+}
+
+.loadout-priority-condition {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 7px;
+    padding-bottom: 3px;
+    text-align: left;
+
+    overflow: auto;
+
+    font-size: 13px;
+}
+
 .footer {
     position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
 
-    width:100%;
     height:40px;
 
     border-top: 2px solid var(--panel-colour);

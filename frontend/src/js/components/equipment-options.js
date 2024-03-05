@@ -32,12 +32,15 @@ const updateEquipmentFromImportedData = (data) => {
     let tierS2Counter = 0;
     let tierS3Counter = 0;
     let embellishmentCounter = 0;
+    let idolCounter = 0;
+    let combinedItemLevel = 0;
 
     for (const itemSlot in equipmentData) {
         const itemSlotData = equipmentData[itemSlot];
 
         const itemIcon = itemSlotData["item_icon"];
         const itemLevel = itemSlotData["item_level"];
+        combinedItemLevel += Number(itemLevel);
         const itemName = itemSlotData["name"];
         const itemEnchants = itemSlotData["enchantments"];
         const itemGems = itemSlotData["gems"];
@@ -133,6 +136,7 @@ const updateEquipmentFromImportedData = (data) => {
                                                  .replace(/\s\(\d+\)/g, "");
 
             if (itemEffects && itemCategory.includes("Embellished")) {
+                embellishmentCounter += 1;
                 itemCategoryDisplay.textContent = `${itemCategoryText}: ${itemEffects[0]["name"]}`;
             } else {
                 itemCategoryDisplay.textContent = itemCategoryText;
@@ -160,6 +164,32 @@ const updateEquipmentFromImportedData = (data) => {
         };
     };
 
+    combinedItemLevel = Math.round(combinedItemLevel / 16);
+    const combinedItemLevelValue = document.getElementById("equipped-items-item-level-value");
+    combinedItemLevelValue.textContent = combinedItemLevel;
+    const combinedItemLevelText = document.getElementById("equipped-items-item-level-text");
+    combinedItemLevelText.style.color = "var(--paladin-font)";
+    let combinedItemLevelColour;
+
+    switch(true) {
+        case combinedItemLevel >= 350:
+            combinedItemLevelColour = "var(--rarity-epic)";
+            break;
+        case combinedItemLevel >= 250:
+            combinedItemLevelColour = "var(--rarity-rare)";
+            break;
+        case combinedItemLevel >= 150:
+            combinedItemLevelColour = "var(--rarity-uncommon)";
+            break;
+        case combinedItemLevel >= 50:
+            combinedItemLevelColour = "var(--rarity-common)";
+            break;
+        default:
+            combinedItemLevelColour = "var(--rarity-poor)";
+    };
+    combinedItemLevelValue.style.color = combinedItemLevelColour;
+
+
     const equippedItemsInfo = document.getElementById("equipped-items-info");
     equippedItemsInfo.innerHTML = "";
     const tierSetCounts = [tierS1Counter, tierS2Counter, tierS3Counter];
@@ -173,7 +203,7 @@ const updateEquipmentFromImportedData = (data) => {
     };
 
     const embellishmentsContainer = createElement("div", "item-slot-embellishments", null);
-    let embellishmentColour = embellishmentCounter >= 2 ? "var(--sorting-arrow-colour)" : "var(--red-font-hover)";
+    let embellishmentColour = embellishmentCounter === 2 ? "var(--sorting-arrow-colour)" : "var(--red-font-hover)";
     embellishmentsContainer.innerHTML = `<span style="color: var(--paladin-font)">Embellishments</span> <span style="color: ${embellishmentColour}">${embellishmentCounter}/2</span>`;
     equippedItemsInfo.appendChild(embellishmentsContainer);
 
@@ -192,6 +222,11 @@ const updateEquipmentFromImportedData = (data) => {
             statValue.textContent = statsData[stat];
         };
     };
+
+    const itemLevelContainer = document.getElementById("equipped-items-item-level");
+    const itemLevelInfo = document.getElementById("equipped-items-info");
+    itemLevelContainer.style.display = "block";
+    itemLevelInfo.style.display = "block";
 };
 
 const generateFullItemData = () => {
@@ -1309,9 +1344,14 @@ const initialiseEquipment = () => {
         };
 
         const currentSlot = document.getElementById("equipped-items-edit-choose-slot-dropdown").value.toLowerCase();
+        let convertedItemSlot = "";
 
-        const convertedItemSlot = blizzardItemSlotsMap[finalNewItemData["item_slot"].toLowerCase()];
         const convertedCurrentSlot = itemSlotsMap[currentSlot];
+        if (finalNewItemData["item_slot"]) {
+            convertedItemSlot = blizzardItemSlotsMap[finalNewItemData["item_slot"].toLowerCase()];
+        } else {
+            convertedItemSlot = currentSlot;
+        };
 
         if (convertedItemSlot.startsWith("trinket") && convertedCurrentSlot.startsWith("trinket")) {
         } else if (convertedItemSlot.startsWith("finger") && convertedCurrentSlot.startsWith("finger")) {

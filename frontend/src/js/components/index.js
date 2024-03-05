@@ -9,6 +9,7 @@ import { createResourcesBreakdown } from "./resources-breakdown.js";
 import { createPriorityBreakdown } from "./priority-breakdown.js";
 import { createCooldownsBreakdown } from "./cooldowns-breakdown.js";
 import { createPriorityListDisplay, priorityList, addPotionToPriorityList, updatePriorityList, removePotionFromPriorityList } from "./priority-list-display.js";
+import { createLoadoutBreakdown } from "./loadout-breakdown.js";
 import { handleTabs } from "./simulation-options-tabs.js";
 import { setSimulationOptionsFromImportedData } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
@@ -95,8 +96,8 @@ const importCharacter = async () => {
     let characterName = document.getElementById("character-name-input").value.toLowerCase();
     let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
 
-    // characterName = "daisu";
-    // characterRealm = "aszune";
+    characterName = "daisu";
+    characterRealm = "aszune";
 
     return fetch(`http://127.0.0.1:5000/import_character?character_name=${characterName}&realm=${characterRealm}`, {
         credentials: "include"
@@ -122,8 +123,8 @@ const updateStats = async () => {
     let characterName = document.getElementById("character-name-input").value.toLowerCase();
     let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
 
-    // characterName = "daisu";
-    // characterRealm = "aszune";
+    characterName = "daisu";
+    characterRealm = "aszune";
     const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
 
     return fetch(`http://127.0.0.1:5000/fetch_updated_data?character_name=${characterName}&realm=${characterRealm}&custom_equipment=${customEquipment}`, {
@@ -318,12 +319,15 @@ const createSimulationResults = (simulationData) => {
     priorityTab.textContent = "Priority";
     const cooldownsTab = createElement("div", `results-tab-${containerCount} inactive`, "cooldowns-tab");
     cooldownsTab.textContent = "Cooldowns";
+    const loadoutTab = createElement("div", `results-tab-${containerCount} inactive`, "loadout-tab");
+    loadoutTab.textContent = "Loadout";
 
     resultsNavbar.appendChild(healingTab);
     resultsNavbar.appendChild(buffsWindowTab);
     resultsNavbar.appendChild(resourcesTab);
     resultsNavbar.appendChild(priorityTab);
     resultsNavbar.appendChild(cooldownsTab);
+    resultsNavbar.appendChild(loadoutTab);
     resultContainer.appendChild(resultsNavbar);
 
     // create content windows
@@ -363,6 +367,13 @@ const createSimulationResults = (simulationData) => {
     cooldownsContent.appendChild(cooldownsBreakdown);
     resultContainer.appendChild(cooldownsContent);
 
+    // player info breakdown
+    const loadoutContent = createElement("div", `results-tab-content-${containerCount}`, "loadout-content");
+    const loadoutBreakdown = createElement("div", null, "loadout-breakdown-table-container");
+
+    loadoutContent.appendChild(loadoutBreakdown);
+    resultContainer.appendChild(loadoutContent);
+
     simulationContainer.appendChild(resultContainer);
 
     const firstChild = fullResultsContainer.firstChild;
@@ -377,6 +388,7 @@ const createSimulationResults = (simulationData) => {
     createResourcesBreakdown(simulationData, containerCount);
     createPriorityBreakdown(simulationData, containerCount);
     createCooldownsBreakdown(simulationData, containerCount);
+    createLoadoutBreakdown(simulationData, containerCount);
 
     // initialise tabs within the results
     handleTabs(`results-navbar-${containerCount}`, `results-tab-content-${containerCount}`, containerCount);
