@@ -304,6 +304,7 @@ const initialiseEquipment = () => {
             let fullItemData = generateFullItemData();
             const newItemLevel = currentItemLevel.textContent;
             const currentItemSlot = itemSlotsMap[itemSlot.getAttribute("data-item-slot").toLowerCase()];
+            console.log(itemSlotData)
             const newStats = generateItemStats(itemSlotData.stats, currentItemSlot, newItemLevel);
             fullItemData.equipment[currentItemSlot].stats = newStats;
             fullItemData.equipment[currentItemSlot].item_level = newItemLevel;

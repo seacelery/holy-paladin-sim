@@ -1,10 +1,11 @@
-import { ratingMultiplierByItemLevel, ratingMultiplierByItemLevelRingsNeck } from "./rating-multipliers.js";
+import { ratingMultiplierByItemLevel, ratingMultiplierByItemLevelRingsNeck, ratingMultiplierStamina } from "./rating-multipliers.js";
 import { itemSlotAllocations } from "./item-slot-allocations.js";
 
 const calculateStatAllocations = (stats, itemSlot) => {
     console.log(itemSlot)
     console.log(stats)
     let intellectAllocated = 5259;
+    let staminaAllocated = 7889;
     let totalSecondariesAllocated = 7000;
     let leechAllocated = 3000;
 
@@ -27,6 +28,10 @@ const calculateStatAllocations = (stats, itemSlot) => {
     };
 
     const statAllocations = {};
+
+    if ("stamina" in stats || "Stamina" in stats) {
+        statAllocations["stamina"] = staminaAllocated;
+    };
 
     if ("intellect" in stats || "Intellect" in stats) {
         statAllocations["intellect"] = intellectAllocated;
@@ -54,13 +59,18 @@ const calculateStatAllocations = (stats, itemSlot) => {
         statAllocations[lowestSecondaryName] = totalSecondariesAllocated / (ratio + 1);
     };
 
+    console.log(statAllocations)
     return statAllocations;
 };
 
 const generateItemStats = (stats, itemSlot, itemLevel) => {
+    console.log(stats)
     let ratingMultiplier;
+    let staminaMultiplier = ratingMultiplierStamina[itemLevel] ? ratingMultiplierStamina[itemLevel] : 1;
+
     if (["finger_1", "finger_2", "neck"].includes(itemSlot)) {
         ratingMultiplier = ratingMultiplierByItemLevelRingsNeck[itemLevel];
+        staminaMultiplier /= 1.778;
     } else {
         ratingMultiplier = ratingMultiplierByItemLevel[itemLevel];
     };
@@ -101,6 +111,9 @@ const generateItemStats = (stats, itemSlot, itemLevel) => {
                 break;
             case ["leech", "Leech"].includes(stat):
                 finalStats[stat] = Math.round(slotAllocation * statAllocations[stat] * 0.0001 * ratingMultiplier);
+                break;
+            case ["stamina", "Stamina"].includes(stat):
+                finalStats[stat] = Math.round(1612 * staminaMultiplier);
         };
     };
 

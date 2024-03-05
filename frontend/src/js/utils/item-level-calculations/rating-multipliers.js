@@ -246,4 +246,34 @@ const ratingMultiplierByItemLevelRingsNeck = [
     0.923819525, 0.923819525, 0.923819525, 0.923819525, 0.923819525,
 ];
 
-export { ratingMultiplierByItemLevel, ratingMultiplierByItemLevelRingsNeck };
+// TODO figure out the inbetween ilvls somehow
+const ratingMultiplierStamina = {
+    "415": 1,
+    "418": 1.03908,
+    "421": 1.07874,
+    "424": 1.11849,
+    "428": 1.17556,
+    "431": 1.22084,
+    "434": 1.26737,
+    "437": 1.31328,
+    "441": 1.37903,
+    "444": 1.43238,
+    "447": 1.48573,
+    "450": 1.53908,
+    "454": 1.61600,
+    "457": 1.67742,
+    "460": 1.73945,
+    "463": 1.80149,
+    "467": 1.89082,
+    "470": 1.96216,
+    "473": 2.03412,
+    "476": 2.10670,
+    "480": 2.21092,
+    "483": 2.29529,
+    "486": 2.37779,
+    "489": 2.46030,
+    "493": 2.58189,
+    "496": 2.67804
+};
+
+export { ratingMultiplierByItemLevel, ratingMultiplierByItemLevelRingsNeck, ratingMultiplierStamina };
