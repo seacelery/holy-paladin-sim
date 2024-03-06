@@ -1,8 +1,9 @@
 import random
 
 from .auras import Buff
-from ..utils.misc_functions import append_spell_heal_event, format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
+from ..utils.misc_functions import append_spell_heal_event, format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event, calculate_trinket_effect_value
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
+from ..utils.trinket_data import trinket_data
 
 
 class HoT(Buff):
@@ -878,3 +879,63 @@ class Innervate(Buff):
     
     def remove_effect(self, caster, current_time=None):
         caster.innervate_active = False
+        
+
+# TRINKETS
+class MirrorOfFracturedTomorrowsBuff(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Mirror of Fractured Tomorrows", 20, base_duration=20)
+        self.base_item_level = trinket_data[self.name]["base_item_level"]
+        self.base_effect_value = trinket_data[self.name]["base_effect_value"]
+        self.scale_factor = trinket_data[self.name]["scale_factor"]
+        self.current_item_level = int(caster.trinkets[self.name]["item_level"])
+        
+        self.effect_value = calculate_trinket_effect_value(self.base_item_level, self.base_effect_value, self.current_item_level, self.scale_factor)
+        print(self.effect_value)
+        
+    def apply_effect(self, caster, current_time=None):        
+        caster.spell_power += caster.get_effective_spell_power(self.effect_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.effect_value)
+        
+
+class CoagulatedGenesaurBloodBuff(Buff):
+    
+    BASE_PPM = 1.66
+    
+    def __init__(self, caster):
+        super().__init__("Coagulated Genesaur Blood", 10, base_duration=10)
+        self.base_item_level = trinket_data[self.name]["base_item_level"]
+        self.base_effect_value = trinket_data[self.name]["base_effect_value"]
+        self.scale_factor = trinket_data[self.name]["scale_factor"]
+        self.current_item_level = int(caster.trinkets[self.name]["item_level"])
+        
+        self.effect_value = calculate_trinket_effect_value(self.base_item_level, self.base_effect_value, self.current_item_level, self.scale_factor)
+        
+    def apply_effect(self, caster, current_time=None):        
+        caster.base_crit += caster.get_percent_from_stat_rating("Crit", self.effect_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", self.effect_value)
+        
+        
+class SustainingAlchemistStoneBuff(Buff):
+    
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Sustaining Alchemist Stone", 10, base_duration=10)
+        self.base_item_level = trinket_data[self.name]["base_item_level"]
+        self.base_effect_value = trinket_data[self.name]["base_effect_value"]
+        self.scale_factor = trinket_data[self.name]["scale_factor"]
+        self.current_item_level = int(caster.trinkets[self.name]["item_level"])
+        
+        self.effect_value = calculate_trinket_effect_value(self.base_item_level, self.base_effect_value, self.current_item_level, self.scale_factor)
+        
+    def apply_effect(self, caster, current_time=None):        
+        caster.spell_power += caster.get_effective_spell_power(self.effect_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.effect_value)

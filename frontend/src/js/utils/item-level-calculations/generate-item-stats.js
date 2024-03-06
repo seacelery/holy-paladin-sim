@@ -2,8 +2,8 @@ import { ratingMultiplierByItemLevel, ratingMultiplierByItemLevelRingsNeck, rati
 import { itemSlotAllocations } from "./item-slot-allocations.js";
 
 const calculateStatAllocations = (stats, itemSlot) => {
-    console.log(itemSlot)
-    console.log(stats)
+    // console.log(itemSlot)
+    // console.log(stats)
     let intellectAllocated = 5259;
     let staminaAllocated = 7889;
     let totalSecondariesAllocated = 7000;
@@ -12,6 +12,7 @@ const calculateStatAllocations = (stats, itemSlot) => {
     switch(true) {
         case ["trinket_1", "trinket_2"].includes(itemSlot):
             intellectAllocated = 6666;
+            totalSecondariesAllocated = 6666;
             break;
         case ["finger_1", "finger_2", "neck"].includes(itemSlot):
             intellectAllocated = 0;
@@ -59,12 +60,12 @@ const calculateStatAllocations = (stats, itemSlot) => {
         statAllocations[lowestSecondaryName] = totalSecondariesAllocated / (ratio + 1);
     };
 
-    console.log(statAllocations)
+    // console.log(statAllocations)
     return statAllocations;
 };
 
 const generateItemStats = (stats, itemSlot, itemLevel) => {
-    console.log(stats)
+    // console.log(stats)
     let ratingMultiplier;
     let staminaMultiplier = ratingMultiplierStamina[itemLevel] ? ratingMultiplierStamina[itemLevel] : 1;
 
@@ -117,7 +118,7 @@ const generateItemStats = (stats, itemSlot, itemLevel) => {
         };
     };
 
-    console.log(finalStats)
+    // console.log(finalStats)
     return finalStats;
 };
 

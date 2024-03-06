@@ -24,6 +24,11 @@ def increment_holy_power(ability, caster):
     
 def add_to_holy_power_by_ability(dict, ability, caster):
     caster.holy_power_by_ability[ability.name] = caster.holy_power_by_ability.get(ability.name, 0) + ability.holy_power_gain
+    
+def calculate_trinket_effect_value(base_item_level, base_effect_value, current_item_level, scale_factor):
+    print(f"Base ilvl {base_item_level}, Base value {base_effect_value}, Current ilvl {current_item_level}, Scale factor {scale_factor}")
+    print(f"Results {base_effect_value + scale_factor * (current_item_level - base_item_level)}")
+    return base_effect_value + scale_factor * (current_item_level - base_item_level)
 
 # data tracking functions
 def append_spell_heal_event(array, spell_name, caster, target, amount, current_time, is_crit, spends_mana=False, is_absorb=False):

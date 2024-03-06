@@ -32612,7 +32612,10 @@ const itemData = [
             {
                 "name": "Sustaining Alchemist Stone",
                 "id": 375844,
-                "description": "Equip: Your spells and abilities have a chance to increase your primary stat by 925 for 10 sec and extend the duration of your active phial by 60 sec."
+                "description": "Equip: Your spells and abilities have a chance to increase your primary stat by *925 for 10 sec and extend the duration of your active phial by 60 sec.",
+                "effect_values": [
+                    {"base_value": 925, "effect_type": "scalar", "effect_coefficient": 1.405902, "allocation_type": 1}
+                ]
             }
         ],
         "stats": {
@@ -32620,7 +32623,7 @@ const itemData = [
         },
         "limit": "Unique-Equipped: Alchemist Stone (1)",
         "enchantments": [],
-        "gems": []
+        "gems": [],
     },
     {
         "id": 191492,
@@ -32633,7 +32636,10 @@ const itemData = [
             {
                 "name": "Alacritous Alchemist Stone",
                 "id": 375626,
-                "description": "Equip: Your spells and abilities have a chance to increase your primary stat by 772 for 10 sec and reduce the cooldown of your combat potions by 10 sec."
+                "description": "Equip: Your spells and abilities have a chance to increase your primary stat by *772 for 10 sec and reduce the cooldown of your combat potions by 10 sec.",
+                "effect_values": [
+                    {"base_value": 772, "effect_type": "scalar", "effect_coefficient": 1.172515, "allocation_type": 1}
+                ]
             }
         ],
         "stats": {
@@ -91314,7 +91320,11 @@ const itemData = [
             {
                 "name": "Pip's Emerald Friendship Badge",
                 "id": 422858,
-                "description": "Equip: Join the Dream Team, gaining 236 of Pip's Mastery, Urctos's Versatility, or Aerwynn's Critical Strike based on your current Best Friend.\r\n\r\nYour spells and abilities have a chance to tag in a random new Best Friend, granting you their passive bonus and empowering it to 2,829 before diminishing over 12 sec."
+                "description": "Equip: Join the Dream Team, gaining *236 of Pip's Mastery, Urctos's Versatility, or Aerwynn's Critical Strike based on your current Best Friend.\r\n\r\nYour spells and abilities have a chance to tag in a random new Best Friend, granting you their passive bonus and empowering it to *2,829 before diminishing over 12 sec.",
+                "effect_values": [
+                    {"base_value": 236, "effect_type": "linear", "scale_factor": 1.051111111, "base_item_level": 441},
+                    {"base_value": 2829, "effect_type": "scalar", "effect_coefficient": 2.328225, "allocation_type": "rating_multiplier"}
+                ]
             }
         ],
         "stats": {
@@ -93672,7 +93682,10 @@ const itemData = [
             {
                 "name": "Mirror of Fractured Tomorrows",
                 "id": 418527,
-                "description": "Use: Gaze into the mirror's depths, inviting a version of your future self to fight alongside you for 20 sec, casting spells based on your role. In addition, you grant yourself 2,789 of your highest secondary stat. (3 Min Cooldown)"
+                "description": "Use: Gaze into the mirror's depths, inviting a version of your future self to fight alongside you for 20 sec, casting spells based on your role. In addition, you grant yourself *2,789 of your highest secondary stat. (3 Min Cooldown)",
+                "effect_values": [
+                    {"base_value": 2789, "effect_type": "linear", "scale_factor": 13.684, "base_item_level": 421},
+                ]
             }
         ],
         "stats": {

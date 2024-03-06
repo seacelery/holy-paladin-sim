@@ -318,7 +318,7 @@ class Spell:
         
     def try_trigger_rppm_effects(self, caster, targets, current_time):
         from .spells_passives import TouchOfLight, EmbraceOfAkunda
-        from .auras_buffs import SophicDevotion, EmbraceOfPaku
+        from .auras_buffs import SophicDevotion, EmbraceOfPaku, CoagulatedGenesaurBloodBuff, SustainingAlchemistStoneBuff
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False):
             # time since last attempt makes it so the number of events happening has very little impact on the number of procs that occur
@@ -361,6 +361,15 @@ class Spell:
             try_proc_rppm_effect(embrace_of_paku, is_self_buff=True)
             embrace_of_akunda = EmbraceOfAkunda(caster)
             try_proc_rppm_effect(embrace_of_akunda, is_heal=True)
+            
+        # trinkets
+        if "Coagulated Genesaur Blood" in caster.trinkets:
+            coagulated_genesaur_blood = CoagulatedGenesaurBloodBuff(caster)
+            try_proc_rppm_effect(coagulated_genesaur_blood, is_self_buff=True)
+            
+        if "Sustaining Alchemist Stone" in caster.trinkets:
+            sustaining_alchemist_stone = SustainingAlchemistStoneBuff(caster)
+            try_proc_rppm_effect(sustaining_alchemist_stone, is_self_buff=True)
                   
     def collect_priority_breakdown_data(self, caster, targets=None, exclude_target_auras=False):
         # add auras to dictionaries and check current spell cooldownsfor display in priority list example

@@ -42,6 +42,9 @@ const spellToIconsMap = {
     // consumables
     "Aerated Mana Potion": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape1_blue.jpg",
     "Elemental Potion of Ultimate Power": "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_dpotion_b20.jpg",
+
+    // trinkets
+    "Mirror of Fractured Tomorrows": "https://render.worldofwarcraft.com/eu/icons/56/achievement_dungeon_ulduarraid_misc_06.jpg",
 };
 
 export { spellToIconsMap };

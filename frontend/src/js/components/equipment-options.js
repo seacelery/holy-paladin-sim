@@ -1,6 +1,7 @@
 import { createElement, updateStats } from "./index.js";
 import { itemsToIconsMap, groupedGems } from "../utils/items-to-icons-map.js";
 import { generateItemStats } from "../utils/item-level-calculations/generate-item-stats.js";
+import { generateItemEffects } from "../utils/item-level-calculations/generate-item-effect.js";
 import { itemSlotsMap, blizzardItemSlotsMap, itemSlotToDefaultIcon } from "../utils/item-slots-map.js";
 import { itemSlotBonuses, embellishmentsData, embellishmentItems, craftedItems } from "../utils/item-level-calculations/item-slot-bonuses.js";
 import itemData from "../utils/data/item_data.js";
@@ -305,9 +306,15 @@ const initialiseEquipment = () => {
             const newItemLevel = currentItemLevel.textContent;
             const currentItemSlot = itemSlotsMap[itemSlot.getAttribute("data-item-slot").toLowerCase()];
             console.log(itemSlotData)
+
             const newStats = generateItemStats(itemSlotData.stats, currentItemSlot, newItemLevel);
             fullItemData.equipment[currentItemSlot].stats = newStats;
             fullItemData.equipment[currentItemSlot].item_level = newItemLevel;
+
+            const newEffects = generateItemEffects(itemSlotData.effects, currentItemSlot, newItemLevel);
+            fullItemData.equipment[currentItemSlot].effects = newEffects;
+            console.log(fullItemData)
+
             updateEquipmentFromImportedData(fullItemData);
             updateEquippedItemDisplay(itemSlot, itemSlots);
             updateStats();
@@ -836,6 +843,10 @@ const initialiseEquipment = () => {
                 const newStats = generateItemStats(item.stats, itemSlotsMap[selectedItemSlot.toLowerCase()], newItemLevelText);
                 item.stats = newStats;
                 item.base_item_level = newItemLevelText;
+
+                const newEffects = generateItemEffects(item.effects, itemSlotsMap[selectedItemSlot.toLowerCase()], newItemLevelText);
+                item.effects = newEffects;
+
                 updateNewItemDisplay(item);
             };
     
@@ -1277,6 +1288,7 @@ const initialiseEquipment = () => {
                 itemSuggestions.innerHTML = "";
                 updateNewItemDisplay(item);
                 currentItemSuggestion = item;
+                finalNewItemData = item;
             });
 
             if (filteredData.length <= 6) {
@@ -1327,7 +1339,7 @@ const initialiseEquipment = () => {
                 newData[newKey] = data[key];
             });
             return newData;
-        }
+        };
         
         const propertyKeyMap = {
             "id": "item_id",
@@ -1344,6 +1356,8 @@ const initialiseEquipment = () => {
             "Leech": "leech"
         };
 
+        if (Object.keys(finalNewItemData).length === 0) return;
+
         const currentSlot = document.getElementById("equipped-items-edit-choose-slot-dropdown").value.toLowerCase();
         let convertedItemSlot = "";
 
@@ -1351,7 +1365,7 @@ const initialiseEquipment = () => {
         if (finalNewItemData["item_slot"]) {
             convertedItemSlot = blizzardItemSlotsMap[finalNewItemData["item_slot"].toLowerCase()];
         } else {
-            convertedItemSlot = currentSlot;
+            convertedItemSlot = currentSlot.replaceAll(" ", "_");
         };
 
         if (convertedItemSlot.startsWith("trinket") && convertedCurrentSlot.startsWith("trinket")) {
@@ -1369,8 +1383,8 @@ const initialiseEquipment = () => {
             fullItemData.equipment[slotToReplace] = finalNewItemData;
         };
 
-        finalNewItemData = renameKeys(fullItemData.equipment[itemSlotsMap[currentSlot]], propertyKeyMap);
-        finalNewItemData["stats"] = renameKeys(fullItemData.equipment[itemSlotsMap[currentSlot]]["stats"], statsKeyMap);
+        finalNewItemData = renameKeys(fullItemData.equipment[finalNewItemData["item_slot"]], propertyKeyMap);
+        finalNewItemData["stats"] = renameKeys(fullItemData.equipment[finalNewItemData["item_slot"]]["stats"], statsKeyMap);
         if (!finalNewItemData["enchantments"]) finalNewItemData["enchantments"] = [];
         
         fullItemData.equipment[slotToReplace] = finalNewItemData;

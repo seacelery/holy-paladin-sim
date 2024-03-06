@@ -80,6 +80,10 @@ const buffsToIconsMap = {
     "Innervate": "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_lightning.jpg",
     "Shifting Sands": "https://render.worldofwarcraft.com/eu/icons/56/ability_evoker_masterytimewalker.jpg",
     "Ebon Might": "https://render.worldofwarcraft.com/eu/icons/56/spell_sarkareth.jpg",
+
+    // trinkets
+    "Mirror of Fractured Tomorrows": "https://render.worldofwarcraft.com/eu/icons/56/achievement_dungeon_ulduarraid_misc_06.jpg",
+    "Coagulated Genesaur Blood": "https://render.worldofwarcraft.com/eu/icons/56/ability_creature_poison_06.jpg",
 }; 
 
 export { buffsToIconsMap };

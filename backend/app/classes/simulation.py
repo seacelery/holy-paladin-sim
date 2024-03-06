@@ -1073,8 +1073,6 @@ class Simulation:
             "cooldowns_breakdown": full_cooldowns_breakdown_results
         }
         
-        print(self.priority_list)
-        
         simulation_details = {
             "encounter_length": self.encounter_length,
             "paladin_name": self.paladin.name,

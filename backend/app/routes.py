@@ -71,11 +71,8 @@ def fetch_updated_stats_route():
         spec_talents=modifiable_data.get("spec_talents"),
         consumables=modifiable_data.get("consumables")
     )
-    pp.pprint(custom_equipment)
+
     paladin.update_equipment(custom_equipment)
-    
-    print(paladin.mastery, paladin.mastery_rating)
-    print(paladin.spell_power)
     
     return jsonify({
         "message": f"Character imported successfully, {character_name}, {realm}",

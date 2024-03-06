@@ -13,6 +13,7 @@ from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, H
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
 from .spells_damage import Judgment, CrusaderStrike
 from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell
+from .trinkets import MirrorOfFracturedTomorrows
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
@@ -136,6 +137,9 @@ class Paladin:
         self.buffs = buffs
         self.consumables = {}
         self.initial_consumables = {}
+        
+        self.trinkets = {}
+        self.update_trinkets()
         
         # initialise abilities
         self.abilities = {}      
@@ -321,6 +325,16 @@ class Paladin:
         self.update_stats_with_racials()
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
         print("a", self.mastery, self.mastery_rating)
+        self.update_abilities()
+        self.update_trinkets()
+    
+    def update_trinkets(self):
+        self.trinkets = {}
+        
+        for item in self.equipment:
+            if item in ["trinket_1", "trinket_2"]:
+                trinket_data = self.equipment[item]
+                self.trinkets[trinket_data["name"]] = {"item_level": trinket_data["item_level"]}
     
     # update loadout based on updated properties 
     def apply_consumables(self):
@@ -468,6 +482,10 @@ class Paladin:
             
         if self.is_talent_active("Blessing of Summer"):
             self.abilities["Blessing of the Seasons"] = BlessingOfTheSeasons(self)
+            
+        # trinkets
+        if "Mirror of Fractured Tomorrows" in self.equipment["trinket_1"]["name"] or "Mirror of Fractured Tomorrows" in self.equipment["trinket_2"]["name"]:
+            self.abilities["Mirror of Fractured Tomorrows"] = MirrorOfFracturedTomorrows(self)
             
     def is_talent_active(self, talent_name):
         for row, talents in self.class_talents.items():

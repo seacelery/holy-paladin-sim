@@ -578,7 +578,7 @@ priorityListPresetsButton.addEventListener("mousedown", () => {
 
 const standardPreset = document.getElementById("standard-preset");
 standardPreset.addEventListener("click", () => {
-    priorityListPastedCode = "Holy Shock | Holy Shock charges = 2\nArcane Torrent | Race = Blood Elf\nJudgment | Infusion of Light duration < 5",
+    priorityListPastedCode = "Holy Shock | Holy Shock charges = 2\nArcane Torrent | Race = Blood Elf\nMirror of Fractured Tomorrows\nJudgment | Infusion of Light duration < 5",
     convertPasteToPriorityList(priorityListPastedCode);
     updatePriorityList();
 });
