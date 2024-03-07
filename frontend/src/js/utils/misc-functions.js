@@ -1,3 +1,5 @@
+import itemDataEffects from "../utils/data/item-data-effects.js";
+
 const formatNumbers = (number) => {
     return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
@@ -126,4 +128,17 @@ const makeFieldEditable = (field, {defaultValue = null, fieldSlider = null, char
     });
 };
 
-export { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable };
+const updateEquipmentWithEffectValues = (data) => {
+    const equipmentData = data["equipment"];
+    Object.keys(equipmentData).forEach(slot => {
+        const equipmentPiece = equipmentData[slot];
+        const enhancedItem = itemDataEffects.find(item => item.id === equipmentPiece.item_id);
+        
+        if (enhancedItem && enhancedItem.effects) {
+            equipmentPiece.effects[0]["effect_values"] = enhancedItem.effects.map(effect => effect.effect_values)[0];
+            equipmentPiece.effects[0]["description"] = enhancedItem.effects.map(effect => effect.description)[0];
+        };
+    });
+};
+
+export { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable, updateEquipmentWithEffectValues };

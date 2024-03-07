@@ -4,7 +4,7 @@ import { generateItemStats } from "../utils/item-level-calculations/generate-ite
 import { generateItemEffects } from "../utils/item-level-calculations/generate-item-effect.js";
 import { itemSlotsMap, blizzardItemSlotsMap, itemSlotToDefaultIcon } from "../utils/item-slots-map.js";
 import { itemSlotBonuses, embellishmentsData, embellishmentItems, craftedItems } from "../utils/item-level-calculations/item-slot-bonuses.js";
-import itemData from "../utils/data/item_data.js";
+import itemData from "../utils/data/item-data.js";
 
 const updateBlurListener = (element, listener) => {
     const blurHandler = () => {
@@ -27,7 +27,7 @@ const updateBlurListener = (element, listener) => {
 
 const updateEquipmentFromImportedData = (data) => {
     // left half
-    const equipmentData = data["equipment"];
+    let equipmentData = data["equipment"];
 
     let tierS1Counter = 0;
     let tierS2Counter = 0;
@@ -690,7 +690,8 @@ const initialiseEquipment = () => {
             const currentTrinketEffectField = createElement("div", "current-equipped-item-field-right-trinket", "current-equipped-item-trinket-effects-0");
             const currentTrinketEffect = createElement("div", "current-equipped-item-trinket-effect", null);
             if (itemSlotData["effects"].length > 0) {
-                currentTrinketEffect.textContent = `${itemSlotData["effects"][0].description}`;
+                const descriptionText = itemSlotData["effects"][0].description.replaceAll("*", "").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+                currentTrinketEffect.innerHTML = descriptionText;
                 currentTrinketEffect.style.color = "var(--mana)";
             } else {
                 currentTrinketEffect.textContent = `No effect`;
@@ -1211,7 +1212,8 @@ const initialiseEquipment = () => {
                 const newTrinketEffectField = createElement("div", "new-equipped-item-field-right-trinket", "new-equipped-item-trinket-effects-0");
                 const newTrinketEffect = createElement("div", "new-equipped-item-trinket-effect", null);
                 if (item["effects"].length > 0) {
-                    newTrinketEffect.textContent = `${item["effects"][0].description}`;
+                    const descriptionText = item["effects"][0].description.replaceAll("*", "").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+                    newTrinketEffect.innerHTML = `${descriptionText}`;
                     newTrinketEffect.style.color = "var(--mana)";
                 } else {
                     newTrinketEffect.textContent = `No effect`;
@@ -1225,6 +1227,8 @@ const initialiseEquipment = () => {
                 newItemInfo.querySelectorAll(".new-equipped-item-field-left").forEach(item => {
                     item.style.borderBottom = `1px solid ${rarityColour}`;
                 });
+
+                newItemInfo.querySelector(".new-equipped-item-info-left").style.borderRight = `1px solid ${rarityColour}`;
             };
 
             const jewelleryItemSlots = ["Necklace", "Ring 1", "Ring 2"];

@@ -924,7 +924,7 @@ body {
     padding-top: 1px;
 
     width: 100%;
-    height: 25px;
+    height: 26px;
 
     background-color: var(--tooltip-colour);
     color: var(--light-font-colour);
@@ -936,7 +936,7 @@ body {
 
 #new-equipped-item-search {
     padding-top: 0px;
-    margin-top: -1px;
+    margin-top: -2px;
 }
 
 #current-equipped-item-info, #new-equipped-item-info {

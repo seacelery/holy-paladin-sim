@@ -14,7 +14,7 @@ import { handleTabs } from "./simulation-options-tabs.js";
 import { setSimulationOptionsFromImportedData } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
 import { updateEquipmentFromImportedData, initialiseEquipment, generateFullItemData } from "./equipment-options.js";
-import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable } from "../utils/misc-functions.js";
+import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable, updateEquipmentWithEffectValues } from "../utils/misc-functions.js";
 
 // window.addEventListener("mouseover", (e) => {
 //     console.log(e.target)
@@ -105,6 +105,7 @@ const importCharacter = async () => {
     .then(response => response.json())
     .then(data => {
         console.log(data)
+        updateEquipmentWithEffectValues(data);
         updateUIAfterImport(data);
         initialiseEquipment();
     })

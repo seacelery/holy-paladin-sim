@@ -2,30 +2,6 @@ import { ratingMultiplierByItemLevel, ratingMultiplierByItemLevelRingsNeck, rati
 import { itemSlotAllocations } from "./item-slot-allocations.js";
 
 const calculateNewEffect = (effectsData, itemSlot, itemLevel, effectDescription) => {
-    // let intellectAllocated = 5259;
-    // let staminaAllocated = 7889;
-    // let totalSecondariesAllocated = 7000;
-    // let leechAllocated = 3000;
-
-    // switch(true) {
-    //     case ["trinket_1", "trinket_2"].includes(itemSlot):
-    //         intellectAllocated = 6666;
-    //         totalSecondariesAllocated = 6666;
-    //         break;
-    //     case ["finger_1", "finger_2", "neck"].includes(itemSlot):
-    //         intellectAllocated = 0;
-    //         totalSecondariesAllocated = 17500;
-    //         break;
-    //     case ["main_hand"].includes(itemSlot):
-    //         intellectAllocated = 30629;
-    //         break;
-    //     case ["off_hand"].includes(itemSlot):
-    //         intellectAllocated = 16132;
-    //         break;
-    //     default:
-    //         break;
-    // };
-
     let newEffectsData = effectsData;
     let newValues = [];
 
@@ -41,11 +17,14 @@ const calculateNewEffect = (effectsData, itemSlot, itemLevel, effectDescription)
             for (const allocation in itemSlotAllocations) {
                 if (allocation == itemLevel) {
                     switch (true) {
-                        case allocationType === 1:
-                            slotAllocation = itemSlotAllocations[allocation][allocationType]
+                        case allocationType === "no_multiplier":
+                            slotAllocation = itemSlotAllocations[allocation]["1"]
                             break;
                         case allocationType === "rating_multiplier":
-                            slotAllocation = itemSlotAllocations[allocation][1] * ratingMultiplierByItemLevel[itemLevel];
+                            slotAllocation = itemSlotAllocations[allocation]["1"] * ratingMultiplierByItemLevel[itemLevel];
+                            break
+                        case allocationType === "flat_healing":
+                            slotAllocation = itemSlotAllocations[allocation]["6"];
                             break
                         default:
                             slotAllocation = itemSlotAllocations[allocation]["1"];
@@ -88,6 +67,7 @@ const generateItemEffects = (effects, itemSlot, itemLevel) => {
         };
     });
 
+    console.log(effects)
     return effects;
 };
 

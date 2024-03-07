@@ -365,7 +365,7 @@ class Spell:
         # trinkets
         if "Coagulated Genesaur Blood" in caster.trinkets:
             coagulated_genesaur_blood = CoagulatedGenesaurBloodBuff(caster)
-            try_proc_rppm_effect(coagulated_genesaur_blood, is_self_buff=True)
+            try_proc_rppm_effect(coagulated_genesaur_blood, is_hasted=False, is_self_buff=True)
             
         if "Sustaining Alchemist Stone" in caster.trinkets:
             sustaining_alchemist_stone = SustainingAlchemistStoneBuff(caster)
