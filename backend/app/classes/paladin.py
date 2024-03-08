@@ -126,6 +126,8 @@ class Paladin:
         
         print(f"Haste: {self.haste}, Crit: {self.crit}, Mastery: {self.mastery}, Vers: {self.versatility}")
         
+        self.gem_counts = {}
+        
         self.crit_damage_modifier = 1
         self.crit_healing_modifier = 1
         
@@ -229,8 +231,6 @@ class Paladin:
         self.mana_breakdown = {}
         self.holy_power_breakdown = {}
         self.priority_breakdown = {} 
-        
-        self.stats_after_buffs = {}
         
     def reset_state(self):
         current_state = copy.deepcopy(self.initial_state)
@@ -367,16 +367,6 @@ class Paladin:
         self.load_abilities_based_on_talents()
         self.update_abilities_with_racials()
         self.update_stats_with_racials()
-    
-    def get_percent_from_stat_rating(self, stat, stat_rating):
-        if stat == "Haste":
-            return (stat_rating / 170) * 1.04
-        if stat == "Crit":
-            return (stat_rating / 180)
-        if stat == "Mastery":
-            return (stat_rating / 120)
-        if stat == "Versatility":
-            return (stat_rating / 205)
         
     def update_stat(self, stat, stat_rating):
         if stat == "Haste":
@@ -680,9 +670,12 @@ class Paladin:
         if buff.name in self.active_auras and not reapply:
             append_aura_applied_event(self.events, f"{self.active_auras[buff.name].name} reapplied", self, self, current_time, self.active_auras[buff.name].duration)
             if buff.current_stacks < max_stacks:
+                print(f"{buff.name} applying {stacks_to_apply}, max stacks {max_stacks}")
                 buff.current_stacks += stacks_to_apply
+                print(buff.name, buff.current_stacks)
                 buff.duration = buff.base_duration
             self.active_auras[buff.name] = buff
+            buff.apply_effect(self, current_time)
         else:
             self.active_auras[buff.name] = buff
             buff.apply_effect(self, current_time)

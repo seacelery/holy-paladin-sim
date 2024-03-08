@@ -66,6 +66,13 @@ def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, sta
     return stat_values_from_equipment, bonus_effect_enchants
 
 def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):   
+    player.gem_counts = {
+        "Ysemerald": 0,
+        "Alexstraszite": 0,
+        "Neltharite": 0,
+        "Malygite": 0
+    }
+    
     for gem in gems_from_equipment:
         if gem == "Resplendent Illimited Diamond":
             stat_values_from_equipment["intellect"] += 75
@@ -83,50 +90,67 @@ def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):
         elif gem == "Crafty Ysemerald":
             stat_values_from_equipment["haste"] += 70
             stat_values_from_equipment["crit"] += 33
+            player.gem_counts["Ysemerald"] += 1
         elif gem == "Energized Ysemerald":
             stat_values_from_equipment["haste"] += 70
             stat_values_from_equipment["versatility"] += 33
+            player.gem_counts["Ysemerald"] += 1
         elif gem == "Keen Ysemerald":
             stat_values_from_equipment["haste"] += 70
             stat_values_from_equipment["mastery"] += 33
+            player.gem_counts["Ysemerald"] += 1
         elif gem == "Quick Ysemerald":
             stat_values_from_equipment["haste"] += 88
+            player.gem_counts["Ysemerald"] += 1
             
         elif gem == "Keen Neltharite":
             stat_values_from_equipment["mastery"] += 70
             stat_values_from_equipment["haste"] += 33
+            player.gem_counts["Neltharite"] += 1
         elif gem == "Sensei's Neltharite":
             stat_values_from_equipment["mastery"] += 70
             stat_values_from_equipment["crit"] += 33
+            player.gem_counts["Neltharite"] += 1
         elif gem == "Zen Neltharite":
             stat_values_from_equipment["mastery"] += 70
             stat_values_from_equipment["versatility"] += 33
+            player.gem_counts["Neltharite"] += 1
         elif gem == "Fractured Neltharite":
             stat_values_from_equipment["mastery"] += 88
+            player.gem_counts["Neltharite"] += 1
             
         elif gem == "Crafty Alexstraszite":
             stat_values_from_equipment["crit"] += 70
             stat_values_from_equipment["haste"] += 33
+            player.gem_counts["Alexstraszite"] += 1
         elif gem == "Radiant Alexstraszite":
             stat_values_from_equipment["crit"] += 70
             stat_values_from_equipment["versatility"] += 33
+            player.gem_counts["Alexstraszite"] += 1
         elif gem == "Sensei's Alexstraszite":
             stat_values_from_equipment["crit"] += 70
             stat_values_from_equipment["mastery"] += 33
+            player.gem_counts["Alexstraszite"] += 1
         elif gem == "Deadly Alexstraszite":
             stat_values_from_equipment["crit"] += 88
+            player.gem_counts["Alexstraszite"] += 1
             
         elif gem == "Energized Malygite":
             stat_values_from_equipment["versatility"] += 70
             stat_values_from_equipment["haste"] += 33
+            player.gem_counts["Malygite"] += 1
         elif gem == "Radiant Malygite":
             stat_values_from_equipment["versatility"] += 70
             stat_values_from_equipment["crit"] += 33
+            player.gem_counts["Malygite"] += 1
         elif gem == "Zen Malygite":
             stat_values_from_equipment["versatility"] += 70
             stat_values_from_equipment["mastery"] += 33
+            player.gem_counts["Malygite"] += 1
         elif gem == "Stormy Malygite":
             stat_values_from_equipment["versatility"] += 88
+            player.gem_counts["Malygite"] += 1
     print(stat_values_from_equipment)
+    print(player.gem_counts)
         
     return stat_values_from_equipment

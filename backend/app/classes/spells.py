@@ -320,8 +320,8 @@ class Spell:
         from .spells_passives import TouchOfLight, EmbraceOfAkunda
         from .auras_buffs import ( 
                                   SophicDevotion, EmbraceOfPaku, CoagulatedGenesaurBloodBuff, SustainingAlchemistStoneBuff, 
-                                  SeaStarBuff, PipsEmeraldFriendshipBadge, BestFriendsWithPipEmpowered, BestFriendsWithAerwynEmpowered, 
-                                  BestFriendsWithUrctosEmpowered
+                                  AlacritousAlchemistStoneBuff, SeaStarBuff, PipsEmeraldFriendshipBadge, BestFriendsWithPipEmpowered, 
+                                  BestFriendsWithAerwynEmpowered, BestFriendsWithUrctosEmpowered, IdolOfTheSpellWeaverStacks
                                  )
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False):
@@ -349,11 +349,14 @@ class Spell:
                     update_spell_data_heals(caster.ability_breakdown, effect.name, target, effect_heal, is_crit)
                     append_spell_heal_event(caster.events, effect.name, caster, target, effect_heal, current_time, is_crit)
                     
-                if is_self_buff and effect in caster.active_auras:
-                    del caster.active_auras[effect]
-                    caster.apply_buff_to_self(effect, current_time)
+                if is_self_buff and effect.name in caster.active_auras:
+                    if effect.max_stacks > 1:
+                        caster.apply_buff_to_self(caster.active_auras[effect.name], current_time, effect.current_stacks, effect.max_stacks)
+                    else:
+                        del caster.active_auras[effect.name]
+                        caster.apply_buff_to_self(effect, current_time, effect.current_stacks, effect.max_stacks)
                 elif is_self_buff:
-                    caster.apply_buff_to_self(effect, current_time)
+                    caster.apply_buff_to_self(effect, current_time, effect.current_stacks, effect.max_stacks)
                     
             caster.time_since_last_rppm_proc_attempt[effect.name] = 0
             
@@ -386,6 +389,10 @@ class Spell:
             sustaining_alchemist_stone = SustainingAlchemistStoneBuff(caster)
             try_proc_rppm_effect(sustaining_alchemist_stone, is_self_buff=True)
             
+        if "Alacritous Alchemist Stone" in caster.trinkets:
+            alacritous_alchemist_stone = AlacritousAlchemistStoneBuff(caster)
+            try_proc_rppm_effect(alacritous_alchemist_stone, is_self_buff=True)
+            
         if "Pip's Emerald Friendship Badge" in caster.trinkets:
             pips_emerald_friendship_badge = PipsEmeraldFriendshipBadge(caster)
             pips_proc = try_proc_rppm_effect(pips_emerald_friendship_badge, is_hasted=False, is_self_buff=True)
@@ -409,6 +416,11 @@ class Spell:
                     caster.remove_or_decrement_buff_on_self(caster.active_auras["Best Friends with Urctos Empowered"], current_time, replaced=True)
                 
                 caster.apply_buff_to_self(new_pips_proc, current_time)
+                
+        if "Idol of the Spell-Weaver" in caster.trinkets:
+            idol_of_the_spellweaver = IdolOfTheSpellWeaverStacks(caster)
+            if "Idol of the Spell-Weaver Empowered" not in caster.active_auras:
+                try_proc_rppm_effect(idol_of_the_spellweaver, is_hasted=False, is_self_buff=True)
             
                   
     def collect_priority_breakdown_data(self, caster, targets=None, exclude_target_auras=False):

@@ -9,7 +9,6 @@ class Trinket(Spell):
     
     
 class MirrorOfFracturedTomorrows(Trinket):
-    # TODO clone healing
     
     BASE_COOLDOWN = 180
     

@@ -891,7 +891,7 @@ class Innervate(Buff):
         caster.innervate_active = False
         
 
-# TRINKETS
+# trinkets
 class MirrorOfFracturedTomorrowsBuff(Buff):
     
     def __init__(self, caster):
@@ -1172,3 +1172,53 @@ class BestFriendsWithUrctos(Buff):
         
     def remove_effect(self, caster, current_time):
         caster.update_stat("Versatility", -self.trinket_first_value)
+        
+        
+        
+class IdolOfTheSpellWeaverStacks(Buff):
+    
+    BASE_PPM = 2.2
+    
+    def __init__(self, caster):
+        super().__init__("Idol of the Spell-Weaver", 10000, base_duration=10000, current_stacks=2, max_stacks=18)
+        trinket_effect = caster.trinkets["Idol of the Spell-Weaver"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        self.malygite_count = caster.gem_counts["Malygite"]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        print(caster.active_auras[self.name].current_stacks)
+        caster.update_stat("Versatility", self.trinket_first_value * self.malygite_count)
+        if caster.active_auras[self.name].current_stacks == 18:
+            del caster.active_auras[self.name]
+            self.remove_effect(caster, current_time)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("Versatility", -self.trinket_first_value * 18)
+        caster.apply_buff_to_self(IdolOfTheSpellWeaverEmpower(caster), current_time)
+    
+
+class IdolOfTheSpellWeaverEmpower(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Idol of the Spell-Weaver Empowered", 15, base_duration=15)
+        trinket_effect = caster.trinkets["Idol of the Spell-Weaver"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        self.malygite_count = caster.gem_counts["Malygite"]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("Haste", self.trinket_second_value / 4)
+        caster.update_stat("Crit", self.trinket_second_value / 4)
+        caster.update_stat("Mastery", self.trinket_second_value / 4)
+        caster.update_stat("Versatility", self.trinket_second_value / 4)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("Haste", -self.trinket_second_value / 4)
+        caster.update_stat("Crit", -self.trinket_second_value / 4)
+        caster.update_stat("Mastery", -self.trinket_second_value / 4)
+        caster.update_stat("Versatility", -self.trinket_second_value / 4)

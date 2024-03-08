@@ -221,6 +221,30 @@ const itemDataEffects = [
         "gems": []
     },
     {
+        "id": 202116,
+        "name": "Alacritous Alchemist Stone",
+        "item_slot": "Trinket",
+        "icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_alchemystone_color1.jpg",
+        "base_item_level": 405,
+        "quality": "Epic",
+        "effects": [
+            {
+                "name": "Alacritous Alchemist Stone",
+                "id": 375626,
+                "description": "Equip: Your spells and abilities have a chance to increase your primary stat by *772 for 10 sec and reduce the cooldown of your combat potions by 10 sec.",
+                "effect_values": [
+                    {"base_value": 772, "effect_type": "scalar", "effect_coefficient": 1.172515, "allocation_type": "no_multiplier"}
+                ]
+            }
+        ],
+        "stats": {
+            "Haste": 510
+        },
+        "limit": "Unique-Equipped: Alchemist Stone (1)",
+        "enchantments": [],
+        "gems": []
+    },
+    {
         "id": 133201,
         "name": "Sea Star",
         "item_slot": "Trinket",
