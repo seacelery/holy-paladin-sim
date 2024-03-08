@@ -108,7 +108,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     // displays casts with average as healing divided by casts
     const excludedSpellsCasts = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", 
                                  "Judgment of Light", "Greater Judgment", "Touch of Light", "Afterimage", "Glimmer of Light", "Glimmer of Light (Glistening Radiance (Light of Dawn))",
-                                 "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda", "Holy Reverberation"];
+                                 "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda", "Holy Reverberation", "Restorative Sands"];
     // displays casts with average as healing divided by hits
     const excludedSpellsCastsAverageHits = ["Gift of the Naaru"];
     const excludedSpellsCrit = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", 

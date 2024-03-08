@@ -3,6 +3,7 @@ import copy
 import heapq
 import os
 import json
+import random
 from dotenv import load_dotenv
 
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
@@ -13,6 +14,7 @@ from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, H
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
 from .spells_damage import Judgment, CrusaderStrike
 from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell
+from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos
 from .trinkets import MirrorOfFracturedTomorrows
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
@@ -127,6 +129,11 @@ class Paladin:
         self.crit_damage_modifier = 1
         self.crit_healing_modifier = 1
         
+        self.flat_haste = 0
+        self.flat_crit = 5
+        self.flat_mastery = 0
+        self.flat_versatility = 0
+        
         # self.haste_multiplier = (self.haste / 100) + 1
         # self.crit_multiplier = (self.crit / 100) + 1
         # self.mastery_multiplier = (self.mastery / 100) + 1
@@ -229,16 +236,6 @@ class Paladin:
         current_state = copy.deepcopy(self.initial_state)
         self.__dict__.update(current_state.__dict__)
         
-    def check_stats_after_buffs(self):
-        self.stats_after_buffs = {
-            "intellect": self.spell_power,
-            "haste": self.haste,
-            "crit": self.crit,
-            "mastery": self.mastery,
-            "versatility": self.versatility,
-            "vers_rating": self.base_versatility
-        }
-        
     # update properties methods used in routes.py
     def update_character(self, race=None, class_talents=None, spec_talents=None, consumables=None):
         if consumables:
@@ -334,7 +331,8 @@ class Paladin:
         for item in self.equipment:
             if item in ["trinket_1", "trinket_2"]:
                 trinket_data = self.equipment[item]
-                self.trinkets[trinket_data["name"]] = {"item_level": trinket_data["item_level"]}
+                print(trinket_data)
+                self.trinkets[trinket_data["name"]] = {"item_level": trinket_data["item_level"], "effect": trinket_data["effects"][0]["description"]}
     
     # update loadout based on updated properties 
     def apply_consumables(self):
@@ -379,6 +377,52 @@ class Paladin:
             return (stat_rating / 120)
         if stat == "Versatility":
             return (stat_rating / 205)
+        
+    def update_stat(self, stat, stat_rating):
+        if stat == "Haste":
+            if self.race == "Human":
+                self.haste_rating += stat_rating * 1.02
+            else:
+                self.haste_rating += stat_rating
+            haste_percent = self.haste_rating / 170
+            if self.is_talent_active("Seal of Alacrity") and self.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 1:
+                haste_percent = haste_percent * 1.02 + 2
+            elif self.is_talent_active("Seal of Alacrity") and self.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 2:
+                haste_percent = haste_percent * 1.04 + 4
+            self.haste = haste_percent + self.flat_haste
+            self.haste_multiplier = (self.haste / 100) + 1
+        if stat == "Crit":
+            if self.race == "Human":
+                self.crit_rating += stat_rating * 1.02
+            else:
+                self.crit_rating += stat_rating
+            crit_percent = self.crit_rating / 180
+            if self.is_talent_active("Holy Aegis") and self.class_talents["row5"]["Holy Aegis"]["ranks"]["current rank"] == 1:
+                crit_percent += 2
+            elif self.is_talent_active("Holy Aegis") and self.class_talents["row5"]["Holy Aegis"]["ranks"]["current rank"] == 2:
+                crit_percent += 4
+            self.crit = crit_percent + self.flat_crit
+            self.crit_multiplier = (self.crit / 100) + 1
+        if stat == "Mastery":
+            if self.race == "Human":
+                self.mastery_rating += stat_rating * 1.02
+            else:
+                self.mastery_rating += stat_rating
+            mastery_percent = self.mastery_rating / 120 + 12
+            if self.is_talent_active("Seal of Might") and self.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 1:
+                mastery_percent += 3
+            elif self.is_talent_active("Seal of Might") and self.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 2:
+                mastery_percent += 6
+            self.mastery = mastery_percent + self.flat_mastery
+            self.mastery_multiplier = (self.mastery / 100) + 1
+        if stat == "Versatility":
+            if self.race == "Human":
+                self.versatility_rating += stat_rating * 1.02
+            else:
+                self.versatility_rating += stat_rating
+            versatility_percent = self.versatility_rating / 205
+            self.versatility = versatility_percent + self.flat_versatility
+            self.versatility_multiplier = (self.versatility / 100) + 1
         
     def update_stats_with_racials(self):   
         # reset stats
@@ -427,6 +471,9 @@ class Paladin:
         elif self.race == "Zandalari Troll":
             pass
         
+        self.update_stat_multipliers()
+        
+    def update_stat_multipliers(self):
         self.haste_multiplier = (self.haste / 100) + 1
         self.crit_multiplier = (self.crit / 100) + 1
         self.mastery_multiplier = (self.mastery / 100) + 1
@@ -484,7 +531,7 @@ class Paladin:
             self.abilities["Blessing of the Seasons"] = BlessingOfTheSeasons(self)
             
         # trinkets
-        if "Mirror of Fractured Tomorrows" in self.equipment["trinket_1"]["name"] or "Mirror of Fractured Tomorrows" in self.equipment["trinket_2"]["name"]:
+        if self.is_trinket_equipped("Mirror of Fractured Tomorrows"):
             self.abilities["Mirror of Fractured Tomorrows"] = MirrorOfFracturedTomorrows(self)
             
     def is_talent_active(self, talent_name):
@@ -498,6 +545,17 @@ class Paladin:
 
         return False
     
+    def is_trinket_equipped(self, trinket_name):
+        if trinket_name in self.equipment["trinket_1"]["name"] or trinket_name in self.equipment["trinket_2"]["name"]:
+            return True
+        
+        return False
+    
+    def apply_buffs_on_encounter_start(self):
+        if self.is_trinket_equipped("Pip's Emerald Friendship Badge"):
+            self.apply_buff_to_self(PipsEmeraldFriendshipBadge(self), 0)
+            self.apply_buff_to_self(random.choice([BestFriendsWithPip(self), BestFriendsWithAerwyn(self), BestFriendsWithUrctos(self)]), 0)
+    
     # misc simulation functions 
     def print_stats(self, current_time):
         print(f"{round(current_time, 2)}: sp {self.spell_power}, haste {round(self.base_haste, 2)}, crit {round(self.base_crit, 2)}, mast {round(self.base_mastery, 2)}, vers {round(self.base_versatility, 2)}, crit heal {round(self.crit_healing_modifier, 2)}")
@@ -507,6 +565,16 @@ class Paladin:
             if ability.hasted_cooldown and ability.original_cooldown is not None:
                 elapsed_cooldown = ability.original_cooldown - ability.remaining_cooldown
                 ability.remaining_cooldown = ability.calculate_cooldown(self) - elapsed_cooldown * (ability.calculate_cooldown(self) / ability.original_cooldown)
+                
+    def find_highest_secondary_stat_rating(self):
+        stats = {
+            "Haste": self.haste_rating,
+            "Crit": self.crit_rating,
+            "Mastery": self.mastery_rating,
+            "Versatility": self.versatility_rating
+        }
+        
+        return max(stats, key=stats.get)
                 
     def check_cooldowns(self):
         spell_cooldowns = {}
@@ -525,6 +593,43 @@ class Paladin:
             buff_class = buff_class_map.get(buff)
             print(f"applying {buff} at {current_time}")
             self.apply_buff_to_self(buff_class(), timer)
+            
+    def check_stats(self):
+        stats = {
+            "haste": {},
+            "crit": {},
+            "mastery": {},
+            "versatility": {},
+            "intellect": {}
+        }
+        
+        stats["haste"]["haste_rating"] = self.haste_rating
+        stats["haste"]["base_haste_rating"] = self.base_haste_rating
+        stats["haste"]["haste"] = self.haste
+        stats["haste"]["base_haste"] = self.base_haste
+        stats["haste"]["haste_multiplier"] = self.haste_multiplier
+        
+        stats["crit"]["crit_rating"] = self.crit_rating
+        stats["crit"]["base_crit_rating"] = self.base_crit_rating
+        stats["crit"]["crit"] = self.crit
+        stats["crit"]["base_crit"] = self.base_crit
+        stats["crit"]["crit_multiplier"] = self.crit_multiplier
+        
+        stats["mastery"]["mastery_rating"] = self.mastery_rating
+        stats["mastery"]["base_mastery_rating"] = self.base_mastery_rating
+        stats["mastery"]["mastery"] = self.mastery
+        stats["mastery"]["base_mastery"] = self.base_mastery
+        stats["mastery"]["mastery_multiplier"] = self.mastery_multiplier
+        
+        stats["versatility"]["versatility_rating"] = self.versatility_rating
+        stats["versatility"]["base_versatility_rating"] = self.base_versatility_rating
+        stats["versatility"]["versatility"] = self.versatility
+        stats["versatility"]["base_versatility"] = self.base_versatility
+        stats["versatility"]["versatility_multiplier"] = self.versatility_multiplier
+        
+        stats["intellect"]["intellect"] = self.spell_power
+        
+        return stats
     
     def get_effective_spell_power(self, spell_power):
         # 5% from plate armour bonus
@@ -593,19 +698,21 @@ class Paladin:
             
         update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "extended", buff.duration, buff.current_stacks, time_extension)
     
-    def remove_or_decrement_buff_on_self(self, buff, current_time, max_stacks=1):
+    def remove_or_decrement_buff_on_self(self, buff, current_time, max_stacks=1, replaced=False):
         if buff.name in self.active_auras:
             if buff.current_stacks > 1:
                 buff.current_stacks -= 1
                 append_aura_stacks_decremented(self.events, buff.name, self, current_time, buff.current_stacks, duration=self.active_auras[buff.name].duration)
                 
                 update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "stacks_decremented", buff.duration, buff.current_stacks)
-        else:
-            del self.active_auras[buff.name]
-            buff.remove_effect(self, current_time)
-            append_aura_removed_event(self.events, buff.name, self, self, current_time, duration=self.active_auras[buff.name].duration)
-            
-            update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "expired")
+            else:
+                del self.active_auras[buff.name]
+                if replaced:
+                    buff.remove_effect(self, current_time, replaced)
+                else:
+                    buff.remove_effect(self, current_time)
+                
+                update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "expired")
     
     # functions for parsing gear and loadout    
     def parse_stats(self, stats_data):

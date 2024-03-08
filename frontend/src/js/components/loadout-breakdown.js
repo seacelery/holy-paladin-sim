@@ -20,7 +20,6 @@ const createLoadoutBreakdown = (simulationData, containerCount) => {
     const priorityListContainer = createElement("div", "loadout-container-content", "loadout-priority-list-container");
     loadoutContainer.append(talentsContainer, equipmentContainer, priorityListContainer);
 
-    console.log(simulationData)
     // talents
     const talentsHeader = createElement("div", "loadout-header", null);
     talentsHeader.textContent = "Talents";
@@ -154,7 +153,6 @@ const createLoadoutBreakdown = (simulationData, containerCount) => {
         return acc;
     }, {});
 
-    console.log(sortedEquipment)
     for (const item in sortedEquipment) {
         const itemData = equipmentData[item];
         const rarityColour = `var(--rarity-${itemData["quality"].toLowerCase()})`;

@@ -643,6 +643,7 @@ priorityListInfoModalContainer.innerHTML = `
 
 const addPotionToPriorityList = (potionName, potionTimers) => {
     const potionRegex = new RegExp(`${potionName} \\| Timers = \\[(\\d*(?:\\.\\d+)?(?:,\\s*\\d*(?:\\.\\d+)?)*)\\]`, "g");
+    console.log(potionName, potionTimers)
     
     let priorityListJoined = "";
     if (!priorityListPastedCode) {

@@ -24,11 +24,6 @@ def increment_holy_power(ability, caster):
     
 def add_to_holy_power_by_ability(dict, ability, caster):
     caster.holy_power_by_ability[ability.name] = caster.holy_power_by_ability.get(ability.name, 0) + ability.holy_power_gain
-    
-def calculate_trinket_effect_value(base_item_level, base_effect_value, current_item_level, scale_factor):
-    print(f"Base ilvl {base_item_level}, Base value {base_effect_value}, Current ilvl {current_item_level}, Scale factor {scale_factor}")
-    print(f"Results {base_effect_value + scale_factor * (current_item_level - base_item_level)}")
-    return base_effect_value + scale_factor * (current_item_level - base_item_level)
 
 # data tracking functions
 def append_spell_heal_event(array, spell_name, caster, target, amount, current_time, is_crit, spends_mana=False, is_absorb=False):
@@ -315,7 +310,7 @@ def update_target_buff_data(buff_breakdown, buff_name, current_time, event_type,
         "target": target
     })
     
-def update_priority_breakdown(priority_breakdown, caster, current_time, priority_list_number, spell_name, player_active_auras, resources, target_active_auras=None, remaining_cooldowns=None, aura_counts=None):
+def update_priority_breakdown(priority_breakdown, caster, current_time, priority_list_number, spell_name, player_active_auras, resources, target_active_auras=None, remaining_cooldowns=None, aura_counts=None, current_stats=None):
     if caster.last_iteration:     
         priority_breakdown[current_time] = {"priority_list_number": priority_list_number, "spell_name": spell_name, "player_active_auras": player_active_auras,
-                                            "resources": resources, "target_active_auras": target_active_auras, "remaining_cooldowns": remaining_cooldowns, "total_target_aura_counts": aura_counts}
+                                            "resources": resources, "target_active_auras": target_active_auras, "remaining_cooldowns": remaining_cooldowns, "total_target_aura_counts": aura_counts, "current_stats": current_stats}

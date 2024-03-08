@@ -5,6 +5,8 @@ import { cooldownFilterState } from './index.js';
 import { playerAurasFilterState } from './index.js';
 
 const createPriorityBreakdown = (simulationData, containerCount) => {
+    console.log(simulationData.results.priority_breakdown["0"].current_stats)
+    console.log(simulationData.results.priority_breakdown)
     const formatPriorityTime = (seconds) => {
         let minutes = Math.floor(seconds / 60);
         let remainingSeconds = (seconds % 60).toFixed(2);
@@ -172,7 +174,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
 
         const headerGridContainer = createElement("div", "priority-header-grid-container", null);
         const gridContainer = createElement("div", "priority-grid-container", `priority-grid-container`);
-        gridContainer.style.height = "100vh"; // Adjust based on your desired viewport height
+        gridContainer.style.height = "100vh";
         gridContainer.style.overflowY = "scroll";
 
         // generate header row
@@ -203,10 +205,6 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const timeCell = createElement("div", "priority-grid-time-cell priority-grid-cell", null);
             timeCell.textContent = formatPriorityTime(timestamp);
             gridRow.appendChild(timeCell);
-
-            const numberCell = createElement("div", "priority-grid-number-cell priority-grid-cell", null);
-            numberCell.textContent = timestampData.priority_list_number;
-            gridRow.appendChild(numberCell);
 
             const spellCell = createElement("div", "priority-grid-name-cell priority-grid-cell", null);
             const spellIconContainer = createElement("div", "priority-grid-spell-icon-container", null);
@@ -431,6 +429,43 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             auraCountsCell.appendChild(auraCountsContainer);
             gridRow.appendChild(auraCountsCell);
 
+            const statsCell = createElement("div", "priority-grid-stats-cell priority-grid-cell", null);
+            const statsData = simulationData.results.priority_breakdown[timestamp].current_stats;
+            const statsOrder = ["intellect", "haste", "crit", "mastery", "versatility"];
+            const sortedStatsData = Object.fromEntries(
+                Object.entries(statsData).sort(([a], [b]) => statsOrder.indexOf(a) - statsOrder.indexOf(b))
+            );
+
+            for (const stat in sortedStatsData) {
+                let statRating, statPercent;
+                const statData = sortedStatsData[stat];
+                if (stat === "intellect") {
+                    statRating = Math.round(statData[stat]);
+                } else {
+                    statPercent = Number(statData[stat]).toFixed(2);
+                    statRating = Math.round(statData[`${stat}_rating`]);
+                };
+
+                const statContainer = createElement("div", "priority-grid-stat-container", null);
+                const statNameContainer = createElement("span", "priority-grid-stat-container-name", null);
+                statNameContainer.textContent = stat.charAt(0).toUpperCase() + stat.slice(1);
+                statNameContainer.style.color = `var(--stat-${stat})`;
+                const statRatingContainer = createElement("span", "priority-grid-stat-container-rating", null);
+                statRatingContainer.textContent = statRating;
+                statRatingContainer.style.color = `var(--stat-${stat})`;
+                const statDivider = createElement("span", "priority-grid-stat-container-divider", null);
+                statDivider.textContent = stat !== "intellect" ? "/" : "";
+                statDivider.style.color = `var(--stat-${stat})`;
+                const statPercentContainer = createElement("span", "priority-grid-stat-container-percent", null);
+                statPercentContainer.textContent = stat !== "intellect" ? statPercent + "%" : "";
+                statPercentContainer.style.color = `var(--stat-${stat})`;
+                statContainer.append(statNameContainer, statRatingContainer, statDivider, statPercentContainer);
+        
+                statsCell.appendChild(statContainer);
+            };
+              
+            gridRow.appendChild(statsCell);
+
             return gridRow
         };
 
@@ -440,10 +475,28 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const visibleRowCount = Math.ceil(gridContainer.clientHeight / rowHeight);
             const totalRows = timestamps.length;
         
-            const startIndex = Math.max(0, Math.floor(scrollTop / rowHeight) - buffer);
+            let startIndex = Math.max(0, Math.floor(scrollTop / rowHeight) - buffer);
             const endIndex = Math.min(totalRows - 1, startIndex + visibleRowCount + buffer);
         
-            // Append new rows as needed when scrolling down
+            // while (currentStartIndex < startIndex) {
+            //     gridContainer.removeChild(gridContainer.firstChild);
+            //     currentStartIndex++;
+            //     currentEndIndex = Math.max(currentEndIndex - 1, visibleRowCount + buffer - 1);
+            // };
+
+            if (scrollTop === 0) {
+                gridContainer.innerHTML = "";
+                currentEndIndex = Math.ceil(gridContainer.clientHeight / rowHeight) + buffer - 1;
+                const fragment = document.createDocumentFragment();
+                for (let i = 0; i <= currentEndIndex; i++) {
+                    const row = createRow(timestamps[i]);
+                    if (row) fragment.appendChild(row);
+                };
+                gridContainer.appendChild(fragment);
+                currentStartIndex = 0;
+                return;
+            };
+        
             if (endIndex > currentEndIndex) {
                 const fragment = document.createDocumentFragment();
                 for (let i = currentEndIndex + 1; i <= endIndex; i++) {
@@ -455,14 +508,15 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             };
         };
         
+        let currentStartIndex = 0;
         let currentEndIndex = Math.ceil(gridContainer.clientHeight / rowHeight) + buffer - 1;
         
         // initial rows
         const initialFragment = document.createDocumentFragment();
-        for (let i = 0; i <= currentEndIndex; i++) {
+        for (let i = currentStartIndex; i <= currentEndIndex; i++) {
             const row = createRow(timestamps[i]);
             if (row) initialFragment.appendChild(row);
-        };
+        }
         gridContainer.appendChild(initialFragment);
         
         gridContainer.addEventListener("scroll", handleScroll);
@@ -487,7 +541,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     });
 
     // choose headers and create the grid
-    const gridHeaders = ["Time", "Priority", "Spell", "Resources", "Player Auras", "Target Auras", "Cooldowns", "Counts"];
+    const gridHeaders = ["Time", "Spell", "Resources", "Player Auras", "Target Auras", "Cooldowns", "Counts", "Stats"];
     const priorityGrid = createPriorityGrid(priorityData, priorityBreakdownContainer, gridHeaders);
     priorityBreakdownContainer.appendChild(priorityGrid);
 
@@ -527,7 +581,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             };
         };
     };
-    window.addEventListener("resize", syncColumnWidths);
+    // window.addEventListener("resize", syncColumnWidths);
 };
 
 export { createPriorityBreakdown };

@@ -319,6 +319,31 @@ const itemDataEffects = [
         "enchantments": [],
         "gems": []
     },
+    {
+        "id": 207581,
+        "name": "Mirror of Fractured Tomorrows",
+        "item_slot": "Trinket",
+        "icon": "https://render.worldofwarcraft.com/eu/icons/56/achievement_dungeon_ulduarraid_misc_06.jpg",
+        "base_item_level": 421,
+        "quality": "Epic",
+        "effects": [
+            {
+                "name": "Mirror of Fractured Tomorrows",
+                "id": 418527,
+                "description": "Use: Gaze into the mirror's depths, inviting a version of your future self to fight alongside you for 20 sec, casting healing spells for *25,000. In addition, you grant yourself *2,789 of your highest secondary stat. (3 Min Cooldown)",
+                "effect_values": [
+                    {"base_value": 25000, "effect_type": "scalar", "effect_coefficient": 34.791132, "allocation_type": "flat_healing"},
+                    {"base_value": 2789, "effect_type": "linear", "scale_factor": 13.684, "base_item_level": 421},
+                ]
+            }
+        ],
+        "stats": {
+            "Intellect": 473
+        },
+        "limit": null,
+        "enchantments": [],
+        "gems": []
+    },
 ];
 
 export default itemDataEffects;

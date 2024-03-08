@@ -3045,18 +3045,34 @@ tr {
 /* priority grid css */
 .priority-grid-container {
     display: grid;
-    grid-template-columns: 0.3fr 0.2fr 0.2fr 0.35fr 1fr 0.35fr 1fr 0.35fr; 
-    width: calc(100% + 7px); 
+    grid-template-columns: 0.3fr 0.2fr 0.35fr 0.7fr 0.35fr 1fr 0.35fr 0.5fr;
+    width: calc(100% + 9px); 
+    padding-right: 1px;
 }
 
-/* .priority-grid-container::-webkit-scrollbar {
-    display: none;
-} */
+.priority-grid-container::-webkit-scrollbar-thumb {
+    border: 2px solid var(--panel-colour-6);
+    border-left: 2px solid var(--panel-colour-6);
+    border-radius: 2px;
+
+    background: var(--border-colour-3);
+}
+
+.priority-grid-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* work around for chrome supporting scrollbar-width/color */
+@-moz-document url-prefix() {
+    .priority-grid-container {
+        scrollbar-width: thin;
+        scrollbar-color: var(--border-colour-3) var(--panel-colour-6);
+    }
+}
 
 .priority-grid-header-row {
     display: grid;
-    grid-template-columns: 0.3fr 0.2fr 0.2fr 0.35fr 1fr 0.35fr 1fr 0.35fr;
-    width: calc(100% - 3px);
+    grid-template-columns: 0.3fr 0.2fr 0.35fr 0.7fr 0.35fr 1fr 0.35fr 0.5fr;
 }
 
 .priority-grid-header-cell:last-child {
@@ -3116,12 +3132,46 @@ tr {
     border-bottom: none;
 }
 
-.priority-grid-time-cell, .priority-grid-number-cell, .priority-grid-name-cell {
+.priority-grid-time-cell, .priority-grid-name-cell {
     padding-top: 10px;
 }
 
-.priority-grid-time-cell, .priority-grid-number-cell {
+.priority-grid-time-cell {
     padding-top: 23px;
+}
+
+.priority-grid-stats-cell {
+    display: flex;
+    flex-direction: column;
+}
+
+.priority-grid-stat-container {
+    display: flex;
+
+    width: 100%;
+    height: 20px;
+
+    font-size: 12px;
+}
+
+.priority-grid-stat-container-name {
+    text-align: left;
+    width: 37%;
+}
+
+.priority-grid-stat-container-rating {
+    text-align: right;
+    width: 25%;
+}
+
+.priority-grid-stat-container-divider {
+    text-align: right;
+    width: 8%;
+}
+
+.priority-grid-stat-container-percent {
+    text-align: right;
+    width: 30%;
 }
 
 .priority-grid-spell-icon {

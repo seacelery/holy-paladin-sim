@@ -93706,8 +93706,9 @@ const itemData = [
             {
                 "name": "Mirror of Fractured Tomorrows",
                 "id": 418527,
-                "description": "Use: Gaze into the mirror's depths, inviting a version of your future self to fight alongside you for 20 sec, casting spells based on your role. In addition, you grant yourself *2,789 of your highest secondary stat. (3 Min Cooldown)",
+                "description": "Use: Gaze into the mirror's depths, inviting a version of your future self to fight alongside you for 20 sec, casting healing spells for *25,000. In addition, you grant yourself *2,789 of your highest secondary stat. (3 Min Cooldown)",
                 "effect_values": [
+                    {"base_value": 25000, "effect_type": "scalar", "effect_coefficient": 34.791132, "allocation_type": "flat_healing"},
                     {"base_value": 2789, "effect_type": "linear", "scale_factor": 13.684, "base_item_level": 421},
                 ]
             }

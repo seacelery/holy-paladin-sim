@@ -11,7 +11,7 @@ from flask_socketio import emit
 from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget
-from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, TimeWarp
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
 from .priority_list_dsl import parse_condition, condition_to_lambda
 
@@ -144,8 +144,8 @@ class Simulation:
             self.decrement_buffs_on_targets()
             self.decrement_debuffs_on_targets()
             self.decrement_summons()
+            self.decrement_trinkets()
             self.regen_mana()
-            
             
             # print(self.elapsed_time, self.paladin.abilities["Holy Shock"].remaining_cooldown, self.paladin.abilities["Holy Shock"].current_charges)
             
@@ -349,6 +349,11 @@ class Simulation:
                     
                     if ability_instance.current_charges < ability_instance.max_charges:
                         ability_instance.start_cooldown(self.paladin)
+                        
+    def decrement_trinkets(self):
+        for buff_name, buff in self.paladin.active_auras.items():
+            if isinstance(buff, (BestFriendsWithPipEmpowered, BestFriendsWithAerwynEmpowered, BestFriendsWithUrctosEmpowered)):
+                buff.diminish_effect(self.paladin, self.elapsed_time)
                                  
     def decrement_buffs_on_self(self):
         # for buff_name, buff in self.paladin.active_auras.items():
@@ -586,11 +591,11 @@ class Simulation:
             self.paladin.reset_state()
             self.reset_simulation()
             self.paladin.apply_consumables()
+            self.paladin.apply_buffs_on_encounter_start()
             
             # only record some data on the last iteration
             if i == self.iterations - 1:
                 self.paladin.last_iteration = True
-                # self.paladin.check_stats_after_buffs()
                 
             self.simulate()
             

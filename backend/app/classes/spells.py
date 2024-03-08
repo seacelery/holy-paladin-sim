@@ -49,9 +49,9 @@ class Spell:
         caster.remaining_cast_time = self.calculate_cast_time(caster)
         append_spell_started_casting_event(caster.events, caster, ability, current_time)
         
-        self_auras, _, total_target_aura_counts, spell_cooldowns = self.collect_priority_breakdown_data(caster, exclude_target_auras=True)
+        self_auras, _, total_target_aura_counts, spell_cooldowns, current_stats = self.collect_priority_breakdown_data(caster, exclude_target_auras=True)
         
-        update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts)    
+        update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)    
         
     def can_cast(self, caster, current_time=0):
         if not self.off_gcd and caster.global_cooldown > 0:
@@ -78,10 +78,10 @@ class Spell:
         
         self.try_trigger_rppm_effects(caster, targets, current_time)
         
-        self_auras, target_auras, total_target_aura_counts, spell_cooldowns = self.collect_priority_breakdown_data(caster, targets)
+        self_auras, target_auras, total_target_aura_counts, spell_cooldowns, current_stats  = self.collect_priority_breakdown_data(caster, targets)
         
         for target in targets:
-            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts)    
+            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)    
             
             mana_cost = self.get_mana_cost(caster)
             damage_value, is_crit = self.calculate_damage(caster, self.bonus_crit, self.bonus_versatility)
@@ -129,25 +129,25 @@ class Spell:
         
         self.try_trigger_rppm_effects(caster, targets, current_time)
         
-        self_auras, target_auras, total_target_aura_counts, spell_cooldowns = self.collect_priority_breakdown_data(caster, targets)
+        self_auras, target_auras, total_target_aura_counts, spell_cooldowns, current_stats  = self.collect_priority_breakdown_data(caster, targets)
         
         # add spells that trigger other spells as a cast event and don't cost mana
         if self.name in ["Daybreak", "Arcane Torrent", "Gift of the Naaru"]:
             update_spell_data_casts(caster.ability_breakdown, self.name, self.get_mana_cost(caster), self.holy_power_gain, self.holy_power_cost)
-            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts)
+            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)
             
         # add spells that cost mana and don't heal
         if caster.mana >= self.get_mana_cost(caster) and not is_heal: 
             if self.get_mana_cost(caster) > 0:
                 update_spell_data_casts(caster.ability_breakdown, self.name, self.get_mana_cost(caster), self.holy_power_gain, self.holy_power_cost)             
             if self.name not in ["Tyr's Deliverance"]:
-                update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts) 
+                update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats) 
             caster.mana -= self.get_mana_cost(caster)
                      
         # add spells that cost mana and do heal       
         elif caster.mana >= self.get_mana_cost(caster) and is_heal: 
             if self.name not in ["Tyr's Deliverance", "Light's Hammer", "Holy Shock (Divine Toll)", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Resonance)", "Holy Light", "Flash of Light"]:
-                update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts)    
+                update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)    
             
             target_count = self.healing_target_count
             if target_count > 1:  
@@ -318,10 +318,15 @@ class Spell:
         
     def try_trigger_rppm_effects(self, caster, targets, current_time):
         from .spells_passives import TouchOfLight, EmbraceOfAkunda
-        from .auras_buffs import SophicDevotion, EmbraceOfPaku, CoagulatedGenesaurBloodBuff, SustainingAlchemistStoneBuff
+        from .auras_buffs import ( 
+                                  SophicDevotion, EmbraceOfPaku, CoagulatedGenesaurBloodBuff, SustainingAlchemistStoneBuff, 
+                                  SeaStarBuff, PipsEmeraldFriendshipBadge, BestFriendsWithPipEmpowered, BestFriendsWithAerwynEmpowered, 
+                                  BestFriendsWithUrctosEmpowered
+                                 )
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False):
             # time since last attempt makes it so the number of events happening has very little impact on the number of procs that occur
+            proc_occurred = False
             
             caster.time_since_last_rppm_proc[effect.name] = caster.time_since_last_rppm_proc.get(effect.name, 0)
             caster.time_since_last_rppm_proc_attempt[effect.name] = caster.time_since_last_rppm_proc_attempt.get(effect.name, 0)
@@ -333,7 +338,8 @@ class Spell:
                 bad_luck_protection = max(1, 1 + 3 * (caster.time_since_last_rppm_proc[effect.name] * effect.BASE_PPM / 60 - 1.5))
                 effect_proc_chance = bad_luck_protection * (effect.BASE_PPM / 60) * min(caster.time_since_last_rppm_proc_attempt[effect.name], 10)
             
-            if random.random() < effect_proc_chance:     
+            if random.random() < effect_proc_chance:  
+                proc_occurred = True   
                 caster.time_since_last_rppm_proc[effect.name] = 0
                 target = targets[0]
                 if is_heal:
@@ -343,10 +349,15 @@ class Spell:
                     update_spell_data_heals(caster.ability_breakdown, effect.name, target, effect_heal, is_crit)
                     append_spell_heal_event(caster.events, effect.name, caster, target, effect_heal, current_time, is_crit)
                     
-                if is_self_buff:
+                if is_self_buff and effect in caster.active_auras:
+                    del caster.active_auras[effect]
+                    caster.apply_buff_to_self(effect, current_time)
+                elif is_self_buff:
                     caster.apply_buff_to_self(effect, current_time)
                     
             caster.time_since_last_rppm_proc_attempt[effect.name] = 0
+            
+            return proc_occurred
         
         if caster.is_talent_active("Touch of Light"):        
             touch_of_light = TouchOfLight(caster)        
@@ -367,9 +378,38 @@ class Spell:
             coagulated_genesaur_blood = CoagulatedGenesaurBloodBuff(caster)
             try_proc_rppm_effect(coagulated_genesaur_blood, is_hasted=False, is_self_buff=True)
             
+        if "Sea Star" in caster.trinkets:
+            sea_star = SeaStarBuff(caster)
+            try_proc_rppm_effect(sea_star, is_hasted=False, is_self_buff=True)
+            
         if "Sustaining Alchemist Stone" in caster.trinkets:
             sustaining_alchemist_stone = SustainingAlchemistStoneBuff(caster)
             try_proc_rppm_effect(sustaining_alchemist_stone, is_self_buff=True)
+            
+        if "Pip's Emerald Friendship Badge" in caster.trinkets:
+            pips_emerald_friendship_badge = PipsEmeraldFriendshipBadge(caster)
+            pips_proc = try_proc_rppm_effect(pips_emerald_friendship_badge, is_hasted=False, is_self_buff=True)
+            
+            if pips_proc:
+                new_pips_proc = random.choice([BestFriendsWithPipEmpowered(caster), BestFriendsWithAerwynEmpowered(caster), BestFriendsWithUrctosEmpowered(caster)])
+                # remove permanent buff
+                if "Best Friends with Pip" in caster.active_auras:
+                    caster.remove_or_decrement_buff_on_self(caster.active_auras["Best Friends with Pip"], current_time)
+                elif "Best Friends with Aerwyn" in caster.active_auras:
+                    caster.remove_or_decrement_buff_on_self(caster.active_auras["Best Friends with Aerwyn"], current_time)
+                elif "Best Friends with Urctos" in caster.active_auras:
+                    caster.remove_or_decrement_buff_on_self(caster.active_auras["Best Friends with Urctos"], current_time)
+                    
+                # if it procs during an existing empower, remove the existing empower
+                if "Best Friends with Pip Empowered" in caster.active_auras:
+                    caster.remove_or_decrement_buff_on_self(caster.active_auras["Best Friends with Pip Empowered"], current_time, replaced=True)    
+                elif "Best Friends with Aerwyn Empowered" in caster.active_auras:
+                    caster.remove_or_decrement_buff_on_self(caster.active_auras["Best Friends with Aerwyn Empowered"], current_time, replaced=True)
+                elif "Best Friends with Urctos Empowered" in caster.active_auras:
+                    caster.remove_or_decrement_buff_on_self(caster.active_auras["Best Friends with Urctos Empowered"], current_time, replaced=True)
+                
+                caster.apply_buff_to_self(new_pips_proc, current_time)
+            
                   
     def collect_priority_breakdown_data(self, caster, targets=None, exclude_target_auras=False):
         # add auras to dictionaries and check current spell cooldownsfor display in priority list example
@@ -395,7 +435,10 @@ class Spell:
         # check cooldowns and add to priority breakdown
         spell_cooldowns = caster.check_cooldowns()
         
-        return self_auras, target_auras, total_target_aura_counts, spell_cooldowns
+        # check stats
+        stats = caster.check_stats()
+        
+        return self_auras, target_auras, total_target_aura_counts, spell_cooldowns, stats
    
         
 class Wait(Spell):

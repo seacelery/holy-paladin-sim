@@ -1,9 +1,9 @@
 import random
+import re
 
 from .auras import Buff
-from ..utils.misc_functions import append_spell_heal_event, format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event, calculate_trinket_effect_value
+from ..utils.misc_functions import append_spell_heal_event, format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
-from ..utils.trinket_data import trinket_data
 
 
 class HoT(Buff):
@@ -127,13 +127,15 @@ class AvengingWrathBuff(Buff):
             update_self_buff_data(caster.self_buff_breakdown, "Avenging Wrath (Awakening)", current_time, "expired")      
         
         if caster.is_talent_active("Avenging Wrath: Might"):
-            caster.crit += 15
+            caster.flat_crit += 15
+            caster.update_stat("Crit", 0)
         caster.healing_multiplier *= 1.15
         caster.damage_multiplier *= 1.15
         
     def remove_effect(self, caster, current_time=None):
         if caster.is_talent_active("Avenging Wrath: Might"):
-            caster.crit -= 15
+            caster.flat_crit -= 15
+            caster.update_stat("Crit", 0)
         caster.healing_multiplier /= 1.15
         caster.damage_multiplier /= 1.15
        
@@ -145,13 +147,15 @@ class AvengingWrathAwakening(Buff):
         
     def apply_effect(self, caster, current_time=None):
         if caster.is_talent_active("Avenging Wrath: Might"):
-            caster.crit += 15
+            caster.flat_crit += 15
+            caster.update_stat("Crit", 0)
         caster.healing_multiplier *= 1.15
         caster.damage_multiplier *= 1.15
         
     def remove_effect(self, caster, current_time=None):
         if caster.is_talent_active("Avenging Wrath: Might"):
-            caster.crit -= 15
+            caster.flat_crit -= 15
+            caster.update_stat("Crit", 0)
         caster.healing_multiplier /= 1.15
         caster.damage_multiplier /= 1.15
         
@@ -161,8 +165,6 @@ class DivineFavorBuff(Buff):
         super().__init__("Divine Favor", 10000)
         
     def apply_effect(self, caster, current_time=None):
-        # for aura in caster.active_auras:
-        #     print(current_time, aura, caster.active_auras[aura].duration, caster.active_auras[aura].current_stacks)
         if "Holy Light" in caster.abilities:
             caster.abilities["Holy Light"].spell_healing_modifier *= 1.6
             caster.abilities["Holy Light"].cast_time_modifier *= 0.7
@@ -379,7 +381,7 @@ class BlessingOfWinter(Buff):
     
     def __init__(self):
         super().__init__("Blessing of Winter", 30, base_duration=30)
-        self.last_holy_shock_time = 0
+        self.last_winter_tick_time = 0
         
     def apply_effect(self, caster, current_time=None):
         self.last_winter_tick_time = 0
@@ -419,10 +421,12 @@ class EmbraceOfPaku(Buff):
         super().__init__("Embrace of Pa'ku", 12, base_duration=12)
         
     def apply_effect(self, caster, current_time=None):
-        caster.crit += 4
+        caster.flat_crit += 4
+        caster.update_stat("Crit", 0)
         
     def remove_effect(self, caster, current_time=None):
-        caster.crit -= 4
+        caster.flat_crit -= 4
+        caster.update_stat("Crit", 0)
         
 
 class FirebloodBuff(Buff):
@@ -473,10 +477,10 @@ class PhialOfTepidVersatility(Buff):
         super().__init__("Phial of Tepid Versatility", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_versatility += 745 / 205
+        caster.update_stat("Versatility", 745)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_versatility -= 745 / 205
+        caster.update_stat("Versatility", -745)
         
         
 def apply_elemental_chaos_aura(caster, current_time):
@@ -522,10 +526,10 @@ class ElementalChaosAir(Buff):
         super().__init__("Elemental Chaos: Air", 60, base_duration=60)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_haste += caster.get_percent_from_stat_rating("Haste", 652)
+        caster.update_stat("Haste", 652)
         
     def remove_effect(self, caster, current_time):
-        caster.base_haste -= caster.get_percent_from_stat_rating("Haste", 652)
+        caster.update_stat("Haste", -652)
         apply_elemental_chaos_aura(caster, current_time)
         
     def reapply_self(self, caster, current_time):
@@ -539,11 +543,11 @@ class ElementalChaosFire(Buff):
         super().__init__("Elemental Chaos: Fire", 60, base_duration=60)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_crit += caster.get_percent_from_stat_rating("Crit", 652)
+        caster.update_stat("Crit", 652)
         caster.crit_damage_modifier += 0.02
         
     def remove_effect(self, caster, current_time):
-        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", 652)
+        caster.update_stat("Crit", -652)
         caster.crit_damage_modifier -= 0.02
         apply_elemental_chaos_aura(caster, current_time)
         
@@ -558,11 +562,11 @@ class ElementalChaosFrost(Buff):
         super().__init__("Elemental Chaos: Frost", 60, base_duration=60)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_versatility += caster.get_percent_from_stat_rating("Versatility", 652)
+        caster.update_stat("Versatility", 652)
         caster.crit_healing_modifier += 0.02
         
     def remove_effect(self, caster, current_time):
-        caster.base_versatility -= caster.get_percent_from_stat_rating("Versatility", 652)
+        caster.update_stat("Versatility", -652)
         caster.crit_healing_modifier -= 0.02
         apply_elemental_chaos_aura(caster, current_time)
         
@@ -577,10 +581,10 @@ class ElementalChaosEarth(Buff):
         super().__init__("Elemental Chaos: Earth", 60, base_duration=60)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_mastery += caster.get_percent_from_stat_rating("Mastery", 652)
+        caster.update_stat("Mastery", 652)
         
     def remove_effect(self, caster, current_time):
-        caster.base_mastery -= caster.get_percent_from_stat_rating("Mastery", 652)
+        caster.update_stat("Mastery", -652)
         apply_elemental_chaos_aura(caster, current_time)
         
     def reapply_self(self, caster, current_time):
@@ -607,10 +611,11 @@ class TimelyDemiseFood(Buff):
         super().__init__("Timely Demise", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_haste += caster.get_percent_from_stat_rating("Haste", 105)
+        caster.update_stat("Haste", 105)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_haste -= caster.get_percent_from_stat_rating("Haste", 105)
+        caster.update_stat("Haste", -105)
+
         
         
 class FiletOfFangsFood(Buff):
@@ -619,10 +624,11 @@ class FiletOfFangsFood(Buff):
         super().__init__("Filet of Fangs", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_crit += caster.get_percent_from_stat_rating("Crit", 105)
+        caster.update_stat("Crit", 105)
+
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", 105)
+        caster.update_stat("Crit", -105)
         
         
 class SeamothSurpriseFood(Buff):
@@ -631,10 +637,10 @@ class SeamothSurpriseFood(Buff):
         super().__init__("Seamoth Surprise", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_versatility += caster.get_percent_from_stat_rating("Versatility", 105)
+        caster.update_stat("Versatility", 105)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_versatility -= caster.get_percent_from_stat_rating("Versatility", 105)
+        caster.update_stat("Versatility", -105)
 
 
 class SaltBakedFishcakeFood(Buff):
@@ -643,10 +649,10 @@ class SaltBakedFishcakeFood(Buff):
         super().__init__("Salt-Baked Fishcake", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_mastery += caster.get_percent_from_stat_rating("Mastery", 105)
+        caster.update_stat("Mastery", 105)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_mastery -= caster.get_percent_from_stat_rating("Mastery", 105)
+        caster.update_stat("Mastery", -105)
         
         
 class FeistyFishSticksFood(Buff):
@@ -655,12 +661,12 @@ class FeistyFishSticksFood(Buff):
         super().__init__("Feisty Fish Sticks", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_crit += caster.get_percent_from_stat_rating("Crit", 67)
-        caster.base_haste += caster.get_percent_from_stat_rating("Haste", 67)
+        caster.update_stat("Crit", 67)
+        caster.update_stat("Haste", 67)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", 67)
-        caster.base_haste -= caster.get_percent_from_stat_rating("Haste", 67)
+        caster.update_stat("Crit", -67)
+        caster.update_stat("Haste", -67)
         
 
 class AromaticSeafoodPlatterFood(Buff):
@@ -669,12 +675,12 @@ class AromaticSeafoodPlatterFood(Buff):
         super().__init__("Aromatic Seafood Platter", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_versatility += caster.get_percent_from_stat_rating("Versatility", 67)
-        caster.base_haste += caster.get_percent_from_stat_rating("Haste", 67)
+        caster.update_stat("Versatility", 67)
+        caster.update_stat("Haste", 67)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_versatility -= caster.get_percent_from_stat_rating("Versatility", 67)
-        caster.base_haste -= caster.get_percent_from_stat_rating("Haste", 67)
+        caster.update_stat("Versatility", -67)
+        caster.update_stat("Haste", -67)
 
 
 class SizzlingSeafoodMedleyFood(Buff):
@@ -683,12 +689,12 @@ class SizzlingSeafoodMedleyFood(Buff):
         super().__init__("Sizzling Seafood Medley", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_mastery += caster.get_percent_from_stat_rating("Mastery", 67)
-        caster.base_haste += caster.get_percent_from_stat_rating("Haste", 67)
+        caster.update_stat("Mastery", 67)
+        caster.update_stat("Haste", 67)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_mastery -= caster.get_percent_from_stat_rating("Mastery", 67)
-        caster.base_haste -= caster.get_percent_from_stat_rating("Haste", 67)
+        caster.update_stat("Mastery", -67)
+        caster.update_stat("Haste", -67)
         
         
 class RevengeServedColdFood(Buff):
@@ -697,12 +703,12 @@ class RevengeServedColdFood(Buff):
         super().__init__("Revenge, Served Cold", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_crit += caster.get_percent_from_stat_rating("Crit", 67)
-        caster.base_versatility += caster.get_percent_from_stat_rating("Versatility", 67)
+        caster.update_stat("Crit", 67)
+        caster.update_stat("Versatility", 67)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", 67)
-        caster.base_versatility -= caster.get_percent_from_stat_rating("Versatility", 67)
+        caster.update_stat("Crit", -67)
+        caster.update_stat("Versatility", -67)
         
         
 class ThousandboneTongueslicerFood(Buff):
@@ -711,12 +717,12 @@ class ThousandboneTongueslicerFood(Buff):
         super().__init__("Thousandbone Tongueslicer", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_crit += caster.get_percent_from_stat_rating("Crit", 67)
-        caster.base_mastery += caster.get_percent_from_stat_rating("Mastery", 67)
+        caster.update_stat("Mastery", 67)
+        caster.update_stat("Crit", 67)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", 67)
-        caster.base_mastery -= caster.get_percent_from_stat_rating("Mastery", 67)
+        caster.update_stat("Mastery", -67)
+        caster.update_stat("Crit", -67)
 
 
 class GreatCeruleanSeaFood(Buff):
@@ -725,12 +731,12 @@ class GreatCeruleanSeaFood(Buff):
         super().__init__("Great Cerulean Sea", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_versatility += caster.get_percent_from_stat_rating("Versatility", 67)
-        caster.base_mastery += caster.get_percent_from_stat_rating("Mastery", 67)
+        caster.update_stat("Mastery", 67)
+        caster.update_stat("Versatility", 67)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_versatility -= caster.get_percent_from_stat_rating("Versatility", 67)
-        caster.base_mastery -= caster.get_percent_from_stat_rating("Mastery", 67)
+        caster.update_stat("Mastery", -67)
+        caster.update_stat("Versatility", -67)
         
         
 # weapon imbues
@@ -740,10 +746,10 @@ class BuzzingRune(Buff):
         super().__init__("Buzzing Rune", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_crit += caster.get_percent_from_stat_rating("Crit", 310)
+        caster.update_stat("Crit", 310)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", 310)
+        caster.update_stat("Crit", -310)
 
 
 class ChirpingRune(Buff):
@@ -764,10 +770,10 @@ class HowlingRune(Buff):
         super().__init__("Howling Rune", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_haste += caster.get_percent_from_stat_rating("Haste", 310)
+        caster.update_stat("Haste", 310)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_haste -= caster.get_percent_from_stat_rating("Haste", 310)
+        caster.update_stat("Haste", -310)
         
 
 class HissingRune(Buff):
@@ -776,10 +782,10 @@ class HissingRune(Buff):
         super().__init__("Hissing Rune", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_mastery += caster.get_percent_from_stat_rating("Mastery", 310)
+        caster.update_stat("Mastery", 310)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_mastery -= caster.get_percent_from_stat_rating("Mastery", 310)
+        caster.update_stat("Mastery", -310)
         
         
 # augment runes
@@ -814,10 +820,12 @@ class MarkOfTheWild(Buff):
         super().__init__("Mark of the Wild", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.base_versatility += 3
+        caster.flat_versatility += 3
+        caster.update_stat("Versatility", 0)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_versatility -= 3
+        caster.flat_versatility -= 3
+        caster.update_stat("Versatility", 0)
         
 
 class CloseToHeart(Buff):
@@ -862,11 +870,13 @@ class PowerInfusion(Buff):
         super().__init__("Power Infusion", 15, base_duration=15)
         
     def apply_effect(self, caster, current_time=None):
-        caster.haste_multiplier *= 1.2
+        caster.flat_haste += 20
+        caster.update_stat("Haste", 0)
         caster.update_hasted_cooldowns_with_haste_changes()
     
     def remove_effect(self, caster, current_time=None):
-        caster.haste_multiplier /= 1.2
+        caster.flat_haste -= 20
+        caster.update_stat("Haste", 0)
         caster.update_hasted_cooldowns_with_haste_changes()
         
         
@@ -886,19 +896,45 @@ class MirrorOfFracturedTomorrowsBuff(Buff):
     
     def __init__(self, caster):
         super().__init__("Mirror of Fractured Tomorrows", 20, base_duration=20)
-        self.base_item_level = trinket_data[self.name]["base_item_level"]
-        self.base_effect_value = trinket_data[self.name]["base_effect_value"]
-        self.scale_factor = trinket_data[self.name]["scale_factor"]
-        self.current_item_level = int(caster.trinkets[self.name]["item_level"])
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
         
-        self.effect_value = calculate_trinket_effect_value(self.base_item_level, self.base_effect_value, self.current_item_level, self.scale_factor)
-        print(self.effect_value)
+        # flat healing
+        self.trinket_first_value = trinket_values[0]
+        # highest secondary stat rating
+        self.trinket_second_value = trinket_values[1]
         
-    def apply_effect(self, caster, current_time=None):        
-        caster.spell_power += caster.get_effective_spell_power(self.effect_value)
+    def apply_effect(self, caster, current_time=None):  
+        from .spells_passives import RestorativeSands
+        target = random.choice(caster.potential_healing_targets)
+        restorative_sands_heal, restorative_sands_crit = RestorativeSands(caster).calculate_heal(caster)
+        restorative_sands_heal = self.trinket_first_value * caster.versatility_multiplier
+        
+        # average 4 heals
+        for i in range(4):
+            target.receive_heal(restorative_sands_heal)
+            update_spell_data_heals(caster.ability_breakdown, "Restorative Sands", target, restorative_sands_heal, restorative_sands_crit)
+        
+        self.highest_stat = caster.find_highest_secondary_stat_rating()
+        
+        if self.highest_stat == "Haste":
+            caster.update_stat("Haste", self.trinket_second_value)
+        elif self.highest_stat == "Crit":
+            caster.update_stat("Crit", self.trinket_second_value)
+        elif self.highest_stat == "Mastery":
+            caster.update_stat("Mastery", self.trinket_second_value)
+        elif self.highest_stat == "Versatility":
+            caster.update_stat("Versatility", self.trinket_second_value)
         
     def remove_effect(self, caster, current_time=None):
-        caster.spell_power -= caster.get_effective_spell_power(self.effect_value)
+        if self.highest_stat == "Haste":
+            caster.update_stat("Haste", -self.trinket_second_value)
+        elif self.highest_stat == "Crit":
+            caster.update_stat("Crit", -self.trinket_second_value)
+        elif self.highest_stat == "Mastery":
+            caster.update_stat("Mastery", -self.trinket_second_value)
+        elif self.highest_stat == "Versatility":
+            caster.update_stat("Versatility", -self.trinket_second_value)
         
 
 class CoagulatedGenesaurBloodBuff(Buff):
@@ -907,18 +943,36 @@ class CoagulatedGenesaurBloodBuff(Buff):
     
     def __init__(self, caster):
         super().__init__("Coagulated Genesaur Blood", 10, base_duration=10)
-        self.base_item_level = trinket_data[self.name]["base_item_level"]
-        self.base_effect_value = trinket_data[self.name]["base_effect_value"]
-        self.scale_factor = trinket_data[self.name]["scale_factor"]
-        self.current_item_level = int(caster.trinkets[self.name]["item_level"])
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
         
-        self.effect_value = calculate_trinket_effect_value(self.base_item_level, self.base_effect_value, self.current_item_level, self.scale_factor)
+        # crit
+        self.trinket_first_value = trinket_values[0]
         
     def apply_effect(self, caster, current_time=None):        
-        caster.base_crit += caster.get_percent_from_stat_rating("Crit", self.effect_value)
+        caster.update_stat("Crit", self.trinket_first_value)
         
     def remove_effect(self, caster, current_time=None):
-        caster.base_crit -= caster.get_percent_from_stat_rating("Crit", self.effect_value)
+        caster.update_stat("Crit", -self.trinket_first_value)
+        
+
+class SeaStarBuff(Buff):
+    
+    BASE_PPM = 1.5
+    
+    def __init__(self, caster):
+        super().__init__("Sea Star", 15, base_duration=15)
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # intellect
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):     
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value)
         
         
 class SustainingAlchemistStoneBuff(Buff):
@@ -927,15 +981,194 @@ class SustainingAlchemistStoneBuff(Buff):
     
     def __init__(self, caster):
         super().__init__("Sustaining Alchemist Stone", 10, base_duration=10)
-        self.base_item_level = trinket_data[self.name]["base_item_level"]
-        self.base_effect_value = trinket_data[self.name]["base_effect_value"]
-        self.scale_factor = trinket_data[self.name]["scale_factor"]
-        self.current_item_level = int(caster.trinkets[self.name]["item_level"])
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
         
-        self.effect_value = calculate_trinket_effect_value(self.base_item_level, self.base_effect_value, self.current_item_level, self.scale_factor)
+        # intellect
+        self.trinket_first_value = trinket_values[0]
         
     def apply_effect(self, caster, current_time=None):        
-        caster.spell_power += caster.get_effective_spell_power(self.effect_value)
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_first_value)
         
     def remove_effect(self, caster, current_time=None):
-        caster.spell_power -= caster.get_effective_spell_power(self.effect_value)
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value)
+        
+
+class AlacritousAlchemistStoneBuff(Buff):
+    
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Alacritous Alchemist Stone", 10, base_duration=10)
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # intellect
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):        
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value)
+            
+            
+class PipsEmeraldFriendshipBadge(Buff):
+    
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Pip's Emerald Friendship Badge", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class BestFriendsWithPipEmpowered(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Best Friends with Pip Empowered", 12, base_duration=12)
+        trinket_effect = caster.trinkets["Pip's Emerald Friendship Badge"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+        self.diminish_rate = 1/12
+        self.diminished_value = 0
+        self.last_update_time = 0
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("Mastery", self.trinket_second_value)
+        self.diminished_value = self.trinket_second_value
+        self.last_update_time = current_time
+        
+    def remove_effect(self, caster, current_time, replaced=False):
+        if not replaced:
+            caster.apply_buff_to_self(BestFriendsWithPip(caster), current_time)
+        caster.update_stat("Mastery", -self.diminished_value)
+            
+    def diminish_effect(self, caster, current_time):
+        time_since_update = current_time - self.last_update_time
+        if time_since_update >= 1:
+            self.diminished_value -= self.trinket_second_value * self.diminish_rate
+            caster.update_stat("Mastery", -self.trinket_second_value * self.diminish_rate)
+            self.last_update_time = current_time
+        
+        
+class BestFriendsWithPip(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Best Friends with Pip", 10000, base_duration=10000)
+        trinket_effect = caster.trinkets["Pip's Emerald Friendship Badge"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("Mastery", self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("Mastery", -self.trinket_first_value)
+        
+        
+class BestFriendsWithAerwynEmpowered(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Best Friends with Aerwyn Empowered", 12, base_duration=12)
+        trinket_effect = caster.trinkets["Pip's Emerald Friendship Badge"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+        self.diminish_rate = 1/12
+        self.diminished_value = 0
+        self.last_update_time = 0
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("Crit", self.trinket_second_value)
+        self.diminished_value = self.trinket_second_value
+        self.last_update_time = current_time
+        
+    def remove_effect(self, caster, current_time, replaced=False):
+        if not replaced:
+            caster.apply_buff_to_self(BestFriendsWithAerwyn(caster), current_time)
+        caster.update_stat("Crit", -self.diminished_value)
+            
+    def diminish_effect(self, caster, current_time):
+        time_since_update = current_time - self.last_update_time
+        if time_since_update >= 1:
+            self.diminished_value -= self.trinket_second_value * self.diminish_rate
+            caster.update_stat("Crit", -self.trinket_second_value * self.diminish_rate)
+            self.last_update_time = current_time
+        
+
+class BestFriendsWithAerwyn(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Best Friends with Aerwyn", 10000, base_duration=10000)
+        trinket_effect = caster.trinkets["Pip's Emerald Friendship Badge"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("Crit", self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("Crit", -self.trinket_first_value)
+        
+        
+class BestFriendsWithUrctosEmpowered(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Best Friends with Urctos Empowered", 12, base_duration=12)
+        trinket_effect = caster.trinkets["Pip's Emerald Friendship Badge"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+        self.diminish_rate = 1/12
+        self.diminished_value = 0
+        self.last_update_time = 0
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("Versatility", self.trinket_second_value)
+        self.diminished_value = self.trinket_second_value
+        self.last_update_time = current_time
+        
+    def remove_effect(self, caster, current_time, replaced=False):
+        if not replaced:
+            caster.apply_buff_to_self(BestFriendsWithUrctos(caster), current_time)
+        caster.update_stat("Versatility", -self.diminished_value)
+            
+    def diminish_effect(self, caster, current_time):
+        time_since_update = current_time - self.last_update_time
+        if time_since_update >= 1:
+            self.diminished_value -= self.trinket_second_value * self.diminish_rate
+            caster.update_stat("Versatility", -self.trinket_second_value * self.diminish_rate)
+            self.last_update_time = current_time
+        
+        
+class BestFriendsWithUrctos(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Best Friends with Urctos", 10000, base_duration=10000)
+        trinket_effect = caster.trinkets["Pip's Emerald Friendship Badge"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("Versatility", self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("Versatility", -self.trinket_first_value)

@@ -84,6 +84,14 @@ const buffsToIconsMap = {
     // trinkets
     "Mirror of Fractured Tomorrows": "https://render.worldofwarcraft.com/eu/icons/56/achievement_dungeon_ulduarraid_misc_06.jpg",
     "Coagulated Genesaur Blood": "https://render.worldofwarcraft.com/eu/icons/56/ability_creature_poison_06.jpg",
+
+    "Pip's Emerald Friendship Badge": "https://render.worldofwarcraft.com/eu/icons/56/10_2_raidability_green.jpg",
+    "Best Friends with Pip": "https://render.worldofwarcraft.com/eu/icons/56/inv_achievement_raidemeralddream_dreamcouncil.jpg",
+    "Best Friends with Pip Empowered": "https://render.worldofwarcraft.com/eu/icons/56/inv_achievement_raidemeralddream_dreamcouncil.jpg",
+    "Best Friends with Aerwyn": "https://render.worldofwarcraft.com/eu/icons/56/ui_darkshore_warfront_alliance_dryad.jpg",
+    "Best Friends with Aerwyn Empowered": "https://render.worldofwarcraft.com/eu/icons/56/ui_darkshore_warfront_alliance_dryad.jpg",
+    "Best Friends with Urctos": "https://render.worldofwarcraft.com/eu/icons/56/spell_druid_bearhug.jpg",
+    "Best Friends with Urctos Empowered": "https://render.worldofwarcraft.com/eu/icons/56/spell_druid_bearhug.jpg",
 }; 
 
 export { buffsToIconsMap };

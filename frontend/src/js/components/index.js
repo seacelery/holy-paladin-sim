@@ -221,7 +221,7 @@ const runSimulation = async () => {
     .then(response => response.json())
     .then(data => {
         let simulationData = data;     
-        console.log(simulationData)
+        // console.log(simulationData)
         createSimulationResults(simulationData);
 
         simulationProgressBarText.textContent = "";
@@ -542,6 +542,8 @@ handleOptionImages(potionImages, "potion", "consumable", true, true);
 const updateTimerValues = (name, consumableType) => {
     if (!currentConsumables[consumableType].hasOwnProperty(name)) return;
 
+    console.log(name, consumableType)
+
     let values = [];
     if (!["Source of Magic"].includes(name)) {
         const formattedName = name.replaceAll(" ", "-").toLowerCase();
@@ -613,7 +615,7 @@ const createExternalBuffTimers = (buffName, buffCooldown) => {
                 currentConsumables["external_buff"][buffName].push(nextTimerValue);
                 nextTimerValue += buffCooldown;
             };
-
+            
             updateCharacter({
                 consumables: currentConsumables
             });
@@ -678,7 +680,6 @@ const createPotionTimers = (potionName, potionCooldown) => {
         });
 
         if (repeatButton.classList.contains("potion-repeating")) {
-
             const maxValue = 600;
             const firstTimerInputValue = parseFloat(firstTimerInput.value);
             currentConsumables["potion"][potionName] = [firstTimerInputValue];
@@ -688,10 +689,13 @@ const createPotionTimers = (potionName, potionCooldown) => {
                 currentConsumables["potion"][potionName].push(nextTimerValue);
                 nextTimerValue += potionCooldown;
             };
+            console.log(currentConsumables["potion"][potionName])
 
             updateCharacter({
                 consumables: currentConsumables
             });
+
+            addPotionToPriorityList(potionName, currentConsumables["potion"][potionName]);
         } else {
             updateTimerValues(potionName, "potion");
         };

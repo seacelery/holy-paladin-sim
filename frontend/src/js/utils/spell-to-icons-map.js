@@ -45,6 +45,7 @@ const spellToIconsMap = {
 
     // trinkets
     "Mirror of Fractured Tomorrows": "https://render.worldofwarcraft.com/eu/icons/56/achievement_dungeon_ulduarraid_misc_06.jpg",
+    "Restorative Sands": "https://render.worldofwarcraft.com/eu/icons/56/spell_quicksand.jpg",
 };
 
 export { spellToIconsMap };

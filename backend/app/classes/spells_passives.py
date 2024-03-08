@@ -52,3 +52,12 @@ class EmbraceOfAkunda(Spell):
     
     def __init__(self, caster):
         super().__init__("Embrace of Akunda")
+        
+   
+# Mirror of Fractured Tomorrows trinket healing cast     
+class RestorativeSands(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    
+    def __init__(self, caster):
+        super().__init__("Restorative Sands")
