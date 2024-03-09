@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
 from ..utils.buff_class_map import buff_class_map
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
+from ..utils.stat_values import diminishing_returns_values, stat_conversions, calculate_stat_percent_with_dr
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
@@ -78,6 +79,11 @@ class Paladin:
         self.mana_regen_per_second = 2000
         self.innervate_active = False
         
+        self.flat_haste = 0
+        self.flat_crit = 5
+        self.flat_mastery = 0
+        self.flat_versatility = 0
+        
         if equipment_data:
             self.equipment = self.parse_equipment(equipment_data)
             # pp.pprint(self.equipment)
@@ -124,17 +130,12 @@ class Paladin:
             self.stats.ratings["health"] = 450000
             self.bonus_enchants = []
         
-        print(f"Haste: {self.haste}, Crit: {self.crit}, Mastery: {self.mastery}, Vers: {self.versatility}")
+        print(f"haste: {self.haste}, crit: {self.crit}, mastery: {self.mastery}, Vers: {self.versatility}")
         
         self.gem_counts = {}
         
         self.crit_damage_modifier = 1
         self.crit_healing_modifier = 1
-        
-        self.flat_haste = 0
-        self.flat_crit = 5
-        self.flat_mastery = 0
-        self.flat_versatility = 0
         
         # self.haste_multiplier = (self.haste / 100) + 1
         # self.crit_multiplier = (self.crit / 100) + 1
@@ -369,49 +370,33 @@ class Paladin:
         self.update_stats_with_racials()
         
     def update_stat(self, stat, stat_rating):
-        if stat == "Haste":
+        if stat == "haste":
             if self.race == "Human":
                 self.haste_rating += stat_rating * 1.02
             else:
                 self.haste_rating += stat_rating
-            haste_percent = self.haste_rating / 170
-            if self.is_talent_active("Seal of Alacrity") and self.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 1:
-                haste_percent = haste_percent * 1.02 + 2
-            elif self.is_talent_active("Seal of Alacrity") and self.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 2:
-                haste_percent = haste_percent * 1.04 + 4
-            self.haste = haste_percent + self.flat_haste
+            self.haste = calculate_stat_percent_with_dr(self, "haste", self.haste_rating, self.flat_haste)
             self.haste_multiplier = (self.haste / 100) + 1
-        if stat == "Crit":
+        if stat == "crit":
             if self.race == "Human":
                 self.crit_rating += stat_rating * 1.02
             else:
                 self.crit_rating += stat_rating
-            crit_percent = self.crit_rating / 180
-            if self.is_talent_active("Holy Aegis") and self.class_talents["row5"]["Holy Aegis"]["ranks"]["current rank"] == 1:
-                crit_percent += 2
-            elif self.is_talent_active("Holy Aegis") and self.class_talents["row5"]["Holy Aegis"]["ranks"]["current rank"] == 2:
-                crit_percent += 4
-            self.crit = crit_percent + self.flat_crit
+            self.crit = calculate_stat_percent_with_dr(self, "crit", self.crit_rating, self.flat_crit)
             self.crit_multiplier = (self.crit / 100) + 1
-        if stat == "Mastery":
+        if stat == "mastery":
             if self.race == "Human":
                 self.mastery_rating += stat_rating * 1.02
             else:
                 self.mastery_rating += stat_rating
-            mastery_percent = self.mastery_rating / 120 + 12
-            if self.is_talent_active("Seal of Might") and self.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 1:
-                mastery_percent += 3
-            elif self.is_talent_active("Seal of Might") and self.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 2:
-                mastery_percent += 6
-            self.mastery = mastery_percent + self.flat_mastery
+            self.mastery = calculate_stat_percent_with_dr(self, "mastery", self.mastery_rating, self.flat_mastery)
             self.mastery_multiplier = (self.mastery / 100) + 1
-        if stat == "Versatility":
+        if stat == "versatility":
             if self.race == "Human":
                 self.versatility_rating += stat_rating * 1.02
             else:
                 self.versatility_rating += stat_rating
-            versatility_percent = self.versatility_rating / 205
-            self.versatility = versatility_percent + self.flat_versatility
+            self.versatility = calculate_stat_percent_with_dr(self, "versatility", self.versatility_rating, self.flat_versatility)
             self.versatility_multiplier = (self.versatility / 100) + 1
         
     def update_stats_with_racials(self):   
@@ -558,10 +543,10 @@ class Paladin:
                 
     def find_highest_secondary_stat_rating(self):
         stats = {
-            "Haste": self.haste_rating,
-            "Crit": self.crit_rating,
-            "Mastery": self.mastery_rating,
-            "Versatility": self.versatility_rating
+            "haste": self.haste_rating,
+            "crit": self.crit_rating,
+            "mastery": self.mastery_rating,
+            "versatility": self.versatility_rating
         }
         
         return max(stats, key=stats.get)
@@ -847,38 +832,18 @@ class Paladin:
         versatility_rating = stat_values["versatility"]
         leech_rating = stat_values["leech"]
         
-        haste_rating_per_percent = 170
-        crit_rating_per_percent = 180
-        mastery_rating_per_percent = 120
-        versatility_rating_per_percent = 205
-        leech_rating_per_percent = 148
-        
         # 2% haste per point from seal of alacrity, multiplicative
-        haste_percent = haste_rating / haste_rating_per_percent
-        if self.is_talent_active("Seal of Alacrity") and self.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 1:
-            haste_percent = haste_percent * 1.02 + 2
-        elif self.is_talent_active("Seal of Alacrity") and self.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 2:
-            haste_percent = haste_percent * 1.04 + 4
+        haste_percent = calculate_stat_percent_with_dr(self, "haste", haste_rating, self.flat_haste)
             
         # 5% bonus crit
-        crit_percent = crit_rating / crit_rating_per_percent + 5
-        # 2% crit per point from holy aegis
-        if self.is_talent_active("Holy Aegis") and self.class_talents["row5"]["Holy Aegis"]["ranks"]["current rank"] == 1:
-            crit_percent += 2
-        elif self.is_talent_active("Holy Aegis") and self.class_talents["row5"]["Holy Aegis"]["ranks"]["current rank"] == 2:
-            crit_percent += 4
+        crit_percent = calculate_stat_percent_with_dr(self, "crit", crit_rating, self.flat_crit)
             
         # 12% base mastery
-        mastery_percent = mastery_rating / mastery_rating_per_percent + 12
-        # 3% mastery per point from seal of might
-        if self.is_talent_active("Seal of Might") and self.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 1:
-            mastery_percent += 3
-        elif self.is_talent_active("Seal of Might") and self.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 2:
-            mastery_percent += 6
+        mastery_percent = calculate_stat_percent_with_dr(self, "mastery", mastery_rating, self.flat_mastery)
             
-        versatility_percent = versatility_rating / versatility_rating_per_percent
+        versatility_percent = calculate_stat_percent_with_dr(self, "versatility", versatility_rating, self.flat_versatility)
         
-        leech_percent = leech_rating / leech_rating_per_percent
+        leech_percent = leech_rating / stat_conversions["leech"]
         
         return haste_percent, crit_percent, mastery_percent, versatility_percent, leech_percent
     

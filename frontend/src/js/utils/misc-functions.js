@@ -1,4 +1,5 @@
 import itemDataEffects from "../utils/data/item-data-effects.js";
+import { generateItemEffects } from "./item-level-calculations/generate-item-effect.js";
 
 const formatNumbers = (number) => {
     return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -138,6 +139,8 @@ const updateEquipmentWithEffectValues = (data) => {
             equipmentPiece.effects[0]["effect_values"] = enhancedItem.effects.map(effect => effect.effect_values)[0];
             equipmentPiece.effects[0]["description"] = enhancedItem.effects.map(effect => effect.description)[0];
         };
+        
+        equipmentPiece.effects = generateItemEffects(equipmentPiece.effects, slot, equipmentPiece.item_level);
     });
 };
 
