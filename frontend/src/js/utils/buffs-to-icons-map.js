@@ -99,6 +99,13 @@ const buffsToIconsMap = {
     "Idol of the Spell-Weaver": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_trinket_stonedragon3_color1.jpg",
     "Idol of the Spell-Weaver Empowered": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_trinket_stonedragon3_color1.jpg",
     
+    "Smoldering Seedling": "https://render.worldofwarcraft.com/eu/icons/56/inv_treepet.jpg",
+    "Smoldering Seedling active": "https://render.worldofwarcraft.com/eu/icons/56/inv_treepet.jpg",
+
+    "Blossom of Amirdrassil": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
+    "Blossom of Amirdrassil Absorb": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
+    "Blossom of Amirdrassil Large HoT": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
+    "Blossom of Amirdrassil Small HoT": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
 }; 
 
 export { buffsToIconsMap };

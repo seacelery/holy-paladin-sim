@@ -67,7 +67,6 @@ const generateItemEffects = (effects, itemSlot, itemLevel) => {
         };
     });
 
-    console.log(effects)
     return effects;
 };
 

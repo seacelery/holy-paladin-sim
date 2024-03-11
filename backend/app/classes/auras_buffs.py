@@ -33,7 +33,7 @@ class HoT(Buff):
         if is_partial_tick:
             total_heal_value *= (current_time - self.previous_tick_time) / (self.base_tick_interval / caster.haste_multiplier)
             
-        target.receive_heal(total_heal_value)
+        target.receive_heal(total_heal_value, caster)
         
         caster.handle_beacon_healing(self.name, target, total_heal_value, current_time)
         
@@ -113,8 +113,6 @@ class HolyReverberation(HoT):
     
     
 # self buffs   
-
-
 class AvengingWrathBuff(Buff):
     
     def __init__(self):
@@ -909,10 +907,13 @@ class MirrorOfFracturedTomorrowsBuff(Buff):
         target = random.choice(caster.potential_healing_targets)
         restorative_sands_heal, restorative_sands_crit = RestorativeSands(caster).calculate_heal(caster)
         restorative_sands_heal = self.trinket_first_value * caster.versatility_multiplier
+        if restorative_sands_crit:
+            restorative_sands_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+            
         
         # average 4 heals
         for i in range(4):
-            target.receive_heal(restorative_sands_heal)
+            target.receive_heal(restorative_sands_heal, caster)
             update_spell_data_heals(caster.ability_breakdown, "Restorative Sands", target, restorative_sands_heal, restorative_sands_crit)
         
         self.highest_stat = caster.find_highest_secondary_stat_rating()
@@ -948,7 +949,6 @@ class CoagulatedGenesaurBloodBuff(Buff):
         
         # crit
         self.trinket_first_value = trinket_values[0]
-        print("COAGULATED", self.trinket_first_value)
         
     def apply_effect(self, caster, current_time=None):        
         caster.update_stat("crit", self.trinket_first_value)
@@ -1190,7 +1190,6 @@ class IdolOfTheSpellWeaverStacks(Buff):
         self.trinket_second_value = trinket_values[1]
         
     def apply_effect(self, caster, current_time=None):
-        print(caster.active_auras[self.name].current_stacks)
         caster.update_stat("versatility", self.trinket_first_value * self.malygite_count)
         if caster.active_auras[self.name].current_stacks == 18:
             del caster.active_auras[self.name]
@@ -1223,3 +1222,119 @@ class IdolOfTheSpellWeaverEmpower(Buff):
         caster.update_stat("crit", -self.trinket_second_value / 4)
         caster.update_stat("mastery", -self.trinket_second_value / 4)
         caster.update_stat("versatility", -self.trinket_second_value / 4)
+        
+
+class EchoingTyrstoneBuff(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Echoing Tyrstone", 15, base_duration=15)
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("haste", self.trinket_second_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("haste", -self.trinket_second_value)
+        
+        
+class SmolderingSeedlingActive(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Smoldering Seedling active", 12, base_duration=12)
+        from .target import SmolderingSeedling
+        
+        trinket_effect = caster.trinkets["Smoldering Seedling"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+        self.smoldering_seedling = SmolderingSeedling("smoldering_seedling", caster)
+        
+    def apply_effect(self, caster, current_time=None):
+        if self.smoldering_seedling not in caster.potential_healing_targets:
+            caster.potential_healing_targets.append(self.smoldering_seedling)
+        
+    def remove_effect(self, caster, current_time=None):
+        if self.smoldering_seedling in caster.potential_healing_targets:
+            caster.potential_healing_targets.remove(self.smoldering_seedling)
+        caster.apply_buff_to_self(SmolderingSeedlingBuff(caster), current_time)
+        
+
+class SmolderingSeedlingBuff(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Smoldering Seedling", 10, base_duration=10)      
+        trinket_effect = caster.trinkets["Smoldering Seedling"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", self.trinket_second_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", -self.trinket_second_value)
+        
+
+class BlossomOfAmirdrassilLargeHoT(HoT):
+    
+    def __init__(self, caster):
+        super().__init__("Blossom of Amirdrassil Large HoT", 6, base_duration=6, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier, hasted=False)
+        self.time_until_next_tick = self.base_tick_interval
+        trinket_effect = caster.trinkets["Blossom of Amirdrassil"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # initial hot
+        self.trinket_first_value = trinket_values[0]
+        
+    def calculate_tick_healing(self, caster):
+        total_healing = self.trinket_first_value * caster.versatility_multiplier
+        
+        if "Blessing of Spring" in caster.active_auras:
+            total_healing *= 1.15
+        
+        number_of_ticks = self.base_duration / self.base_tick_interval
+        healing_per_tick = total_healing / number_of_ticks
+        
+        is_crit = False
+        crit_chance = caster.crit
+        random_num = random.random() * 100
+        if random_num <= crit_chance:
+            is_crit = True
+
+        return healing_per_tick, is_crit
+
+
+class BlossomOfAmirdrassilSmallHoT(HoT):
+    
+    def __init__(self, caster):
+        super().__init__("Blossom of Amirdrassil Small HoT", 6, base_duration=6, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier, hasted=False)
+        self.time_until_next_tick = self.base_tick_interval
+        trinket_effect = caster.trinkets["Blossom of Amirdrassil"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # three target hot
+        self.trinket_second_value = trinket_values[1]
+        
+    def calculate_tick_healing(self, caster):
+        total_healing = self.trinket_second_value * caster.versatility_multiplier
+        
+        if "Blessing of Spring" in caster.active_auras:
+            total_healing *= 1.15
+        
+        number_of_ticks = self.base_duration / self.base_tick_interval
+        healing_per_tick = total_healing / number_of_ticks
+        
+        is_crit = False
+        crit_chance = caster.crit
+        random_num = random.random() * 100
+        if random_num <= crit_chance:
+            is_crit = True
+
+        return healing_per_tick, is_crit

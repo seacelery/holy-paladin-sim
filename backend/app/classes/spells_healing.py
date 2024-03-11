@@ -125,7 +125,7 @@ class HolyShock(Spell):
                     # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                     # print(glimmer_healing)
                     
-                    glimmer_target.receive_heal(glimmer_heal_value)
+                    glimmer_target.receive_heal(glimmer_heal_value, caster)
                     caster.healing_by_ability["Glimmer of Light"] = caster.healing_by_ability.get("Glimmer of Light", 0) + glimmer_heal_value
                     
                     update_spell_data_casts(caster.ability_breakdown, "Glimmer of Light")
@@ -135,7 +135,7 @@ class HolyShock(Spell):
                     # overflowing light
                     if caster.is_talent_active("Overflowing Light"):
                         overflowing_light_absorb_value = glimmer_heal_value * 0.3
-                        glimmer_target.receive_heal(overflowing_light_absorb_value)
+                        glimmer_target.receive_heal(overflowing_light_absorb_value, caster)
                         caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                         
                         update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
@@ -224,7 +224,7 @@ class Daybreak(Spell):
                 # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                 # print(glimmer_healing)
                 
-                glimmer_target.receive_heal(glimmer_heal_value)
+                glimmer_target.receive_heal(glimmer_heal_value, caster)
                 caster.healing_by_ability["Glimmer of Light"] = caster.healing_by_ability.get("Glimmer of Light", 0) + glimmer_heal_value
                 
                 update_spell_data_casts(caster.ability_breakdown, "Glimmer of Light (Daybreak)")
@@ -234,7 +234,7 @@ class Daybreak(Spell):
                 # overflowing light
                 if caster.is_talent_active("Overflowing Light"):
                     overflowing_light_absorb_value = glimmer_heal_value * 0.3
-                    glimmer_target.receive_heal(overflowing_light_absorb_value)
+                    glimmer_target.receive_heal(overflowing_light_absorb_value, caster)
                     caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                     
                     update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
@@ -349,7 +349,7 @@ class RisingSunlightHolyShock(Spell):
                     # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                     # print(glimmer_healing)
                     
-                    glimmer_target.receive_heal(glimmer_heal_value)
+                    glimmer_target.receive_heal(glimmer_heal_value, caster)
                     caster.healing_by_ability["Glimmer of Light"] = caster.healing_by_ability.get("Glimmer of Light", 0) + glimmer_heal_value
                     
                     update_spell_data_casts(caster.ability_breakdown, "Glimmer of Light (Rising Sunlight)")
@@ -359,7 +359,7 @@ class RisingSunlightHolyShock(Spell):
                     # overflowing light
                     if caster.is_talent_active("Overflowing Light"):
                         overflowing_light_absorb_value = glimmer_heal_value * 0.3
-                        glimmer_target.receive_heal(overflowing_light_absorb_value)
+                        glimmer_target.receive_heal(overflowing_light_absorb_value, caster)
                         caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                         
                         update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
@@ -543,7 +543,7 @@ class DivineTollHolyShock(Spell):
                         # print(glimmer_healing)
                     
                     for target in glimmer_targets:    
-                        target.receive_heal(glimmer_heal_value)
+                        target.receive_heal(glimmer_heal_value, caster)
                         caster.healing_by_ability["Glimmer of Light"] = caster.healing_by_ability.get("Glimmer of Light", 0) + glimmer_heal_value
                         append_spell_heal_event(caster.events, "Glimmer of Light", caster, target, glimmer_heal_value, current_time, glimmer_crit)
                         
@@ -553,7 +553,7 @@ class DivineTollHolyShock(Spell):
                         # overflowing light
                         if caster.is_talent_active("Overflowing Light"):
                             overflowing_light_absorb_value = glimmer_heal_value * 0.3
-                            target.receive_heal(overflowing_light_absorb_value)
+                            target.receive_heal(overflowing_light_absorb_value, caster)
                             caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                             
                             update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", target, overflowing_light_absorb_value, False)
@@ -713,7 +713,7 @@ class HolyLight(Spell):
                 target_pool = copy.deepcopy(caster.potential_healing_targets)
                 for _ in range(5):
                     target = random.choice(target_pool)
-                    target.receive_heal(resplendent_light_healing)
+                    target.receive_heal(resplendent_light_healing, caster)
                     target_pool.remove(target)
                     append_spell_heal_event(caster.events, "Resplendent Light", caster, target, resplendent_light_healing, current_time, is_crit=False) 
                     
@@ -943,7 +943,7 @@ class WordOfGlory(Spell):
                             # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                             # print(glimmer_healing)
                             
-                            glimmer_target.receive_heal(glimmer_heal_value)
+                            glimmer_target.receive_heal(glimmer_heal_value, caster)
                             caster.healing_by_ability["Glimmer of Light"] = caster.healing_by_ability.get("Glimmer of Light", 0) + glimmer_heal_value
                             
                             update_spell_data_casts(caster.ability_breakdown, "Glimmer of Light (Glistening Radiance (Word of Glory))")
@@ -953,7 +953,7 @@ class WordOfGlory(Spell):
                             # overflowing light
                             if caster.is_talent_active("Overflowing Light"):
                                 overflowing_light_absorb_value = glimmer_heal_value * 0.3
-                                glimmer_target.receive_heal(overflowing_light_absorb_value)
+                                glimmer_target.receive_heal(overflowing_light_absorb_value, caster)
                                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                                 
                                 update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
@@ -973,7 +973,7 @@ class WordOfGlory(Spell):
                     afterimage_heal, afterimage_crit = self.calculate_heal(caster)
                     afterimage_heal *= 0.3
                     
-                    targets[0].receive_heal(afterimage_heal)
+                    targets[0].receive_heal(afterimage_heal, caster)
                     
                     update_spell_data_heals(caster.ability_breakdown, "Afterimage", targets[0], afterimage_heal, afterimage_crit)
                     append_spell_heal_event(caster.events, "Afterimage", caster, targets[0], afterimage_heal, current_time, is_crit=False)
@@ -1072,7 +1072,7 @@ class LightOfDawn(Spell):
                             # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                             # print(glimmer_healing)
                             
-                            glimmer_target.receive_heal(glimmer_heal_value)
+                            glimmer_target.receive_heal(glimmer_heal_value, caster)
                             caster.healing_by_ability["Glimmer of Light"] = caster.healing_by_ability.get("Glimmer of Light", 0) + glimmer_heal_value
                             
                             update_spell_data_casts(caster.ability_breakdown, "Glimmer of Light (Glistening Radiance (Light of Dawn))")
@@ -1082,7 +1082,7 @@ class LightOfDawn(Spell):
                             # overflowing light
                             if caster.is_talent_active("Overflowing Light"):
                                 overflowing_light_absorb_value = glimmer_heal_value * 0.3
-                                glimmer_target.receive_heal(overflowing_light_absorb_value)
+                                glimmer_target.receive_heal(overflowing_light_absorb_value, caster)
                                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                                 
                                 update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)

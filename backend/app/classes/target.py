@@ -1,4 +1,6 @@
-from ..utils.misc_functions import format_time, update_target_buff_data
+import re
+
+from ..utils.misc_functions import format_time, update_target_buff_data, update_spell_data_heals
 
 class Target:
     
@@ -8,7 +10,7 @@ class Target:
         self.target_active_buffs = {}
         self.healing_taken_modifier = 1
         
-    def receive_heal(self, amount):
+    def receive_heal(self, amount, caster=None):
         self.healing_received += amount
         
     def apply_buff_to_target(self, buff, current_time, stacks_to_apply=1, max_stacks=1, caster=None):
@@ -20,10 +22,6 @@ class Target:
         
         buff.times_applied += 1
         update_target_buff_data(caster.target_buff_breakdown, buff.name, current_time, "applied", self.name, buff.duration, buff.current_stacks)
-           
-    # def refresh_buff_on_target(self, buff, caster, current_time):
-    #     if buff.name in self.target_active_buffs:
-    #         self.target_active_buffs[buff.name].duration = self.target_active_buffs[buff.name].base_duration
    
     def reset_state(self):
         self.healing_received = 0
@@ -42,6 +40,38 @@ class BeaconOfLight(Target):
     def reset_state(self):
         super().reset_state()
         self.beacon_healing_received = 0
+        
+        
+class SmolderingSeedling(Target):
+    
+    def __init__(self, name, caster):
+        super().__init__(name)
+        self.smoldering_seedling_healing_received = 0
+        trinket_effect = caster.trinkets["Smoldering Seedling"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+        self.smoldering_seedling_healing_cap = self.trinket_first_value
+        
+    def receive_heal(self, amount, caster=None, smoldering_heal=False):
+        if not smoldering_heal:
+            self.healing_received += amount
+            self.receive_heal(amount * 1.5, caster, smoldering_heal=True)
+        else:
+            if self.smoldering_seedling_healing_received + amount > self.smoldering_seedling_healing_cap:
+                amount = self.smoldering_seedling_healing_cap - self.smoldering_seedling_healing_received
+                self.smoldering_seedling_healing_received = self.smoldering_seedling_healing_cap
+            else:
+                self.smoldering_seedling_healing_received += amount
+                
+            update_spell_data_heals(caster.ability_breakdown, "Smoldering Seedling", self, amount, False)
+            
+    def reset_state(self):
+        super().reset_state()
+        self.smoldering_seedling_healing_received = 0
+            
 
 
 class Player(Target):
@@ -53,6 +83,7 @@ class Player(Target):
     def reset_state(self):
         super().reset_state()
         self.self_healing = 0
+
 
 class EnemyTarget(Target):
     

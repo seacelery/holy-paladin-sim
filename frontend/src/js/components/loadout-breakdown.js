@@ -272,6 +272,9 @@ const createLoadoutBreakdown = (simulationData, containerCount) => {
         const priorityAbility = createElement("div", "loadout-priority-ability", null);
         const priorityCondition = createElement("div", "loadout-priority-condition", null);
         priorityAbility.textContent = abilityName;
+        if (abilityName.length >= 20) {
+            priorityAbility.style.marginTop = "-1px";
+        };
         priorityCondition.textContent = conditionText;
         priorityContainer.append(priorityIcon, priorityAbility, priorityCondition);
         priorityList.appendChild(priorityContainer);

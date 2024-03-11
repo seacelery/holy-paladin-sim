@@ -10,7 +10,7 @@ from flask_socketio import emit
 
 from collections import defaultdict
 
-from .target import Target, BeaconOfLight, EnemyTarget
+from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
 from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
 from .priority_list_dsl import parse_condition, condition_to_lambda
@@ -135,6 +135,9 @@ class Simulation:
             for effect in self.paladin.time_since_last_rppm_proc_attempt:
                 self.paladin.time_since_last_rppm_proc_attempt[effect] += self.tick_rate
                 self.paladin.time_since_last_rppm_proc[effect] += self.tick_rate
+                
+            for effect in self.paladin.conditional_effect_cooldowns:
+                self.paladin.conditional_effect_cooldowns[effect] -= self.tick_rate
             
             self.action()
             self.paladin.update_gcd(self.tick_rate)
@@ -252,6 +255,9 @@ class Simulation:
             
             if ability.healing_target_count > 1:
                 targets = self.choose_multiple_targets(ability, non_beacon_targets)
+            elif "Smoldering Seedling active" in self.paladin.active_auras:
+                smoldering_seedling_target = next((target for target in self.paladin.potential_healing_targets if isinstance(target, SmolderingSeedling)), None)
+                targets = [smoldering_seedling_target]
             else:
                 targets = [random.choice(non_beacon_targets)]
             ability.cast_healing_spell(self.paladin, targets, current_time, ability.is_heal)
@@ -267,7 +273,7 @@ class Simulation:
         if self.paladin.currently_casting:
             return
         
-        non_beacon_targets = [target for target in self.healing_targets_list if not isinstance(target, BeaconOfLight)]
+        non_beacon_targets = [target for target in self.paladin.potential_healing_targets if not isinstance(target, BeaconOfLight)]
         
         for ability_name, condition in self.priority_list:    
             if ability_name in self.abilities and condition():
@@ -281,6 +287,9 @@ class Simulation:
                         else:
                             if ability.healing_target_count > 1:
                                 targets = self.choose_multiple_targets(ability, non_beacon_targets)
+                            elif "Smoldering Seedling active" in self.paladin.active_auras:
+                                smoldering_seedling_target = next((target for target in self.paladin.potential_healing_targets if isinstance(target, SmolderingSeedling)), None)
+                                targets = [smoldering_seedling_target]
                             else:
                                 targets = [random.choice(non_beacon_targets)]
                             
@@ -289,20 +298,24 @@ class Simulation:
                             
                             # adjust target selection for glimmer of light    
                             if ability.name == "Holy Shock" or ability.name == "Divine Toll" or ability.name == "Daybreak":
-                                glimmer_targets = [glimmer_target for glimmer_target in self.healing_targets_list if "Glimmer of Light" in glimmer_target.target_active_buffs]
-                                non_glimmer_targets = [glimmer_target for glimmer_target in self.healing_targets_list if "Glimmer of Light" not in glimmer_target.target_active_buffs]
+                                glimmer_targets = [glimmer_target for glimmer_target in self.paladin.potential_healing_targets if "Glimmer of Light" in glimmer_target.target_active_buffs]
+                                non_glimmer_targets = [glimmer_target for glimmer_target in self.paladin.potential_healing_targets if "Glimmer of Light" not in glimmer_target.target_active_buffs]
                             
-                                # to exclude beacons from holy shock target selection:
-                                non_glimmer_non_beacon_targets = [t for t in non_glimmer_targets if t not in self.paladin.beacon_targets] 
-                                # if self.holy_shock_target_selection == "Single":
-                                # targets = [t for t in non_beacon_targets if t.name == "target18"]
-                                # elif self.holy_shock_target_selection == "Multi":
+                                # to exclude beacons and/or additional targets from holy shock target selection:                               
+                                if self.paladin.is_trinket_equipped("Smoldering Seedling"):
+                                    non_glimmer_non_beacon_targets = [
+                                                                       t for t in non_glimmer_targets 
+                                                                       if t not in self.paladin.beacon_targets 
+                                                                       and not isinstance(t, SmolderingSeedling)
+                                                                     ]
+                                else:
+                                    non_glimmer_non_beacon_targets = [t for t in non_glimmer_targets if t not in self.paladin.beacon_targets] 
+                                
                                 targets = [random.choice(non_glimmer_non_beacon_targets)]              
-                                # targets = [random.choice(non_glimmer_targets)]
                                 ability.cast_healing_spell(self.paladin, targets, self.elapsed_time, ability.is_heal, glimmer_targets)
                             else:
                                 ability.cast_healing_spell(self.paladin, targets, self.elapsed_time, ability.is_heal)
-                                
+                
                             self.previous_ability = ability.name
                             # print(f"new previous ability: {ability.name}")
                     
@@ -384,7 +397,7 @@ class Simulation:
             # print(f"new crit %: {self.paladin.crit}")
         
     def decrement_buffs_on_targets(self):
-        for target in self.healing_targets_list:
+        for target in self.paladin.potential_healing_targets:            
             if "Holy Reverberation" in target.target_active_buffs:
                 initial_holy_reverberation_count = len(target.target_active_buffs["Holy Reverberation"])
                 first_instance_tick_time = target.target_active_buffs["Holy Reverberation"][0].time_until_next_tick
@@ -578,6 +591,9 @@ class Simulation:
                 "Blessing of Autumn": "Blessing of the Seasons",
                 "Blessing of Winter": "Blessing of the Seasons",
                 "Blessing of Spring": "Blessing of the Seasons",
+                "Blossom of Amirdrassil Large HoT": "Blossom of Amirdrassil",
+                "Blossom of Amirdrassil Small HoT": "Blossom of Amirdrassil",
+                "Blossom of Amirdrassil Absorb": "Blossom of Amirdrassil",
             }
 
         # time the function
@@ -735,7 +751,7 @@ class Simulation:
                         "Glimmer of Light (Glistening Radiance (Light of Dawn))", "Glimmer of Light (Glistening Radiance (Word of Glory))", "Resplendent Light",
                         "Greater Judgment", "Judgment of Light", "Crusader's Reprieve", "Afterimage", "Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", 
                         "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", "Blessing of Summer", "Blessing of Autumn",
-                        "Blessing of Winter", "Blessing of Spring"]:
+                        "Blessing of Winter", "Blessing of Spring", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT"]:
                 if spell in ability_breakdown:
                     del ability_breakdown[spell]
                           
@@ -818,6 +834,12 @@ class Simulation:
                             sub_sub_spells[sub_spell]["holy_power_gained"] = sub_spells[sub_spell]["holy_power_gained"]
                             sub_sub_spells[sub_spell]["holy_power_spent"] = sub_spells[sub_spell]["holy_power_spent"]
                             sub_sub_spells[sub_spell]["holy_power_wasted"] = sub_spells[sub_spell]["holy_power_wasted"]
+            
+            # remove spells that aren't actually spells but have subspells               
+            for spell in ["Blossom of Amirdrassil"]:
+                if spell in ability_breakdown:
+                    if spell in ability_breakdown[spell]["sub_spells"]:
+                        del ability_breakdown[spell]["sub_spells"][spell]
             
             # PROCESS BUFFS                
             def process_buff_data(events):

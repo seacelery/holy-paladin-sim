@@ -16,7 +16,7 @@ from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPoti
 from .spells_damage import Judgment, CrusaderStrike
 from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell
 from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos
-from .trinkets import MirrorOfFracturedTomorrows
+from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
@@ -197,6 +197,7 @@ class Paladin:
         self.active_summons = {}
         self.time_since_last_rppm_proc = {}
         self.time_since_last_rppm_proc_attempt = {}
+        self.conditional_effect_cooldowns = {}
         self.healing_multiplier = 1
         self.damage_multiplier = 1
         
@@ -322,7 +323,6 @@ class Paladin:
         
         self.update_stats_with_racials()
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
-        print("a", self.mastery, self.mastery_rating)
         self.update_abilities()
         self.update_trinkets()
     
@@ -332,7 +332,6 @@ class Paladin:
         for item in self.equipment:
             if item in ["trinket_1", "trinket_2"]:
                 trinket_data = self.equipment[item]
-                print(trinket_data)
                 self.trinkets[trinket_data["name"]] = {"item_level": trinket_data["item_level"], "effect": trinket_data["effects"][0]["description"]}
     
     # update loadout based on updated properties 
@@ -509,6 +508,9 @@ class Paladin:
         if self.is_trinket_equipped("Mirror of Fractured Tomorrows"):
             self.abilities["Mirror of Fractured Tomorrows"] = MirrorOfFracturedTomorrows(self)
             
+        if self.is_trinket_equipped("Smoldering Seedling"):
+            self.abilities["Smoldering Seedling"] = SmolderingSeedling(self)
+            
     def is_talent_active(self, talent_name):
         for row, talents in self.class_talents.items():
             if talent_name in talents and talents[talent_name]["ranks"]["current rank"] > 0:
@@ -566,7 +568,6 @@ class Paladin:
         while self.timers_priority_queue and current_time >= self.timers_priority_queue[0][0]:
             timer, buff = heapq.heappop(self.timers_priority_queue)
             buff_class = buff_class_map.get(buff)
-            print(f"applying {buff} at {current_time}")
             self.apply_buff_to_self(buff_class(), timer)
             
     def check_stats(self):
@@ -650,14 +651,11 @@ class Paladin:
         self.events.append(f"{format_time(current_time)}: {summon.name} created: {summon.duration}s")
         summon.apply_effect(self, current_time)
    
-    def apply_buff_to_self(self, buff, current_time, stacks_to_apply=1, max_stacks=1, reapply=False):
-        # print(f"{buff.name} applied at {current_time}")     
+    def apply_buff_to_self(self, buff, current_time, stacks_to_apply=1, max_stacks=1, reapply=False): 
         if buff.name in self.active_auras and not reapply:
             append_aura_applied_event(self.events, f"{self.active_auras[buff.name].name} reapplied", self, self, current_time, self.active_auras[buff.name].duration)
             if buff.current_stacks < max_stacks:
-                print(f"{buff.name} applying {stacks_to_apply}, max stacks {max_stacks}")
                 buff.current_stacks += stacks_to_apply
-                print(buff.name, buff.current_stacks)
                 buff.duration = buff.base_duration
             self.active_auras[buff.name] = buff
             buff.apply_effect(self, current_time)
@@ -830,7 +828,7 @@ class Paladin:
         crit_rating = stat_values["crit"]
         mastery_rating = stat_values["mastery"]
         versatility_rating = stat_values["versatility"]
-        leech_rating = stat_values["leech"]
+        leech_rating = stat_values["leech"] if "leech" in stat_values else 0
         
         # 2% haste per point from seal of alacrity, multiplicative
         haste_percent = calculate_stat_percent_with_dr(self, "haste", haste_rating, self.flat_haste)

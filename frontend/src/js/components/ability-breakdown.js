@@ -108,11 +108,12 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     // displays casts with average as healing divided by casts
     const excludedSpellsCasts = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", 
                                  "Judgment of Light", "Greater Judgment", "Touch of Light", "Afterimage", "Glimmer of Light", "Glimmer of Light (Glistening Radiance (Light of Dawn))",
-                                 "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda", "Holy Reverberation", "Restorative Sands"];
+                                 "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda", "Holy Reverberation", "Restorative Sands",
+                                 "Echoing Tyrstone", "Smoldering Seedling", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil"];
     // displays casts with average as healing divided by hits
     const excludedSpellsCastsAverageHits = ["Gift of the Naaru"];
     const excludedSpellsCrit = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", 
-                                "Crusader Strike", "Judgment", "Daybreak", "Divine Toll"];
+                                "Crusader Strike", "Judgment", "Daybreak", "Divine Toll", "Smoldering Seedling", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil"];
 
     const tableContainer = document.getElementById(`ability-breakdown-table-container-${containerCount}`);
     tableContainer.innerHTML = "";

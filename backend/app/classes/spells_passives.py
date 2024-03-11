@@ -1,4 +1,8 @@
+import random
+import re
+
 from .spells import Spell
+from ..utils.misc_functions import update_spell_data_heals
 
 # PASSIVE SPELLS
 
@@ -61,3 +65,79 @@ class RestorativeSands(Spell):
     
     def __init__(self, caster):
         super().__init__("Restorative Sands")
+        
+        
+# Echoing Tyrstone conditional proc
+class EchoingTyrstoneProc(Spell):
+    
+    # TODO exact healing scaling
+    
+    SPELL_POWER_COEFFICIENT = 0
+    AVERAGE_TIME_TO_PROC = 20
+    
+    def __init__(self, caster):
+        super().__init__("Echoing Tyrstone")
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # flat healing
+        self.trinket_first_value = trinket_values[0]
+        # haste
+        self.trinket_second_value = trinket_values[1]
+        
+    def trigger_proc(self, caster, targets, current_time):
+        from .auras_buffs import EchoingTyrstoneBuff
+        target_count = 5
+        
+        for i in range(target_count):
+            target = random.choice(caster.potential_healing_targets)
+            
+            echoing_tyrstone_heal, echoing_tyrstone_crit = EchoingTyrstoneProc(caster).calculate_heal(caster)
+            echoing_tyrstone_heal = self.trinket_first_value / target_count
+            if echoing_tyrstone_crit:
+                echoing_tyrstone_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+            
+            target.receive_heal(echoing_tyrstone_heal, caster)
+            update_spell_data_heals(caster.ability_breakdown, "Echoing Tyrstone", target, echoing_tyrstone_heal, echoing_tyrstone_crit)
+            
+        caster.apply_buff_to_self(EchoingTyrstoneBuff(caster), current_time)
+        
+        
+# Blossom of Amirdrassil conditional proc
+class BlossomOfAmirdrassilProc(Spell):
+    
+    # TODO exact healing scaling
+    
+    SPELL_POWER_COEFFICIENT = 0
+    AVERAGE_TIME_TO_PROC = 5
+    BASE_COOLDOWN = 60
+    
+    def __init__(self, caster):
+        super().__init__("Blossom of Amirdrassil")
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # initial hot
+        self.trinket_first_value = trinket_values[0]
+        # three target hot
+        self.trinket_second_value = trinket_values[1]
+        # absorb
+        self.trinket_third_value = trinket_values[2]
+        
+    def trigger_proc(self, caster, targets, current_time):
+        from .auras_buffs import BlossomOfAmirdrassilLargeHoT, BlossomOfAmirdrassilSmallHoT
+        
+        random.choice(caster.potential_healing_targets)
+        target = targets[0]
+        target.apply_buff_to_target(BlossomOfAmirdrassilLargeHoT(caster), current_time, caster=caster)
+        
+        if random.random() > 0.1:
+            chosen_targets = random.sample(caster.potential_healing_targets, 3)
+            for target in chosen_targets:
+                target.apply_buff_to_target(BlossomOfAmirdrassilSmallHoT(caster), current_time, caster=caster)
+        else:
+            absorb_amount = self.trinket_third_value * caster.versatility_multiplier
+            target.receive_heal(absorb_amount, caster)
+            update_spell_data_heals(caster.ability_breakdown, "Blossom of Amirdrassil Absorb", target, absorb_amount, False)
+            
+        update_spell_data_heals(caster.ability_breakdown, "Blossom of Amirdrassil", target, 0, False)

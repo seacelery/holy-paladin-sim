@@ -21,7 +21,7 @@ class JudgmentOfLightDebuff(Debuff):
         for _ in range(self.current_stacks):          
             heal_value, is_crit = JudgmentOfLightSpell(caster).calculate_heal(caster)
             healing_target = random.choice(healing_targets)
-            healing_target.receive_heal(heal_value)
+            healing_target.receive_heal(heal_value, caster)
             
             update_spell_data_heals(caster.ability_breakdown, "Judgment of Light", healing_target, heal_value, is_crit)
             append_spell_heal_event(caster.events, self.name, caster, healing_target, heal_value, current_time, is_crit)
@@ -62,7 +62,7 @@ class GreaterJudgmentDebuff(Debuff):
         heal_value, is_crit = greater_judgment_spell.calculate_heal(caster)
         
         healing_target = random.choice(healing_targets)
-        healing_target.receive_heal(heal_value)
+        healing_target.receive_heal(heal_value, caster)
         
         update_spell_data_heals(caster.ability_breakdown, "Greater Judgment", healing_target, heal_value, is_crit)
         append_spell_heal_event(caster.events, self.name, caster, healing_target, heal_value, current_time, is_crit, is_absorb=greater_judgment_spell.is_absorb)

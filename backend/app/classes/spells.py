@@ -77,6 +77,7 @@ class Spell:
         spell_crit = False
         
         self.try_trigger_rppm_effects(caster, targets, current_time)
+        self.try_trigger_conditional_effects(caster, targets, current_time)
         
         self_auras, target_auras, total_target_aura_counts, spell_cooldowns, current_stats  = self.collect_priority_breakdown_data(caster, targets)
         
@@ -116,6 +117,8 @@ class Spell:
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         if not self.can_cast(caster):         
             return False
+        
+        # print(current_time, self.name, targets[0].name)
 
         if caster.innervate_active:
             self.mana_cost = 0
@@ -128,6 +131,7 @@ class Spell:
         heal_amount = 0
         
         self.try_trigger_rppm_effects(caster, targets, current_time)
+        self.try_trigger_conditional_effects(caster, targets, current_time)
         
         self_auras, target_auras, total_target_aura_counts, spell_cooldowns, current_stats  = self.collect_priority_breakdown_data(caster, targets)
         
@@ -159,7 +163,7 @@ class Spell:
                 mana_cost = self.get_mana_cost(caster)
                 healing_value = round(healing_value) 
                 # print(self.name, healing_value)   
-                target.receive_heal(healing_value)
+                target.receive_heal(healing_value, caster)
                 if target_count > 1:
                     # deduct mana on the first instance of a multi-target spell
                     if self.aoe_cast_counter == 0:
@@ -344,7 +348,7 @@ class Spell:
                 target = targets[0]
                 if is_heal:
                     effect_heal, is_crit = effect.calculate_heal(caster)
-                    target.receive_heal(effect_heal)
+                    target.receive_heal(effect_heal, caster)
                     
                     update_spell_data_heals(caster.ability_breakdown, effect.name, target, effect_heal, is_crit)
                     append_spell_heal_event(caster.events, effect.name, caster, target, effect_heal, current_time, is_crit)
@@ -421,8 +425,29 @@ class Spell:
             idol_of_the_spellweaver = IdolOfTheSpellWeaverStacks(caster)
             if "Idol of the Spell-Weaver Empowered" not in caster.active_auras:
                 try_proc_rppm_effect(idol_of_the_spellweaver, is_hasted=False, is_self_buff=True)
+                
+    def try_trigger_conditional_effects(self, caster, targets, current_time):
+        from .spells_passives import EchoingTyrstoneProc, BlossomOfAmirdrassilProc
+        from .trinkets import EchoingTyrstone
+        
+        if caster.is_trinket_equipped("Echoing Tyrstone"):
+            echoing_tyrstone_cast = EchoingTyrstone(caster)
+            echoing_tyrstone_proc = EchoingTyrstoneProc(caster)
             
-                  
+            caster.conditional_effect_cooldowns[echoing_tyrstone_proc.name] = caster.conditional_effect_cooldowns.get(echoing_tyrstone_proc.name, 0)
+            
+            if current_time >= echoing_tyrstone_cast.tyrstone_end_time + echoing_tyrstone_proc.AVERAGE_TIME_TO_PROC and caster.conditional_effect_cooldowns[echoing_tyrstone_proc.name] <= 0:
+                caster.conditional_effect_cooldowns[echoing_tyrstone_proc.name] = echoing_tyrstone_cast.BASE_COOLDOWN
+                echoing_tyrstone_proc.trigger_proc(caster, targets, current_time)
+                
+        if caster.is_trinket_equipped("Blossom of Amirdrassil"):
+            blossom_proc = BlossomOfAmirdrassilProc(caster)
+            
+            caster.conditional_effect_cooldowns[blossom_proc.name] = caster.conditional_effect_cooldowns.get(blossom_proc.name, 0)
+            if current_time >= blossom_proc.AVERAGE_TIME_TO_PROC and caster.conditional_effect_cooldowns[blossom_proc.name] <= 0:
+                caster.conditional_effect_cooldowns[blossom_proc.name] = blossom_proc.BASE_COOLDOWN
+                blossom_proc.trigger_proc(caster, targets, current_time)
+                          
     def collect_priority_breakdown_data(self, caster, targets=None, exclude_target_auras=False):
         # add auras to dictionaries and check current spell cooldownsfor display in priority list example
         self_auras = defaultdict(dict)
