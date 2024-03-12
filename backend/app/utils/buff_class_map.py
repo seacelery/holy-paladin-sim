@@ -1,4 +1,4 @@
-from ..classes.auras_buffs import PhialOfTepidVersatility, PhialOfElementalChaos, DraconicAugmentRune, GrandBanquetOfTheKaluakFood, TimelyDemiseFood, FiletOfFangsFood, SeamothSurpriseFood, SaltBakedFishcakeFood, FeistyFishSticksFood, AromaticSeafoodPlatterFood, SizzlingSeafoodMedleyFood, RevengeServedColdFood, ThousandboneTongueslicerFood, GreatCeruleanSeaFood, BuzzingRune, ChirpingRune, HowlingRune, HissingRune, ArcaneIntellect, MarkOfTheWild, CloseToHeart, RetributionAura, SourceOfMagic, PowerInfusion, Innervate
+from ..classes.auras_buffs import PhialOfTepidVersatility, PhialOfElementalChaos, DraconicAugmentRune, GrandBanquetOfTheKaluakFood, TimelyDemiseFood, FiletOfFangsFood, SeamothSurpriseFood, SaltBakedFishcakeFood, FeistyFishSticksFood, AromaticSeafoodPlatterFood, SizzlingSeafoodMedleyFood, RevengeServedColdFood, ThousandboneTongueslicerFood, GreatCeruleanSeaFood, BuzzingRune, ChirpingRune, HowlingRune, HissingRune, ArcaneIntellect, MarkOfTheWild, CloseToHeart, RetributionAura, SourceOfMagic, PowerInfusion, Innervate, PotionAbsorptionInhibitor
 
 buff_class_map = {
     # flasks
@@ -37,4 +37,7 @@ buff_class_map = {
     "Source of Magic": SourceOfMagic,
     "Innervate": Innervate,
     "Power Infusion": PowerInfusion,
+    
+    # embellishments
+    "Potion Absorption Inhibitor": PotionAbsorptionInhibitor
 }

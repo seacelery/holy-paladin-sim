@@ -141,3 +141,6 @@ class BlossomOfAmirdrassilProc(Spell):
             update_spell_data_heals(caster.ability_breakdown, "Blossom of Amirdrassil Absorb", target, absorb_amount, False)
             
         update_spell_data_heals(caster.ability_breakdown, "Blossom of Amirdrassil", target, 0, False)
+        
+
+# embellishments

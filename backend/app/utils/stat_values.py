@@ -50,13 +50,11 @@ def calculate_stat_percent_with_dr(caster, stat, rating, flat_percent):
             rating_to_percent += 3
         elif caster.is_talent_active("Seal of Might") and caster.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 2:
             rating_to_percent += 6
-        rating_to_percent += 12
     elif stat == "crit":
         if caster.is_talent_active("Holy Aegis") and caster.class_talents["row5"]["Holy Aegis"]["ranks"]["current rank"] == 1:
             rating_to_percent += 2
         elif caster.is_talent_active("Holy Aegis") and caster.class_talents["row5"]["Holy Aegis"]["ranks"]["current rank"] == 2:
             rating_to_percent += 4
-        rating_to_percent += 5
     elif stat == "haste":
         if caster.is_talent_active("Seal of Alacrity") and caster.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 1:
             rating_to_percent = rating_to_percent * 1.02 + 2

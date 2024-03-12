@@ -641,8 +641,8 @@ priorityListInfoModalContainer.innerHTML = `
     Timers = [0, 150, 300]
 `;
 
-const addPotionToPriorityList = (potionName, potionTimers) => {
-    const potionRegex = new RegExp(`${potionName} \\| Timers = \\[(\\d*(?:\\.\\d+)?(?:,\\s*\\d*(?:\\.\\d+)?)*)\\]`, "g");
+const addPotionToPriorityList = (potionName, potionTimers, repeat = false) => {
+    const potionRegex = new RegExp(`${potionName} \\| Timers = \\[(\\d*(?:\\.\\d+)?(?:,\\s*\\d*(?:\\.\\d+)?)*)\\][+]?`, "g");
     console.log(potionName, potionTimers)
     
     let priorityListJoined = "";
@@ -652,8 +652,12 @@ const addPotionToPriorityList = (potionName, potionTimers) => {
         priorityListJoined = priorityListPastedCode.join("\n");
     };
 
-    if (!priorityListJoined.includes(potionName)) {
+    if (!priorityListJoined.includes(potionName) && repeat) {
+        priorityListPastedCode = `${potionName} | Timers = [${potionTimers.join(", ")}]+\n` + priorityListJoined;
+    } else if (!priorityListJoined.includes(potionName)) {
         priorityListPastedCode = `${potionName} | Timers = [${potionTimers.join(", ")}]\n` + priorityListJoined;
+    } else if (repeat) {
+        priorityListPastedCode = priorityListJoined.replace(potionRegex, `${potionName} | Timers = [${potionTimers.join(", ")}]+`)
     } else {
         priorityListPastedCode = priorityListJoined.replace(potionRegex, `${potionName} | Timers = [${potionTimers.join(", ")}]`)
     };

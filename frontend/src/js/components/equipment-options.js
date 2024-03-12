@@ -286,6 +286,10 @@ const initialiseEquipment = () => {
         const itemSlotData = JSON.parse(itemSlot.getAttribute("data-item-data"));
 
         const updateItemData = (property, new_value, subProperty = null) => {
+            if (property === "effects" && new_value.length === 0) {
+                itemSlotData["limit"] = "";
+            };
+
             if (new_value[0]?.type === "embellishment") {
                 itemSlotData["limit"] = "Unique-Equipped: Embellished (2)";
             };

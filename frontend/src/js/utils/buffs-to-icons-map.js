@@ -106,6 +106,9 @@ const buffsToIconsMap = {
     "Blossom of Amirdrassil Absorb": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
     "Blossom of Amirdrassil Large HoT": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
     "Blossom of Amirdrassil Small HoT": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
+
+    // embellishments
+    "Potion Absorption Inhibitor": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_gooamber_drop.jpg",
 }; 
 
 export { buffsToIconsMap };

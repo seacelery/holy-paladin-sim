@@ -25,7 +25,14 @@ def parse_condition(condition_str):
 
         condition = {"keyword": "", "extra_condition": "", "value": 0, "first_value": 0, "second_value": 0, "time_values": [], "operator": "", "multiple_comparisons": False}
         
-        if re.search(r"[Tt]imers\s+=\s+\[\d+(?:\.\d+)?(?:\s*,\s*\d+(?:\.\d+)?)*", part):
+        if re.search(r"[Tt]imers\s+=\s+\[\d+(?:\.\d+)?(?:\s*,\s*\d+(?:\.\d+)?)*\][+]", part):
+            print("A")
+            pattern = r"\b\d+(?:\.\d+)?\b"
+            matches = re.findall(pattern, part)
+            condition["time_values"] = [float(match) for match in matches]
+            condition["keyword"] = "timers+"
+        elif re.search(r"[Tt]imers\s+=\s+\[\d+(?:\.\d+)?(?:\s*,\s*\d+(?:\.\d+)?)*", part):
+            print("B")
             pattern = r"\b\d+(?:\.\d+)?\b"
             matches = re.findall(pattern, part)
             condition["time_values"] = [float(match) for match in matches]
@@ -237,6 +244,16 @@ def condition_to_lambda(sim_instance, all_conditions):
                         result = compare_value_plus_two_gcds(timer, sim_instance.elapsed_time, sim_instance.paladin.hasted_global_cooldown)
                         if result:
                             break
+                        
+                elif condition["keyword"].lower() == "timers+":
+                    result = False
+                    for timer in condition["time_values"]:
+                        if sim_instance.elapsed_time > timer + 3:
+                            result = True
+                        else:
+                            result = compare_value_plus_two_gcds(timer, sim_instance.elapsed_time, sim_instance.paladin.hasted_global_cooldown)
+                        if result:
+                            break
                 
                 elif condition["keyword"].lower() == "active":
                     result = condition["name"] in sim_instance.paladin.active_auras
@@ -326,7 +343,7 @@ def condition_to_lambda(sim_instance, all_conditions):
                 
                 # extra conditions
                 if condition["extra_condition"] == "potion":
-                    result = result and sim_instance.paladin.abilities["Potion"].check_potion_cooldown(sim_instance.elapsed_time)
+                    result = result and sim_instance.paladin.abilities["Potion"].check_potion_cooldown(sim_instance.paladin, sim_instance.elapsed_time)
 
                 # if any condition's result is false, the whole group"s result is false
                 if not result:

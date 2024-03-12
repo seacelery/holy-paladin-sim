@@ -446,20 +446,22 @@ class TimeWarp(Buff):
         super().__init__("Time Warp", 40, base_duration=40)
         
     def apply_effect(self, caster, current_time=None):
-        caster.haste_multiplier *= 1.3
-        caster.update_hasted_cooldowns_with_haste_changes()
+        caster.update_stat_with_multiplicative_percentage("haste", 30, True)
     
     def remove_effect(self, caster, current_time=None):
-        caster.haste_multiplier /= 1.3
-        caster.update_hasted_cooldowns_with_haste_changes()
+        caster.update_stat_with_multiplicative_percentage("haste", 30, False)
         
         
 ## consumables
 # potions
 class ElementalPotionOfUltimatePowerBuff(Buff):
     
-    def __init__(self):
+    def __init__(self, caster):
         super().__init__("Elemental Potion of Ultimate Power", 30, base_duration=30)
+        if "Potion Absorption Inhibitor" in caster.active_auras:
+            print("a", caster.active_auras["Potion Absorption Inhibitor"].current_stacks)
+            self.duration *= 1 + (0.5 * caster.active_auras["Potion Absorption Inhibitor"].current_stacks)
+            self.base_duration *= 1 + (0.5 * caster.active_auras["Potion Absorption Inhibitor"].current_stacks)
         
     def apply_effect(self, caster, current_time=None):
         caster.spell_power += caster.get_effective_spell_power(886)
@@ -1009,6 +1011,10 @@ class AlacritousAlchemistStoneBuff(Buff):
         
     def apply_effect(self, caster, current_time=None):        
         caster.spell_power += caster.get_effective_spell_power(self.trinket_first_value)
+        caster.abilities["Potion"].remaining_cooldown -= 10
+        caster.abilities["Potion"].shared_cooldown_end_time -= 10
+        caster.abilities["Aerated Mana Potion"].remaining_cooldown -= 10
+        caster.abilities["Elemental Potion of Ultimate Power"].remaining_cooldown -= 10
         
     def remove_effect(self, caster, current_time=None):
         caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value)
@@ -1338,3 +1344,19 @@ class BlossomOfAmirdrassilSmallHoT(HoT):
             is_crit = True
 
         return healing_per_tick, is_crit
+    
+
+# embellishments
+class PotionAbsorptionInhibitor(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Potion Absorption Inhibitor", 10000, base_duration=10000)   
+        if caster.embellishments["Potion Absorption Inhibitor"]["count"] == 2:
+            self.current_stacks = 2
+            self.max_stacks = 2
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass

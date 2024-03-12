@@ -684,18 +684,17 @@ const createPotionTimers = (potionName, potionCooldown) => {
             const firstTimerInputValue = parseFloat(firstTimerInput.value);
             currentConsumables["potion"][potionName] = [firstTimerInputValue];
 
-            let nextTimerValue = parseFloat(firstTimerInputValue) + potionCooldown;
-            while (nextTimerValue <= maxValue) {
-                currentConsumables["potion"][potionName].push(nextTimerValue);
-                nextTimerValue += potionCooldown;
-            };
-            console.log(currentConsumables["potion"][potionName])
+            // let nextTimerValue = parseFloat(firstTimerInputValue) + potionCooldown;
+            // while (nextTimerValue <= maxValue) {
+            //     currentConsumables["potion"][potionName].push(nextTimerValue);
+            //     nextTimerValue += potionCooldown;
+            // };
 
             updateCharacter({
                 consumables: currentConsumables
             });
 
-            addPotionToPriorityList(potionName, currentConsumables["potion"][potionName]);
+            addPotionToPriorityList(potionName, currentConsumables["potion"][potionName], true);
         } else {
             updateTimerValues(potionName, "potion");
         };

@@ -26,8 +26,8 @@ class Potion(Spell):
     def __init__(self, name):
         super().__init__(name, cooldown=Potion.BASE_COOLDOWN, off_gcd=True)
         
-    def check_potion_cooldown(self, current_time):
-        return current_time >= Potion.shared_cooldown_end_time
+    def check_potion_cooldown(self, caster, current_time):
+        return current_time >= caster.abilities["Potion"].shared_cooldown_end_time
         
         
 class AeratedManaPotion(Potion):
@@ -55,7 +55,7 @@ class ElementalPotionOfUltimatePowerPotion(Potion):
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
-            caster.apply_buff_to_self(ElementalPotionOfUltimatePowerBuff(), current_time)
+            caster.apply_buff_to_self(ElementalPotionOfUltimatePowerBuff(caster), current_time)
             
             Potion.shared_cooldown_end_time = current_time + self.cooldown
             

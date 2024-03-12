@@ -16,7 +16,7 @@ from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPoti
 from .spells_damage import Judgment, CrusaderStrike
 from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell
 from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos
-from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling
+from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
@@ -81,7 +81,7 @@ class Paladin:
         
         self.flat_haste = 0
         self.flat_crit = 5
-        self.flat_mastery = 0
+        self.flat_mastery = 12
         self.flat_versatility = 0
         
         if equipment_data:
@@ -150,6 +150,9 @@ class Paladin:
         
         self.trinkets = {}
         self.update_trinkets()
+        
+        self.embellishments = {}
+        self.update_embellishments()
         
         # initialise abilities
         self.abilities = {}      
@@ -325,6 +328,7 @@ class Paladin:
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
         self.update_abilities()
         self.update_trinkets()
+        self.update_embellishments()
     
     def update_trinkets(self):
         self.trinkets = {}
@@ -333,6 +337,19 @@ class Paladin:
             if item in ["trinket_1", "trinket_2"]:
                 trinket_data = self.equipment[item]
                 self.trinkets[trinket_data["name"]] = {"item_level": trinket_data["item_level"], "effect": trinket_data["effects"][0]["description"]}
+                
+    def update_embellishments(self):
+        self.embellishments = {}
+        
+        for item in self.equipment:
+            
+            if self.equipment[item]["limit"] == "Unique-Equipped: Embellished (2)":
+                embellishment_data = self.equipment[item]["effects"][0]
+                name = embellishment_data["name"]
+                self.embellishments[name] = {
+                                             "effect": embellishment_data["description"], 
+                                             "count": self.embellishments.get(name, {"count": 0})["count"] + 1
+                                            }
     
     # update loadout based on updated properties 
     def apply_consumables(self):
@@ -362,6 +379,18 @@ class Paladin:
         self.abilities["Potion"] = Potion(self)
         self.abilities["Aerated Mana Potion"] = AeratedManaPotion(self)
         self.abilities["Elemental Potion of Ultimate Power"] = ElementalPotionOfUltimatePowerPotion(self)
+        
+    def apply_item_effects(self):
+        item_effect_buffs = {}
+        
+        for effect_name, effect_data in self.embellishments.items():
+            effect =  effect_data["effect"]
+            effect_count = effect_data["count"]
+            
+            item_effect_buffs[buff_class_map.get(effect_name)] = effect_count
+            
+        for buff, buff_count in item_effect_buffs.items():
+            self.apply_buff_to_self(buff(self), 0, buff_count, 2)    
                            
     def update_abilities(self):
         self.load_abilities_based_on_talents()
@@ -397,6 +426,36 @@ class Paladin:
                 self.versatility_rating += stat_rating
             self.versatility = calculate_stat_percent_with_dr(self, "versatility", self.versatility_rating, self.flat_versatility)
             self.versatility_multiplier = (self.versatility / 100) + 1
+            
+    def update_stat_with_multiplicative_percentage(self, stat, percentage, add_percentage=True):
+        if add_percentage:
+            if stat == "haste":
+                self.haste = (((self.haste / 100 + 1) * 1.3) - 1) * 100
+                self.haste_multiplier *= 1 + percentage / 100
+                self.update_hasted_cooldowns_with_haste_changes()
+            elif stat == "crit":
+                self.crit = (((self.crit / 100 + 1) * 1.3) - 1) * 100
+                self.crit_multiplier *= 1 + percentage / 100
+            elif stat == "mastery":
+                self.mastery = (((self.mastery / 100 + 1) * 1.3) - 1) * 100
+                self.mastery_multiplier *= 1 + percentage / 100
+            elif stat == "versatility":
+                self.versatility = (((self.versatility / 100 + 1) * 1.3) - 1) * 100
+                self.versatility_multiplier *= 1 + percentage / 100
+        else:
+            if stat == "haste":
+                self.haste = (((self.haste / 100 + 1) / 1.3) - 1) * 100
+                self.haste_multiplier /= 1 + percentage / 100
+                self.update_hasted_cooldowns_with_haste_changes()
+            elif stat == "crit":
+                self.crit = (((self.crit / 100 + 1) / 1.3) - 1) * 100
+                self.crit_multiplier /= 1 + percentage / 100
+            elif stat == "mastery":
+                self.mastery = (((self.mastery / 100 + 1) / 1.3) - 1) * 100
+                self.mastery_multiplier /= 1 + percentage / 100
+            elif stat == "versatility":
+                self.versatility = (((self.versatility / 100 + 1) / 1.3) - 1) * 100
+                self.versatility_multiplier /= 1 + percentage / 100
         
     def update_stats_with_racials(self):   
         # reset stats
@@ -510,6 +569,9 @@ class Paladin:
             
         if self.is_trinket_equipped("Smoldering Seedling"):
             self.abilities["Smoldering Seedling"] = SmolderingSeedling(self)
+            
+        if self.is_trinket_equipped("Nymue's Unraveling Spindle"):
+            self.abilities["Nymue's Unraveling Spindle"] = NymuesUnravelingSpindle(self)
             
     def is_talent_active(self, talent_name):
         for row, talents in self.class_talents.items():
@@ -675,6 +737,7 @@ class Paladin:
         update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "extended", buff.duration, buff.current_stacks, time_extension)
     
     def remove_or_decrement_buff_on_self(self, buff, current_time, max_stacks=1, replaced=False):
+        
         if buff.name in self.active_auras:
             if buff.current_stacks > 1:
                 buff.current_stacks -= 1

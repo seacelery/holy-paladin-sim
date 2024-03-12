@@ -607,6 +607,7 @@ class Simulation:
             self.paladin.reset_state()
             self.reset_simulation()
             self.paladin.apply_consumables()
+            self.paladin.apply_item_effects()
             self.paladin.apply_buffs_on_encounter_start()
             
             # only record some data on the last iteration
