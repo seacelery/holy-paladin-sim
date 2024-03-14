@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
 from ..utils.buff_class_map import buff_class_map
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
-from ..utils.stat_values import diminishing_returns_values, stat_conversions, calculate_stat_percent_with_dr
+from ..utils.stat_values import diminishing_returns_values, stat_conversions, calculate_stat_percent_with_dr, update_stat_with_multiplicative_percentage
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
@@ -84,6 +84,8 @@ class Paladin:
         self.flat_mastery = 12
         self.flat_versatility = 0
         
+        self.active_auras = {}
+        
         if equipment_data:
             self.equipment = self.parse_equipment(equipment_data)
             # pp.pprint(self.equipment)
@@ -133,6 +135,7 @@ class Paladin:
         print(f"haste: {self.haste}, crit: {self.crit}, mastery: {self.mastery}, Vers: {self.versatility}")
         
         self.gem_counts = {}
+        self.total_elemental_gems = 0
         
         self.crit_damage_modifier = 1
         self.crit_healing_modifier = 1
@@ -196,7 +199,7 @@ class Paladin:
         self.glimmer_application_counter = 0
         self.glimmer_removal_counter = 0
         
-        self.active_auras = {}
+        self.time_based_stacking_buffs = {}
         self.active_summons = {}
         self.time_since_last_rppm_proc = {}
         self.time_since_last_rppm_proc_attempt = {}
@@ -390,7 +393,9 @@ class Paladin:
             item_effect_buffs[buff_class_map.get(effect_name)] = effect_count
             
         for buff, buff_count in item_effect_buffs.items():
-            self.apply_buff_to_self(buff(self), 0, buff_count, 2)    
+            buff_instance = buff(self)
+            if buff_instance.base_duration == 10000:
+                self.apply_buff_to_self(buff_instance, 0, buff_count, 2)    
                            
     def update_abilities(self):
         self.load_abilities_based_on_talents()
@@ -427,35 +432,12 @@ class Paladin:
             self.versatility = calculate_stat_percent_with_dr(self, "versatility", self.versatility_rating, self.flat_versatility)
             self.versatility_multiplier = (self.versatility / 100) + 1
             
-    def update_stat_with_multiplicative_percentage(self, stat, percentage, add_percentage=True):
-        if add_percentage:
-            if stat == "haste":
-                self.haste = (((self.haste / 100 + 1) * 1.3) - 1) * 100
-                self.haste_multiplier *= 1 + percentage / 100
-                self.update_hasted_cooldowns_with_haste_changes()
-            elif stat == "crit":
-                self.crit = (((self.crit / 100 + 1) * 1.3) - 1) * 100
-                self.crit_multiplier *= 1 + percentage / 100
-            elif stat == "mastery":
-                self.mastery = (((self.mastery / 100 + 1) * 1.3) - 1) * 100
-                self.mastery_multiplier *= 1 + percentage / 100
-            elif stat == "versatility":
-                self.versatility = (((self.versatility / 100 + 1) * 1.3) - 1) * 100
-                self.versatility_multiplier *= 1 + percentage / 100
-        else:
-            if stat == "haste":
-                self.haste = (((self.haste / 100 + 1) / 1.3) - 1) * 100
-                self.haste_multiplier /= 1 + percentage / 100
-                self.update_hasted_cooldowns_with_haste_changes()
-            elif stat == "crit":
-                self.crit = (((self.crit / 100 + 1) / 1.3) - 1) * 100
-                self.crit_multiplier /= 1 + percentage / 100
-            elif stat == "mastery":
-                self.mastery = (((self.mastery / 100 + 1) / 1.3) - 1) * 100
-                self.mastery_multiplier /= 1 + percentage / 100
-            elif stat == "versatility":
-                self.versatility = (((self.versatility / 100 + 1) / 1.3) - 1) * 100
-                self.versatility_multiplier /= 1 + percentage / 100
+        if stat == "haste" and "Time Warp" in self.active_auras:
+            update_stat_with_multiplicative_percentage(self, "haste", 30, True)
+        if stat == "haste" and "First Light" in self.active_auras:
+            update_stat_with_multiplicative_percentage(self, "haste", 25, True)
+            
+    
         
     def update_stats_with_racials(self):   
         # reset stats

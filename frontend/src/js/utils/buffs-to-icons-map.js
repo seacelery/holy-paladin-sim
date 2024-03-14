@@ -96,6 +96,12 @@ const buffsToIconsMap = {
     "Best Friends with Urctos": "https://render.worldofwarcraft.com/eu/icons/56/spell_druid_bearhug.jpg",
     "Best Friends with Urctos Empowered": "https://render.worldofwarcraft.com/eu/icons/56/spell_druid_bearhug.jpg",
 
+    "Idol of the Dreamer": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_trinket_stonedragon1_color2.jpg",
+    "Idol of the Dreamer Empowered": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_trinket_stonedragon1_color2.jpg",
+    "Idol of the Life-Binder": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_trinket_stonedragon2_color2.jpg",
+    "Idol of the Life-Binder Empowered": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_trinket_stonedragon2_color2.jpg",
+    "Idol of the Earth-Warder": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_statue_color5.jpg",
+    "Idol of the Earth-Warder Empowered": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_statue_color5.jpg",
     "Idol of the Spell-Weaver": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_trinket_stonedragon3_color1.jpg",
     "Idol of the Spell-Weaver Empowered": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_trinket_stonedragon3_color1.jpg",
     
@@ -109,6 +115,18 @@ const buffsToIconsMap = {
 
     // embellishments
     "Potion Absorption Inhibitor": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_gooamber_drop.jpg",
+    "Verdant Tether": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_tailoring_tailoringconsumable_color4.jpg",
+    "Verdant Conduit": "https://render.worldofwarcraft.com/eu/icons/56/inv_trinket_ardenweald_01_orange.jpg",
+    "Dreamtender's Charm": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_trinket_stonedragon3_color3.jpg",
+    
+    "Elemental Lariat": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_necklace_necklace1_color3.jpg",
+    "Elemental Lariat - Haste": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_elementalcombinedfoozles_air.jpg",
+    "Elemental Lariat - Crit": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_elementalcombinedfoozles_fire.jpg",
+    "Elemental Lariat - Mastery": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_elementalcombinedfoozles_earth.jpg",
+    "Elemental Lariat - Versatility": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_elementalcombinedfoozles_frost.jpg",
+    "Allied Chestplate of Generosity": "https://render.worldofwarcraft.com/eu/icons/56/inv_chest_plate_raidwarriorprimalist_d_01.jpg",
+    "Allied Wristguards of Companionship": "https://render.worldofwarcraft.com/eu/icons/56/inv_bracer_plate_raidwarriorprimalist_d_01.jpg",
+    "Allied Wristgaurds of Companionship": "https://render.worldofwarcraft.com/eu/icons/56/inv_bracer_plate_raidwarriorprimalist_d_01.jpg",
 }; 
 
 export { buffsToIconsMap };

@@ -11,7 +11,7 @@ from flask_socketio import emit
 from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
-from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, DreamtendersCharm
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
 from .priority_list_dsl import parse_condition, condition_to_lambda
 
@@ -83,6 +83,7 @@ class Simulation:
         self.times_direct_healed = {}
         self.previous_ability = None
         
+        self.time_since_last_buff_interval = {}
         self.time_since_last_check = 0
         self.previous_total_healing = 0
         self.aura_healing = {}
@@ -148,6 +149,7 @@ class Simulation:
             self.decrement_debuffs_on_targets()
             self.decrement_summons()
             self.decrement_trinkets()
+            self.increment_time_based_stacking_buffs()
             self.regen_mana()
             
             # print(self.elapsed_time, self.paladin.abilities["Holy Shock"].remaining_cooldown, self.paladin.abilities["Holy Shock"].current_charges)
@@ -367,6 +369,20 @@ class Simulation:
         for buff_name, buff in self.paladin.active_auras.items():
             if isinstance(buff, (BestFriendsWithPipEmpowered, BestFriendsWithAerwynEmpowered, BestFriendsWithUrctosEmpowered)):
                 buff.diminish_effect(self.paladin, self.elapsed_time)
+                
+    def increment_time_based_stacking_buffs(self):
+        # print(self.paladin.time_based_stacking_buffs)
+        for buff, buff_interval in self.paladin.time_based_stacking_buffs.items():
+            self.time_since_last_buff_interval[buff.name] = self.time_since_last_buff_interval.get(buff.name, 0)
+            # print(f"{self.elapsed_time} incrementing time on {buff.name}")
+            self.time_since_last_buff_interval[buff.name] += self.tick_rate
+            # print(self.time_since_last_buff_interval[buff.name])
+            if self.time_since_last_buff_interval[buff.name] >= buff_interval and buff.current_stacks < buff.max_stacks:
+                # print(f"{self.elapsed_time} APPLYING STACK, {buff.current_stacks}, {buff.max_stacks}")
+                self.paladin.apply_buff_to_self(buff, self.elapsed_time, buff.stacks_to_apply, buff.max_stacks)
+                self.time_since_last_buff_interval[buff.name] = 0
+            
+            
                                  
     def decrement_buffs_on_self(self):
         # for buff_name, buff in self.paladin.active_auras.items():

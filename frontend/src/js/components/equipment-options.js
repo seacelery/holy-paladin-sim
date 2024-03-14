@@ -26,6 +26,7 @@ const updateBlurListener = (element, listener) => {
 };
 
 const updateEquipmentFromImportedData = (data) => {
+    console.log(data)
     // left half
     let equipmentData = data["equipment"];
 
@@ -680,8 +681,10 @@ const initialiseEquipment = () => {
                         } else {
                             defaultEmbellishmentOption.textContent = `Embellishment: ${embellishmentOption.textContent}`;
                             defaultEmbellishmentOption.style.color = "var(--rarity-uncommon)";
-                            updatedEmbellishmentData = [{"name": embellishmentsData[embellishment].name, "description": embellishmentsData[embellishment].description, "id": embellishmentsData[embellishment].id, "type": embellishmentsData[embellishment].type}];
+                            updatedEmbellishmentData = [{"name": embellishmentsData[embellishment].name, "description": embellishmentsData[embellishment].description, "id": embellishmentsData[embellishment].id, "type": embellishmentsData[embellishment].type, "effect_values": embellishmentsData[embellishment].effect_values}];
+                            
                         };
+                        updatedEmbellishmentData = generateItemEffects(updatedEmbellishmentData, itemSlot.getAttribute("data-item-slot"), currentItemLevel.textContent);
                         updateItemData("effects", updatedEmbellishmentData);
                         updateEquippedItemDisplay(itemSlot, itemSlots);
                     });
@@ -1179,9 +1182,10 @@ const initialiseEquipment = () => {
                             } else {
                                 defaultEmbellishmentOption.textContent = `Embellishment: ${embellishmentOption.textContent}`;
                                 defaultEmbellishmentOption.style.color = "var(--mana)";
-                                updatedEmbellishmentData = {"name": embellishmentsData[embellishment].name, "description": embellishmentsData[embellishment].description, "id": embellishmentsData[embellishment].id, "type": embellishmentsData[embellishment].type};
+                                updatedEmbellishmentData = [{"name": embellishmentsData[embellishment].name, "description": embellishmentsData[embellishment].description, "id": embellishmentsData[embellishment].id, "type": embellishmentsData[embellishment].type, "effect_values": embellishmentsData[embellishment].effect_values}];
                             };
-                            item["effects"].push(updatedEmbellishmentData);
+                            updatedEmbellishmentData = generateItemEffects(updatedEmbellishmentData, document.getElementById("equipped-items-edit-choose-slot-dropdown").value, newItemLevel.textContent);
+                            item["effects"] = updatedEmbellishmentData;
                             item["limit"] = "Unique-Equipped: Embellished (2)";
                         });
                     };

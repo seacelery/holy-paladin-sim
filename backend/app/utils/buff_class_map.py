@@ -1,4 +1,12 @@
-from ..classes.auras_buffs import PhialOfTepidVersatility, PhialOfElementalChaos, DraconicAugmentRune, GrandBanquetOfTheKaluakFood, TimelyDemiseFood, FiletOfFangsFood, SeamothSurpriseFood, SaltBakedFishcakeFood, FeistyFishSticksFood, AromaticSeafoodPlatterFood, SizzlingSeafoodMedleyFood, RevengeServedColdFood, ThousandboneTongueslicerFood, GreatCeruleanSeaFood, BuzzingRune, ChirpingRune, HowlingRune, HissingRune, ArcaneIntellect, MarkOfTheWild, CloseToHeart, RetributionAura, SourceOfMagic, PowerInfusion, Innervate, PotionAbsorptionInhibitor
+from ..classes.auras_buffs import (
+                                   PhialOfTepidVersatility, PhialOfElementalChaos, DraconicAugmentRune, GrandBanquetOfTheKaluakFood, 
+                                   TimelyDemiseFood, FiletOfFangsFood, SeamothSurpriseFood, SaltBakedFishcakeFood, FeistyFishSticksFood, 
+                                   AromaticSeafoodPlatterFood, SizzlingSeafoodMedleyFood, RevengeServedColdFood, ThousandboneTongueslicerFood, 
+                                   GreatCeruleanSeaFood, BuzzingRune, ChirpingRune, HowlingRune, HissingRune, ArcaneIntellect, MarkOfTheWild, 
+                                   CloseToHeart, RetributionAura, SourceOfMagic, PowerInfusion, Innervate, PotionAbsorptionInhibitor,
+                                   AlliedChestplateOfGenerosity, AlliedWristguardOfCompanionship, VerdantConduit, VerdantTether, ElementalLariat,
+                                   DreamtendersCharm
+                                  )
 
 buff_class_map = {
     # flasks
@@ -39,5 +47,12 @@ buff_class_map = {
     "Power Infusion": PowerInfusion,
     
     # embellishments
-    "Potion Absorption Inhibitor": PotionAbsorptionInhibitor
+    "Potion Absorption Inhibitor": PotionAbsorptionInhibitor,
+    "Verdant Tether": VerdantTether,
+    "Verdant Conduit": VerdantConduit,
+    "Dreamtender's Charm": DreamtendersCharm,
+    
+    "Elemental Lariat": ElementalLariat,
+    "Allied Chestplate of Generosity": AlliedChestplateOfGenerosity,
+    "Allied Wristgaurds of Companionship": AlliedWristguardOfCompanionship,
 }

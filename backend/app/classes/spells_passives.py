@@ -144,3 +144,21 @@ class BlossomOfAmirdrassilProc(Spell):
         
 
 # embellishments
+class MagazineOfHealingDarts(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Magazine of Healing Darts")
+        
+        
+class BronzedGripWrappings(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    # base 4 ppm shared with damage proc
+    BASE_PPM = 3
+    
+    def __init__(self, caster):
+        super().__init__("Bronzed Grip Wrappings")
+    

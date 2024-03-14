@@ -325,7 +325,9 @@ class Spell:
         from .auras_buffs import ( 
                                   SophicDevotion, EmbraceOfPaku, CoagulatedGenesaurBloodBuff, SustainingAlchemistStoneBuff, 
                                   AlacritousAlchemistStoneBuff, SeaStarBuff, PipsEmeraldFriendshipBadge, BestFriendsWithPipEmpowered, 
-                                  BestFriendsWithAerwynEmpowered, BestFriendsWithUrctosEmpowered, IdolOfTheSpellWeaverStacks
+                                  BestFriendsWithAerwynEmpowered, BestFriendsWithUrctosEmpowered, IdolOfTheSpellWeaverStacks,
+                                  IdolOfTheDreamerStacks, IdolOfTheEarthWarderStacks, IdolOfTheLifeBinderStacks,
+                                  AlliedChestplateOfGenerosity, ElementalLariat, VerdantTether, VerdantConduit
                                  )
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False):
@@ -357,6 +359,7 @@ class Spell:
                     if effect.max_stacks > 1:
                         caster.apply_buff_to_self(caster.active_auras[effect.name], current_time, effect.current_stacks, effect.max_stacks)
                     else:
+                        effect.remove_effect(caster, current_time)
                         del caster.active_auras[effect.name]
                         caster.apply_buff_to_self(effect, current_time, effect.current_stacks, effect.max_stacks)
                 elif is_self_buff:
@@ -421,10 +424,44 @@ class Spell:
                 
                 caster.apply_buff_to_self(new_pips_proc, current_time)
                 
+        if "Idol of the Dreamer" in caster.trinkets:
+            idol_of_the_dreamer = IdolOfTheDreamerStacks(caster)
+            if "Idol of the Dreamer Empowered" not in caster.active_auras:
+                try_proc_rppm_effect(idol_of_the_dreamer, is_hasted=False, is_self_buff=True)
+                
+        if "Idol of the Life-Binder" in caster.trinkets:
+            idol_of_the_lifebinder = IdolOfTheLifeBinderStacks(caster)
+            if "Idol of the Life-Binder Empowered" not in caster.active_auras:
+                try_proc_rppm_effect(idol_of_the_lifebinder, is_hasted=False, is_self_buff=True)
+                
+        if "Idol of the Earth-Warder" in caster.trinkets:
+            idol_of_the_earthwarder = IdolOfTheEarthWarderStacks(caster)
+            if "Idol of the Earth-Warder Empowered" not in caster.active_auras:
+                try_proc_rppm_effect(idol_of_the_earthwarder, is_hasted=False, is_self_buff=True)
+                
         if "Idol of the Spell-Weaver" in caster.trinkets:
             idol_of_the_spellweaver = IdolOfTheSpellWeaverStacks(caster)
             if "Idol of the Spell-Weaver Empowered" not in caster.active_auras:
                 try_proc_rppm_effect(idol_of_the_spellweaver, is_hasted=False, is_self_buff=True)
+        
+        # embellishments   
+        if "Elemental Lariat" in caster.embellishments:
+            elemental_lariat = ElementalLariat(caster)
+            if "Elemental Lariat" not in caster.active_auras:
+                try_proc_rppm_effect(elemental_lariat, is_hasted=False, is_self_buff=True)
+            
+        if "Allied Chestplate of Generosity" in caster.embellishments:
+            allied_chestplate_of_generosity = AlliedChestplateOfGenerosity(caster)
+            try_proc_rppm_effect(allied_chestplate_of_generosity, is_hasted=False, is_self_buff=True)
+            
+        if "Verdant Tether" in caster.embellishments:
+            verdant_tether = VerdantTether(caster)
+            try_proc_rppm_effect(verdant_tether, is_hasted=False, is_self_buff=True)
+            
+        if "Verdant Conduit" in caster.embellishments:
+            verdant_conduit = VerdantConduit(caster)
+            if "Verdant Conduit" not in caster.active_auras:
+                try_proc_rppm_effect(verdant_conduit, is_hasted=False, is_self_buff=True)
                 
     def try_trigger_conditional_effects(self, caster, targets, current_time):
         from .spells_passives import EchoingTyrstoneProc, BlossomOfAmirdrassilProc

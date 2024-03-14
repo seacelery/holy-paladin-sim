@@ -16,15 +16,28 @@ const calculateNewEffect = (effectsData, itemSlot, itemLevel, effectDescription)
             let slotAllocation;
             for (const allocation in itemSlotAllocations) {
                 if (allocation == itemLevel) {
+                    console.log(allocationType)
                     switch (true) {
                         case allocationType === "no_multiplier":
-                            slotAllocation = itemSlotAllocations[allocation]["1"]
+                            slotAllocation = itemSlotAllocations[allocation]["1"];
                             break;
                         case allocationType === "rating_multiplier":
                             slotAllocation = itemSlotAllocations[allocation]["1"] * ratingMultiplierByItemLevel[itemLevel];
                             break
+                        case allocationType === "rating_multiplier_jewellery":
+                            slotAllocation = itemSlotAllocations[allocation]["1"] * ratingMultiplierByItemLevelRingsNeck[itemLevel];
+                            console.log(itemSlotAllocations[allocation]["1"] * ratingMultiplierByItemLevelRingsNeck[itemLevel])
+                            console.log(itemSlotAllocations[allocation]["2"] * ratingMultiplierByItemLevelRingsNeck[itemLevel])
+                            console.log(itemSlotAllocations[allocation]["3"] * ratingMultiplierByItemLevelRingsNeck[itemLevel])
+                            console.log(itemSlotAllocations[allocation]["4"] * ratingMultiplierByItemLevelRingsNeck[itemLevel])
+                            console.log(itemSlotAllocations[allocation]["5"] * ratingMultiplierByItemLevelRingsNeck[itemLevel])
+                            console.log(itemSlotAllocations[allocation]["6"] * ratingMultiplierByItemLevelRingsNeck[itemLevel])
+                            break
                         case allocationType === "flat_healing":
                             slotAllocation = itemSlotAllocations[allocation]["6"];
+                            break
+                        case allocationType === "flat_damage":
+                            slotAllocation = itemSlotAllocations[allocation]["5"];
                             break
                         default:
                             slotAllocation = itemSlotAllocations[allocation]["1"];
@@ -59,6 +72,7 @@ const calculateNewEffect = (effectsData, itemSlot, itemLevel, effectDescription)
 };
 
 const generateItemEffects = (effects, itemSlot, itemLevel) => {
+    console.log(effects)
     effects.forEach((effectData, index) => {
         if (effectData["effect_values"]) {
             const { newEffectsData, newDescription } = calculateNewEffect(effectData["effect_values"], itemSlot, itemLevel, effectData["description"]);

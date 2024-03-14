@@ -4,6 +4,7 @@ import re
 from .auras import Buff
 from ..utils.misc_functions import append_spell_heal_event, format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
+from ..utils.stat_values import update_stat_with_multiplicative_percentage
 
 
 class HoT(Buff):
@@ -243,12 +244,10 @@ class FirstLight(Buff):
         super().__init__("First Light", 6, base_duration=6)
         
     def apply_effect(self, caster, current_time=None):
-        caster.haste_multiplier *= 1.25
-        caster.update_hasted_cooldowns_with_haste_changes()
+        update_stat_with_multiplicative_percentage(caster, "haste", 25, True)
     
     def remove_effect(self, caster, current_time=None):
-        caster.haste_multiplier /= 1.25
-        caster.update_hasted_cooldowns_with_haste_changes()
+        update_stat_with_multiplicative_percentage(caster, "haste", 25, False)
         
         
 class AwakeningStacks(Buff):
@@ -446,10 +445,10 @@ class TimeWarp(Buff):
         super().__init__("Time Warp", 40, base_duration=40)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat_with_multiplicative_percentage("haste", 30, True)
+        update_stat_with_multiplicative_percentage(caster, "haste", 30, True)
     
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat_with_multiplicative_percentage("haste", 30, False)
+        update_stat_with_multiplicative_percentage(caster, "haste", 30, False)
         
         
 ## consumables
@@ -1181,13 +1180,153 @@ class BestFriendsWithUrctos(Buff):
         caster.update_stat("versatility", -self.trinket_first_value)
         
         
+class IdolOfTheDreamerStacks(Buff):
+    
+    BASE_PPM = 2.2
+    
+    def __init__(self, caster):
+        super().__init__("Idol of the Dreamer", 10000, base_duration=10000, current_stacks=caster.gem_counts["Ysemerald"], max_stacks=18)
+        trinket_effect = caster.trinkets["Idol of the Dreamer"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        self.ysemerald_count = caster.gem_counts["Ysemerald"]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("haste", self.trinket_first_value * self.ysemerald_count)
+        if caster.active_auras[self.name].current_stacks == 18:
+            del caster.active_auras[self.name]
+            self.remove_effect(caster, current_time)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("haste", -self.trinket_first_value * 18)
+        caster.apply_buff_to_self(IdolOfTheDreamerEmpower(caster), current_time)
+    
+    
+class IdolOfTheDreamerEmpower(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Idol of the Dreamer Empowered", 15, base_duration=15)
+        trinket_effect = caster.trinkets["Idol of the Dreamer"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("haste", self.trinket_second_value / 4)
+        caster.update_stat("crit", self.trinket_second_value / 4)
+        caster.update_stat("mastery", self.trinket_second_value / 4)
+        caster.update_stat("versatility", self.trinket_second_value / 4)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("haste", -self.trinket_second_value / 4)
+        caster.update_stat("crit", -self.trinket_second_value / 4)
+        caster.update_stat("mastery", -self.trinket_second_value / 4)
+        caster.update_stat("versatility", -self.trinket_second_value / 4)
+ 
+
+class IdolOfTheLifeBinderStacks(Buff):
+    
+    BASE_PPM = 2.2
+    
+    def __init__(self, caster):
+        super().__init__("Idol of the Life-Binder", 10000, base_duration=10000, current_stacks=caster.gem_counts["Alexstraszite"], max_stacks=18)
+        trinket_effect = caster.trinkets["Idol of the Life-Binder"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        self.alexstraszite_count = caster.gem_counts["Alexstraszite"]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("crit", self.trinket_first_value * self.alexstraszite_count)
+        if caster.active_auras[self.name].current_stacks == 18:
+            del caster.active_auras[self.name]
+            self.remove_effect(caster, current_time)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("crit", -self.trinket_first_value * 18)
+        caster.apply_buff_to_self(IdolOfTheLifeBinderEmpower(caster), current_time)
+    
+
+class IdolOfTheLifeBinderEmpower(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Idol of the Life-Binder Empowered", 15, base_duration=15)
+        trinket_effect = caster.trinkets["Idol of the Life-Binder"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("haste", self.trinket_second_value / 4)
+        caster.update_stat("crit", self.trinket_second_value / 4)
+        caster.update_stat("mastery", self.trinket_second_value / 4)
+        caster.update_stat("versatility", self.trinket_second_value / 4)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("haste", -self.trinket_second_value / 4)
+        caster.update_stat("crit", -self.trinket_second_value / 4)
+        caster.update_stat("mastery", -self.trinket_second_value / 4)
+        caster.update_stat("versatility", -self.trinket_second_value / 4)
+
+
+class IdolOfTheEarthWarderStacks(Buff):
+    
+    BASE_PPM = 2.2
+    
+    def __init__(self, caster):
+        super().__init__("Idol of the Earth-Warder", 10000, base_duration=10000, current_stacks=caster.gem_counts["Neltharite"], max_stacks=18)
+        trinket_effect = caster.trinkets["Idol of the Earth-Warder"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        self.neltharite_count = caster.gem_counts["Neltharite"]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", self.trinket_first_value * self.neltharite_count)
+        if caster.active_auras[self.name].current_stacks == 18:
+            del caster.active_auras[self.name]
+            self.remove_effect(caster, current_time)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("mastery", -self.trinket_first_value * 18)
+        caster.apply_buff_to_self(IdolOfTheEarthWarderEmpower(caster), current_time)
+    
+
+class IdolOfTheEarthWarderEmpower(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Idol of the Earth-Warder Empowered", 15, base_duration=15)
+        trinket_effect = caster.trinkets["Idol of the Earth-Warder"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("haste", self.trinket_second_value / 4)
+        caster.update_stat("crit", self.trinket_second_value / 4)
+        caster.update_stat("mastery", self.trinket_second_value / 4)
+        caster.update_stat("versatility", self.trinket_second_value / 4)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("haste", -self.trinket_second_value / 4)
+        caster.update_stat("crit", -self.trinket_second_value / 4)
+        caster.update_stat("mastery", -self.trinket_second_value / 4)
+        caster.update_stat("versatility", -self.trinket_second_value / 4)
+        
         
 class IdolOfTheSpellWeaverStacks(Buff):
     
     BASE_PPM = 2.2
     
     def __init__(self, caster):
-        super().__init__("Idol of the Spell-Weaver", 10000, base_duration=10000, current_stacks=2, max_stacks=18)
+        super().__init__("Idol of the Spell-Weaver", 10000, base_duration=10000, current_stacks=caster.gem_counts["Malygite"], max_stacks=18)
         trinket_effect = caster.trinkets["Idol of the Spell-Weaver"]["effect"]
         trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
         self.malygite_count = caster.gem_counts["Malygite"]
@@ -1212,7 +1351,6 @@ class IdolOfTheSpellWeaverEmpower(Buff):
         super().__init__("Idol of the Spell-Weaver Empowered", 15, base_duration=15)
         trinket_effect = caster.trinkets["Idol of the Spell-Weaver"]["effect"]
         trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
-        self.malygite_count = caster.gem_counts["Malygite"]
         
         self.trinket_first_value = trinket_values[0]
         self.trinket_second_value = trinket_values[1]
@@ -1360,3 +1498,199 @@ class PotionAbsorptionInhibitor(Buff):
         
     def remove_effect(self, caster, current_time=None):
         pass
+    
+    
+class ElementalLariat(Buff):
+    
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Elemental Lariat", 5 + caster.total_elemental_gems, base_duration=5 + caster.total_elemental_gems)   
+        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        
+        self.ysemerald_count = caster.gem_counts["Ysemerald"]
+        self.alexstraszite_count = caster.gem_counts["Alexstraszite"]
+        self.neltharite_count = caster.gem_counts["Neltharite"]
+        self.malygite_count = caster.gem_counts["Malygite"]
+        
+        self.chosen_stat = ""
+        
+    def apply_effect(self, caster, current_time=None):
+        choices = self.ysemerald_count * ["haste"] + self.alexstraszite_count * ["crit"] + self.neltharite_count * ["mastery"] + self.malygite_count * ["versatility"]
+        self.chosen_stat = random.choice(choices)
+        
+        if self.chosen_stat == "haste":
+            caster.apply_buff_to_self(ElementalLariatHaste(caster), current_time)
+        elif self.chosen_stat == "crit":
+            caster.apply_buff_to_self(ElementalLariatCrit(caster), current_time)
+        elif self.chosen_stat == "mastery":
+            caster.apply_buff_to_self(ElementalLariatMastery(caster), current_time)
+        elif self.chosen_stat == "versatility":
+            caster.apply_buff_to_self(ElementalLariatVersatility(caster), current_time)
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class ElementalLariatHaste(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Elemental Lariat - Haste", 5 + caster.total_elemental_gems, base_duration=5 + caster.total_elemental_gems)   
+        embellishment_effect = caster.embellishments["Elemental Lariat"]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("haste", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("haste", -self.embellishment_first_value)
+        
+        
+class ElementalLariatCrit(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Elemental Lariat - Crit", 5 + caster.total_elemental_gems, base_duration=5 + caster.total_elemental_gems)   
+        embellishment_effect = caster.embellishments["Elemental Lariat"]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("crit", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("crit", -self.embellishment_first_value)
+        
+
+class ElementalLariatMastery(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Elemental Lariat - Mastery", 5 + caster.total_elemental_gems, base_duration=5 + caster.total_elemental_gems)   
+        embellishment_effect = caster.embellishments["Elemental Lariat"]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", -self.embellishment_first_value)
+        
+        
+class ElementalLariatVersatility(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Elemental Lariat - Versatility", 5 + caster.total_elemental_gems, base_duration=5 + caster.total_elemental_gems)   
+        embellishment_effect = caster.embellishments["Elemental Lariat"]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", -self.embellishment_first_value)
+    
+    
+class AlliedChestplateOfGenerosity(Buff):
+    
+    BASE_PPM = 1
+    
+    def __init__(self, caster):
+        super().__init__("Allied Chestplate of Generosity", 10, base_duration=10)   
+        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", -self.embellishment_first_value)
+    
+    
+class AlliedWristguardOfCompanionship(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Allied Wristguards of Companionship", 10000, base_duration=10000)   
+        embellishment_effect = caster.embellishments["Allied Wristgaurds of Companionship"]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        targets_nearby = 4
+        self.embellishment_first_value = embellishment_values[0] * targets_nearby
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", -self.embellishment_first_value)
+    
+    
+class VerdantTether(Buff):
+    
+    BASE_PPM = 2.2
+    
+    def __init__(self, caster):
+        super().__init__("Verdant Tether", 15, base_duration=15)
+        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        self.embellishment_second_value = embellishment_values[1]
+        
+        average_value = 0.75
+        self.embellishment_second_value *= average_value
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.embellishment_second_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", -self.embellishment_second_value)
+    
+
+class VerdantConduit(Buff):
+    
+    # 10s icd
+    BASE_PPM = 5
+    
+    def __init__(self, caster):
+        super().__init__("Verdant Conduit", 10, base_duration=10)
+        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        self.chosen_stat = ""
+        
+    def apply_effect(self, caster, current_time=None):
+        self.chosen_stat = random.choice(["haste", "crit", "mastery", "versatility"])
+        caster.update_stat(self.chosen_stat, self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat(self.chosen_stat, -self.embellishment_first_value)
+    
+
+class DreamtendersCharm(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Dreamtender's Charm", 10000, base_duration=10000, current_stacks=1, max_stacks=20)
+        self.stacks_to_apply = 1
+        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        print(embellishment_values)
+        
+        self.embellishment_first_value = embellishment_values[0]
+        caster.time_based_stacking_buffs[self] = 1
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("crit", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("crit", self.embellishment_first_value * self.current_stacks)

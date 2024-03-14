@@ -22,700 +22,704 @@
         <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
     </head>
     <body>
-        <div id="import-character-container">
-            <label for="character-region-input" class="character-input-label">Region:</label>
-            <select id="character-region-input" class="character-input-field">
-                <option value="EU">EU</option>
-                <option value="US">US</option>
-            </select>
+        <div id="wrapper">
+            <div id="content">
+                <div id="import-character-container">
+                    <label for="character-region-input" class="character-input-label">Region:</label>
+                    <select id="character-region-input" class="character-input-field">
+                        <option value="EU">EU</option>
+                        <option value="US">US</option>
+                    </select>
 
-            <label for="character-realm-input" class="character-input-label">Realm:</label>
-            <input type="text" id="character-realm-input" class="character-input-field">
+                    <label for="character-realm-input" class="character-input-label">Realm:</label>
+                    <input type="text" id="character-realm-input" class="character-input-field">
 
-            <label for="character-name-input" class="character-input-label">Character Name:</label>
-            <input type="text" id="character-name-input" class="character-input-field">
+                    <label for="character-name-input" class="character-input-label">Character Name:</label>
+                    <input type="text" id="character-name-input" class="character-input-field">
 
-            <button id="import-button">Import</button>
-        </div>
+                    <button id="import-button">Import</button>
+                </div>
 
-        <div id="simulation-options-container">
-            <nav id="options-navbar-1">
-                <div id="options-tab" class="options-tab active">Options</div>
-                <div id="talents-tab" class="options-tab inactive">Talents</div>
-                <div id="equipment-tab" class="options-tab inactive">Equipment</div>
-                <div id="buffs-tab" class="options-tab inactive">Buffs & Consumables</div>
-                <div id="priority-list-tab" class="options-tab inactive">Priority List</div>
+                <div id="simulation-options-container">
+                    <nav id="options-navbar-1">
+                        <div id="options-tab" class="options-tab active">Options</div>
+                        <div id="talents-tab" class="options-tab inactive">Talents</div>
+                        <div id="equipment-tab" class="options-tab inactive">Equipment</div>
+                        <div id="buffs-tab" class="options-tab inactive">Buffs & Consumables</div>
+                        <div id="priority-list-tab" class="options-tab inactive">Priority List</div>
+                        
+                    </nav>
+
+                    <div id="options-window">
+                        <div id="options-content" class="options-tab-content">
+                            <div id="options-container">
+                                <div class="options-half options-half-left">
+                                    <div class="option-container">
+                                        <label for="iterations-option" id="iterations-option-label" class="options-option-label">Iterations:</label>
+                                        <div id="iterations-slider-container" class="slider-container">
+                                            <div id="iterations-value-container" class="slider-value-container">
+                                                <div id="iterations-value" class="slider-value">1</div>
+                                            </div>
+                                            <input type="range" id="iterations-option" class="options-option option-slider" value="1" min="1" max="1001" step="1">                              
+                                        </div>                              
+                                    </div>
+
+                                    <div class="option-container">
+                                        <label for="encounter-length-option" id="encounter-length-option-label" class="options-option-label">Encounter Length:</label>
+                                        <div id="encounter-length-slider-container" class="slider-container">
+                                            <div id="encounter-length-value-container" class="slider-value-container">
+                                                <div id="encounter-length-minutes" class="slider-value-time">5</div>
+                                                <span class="slider-value-time-divider">:</span>
+                                                <div id="encounter-length-seconds" class="slider-value-time">00</div>
+                                            </div>
+                                            <input type="range" id="encounter-length-option" class="options-option option-slider" value="300" min="1" max="600" step="1">
+                                        </div>
+                                    </div>
+
+                                    <div class="option-container">
+                                        <div id="race-filter-label" class="options-option-label">Race:</div>
+                                        <div id="race-filter-container" class="options-option-container">
+                                            <img class="race-image" data-race="Human" src="https://render.worldofwarcraft.com/eu/icons/56/race_human_female.jpg">
+                                            <img class="race-image" data-race="Dwarf" src="https://render.worldofwarcraft.com/eu/icons/56/race_dwarf_female.jpg">
+                                            <img class="race-image" data-race="Dark Iron Dwarf" src="https://wow.zamimg.com/images/wow/icons/large/race_darkirondwarf_female.jpg">
+                                            <img class="race-image" data-race="Draenei" src="https://render.worldofwarcraft.com/eu/icons/56/race_draenei_female.jpg">
+                                            <img class="race-image" data-race="Lightforged Draenei" src="https://wow.zamimg.com/images/wow/icons/large/race_lightforgeddraenei_female.jpg">
+                                            <img class="race-image" data-race="Blood Elf" src="https://render.worldofwarcraft.com/eu/icons/56/race_blood-elf_female.jpg">
+                                            <img class="race-image" data-race="Tauren" src="https://render.worldofwarcraft.com/eu/icons/56/race_tauren_female.jpg">
+                                            <img class="race-image" data-race="Zandalari Troll" src="https://wow.zamimg.com/images/wow/icons/large/race_zandalaritroll_female.jpg">
+                                        </div>
+                                    </div>
+                                </div>    
+
+                                <div class="options-half options-half-center">
+                                    <div class="option-container">
+                                        <label for="time-warp-time" id="time-warp-time-label" class="options-option-label">Time Warp Timer:</label>
+                                        <input id="time-warp-time" class="options-option" value="0">
+                                    </div>
+                                </div>
+                                
+                                <div class="options-half options-half-right">
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div id="talents-content" class="options-tab-content">
+                            <div id="all-talents-container">
+                                <div id="class-talents" class="talents-container">
+                                
+                                </div>
+                                <div id="spec-talents" class="talents-container">
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div id="equipment-content" class="options-tab-content">
+                            <div id="equipment-container">
+                                <div id="equipment-left-half">
+                                    <div id="equipped-items-container">
+                                        <div id="equipped-items-item-level">
+                                            <div id="equipped-items-item-level-text" style="color: var(--light-font-colour)">Item Level</div>
+                                            <div id="equipped-items-item-level-value"></div>
+                                        </div>
+                                        <div id="equipped-items-info"></div>
+
+                                        <div class="item-row" id="item-row-one">
+                                            <div class="item-slot" id="item-slot-head" data-item-slot="Head" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_head.jpg","item_id":"","item_level":"","limit":null,"name":"Head","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-head" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_head.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Head</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="item-row" id="item-row-two">
+                                            <div class="item-slot" id="item-slot-shoulder" data-item-slot="Shoulders" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_shoulder.jpg","item_id":"","item_level":"","limit":null,"name":"Shoulders","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-shoulder" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_shoulder.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Shoulders</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                            <div class="item-slot" id="item-slot-neck" data-item-slot="Necklace" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_neck.jpg","item_id":"","item_level":"","limit":null,"name":"Necklace","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-neck" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_neck.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Necklace</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                            <div class="item-slot" id="item-slot-back" data-item-slot="Cloak" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_chest.jpg","item_id":"","item_level":"","limit":null,"name":"Cloak","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-back" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_chest.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Cloak</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="item-row" id="item-row-three">
+                                            <div class="item-slot" id="item-slot-hands" data-item-slot="Gloves" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_hands.jpg","item_id":"","item_level":"","limit":null,"name":"Gloves","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-hands" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_hands.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Gloves</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                            <div class="item-slot" id="item-slot-chest" data-item-slot="Body" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_chest.jpg","item_id":"","item_level":"","limit":null,"name":"Body","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-chest" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_chest.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Body</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                            <div class="item-slot" id="item-slot-wrist" data-item-slot="Bracers" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_wrists.jpg","item_id":"","item_level":"","limit":null,"name":"Bracers","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-wrist" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_wrists.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Bracers</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="item-row" id="item-row-four">
+                                            <div class="item-slot" id="item-slot-main_hand" data-item-slot="Main Hand" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_mainhand.jpg","item_id":"","item_level":"","limit":null,"name":"Main Hand","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-main_hand" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_mainhand.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Main Hand</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                            <div class="item-slot" id="item-slot-waist" data-item-slot="Belt" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_waist.jpg","item_id":"","item_level":"","limit":null,"name":"Belt","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-waist" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_waist.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Belt</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                            <div class="item-slot" id="item-slot-off_hand" data-item-slot="Off Hand" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_offhand.jpg","item_id":"","item_level":"","limit":null,"name":"Off Hand","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-off_hand" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_offhand.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Off Hand</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="item-row" id="item-row-five">
+                                            <div class="item-slot" id="item-slot-finger_1" data-item-slot="Ring 1" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_finger.jpg","item_id":"","item_level":"","limit":null,"name":"Finger 1","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-finger_1" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_finger.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Ring 1</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                            <div class="item-slot" id="item-slot-legs" data-item-slot="Legs" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_legs.jpg","item_id":"","item_level":"","limit":null,"name":"Legs","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-legs" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_legs.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Legs</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                            <div class="item-slot" id="item-slot-finger_2" data-item-slot="Ring 2" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_finger.jpg","item_id":"","item_level":"","limit":null,"name":"Finger 2","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-finger_2" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_finger.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Ring 2</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="item-row" id="item-row-six">
+                                            <div class="item-slot" id="item-slot-trinket_1" data-item-slot="Trinket 1" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_trinket.jpg","item_id":"","item_level":"","limit":null,"name":"Trinket 1","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-trinket_1" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_trinket.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Trinket 1</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                            <div class="item-slot" id="item-slot-feet" data-item-slot="Boots" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_feet.jpg","item_id":"","item_level":"","limit":null,"name":"Boots","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-feet" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_feet.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Boots</div>
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                            <div class="item-slot" id="item-slot-trinket_2" data-item-slot="Trinket 2" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_trinket.jpg","item_id":"","item_level":"","limit":null,"name":"Trinket 2","quality":"poor","stats":{}}'>
+                                                <div class="item-slot-icon-container">
+                                                    <img class="item-slot-icon" id="item-slot-icon-trinket_2" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_trinket.jpg">
+                                                    <div class="item-slot-item-level"></div>
+                                                </div>
+                                                <div class="item-slot-info">
+                                                    <div class="item-slot-default-name">Trinket 2</div>                                           
+                                                </div>
+                                                <div class="item-slot-hover"></div>
+                                            </div>
+                                        </div>                               
+                                    </div>
+                                </div>
+                                <div id="equipment-right-half">
+                                    <div id="equipped-items-stats-container">
+                                        <div class="equipped-items-stats-row">
+                                            <div class="equipped-items-stat" id="equipped-items-stats-intellect">
+                                                <span class="equipped-items-stat-label" style="color: var(--stat-intellect)">Intellect</span>
+                                                <span class="equipped-items-stat-value" style="color: var(--stat-intellect)">0</span>
+                                            </div>
+                                            <div class="equipped-items-stat" id="equipped-items-stats-leech">
+                                                <span class="equipped-items-stat-label" style="color: var(--leech-font)">Leech</span>
+                                                <span class="equipped-items-stat-value" style="color: var(--leech-font)">0</span>
+                                            </div>
+                                            <div class="equipped-items-stat" id="equipped-items-stats-health">
+                                                <span class="equipped-items-stat-label" style="color: var(--healing-font)">Health</span>
+                                                <span class="equipped-items-stat-value" style="color: var(--healing-font)">0</span>
+                                            </div>
+                                            <div class="equipped-items-stat" id="equipped-items-stats-mana">
+                                                <span class="equipped-items-stat-label" style="color: var(--mana)">Mana</span>
+                                                <span class="equipped-items-stat-value" style="color: var(--mana)">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="equipped-items-stats-row">
+                                            <div class="equipped-items-stat" id="equipped-items-stats-haste">
+                                                <span class="equipped-items-stat-label" style="color: var(--stat-haste)">Haste</span>
+                                                <span class="equipped-items-stat-value" style="color: var(--stat-haste)">0</span>
+                                            </div>
+                                            <div class="equipped-items-stat" id="equipped-items-stats-crit">
+                                                <span class="equipped-items-stat-label" style="color: var(--stat-crit)">Crit</span>
+                                                <span class="equipped-items-stat-value" style="color: var(--stat-crit)">0</span>
+                                            </div>
+                                            <div class="equipped-items-stat" id="equipped-items-stats-mastery">
+                                                <span class="equipped-items-stat-label" style="color: var(--stat-mastery)">Mastery</span>
+                                                <span class="equipped-items-stat-value" style="color: var(--stat-mastery)">0</span>
+                                            </div>
+                                            <div class="equipped-items-stat" id="equipped-items-stats-versatility">
+                                                <span class="equipped-items-stat-label" style="color: var(--stat-versatility)">Versatility</span>
+                                                <span class="equipped-items-stat-value" style="color: var(--stat-versatility)">0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="equipped-items-edit-equipment-container">
+                                        <div id="equipped-items-edit-choose-slot">
+                                            <select id="equipped-items-edit-choose-slot-dropdown">
+                                                <option class="choose-slot-option">Choose an item slot</option>
+                                                <option class="choose-slot-option">Head</option>
+                                                <option class="choose-slot-option">Shoulders</option>
+                                                <option class="choose-slot-option">Necklace</option>
+                                                <option class="choose-slot-option">Cloak</option>
+                                                <option class="choose-slot-option">Gloves</option>
+                                                <option class="choose-slot-option">Body</option>
+                                                <option class="choose-slot-option">Bracers</option>
+                                                <option class="choose-slot-option">Main Hand</option>
+                                                <option class="choose-slot-option">Off Hand</option>
+                                                <option class="choose-slot-option">Belt</option>
+                                                <option class="choose-slot-option">Legs</option>
+                                                <option class="choose-slot-option">Boots</option>
+                                                <option class="choose-slot-option">Ring 1</option>
+                                                <option class="choose-slot-option">Ring 2</option>
+                                                <option class="choose-slot-option">Trinket 1</option>
+                                                <option class="choose-slot-option">Trinket 2</option>
+                                            </select>
+                                        </div>
+                                        <div id="equipped-items-edit-container">
+                                            <div id="equipped-items-edit-top-half">
+                                                
+                                                <div id="current-equipped-item-container">
+                                                    <div id="current-equipped-item-title">Currently equipped</div>
+                                                    <div id="current-equipped-item-info-container">
+                                                        <div id="current-equipped-item-icon-container">
+                                                            <img id="current-equipped-item-icon" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg" style="filter: grayscale(1)">
+                                                            <div id="equipped-item-item-level"></div>
+                                                        </div>                                             
+                                                        <div id="current-equipped-item-info">
+                                                            <div id="current-equipped-item-info-left">
+
+                                                            </div>
+
+                                                            <div id="current-equipped-item-info-right">
+                                                                <!-- <select class="current-equipped-item-field-right" id="current-equipped-item-enchants">
+                                                                    <option class="current-equipped-item-enchant-option">Choose an enchant</option>
+                                                                </select>
+                                                                <div class="current-equipped-item-field-right" id="current-equipped-item-gems"></div>
+                                                                <select class="current-equipped-item-field-right" id="current-equipped-item-embellishments">
+                                                                    <option class="current-equipped-item-embellishment-option">Choose an embellishment</option>
+                                                                </select>
+                                                                <div class="current-equipped-item-field-right" id="current-equipped-item-leech"></div> -->
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>       
+                                                </div>
+                                                
+                                            </div>
+                                            <div id="equipped-items-edit-bottom-half">
+                                                <div id="new-equipped-item-container">
+                                                    <div id="item-search-container">
+                                                        <input id="new-equipped-item-search" placeholder="Choose a new item" autocomplete="off">
+                                                        <div id="item-search-suggestions"></div>
+                                                        <div id="replace-item-button">Replace</div>
+                                                    </div>                                          
+                                                    <div id="new-equipped-item-info-container">
+                                                        <div id="new-equipped-item-icon-container">
+                                                            <img id="new-equipped-item-icon" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg" style="filter: grayscale(1)">
+                                                            <div id="new-item-item-level"></div>
+                                                        </div>
+                                                        <div id="new-equipped-item-info"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="buffs-content" class="options-tab-content">
+                            <div id="buffs-container">
+                                <div class="options-half options-half-left">        
+                                    <div class="option-container">
+                                        <div id="flask-filter-label" class="options-option-label">Flask:</div>
+                                        <div id="flask-filter-container" class="options-option-container">
+                                            <img class="flask-image" data-flask="Phial of Tepid Versatility" src="https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_black.jpg">
+                                            <img class="flask-image" data-flask="Phial of Elemental Chaos" src="https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_orange.jpg">
+                                            <img class="flask-image" data-flask="Iced Phial of Corrupting Rage" src="https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_red.jpg">
+                                        </div>
+                                    </div>
                 
-            </nav>
+                                    <div class="option-container">
+                                        <div id="food-filter-label" class="options-option-label">Food:</div>
+                                        <div id="food-filter-container" class="options-option-container">
+                                            <img class="food-image" data-food="Grand Banquet of the Kalu'ak" src="https://render.worldofwarcraft.com/eu/icons/56/inv_cooking_10_grandbanquet.jpg">
+                                            <img class="food-image" data-food="Timely Demise" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_seedbatteredfishplate.jpg">
+                                            <img class="food-image" data-food="Filet of Fangs" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_cooked_eternalblossomfish.jpg">
+                                            <img class="food-image" data-food="Seamoth Surprise" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_159_fish_82.jpg">
+                                            <img class="food-image" data-food="Salt-Baked Fishcake" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_deepfriedmossgill.jpg">
+                                            <img class="food-image" data-food="Feisty Fish Sticks" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_164_fish_seadog.jpg">
+                                            <img class="food-image" data-food="Aromatic Seafood Platter" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_drogbarstylesalmon.jpg">
+                                            <img class="food-image" data-food="Sizzling Seafood Medley" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_draenor_sturgeonstew.jpg">
+                                            <img class="food-image" data-food="Revenge, Served Cold" src="https://render.worldofwarcraft.com/eu/icons/56/inv_cooking_100_revengeservedcold_color02.jpg">
+                                            <img class="food-image" data-food="Thousandbone Tongueslicer" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_154_fish_77.jpg">
+                                            <img class="food-image" data-food="Great Cerulean Sea" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_159_fish_white.jpg">
+                                        </div>
+                                    </div>
+            
+                                    <div class="option-container">
+                                        <div id="weapon-imbue-filter-label" class="options-option-label">Weapon Imbue:</div>
+                                        <div id="weapon-imbue-filter-container" class="options-option-container">
+                                            <img class="weapon-imbue-image" data-weapon-imbue="Buzzing Rune" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_08.jpg">
+                                            <img class="weapon-imbue-image" data-weapon-imbue="Chirping Rune" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_09.jpg">
+                                            <img class="weapon-imbue-image" data-weapon-imbue="Howling Rune" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_05.jpg">
+                                            <img class="weapon-imbue-image" data-weapon-imbue="Hissing Rune" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_09.jpg">
+                                        </div>
+                                    </div>
+                
+                                    <div class="option-container">
+                                        <div id="augment-rune-filter-label" class="options-option-label">Augment Rune:</div>
+                                        <div id="augment-rune-filter-container" class="options-option-container">
+                                            <img class="augment-rune-image" data-augment-rune="Draconic Augment Rune" src="https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting3_rainbowprism_color2.jpg">
+                                        </div>
+                                    </div>
 
-            <div id="options-window">
-                <div id="options-content" class="options-tab-content">
-                    <div id="options-container">
-                        <div class="options-half options-half-left">
-                            <div class="option-container">
-                                <label for="iterations-option" id="iterations-option-label" class="options-option-label">Iterations:</label>
-                                <div id="iterations-slider-container" class="slider-container">
-                                    <div id="iterations-value-container" class="slider-value-container">
-                                        <div id="iterations-value" class="slider-value">1</div>
-                                    </div>
-                                    <input type="range" id="iterations-option" class="options-option option-slider" value="1" min="1" max="1001" step="1">                              
-                                </div>                              
-                            </div>
-
-                            <div class="option-container">
-                                <label for="encounter-length-option" id="encounter-length-option-label" class="options-option-label">Encounter Length:</label>
-                                <div id="encounter-length-slider-container" class="slider-container">
-                                    <div id="encounter-length-value-container" class="slider-value-container">
-                                        <div id="encounter-length-minutes" class="slider-value-time">5</div>
-                                        <span class="slider-value-time-divider">:</span>
-                                        <div id="encounter-length-seconds" class="slider-value-time">00</div>
-                                    </div>
-                                    <input type="range" id="encounter-length-option" class="options-option option-slider" value="300" min="1" max="600" step="1">
-                                </div>
-                            </div>
-
-                            <div class="option-container">
-                                <div id="race-filter-label" class="options-option-label">Race:</div>
-                                <div id="race-filter-container" class="options-option-container">
-                                    <img class="race-image" data-race="Human" src="https://render.worldofwarcraft.com/eu/icons/56/race_human_female.jpg">
-                                    <img class="race-image" data-race="Dwarf" src="https://render.worldofwarcraft.com/eu/icons/56/race_dwarf_female.jpg">
-                                    <img class="race-image" data-race="Dark Iron Dwarf" src="https://wow.zamimg.com/images/wow/icons/large/race_darkirondwarf_female.jpg">
-                                    <img class="race-image" data-race="Draenei" src="https://render.worldofwarcraft.com/eu/icons/56/race_draenei_female.jpg">
-                                    <img class="race-image" data-race="Lightforged Draenei" src="https://wow.zamimg.com/images/wow/icons/large/race_lightforgeddraenei_female.jpg">
-                                    <img class="race-image" data-race="Blood Elf" src="https://render.worldofwarcraft.com/eu/icons/56/race_blood-elf_female.jpg">
-                                    <img class="race-image" data-race="Tauren" src="https://render.worldofwarcraft.com/eu/icons/56/race_tauren_female.jpg">
-                                    <img class="race-image" data-race="Zandalari Troll" src="https://wow.zamimg.com/images/wow/icons/large/race_zandalaritroll_female.jpg">
-                                </div>
-                            </div>
-                        </div>    
-
-                        <div class="options-half options-half-center">
-                            <div class="option-container">
-                                <label for="time-warp-time" id="time-warp-time-label" class="options-option-label">Time Warp Timer:</label>
-                                <input id="time-warp-time" class="options-option" value="0">
-                            </div>
-                        </div>
-                        
-                        <div class="options-half options-half-right">
-                            
-                        </div>
-                    </div>
-                    
-                </div>
-                <div id="talents-content" class="options-tab-content">
-                    <div id="all-talents-container">
-                        <div id="class-talents" class="talents-container">
-                        
-                        </div>
-                        <div id="spec-talents" class="talents-container">
-                            
-                        </div>
-                    </div>
-                    
-                </div>
-
-                <div id="equipment-content" class="options-tab-content">
-                    <div id="equipment-container">
-                        <div id="equipment-left-half">
-                            <div id="equipped-items-container">
-                                <div id="equipped-items-item-level">
-                                    <div id="equipped-items-item-level-text" style="color: var(--light-font-colour)">Item Level</div>
-                                    <div id="equipped-items-item-level-value"></div>
-                                </div>
-                                <div id="equipped-items-info"></div>
-
-                                <div class="item-row" id="item-row-one">
-                                    <div class="item-slot" id="item-slot-head" data-item-slot="Head" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_head.jpg","item_id":"","item_level":"","limit":null,"name":"Head","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-head" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_head.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Head</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                </div>
-                            
-                                <div class="item-row" id="item-row-two">
-                                    <div class="item-slot" id="item-slot-shoulder" data-item-slot="Shoulders" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_shoulder.jpg","item_id":"","item_level":"","limit":null,"name":"Shoulders","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-shoulder" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_shoulder.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Shoulders</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                    <div class="item-slot" id="item-slot-neck" data-item-slot="Necklace" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_neck.jpg","item_id":"","item_level":"","limit":null,"name":"Necklace","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-neck" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_neck.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Necklace</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                    <div class="item-slot" id="item-slot-back" data-item-slot="Cloak" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_chest.jpg","item_id":"","item_level":"","limit":null,"name":"Cloak","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-back" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_chest.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Cloak</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                </div>
-                            
-                                <div class="item-row" id="item-row-three">
-                                    <div class="item-slot" id="item-slot-hands" data-item-slot="Gloves" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_hands.jpg","item_id":"","item_level":"","limit":null,"name":"Gloves","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-hands" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_hands.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Gloves</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                    <div class="item-slot" id="item-slot-chest" data-item-slot="Body" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_chest.jpg","item_id":"","item_level":"","limit":null,"name":"Body","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-chest" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_chest.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Body</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                    <div class="item-slot" id="item-slot-wrist" data-item-slot="Bracers" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_wrists.jpg","item_id":"","item_level":"","limit":null,"name":"Bracers","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-wrist" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_wrists.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Bracers</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                </div>
-                            
-                                <div class="item-row" id="item-row-four">
-                                    <div class="item-slot" id="item-slot-main_hand" data-item-slot="Main Hand" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_mainhand.jpg","item_id":"","item_level":"","limit":null,"name":"Main Hand","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-main_hand" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_mainhand.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Main Hand</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                    <div class="item-slot" id="item-slot-waist" data-item-slot="Belt" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_waist.jpg","item_id":"","item_level":"","limit":null,"name":"Belt","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-waist" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_waist.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Belt</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                    <div class="item-slot" id="item-slot-off_hand" data-item-slot="Off Hand" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_offhand.jpg","item_id":"","item_level":"","limit":null,"name":"Off Hand","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-off_hand" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_offhand.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Off Hand</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                </div>
-                            
-                                <div class="item-row" id="item-row-five">
-                                    <div class="item-slot" id="item-slot-finger_1" data-item-slot="Ring 1" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_finger.jpg","item_id":"","item_level":"","limit":null,"name":"Finger 1","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-finger_1" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_finger.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Ring 1</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                    <div class="item-slot" id="item-slot-legs" data-item-slot="Legs" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_legs.jpg","item_id":"","item_level":"","limit":null,"name":"Legs","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-legs" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_legs.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Legs</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                    <div class="item-slot" id="item-slot-finger_2" data-item-slot="Ring 2" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_finger.jpg","item_id":"","item_level":"","limit":null,"name":"Finger 2","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-finger_2" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_finger.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Ring 2</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                </div>
-                            
-                                <div class="item-row" id="item-row-six">
-                                    <div class="item-slot" id="item-slot-trinket_1" data-item-slot="Trinket 1" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_trinket.jpg","item_id":"","item_level":"","limit":null,"name":"Trinket 1","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-trinket_1" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_trinket.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Trinket 1</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                    <div class="item-slot" id="item-slot-feet" data-item-slot="Boots" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_feet.jpg","item_id":"","item_level":"","limit":null,"name":"Boots","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-feet" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_feet.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Boots</div>
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                    <div class="item-slot" id="item-slot-trinket_2" data-item-slot="Trinket 2" data-item-data='{"effects":[],"gems":[],"item_icon":"https://wow.zamimg.com/images/wow/icons/large/inventoryslot_trinket.jpg","item_id":"","item_level":"","limit":null,"name":"Trinket 2","quality":"poor","stats":{}}'>
-                                        <div class="item-slot-icon-container">
-                                            <img class="item-slot-icon" id="item-slot-icon-trinket_2" src="https://wow.zamimg.com/images/wow/icons/large/inventoryslot_trinket.jpg">
-                                            <div class="item-slot-item-level"></div>
-                                        </div>
-                                        <div class="item-slot-info">
-                                            <div class="item-slot-default-name">Trinket 2</div>                                           
-                                        </div>
-                                        <div class="item-slot-hover"></div>
-                                    </div>
-                                </div>                               
-                            </div>
-                        </div>
-                        <div id="equipment-right-half">
-                            <div id="equipped-items-stats-container">
-                                <div class="equipped-items-stats-row">
-                                    <div class="equipped-items-stat" id="equipped-items-stats-intellect">
-                                        <span class="equipped-items-stat-label" style="color: var(--stat-intellect)">Intellect</span>
-                                        <span class="equipped-items-stat-value" style="color: var(--stat-intellect)">0</span>
-                                    </div>
-                                    <div class="equipped-items-stat" id="equipped-items-stats-leech">
-                                        <span class="equipped-items-stat-label" style="color: var(--leech-font)">Leech</span>
-                                        <span class="equipped-items-stat-value" style="color: var(--leech-font)">0</span>
-                                    </div>
-                                    <div class="equipped-items-stat" id="equipped-items-stats-health">
-                                        <span class="equipped-items-stat-label" style="color: var(--healing-font)">Health</span>
-                                        <span class="equipped-items-stat-value" style="color: var(--healing-font)">0</span>
-                                    </div>
-                                    <div class="equipped-items-stat" id="equipped-items-stats-mana">
-                                        <span class="equipped-items-stat-label" style="color: var(--mana)">Mana</span>
-                                        <span class="equipped-items-stat-value" style="color: var(--mana)">0</span>
-                                    </div>
-                                </div>
-                                <div class="equipped-items-stats-row">
-                                    <div class="equipped-items-stat" id="equipped-items-stats-haste">
-                                        <span class="equipped-items-stat-label" style="color: var(--stat-haste)">Haste</span>
-                                        <span class="equipped-items-stat-value" style="color: var(--stat-haste)">0</span>
-                                    </div>
-                                    <div class="equipped-items-stat" id="equipped-items-stats-crit">
-                                        <span class="equipped-items-stat-label" style="color: var(--stat-crit)">Crit</span>
-                                        <span class="equipped-items-stat-value" style="color: var(--stat-crit)">0</span>
-                                    </div>
-                                    <div class="equipped-items-stat" id="equipped-items-stats-mastery">
-                                        <span class="equipped-items-stat-label" style="color: var(--stat-mastery)">Mastery</span>
-                                        <span class="equipped-items-stat-value" style="color: var(--stat-mastery)">0</span>
-                                    </div>
-                                    <div class="equipped-items-stat" id="equipped-items-stats-versatility">
-                                        <span class="equipped-items-stat-label" style="color: var(--stat-versatility)">Versatility</span>
-                                        <span class="equipped-items-stat-value" style="color: var(--stat-versatility)">0</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="equipped-items-edit-equipment-container">
-                                <div id="equipped-items-edit-choose-slot">
-                                    <select id="equipped-items-edit-choose-slot-dropdown">
-                                        <option class="choose-slot-option">Choose an item slot</option>
-                                        <option class="choose-slot-option">Head</option>
-                                        <option class="choose-slot-option">Shoulders</option>
-                                        <option class="choose-slot-option">Necklace</option>
-                                        <option class="choose-slot-option">Cloak</option>
-                                        <option class="choose-slot-option">Gloves</option>
-                                        <option class="choose-slot-option">Body</option>
-                                        <option class="choose-slot-option">Bracers</option>
-                                        <option class="choose-slot-option">Main Hand</option>
-                                        <option class="choose-slot-option">Off Hand</option>
-                                        <option class="choose-slot-option">Belt</option>
-                                        <option class="choose-slot-option">Legs</option>
-                                        <option class="choose-slot-option">Boots</option>
-                                        <option class="choose-slot-option">Ring 1</option>
-                                        <option class="choose-slot-option">Ring 2</option>
-                                        <option class="choose-slot-option">Trinket 1</option>
-                                        <option class="choose-slot-option">Trinket 2</option>
-                                    </select>
-                                </div>
-                                <div id="equipped-items-edit-container">
-                                    <div id="equipped-items-edit-top-half">
-                                        
-                                        <div id="current-equipped-item-container">
-                                            <div id="current-equipped-item-title">Currently equipped</div>
-                                            <div id="current-equipped-item-info-container">
-                                                <div id="current-equipped-item-icon-container">
-                                                    <img id="current-equipped-item-icon" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg" style="filter: grayscale(1)">
-                                                    <div id="equipped-item-item-level"></div>
-                                                </div>                                             
-                                                <div id="current-equipped-item-info">
-                                                    <div id="current-equipped-item-info-left">
-
+                                    <div class="option-container">
+                                        <div id="potion-filter-label" class="options-option-label">Potions:</div>
+                                        <div id="potion-filter-container" class="options-option-container">
+                                            <div class="option-image-container" id="aerated-mana-potion-container">
+                                                <img class="potion-image" data-potion="Aerated Mana Potion" src="https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape1_blue.jpg">
+                                                <div class="option-image-double-buttons">
+                                                    <div class="option-image-button" id="aerated-mana-potion-repeat-button" style="display:none">
+                                                        <i class="fa-solid fa-repeat"></i>
                                                     </div>
-
-                                                    <div id="current-equipped-item-info-right">
-                                                        <!-- <select class="current-equipped-item-field-right" id="current-equipped-item-enchants">
-                                                            <option class="current-equipped-item-enchant-option">Choose an enchant</option>
-                                                        </select>
-                                                        <div class="current-equipped-item-field-right" id="current-equipped-item-gems"></div>
-                                                        <select class="current-equipped-item-field-right" id="current-equipped-item-embellishments">
-                                                            <option class="current-equipped-item-embellishment-option">Choose an embellishment</option>
-                                                        </select>
-                                                        <div class="current-equipped-item-field-right" id="current-equipped-item-leech"></div> -->
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>       
-                                        </div>
-                                        
-                                    </div>
-                                    <div id="equipped-items-edit-bottom-half">
-                                        <div id="new-equipped-item-container">
-                                            <div id="item-search-container">
-                                                <input id="new-equipped-item-search" placeholder="Choose a new item">
-                                                <div id="item-search-suggestions"></div>
-                                                <div id="replace-item-button">Replace</div>
-                                            </div>                                          
-                                            <div id="new-equipped-item-info-container">
-                                                <div id="new-equipped-item-icon-container">
-                                                    <img id="new-equipped-item-icon" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg" style="filter: grayscale(1)">
-                                                    <div id="new-item-item-level"></div>
-                                                </div>
-                                                <div id="new-equipped-item-info"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="buffs-content" class="options-tab-content">
-                    <div id="buffs-container">
-                        <div class="options-half options-half-left">        
-                            <div class="option-container">
-                                <div id="flask-filter-label" class="options-option-label">Flask:</div>
-                                <div id="flask-filter-container" class="options-option-container">
-                                    <img class="flask-image" data-flask="Phial of Tepid Versatility" src="https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_black.jpg">
-                                    <img class="flask-image" data-flask="Phial of Elemental Chaos" src="https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_orange.jpg">
-                                    <img class="flask-image" data-flask="Iced Phial of Corrupting Rage" src="https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_red.jpg">
-                                </div>
-                            </div>
-        
-                            <div class="option-container">
-                                <div id="food-filter-label" class="options-option-label">Food:</div>
-                                <div id="food-filter-container" class="options-option-container">
-                                    <img class="food-image" data-food="Grand Banquet of the Kalu'ak" src="https://render.worldofwarcraft.com/eu/icons/56/inv_cooking_10_grandbanquet.jpg">
-                                    <img class="food-image" data-food="Timely Demise" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_seedbatteredfishplate.jpg">
-                                    <img class="food-image" data-food="Filet of Fangs" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_cooked_eternalblossomfish.jpg">
-                                    <img class="food-image" data-food="Seamoth Surprise" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_159_fish_82.jpg">
-                                    <img class="food-image" data-food="Salt-Baked Fishcake" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_deepfriedmossgill.jpg">
-                                    <img class="food-image" data-food="Feisty Fish Sticks" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_164_fish_seadog.jpg">
-                                    <img class="food-image" data-food="Aromatic Seafood Platter" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_drogbarstylesalmon.jpg">
-                                    <img class="food-image" data-food="Sizzling Seafood Medley" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_draenor_sturgeonstew.jpg">
-                                    <img class="food-image" data-food="Revenge, Served Cold" src="https://render.worldofwarcraft.com/eu/icons/56/inv_cooking_100_revengeservedcold_color02.jpg">
-                                    <img class="food-image" data-food="Thousandbone Tongueslicer" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_154_fish_77.jpg">
-                                    <img class="food-image" data-food="Great Cerulean Sea" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_159_fish_white.jpg">
-                                </div>
-                            </div>
-    
-                            <div class="option-container">
-                                <div id="weapon-imbue-filter-label" class="options-option-label">Weapon Imbue:</div>
-                                <div id="weapon-imbue-filter-container" class="options-option-container">
-                                    <img class="weapon-imbue-image" data-weapon-imbue="Buzzing Rune" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_08.jpg">
-                                    <img class="weapon-imbue-image" data-weapon-imbue="Chirping Rune" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_09.jpg">
-                                    <img class="weapon-imbue-image" data-weapon-imbue="Howling Rune" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_05.jpg">
-                                    <img class="weapon-imbue-image" data-weapon-imbue="Hissing Rune" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_09.jpg">
-                                </div>
-                            </div>
-        
-                            <div class="option-container">
-                                <div id="augment-rune-filter-label" class="options-option-label">Augment Rune:</div>
-                                <div id="augment-rune-filter-container" class="options-option-container">
-                                    <img class="augment-rune-image" data-augment-rune="Draconic Augment Rune" src="https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting3_rainbowprism_color2.jpg">
-                                </div>
-                            </div>
-
-                            <div class="option-container">
-                                <div id="potion-filter-label" class="options-option-label">Potions:</div>
-                                <div id="potion-filter-container" class="options-option-container">
-                                    <div class="option-image-container" id="aerated-mana-potion-container">
-                                        <img class="potion-image" data-potion="Aerated Mana Potion" src="https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape1_blue.jpg">
-                                        <div class="option-image-double-buttons">
-                                            <div class="option-image-button" id="aerated-mana-potion-repeat-button" style="display:none">
-                                                <i class="fa-solid fa-repeat"></i>
-                                            </div>
-                                            <div class="option-image-button" id="aerated-mana-potion-add-timer-button" style="display:none">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
-                                        </div>                                     
-                                        <div class="option-image-button aerated-mana-potion-timer" style="display:none">
-                                            <input class="potion-timer-input" value="0">
-                                        </div>                   
-                                    </div>
-
-                                    <div class="option-image-container" id="elemental-potion-of-ultimate-power-container">
-                                        <img class="potion-image" data-potion="Elemental Potion of Ultimate Power" src="https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_dpotion_b20.jpg">
-                                        <div class="option-image-double-buttons">
-                                            <div class="option-image-button" id="elemental-potion-of-ultimate-power-repeat-button" style="display:none">
-                                                <i class="fa-solid fa-repeat"></i>
-                                            </div>
-                                            <div class="option-image-button" id="elemental-potion-of-ultimate-power-add-timer-button" style="display:none">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
-                                        </div>                                     
-                                        <div class="option-image-button elemental-potion-of-ultimate-power-timer" style="display:none">
-                                            <input class="potion-timer-input" value="0">
-                                        </div>                   
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="options-half options-half-right">
-                            <div class="option-container">
-                                <div class="options-option-label">Raid Buffs:</div>
-                                <div class="options-option-container">
-                                    <img class="raid-buff-image" data-raid-buff="Arcane Intellect" src="https://render.worldofwarcraft.com/eu/icons/56/spell_holy_magicalsentry.jpg">
-                                    <img class="raid-buff-image" data-raid-buff="Mark of the Wild" src="https://render.worldofwarcraft.com/eu/icons/56/spell_nature_regeneration.jpg">
-                                    <img class="raid-buff-image" data-raid-buff="Close to Heart" src="https://render.worldofwarcraft.com/eu/icons/56/inv_offhand_1h_pvppandarias2_c_01.jpg">
-                                    <img class="raid-buff-image" data-raid-buff="Retribution Aura" src="https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusade.jpg">
-                                </div>
-                            </div>
-
-                            <div class="option-container">
-                                <div class="options-option-label">External Buffs:</div>
-                                <div class="options-option-container">
-                                    <div class="option-image-container" id="power-infusion-container">
-                                        <img class="external-buff-image" data-external-buff="Power Infusion" src="https://render.worldofwarcraft.com/eu/icons/56/spell_holy_powerinfusion.jpg">
-                                        <div class="option-image-double-buttons">
-                                            <div class="option-image-button" id="power-infusion-repeat-button" style="display:none">
-                                                <i class="fa-solid fa-repeat"></i>
-                                            </div>
-                                            <div class="option-image-button" id="power-infusion-add-timer-button" style="display:none">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
-                                        </div>                                     
-                                        <div class="option-image-button power-infusion-timer" style="display:none">
-                                            <input class="external-buff-timer-input" value="0">
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="option-image-container" id="innervate-container">
-                                        <img class="external-buff-image" data-external-buff="Innervate" src="https://render.worldofwarcraft.com/eu/icons/56/spell_nature_lightning.jpg">
-                                        <div class="option-image-double-buttons">
-                                            <div class="option-image-button" id="innervate-repeat-button" style="display:none">
-                                                <i class="fa-solid fa-repeat"></i>
-                                            </div>
-                                            <div class="option-image-button" id="innervate-add-timer-button" style="display:none">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </div>
-                                        </div> 
-                                        <div class="option-image-button innervate-timer" style="display:none">
-                                            <input class="external-buff-timer-input" value="0">
-                                        </div>
-                                    </div>
-                                    
-                                    <img class="external-buff-image" data-external-buff="Source of Magic" src="https://render.worldofwarcraft.com/eu/icons/56/ability_evoker_blue_01.jpg">            
-                                    
-                                </div>
-                                <!-- <div id="external-buff-timers-container">
-                                    <div class="external-buff-timer-container">
-                                        <div class="external-buff-left">
-                                            <div class="external-buff-name">Power Infusion:</div>
-                                        </div>
-                                        <div class="external-buff-right">
-                                            <div class="external-buff-options">
-                                                <div class="external-buff-checkbox">
-                                                    <input class="external-buff-checkbox-input" type="checkbox" checked="true">
-                                                    <div class="external-buff-checkbox-text">Automatic</div>
-                                                </div>
-
-                                                <div class="external-buff-timers">
-                                                    <div class="external-buff-timer">
-                                                        <input class="external-buff-timer-input">
-                                                    </div>
-                                                    <div class="external-buff-add-timer-button">
+                                                    <div class="option-image-button" id="aerated-mana-potion-add-timer-button" style="display:none">
                                                         <i class="fa-solid fa-plus"></i>
                                                     </div>
+                                                </div>                                     
+                                                <div class="option-image-button aerated-mana-potion-timer" style="display:none">
+                                                    <input class="potion-timer-input" value="0">
+                                                </div>                   
+                                            </div>
+
+                                            <div class="option-image-container" id="elemental-potion-of-ultimate-power-container">
+                                                <img class="potion-image" data-potion="Elemental Potion of Ultimate Power" src="https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_dpotion_b20.jpg">
+                                                <div class="option-image-double-buttons">
+                                                    <div class="option-image-button" id="elemental-potion-of-ultimate-power-repeat-button" style="display:none">
+                                                        <i class="fa-solid fa-repeat"></i>
+                                                    </div>
+                                                    <div class="option-image-button" id="elemental-potion-of-ultimate-power-add-timer-button" style="display:none">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                    </div>
+                                                </div>                                     
+                                                <div class="option-image-button elemental-potion-of-ultimate-power-timer" style="display:none">
+                                                    <input class="potion-timer-input" value="0">
+                                                </div>                   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="options-half options-half-right">
+                                    <div class="option-container">
+                                        <div class="options-option-label">Raid Buffs:</div>
+                                        <div class="options-option-container">
+                                            <img class="raid-buff-image" data-raid-buff="Arcane Intellect" src="https://render.worldofwarcraft.com/eu/icons/56/spell_holy_magicalsentry.jpg">
+                                            <img class="raid-buff-image" data-raid-buff="Mark of the Wild" src="https://render.worldofwarcraft.com/eu/icons/56/spell_nature_regeneration.jpg">
+                                            <img class="raid-buff-image" data-raid-buff="Close to Heart" src="https://render.worldofwarcraft.com/eu/icons/56/inv_offhand_1h_pvppandarias2_c_01.jpg">
+                                            <img class="raid-buff-image" data-raid-buff="Retribution Aura" src="https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusade.jpg">
+                                        </div>
+                                    </div>
+
+                                    <div class="option-container">
+                                        <div class="options-option-label">External Buffs:</div>
+                                        <div class="options-option-container">
+                                            <div class="option-image-container" id="power-infusion-container">
+                                                <img class="external-buff-image" data-external-buff="Power Infusion" src="https://render.worldofwarcraft.com/eu/icons/56/spell_holy_powerinfusion.jpg">
+                                                <div class="option-image-double-buttons">
+                                                    <div class="option-image-button" id="power-infusion-repeat-button" style="display:none">
+                                                        <i class="fa-solid fa-repeat"></i>
+                                                    </div>
+                                                    <div class="option-image-button" id="power-infusion-add-timer-button" style="display:none">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                    </div>
+                                                </div>                                     
+                                                <div class="option-image-button power-infusion-timer" style="display:none">
+                                                    <input class="external-buff-timer-input" value="0">
                                                 </div>
                                                 
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="external-buff-timer-container">
-                                        <div class="external-buff-left">
-                                            <div class="external-buff-name">Innervate:</div>
-                                        </div>
-                                        <div class="external-buff-right">
-                                            <div class="external-buff-options">
-                                                <div class="external-buff-checkbox">
-                                                    <input class="external-buff-checkbox-input" type="checkbox" checked="true">
-                                                    <div class="external-buff-checkbox-text">Automatic</div>
-                                                </div>
-
-                                                <div class="external-buff-timers">
-                                                    <div class="external-buff-timer">
-                                                        <input class="external-buff-timer-input">
+                                            <div class="option-image-container" id="innervate-container">
+                                                <img class="external-buff-image" data-external-buff="Innervate" src="https://render.worldofwarcraft.com/eu/icons/56/spell_nature_lightning.jpg">
+                                                <div class="option-image-double-buttons">
+                                                    <div class="option-image-button" id="innervate-repeat-button" style="display:none">
+                                                        <i class="fa-solid fa-repeat"></i>
                                                     </div>
-                                                    <div class="external-buff-add-timer-button">
+                                                    <div class="option-image-button" id="innervate-add-timer-button" style="display:none">
                                                         <i class="fa-solid fa-plus"></i>
                                                     </div>
+                                                </div> 
+                                                <div class="option-image-button innervate-timer" style="display:none">
+                                                    <input class="external-buff-timer-input" value="0">
                                                 </div>
-                                                
+                                            </div>
+                                            
+                                            <img class="external-buff-image" data-external-buff="Source of Magic" src="https://render.worldofwarcraft.com/eu/icons/56/ability_evoker_blue_01.jpg">            
+                                            
+                                        </div>
+                                        <!-- <div id="external-buff-timers-container">
+                                            <div class="external-buff-timer-container">
+                                                <div class="external-buff-left">
+                                                    <div class="external-buff-name">Power Infusion:</div>
+                                                </div>
+                                                <div class="external-buff-right">
+                                                    <div class="external-buff-options">
+                                                        <div class="external-buff-checkbox">
+                                                            <input class="external-buff-checkbox-input" type="checkbox" checked="true">
+                                                            <div class="external-buff-checkbox-text">Automatic</div>
+                                                        </div>
+
+                                                        <div class="external-buff-timers">
+                                                            <div class="external-buff-timer">
+                                                                <input class="external-buff-timer-input">
+                                                            </div>
+                                                            <div class="external-buff-add-timer-button">
+                                                                <i class="fa-solid fa-plus"></i>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="external-buff-timer-container">
+                                                <div class="external-buff-left">
+                                                    <div class="external-buff-name">Innervate:</div>
+                                                </div>
+                                                <div class="external-buff-right">
+                                                    <div class="external-buff-options">
+                                                        <div class="external-buff-checkbox">
+                                                            <input class="external-buff-checkbox-input" type="checkbox" checked="true">
+                                                            <div class="external-buff-checkbox-text">Automatic</div>
+                                                        </div>
+
+                                                        <div class="external-buff-timers">
+                                                            <div class="external-buff-timer">
+                                                                <input class="external-buff-timer-input">
+                                                            </div>
+                                                            <div class="external-buff-add-timer-button">
+                                                                <i class="fa-solid fa-plus"></i>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                
+                            </div>  
+                        </div>
+                        <div id="priority-list-content" class="options-tab-content">
+                            <div id="priority-list-container">
+                                <div id="priority-list-list-container">
+                                    <div id="priority-list-headers">
+                                        <div id="priority-list-header-ability">Ability</div>
+                                        <div class="priority-list-header-condition">Conditions</div>
+                                        <div id="priority-list-info">
+                                            <i class="fa-solid fa-list" id="priority-list-presets-icon"></i>
+                                            <i class="fa-solid fa-copy" id="priority-list-copy-icon"></i>
+                                            <i class="fa-solid fa-paste" id="priority-list-paste-icon"></i>
+                                            <i class="fa-solid fa-circle-question" id="priority-list-info-icon"></i>
+                                        </div>
+
+                                        <div id="priority-list-presets-modal">
+                                            <div id="priority-list-presets-modal-header">Presets</div>
+                                            <div id="priority-list-presets-modal-container">
+                                                <div id="standard-preset" class="priority-list-preset">Beacon of Faith</div>
+                                                <div id="second-preset" class="priority-list-preset">Beacon of Virtue</div>
                                             </div>
                                         </div>
+
+                                        <div id="priority-list-paste-modal">
+                                            <div id="priority-list-paste-modal-header">Paste your priority list</div>
+                                            <textarea id="priority-list-paste-modal-textarea"></textarea>
+                                        </div>      
+                                        
+                                        <div id="priority-list-info-modal">
+                                            <div id="priority-list-info-modal-container"></div>
+                                        </div>  
                                     </div>
-                                </div> -->
+
+                                    <div id="priority-list-divider"></div>
+
+                                    <div id="priority-list-items-container">
+                                        <div class="priority-list-item-container">
+                                            <div class="priority-list-item-number">0</div>
+
+                                            <div class="priority-list-item-icon-container">
+                                                <img class="priority-list-item-icon" id="priority-list-item-icon" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg">
+                                            </div>
+                                            <div class="priority-list-item-ability">
+                                                <textarea class="priority-list-item-ability-text" id="priority-list-item-ability-text"></textarea>
+                                            </div>
+            
+                                            <div class="priority-list-item-condition">
+                                                <textarea class="priority-list-item-condition-text" id="priority-list-item-condition-text"></textarea>
+                                            </div>
+            
+                                            <div class="priority-list-buttons-container">
+                                                <div class="priority-list-and-button priority-list-button">
+                                                    AND
+                                                </div>
+                
+                                                <div class="priority-list-or-button priority-list-button">
+                                                    OR
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="priority-list-buttons-container">
+                                                <div class="priority-list-up-button priority-list-button">
+                                                    <i class="fa-solid fa-arrow-up"></i>
+                                                </div>
+                
+                                                <div class="priority-list-down-button priority-list-button">
+                                                    <i class="fa-solid fa-arrow-down"></i>
+                                                </div>
+                                            </div>
+
+                                            <div class="priority-list-buttons-container">
+                                                <div class="priority-list-add-item priority-list-button">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+            
+                                                <div id="priority-list-delete-item" class="priority-list-delete-item priority-list-button priority-list-button-disabled">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="priority-list-item-handle" id="priority-list-item-handle">
+                                                <i class="fa-solid fa-grip"></i>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
                             </div>
-                        </div>
-                        
-                    </div>  
-                </div>
-                <div id="priority-list-content" class="options-tab-content">
-                    <div id="priority-list-container">
-                        <div id="priority-list-list-container">
-                            <div id="priority-list-headers">
-                                <div id="priority-list-header-ability">Ability</div>
-                                <div class="priority-list-header-condition">Conditions</div>
-                                <div id="priority-list-info">
-                                    <i class="fa-solid fa-list" id="priority-list-presets-icon"></i>
-                                    <i class="fa-solid fa-copy" id="priority-list-copy-icon"></i>
-                                    <i class="fa-solid fa-paste" id="priority-list-paste-icon"></i>
-                                    <i class="fa-solid fa-circle-question" id="priority-list-info-icon"></i>
+                        </div>               
+                    </div>
+
+                    <div id="options-status-bar">
+                        <div id="saving-data-status">Saving changes...</div>
+                        <div id="saved-data-status"><i class="fa-regular fa-circle-check" id="saved-data-status-check"></i>Changes saved</div>
+
+                        <div id="simulate-button-container">
+                            <input id="simulation-name-text-input">
+                            <button id="simulate-button">lets go!!!!!</button>
+
+                            <div id="simulation-progress-bar-container">                      
+                                <div id="simulation-progress-bar"></div>
+                                <span id="simulation-progress-bar-text"></span>
+                                <div class="simulation-progress-bar-check-container"> 
+                                    <svg class="simulation-progress-bar-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> 
+                                        <circle class="simulation-progress-bar-checkmark-circle" cx="26" cy="26" r="25" fill="none"/> 
+                                        <path class="simulation-progress-bar-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                    </svg>
                                 </div>
-
-                                <div id="priority-list-presets-modal">
-                                    <div id="priority-list-presets-modal-header">Presets</div>
-                                    <div id="priority-list-presets-modal-container">
-                                        <div id="standard-preset" class="priority-list-preset">Beacon of Faith</div>
-                                        <div id="second-preset" class="priority-list-preset">Beacon of Virtue</div>
-                                    </div>
-                                </div>
-
-                                <div id="priority-list-paste-modal">
-                                    <div id="priority-list-paste-modal-header">Paste your priority list</div>
-                                    <textarea id="priority-list-paste-modal-textarea"></textarea>
-                                </div>      
-                                
-                                <div id="priority-list-info-modal">
-                                    <div id="priority-list-info-modal-container"></div>
-                                </div>  
-                            </div>
-
-                            <div id="priority-list-divider"></div>
-
-                            <div id="priority-list-items-container">
-                                <div class="priority-list-item-container">
-                                    <div class="priority-list-item-number">0</div>
-
-                                    <div class="priority-list-item-icon-container">
-                                        <img class="priority-list-item-icon" id="priority-list-item-icon" src="https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg">
-                                    </div>
-                                    <div class="priority-list-item-ability">
-                                        <textarea class="priority-list-item-ability-text" id="priority-list-item-ability-text"></textarea>
-                                    </div>
-    
-                                    <div class="priority-list-item-condition">
-                                        <textarea class="priority-list-item-condition-text" id="priority-list-item-condition-text"></textarea>
-                                    </div>
-    
-                                    <div class="priority-list-buttons-container">
-                                        <div class="priority-list-and-button priority-list-button">
-                                            AND
-                                        </div>
-        
-                                        <div class="priority-list-or-button priority-list-button">
-                                            OR
-                                        </div>
-                                    </div>
-                                     
-                                    <div class="priority-list-buttons-container">
-                                        <div class="priority-list-up-button priority-list-button">
-                                            <i class="fa-solid fa-arrow-up"></i>
-                                        </div>
-        
-                                        <div class="priority-list-down-button priority-list-button">
-                                            <i class="fa-solid fa-arrow-down"></i>
-                                        </div>
-                                    </div>
-
-                                    <div class="priority-list-buttons-container">
-                                        <div class="priority-list-add-item priority-list-button">
-                                            <i class="fa-solid fa-plus"></i>
-                                        </div>
-    
-                                        <div id="priority-list-delete-item" class="priority-list-delete-item priority-list-button priority-list-button-disabled">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="priority-list-item-handle" id="priority-list-item-handle">
-                                        <i class="fa-solid fa-grip"></i>
-                                    </div>
-                                </div>
-                            </div>    
+                            </div>          
                         </div>
                     </div>
-                </div>               
-            </div>
+                </div>
 
-            <div id="options-status-bar">
-                <div id="saving-data-status">Saving changes...</div>
-                <div id="saved-data-status"><i class="fa-regular fa-circle-check" id="saved-data-status-check"></i>Changes saved</div>
+                <div id="results-container">
 
-                <div id="simulate-button-container">
-                    <input id="simulation-name-text-input">
-                    <button id="simulate-button">lets go!!!!!</button>
-
-                    <div id="simulation-progress-bar-container">                      
-                        <div id="simulation-progress-bar"></div>
-                        <span id="simulation-progress-bar-text"></span>
-                        <div class="simulation-progress-bar-check-container"> 
-                            <svg class="simulation-progress-bar-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> 
-                                <circle class="simulation-progress-bar-checkmark-circle" cx="26" cy="26" r="25" fill="none"/> 
-                                <path class="simulation-progress-bar-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                            </svg>
-                        </div>
-                    </div>          
                 </div>
             </div>
+            
+            <div class="footer"></div>
         </div>
-
-        <div id="results-container">
-
-        </div>
-        
-        <div class="footer"></div>
 
         <script src="https://d3js.org/d3.v6.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/leader-line/leader-line.min.js"></script>

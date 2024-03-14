@@ -70,13 +70,9 @@ body {
     width: 10px;
 }
 
-::-webkit-scrollbar-track {
-    background: var(--panel-colour-6);
-}
-
 ::-webkit-scrollbar-thumb {
-    border: 2px solid var(--panel-colour-6);
-    border-left: 4px solid var(--panel-colour-6);
+    border: 2px solid var(--background-colour);
+    border-left: 4px solid var(--background-colour);
     border-radius: 2px;
 
     background: var(--border-colour-3);
@@ -1309,8 +1305,8 @@ body {
     position: absolute;
     top: 26px;
 
-    width: 510px;
-    max-height: 134px;
+    width: 519px;
+    max-height: 133px;
     overflow: auto;
 
     border: 1px solid var(--border-colour-3);
@@ -1323,6 +1319,10 @@ body {
 
 #item-search-suggestions::-webkit-scrollbar-thumb {
     border-left: 2px solid var(--panel-colour-6);
+}
+
+#item-search-suggestions::-webkit-scrollbar-track {
+    background-color: 1px solid var(--panel-colour-6);
 }
 
 .item-search-suggestion {
@@ -3078,6 +3078,8 @@ tr {
     grid-template-columns: 0.3fr 0.2fr 0.35fr 0.7fr 0.35fr 1fr 0.35fr 0.5fr;
     width: calc(100% + 9px); 
     padding-right: 1px;
+
+    border-bottom: 1px solid var(--border-colour-3);
 }
 
 .priority-grid-container::-webkit-scrollbar-thumb {

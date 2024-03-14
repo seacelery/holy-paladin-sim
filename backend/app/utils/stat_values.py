@@ -42,8 +42,6 @@ def calculate_stat_percent_with_dr(caster, stat, rating, flat_percent):
             rating_to_percent += (remainder / stat_conversions[stat]) * (0.6)
     else:
         rating_to_percent = rating / stat_conversions[stat]
-        
-    rating_to_percent += flat_percent
     
     if stat == "mastery":
         if caster.is_talent_active("Seal of Might") and caster.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 1:
@@ -60,5 +58,37 @@ def calculate_stat_percent_with_dr(caster, stat, rating, flat_percent):
             rating_to_percent = rating_to_percent * 1.02 + 2
         elif caster.is_talent_active("Seal of Alacrity") and caster.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 2:
             rating_to_percent = rating_to_percent * 1.04 + 4
+            
+    rating_to_percent += flat_percent
     
     return rating_to_percent
+
+def update_stat_with_multiplicative_percentage(caster, stat, percentage, add_percentage=True):
+    if add_percentage:
+        if stat == "haste":
+            caster.haste = (((caster.haste / 100 + 1) * (1 + percentage / 100)) - 1) * 100
+            caster.haste_multiplier *= (1 + percentage / 100)
+            caster.update_hasted_cooldowns_with_haste_changes()
+        elif stat == "crit":
+            caster.crit = (((caster.crit / 100 + 1) * (1 + percentage / 100)) - 1) * 100
+            caster.crit_multiplier *= (1 + percentage / 100)
+        elif stat == "mastery":
+            caster.mastery = (((caster.mastery / 100 + 1) * (1 + percentage / 100)) - 1) * 100
+            caster.mastery_multiplier *= (1 + percentage / 100)
+        elif stat == "versatility":
+            caster.versatility = (((caster.versatility / 100 + 1) * (1 + percentage / 100)) - 1) * 100
+            caster.versatility_multiplier *= (1 + percentage / 100)
+    else:
+        if stat == "haste":
+            caster.haste = (((caster.haste / 100 + 1) / (1 + percentage / 100)) - 1) * 100
+            caster.haste_multiplier /= (1 + percentage / 100)
+            caster.update_hasted_cooldowns_with_haste_changes()
+        elif stat == "crit":
+            caster.crit = (((caster.crit / 100 + 1) / (1 + percentage / 100)) - 1) * 100
+            caster.crit_multiplier /= (1 + percentage / 100)
+        elif stat == "mastery":
+            caster.mastery = (((caster.mastery / 100 + 1) / (1 + percentage / 100)) - 1) * 100
+            caster.mastery_multiplier /= (1 + percentage / 100)
+        elif stat == "versatility":
+            caster.versatility = (((caster.versatility / 100 + 1) / (1 + percentage / 100)) - 1) * 100
+            caster.versatility_multiplier /= (1 + percentage / 100)

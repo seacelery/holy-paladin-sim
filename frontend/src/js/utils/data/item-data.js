@@ -30690,9 +30690,11 @@ const itemData = [
         "quality": "Epic",
         "effects": [
             {
-                "name": "Rallied to Victory",
+                "name": "Allied Chestplate of Generosity", 
+                "description": "Your spells and abilities have a chance to rally you and your 4 closest allies within 30 yards to victory for 10 sec, increasing Versatility by *191.", 
                 "id": 378134,
-                "description": "Equip: Your spells and abilities have a chance to rally you and your 4 closest allies within 30 yards to victory for 10 sec, increasing Versatility by 191."
+                "type": "embellishment",
+                "effect_values": [{"allocation_type": "flat_damage", "base_item_level": 382, "base_value": 191, "effect_coefficient": 0.74681, "effect_type": "scalar"}]
             }
         ],
         "stats": {
@@ -30762,9 +30764,11 @@ const itemData = [
         "quality": "Epic",
         "effects": [
             {
-                "name": "Allied Wristgaurds of Companionship",
+                "name": "Allied Wristgaurds of Companionship", 
+                "description": "Grants *46 Versatility for every ally in a 30 yard radius, stacking up to 4 times.", 
                 "id": 395959,
-                "description": "Equip: Grants 46 Versatility for every ally in a 30 yard radius, stacking up to 4 times."
+                "type": "embellishment",
+                "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 382, "base_value": 46, "effect_coefficient": 0.052152, "effect_type": "scalar"}]
             }
         ],
         "stats": {
@@ -36831,9 +36835,11 @@ const itemData = [
         "quality": "Epic",
         "effects": [
             {
-                "name": "Elemental Lariat",
+                "name": "Elemental Lariat", 
+                "description": "Your spells and abilities have a chance to empower one of your socketed elemental gems, granting *407 of their associated stat. Lasts 5 sec and an additional 1 sec per elemental gem.", 
                 "id": 375323,
-                "description": "Equip: Your spells and abilities have a chance to empower one of your socketed elemental gems, granting 409 of their associated stat. Lasts 5 sec and an additional 1 sec per elemental gem."
+                "type": "embellishment",
+                "effect_values": [{"allocation_type": "rating_multiplier_jewellery", "base_item_level": 382, "base_value": 407, "effect_coefficient": 0.458195, "effect_type": "scalar"}]
             }
         ],
         "stats": {

@@ -325,7 +325,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const generatorRowOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath"];
             const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Tyr's Deliverance", 
                                            "Light's Hammer", "Blessing of the Seasons", "Divine Favor", "Arcane Torrent",
-                                           "Fireblood", "Gift of the Naaru", "Aerated Mana Potion"];
+                                           "Fireblood", "Gift of the Naaru", "Aerated Mana Potion", "Elemental Potion of Ultimate Power"];
 
             // only append if the cooldown is actually present in the current simulation
             generatorRowOrder.forEach(cooldownName => {
@@ -364,6 +364,11 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     
             majorCooldownRowOrder.forEach(cooldownName => {
                 if (cooldowns[cooldownName]) {
+                    const temporaryCooldowns = ["Aerated Mana Potion", "Elemental Potion of Ultimate Power"];
+                    if (cooldowns[cooldownName].remaining_cooldown === 0 && (temporaryCooldowns.includes(cooldownName))) {
+                        return;
+                    };
+
                     const cooldown = cooldowns[cooldownName];
                     const formattedCooldownName = cooldownName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
                     const cooldownIconContainer = createElement("div", `priority-grid-cooldown-icon-container-${formattedCooldownName}`, `priority-grid-cooldown-icon-container-${formattedCooldownName}`);
@@ -373,7 +378,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     
                     const cooldownIcon = createElement("img", "priority-grid-cooldown-icon", null);
                     cooldownIcon.src = spellToIconsMap[cooldownName];
-                    // set to greyscale if the spell is on cooldown
+
                     if (cooldowns[cooldownName].remaining_cooldown > 0) {
                         cooldownIcon.style.filter = "grayscale(1)";
                     };
