@@ -26,13 +26,11 @@ def parse_condition(condition_str):
         condition = {"keyword": "", "extra_condition": "", "value": 0, "first_value": 0, "second_value": 0, "time_values": [], "operator": "", "multiple_comparisons": False}
         
         if re.search(r"[Tt]imers\s+=\s+\[\d+(?:\.\d+)?(?:\s*,\s*\d+(?:\.\d+)?)*\][+]", part):
-            print("A")
             pattern = r"\b\d+(?:\.\d+)?\b"
             matches = re.findall(pattern, part)
             condition["time_values"] = [float(match) for match in matches]
             condition["keyword"] = "timers+"
         elif re.search(r"[Tt]imers\s+=\s+\[\d+(?:\.\d+)?(?:\s*,\s*\d+(?:\.\d+)?)*", part):
-            print("B")
             pattern = r"\b\d+(?:\.\d+)?\b"
             matches = re.findall(pattern, part)
             condition["time_values"] = [float(match) for match in matches]

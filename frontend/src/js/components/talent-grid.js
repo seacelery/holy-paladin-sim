@@ -1,5 +1,5 @@
-import { baseClassTalents, baseSpecTalents } from "../utils/base-talents.js";
-import { updateCharacter, updateStats } from "./index.js";
+import { baseClassTalents, baseSpecTalents, classTalentsDown, classTalentsDownLong, classTalentsLeft, classTalentsRight, specTalentsDown, specTalentsDownLong, specTalentsLeft, specTalentsRight } from "../utils/base-talents.js";
+import { createElement, updateCharacter, updateStats } from "./index.js";
 import { talentsToIcons } from "../utils/talents-to-icons-map.js";
 
 const classTalents = [
@@ -29,13 +29,13 @@ const specTalents = [
 ];
 
 const updateTalentsFromImportedData = (importedTalents) => {
-    console.log("Imported talents:")
-    console.log(importedTalents)
-
     let importedClassTalents = importedTalents.class_talents;
     let importedSpecTalents = importedTalents.spec_talents;
 
-    const updateTalents = (imported, baseTalents) => {
+    const updateTalents = (imported, baseTalents, category) => {
+        let classTalentsCount = 0;
+        let specTalentsCount = 0;
+
         for (const row in imported) {
             for (const talentName in imported[row]) {
                 const talentData = imported[row][talentName];
@@ -47,14 +47,111 @@ const updateTalentsFromImportedData = (importedTalents) => {
                         baseTalents[row][talentName].ranks["current rank"] = talentData.ranks["current rank"];
                     };
                     talentIcon.style.filter = talentData.ranks["current rank"] > 0 ? "saturate(1)" : "saturate(0)";
+
+                    if (talentData.ranks["max rank"] > 1) {
+                        const rankDisplay = talentIcon.parentElement.querySelector(".talent-rank-display");
+                        rankDisplay.textContent = `${talentData.ranks["current rank"]} / ${talentData.ranks["max rank"]}`;
+                    };
+
+                    if (category === "class") {
+                        classTalentsCount += talentData.ranks["current rank"];
+                    } else if (category === "spec") {
+                        specTalentsCount += talentData.ranks["current rank"];
+                    };
+
+                    if (talentIcon.parentElement.querySelector(".class-talents-option-down") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+                        talentIcon.parentElement.querySelector(".class-talents-option-down").classList.add("talent-option-highlighted");
+                    };
+                    if (talentIcon.parentElement.querySelector(".class-talents-option-down-long") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+                        talentIcon.parentElement.querySelector(".class-talents-option-down-long").classList.add("talent-option-highlighted");
+                    };
+                    if (talentIcon.parentElement.querySelector(".class-talents-option-left") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+                        talentIcon.parentElement.querySelector(".class-talents-option-left").classList.add("talent-option-highlighted");
+                    };
+                    if (talentIcon.parentElement.querySelector(".class-talents-option-right") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+                        talentIcon.parentElement.querySelector(".class-talents-option-right").classList.add("talent-option-highlighted");
+                    };
+
+                    if (talentIcon.parentElement.querySelector(".spec-talents-option-down") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+                        talentIcon.parentElement.querySelector(".spec-talents-option-down").classList.add("talent-option-highlighted");
+                    };
+                    if (talentIcon.parentElement.querySelector(".spec-talents-option-down-long") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+                        talentIcon.parentElement.querySelector(".spec-talents-option-down-long").classList.add("talent-option-highlighted");
+                    };
+                    if (talentIcon.parentElement.querySelector(".spec-talents-option-left") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+                        talentIcon.parentElement.querySelector(".spec-talents-option-left").classList.add("talent-option-highlighted");
+                    };
+                    if (talentIcon.parentElement.querySelector(".spec-talents-option-right") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+                        talentIcon.parentElement.querySelector(".spec-talents-option-right").classList.add("talent-option-highlighted");
+                    };
                 };
             };
         };
+        
+        if (category === "class") {
+            const freeTalentsCount = 3;
+            const classTalents = document.getElementById("class-talents");
+            classTalents.setAttribute("data-class-talents-count", classTalentsCount - freeTalentsCount);
+        } else if (category === "spec") {
+            const freeTalentsCount = 1;
+            const specTalents = document.getElementById("spec-talents");
+            specTalents.setAttribute("data-specs-talents-count", specTalentsCount - freeTalentsCount);
+        };
+
+        updateTalentCounts("class");
+        updateTalentCounts("spec");
     };
 
-    updateTalents(importedClassTalents, baseClassTalents);
-    updateTalents(importedSpecTalents, baseSpecTalents);    
+    updateTalents(importedClassTalents, baseClassTalents, "class");
+    updateTalents(importedSpecTalents, baseSpecTalents, "spec");    
 };
+
+const updateTalentCounts = (category, pointsToAdd = 0) => {
+    if (category === "class") {
+        const classTalents = document.getElementById("class-talents");
+        let classTalentsCount = Number(classTalents.getAttribute("data-class-talents-count"));
+        classTalentsCount += pointsToAdd;
+
+        const classTalentsCountText = document.getElementById("class-talents-count");
+        const classTalentsTotalText = document.getElementById("class-talents-total");
+        classTalentsCountText.textContent = classTalentsCount;
+
+        
+        classTalents.setAttribute("data-class-talents-count", classTalentsCount);
+
+        if (classTalentsCount == 31) {
+            classTalentsCountText.style.color = "var(--healing-font)";
+            classTalentsTotalText.style.color = "var(--healing-font)";
+        } else if (classTalentsCount > 31) {
+            classTalentsCountText.style.color = "var(--red-font-hover)";
+            classTalentsTotalText.style.color = "var(--red-font-hover)";
+        } else if (classTalentsCount < 31) {
+            classTalentsCountText.style.color = "var(--light-font-colour)";
+            classTalentsTotalText.style.color = "var(--light-font-colour)";
+        };
+    } else if (category === "spec") {
+        const specTalents = document.getElementById("spec-talents");
+        let specTalentsCount = Number(specTalents.getAttribute("data-specs-talents-count"));
+        specTalentsCount += pointsToAdd;
+
+        const specTalentsCountText = document.getElementById("spec-talents-count");
+        const specTalentsTotalText = document.getElementById("spec-talents-total");
+        specTalentsCountText.textContent = specTalentsCount;
+
+        specTalents.setAttribute("data-specs-talents-count", specTalentsCount);
+
+        if (specTalentsCount == 30) {
+            specTalentsCountText.style.color = "var(--healing-font)";
+            specTalentsTotalText.style.color = "var(--healing-font)";
+        } else if (specTalentsCount > 30) {
+            specTalentsCountText.style.color = "var(--red-font-hover)";
+            specTalentsTotalText.style.color = "var(--red-font-hover)";
+        } else if (specTalentsCount < 31) {
+            specTalentsCountText.style.color = "var(--light-font-colour)";
+            specTalentsTotalText.style.color = "var(--light-font-colour)";
+        };
+    };
+}
 
 const handleTalentChange = (talentName, talentData) => {
     const talentValue = talentData.ranks["current rank"];
@@ -92,28 +189,129 @@ const findTalentInTalentsData = (baseTalents, talentName) => {
     return null;
 };
 
-const incrementTalent = (talentData, talentIcon) => {
+const incrementTalent = (talentData, talentIcon, category) => {
     if (talentData.ranks["current rank"] < talentData.ranks["max rank"]) {
         talentData.ranks["current rank"] += 1;
     };
     talentIcon.style.filter = talentData.ranks["current rank"] > 0 ? "saturate(1)" : "saturate(0)";
+
+    if (talentData.ranks["max rank"] > 1) {
+        const rankDisplay = talentIcon.parentElement.querySelector(".talent-rank-display");
+        rankDisplay.textContent = `${talentData.ranks["current rank"]} / ${talentData.ranks["max rank"]}`;
+    };
+
+    updateTalentCounts(category, 1);
+
+    if (talentIcon.parentElement.querySelector(".class-talents-option-down") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+        talentIcon.parentElement.querySelector(".class-talents-option-down").classList.add("talent-option-highlighted");
+    };
+    if (talentIcon.parentElement.querySelector(".class-talents-option-down-long") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+        talentIcon.parentElement.querySelector(".class-talents-option-down-long").classList.add("talent-option-highlighted");
+    };
+    if (talentIcon.parentElement.querySelector(".class-talents-option-left") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+        talentIcon.parentElement.querySelector(".class-talents-option-left").classList.add("talent-option-highlighted");
+    };
+    if (talentIcon.parentElement.querySelector(".class-talents-option-right") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+        talentIcon.parentElement.querySelector(".class-talents-option-right").classList.add("talent-option-highlighted");
+    };
+
+    if (talentIcon.parentElement.querySelector(".spec-talents-option-down") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+        talentIcon.parentElement.querySelector(".spec-talents-option-down").classList.add("talent-option-highlighted");
+    };
+    if (talentIcon.parentElement.querySelector(".spec-talents-option-down-long") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+        talentIcon.parentElement.querySelector(".spec-talents-option-down-long").classList.add("talent-option-highlighted");
+    };
+    if (talentIcon.parentElement.querySelector(".spec-talents-option-left") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+        talentIcon.parentElement.querySelector(".spec-talents-option-left").classList.add("talent-option-highlighted");
+    };
+    if (talentIcon.parentElement.querySelector(".spec-talents-option-right") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+        talentIcon.parentElement.querySelector(".spec-talents-option-right").classList.add("talent-option-highlighted");
+    };
 };
 
-const decrementTalent = (talentData, talentIcon) => {
+const decrementTalent = (talentData, talentIcon, category) => {
     if (talentData.ranks["current rank"] > 0) {
         talentData.ranks["current rank"] -= 1;
     };
     talentIcon.style.filter = talentData.ranks["current rank"] === 0 ? "saturate(0)" : "saturate(1)";
+
+    if (talentData.ranks["max rank"] > 1) {
+        const rankDisplay = talentIcon.parentElement.querySelector(".talent-rank-display");
+        rankDisplay.textContent = `${talentData.ranks["current rank"]} / ${talentData.ranks["max rank"]}`;
+    };
+
+    updateTalentCounts(category, -1);
+
+    if (talentIcon.parentElement.querySelector(".class-talents-option-down")) {
+        talentIcon.parentElement.querySelector(".class-talents-option-down").classList.remove("talent-option-highlighted");
+    };
+    if (talentIcon.parentElement.querySelector(".class-talents-option-down-long")) {
+        talentIcon.parentElement.querySelector(".class-talents-option-down-long").classList.remove("talent-option-highlighted");
+    };
+    if (talentIcon.parentElement.querySelector(".class-talents-option-left")) {
+        talentIcon.parentElement.querySelector(".class-talents-option-left").classList.remove("talent-option-highlighted");
+    };
+    if (talentIcon.parentElement.querySelector(".class-talents-option-right")) {
+        talentIcon.parentElement.querySelector(".class-talents-option-right").classList.remove("talent-option-highlighted");
+    };
+
+    if (talentIcon.parentElement.querySelector(".spec-talents-option-down")) {
+        talentIcon.parentElement.querySelector(".spec-talents-option-down").classList.remove("talent-option-highlighted");
+    };
+    if (talentIcon.parentElement.querySelector(".spec-talents-option-down-long")) {
+        talentIcon.parentElement.querySelector(".spec-talents-option-down-long").classList.remove("talent-option-highlighted");
+    };
+    if (talentIcon.parentElement.querySelector(".spec-talents-option-left")) {
+        talentIcon.parentElement.querySelector(".spec-talents-option-left").classList.remove("talent-option-highlighted");
+    };
+    if (talentIcon.parentElement.querySelector(".spec-talents-option-right")) {
+        talentIcon.parentElement.querySelector(".spec-talents-option-right").classList.remove("talent-option-highlighted");
+    };
 };
 
 const createTalentGrid = () => {
     const classTalentsGridContainer = document.getElementById("class-talents");
     const specTalentsGridContainer = document.getElementById("spec-talents");
 
-    const createTalentCells = (talentSet, baseTalentSet, container) => {
+    const createTalentCells = (talentSet, baseTalentSet, container, category) => {
+
         talentSet.forEach((talentName, index) => {
             let cell = document.createElement("div");
             cell.classList.add("talent-option");
+
+            if (classTalentsDown.includes(talentName)) {
+                const downPseudoElement = createElement("div", "class-talents-option-down", null);
+                cell.appendChild(downPseudoElement);
+            };              
+            if (classTalentsDownLong.includes(talentName)) {
+                const downLongPseudoElement = createElement("div", "class-talents-option-down-long", null);
+                cell.appendChild(downLongPseudoElement);
+            };             
+            if (classTalentsLeft.includes(talentName)) {
+                const leftPseudoElement = createElement("div", "class-talents-option-left", null);
+                cell.appendChild(leftPseudoElement);
+            };          
+            if (classTalentsRight.includes(talentName)) {
+                const rightPseudoElement = createElement("div", "class-talents-option-right", null);
+                cell.appendChild(rightPseudoElement);
+            };
+            
+            if (specTalentsDown.includes(talentName)) {
+                const downPseudoElement = createElement("div", "spec-talents-option-down", null);
+                cell.appendChild(downPseudoElement);
+            };              
+            if (specTalentsDownLong.includes(talentName)) {
+                const downLongPseudoElement = createElement("div", "spec-talents-option-down-long", null);
+                cell.appendChild(downLongPseudoElement);
+            };             
+            if (specTalentsLeft.includes(talentName)) {
+                const leftPseudoElement = createElement("div", "spec-talents-option-left", null);
+                cell.appendChild(leftPseudoElement);
+            };          
+            if (specTalentsRight.includes(talentName)) {
+                const rightPseudoElement = createElement("div", "spec-talents-option-right", null);
+                cell.appendChild(rightPseudoElement);
+            };
     
             let formattedTalentName = talentName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
             cell.id = formattedTalentName;
@@ -143,18 +341,17 @@ const createTalentGrid = () => {
                 talentIconLeft.style.filter = talentDataLeft.ranks["current rank"] > 0 ? "saturate(1)" : "saturate(0)";
 
                 talentIconLeft.addEventListener("click", (e) => {
-                    console.log(e.target.id)
-                    if (e.button === 0 && e.target.id === formattedTalentNameLeft + "-icon") {
-                        incrementTalent(talentDataLeft, talentIconLeft);
+                    if (e.button === 0 && e.target.id === formattedTalentNameLeft + "-icon" && talentDataLeft.ranks["current rank"] < talentDataLeft.ranks["max rank"]) {
+                        incrementTalent(talentDataLeft, talentIconLeft, category);
+                        handleTalentChange(talentNameLeft, talentDataLeft);
                     };
-    
-                    handleTalentChange(talentNameLeft, talentDataLeft);
+                    
                 });
     
                 cell.addEventListener("contextmenu", (e) => {
                     e.preventDefault();
-                    if (e.target.id === formattedTalentNameLeft + "-icon") {                 
-                        decrementTalent(talentDataLeft, talentIconLeft);
+                    if (e.target.id === formattedTalentNameLeft + "-icon" && talentDataLeft.ranks["current rank"] > 0) {                 
+                        decrementTalent(talentDataLeft, talentIconLeft, category);
                         handleTalentChange(talentNameLeft, talentDataLeft);
                     };
                 });
@@ -168,16 +365,16 @@ const createTalentGrid = () => {
                 talentIconRight.style.filter = talentDataRight.ranks["current rank"] > 0 ? "saturate(1)" : "saturate(0)";
 
                 talentIconRight.addEventListener("click", (e) => {
-                    if (e.button === 0 && e.target.id === formattedTalentNameRight + "-icon") {
-                        incrementTalent(talentDataRight, talentIconRight);
-                    };
-                    handleTalentChange(talentNameRight, talentDataRight);
+                    if (e.button === 0 && e.target.id === formattedTalentNameRight + "-icon" && talentDataRight.ranks["current rank"] < talentDataRight.ranks["max rank"]) {
+                        incrementTalent(talentDataRight, talentIconRight, category);
+                        handleTalentChange(talentNameRight, talentDataRight);
+                    };                 
                 });
     
                 cell.addEventListener("contextmenu", (e) => {
                     e.preventDefault();   
-                    if (e.target.id === formattedTalentNameRight + "-icon") {                 
-                        decrementTalent(talentDataRight, talentIconRight);
+                    if (e.target.id === formattedTalentNameRight + "-icon" && talentDataRight.ranks["current rank"] > 0) {                 
+                        decrementTalent(talentDataRight, talentIconRight, category);
                         handleTalentChange(talentNameRight, talentDataRight);
                     };
                 });
@@ -195,19 +392,28 @@ const createTalentGrid = () => {
                 if (talentData) {
                     talentIcon.src = talentsToIcons[talentName];
                     talentIcon.style.filter = talentData.ranks["current rank"] > 0 ? "saturate(1)" : "saturate(0)";
+                    
                     cell.appendChild(talentIcon);
+
+                    if (talentData.ranks["max rank"] > 1) {
+                        const rankDisplay = createElement("div", "talent-rank-display", null);
+                        rankDisplay.textContent = `${talentData.ranks["current rank"]} / ${talentData.ranks["max rank"]}`;
+                        cell.appendChild(rankDisplay);
+                    };
     
                     cell.addEventListener("click", (e) => {   
-                        if (e.button === 0) {
-                            incrementTalent(talentData, talentIcon);
+                        if (e.button === 0 && talentData.ranks["current rank"] < talentData.ranks["max rank"]) {
+                            incrementTalent(talentData, talentIcon, category);
+                            handleTalentChange(talentName, talentData);
                         };
-                        handleTalentChange(talentName, talentData);
                     });
     
                     cell.addEventListener("contextmenu", (e) => {
                         e.preventDefault();
-                        decrementTalent(talentData, talentIcon);
-                        handleTalentChange(talentName, talentData);
+                        if (talentData.ranks["current rank"] > 0) {
+                            decrementTalent(talentData, talentIcon, category);
+                            handleTalentChange(talentName, talentData);
+                        };
                     });
                 };
             };
@@ -216,22 +422,8 @@ const createTalentGrid = () => {
         });
     };
 
-    createTalentCells(classTalents, baseClassTalents, classTalentsGridContainer);
-    createTalentCells(specTalents, baseSpecTalents, specTalentsGridContainer);
-
-    // new LeaderLine(
-    //     document.getElementById('lay-on-hands-icon'),
-    //     document.getElementById('improved-cleanse-icon'),
-    //     {
-    //         color: 'aqua',
-    //         size: 2,
-    //         path: 'straight',
-    //         endPlug: 'arrow1',
-    //         endPlugSize: 1,
-    //         startSocket: 'bottom left',
-    //         endSocket: 'top right', 
-    //     }
-    // );
+    createTalentCells(classTalents, baseClassTalents, classTalentsGridContainer, "class");
+    createTalentCells(specTalents, baseSpecTalents, specTalentsGridContainer, "spec");
 
 };
 

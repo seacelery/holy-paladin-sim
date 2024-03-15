@@ -371,18 +371,13 @@ class Simulation:
                 buff.diminish_effect(self.paladin, self.elapsed_time)
                 
     def increment_time_based_stacking_buffs(self):
-        # print(self.paladin.time_based_stacking_buffs)
-        for buff, buff_interval in self.paladin.time_based_stacking_buffs.items():
-            self.time_since_last_buff_interval[buff.name] = self.time_since_last_buff_interval.get(buff.name, 0)
-            # print(f"{self.elapsed_time} incrementing time on {buff.name}")
-            self.time_since_last_buff_interval[buff.name] += self.tick_rate
-            # print(self.time_since_last_buff_interval[buff.name])
-            if self.time_since_last_buff_interval[buff.name] >= buff_interval and buff.current_stacks < buff.max_stacks:
-                # print(f"{self.elapsed_time} APPLYING STACK, {buff.current_stacks}, {buff.max_stacks}")
-                self.paladin.apply_buff_to_self(buff, self.elapsed_time, buff.stacks_to_apply, buff.max_stacks)
-                self.time_since_last_buff_interval[buff.name] = 0
-            
-            
+        if len(self.paladin.time_based_stacking_buffs) > 0:
+            for buff, buff_interval in self.paladin.time_based_stacking_buffs.items():
+                self.time_since_last_buff_interval[buff.name] = self.time_since_last_buff_interval.get(buff.name, 0)
+                self.time_since_last_buff_interval[buff.name] += self.tick_rate
+                if self.time_since_last_buff_interval[buff.name] >= buff_interval and buff.current_stacks < buff.max_stacks:
+                    self.paladin.apply_buff_to_self(buff, self.elapsed_time, buff.stacks_to_apply, buff.max_stacks)
+                    self.time_since_last_buff_interval[buff.name] = 0
                                  
     def decrement_buffs_on_self(self):
         # for buff_name, buff in self.paladin.active_auras.items():

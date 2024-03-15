@@ -148,5 +148,50 @@ let baseSpecTalents = {
         "Boundless Salvation": {"ranks": {"current rank": 0, "max rank": 1}}
     }
 };
+
+const classTalentsDown = [
+    "Blessing of Freedom", "Obduracy", "Rebuke", "Holy Aegis", "Avenging Wrath", "Punishment", "Golden Path", "Echoing Blessings",
+    "Blessing of Sacrifice", "Sanctified Plates", "Blessing of Protection", "Seal of Mercy", "Afterimage",
+    "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Improved Blessing of Protection", "Crusader's Reprieve", "Judgment of Light",
+    "Divine Purpose", "Incandescence/Touch of Light", "Of Dusk and Dawn", "Divine Toll", "Seal of the Crusader"
+];
+const classTalentsDownLong = [
+    "Lay on Hands", "Hammer of Wrath", "Improved Cleanse", "Turn Evil", "Fist of Justice", "Greater Judgment", "Repentance/Blinding Light",
+];
+const classTalentsLeft = [
+    "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Auras of Swift Vengeance", "Turn Evil", "Fist of Justice", 
+    "Cavalier", "Divine Steed", "Seasoned Warhorse", "Rebuke", "Holy Aegis", "Avenging Wrath", "Justification", "Blessing of Sacrifice", 
+    "Blessing of Protection", "Lightforged Blessing", "Afterimage", "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Seal of Might", 
+    "Seal of Alacrity", "Faith's Armor"
+];
+const classTalentsRight = [
+    "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Auras of Swift Vengeance", "Divine Steed",
+    "Greater Judgment", "Repentance/Blinding Light", "Cavalier", "Seasoned Warhorse", "Holy Aegis", "Avenging Wrath", "Justification",
+    "Golden Path", "Blessing of Sacrifice", "Blessing of Protection", "Unbreakable Spirit", "Improved Blessing of Protection",
+    "Crusader's Reprieve", "Seal of Might", "Seal of Alacrity"
+];
+
+const specTalentsDown = [
+    "Glistening Radiance", "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Saved by the Light", "Light's Hammer/Holy Prism",
+    "Power of the Silver Hand", "Light's Protection", "Overflowing Light", "Righteous Judgment", "Tower of Radiance", "Untempered Dedication",
+    "Beacon of Faith/Beacon of Virtue", "Reclamation/Barrier of Faith", "Daybreak", "Merciful Auras/Blessing of Summer", "Tyr's Deliverance",
+];
+const specTalentsDownLong = [
+    "Light's Conviction", "Aura Mastery", "Beacon of the Lightbringer", "Moment of Compassion/Resplendent Light", "Tirion's Devotion",
+    "Unending Light", "Awestruck/Holy Infusion", "Divine Favor/Hand of Divinity", "Light of the Martyr", "Shining Righteousness"
+];
+const specTalentsLeft = [
+    "Holy Shock", "Glimmer of Light", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Moment of Compassion/Resplendent Light",
+    "Glistening Radiance", "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Illumination/Blessed Focus", "Light's Hammer/Holy Prism",
+    "Light's Protection", "Shining Righteousness", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Untempered Dedication",
+    "Veneration", "Avenging Wrath: Might/Avenging Crusader", "Reclamation/Barrier of Faith", "Maraad's Dying Breath", 
+    "Merciful Auras/Blessing of Summer", "Relentless Inquisitor"
+];
+const specTalentsRight = [
+    "Holy Shock", "Glimmer of Light", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Awestruck/Holy Infusion",
+    "Glistening Radiance", "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Illumination/Blessed Focus", "Light's Hammer/Holy Prism",
+    "Light's Protection", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Beacon of Faith/Beacon of Virtue",
+    "Veneration", "Avenging Wrath: Might/Avenging Crusader", "Crusader's Might", "Merciful Auras/Blessing of Summer"
+];
         
-export { baseClassTalents, baseSpecTalents };
+export { baseClassTalents, baseSpecTalents, classTalentsDown, classTalentsDownLong, classTalentsLeft, classTalentsRight, specTalentsDown, specTalentsDownLong, specTalentsLeft, specTalentsRight };
