@@ -1,15 +1,15 @@
 import unittest
 import re
 
-from classes.simulation import Simulation
-from classes.paladin import Paladin
-from classes.target import Target, BeaconOfLight
-from classes.spells import Wait
-from classes.spells_auras import DivineFavorSpell
-from classes.spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
-from classes.spells_damage import Judgment, CrusaderStrike
-from classes.auras_buffs import HolyReverberation
-from utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
+from ..classes.simulation import Simulation
+from ..classes.paladin import Paladin
+from ..classes.target import Target, BeaconOfLight
+from ..classes.spells import Wait
+from ..classes.spells_auras import DivineFavorSpell
+from ..classes.spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
+from ..classes.spells_damage import Judgment, CrusaderStrike
+from ..classes.auras_buffs import HolyReverberation
+from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
 
 
 stats_data = {

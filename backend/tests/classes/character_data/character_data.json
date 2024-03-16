@@ -1,0 +1,138 @@
+{
+    "_links": {
+        "self": {
+            "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu?namespace=profile-eu"
+        }
+    },
+    "id": 167046022,
+    "name": "Daisu",
+    "gender": {
+        "type": "FEMALE",
+        "name": "Female"
+    },
+    "faction": {
+        "type": "ALLIANCE",
+        "name": "Alliance"
+    },
+    "race": {
+        "key": {
+            "href": "https://eu.api.blizzard.com/data/wow/playable-race/1?namespace=static-10.2.5_52554-eu"
+        },
+        "name": "Human",
+        "id": 1
+    },
+    "character_class": {
+        "key": {
+            "href": "https://eu.api.blizzard.com/data/wow/playable-class/2?namespace=static-10.2.5_52554-eu"
+        },
+        "name": "Paladin",
+        "id": 2
+    },
+    "active_spec": {
+        "key": {
+            "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/65?namespace=static-10.2.5_52554-eu"
+        },
+        "name": "Holy",
+        "id": 65
+    },
+    "realm": {
+        "key": {
+            "href": "https://eu.api.blizzard.com/data/wow/realm/502?namespace=dynamic-eu"
+        },
+        "name": "Aszune",
+        "id": 502,
+        "slug": "aszune"
+    },
+    "guild": {
+        "key": {
+            "href": "https://eu.api.blizzard.com/data/wow/guild/aszune/conquistadors?namespace=profile-eu"
+        },
+        "name": "Conquistadors",
+        "id": 34834584,
+        "realm": {
+            "key": {
+                "href": "https://eu.api.blizzard.com/data/wow/realm/502?namespace=dynamic-eu"
+            },
+            "name": "Aszune",
+            "id": 502,
+            "slug": "aszune"
+        },
+        "faction": {
+            "type": "ALLIANCE",
+            "name": "Alliance"
+        }
+    },
+    "level": 70,
+    "experience": 0,
+    "achievement_points": 26125,
+    "achievements": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/achievements?namespace=profile-eu"
+    },
+    "titles": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/titles?namespace=profile-eu"
+    },
+    "pvp_summary": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/pvp-summary?namespace=profile-eu"
+    },
+    "encounters": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/encounters?namespace=profile-eu"
+    },
+    "media": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/character-media?namespace=profile-eu"
+    },
+    "last_login_timestamp": 1706330929000,
+    "average_item_level": 419,
+    "equipped_item_level": 418,
+    "specializations": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/specializations?namespace=profile-eu"
+    },
+    "statistics": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/statistics?namespace=profile-eu"
+    },
+    "mythic_keystone_profile": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/mythic-keystone-profile?namespace=profile-eu"
+    },
+    "equipment": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/equipment?namespace=profile-eu"
+    },
+    "appearance": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/appearance?namespace=profile-eu"
+    },
+    "collections": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/collections?namespace=profile-eu"
+    },
+    "active_title": {
+        "key": {
+            "href": "https://eu.api.blizzard.com/data/wow/title/415?namespace=static-10.2.5_52554-eu"
+        },
+        "name": "Minion of Mayhem",
+        "id": 415,
+        "display_string": "{name}, Minion of Mayhem"
+    },
+    "reputations": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/reputations?namespace=profile-eu"
+    },
+    "quests": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/quests?namespace=profile-eu"
+    },
+    "achievements_statistics": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/achievements/statistics?namespace=profile-eu"
+    },
+    "professions": {
+        "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/professions?namespace=profile-eu"
+    },
+    "covenant_progress": {
+        "chosen_covenant": {
+            "key": {
+                "href": "https://eu.api.blizzard.com/data/wow/covenant/2?namespace=static-10.2.5_52554-eu"
+            },
+            "name": "Venthyr",
+            "id": 2
+        },
+        "renown_level": 80,
+        "soulbinds": {
+            "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/soulbinds?namespace=profile-eu"
+        }
+    },
+    "name_search": "Daisu"
+}

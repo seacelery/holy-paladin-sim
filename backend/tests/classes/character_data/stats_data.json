@@ -1,0 +1,158 @@
+{
+    "_links": {
+        "self": {
+            "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu/statistics?namespace=profile-eu"
+        }
+    },
+    "health": 407620,
+    "power": 262500,
+    "power_type": {
+        "key": {
+            "href": "https://eu.api.blizzard.com/data/wow/power-type/0?namespace=static-10.2.5_52554-eu"
+        },
+        "name": {
+            "en_US": "Mana",
+            "es_MX": "Man\u00e1",
+            "pt_BR": "Mana",
+            "de_DE": "Mana",
+            "en_GB": "Mana",
+            "es_ES": "Man\u00e1",
+            "fr_FR": "Mana",
+            "it_IT": "Mana",
+            "ru_RU": "\u041c\u0430\u043d\u0430",
+            "ko_KR": "\ub9c8\ub098",
+            "zh_TW": "\u6cd5\u529b",
+            "zh_CN": "\u6cd5\u529b\u503c"
+        },
+        "id": 0
+    },
+    "speed": {
+        "rating": 250,
+        "rating_bonus": 5.0001345
+    },
+    "strength": {
+        "base": 2089,
+        "effective": 2089
+    },
+    "agility": {
+        "base": 731,
+        "effective": 731
+    },
+    "intellect": {
+        "base": 2089,
+        "effective": 9476
+    },
+    "stamina": {
+        "base": 3848,
+        "effective": 20381
+    },
+    "melee_crit": {
+        "rating": 1473,
+        "rating_bonus": 8.183554,
+        "value": 13.183554
+    },
+    "melee_haste": {
+        "rating": 3511,
+        "rating_bonus": 20.653498,
+        "value": 20.653496
+    },
+    "mastery": {
+        "rating": 972,
+        "rating_bonus": 8.100218,
+        "value": 20.100218
+    },
+    "bonus_armor": 0,
+    "lifesteal": {
+        "rating": 1188,
+        "rating_bonus": 8.027243,
+        "value": 8.027243
+    },
+    "versatility": 3653.0,
+    "versatility_damage_done_bonus": 17.819992,
+    "versatility_healing_done_bonus": 17.819992,
+    "versatility_damage_taken_bonus": 8.909996,
+    "avoidance": {
+        "rating": 0,
+        "rating_bonus": 0.0
+    },
+    "attack_power": 2089,
+    "main_hand_damage_min": 5073.643,
+    "main_hand_damage_max": 5377.618,
+    "main_hand_speed": 2.155,
+    "main_hand_dps": 2424.8867,
+    "off_hand_damage_min": 0.0,
+    "off_hand_damage_max": 0.0,
+    "off_hand_speed": 1.658,
+    "off_hand_dps": 0.0,
+    "spell_power": 9476,
+    "spell_penetration": 0,
+    "spell_crit": {
+        "rating": 1473,
+        "rating_bonus": 8.183554,
+        "value": 13.183554
+    },
+    "mana_regen": 10000.0,
+    "mana_regen_combat": 10000.0,
+    "armor": {
+        "base": 0,
+        "effective": 10497
+    },
+    "dodge": {
+        "rating": 0,
+        "rating_bonus": 0.0,
+        "value": 3.0
+    },
+    "parry": {
+        "rating": 0,
+        "rating_bonus": 0.0,
+        "value": 6.2412033
+    },
+    "block": {
+        "rating": 0,
+        "rating_bonus": 0.0,
+        "value": 10.0
+    },
+    "ranged_crit": {
+        "rating": 1473,
+        "rating_bonus": 8.183554,
+        "value": 13.183554
+    },
+    "ranged_haste": {
+        "rating": 3511,
+        "rating_bonus": 20.653498,
+        "value": 20.653496
+    },
+    "spell_haste": {
+        "rating": 3511,
+        "rating_bonus": 20.653498,
+        "value": 20.653496
+    },
+    "character": {
+        "key": {
+            "href": "https://eu.api.blizzard.com/profile/wow/character/aszune/daisu?namespace=profile-eu"
+        },
+        "name": "Daisu",
+        "id": 167046022,
+        "realm": {
+            "key": {
+                "href": "https://eu.api.blizzard.com/data/wow/realm/502?namespace=dynamic-eu"
+            },
+            "name": {
+                "en_US": "Aszune",
+                "es_MX": "Aszune",
+                "pt_BR": "Aszune",
+                "de_DE": "Aszune",
+                "en_GB": "Aszune",
+                "es_ES": "Aszune",
+                "fr_FR": "Aszune",
+                "it_IT": "Aszune",
+                "ru_RU": "Aszune",
+                "ko_KR": "Aszune",
+                "zh_TW": "\u4e9e\u65af\u96bc",
+                "zh_CN": "\u827e\u82cf\u6069"
+            },
+            "id": 502,
+            "slug": "aszune"
+        }
+    }
+}

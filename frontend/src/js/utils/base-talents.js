@@ -168,7 +168,7 @@ const classTalentsRight = [
     "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Auras of Swift Vengeance", "Divine Steed",
     "Greater Judgment", "Repentance/Blinding Light", "Cavalier", "Seasoned Warhorse", "Holy Aegis", "Avenging Wrath", "Justification",
     "Golden Path", "Blessing of Sacrifice", "Blessing of Protection", "Unbreakable Spirit", "Improved Blessing of Protection",
-    "Crusader's Reprieve", "Seal of Might", "Seal of Alacrity"
+    "Crusader's Reprieve", "Strength of Conviction", "Seal of Might", "Seal of Alacrity"
 ];
 
 const specTalentsDown = [
@@ -190,7 +190,7 @@ const specTalentsLeft = [
 const specTalentsRight = [
     "Holy Shock", "Glimmer of Light", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Awestruck/Holy Infusion",
     "Glistening Radiance", "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Illumination/Blessed Focus", "Light's Hammer/Holy Prism",
-    "Light's Protection", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Beacon of Faith/Beacon of Virtue",
+    "Light's Protection", "Divine Revelations", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Beacon of Faith/Beacon of Virtue",
     "Veneration", "Avenging Wrath: Might/Avenging Crusader", "Crusader's Might", "Merciful Auras/Blessing of Summer"
 ];
         

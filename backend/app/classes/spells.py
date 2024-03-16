@@ -112,11 +112,11 @@ class Spell:
         if not self.off_gcd:
             caster.global_cooldown = caster.hasted_global_cooldown
 
-        return True, spell_crit
+        return True, spell_crit, damage_value
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         if not self.can_cast(caster):         
-            return False
+            return False, False, 0
         
         # print(current_time, self.name, targets[0].name)
 
@@ -129,6 +129,7 @@ class Spell:
         
         spell_crit = False
         heal_amount = 0
+        ability_healing = 0
         
         self.try_trigger_rppm_effects(caster, targets, current_time)
         self.try_trigger_conditional_effects(caster, targets, current_time)
@@ -157,7 +158,7 @@ class Spell:
             if target_count > 1:  
                 multi_target_healing = [f"{self.name}: ", []]            
             for target in targets:            
-                ability_healing = 0
+                # After calculate_heal, before it potentially modifies spell_crit
                 healing_value, is_crit = self.calculate_heal(caster, self.bonus_crit, self.bonus_versatility, self.bonus_mastery)
                 
                 mana_cost = self.get_mana_cost(caster)
@@ -191,7 +192,6 @@ class Spell:
                 if is_crit:
                     spell_crit = True
                     caster.ability_crits[self.name] = caster.ability_crits.get(self.name, 0) + 1
-                    
                 if target_count == 1:
                     caster.healing_sequence.append(f"{self.name}: {current_time}, {healing_value}, {is_crit}")
                 else:
@@ -230,7 +230,7 @@ class Spell:
         if not self.off_gcd:
             caster.global_cooldown = caster.hasted_global_cooldown
 
-        return True, spell_crit, heal_amount
+        return True, spell_crit, ability_healing
     
     def calculate_cast_time(self, caster):
         return (self.base_cast_time / caster.haste_multiplier) * self.cast_time_modifier
@@ -250,6 +250,8 @@ class Spell:
           
         mastery_multiplier = 1 + ((caster.mastery_multiplier + self.bonus_mastery) - 1) * caster.mastery_effectiveness
         versatility_multiplier = caster.versatility_multiplier + self.bonus_versatility
+        
+        # print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
         
         # overrides
         # spell_power = 8351

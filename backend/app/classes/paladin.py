@@ -85,6 +85,8 @@ class Paladin:
         self.flat_versatility = 0
         
         self.active_auras = {}
+        self.gem_counts = {}
+        self.total_elemental_gems = 0
         
         if equipment_data:
             self.equipment = self.parse_equipment(equipment_data)
@@ -93,10 +95,10 @@ class Paladin:
             # print(formatted_equipment_data)
             self.stats = Stats(formatted_equipment_data[0], self.convert_stat_ratings_to_percent(formatted_equipment_data[0]))
             self.bonus_enchants = formatted_equipment_data[1]
-            print(self.stats.ratings)
+            # print(self.stats.ratings)
             
             self.spell_power = self.stats.ratings["intellect"]
-            print(self.spell_power)
+            # print(self.spell_power)
             
             self.haste_rating = self.stats.ratings["haste"]
             self.crit_rating = self.stats.ratings["crit"]
@@ -132,10 +134,7 @@ class Paladin:
             self.stats.ratings["health"] = 450000
             self.bonus_enchants = []
         
-        print(f"haste: {self.haste}, crit: {self.crit}, mastery: {self.mastery}, Vers: {self.versatility}")
-        
-        self.gem_counts = {}
-        self.total_elemental_gems = 0
+        # print(f"haste: {self.haste}, crit: {self.crit}, mastery: {self.mastery}, Vers: {self.versatility}")
         
         self.crit_damage_modifier = 1
         self.crit_healing_modifier = 1
@@ -165,7 +164,6 @@ class Paladin:
         self.update_stats_with_racials()
         
         self.mastery_effectiveness = 1
-        print(self.max_health)
         
         self.base_global_cooldown = 1.5
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
@@ -222,7 +220,7 @@ class Paladin:
         self.timers_priority_queue = []
         
         # for reclamation
-        self.average_raid_health_percentage = 0.7
+        self.average_raid_health_percentage = 1
         
         # for results output only
         self.last_iteration = False
@@ -251,8 +249,10 @@ class Paladin:
         if race:
             self.update_race(race)
         if class_talents:
+            # pp.pprint(class_talents)
             self.update_class_talents(class_talents)
         if spec_talents:
+            # pp.pprint(spec_talents)
             self.update_spec_talents(spec_talents)
         
         self.update_abilities()
@@ -293,15 +293,15 @@ class Paladin:
                 if talent_name in row:
                     row[talent_name]["ranks"]["current rank"] = new_rank 
                     
-    def update_equipment(self, equipment_data):
+    def update_equipment(self, equipment_data):        
         self.equipment = json.loads(equipment_data)
         formatted_equipment_data = self.calculate_stats_from_equipment(self.equipment)
         self.stats = Stats(formatted_equipment_data[0], self.convert_stat_ratings_to_percent(formatted_equipment_data[0]))
         self.bonus_enchants = formatted_equipment_data[1]
-        print(self.stats.ratings)
+        # print(self.stats.ratings)
         
         self.spell_power = self.stats.ratings["intellect"]
-        print(self.spell_power)
+        # print(self.spell_power)
         
         self.haste_rating = self.stats.ratings["haste"]
         self.crit_rating = self.stats.ratings["crit"]
@@ -437,8 +437,6 @@ class Paladin:
         if stat == "haste" and "First Light" in self.active_auras:
             update_stat_with_multiplicative_percentage(self, "haste", 25, True)
             
-    
-        
     def update_stats_with_racials(self):   
         # reset stats
         self.spell_power = self.base_spell_power

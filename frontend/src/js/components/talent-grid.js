@@ -39,7 +39,7 @@ const updateTalentsFromImportedData = (importedTalents) => {
         for (const row in imported) {
             for (const talentName in imported[row]) {
                 const talentData = imported[row][talentName];
-                const formattedTalentName = talentName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
+                const formattedTalentName = talentName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "").replaceAll(":", "");
                 const talentIcon = document.getElementById(formattedTalentName + "-icon");
                 
                 if (talentData && talentIcon) {
@@ -51,6 +51,11 @@ const updateTalentsFromImportedData = (importedTalents) => {
                     if (talentData.ranks["max rank"] > 1) {
                         const rankDisplay = talentIcon.parentElement.querySelector(".talent-rank-display");
                         rankDisplay.textContent = `${talentData.ranks["current rank"]} / ${talentData.ranks["max rank"]}`;
+                    };
+
+                    if (talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+                        talentIcon.parentElement.style.boxShadow = "0px 0px 4px var(--gold-font)";
+                        talentIcon.style.boxShadow = "0px 0px 1px var(--border-colour-2)";
                     };
 
                     if (category === "class") {
@@ -200,6 +205,11 @@ const incrementTalent = (talentData, talentIcon, category) => {
         rankDisplay.textContent = `${talentData.ranks["current rank"]} / ${talentData.ranks["max rank"]}`;
     };
 
+    if (talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+        talentIcon.parentElement.style.boxShadow = "0px 0px 4px var(--gold-font)";
+        talentIcon.style.boxShadow = "none";
+    };
+
     updateTalentCounts(category, 1);
 
     if (talentIcon.parentElement.querySelector(".class-talents-option-down") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
@@ -238,6 +248,11 @@ const decrementTalent = (talentData, talentIcon, category) => {
     if (talentData.ranks["max rank"] > 1) {
         const rankDisplay = talentIcon.parentElement.querySelector(".talent-rank-display");
         rankDisplay.textContent = `${talentData.ranks["current rank"]} / ${talentData.ranks["max rank"]}`;
+    };
+
+    if (talentData.ranks["current rank"] < talentData.ranks["max rank"]) {
+        talentIcon.style.boxShadow = "0px 0px 1px var(--border-colour-2)";
+        talentIcon.parentElement.style.boxShadow = "none";
     };
 
     updateTalentCounts(category, -1);
@@ -313,7 +328,7 @@ const createTalentGrid = () => {
                 cell.appendChild(rightPseudoElement);
             };
     
-            let formattedTalentName = talentName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
+            let formattedTalentName = talentName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "").replaceAll(":", "");
             cell.id = formattedTalentName;
             
             if (talentName === "") {
@@ -332,7 +347,7 @@ const createTalentGrid = () => {
                 let talentDataRight = findTalentInTalentsData(baseTalentSet, splitTalent[1]);
     
                 let talentIconLeft = document.createElement("img");
-                let formattedTalentNameLeft = talentNameLeft.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
+                let formattedTalentNameLeft = talentNameLeft.toLowerCase().replaceAll(" ", "-").replaceAll("'", "").replaceAll(":", "");
                 talentIconLeft.id = formattedTalentNameLeft + "-icon";
     
                 talentIconLeft.classList.add("talent-icon");
@@ -357,7 +372,7 @@ const createTalentGrid = () => {
                 });
     
                 let talentIconRight = document.createElement("img");
-                let formattedTalentNameRight = talentNameRight.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
+                let formattedTalentNameRight = talentNameRight.toLowerCase().replaceAll(" ", "-").replaceAll("'", "").replaceAll(":", "");
                 talentIconRight.id = formattedTalentNameRight + "-icon";
                 talentIconRight.classList.add("talent-icon");
                 talentIconRight.classList.add("split-talent-icon-right");

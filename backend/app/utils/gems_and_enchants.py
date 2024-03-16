@@ -168,7 +168,7 @@ def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):
             stat_values_from_equipment["versatility"] += 88
             player.gem_counts["Malygite"] += 1
             player.total_elemental_gems += 1
-    print(stat_values_from_equipment)
-    print(player.gem_counts)
+    # print(stat_values_from_equipment)
+    # print(player.gem_counts)
         
     return stat_values_from_equipment

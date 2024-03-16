@@ -7,6 +7,8 @@ from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
 from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals, update_spell_data_beacon_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained
 
+# KNOWN BUGS
+# glimmer's stacking 4% healing skips the first glimmer so 0% at 1 glimmer -> 8% at 2 glimmers
 
 def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_targets):
     if len(glimmer_targets) > max_glimmer_targets:             
@@ -113,13 +115,19 @@ class HolyShock(Spell):
             
             # apply glimmer
             # glimmer_healing = []
+            total_glimmer_healing = 0
             if caster.is_talent_active("Glimmer of Light"):
                 for glimmer_target in glimmer_targets:
                     glimmer_heal, glimmer_crit = GlimmerOfLightSpell(caster).calculate_heal(caster)
-                    glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
+                    if len(glimmer_targets) > 1:
+                        glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
+                    else:
+                        glimmer_heal_value = glimmer_heal
                     
                     if caster.is_talent_active("Glorious Dawn"):
                         glimmer_heal_value *= 1.1
+                    
+                    total_glimmer_healing += glimmer_heal_value
                     
                     # see healing by target for each glimmer proc
                     # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
@@ -185,6 +193,8 @@ class HolyShock(Spell):
                         
                         update_self_buff_data(caster.self_buff_breakdown, "Rising Sunlight", current_time, "expired")
                         append_aura_removed_event(caster.buff_events, "Rising Sunlight", caster, caster, current_time)
+                        
+            return cast_success, spell_crit, heal_amount, total_glimmer_healing
             
             
 class Daybreak(Spell):
@@ -196,7 +206,8 @@ class Daybreak(Spell):
         super().__init__("Daybreak", cooldown=Daybreak.BASE_COOLDOWN)  
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
-        cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        total_glimmer_healing = 0
         if cast_success:
             # caster.events.append(f"{current_time}: mana: {caster.mana}")
             # caster.events.append(f"{current_time}: Glimmers before daybreak: {glimmer_targets}")
@@ -215,10 +226,15 @@ class Daybreak(Spell):
             # adjust for daybreak 200% glimmer healing
             for glimmer_target in glimmer_targets:
                 glimmer_heal, glimmer_crit = GlimmerOfLightSpell(caster).calculate_heal(caster)
-                glimmer_heal_value = 2 * glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / number_of_glimmers_removed
+                if len(glimmer_targets) > 1:
+                    glimmer_heal_value = 2 * glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / number_of_glimmers_removed
+                else:
+                    glimmer_heal_value = 2 * glimmer_heal
                 
                 if caster.is_talent_active("Glorious Dawn"):
                     glimmer_heal_value *= 1.1
+                    
+                total_glimmer_healing += glimmer_heal_value
                 
                 # see healing by target for each glimmer proc
                 # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
@@ -256,6 +272,8 @@ class Daybreak(Spell):
                     if len(target.target_active_buffs["Holy Reverberation"]) > 0:
                         caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
             # caster.events.append(f"{current_time}: Glimmers after daybreak: {glimmer_targets}")
+        
+        return cast_success, spell_crit, heal_amount, total_glimmer_healing
             
                
 class RisingSunlightHolyShock(Spell):
@@ -337,13 +355,19 @@ class RisingSunlightHolyShock(Spell):
             
             # apply glimmer
             # glimmer_healing = []
+            total_glimmer_healing = 0
             if caster.is_talent_active("Glimmer of Light"):
                 for glimmer_target in glimmer_targets:
                     glimmer_heal, glimmer_crit = GlimmerOfLightSpell(caster).calculate_heal(caster)
-                    glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
+                    if len(glimmer_targets) > 1:
+                        glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
+                    else:
+                        glimmer_heal_value = glimmer_heal
                     
                     if caster.is_talent_active("Glorious Dawn"):
                         glimmer_heal_value *= 1.1
+                        
+                    total_glimmer_healing += glimmer_heal_value
                     
                     # see healing by target for each glimmer proc
                     # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
@@ -381,7 +405,7 @@ class RisingSunlightHolyShock(Spell):
                     self.apply_holy_reverberation(caster, target, current_time)
                 else:
                     target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
-                    append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"].duration)
+                    append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     
                     glimmer_targets.append(targets[0])
@@ -391,6 +415,8 @@ class RisingSunlightHolyShock(Spell):
                         handle_glimmer_removal(caster, glimmer_targets, current_time, 8)
                     else:
                         handle_glimmer_removal(caster, glimmer_targets, current_time, 3)
+                        
+        return cast_success, spell_crit, heal_amount, total_glimmer_healing
             
                     
 class DivineToll(Spell):
@@ -405,7 +431,7 @@ class DivineToll(Spell):
             self.cooldown = 45
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
-        cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             original_gcd = caster.hasted_global_cooldown
             
@@ -423,6 +449,8 @@ class DivineToll(Spell):
             
             if caster.is_talent_active("Divine Resonance"):
                 caster.apply_buff_to_self(DivineResonance(), current_time)
+                
+        return cast_success, spell_crit, heal_amount   
   
   
 class DivineTollHolyShock(Spell):
@@ -456,8 +484,8 @@ class DivineTollHolyShock(Spell):
             self.spell_healing_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
             
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        total_glimmer_healing = 0
         if cast_success:
-            
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
@@ -531,16 +559,17 @@ class DivineTollHolyShock(Spell):
                     
                 if caster.divine_toll_holy_shock_count == 5:
                     glimmer_heal, glimmer_crit = GlimmerOfLightSpell(caster).calculate_heal(caster)
-                    if len(glimmer_targets) > 0:
+                    if len(glimmer_targets) > 1:
                         glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
                     else:
-                        glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / 1
+                        glimmer_heal_value = glimmer_heal
                         
                     if caster.is_talent_active("Glorious Dawn"):
                         glimmer_heal_value *= 1.1
                         # see healing by target for each glimmer proc
                         # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                         # print(glimmer_healing)
+                    total_glimmer_healing += glimmer_heal_value
                     
                     for target in glimmer_targets:    
                         target.receive_heal(glimmer_heal_value, caster)
@@ -563,6 +592,8 @@ class DivineTollHolyShock(Spell):
                         caster.handle_beacon_healing("Glimmer of Light", target, glimmer_heal_value, current_time, spell_display_name="Glimmer of Light (Divine Toll)")
                                 
                     caster.divine_toll_holy_shock_count = 0 
+                    
+        return cast_success, spell_crit, heal_amount, total_glimmer_healing
             
             
 class DivineResonanceHolyShock(Spell):
@@ -665,12 +696,14 @@ class DivineResonanceHolyShock(Spell):
                         handle_glimmer_removal(caster, glimmer_targets, current_time, 8)
                     else:
                         handle_glimmer_removal(caster, glimmer_targets, current_time, 3)
+                        
+        return cast_success, spell_crit, heal_amount, 0
 
 
 class HolyLight(Spell):
     
     SPELL_ID = 82326
-    SPELL_POWER_COEFFICIENT = 5.096
+    SPELL_POWER_COEFFICIENT = 5.096 * 0.8
     MANA_COST = 0.024
     HOLY_POWER_GAIN = 0
     BASE_CAST_TIME = 2.5
@@ -708,6 +741,7 @@ class HolyLight(Spell):
                     caster.blessing_of_dawn_counter = 0
             
             # resplendent light
+            resplendent_light_healing = 0
             if caster.is_talent_active("Resplendent Light"):
                 resplendent_light_healing = heal_amount * 0.08
                 target_pool = copy.deepcopy(caster.potential_healing_targets)
@@ -784,6 +818,8 @@ class HolyLight(Spell):
                 caster.abilities["Divine Favor"].remaining_cooldown = 30
                 
                 update_self_buff_data(caster.self_buff_breakdown, "Divine Favor", current_time, "expired")
+                
+        return cast_success, spell_crit, heal_amount, resplendent_light_healing
 
 
 class FlashOfLight(Spell):
@@ -878,7 +914,8 @@ class FlashOfLight(Spell):
                 
                 update_self_buff_data(caster.self_buff_breakdown, "Divine Favor", current_time, "expired")
                 
-         
+        return cast_success, spell_crit, heal_amount
+                
             
 # spenders
 class WordOfGlory(Spell):
@@ -907,7 +944,7 @@ class WordOfGlory(Spell):
                 elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
                     self.spell_healing_modifier *= 1.6
         
-        cast_success, is_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             caster.holy_power -= self.holy_power_cost
             
@@ -934,7 +971,10 @@ class WordOfGlory(Spell):
                                 
                         for glimmer_target in glimmer_targets:
                             glimmer_heal, glimmer_crit = spell.calculate_heal(caster)
-                            glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
+                            if len(glimmer_targets) > 1:
+                                glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
+                            else:
+                                glimmer_heal_value = glimmer_heal
                             
                             if caster.is_talent_active("Glorious Dawn"):
                                 glimmer_heal_value *= 1.1
@@ -1007,12 +1047,14 @@ class WordOfGlory(Spell):
                         caster.awakening_trigger_times.update({round(current_time): 1})
                 else:
                     caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=12)
+                    
+        return cast_success, spell_crit, heal_amount 
            
             
 class LightOfDawn(Spell):
     
     SPELL_ID = 85222
-    SPELL_POWER_COEFFICIENT = 0.8334
+    SPELL_POWER_COEFFICIENT = 0.8334 * 0.8
     MANA_COST = 0.012
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
@@ -1036,7 +1078,7 @@ class LightOfDawn(Spell):
                 elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
                     self.spell_healing_modifier *= 1.6
         
-        cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             caster.holy_power -= self.holy_power_cost
             
@@ -1063,7 +1105,10 @@ class LightOfDawn(Spell):
                                 
                         for glimmer_target in glimmer_targets:
                             glimmer_heal, glimmer_crit = spell.calculate_heal(caster)
-                            glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
+                            if len(glimmer_targets) > 1:
+                                glimmer_heal_value = glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / len(glimmer_targets)
+                            else:
+                                glimmer_heal_value = glimmer_heal
                             
                             if caster.is_talent_active("Glorious Dawn"):
                                 glimmer_heal_value *= 1.1
@@ -1122,6 +1167,8 @@ class LightOfDawn(Spell):
                         caster.awakening_trigger_times.update({round(current_time): 1})
                 else:
                     caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=12)
+                    
+        return cast_success, spell_crit, heal_amount 
 
 
 class LightsHammerSpell(Spell):

@@ -36,12 +36,14 @@ class TyrsDeliveranceHeal(Spell):
         super().__init__("Tyr's Deliverance", is_heal=True, off_gcd=True)
             
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
-        cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             target = targets[0]
             target.apply_buff_to_target(TyrsDeliveranceTargetBuff(), current_time, caster=caster)  
             
-            append_aura_applied_event(caster.events, "Tyr's Deliverance", caster, target, current_time, target.target_active_buffs["Tyr's Deliverance (target)"][0].duration)      
+            append_aura_applied_event(caster.events, "Tyr's Deliverance", caster, target, current_time, target.target_active_buffs["Tyr's Deliverance (target)"][0].duration)   
+        
+        return cast_success, spell_crit, heal_amount   
     
     
 class AvengingWrathSpell(Spell):
@@ -67,9 +69,11 @@ class DivineFavorSpell(Spell):
         super().__init__("Divine Favor", cooldown=DivineFavorSpell.BASE_COOLDOWN, off_gcd=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
-        cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             caster.apply_buff_to_self(DivineFavorBuff(), current_time)
+        
+        return cast_success, spell_crit, heal_amount
             
             
 # class BlessingOfFreedomSpell(Spell):

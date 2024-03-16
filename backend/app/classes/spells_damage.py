@@ -42,7 +42,7 @@ class Judgment(Spell):
                 self.bonus_crit = 1
                 self.spell_damage_modifier *= 1.3
             
-        cast_success, spell_crit = super().cast_damage_spell(caster, targets, current_time)
+        cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
         if cast_success:
             
             increment_holy_power(self, caster)
@@ -121,6 +121,8 @@ class Judgment(Spell):
                 target.apply_debuff_to_target(judgment_of_light_debuff, current_time, stacks_to_apply=5, max_stacks=5)
                 append_aura_applied_event(caster.events, "Judgment of Light", caster, target, current_time, current_stacks=5, max_stacks=5)
                 judgment_of_light_debuff.consume_stacks(caster, target, healing_targets, current_time)
+                
+        return cast_success, spell_crit, spell_damage
            
             
 class CrusaderStrike(Spell):
@@ -141,7 +143,7 @@ class CrusaderStrike(Spell):
         if caster.is_talent_active("Reclamation"):
             self.spell_damage_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
         
-        cast_success, spell_crit = super().cast_damage_spell(caster, targets, current_time)
+        cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
         if cast_success:
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
@@ -167,4 +169,6 @@ class CrusaderStrike(Spell):
                 
                 update_spell_data_heals(caster.ability_breakdown, "Crusader's Reprieve", caster, crusaders_reprieve_heal, False)
                 append_spell_heal_event(caster.events, "Crusader's Reprieve", caster, caster, crusaders_reprieve_heal, current_time, is_crit=False)
+                
+        return cast_success, spell_crit, spell_damage
 

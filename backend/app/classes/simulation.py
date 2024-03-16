@@ -1129,6 +1129,7 @@ class Simulation:
         }
         
         # pp.pprint(average_ability_breakdown)
+        pp.pprint(self.paladin.events)
     
         end_time = time.time()
         simulation_time = end_time - start_time

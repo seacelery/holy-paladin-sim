@@ -11,7 +11,7 @@ class GlimmerOfLightSpell(Spell):
     
     # glorious dawn multiplier
     SPELL_ID = 287269
-    SPELL_POWER_COEFFICIENT = 1.6416 * 1.1
+    SPELL_POWER_COEFFICIENT = 1.6416 * 0.8
     
     def __init__(self, caster):
         super().__init__("Glimmer of Light")

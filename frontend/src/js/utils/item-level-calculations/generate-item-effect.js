@@ -72,7 +72,6 @@ const calculateNewEffect = (effectsData, itemSlot, itemLevel, effectDescription)
 };
 
 const generateItemEffects = (effects, itemSlot, itemLevel) => {
-    console.log(effects)
     effects.forEach((effectData, index) => {
         if (effectData["effect_values"]) {
             const { newEffectsData, newDescription } = calculateNewEffect(effectData["effect_values"], itemSlot, itemLevel, effectData["description"]);

@@ -23,6 +23,7 @@
 
 import sys
 import os
+import json
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -39,6 +40,9 @@ client_id = "57cdb961fae04b8f9dc4d3caea3716db"
 client_secret = "rIIdFk2In9dQfBUxbPmH6ee4DDDO6oUV"
 access_token = battlenet_api.get_access_token(client_id, client_secret)
 
+def save_data_to_file(data, filename):
+    with open(filename, "w") as f:
+        json.dump(data, f, indent=4)
 
 def import_character(character_name, realm):
     character_data = cache.cached_get_character_data(access_token, realm, character_name)
