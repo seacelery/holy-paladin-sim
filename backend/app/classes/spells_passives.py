@@ -23,7 +23,7 @@ class GlimmerOfLightSpell(Spell):
 class JudgmentOfLightSpell(Spell):
     
     SPELL_ID = 183778
-    SPELL_POWER_COEFFICIENT = 0.175
+    SPELL_POWER_COEFFICIENT = 0.175 * 0.8
     
     def __init__(self, caster):
         super().__init__("Judgment of Light")

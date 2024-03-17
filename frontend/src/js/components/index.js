@@ -205,6 +205,7 @@ const runSimulation = async () => {
     
     console.log("iterations", iterations)
     const timeWarpTime = document.getElementById("time-warp-time").value;
+    console.log(timeWarpTime)
 
     simulationProgressBarContainer.style.opacity = "100";
 
@@ -214,14 +215,13 @@ const runSimulation = async () => {
 
     const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
 
-    return fetch(`http://127.0.0.1:5000/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}&
-                  time_warp_time=${timeWarpTime}&priority_list=${priorityListJson}&custom_equipment=${customEquipment}`, {
+    return fetch(`http://127.0.0.1:5000/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}&time_warp_time=${timeWarpTime}&priority_list=${priorityListJson}&custom_equipment=${customEquipment}`, {
         credentials: "include"
     })
     .then(response => response.json())
     .then(data => {
         let simulationData = data;     
-        // console.log(simulationData)
+        console.log(simulationData)
         createSimulationResults(simulationData);
 
         simulationProgressBarText.textContent = "";

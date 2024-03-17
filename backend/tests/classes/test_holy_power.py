@@ -287,7 +287,7 @@ def test_judgment():
     judgment = paladin.abilities["Judgment"]
     
     target = [targets[0]]
-    _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
+    _, _, _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
     
     expected_holy_power = 1
     assert paladin.holy_power == expected_holy_power, "Judgment holy power unexpected value"
@@ -333,7 +333,7 @@ def test_word_of_glory():
     
     target = [targets[0]]
     paladin.holy_power = 3
-    _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
     
     expected_holy_power = 0
     assert paladin.holy_power == expected_holy_power, "Word of Glory holy power unexpected value"
@@ -350,7 +350,7 @@ def test_word_of_glory_divine_purpose():
     target = [targets[0]]
     paladin.holy_power = 3
     paladin.apply_buff_to_self(DivinePurpose(), 0)
-    _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
     
     expected_holy_power = 3
     assert paladin.holy_power == expected_holy_power, "Word of Glory (Divine Purpose) holy power unexpected value"

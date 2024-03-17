@@ -717,7 +717,6 @@ class Paladin:
         update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "extended", buff.duration, buff.current_stacks, time_extension)
     
     def remove_or_decrement_buff_on_self(self, buff, current_time, max_stacks=1, replaced=False):
-        
         if buff.name in self.active_auras:
             if buff.current_stacks > 1:
                 buff.current_stacks -= 1

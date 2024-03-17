@@ -58,8 +58,8 @@ def import_character(character_name, realm):
     
     return paladin, healing_targets
     
-def initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list=None, custom_equipment=None):
-    simulation = Simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, access_token)
+def initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list=None, custom_equipment=None, test=False):
+    simulation = Simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, access_token, test)
     return simulation
 
 def fetch_updated_data(paladin):

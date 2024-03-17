@@ -20,7 +20,7 @@ pp = pprint.PrettyPrinter(width=200)
 
 class Simulation:
     
-    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, access_token):
+    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, access_token, test=False):
 
         self.access_token = access_token
 
@@ -34,6 +34,7 @@ class Simulation:
         self.priority_list = []
         self.custom_equipment = custom_equipment
         self.paladin.update_equipment(custom_equipment)
+        self.test = test
 
         for item in priority_list:
             action_name, parsed_conditions = parse_condition(item)
@@ -168,7 +169,7 @@ class Simulation:
             
             # for display purposes
             self.time_since_last_check += self.tick_rate
-            if self.time_since_last_check >= 0.05:
+            if self.time_since_last_check >= self.tick_rate:
                 self.check_buff_counts()
                 self.check_healing()
                 self.check_resources()
@@ -614,12 +615,13 @@ class Simulation:
         for i in range(self.iterations):
             # reset simulation states
             print(i)
-            emit('iteration_update', {'iteration': i + 1}, broadcast=True, namespace='/')
-            self.paladin.reset_state()
-            self.reset_simulation()
-            self.paladin.apply_consumables()
-            self.paladin.apply_item_effects()
-            self.paladin.apply_buffs_on_encounter_start()
+            if not self.test:
+                emit('iteration_update', {'iteration': i + 1}, broadcast=True, namespace='/')
+                self.paladin.reset_state()
+                self.reset_simulation()
+                self.paladin.apply_consumables()
+                self.paladin.apply_item_effects()
+                self.paladin.apply_buffs_on_encounter_start()
             
             # only record some data on the last iteration
             if i == self.iterations - 1:
@@ -1129,7 +1131,7 @@ class Simulation:
         }
         
         # pp.pprint(average_ability_breakdown)
-        pp.pprint(self.paladin.events)
+        # pp.pprint(self.paladin.events)
     
         end_time = time.time()
         simulation_time = end_time - start_time

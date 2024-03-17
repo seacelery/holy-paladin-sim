@@ -1,0 +1,2 @@
+Flash of Light doesn't receive the mana reduction from Divine Favor
+Glimmer of Light's stacking 4% healing increase does not apply at 1 glimmer, going from a 0% increase at 1 glimmer to 8% at 2

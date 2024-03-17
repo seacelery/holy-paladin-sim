@@ -26,7 +26,7 @@ const updateBlurListener = (element, listener) => {
 };
 
 const updateEquipmentFromImportedData = (data) => {
-    console.log(data)
+    // console.log(data)
     // left half
     let equipmentData = data["equipment"];
 

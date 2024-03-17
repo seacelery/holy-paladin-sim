@@ -15,6 +15,9 @@ beacon_transfer_rates_single_beacon = {
     "Resplendent Light": single_beacon_transfer_st,
     "Afterimage": single_beacon_transfer_st,
     "Holy Reverberation": single_beacon_transfer_st,
+    "Seal of the Crusader": single_beacon_transfer_st,
+    "Golden Path": single_beacon_transfer_st,
+    "Light of the Martyr": single_beacon_transfer_st,
     "Light of Dawn": single_beacon_transfer_aoe,
     "Glimmer of Light": single_beacon_transfer_aoe,
     "Light's Hammer": single_beacon_transfer_aoe
@@ -32,6 +35,9 @@ beacon_transfer_rates_double_beacon = {
     "Resplendent Light": double_beacon_transfer_st,
     "Afterimage": double_beacon_transfer_st,
     "Holy Reverberation": double_beacon_transfer_st,
+    "Seal of the Crusader": double_beacon_transfer_st,
+    "Golden Path": single_beacon_transfer_st,
+    "Light of the Martyr": single_beacon_transfer_st,
     "Light of Dawn": double_beacon_transfer_aoe,
     "Glimmer of Light": double_beacon_transfer_aoe,
     "Light's Hammer": double_beacon_transfer_aoe

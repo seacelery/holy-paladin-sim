@@ -171,7 +171,8 @@ class DivineFavorBuff(Buff):
         if "Flash of Light" in caster.abilities:
             caster.abilities["Flash of Light"].spell_healing_modifier *= 1.6
             caster.abilities["Flash of Light"].cast_time_modifier *= 0.7
-            caster.abilities["Flash of Light"].mana_cost_modifier *= 0.5
+            # mana interaction bugged
+            caster.abilities["Flash of Light"].mana_cost_modifier *= 1
             
     def remove_effect(self, caster, current_time=None):
         if "Holy Light" in caster.abilities:
@@ -181,7 +182,7 @@ class DivineFavorBuff(Buff):
         if "Flash of Light" in caster.abilities:
             caster.abilities["Flash of Light"].spell_healing_modifier /= 1.6
             caster.abilities["Flash of Light"].cast_time_modifier /= 0.7
-            caster.abilities["Flash of Light"].mana_cost_modifier /= 0.5
+            caster.abilities["Flash of Light"].mana_cost_modifier /= 1
         
         
 class InfusionOfLight(Buff):
@@ -193,8 +194,10 @@ class InfusionOfLight(Buff):
             self.max_stacks = 2
         
     def apply_effect(self, caster, current_time=None):
-        if "Flash of Light" in caster.abilities:
+        if "Flash of Light" in caster.abilities and caster.is_talent_active("Inflorescence of the Sunwell"):
             caster.abilities["Flash of Light"].mana_cost_modifier *= 0
+        elif "Flash of Light" in caster.abilities:
+            caster.abilities["Flash of Light"].mana_cost_modifier *= 0.3
         
     def remove_effect(self, caster, current_time=None):
         if "Flash of Light" in caster.abilities:
@@ -300,9 +303,9 @@ class TyrsDeliveranceSelfBuff(Buff):
         hasted_tick_interval = self.base_tick_interval / caster.haste_multiplier
 
         # with a low tick rate if it lines up perfectly it can try to divide by 0
-        spell.spell_healing_modifier *= (hasted_tick_interval - (hasted_tick_interval - self.last_tyr_tick_time - 0.0001)) / hasted_tick_interval
+        spell.spell_healing_modifier *= (hasted_tick_interval - (hasted_tick_interval - self.last_tyr_tick_time - 0.0000001)) / hasted_tick_interval
         spell.cast_healing_spell(caster, target, current_time, is_heal=True)
-        spell.spell_healing_modifier /= (hasted_tick_interval - (hasted_tick_interval - self.last_tyr_tick_time  - 0.0001)) / hasted_tick_interval
+        spell.spell_healing_modifier /= (hasted_tick_interval - (hasted_tick_interval - self.last_tyr_tick_time  - 0.0000001)) / hasted_tick_interval
         
         
 class DivinePurpose(Buff):

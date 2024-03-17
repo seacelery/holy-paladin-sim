@@ -7,8 +7,9 @@ import math
 from app.classes.paladin import Paladin
 from app.classes.target import Target, BeaconOfLight, EnemyTarget
 from app.classes.spells_auras import TyrsDeliveranceHeal
-from app.classes.auras_buffs import DivinePurpose, BlessingOfDawn, GlimmerOfLightBuff
+from app.classes.auras_buffs import DivinePurpose, BlessingOfDawn, GlimmerOfLightBuff, AvengingWrathBuff, BlessingOfSpring, AvengingWrathAwakening
 from app.classes.spells_healing import DivineResonanceHolyShock, RisingSunlightHolyShock, DivineTollHolyShock
+from app.classes.spells_passives import TouchOfLight
 
 pp = pprint.PrettyPrinter(width=200)
 
@@ -71,11 +72,6 @@ def set_crit_to_max(paladin):
     paladin.flat_crit = 100
     paladin.update_stat("crit", 0)
     
-# FORMAT
-# initialise & set up paladin
-# initialise abilities
-# make changes
-# test
 
 # heals
 def test_holy_shock():
@@ -92,7 +88,7 @@ def test_holy_shock():
         paladin.crit = -10
         
         target = [targets[0]]
-        _, _, heal_amount, glimmer_healing = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        _, _, heal_amount, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
         
         expected_heal_amount = 17980
         assert round(heal_amount / 10) * 10 == expected_heal_amount, "Holy Shock (no talents, no crit) unexpected value"
@@ -112,7 +108,7 @@ def test_holy_shock_reclamation():
         paladin.average_raid_health_percentage = 0.7
         
         target = [targets[0]]
-        _, _, heal_amount, glimmer_healing = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        _, _, heal_amount, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
         
         expected_heal_amount = round(17980 * 1.15 / 10) * 10
         assert round(heal_amount / 10) * 10 == expected_heal_amount, "Holy Shock (no talents, no crit, Reclamation at 70%) unexpected value"
@@ -131,7 +127,7 @@ def test_holy_shock_crit():
         set_crit_to_max(paladin)
         
         target = [targets[0]]
-        _, _, heal_amount, glimmer_healing = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        _, _, heal_amount, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
         
         expected_heal_amount = 17980 * 2
         assert round(heal_amount / 10) * 10 == expected_heal_amount, "Holy Shock (no talents, crit) unexpected value"
@@ -151,7 +147,7 @@ def test_holy_shock_awestruck():
         paladin.crit = -10
         
         target = [targets[0]]
-        _, _, heal_amount, glimmer_healing = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        _, _, heal_amount, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
         
         expected_heal_amount = round((17980) / 10) * 10
         assert round(heal_amount / 10) * 10 == expected_heal_amount, "Holy Shock (Awestruck, no crit) unexpected value"
@@ -169,7 +165,7 @@ def test_holy_shock_awestruck():
         set_crit_to_max(paladin)
         
         target = [targets[0]]
-        _, _, heal_amount, glimmer_healing = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        _, _, heal_amount, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
         
         expected_heal_amount = round((17980 * 2 * 1.1) / 10) * 10
         assert round(heal_amount / 10) * 10 == expected_heal_amount, "Holy Shock (Awestruck, crit) unexpected value"
@@ -191,7 +187,7 @@ def test_holy_shock_tyrs_deliverance():
         target = [targets[0]]
         _, _, _ = tyrs_deliverance.cast_healing_spell(paladin, target, 0, True)
         paladin.global_cooldown = 0
-        _, _, heal_amount, glimmer_healing = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        _, _, heal_amount, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
         
         expected_heal_amount = round(17980 * 1.15 / 10) * 10
         assert round(heal_amount / 10) * 10 == expected_heal_amount, "Holy Shock (Tyr's Deliverance, no crit) unexpected value"
@@ -366,10 +362,13 @@ def test_holy_light_divine_favor():
         
         target = [targets[0]]
         _, _, _ = divine_favor.cast_healing_spell(paladin, target, 0, False)
+        divine_favor_cast_time = holy_light.calculate_cast_time(paladin)
         _, _, heal_amount, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
         
         expected_heal_amount = round(59692 * 1.6 / 10) * 10
+        expected_cast_time = 1.39
         assert round(heal_amount / 10) * 10 == expected_heal_amount, "Holy Light (Divine Favor, no crit) unexpected value"
+        assert round(divine_favor_cast_time, 2)  == expected_cast_time
     
 def test_holy_light_tyrs_deliverance():   
     # tyr's deliverance, no crit
@@ -467,6 +466,29 @@ def test_flash_of_light_awestruck():
         
         expected_heal_amount = round(46210 * 2 * 1.1 / 10) * 10
         assert round(heal_amount / 10) * 10 == expected_heal_amount, "Flash of Light (Awestruck, no crit) unexpected value"
+        
+def test_flash_of_light_divine_favor():     
+    # divine favour, no crit & flash of light cast time
+    for _ in range(100):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {}, {"Divine Favor": 1})
+        
+        divine_favor = paladin.abilities["Divine Favor"]
+        flash_of_light = paladin.abilities["Flash of Light"]
+        
+        paladin.crit = -100
+        
+        target = [targets[0]]
+        _, _, _ = divine_favor.cast_healing_spell(paladin, target, 0, False)
+        divine_favor_cast_time = flash_of_light.calculate_cast_time(paladin)
+        _, _, heal_amount = flash_of_light.cast_healing_spell(paladin, target, 0, True)
+        
+        expected_heal_amount = round(46210 * 1.6 / 10) * 10
+        assert round(heal_amount / 10) * 10 == expected_heal_amount, "Flash of Light (Divine Favor, no crit) unexpected value"
+        assert round(divine_favor_cast_time / 0.01) * 0.01 == 0.84
     
 def test_flash_of_light_tyrs_deliverance():   
     # tyr's deliverance, no crit
@@ -525,7 +547,7 @@ def test_word_of_glory():
     target = [targets[0]]
     paladin.crit = -100
     paladin.holy_power = 3
-    _, _, heal_amount = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+    _, _, heal_amount, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
     
     expected_heal_amount = round(40587 / 10) * 10
     assert round(heal_amount / 10) * 10 == expected_heal_amount, "Word of Glory (no talents, no crit) unexpected value"
@@ -544,7 +566,7 @@ def test_word_of_glory_divine_purpose():
     paladin.crit = -100
     paladin.holy_power = 3
     paladin.apply_buff_to_self(DivinePurpose(), 0)
-    _, _, heal_amount = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+    _, _, heal_amount, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
     
     expected_heal_amount = round(40587 * 1.15 / 10) * 10
     assert round(heal_amount / 10) * 10 == expected_heal_amount, "Word of Glory (Divine Purpose, no crit) unexpected value"
@@ -563,7 +585,7 @@ def test_word_of_glory_blessing_of_dawn():
     paladin.crit = -100
     paladin.holy_power = 3
     paladin.apply_buff_to_self(BlessingOfDawn(), 0)
-    _, _, heal_amount = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+    _, _, heal_amount, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
     
     expected_heal_amount = round(40587 * 1.3 / 10) * 10
     assert round(heal_amount / 10) * 10 == expected_heal_amount, "Word of Glory (Of Dusk and Dawn, no crit) unexpected value"
@@ -581,7 +603,7 @@ def test_light_of_dawn():
     target = [targets[0]]
     paladin.crit = -100
     paladin.holy_power = 3
-    _, _, heal_amount = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
+    _, _, heal_amount, _ = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
     
     expected_heal_amount = round(9760 / 10) * 10
     assert round(heal_amount / 10) * 10 == expected_heal_amount, "Light of Dawn (no talents, no crit) unexpected value"
@@ -600,7 +622,7 @@ def test_light_of_dawn_divine_purpose():
     paladin.crit = -100
     paladin.holy_power = 3
     paladin.apply_buff_to_self(DivinePurpose(), 0)
-    _, _, heal_amount = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
+    _, _, heal_amount, _ = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
     
     expected_heal_amount = round(9760 * 1.15 / 100) * 100
     assert round(heal_amount / 100) * 100 == expected_heal_amount, "Light of Dawn (Divine Purpose, no crit) unexpected value"
@@ -619,12 +641,12 @@ def test_light_of_dawn_blessing_of_dawn():
     paladin.crit = -100
     paladin.holy_power = 3
     paladin.apply_buff_to_self(BlessingOfDawn(), 0)
-    _, _, heal_amount = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
+    _, _, heal_amount, _ = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
     
     expected_heal_amount = round(9760 * 1.3 / 10) * 10
     assert round(heal_amount / 10) * 10 == expected_heal_amount, "Light of Dawn (Of Dusk and Dawn, no crit) unexpected value"
     
-def test_glimmer_healing():
+def test_glimmer():
     # 1 glimmer
     paladin = initialise_paladin()
     targets, glimmer_targets = set_up_paladin(paladin)
@@ -647,8 +669,8 @@ def test_glimmer_healing():
     expected_glimmer_healing = round(19227 / 10) * 10
     assert round(glimmer_healing / 10) * 10 == expected_glimmer_healing, "Glimmer of Light (no talents, no crit) unexpected value"
     
-def test_glimmer_healing_glorious_dawn():    
-    for i in range(15):
+def test_glimmer_glorious_dawn():    
+    for i in range(8):
         paladin = initialise_paladin()
         targets, glimmer_targets = set_up_paladin(paladin)
         
@@ -676,7 +698,7 @@ def test_glimmer_healing_glorious_dawn():
         expected_glimmer_healing = math.ceil(19227 * 1.1 * glimmer_bonus / 100) * 100
         assert math.ceil(glimmer_healing / 100) * 100 == expected_glimmer_healing, "Glimmer of Light (no talents, no crit) unexpected value"
         
-def test_glimmer_healing_rising_sunlight():
+def test_glimmer_rising_sunlight():
     # 1 glimmer
     paladin = initialise_paladin()
     targets, glimmer_targets = set_up_paladin(paladin)
@@ -699,8 +721,8 @@ def test_glimmer_healing_rising_sunlight():
     expected_glimmer_healing = round(19227 / 10) * 10
     assert round(glimmer_healing / 10) * 10 == expected_glimmer_healing, "Glimmer of Light (Rising Sunlight, no crit) unexpected value"
     
-def test_glimmer_healing_rising_sunlight_glorious_dawn():    
-    for i in range(15):
+def test_glimmer_rising_sunlight_glorious_dawn():    
+    for i in range(8):
         paladin = initialise_paladin()
         targets, glimmer_targets = set_up_paladin(paladin)
         
@@ -728,7 +750,7 @@ def test_glimmer_healing_rising_sunlight_glorious_dawn():
         expected_glimmer_healing = math.ceil(19227 * 1.1 * glimmer_bonus / 100) * 100
         assert math.ceil(glimmer_healing / 100) * 100 == expected_glimmer_healing, "Glimmer of Light (Glorious Dawn, Rising Sunlight, no crit) unexpected value"
         
-def test_glimmer_healing_divine_resonance():
+def test_glimmer_divine_resonance():
     # 1 glimmer
     paladin = initialise_paladin()
     targets, glimmer_targets = set_up_paladin(paladin)
@@ -751,8 +773,8 @@ def test_glimmer_healing_divine_resonance():
     expected_glimmer_healing = 0
     assert round(glimmer_healing / 10) * 10 == expected_glimmer_healing, "Glimmer of Light (Divine Resonance, no crit) unexpected value"
     
-def test_glimmer_healing_divine_resonance_glorious_dawn():    
-    for i in range(15):
+def test_glimmer_divine_resonance_glorious_dawn():    
+    for i in range(8):
         paladin = initialise_paladin()
         targets, glimmer_targets = set_up_paladin(paladin)
         
@@ -780,7 +802,7 @@ def test_glimmer_healing_divine_resonance_glorious_dawn():
         expected_glimmer_healing = 0
         assert math.ceil(glimmer_healing / 100) * 100 == expected_glimmer_healing, "Glimmer of Light (Glorious Dawn, Divine Resonance, no crit) unexpected value"
         
-def test_glimmer_healing_daybreak():
+def test_glimmer_daybreak():
     # 1 glimmer
     paladin = initialise_paladin()
     targets, glimmer_targets = set_up_paladin(paladin)
@@ -803,8 +825,8 @@ def test_glimmer_healing_daybreak():
     expected_glimmer_healing = math.ceil(19227 * 2 / 10) * 10
     assert math.ceil(glimmer_healing / 10) * 10 == expected_glimmer_healing, "Glimmer of Light (Daybreak, no crit) unexpected value"
     
-def test_glimmer_healing_daybreak_glorious_dawn():    
-    for i in range(15):
+def test_glimmer_daybreak_glorious_dawn():    
+    for i in range(8):
         paladin = initialise_paladin()
         targets, glimmer_targets = set_up_paladin(paladin)
         
@@ -831,3 +853,439 @@ def test_glimmer_healing_daybreak_glorious_dawn():
     
         expected_glimmer_healing = round(19227 * 2 * 1.1 * glimmer_bonus / 100) * 100
         assert round(glimmer_healing / 100) * 100 == expected_glimmer_healing, "Glimmer of Light (Glorious Dawn, Daybreak, no crit) unexpected value"
+        
+def test_glistening_radiance_word_of_glory():
+    # 1 glimmer
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {}, {"Glimmer of Light": 1, "Glistening Radiance": 1})
+    
+    word_of_glory = paladin.abilities["Word of Glory"]
+    
+    paladin.crit = -10
+    
+    chosen_targets = random.sample(paladin.potential_healing_targets, 1)
+    for target in chosen_targets:
+        target.apply_buff_to_target(GlimmerOfLightBuff(), 0, caster=paladin)
+    
+    target = [targets[0]]
+    glimmer_healing = 0
+    while glimmer_healing == 0:
+        paladin.holy_power = 3
+        _, _, _, glimmer_healing, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+        paladin.global_cooldown = 0        
+    
+    expected_glimmer_healing = math.ceil(19227 / 10) * 10
+    assert math.ceil(glimmer_healing / 10) * 10 == expected_glimmer_healing, "Glimmer of Light (Glistening Radiance - Word of Glory, no crit) unexpected value"
+    
+def test_glistening_radiance_glorious_dawn_word_of_glory():    
+    for i in range(8):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {}, {"Glimmer of Light": 1, "Glorious Dawn": 1, "Glistening Radiance": 1})
+        
+        word_of_glory = paladin.abilities["Word of Glory"]
+        
+        glimmer_count = min(i + 1, 8)
+        if glimmer_count == 1:
+            glimmer_bonus = 1
+        else:
+            glimmer_bonus = 1 + glimmer_count * 0.04
+        
+        paladin.crit = -10
+        
+        chosen_targets = random.sample(paladin.potential_healing_targets, glimmer_count)
+        for target in chosen_targets:
+            target.apply_buff_to_target(GlimmerOfLightBuff(), 0, caster=paladin)
+        
+        target = [targets[0]]
+        glimmer_healing = 0
+        while glimmer_healing == 0:
+            paladin.holy_power = 3
+            _, _, _, glimmer_healing, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+            paladin.global_cooldown = 0    
+    
+        expected_glimmer_healing = math.ceil(19227 * 1.1 * glimmer_bonus / 100) * 100
+        assert math.ceil(glimmer_healing / 100) * 100 == expected_glimmer_healing, "Glimmer of Light (Glorious Dawn, Glistening Radiance - Word of Glory, no crit) unexpected value"
+        
+def test_glistening_radiance_light_of_dawn():
+    # 1 glimmer
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {}, {"Light of Dawn": 1, "Glimmer of Light": 1, "Glistening Radiance": 1})
+    
+    light_of_dawn = paladin.abilities["Light of Dawn"]
+    
+    paladin.crit = -10
+    
+    chosen_targets = random.sample(paladin.potential_healing_targets, 1)
+    for target in chosen_targets:
+        target.apply_buff_to_target(GlimmerOfLightBuff(), 0, caster=paladin)
+    
+    target = [targets[0]]
+    glimmer_healing = 0
+    while glimmer_healing == 0:
+        paladin.holy_power = 3
+        _, _, _, glimmer_healing = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
+        paladin.global_cooldown = 0        
+    
+    expected_glimmer_healing = math.ceil(19227 / 10) * 10
+    assert math.ceil(glimmer_healing / 10) * 10 == expected_glimmer_healing, "Glimmer of Light (Glistening Radiance - Light of Dawn, no crit) unexpected value"
+    
+def test_glistening_radiance_glorious_dawn_light_of_dawn():    
+    for i in range(8):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {}, {"Light of Dawn": 1, "Glimmer of Light": 1, "Glorious Dawn": 1, "Glistening Radiance": 1})
+        
+        light_of_dawn = paladin.abilities["Light of Dawn"]
+        
+        glimmer_count = min(i + 1, 8)
+        if glimmer_count == 1:
+            glimmer_bonus = 1
+        else:
+            glimmer_bonus = 1 + glimmer_count * 0.04
+        
+        paladin.crit = -10
+        
+        chosen_targets = random.sample(paladin.potential_healing_targets, glimmer_count)
+        for target in chosen_targets:
+            target.apply_buff_to_target(GlimmerOfLightBuff(), 0, caster=paladin)
+        
+        target = [targets[0]]
+        glimmer_healing = 0
+        while glimmer_healing == 0:
+            paladin.holy_power = 3
+            _, _, _, glimmer_healing = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
+            paladin.global_cooldown = 0    
+    
+        expected_glimmer_healing = math.ceil(19227 * 1.1 * glimmer_bonus / 100) * 100
+        assert math.ceil(glimmer_healing / 100) * 100 == expected_glimmer_healing, "Glimmer of Light (Glorious Dawn, Glistening Radiance -Light of Dawny, no crit) unexpected value"
+        
+def test_afterimage():
+    # 1 glimmer
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {"Afterimage": 1}, {})
+    
+    word_of_glory = paladin.abilities["Word of Glory"]
+    
+    paladin.crit = -10
+    
+    target = [targets[0]]
+    word_of_glory_healing = 0
+    afterimage_healing = 0
+    while paladin.afterimage_counter < 17:
+        paladin.holy_power = 3
+        _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+        paladin.global_cooldown = 0
+        
+    if paladin.afterimage_counter >= 17:
+        
+        paladin.holy_power = 3
+        _, _, word_of_glory_healing, _, afterimage_healing = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+    
+    expected_afterimage_healing = math.ceil(40587 * 0.3 / 10) * 10
+    assert math.ceil(afterimage_healing / 10) * 10 == expected_afterimage_healing, "Afterimage unexpected value"
+    
+def test_avenging_wrath_healing_increase():
+    for _ in range(100):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {}, {})
+        
+        holy_shock = paladin.abilities["Holy Shock"]
+        
+        paladin.crit = -100
+        paladin.apply_buff_to_self(AvengingWrathBuff(), 0)
+        
+        target = [targets[0]]
+        _, _, heal_amount, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        
+        expected_heal_amount = round(17980 * 1.15 / 10) * 10
+        assert round(heal_amount / 10) * 10 == expected_heal_amount, "Holy Shock (Avenging Wrath, no crit) unexpected value"
+        
+    for _ in range(100):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {}, {})
+        
+        holy_shock = paladin.abilities["Holy Shock"]
+        
+        paladin.crit = -100
+        paladin.apply_buff_to_self(AvengingWrathAwakening(), 0)
+        
+        target = [targets[0]]
+        _, _, heal_amount, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        
+        expected_heal_amount = round(17980 * 1.15 / 10) * 10
+        assert round(heal_amount / 10) * 10 == expected_heal_amount, "Holy Shock (Avenging Wrath (Awakening), no crit) unexpected value"
+        
+def test_avenging_wrath_crit_chance_holy_shock():
+    iterations = 10000
+    crits = 0
+    
+    for _ in range(iterations):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {"Avenging Wrath": 1}, {"Avenging Wrath: Might": 1})
+        
+        holy_shock = paladin.abilities["Holy Shock"]
+        avenging_wrath = paladin.abilities["Avenging Wrath"]
+        
+        target = [targets[0]]
+        avenging_wrath.cast_healing_spell(paladin, target, 0, False)
+        _, heal_crit, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        if heal_crit:
+            crits += 1
+            
+    holy_shock_bonus_crit = 0.1
+    paladin.remove_or_decrement_buff_on_self(paladin.active_auras["Avenging Wrath"], 0)
+            
+    expected_crit_rate = paladin.crit / 100 + holy_shock_bonus_crit + 0.15
+    observed_crit_rate = crits / iterations
+    
+    print(f"Expected crit rate: {expected_crit_rate}")
+    print(f"Observed crit rate: {observed_crit_rate}")
+    
+    tolerance = 0.02
+    assert abs(observed_crit_rate - expected_crit_rate) <= tolerance, "Observed crit rate does not match expected crit rate (no talents)"
+    
+    iterations = 10000
+    crits = 0
+    
+    for _ in range(iterations):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {"Avenging Wrath": 1}, {"Avenging Wrath: Might": 1})
+        
+        holy_shock = paladin.abilities["Holy Shock"]
+        
+        target = [targets[0]]
+        paladin.apply_buff_to_self(AvengingWrathAwakening(), 0)
+        _, heal_crit, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        if heal_crit:
+            crits += 1
+            
+    holy_shock_bonus_crit = 0.1
+    paladin.remove_or_decrement_buff_on_self(paladin.active_auras["Avenging Wrath (Awakening)"], 0)
+            
+    expected_crit_rate = paladin.crit / 100 + holy_shock_bonus_crit + 0.15
+    observed_crit_rate = crits / iterations
+    
+    print(f"Expected crit rate: {expected_crit_rate}")
+    print(f"Observed crit rate: {observed_crit_rate}")
+    
+    tolerance = 0.02
+    assert abs(observed_crit_rate - expected_crit_rate) <= tolerance, "Observed crit rate does not match expected crit rate (no talents)"
+    
+def test_avenging_wrath_crit_chance_holy_light():
+    iterations = 10000
+    crits = 0
+    
+    for _ in range(iterations):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {"Avenging Wrath": 1}, {"Avenging Wrath: Might": 1})
+        
+        holy_light = paladin.abilities["Holy Light"]
+        avenging_wrath = paladin.abilities["Avenging Wrath"]
+        
+        target = [targets[0]]
+        avenging_wrath.cast_healing_spell(paladin, target, 0, False)
+        _, heal_crit, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+        if heal_crit:
+            crits += 1
+            
+    paladin.remove_or_decrement_buff_on_self(paladin.active_auras["Avenging Wrath"], 0)
+            
+    expected_crit_rate = paladin.crit / 100 + 0.15
+    observed_crit_rate = crits / iterations
+    
+    print(f"Expected crit rate: {expected_crit_rate}")
+    print(f"Observed crit rate: {observed_crit_rate}")
+    
+    tolerance = 0.02
+    assert abs(observed_crit_rate - expected_crit_rate) <= tolerance, "Observed crit rate does not match expected crit rate (no talents)"
+    
+    iterations = 10000
+    crits = 0
+    
+    for _ in range(iterations):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {"Avenging Wrath": 1}, {"Avenging Wrath: Might": 1})
+        
+        holy_light = paladin.abilities["Holy Light"]
+        
+        target = [targets[0]]
+        paladin.apply_buff_to_self(AvengingWrathAwakening(), 0)
+        _, heal_crit, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+        if heal_crit:
+            crits += 1
+            
+    paladin.remove_or_decrement_buff_on_self(paladin.active_auras["Avenging Wrath (Awakening)"], 0)
+            
+    expected_crit_rate = paladin.crit / 100 + 0.15
+    observed_crit_rate = crits / iterations
+    
+    print(f"Expected crit rate: {expected_crit_rate}")
+    print(f"Observed crit rate: {observed_crit_rate}")
+    
+    tolerance = 0.02
+    assert abs(observed_crit_rate - expected_crit_rate) <= tolerance, "Observed crit rate does not match expected crit rate (Awakening)"
+        
+def test_blessing_of_spring():
+    for _ in range(100):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {}, {})
+        
+        holy_shock = paladin.abilities["Holy Shock"]
+        
+        paladin.crit = -100
+        paladin.apply_buff_to_self(BlessingOfSpring(), 0)
+        
+        target = [targets[0]]
+        _, _, heal_amount, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        
+        expected_heal_amount = round(17980 * 1.15 / 10) * 10
+        assert round(heal_amount / 10) * 10 == expected_heal_amount, "Holy Shock (Blessing of Spring, no crit) unexpected value"
+        
+def test_touch_of_light():
+    for _ in range(100):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {}, {})
+        
+        touch_of_light = TouchOfLight(paladin)
+        
+        paladin.crit = -100
+        
+        target = [targets[0]]
+        _, _, heal_amount = touch_of_light.cast_healing_spell(paladin, target, 0, True, exclude_mastery=True)
+        
+        expected_heal_amount = round(26202 / 10) * 10
+        assert expected_heal_amount - 100 <= round(heal_amount / 10) * 10 <= expected_heal_amount + 100, "Touch of Light unexpected value"
+        
+def test_judgment_of_light():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {"Judgment of Light": 1}, {})
+    
+    judgment = paladin.abilities["Judgment"]
+    enemy_target = EnemyTarget("enemyTarget1")
+    
+    paladin.crit = -100
+    
+    target = [targets[0]]
+    _, _, _, judgment_of_light_healing, _ = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    
+    expected_heal_amount = round(2050 * 5 / 10) * 10
+    assert expected_heal_amount - 100 <= round(judgment_of_light_healing / 10) * 10 <= expected_heal_amount + 100, "Judgment of Light unexpected value"
+    
+def test_greater_judgment():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {"Greater Judgment": 1}, {})
+    
+    judgment = paladin.abilities["Judgment"]
+    enemy_target = EnemyTarget("enemyTarget1")
+    
+    paladin.crit = -100
+    
+    target = [targets[0]]
+    _, _, _, _, greater_judgment_healing = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    
+    expected_heal_amount = round(21365 / 10) * 10
+    assert expected_heal_amount - 100 <= round(greater_judgment_healing / 10) * 10 <= expected_heal_amount + 100, "Greater Judgment unexpected value"
+    
+def test_greater_judgment_infusion_of_light():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {"Greater Judgment": 1}, {})
+    
+    holy_shock = paladin.abilities["Holy Shock"]
+    judgment = paladin.abilities["Judgment"]
+    enemy_target = EnemyTarget("enemyTarget1")
+    
+    set_crit_to_max(paladin)
+    target = [targets[0]]
+    _, _, heal_amount, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    paladin.global_cooldown = 0
+    paladin.crit = -100
+    _, _, _, _, greater_judgment_healing = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    
+    expected_heal_amount = round(21365 * 2 / 10) * 10
+    assert expected_heal_amount - 100 <= round(greater_judgment_healing / 10) * 10 <= expected_heal_amount + 100, "Greater Judgment (Infusion of Light) unexpected value"
+    
+def test_greater_judgment_infusion_of_light_inflorescence_of_the_sunwell():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {"Greater Judgment": 1}, {"Inflorescence of the Sunwell": 1})
+    
+    holy_shock = paladin.abilities["Holy Shock"]
+    judgment = paladin.abilities["Judgment"]
+    enemy_target = EnemyTarget("enemyTarget1")
+       
+    set_crit_to_max(paladin)
+    target = [targets[0]]
+    _, _, heal_amount, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    paladin.global_cooldown = 0
+    paladin.crit = -100
+    _, _, _, _, greater_judgment_healing = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    
+    expected_heal_amount = round(21365 * 2.5 / 10) * 10
+    assert expected_heal_amount - 100 <= round(greater_judgment_healing / 10) * 10 <= expected_heal_amount + 100, "Greater Judgment (Infusion of Light, Inflorescence of the Sunwell) unexpected value"
+    
+def test_crusaders_reprieve():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {"Crusader's Reprieve": 1}, {})
+    
+    crusader_strike = paladin.abilities["Crusader Strike"]
+    enemy_target = EnemyTarget("enemyTarget1")
+       
+    set_crit_to_max(paladin)
+    target = [targets[0]]
+    _, _, _, crusaders_reprieve_healing = crusader_strike.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    
+    # TODO fix when stamina calculation is fixed
+    expected_heal_amount = paladin.max_health * 0.02
+    assert expected_heal_amount - 100 <= round(crusaders_reprieve_healing / 10) * 10 <= expected_heal_amount + 100, "Crusader's Reprieve unexpected value"

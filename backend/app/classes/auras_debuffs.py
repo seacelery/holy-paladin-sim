@@ -16,12 +16,14 @@ class JudgmentOfLightDebuff(Debuff):
     
     def consume_stacks(self, caster, damage_targets, healing_targets, current_time):
         judgment_of_light_target = damage_targets
+        total_judgment_of_light_healing = 0
         
         # heal instantly for each stack
         for _ in range(self.current_stacks):          
             heal_value, is_crit = JudgmentOfLightSpell(caster).calculate_heal(caster)
             healing_target = random.choice(healing_targets)
             healing_target.receive_heal(heal_value, caster)
+            total_judgment_of_light_healing += heal_value
             
             update_spell_data_heals(caster.ability_breakdown, "Judgment of Light", healing_target, heal_value, is_crit)
             append_spell_heal_event(caster.events, self.name, caster, healing_target, heal_value, current_time, is_crit)
@@ -36,6 +38,8 @@ class JudgmentOfLightDebuff(Debuff):
             del judgment_of_light_target.target_active_debuffs[self.name]
             append_aura_removed_event(caster.events, self.name, caster, judgment_of_light_target, current_time)
             
+        return total_judgment_of_light_healing
+            
             
 class GreaterJudgmentDebuff(Debuff):
     
@@ -48,10 +52,13 @@ class GreaterJudgmentDebuff(Debuff):
         greater_judgment_target = damage_targets
         greater_judgment_spell = GreaterJudgmentSpell(caster)
         
-        # infusion of light increases the healing by 150%, only 100% without inflo - add this
-        if "Infusion of Light" in caster.active_auras:
+        for buff in caster.active_auras:
+            print(caster.active_auras[buff].name)
+        
+        if "Infusion of Light" in caster.active_auras and caster.is_talent_active("Inflorescence of the Sunwell"):
             greater_judgment_spell.spell_healing_modifier = 2.5
-            caster.remove_or_decrement_buff_on_self(caster.active_auras["Infusion of Light"], current_time)
+        elif "Infusion of Light" in caster.active_auras:
+            greater_judgment_spell.spell_healing_modifier = 2
         else:
             greater_judgment_spell.spell_healing_modifier = 1
         
@@ -72,4 +79,6 @@ class GreaterJudgmentDebuff(Debuff):
         
         # reset mastery to normal
         caster.mastery_multiplier = original_mastery_multiplier
+        
+        return heal_value
     

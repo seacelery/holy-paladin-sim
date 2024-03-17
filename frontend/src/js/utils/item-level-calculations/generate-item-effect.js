@@ -16,7 +16,6 @@ const calculateNewEffect = (effectsData, itemSlot, itemLevel, effectDescription)
             let slotAllocation;
             for (const allocation in itemSlotAllocations) {
                 if (allocation == itemLevel) {
-                    console.log(allocationType)
                     switch (true) {
                         case allocationType === "no_multiplier":
                             slotAllocation = itemSlotAllocations[allocation]["1"];
@@ -26,12 +25,6 @@ const calculateNewEffect = (effectsData, itemSlot, itemLevel, effectDescription)
                             break
                         case allocationType === "rating_multiplier_jewellery":
                             slotAllocation = itemSlotAllocations[allocation]["1"] * ratingMultiplierByItemLevelRingsNeck[itemLevel];
-                            console.log(itemSlotAllocations[allocation]["1"] * ratingMultiplierByItemLevelRingsNeck[itemLevel])
-                            console.log(itemSlotAllocations[allocation]["2"] * ratingMultiplierByItemLevelRingsNeck[itemLevel])
-                            console.log(itemSlotAllocations[allocation]["3"] * ratingMultiplierByItemLevelRingsNeck[itemLevel])
-                            console.log(itemSlotAllocations[allocation]["4"] * ratingMultiplierByItemLevelRingsNeck[itemLevel])
-                            console.log(itemSlotAllocations[allocation]["5"] * ratingMultiplierByItemLevelRingsNeck[itemLevel])
-                            console.log(itemSlotAllocations[allocation]["6"] * ratingMultiplierByItemLevelRingsNeck[itemLevel])
                             break
                         case allocationType === "flat_healing":
                             slotAllocation = itemSlotAllocations[allocation]["6"];
@@ -51,7 +44,6 @@ const calculateNewEffect = (effectsData, itemSlot, itemLevel, effectDescription)
         } else if (effectType === "linear") {
             const scaleFactor = effectData["scale_factor"];
             const baseItemLevel = effectData["base_item_level"];
-            console.log(`effectValue ${effectValue}, scale factor ${scaleFactor}, base ilvl ${baseItemLevel}, new ilvl ${itemLevel}`)
             const newValue = Math.round(effectValue + scaleFactor * (itemLevel - baseItemLevel));
             newValues.push(newValue);
         };

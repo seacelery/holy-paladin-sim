@@ -8,7 +8,7 @@ from app.classes.spells import Spell
 from app.classes.spells_auras import TyrsDeliveranceSpell, TyrsDeliveranceHeal
 from app.classes.spells_healing import HolyShock, HolyLight, FlashOfLight
 from app.classes.spells_damage import Judgment
-from app.classes.auras_buffs import TyrsDeliveranceTargetBuff
+from app.classes.auras_buffs import TyrsDeliveranceTargetBuff, DivinePurpose, Innervate
 
 pp = pprint.PrettyPrinter(width=200)
 
@@ -92,7 +92,7 @@ def test_divine_revelations():
     
     divine_revelations_mana_gain = 1312.5
     remaining_mana = 262500 - 7000 - 6000
-    assert remaining_mana + divine_revelations_mana_gain == paladin.mana, "Holy Light - Divine Revelations mana gain incorrect"
+    assert remaining_mana + divine_revelations_mana_gain == paladin.mana, "Holy Light (Divine Revelations) mana gain incorrect"
     
     #judgment
     paladin = initialise_paladin()
@@ -109,8 +109,179 @@ def test_divine_revelations():
     target = [targets[0]]
     _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
-    _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
+    _, _, _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
     
     divine_revelations_mana_gain = 1312.5
-    remaining_mana = 262500 - 7000 - 6000
-    assert remaining_mana + divine_revelations_mana_gain == paladin.mana, "Judgment - Divine Revelations mana gain incorrect"
+    expected_remaining_mana = 262500 - 7000 - 6000 + divine_revelations_mana_gain
+    assert expected_remaining_mana == paladin.mana, "Judgment (Divine Revelations) mana gain incorrect"
+    
+# Divine Favour's mana reduction is bugged for Flash of Light
+# def test_flash_of_light_divine_favor():     
+#     paladin = initialise_paladin()
+#     targets, glimmer_targets = set_up_paladin(paladin)
+    
+#     reset_talents(paladin)
+#     update_talents(paladin, {}, {"Divine Favor": 1})
+    
+#     divine_favor = paladin.abilities["Divine Favor"]
+#     flash_of_light = paladin.abilities["Flash of Light"]
+    
+#     paladin.crit = -100
+    
+#     target = [targets[0]]
+#     _, _, _ = divine_favor.cast_healing_spell(paladin, target, 0, False)
+#     _, _, _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
+    
+#     expected_remaining_mana = 262500 - 4500
+#     calculated_remaining_mana = paladin.max_mana - flash_of_light.base_mana_cost * paladin.base_mana * 0.5
+    
+#     assert expected_remaining_mana == paladin.mana, "Flash of Light (Divine Favor) mana reduction incorrect"
+#     assert calculated_remaining_mana == paladin.mana, "Flash of Light (Divine Favor) mana reduction incorrect"
+    
+def test_holy_light_divine_favor():     
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {}, {"Divine Favor": 1})
+    
+    divine_favor = paladin.abilities["Divine Favor"]
+    holy_light = paladin.abilities["Holy Light"]
+    
+    paladin.crit = -100
+    
+    target = [targets[0]]
+    _, _, _ = divine_favor.cast_healing_spell(paladin, target, 0, False)
+    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    
+    expected_remaining_mana = 262500 - 3000
+    calculated_remaining_mana = paladin.max_mana - holy_light.base_mana_cost * paladin.base_mana * 0.5
+    
+    assert expected_remaining_mana == paladin.mana, "Holy Light (Divine Favor) mana reduction incorrect"
+    assert calculated_remaining_mana == paladin.mana, "Holy Light (Divine Favor) mana reduction incorrect"
+ 
+def test_flash_of_light_infusion_of_light():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {}, {})
+    
+    holy_shock = paladin.abilities["Holy Shock"]
+    flash_of_light = paladin.abilities["Flash of Light"]
+    
+    set_crit_to_max(paladin)
+    
+    target = [targets[0]]
+    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    paladin.global_cooldown = 0
+    paladin.crit = -100
+    _, _, _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
+    
+    expected_remaining_mana = 262500 - 2700 - 7000
+    calculated_remaining_mana = paladin.max_mana - flash_of_light.base_mana_cost * paladin.base_mana * 0.3 - holy_shock.base_mana_cost * paladin.base_mana
+    
+    assert expected_remaining_mana == paladin.mana, "Flash of Light (Infusion of Light) mana reduction incorrect"
+    assert calculated_remaining_mana == paladin.mana, "Flash of Light (Infusion of Light) mana reduction incorrect" 
+    
+def test_flash_of_light_infusion_of_light_inflorescence_of_the_sunwell():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {}, {"Inflorescence of the Sunwell": 1})
+    
+    holy_shock = paladin.abilities["Holy Shock"]
+    flash_of_light = paladin.abilities["Flash of Light"]
+    
+    set_crit_to_max(paladin)
+    
+    target = [targets[0]]
+    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    paladin.global_cooldown = 0
+    paladin.crit = -100
+    _, _, _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
+    
+    expected_remaining_mana = 262500 - 7000
+    calculated_remaining_mana = paladin.max_mana - flash_of_light.base_mana_cost * paladin.base_mana * 0 - holy_shock.base_mana_cost * paladin.base_mana
+    
+    assert expected_remaining_mana == paladin.mana, "Flash of Light (Infusion of Light, Inflorescence of the Sunwell) mana reduction incorrect"
+    assert calculated_remaining_mana == paladin.mana, "Flash of Light (Infusion of Light, Inflorescence of the Sunwell) mana reduction incorrect"
+    
+def test_divine_purpose():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {"Divine Purpose": 1}, {"Light of Dawn": 1})
+    
+    word_of_glory = paladin.abilities["Word of Glory"]
+    light_of_dawn = paladin.abilities["Light of Dawn"]
+    
+    
+    target = [targets[0]]
+    paladin.apply_buff_to_self(DivinePurpose(), 0)
+    _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+    paladin.global_cooldown = 0
+    paladin.apply_buff_to_self(DivinePurpose(), 0)
+    _, _, _, _ = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
+    
+    expected_remaining_mana = 262500
+    
+    assert expected_remaining_mana == paladin.mana, "Divine Purpose mana reduction incorrect"
+    
+def test_innervate():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {}, {"Light of Dawn": 1})
+    
+    holy_shock = paladin.abilities["Holy Shock"]
+    holy_light = paladin.abilities["Holy Light"]
+    flash_of_light = paladin.abilities["Flash of Light"]
+    word_of_glory = paladin.abilities["Word of Glory"]
+    light_of_dawn = paladin.abilities["Light of Dawn"]
+    
+    target = [targets[0]]
+    paladin.apply_buff_to_self(Innervate(), 0)
+    paladin.holy_power = 3
+    _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+    paladin.global_cooldown = 0
+    paladin.holy_power = 3
+    _, _, _, _ = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
+    paladin.global_cooldown = 0
+    _, _, _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
+    paladin.global_cooldown = 0
+    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    paladin.global_cooldown = 0
+    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    
+    expected_remaining_mana = 262500
+    
+    assert expected_remaining_mana == paladin.mana, "Innervate mana reduction incorrect"
+    
+def test_reclamation():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {}, {"Reclamation": 1})
+    
+    holy_shock = paladin.abilities["Holy Shock"]
+    crusader_strike = paladin.abilities["Crusader Strike"]
+    
+    # 70% health means we expect 3% mana refund
+    paladin.average_raid_health_percentage = 0.7
+    
+    target = [targets[0]]
+    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    
+    expected_remaining_mana = 262500 - 7000 + (7000 * 0.03)
+    assert expected_remaining_mana == paladin.mana, "Holy Shock (Reclamation) mana reduction incorrect"
+    
+    paladin.global_cooldown = 0
+    _, _, _, _ = crusader_strike.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
+    
+    expected_remaining_mana = expected_remaining_mana - 1500 + (1500 * 0.03)
+    assert expected_remaining_mana == paladin.mana, "Crusader Strike (Reclamation) mana reduction incorrect"

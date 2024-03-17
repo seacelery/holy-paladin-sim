@@ -43,6 +43,8 @@ class Judgment(Spell):
                 self.spell_damage_modifier *= 1.3
             
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
+        judgment_of_light_healing = 0
+        greater_judgment_healing = 0
         if cast_success:
             
             increment_holy_power(self, caster)
@@ -84,6 +86,22 @@ class Judgment(Spell):
                     self.bonus_crit = 0
                               
                 
+            
+
+            # apply greater judgment, add talent condition
+            if caster.is_talent_active("Greater Judgment"):
+                greater_judgment_debuff = GreaterJudgmentDebuff()
+                target.apply_debuff_to_target(greater_judgment_debuff, current_time)
+                append_aura_applied_event(caster.events, "Greater Judgment", caster, target, current_time)
+                greater_judgment_healing = greater_judgment_debuff.consume_greater_judgment(caster, target, healing_targets, current_time)
+            
+            # apply judgment of light, add talent condition
+            if caster.is_talent_active("Judgment of Light"):
+                judgment_of_light_debuff = JudgmentOfLightDebuff()
+                target.apply_debuff_to_target(judgment_of_light_debuff, current_time, stacks_to_apply=5, max_stacks=5)
+                append_aura_applied_event(caster.events, "Judgment of Light", caster, target, current_time, current_stacks=5, max_stacks=5)
+                judgment_of_light_healing = judgment_of_light_debuff.consume_stacks(caster, target, healing_targets, current_time)
+                
             # decrement stacks or remove infusion of light
             if "Infusion of Light" in caster.active_auras:
                 # imbued infusions
@@ -107,22 +125,8 @@ class Judgment(Spell):
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "expired")
                     append_aura_removed_event(caster.buff_events, "Infusion of Light", caster, caster, current_time)
-
-            # apply greater judgment, add talent condition
-            if caster.is_talent_active("Greater Judgment"):
-                greater_judgment_debuff = GreaterJudgmentDebuff()
-                target.apply_debuff_to_target(greater_judgment_debuff, current_time)
-                append_aura_applied_event(caster.events, "Greater Judgment", caster, target, current_time)
-                greater_judgment_debuff.consume_greater_judgment(caster, target, healing_targets, current_time)
-            
-            # apply judgment of light, add talent condition
-            if caster.is_talent_active("Judgment of Light"):
-                judgment_of_light_debuff = JudgmentOfLightDebuff()
-                target.apply_debuff_to_target(judgment_of_light_debuff, current_time, stacks_to_apply=5, max_stacks=5)
-                append_aura_applied_event(caster.events, "Judgment of Light", caster, target, current_time, current_stacks=5, max_stacks=5)
-                judgment_of_light_debuff.consume_stacks(caster, target, healing_targets, current_time)
                 
-        return cast_success, spell_crit, spell_damage
+        return cast_success, spell_crit, spell_damage, judgment_of_light_healing, greater_judgment_healing
            
             
 class CrusaderStrike(Spell):
@@ -144,6 +148,7 @@ class CrusaderStrike(Spell):
             self.spell_damage_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
         
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
+        crusaders_reprieve_heal = 0
         if cast_success:
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
@@ -170,5 +175,5 @@ class CrusaderStrike(Spell):
                 update_spell_data_heals(caster.ability_breakdown, "Crusader's Reprieve", caster, crusaders_reprieve_heal, False)
                 append_spell_heal_event(caster.events, "Crusader's Reprieve", caster, caster, crusaders_reprieve_heal, current_time, is_crit=False)
                 
-        return cast_success, spell_crit, spell_damage
+        return cast_success, spell_crit, spell_damage, crusaders_reprieve_heal
 

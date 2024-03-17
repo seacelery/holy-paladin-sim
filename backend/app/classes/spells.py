@@ -114,7 +114,7 @@ class Spell:
 
         return True, spell_crit, damage_value
         
-    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+    def cast_healing_spell(self, caster, targets, current_time, is_heal, exclude_mastery=False):
         if not self.can_cast(caster):         
             return False, False, 0
         
@@ -159,7 +159,7 @@ class Spell:
                 multi_target_healing = [f"{self.name}: ", []]            
             for target in targets:            
                 # After calculate_heal, before it potentially modifies spell_crit
-                healing_value, is_crit = self.calculate_heal(caster, self.bonus_crit, self.bonus_versatility, self.bonus_mastery)
+                healing_value, is_crit = self.calculate_heal(caster, bonus_crit=self.bonus_crit, bonus_versatility=self.bonus_versatility, bonus_mastery=self.bonus_mastery, exclude_mastery=exclude_mastery)
                 
                 mana_cost = self.get_mana_cost(caster)
                 healing_value = round(healing_value) 
@@ -235,29 +235,29 @@ class Spell:
     def calculate_cast_time(self, caster):
         return (self.base_cast_time / caster.haste_multiplier) * self.cast_time_modifier
     
-    def calculate_heal(self, caster, bonus_crit=0, bonus_crit_healing=0, bonus_versatility=0, bonus_mastery=0):
+    def calculate_heal(self, caster, bonus_crit=0, bonus_crit_healing=0, bonus_versatility=0, bonus_mastery=0, exclude_mastery=False):
         spell_power = caster.spell_power
         
         crit_multiplier = 1
         is_crit = False
         crit_chance = caster.crit + (self.bonus_crit * 100)
+        # print(crit_chance)
         caster_crit_healing_modifier = 1
         random_num = random.random() * 100
         if random_num <= crit_chance:
             crit_multiplier = 2 + (self.bonus_crit_healing / 100)
             caster_crit_healing_modifier = caster.crit_healing_modifier
             is_crit = True
-          
-        mastery_multiplier = 1 + ((caster.mastery_multiplier + self.bonus_mastery) - 1) * caster.mastery_effectiveness
+        
+        if exclude_mastery:
+            mastery_multiplier = 1
+        else:
+            mastery_multiplier = 1 + ((caster.mastery_multiplier + self.bonus_mastery) - 1) * caster.mastery_effectiveness
+            
         versatility_multiplier = caster.versatility_multiplier + self.bonus_versatility
         
         # print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
         
-        # overrides
-        # spell_power = 8351
-        # versatility_multiplier = 1.1782
-        # mastery_multiplier = 1.261
-        # print(f"{self.name}, SP: {spell_power}, COEFF: {self.SPELL_POWER_COEFFICIENT}, caster multiplier: {caster.healing_multiplier}, vers: {versatility_multiplier}, crit: {crit_multiplier}, mastery: {mastery_multiplier}, spell modifier: {self.spell_healing_modifier}")
         return spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier * versatility_multiplier * crit_multiplier * mastery_multiplier * self.spell_healing_modifier * caster_crit_healing_modifier, is_crit
     
     def calculate_damage(self, caster, bonus_crit=0, bonus_versatility=0):
@@ -332,7 +332,7 @@ class Spell:
                                   AlliedChestplateOfGenerosity, ElementalLariat, VerdantTether, VerdantConduit
                                  )
         
-        def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False):
+        def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False):
             # time since last attempt makes it so the number of events happening has very little impact on the number of procs that occur
             proc_occurred = False
             
@@ -351,7 +351,7 @@ class Spell:
                 caster.time_since_last_rppm_proc[effect.name] = 0
                 target = targets[0]
                 if is_heal:
-                    effect_heal, is_crit = effect.calculate_heal(caster)
+                    effect_heal, is_crit = effect.calculate_heal(caster, exclude_mastery=exclude_mastery)
                     target.receive_heal(effect_heal, caster)
                     
                     update_spell_data_heals(caster.ability_breakdown, effect.name, target, effect_heal, is_crit)
@@ -373,7 +373,7 @@ class Spell:
         
         if caster.is_talent_active("Touch of Light"):        
             touch_of_light = TouchOfLight(caster)        
-            try_proc_rppm_effect(touch_of_light, is_heal=True)
+            try_proc_rppm_effect(touch_of_light, is_heal=True, exclude_mastery=True)
             
         if "Sophic Devotion" in caster.bonus_enchants:
             sophic_devotion = SophicDevotion()

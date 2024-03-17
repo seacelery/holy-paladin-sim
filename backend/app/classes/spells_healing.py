@@ -709,7 +709,7 @@ class HolyLight(Spell):
     BASE_CAST_TIME = 2.5
     
     def __init__(self, caster):
-        super().__init__("Holy Light", mana_cost=HolyLight.MANA_COST, holy_power_gain=HolyLight.HOLY_POWER_GAIN, base_cast_time=HolyLight.BASE_CAST_TIME, is_heal=True)
+        super().__init__("Holy Light", base_mana_cost=HolyLight.MANA_COST, holy_power_gain=HolyLight.HOLY_POWER_GAIN, base_cast_time=HolyLight.BASE_CAST_TIME, is_heal=True)
         # tower of radiance
         if caster.is_talent_active("Tower of Radiance"):
             self.holy_power_gain = 1
@@ -945,6 +945,8 @@ class WordOfGlory(Spell):
                     self.spell_healing_modifier *= 1.6
         
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        total_glimmer_healing = 0
+        afterimage_heal = 0
         if cast_success:
             caster.holy_power -= self.holy_power_cost
             
@@ -978,6 +980,8 @@ class WordOfGlory(Spell):
                             
                             if caster.is_talent_active("Glorious Dawn"):
                                 glimmer_heal_value *= 1.1
+                                
+                            total_glimmer_healing += glimmer_heal_value
                             
                             # see healing by target for each glimmer proc
                             # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
@@ -1048,7 +1052,7 @@ class WordOfGlory(Spell):
                 else:
                     caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=12)
                     
-        return cast_success, spell_crit, heal_amount 
+        return cast_success, spell_crit, heal_amount, total_glimmer_healing, afterimage_heal
            
             
 class LightOfDawn(Spell):
@@ -1079,6 +1083,7 @@ class LightOfDawn(Spell):
                     self.spell_healing_modifier *= 1.6
         
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        total_glimmer_healing = 0
         if cast_success:
             caster.holy_power -= self.holy_power_cost
             
@@ -1112,6 +1117,8 @@ class LightOfDawn(Spell):
                             
                             if caster.is_talent_active("Glorious Dawn"):
                                 glimmer_heal_value *= 1.1
+                                
+                            total_glimmer_healing += glimmer_heal_value
                             
                             # see healing by target for each glimmer proc
                             # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
@@ -1168,7 +1175,7 @@ class LightOfDawn(Spell):
                 else:
                     caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=12)
                     
-        return cast_success, spell_crit, heal_amount 
+        return cast_success, spell_crit, heal_amount , total_glimmer_healing
 
 
 class LightsHammerSpell(Spell):
@@ -1189,7 +1196,7 @@ class LightsHammerSpell(Spell):
 class LightsHammerHeal(Spell):
     
     SPELL_ID = 114158
-    SPELL_POWER_COEFFICIENT = 0.4
+    SPELL_POWER_COEFFICIENT = 0.4 * 0.8
     TARGET_COUNT = 6
     
     def __init__(self, caster):
