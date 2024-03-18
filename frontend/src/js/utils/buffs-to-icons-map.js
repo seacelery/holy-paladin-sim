@@ -113,6 +113,8 @@ const buffsToIconsMap = {
     "Blossom of Amirdrassil Large HoT": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
     "Blossom of Amirdrassil Small HoT": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
 
+    "Nymue's Unraveling Spindle": "https://render.worldofwarcraft.com/eu/icons/56/inv_cloth_outdooremeralddream_d_01_buckle.jpg",
+
     // embellishments
     "Potion Absorption Inhibitor": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_gooamber_drop.jpg",
     "Verdant Tether": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_tailoring_tailoringconsumable_color4.jpg",

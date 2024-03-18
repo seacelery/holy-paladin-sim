@@ -96,8 +96,8 @@ const importCharacter = async () => {
     let characterName = document.getElementById("character-name-input").value.toLowerCase();
     let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
 
-    characterName = "daisu";
-    characterRealm = "aszune";
+    // characterName = "daisu";
+    // characterRealm = "aszune";
 
     return fetch(`http://127.0.0.1:5000/import_character?character_name=${characterName}&realm=${characterRealm}`, {
         credentials: "include"
@@ -124,8 +124,8 @@ const updateStats = async () => {
     let characterName = document.getElementById("character-name-input").value.toLowerCase();
     let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
 
-    characterName = "daisu";
-    characterRealm = "aszune";
+    // characterName = "daisu";
+    // characterRealm = "aszune";
     const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
 
     return fetch(`http://127.0.0.1:5000/fetch_updated_data?character_name=${characterName}&realm=${characterRealm}&custom_equipment=${customEquipment}`, {
@@ -281,6 +281,10 @@ const createSimulationResults = (simulationData) => {
 
     // add a display for hps, encounter length, and iterations
     const resultDetailsContainer = createElement("div", `result-details-container-${containerCount}`, null);
+    const resultName = createElement("div", `result-details-name-${containerCount}`, null);
+    resultName.innerHTML = `<span>Name: </span><span style="color: var(--paladin-font)">${simulationData.simulation_details.paladin_name}</span>`;
+    resultDetailsContainer.appendChild(resultName);
+
     const resultHPS = createElement("div", `result-details-hps-${containerCount}`, null);
     resultHPS.innerHTML = `<span>HPS: </span><span style="color: var(--healing-font)">${formatThousands(simulationData.simulation_details.average_hps)}</span>`;
     resultDetailsContainer.appendChild(resultHPS);
@@ -290,7 +294,7 @@ const createSimulationResults = (simulationData) => {
     resultDetailsContainer.appendChild(resultEncounterLength);
 
     const resultIterations = createElement("div", `result-details-iterations-${containerCount}`, null);
-    resultIterations.innerHTML = `<span>Iterations: </span><span style="color: var(--paladin-font)">${simulationData.simulation_details.iterations}</span>`
+    resultIterations.innerHTML = `<span>Iterations: </span><span style="color: var(--mana)">${simulationData.simulation_details.iterations}</span>`
     
     resultDetailsContainer.appendChild(resultIterations);
 

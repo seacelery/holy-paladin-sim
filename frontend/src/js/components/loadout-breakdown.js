@@ -210,9 +210,9 @@ const createLoadoutBreakdown = (simulationData, containerCount) => {
                 for (const stat in sortedStats) {
                     const equipmentTooltipStat = createElement("div", "loadout-equipment=tooltip-stats", null);
                     equipmentTooltipStat.textContent = `+${itemData["stats"][stat]} ${stat.charAt(0).toUpperCase() + stat.slice(1)}`;
-                    if (stat === "leech") {
+                    if (stat.toLowerCase() === "leech") {
                         equipmentTooltipStat.style.color = "var(--leech-font)";
-                    } else if (stat === "stamina") {
+                    } else if (stat.toLowerCase() === "stamina" || stat.toLowerCase() === "combat_rating_sturdiness") {
                         continue
                     } else {
                         equipmentTooltipStat.style.color = `var(--stat-${stat})`;
@@ -221,7 +221,7 @@ const createLoadoutBreakdown = (simulationData, containerCount) => {
                 };
             };
 
-            if (itemData["enchantments"]) {
+            if (itemData["enchantments"] && itemData["enchantments"].length > 0) {
                 const equipmentTooltipEnchant = createElement("div", "loadout-equipment-tooltip-enchant", null);
                 equipmentTooltipEnchant.textContent = itemData["enchantments"][0].split(" |")[0];
                 equipmentTooltipEnchant.style.color = "var(--rarity-uncommon)";

@@ -1,5 +1,5 @@
 from .spells import Spell
-from .auras_buffs import MirrorOfFracturedTomorrowsBuff, SmolderingSeedlingActive
+from .auras_buffs import MirrorOfFracturedTomorrowsBuff, SmolderingSeedlingActive, NymuesUnravelingSpindleBuff
 
 
 class Trinket(Spell):
@@ -60,4 +60,4 @@ class NymuesUnravelingSpindle(Trinket):
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
-            print(current_time)
+            caster.apply_buff_to_self(NymuesUnravelingSpindleBuff(caster), current_time)

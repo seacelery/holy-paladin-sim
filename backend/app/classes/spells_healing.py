@@ -129,6 +129,9 @@ class HolyShock(Spell):
                     
                     total_glimmer_healing += glimmer_heal_value
                     
+                    caster.total_glimmer_healing += glimmer_heal_value
+                    caster.glimmer_hits += 1
+                    
                     # see healing by target for each glimmer proc
                     # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                     # print(glimmer_healing)
@@ -200,7 +203,7 @@ class HolyShock(Spell):
 class Daybreak(Spell):
     
     SPELL_ID = 414170
-    BASE_COOLDOWN = 60
+    BASE_COOLDOWN = 45
     
     def __init__(self, caster):
         super().__init__("Daybreak", cooldown=Daybreak.BASE_COOLDOWN)  
@@ -235,6 +238,9 @@ class Daybreak(Spell):
                     glimmer_heal_value *= 1.1
                     
                 total_glimmer_healing += glimmer_heal_value
+                
+                caster.total_glimmer_healing += glimmer_heal_value
+                caster.glimmer_hits += 1
                 
                 # see healing by target for each glimmer proc
                 # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
@@ -369,6 +375,9 @@ class RisingSunlightHolyShock(Spell):
                         
                     total_glimmer_healing += glimmer_heal_value
                     
+                    caster.total_glimmer_healing += glimmer_heal_value
+                    caster.glimmer_hits += 1
+                    
                     # see healing by target for each glimmer proc
                     # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                     # print(glimmer_healing)
@@ -438,7 +447,8 @@ class DivineToll(Spell):
             caster.events.append(f"{format_time(current_time)}: {caster.name} cast {self.name}")
 
             # each holy shock procs glimmer exactly once on its target
-            for i in range(5):
+            # bugged to heal 6 targets instead of 5 (usually)
+            for i in range(6):
                 caster.global_cooldown = 0
                 non_glimmer_targets = [glimmer_target for glimmer_target in caster.potential_healing_targets if "Glimmer of Light" not in glimmer_target.target_active_buffs]
                 non_glimmer_non_beacon_targets = [t for t in non_glimmer_targets if t not in caster.beacon_targets] 
@@ -570,6 +580,9 @@ class DivineTollHolyShock(Spell):
                         # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                         # print(glimmer_healing)
                     total_glimmer_healing += glimmer_heal_value
+                    
+                    caster.total_glimmer_healing += glimmer_heal_value
+                    caster.glimmer_hits += 1
                     
                     for target in glimmer_targets:    
                         target.receive_heal(glimmer_heal_value, caster)
@@ -983,6 +996,9 @@ class WordOfGlory(Spell):
                                 
                             total_glimmer_healing += glimmer_heal_value
                             
+                            caster.total_glimmer_healing += glimmer_heal_value
+                            caster.glimmer_hits += 1
+                            
                             # see healing by target for each glimmer proc
                             # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
                             # print(glimmer_healing)
@@ -1119,6 +1135,9 @@ class LightOfDawn(Spell):
                                 glimmer_heal_value *= 1.1
                                 
                             total_glimmer_healing += glimmer_heal_value
+                            
+                            caster.total_glimmer_healing += glimmer_heal_value
+                            caster.glimmer_hits += 1
                             
                             # see healing by target for each glimmer proc
                             # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")

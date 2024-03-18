@@ -1132,6 +1132,8 @@ class Simulation:
         
         # pp.pprint(average_ability_breakdown)
         # pp.pprint(self.paladin.events)
+        print(self.paladin.total_glimmer_healing)
+        print(self.paladin.glimmer_hits)
     
         end_time = time.time()
         simulation_time = end_time - start_time

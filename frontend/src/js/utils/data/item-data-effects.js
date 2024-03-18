@@ -368,6 +368,81 @@ const itemDataEffects = [
         "enchantments": [],
         "gems": []
     },
+    {
+        "id": 190526,
+        "name": "Allied Wristguard of Companionship",
+        "item_slot": "Wrist",
+        "icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_bracer_plate_raidwarriorprimalist_d_01.jpg",
+        "base_item_level": 382,
+        "quality": "Epic",
+        "effects": [
+            {
+                "name": "Allied Wristgaurds of Companionship", 
+                "description": "Grants *46 Versatility for every ally in a 30 yard radius, stacking up to 4 times.", 
+                "id": 395959,
+                "type": "embellishment",
+                "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 382, "base_value": 46, "effect_coefficient": 0.052152, "effect_type": "scalar"}]
+            }
+        ],
+        "stats": {
+            "Intellect": 195,
+            "Stamina": 590,
+            "Critical Strike": 146,
+            "Haste": 206
+        },
+        "limit": "Unique-Equipped: Embellished (2)",
+        "enchantments": [],
+        "gems": []
+    },
+    {
+        "id": 193001,
+        "name": "Elemental Lariat",
+        "item_slot": "Neck",
+        "icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_necklace_necklace1_color3.jpg",
+        "base_item_level": 382,
+        "quality": "Epic",
+        "effects": [
+            {
+                "name": "Elemental Lariat", 
+                "description": "Your spells and abilities have a chance to empower one of your socketed elemental gems, granting *407 of their associated stat. Lasts 5 sec and an additional 1 sec per elemental gem.", 
+                "id": 375323,
+                "type": "embellishment",
+                "effect_values": [{"allocation_type": "rating_multiplier_jewellery", "base_item_level": 382, "base_value": 407, "effect_coefficient": 0.458195, "effect_type": "scalar"}]
+            }
+        ],
+        "stats": {
+            "Stamina": 590,
+            "Versatility": 438,
+            "Mastery": 438
+        },
+        "limit": "Unique-Equipped: Embellished (2)",
+        "enchantments": [],
+        "gems": []
+    },
+    {
+        "id": 208615,
+        "name": "Nymue's Unraveling Spindle",
+        "item_slot": "Trinket",
+        "icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_cloth_outdooremeralddream_d_01_buckle.jpg",
+        "base_item_level": 441,
+        "quality": "Epic",
+        "effects": [
+            {
+                "name": "Nymue's Unraveling Spindle",
+                "id": 422956,
+                "description": "Use: Channel to unravel your target's essence, dealing 223,000 Nature damage over 3 sec and granting you up to *2,750 Mastery for 18 sec. \r\n\r\nDamage increased by 30% against immobilized targets. (2 Min Cooldown)",
+                "effect_values": [
+                    {"base_value": 2750, "effect_type": "scalar", "effect_coefficient": 2.263035, "allocation_type": "rating_multiplier"}
+                ]
+            }
+        ],
+        "stats": {
+            "Intellect": 570
+        },
+        "limit": null,
+        "enchantments": [],
+        "gems": []
+    },
 ];
 
 export default itemDataEffects;

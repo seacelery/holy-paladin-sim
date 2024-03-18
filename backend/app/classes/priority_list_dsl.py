@@ -192,6 +192,12 @@ def parse_condition(condition_str):
                 condition["operator"] = part_split[2]
                 condition["value"] = part_split[3]
                 
+            elif "Previous Ability" in part or "previous ability" in part or "Previous ability" in part:
+                part_split = part.split(" ")
+                condition["keyword"] = " ".join(part_split[0:2])
+                condition["operator"] = part_split[2]
+                condition["value"] = " ".join(part_split[3:])
+                
         if "Potion" in action_name:
             condition["extra_condition"] = "potion"
 
@@ -280,6 +286,10 @@ def condition_to_lambda(sim_instance, all_conditions):
                 elif condition["keyword"].lower() == "race":
                     race = sim_instance.paladin.race
                     result = race == condition["value"]
+                    
+                elif condition["keyword"].lower() == "previous ability":
+                    previous_ability = sim_instance.previous_ability
+                    result = previous_ability == condition["value"]
                     
                 elif condition["keyword"].lower() == "stacks":    
                     if condition["name"] in sim_instance.paladin.active_auras:

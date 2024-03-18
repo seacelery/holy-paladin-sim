@@ -98781,7 +98781,10 @@ const itemData = [
             {
                 "name": "Nymue's Unraveling Spindle",
                 "id": 422956,
-                "description": "Use: Channel to unravel your target's essence, dealing 223,000 Nature damage over 3 sec and granting you up to 2,750 Mastery for 18 sec. \r\n\r\nDamage increased by 30% against immobilized targets. (2 Min Cooldown)"
+                "description": "Use: Channel to unravel your target's essence, dealing 223,000 Nature damage over 3 sec and granting you up to *2,750 Mastery for 18 sec. \r\n\r\nDamage increased by 30% against immobilized targets. (2 Min Cooldown)",
+                "effect_values": [
+                    {"base_value": 2750, "effect_type": "scalar", "effect_coefficient": 2.263035, "allocation_type": "rating_multiplier"}
+                ]
             }
         ],
         "stats": {

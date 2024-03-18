@@ -2391,6 +2391,10 @@ input:focus {
 
 [class*="result-details-hps"], [class*="result-details-encounter-length"] {
     margin-right: 30px;
+}
+
+[class*="result-details-name"] {
+    margin-right: 40px;
     text-align: left;
 }
 
@@ -2931,7 +2935,7 @@ tr {
     display: block;
     padding-top: 8px;
     
-    width: 100px;
+    width: 150px;
     height: 40px;
 
     border: 1px solid var(--border-colour-3);
@@ -3316,7 +3320,7 @@ tr {
 /* priority grid css */
 .priority-grid-container {
     display: grid;
-    grid-template-columns: 0.3fr 0.2fr 0.35fr 0.7fr 0.35fr 1fr 0.35fr 0.5fr;
+    grid-template-columns: 0.3fr 0.2fr 0.35fr 0.63fr 0.35fr 1fr 0.35fr 0.5fr;
     width: calc(100% + 9px); 
     padding-right: 1px;
 
@@ -3345,7 +3349,7 @@ tr {
 
 .priority-grid-header-row {
     display: grid;
-    grid-template-columns: 0.3fr 0.2fr 0.35fr 0.7fr 0.35fr 1fr 0.35fr 0.5fr;
+    grid-template-columns: 0.3fr 0.2fr 0.35fr 0.63fr 0.35fr 1fr 0.35fr 0.5fr;
 }
 
 .priority-grid-header-cell:last-child {
@@ -3532,7 +3536,7 @@ tr {
     margin: 2.5px;
 
     width: 30px;
-    height: 30px;
+    height: 45px;
 }
 
 .aura-icon-overlay-container, .cooldown-icon-overlay-container {
@@ -3884,6 +3888,8 @@ tr {
 }
 
 .loadout-priority-list {
+    max-height: 450px;
+
     overflow: auto;
 }
 

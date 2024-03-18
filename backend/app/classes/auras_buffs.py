@@ -1487,6 +1487,22 @@ class BlossomOfAmirdrassilSmallHoT(HoT):
         return healing_per_tick, is_crit
     
 
+class NymuesUnravelingSpindleBuff(Buff):
+    def __init__(self, caster):
+        super().__init__("Nymue's Unraveling Spindle", 18, base_duration=18)
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # mastery buff
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):        
+        caster.update_stat("mastery", self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", -self.trinket_first_value)
+        
+
 # embellishments
 class PotionAbsorptionInhibitor(Buff):
     

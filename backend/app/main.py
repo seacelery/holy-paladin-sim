@@ -33,12 +33,11 @@ from app.classes.simulation import Simulation
 from app.classes.paladin import Paladin
 from app.classes.target import Target, BeaconOfLight
 from app.utils import cache, battlenet_api
+from app.classes.config import CLIENT_ID, CLIENT_SECRET
 
 pp = pprint.PrettyPrinter(width=200)
 
-client_id = "57cdb961fae04b8f9dc4d3caea3716db"
-client_secret = "rIIdFk2In9dQfBUxbPmH6ee4DDDO6oUV"
-access_token = battlenet_api.get_access_token(client_id, client_secret)
+access_token = battlenet_api.get_access_token(CLIENT_ID, CLIENT_SECRET)
 
 def save_data_to_file(data, filename):
     with open(filename, "w") as f:
@@ -68,8 +67,8 @@ def fetch_updated_data(paladin):
 def run_simulation(simulation):
     return simulation.display_results()
     
-if __name__ == "__main__":
-    paladin, healing_targets = import_character("daisu", "aszune")
+# if __name__ == "__main__":
+#     paladin, healing_targets = import_character("daisu", "aszune")
     
-    simulation = initialise_simulation(paladin, healing_targets, encounter_length=30, iterations=1, time_warp_time=0)
-    run_simulation(simulation)
+#     simulation = initialise_simulation(paladin, healing_targets, encounter_length=30, iterations=1, time_warp_time=0)
+#     run_simulation(simulation)

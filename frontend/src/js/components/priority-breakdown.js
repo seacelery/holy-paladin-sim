@@ -61,18 +61,32 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     playerAurasFilter.appendChild(playerAurasFilterModal);
     playerAurasFilter.appendChild(playerAurasFilterButton);
 
-    // hardcode the order and track the auras present in the current simulation
-    const playerAurasModalIconOrder = ["Avenging Wrath", "Blessing of Dawn", "Blessing of Dusk", "Infusion of Light", "Divine Purpose", 
-                                       "Tyr's Deliverance (self)", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring",
-                                       "Rising Sunlight", "First Light", "Divine Favor", "Awakening", "Awakening READY!!!!!!"];
+    // hardcode the order & excluded auras and track the auras present in the current simulation
+    const excludedAuras = [
+        "Arcane Intellect", "Mark of the Wild", "Buzzing Rune", "Howling Rune", "Chirping Rune", "Hissing Rune",
+        "Phial of Tepid Versatility", "Phial of Elemental Chaos", "Iced Phial of Corrupting Rage", "Draconic Augment Rune",
+        "Grand Banquet of the Kalu'ak", "Timely Demise", "Filet of Fangs", "Seamoth Surprise", "Salt-Baked Fishcake",
+        "Feisty Fish Sticks", "Aromatic Seafood Platter", "Sizzling Seafood Medley", "Revenge, Served Cold",
+        "Thousandbone Tongueslicer", "Great Cerulean Sea", "Pip's Emerald Friendship Badge", "Elemental Lariat"
+    ];
+    const playerAurasModalIconOrder = [
+        "Avenging Wrath", "Blessing of Dawn", "Blessing of Dusk", "Infusion of Light", "Divine Purpose", 
+        "Tyr's Deliverance (self)", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring",
+        "Rising Sunlight", "First Light", "Divine Favor", "Awakening", "Awakening READY!!!!!!"
+    ];
     const currentSimulationPlayerAuras = [];
 
     for (const timestamp in priorityData) {
         const playerAurasData = priorityData[timestamp].player_active_auras;
         for (const auraName in playerAurasData) {
+            if (excludedAuras.includes(auraName)) {
+                continue;
+            };
+
             if (!playerAurasModalIconOrder.includes(auraName)) {
                 playerAurasModalIconOrder.push(auraName);      
             };
+
             if (!currentSimulationPlayerAuras.includes(auraName)) {
                 currentSimulationPlayerAuras.push(auraName);
             };  
@@ -237,7 +251,10 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const playerAurasCell = createElement("div", "priority-grid-player-auras-cell priority-grid-cell", null);
             const playerAurasContainer = createElement("div", "priority-grid-player-auras-container", null);
             const playerAuras = timestampData.player_active_auras;
-            for (const aura in playerAuras) {                
+            for (const aura in playerAuras) {   
+                if (!currentSimulationPlayerAuras.includes(aura)) {
+                    continue
+                };  
                 const formattedAuraName = aura.toLowerCase().replaceAll(" (self)", "").replaceAll(" ", "-").replaceAll("'", "");
                 // create an icon for each aura and show duration & stacks
                 const auraIconContainer = createElement("div", `priority-grid-player-auras-icon-container-${formattedAuraName}`, null);

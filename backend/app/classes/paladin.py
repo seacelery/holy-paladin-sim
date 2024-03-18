@@ -238,6 +238,9 @@ class Paladin:
         self.holy_power_breakdown = {}
         self.priority_breakdown = {} 
         
+        self.total_glimmer_healing = 0
+        self.glimmer_hits = 0
+        
     def reset_state(self):
         current_state = copy.deepcopy(self.initial_state)
         self.__dict__.update(current_state.__dict__)
@@ -391,7 +394,7 @@ class Paladin:
             effect_count = effect_data["count"]
             
             item_effect_buffs[buff_class_map.get(effect_name)] = effect_count
-            
+        
         for buff, buff_count in item_effect_buffs.items():
             buff_instance = buff(self)
             if buff_instance.base_duration == 10000:
