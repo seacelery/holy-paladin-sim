@@ -469,28 +469,16 @@ const convertPasteToPriorityList = (pastedCode) => {
 
                 const priorityListAndButton = createElement("div", "priority-list-permanent-and-button priority-list-button priority-list-permanent-button", null);
                 priorityListAndButton.textContent = "AND";
-                priorityListAndButton.addEventListener("click", () => {
-                    lastCondition.remove();
-                    priorityListAndButton.remove();
-                    updatePriorityList();
-                });
-
+            
                 newItem.insertBefore(priorityListAndButton, lastCondition.nextSibling);
-
             } else if (pieceData === "or") {
                 const currentConditions = newItem.querySelectorAll(".priority-list-item-condition");
                 const lastCondition = currentConditions.length > 0 ? currentConditions[currentConditions.length - 1] : null;
 
                 const priorityListOrButton = createElement("div", "priority-list-permanent-or-button priority-list-button priority-list-permanent-button", null);
                 priorityListOrButton.textContent = "OR";
-                priorityListOrButton.addEventListener("click", () => {
-                    lastCondition.remove();
-                    priorityListOrButton.remove();
-                    updatePriorityList();
-                });
 
                 newItem.insertBefore(priorityListOrButton, lastCondition.nextSibling);
-
             } else {
                 const priorityListItemCondition = createElement("div", "priority-list-item-condition", null);
                 const priorityListItemConditionText = createElement("textarea", "priority-list-item-condition-text", null);
@@ -509,6 +497,27 @@ const convertPasteToPriorityList = (pastedCode) => {
                 if (priorityListItemConditionText.textContent.length > 25) {
                     adjustTextareaHeight(priorityListItemConditionText, 40);
                 };
+            };
+
+            const currentConditions = newItem.querySelectorAll(".priority-list-item-condition");
+            if (currentConditions.length > 1) {
+                const andButtons = newItem.querySelectorAll(".priority-list-permanent-and-button");
+                andButtons.forEach(andButton => {
+                    andButton.addEventListener("click", () => {
+                        andButton.nextSibling.remove();
+                        andButton.remove();
+                        updatePriorityList();
+                    });
+                });
+
+                const orButtons = newItem.querySelectorAll(".priority-list-permanent-or-button");
+                orButtons.forEach(orButton => {
+                    orButton.addEventListener("click", () => {
+                        orButton.nextSibling.remove();
+                        orButton.remove();
+                        updatePriorityList();
+                    });
+                });
             };
         };
 
@@ -578,8 +587,24 @@ priorityListPresetsButton.addEventListener("mousedown", () => {
 
 const standardPreset = document.getElementById("standard-preset");
 standardPreset.addEventListener("click", () => {
-    priorityListPastedCode = "Holy Shock | Holy Shock charges = 2\nArcane Torrent | Race = Blood Elf\nSmoldering Seedling\nJudgment | Infusion of Light duration < 5\nHoly Light",
+    priorityListPastedCode = `Divine Toll | Previous Ability = Daybreak
+        Aerated Mana Potion | Timers = [30]+
+        Avenging Wrath | Timers = [18]+
+        Divine Favor
+        Light of Dawn | Holy Power = 5
+        Nymue's Unraveling Spindle | Timers = [17]+
+        Daybreak | Timers = [18]+
+        Holy Shock
+        Blessing of the Seasons
+        Tyr's Deliverance
+        Light's Hammer
+        Light of Dawn | Holy Power >= 3
+        Holy Light | Divine Favor active | and | Infusion of Light active
+        Flash of Light | Infusion of Light active`,
     convertPasteToPriorityList(priorityListPastedCode);
+    document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
+        adjustTextareaHeight(itemText, 40)
+    });
     updatePriorityList();
 });
 

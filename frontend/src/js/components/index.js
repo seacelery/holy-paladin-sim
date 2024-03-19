@@ -11,7 +11,7 @@ import { createCooldownsBreakdown } from "./cooldowns-breakdown.js";
 import { createPriorityListDisplay, priorityList, addPotionToPriorityList, updatePriorityList, removePotionFromPriorityList } from "./priority-list-display.js";
 import { createLoadoutBreakdown } from "./loadout-breakdown.js";
 import { handleTabs } from "./simulation-options-tabs.js";
-import { setSimulationOptionsFromImportedData } from "./simulation-options.js";
+import { setSimulationOptionsFromImportedData, generateBuffsConsumablesImages } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
 import { updateEquipmentFromImportedData, initialiseEquipment, generateFullItemData } from "./equipment-options.js";
 import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable, updateEquipmentWithEffectValues } from "../utils/misc-functions.js";
@@ -423,6 +423,8 @@ const updateUIAfterImport = (data) => {
 // event listeners
 importButton.addEventListener("click", importCharacter);
 simulationProgressBarContainer.addEventListener("click", runSimulation);
+
+generateBuffsConsumablesImages();
 
 // allows options images to be clicked to change/toggle options
 const handleOptionImages = (images, attribute, optionType, toggle = false, multipleAllowed = false) => {
