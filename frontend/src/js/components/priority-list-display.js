@@ -603,7 +603,7 @@ standardPreset.addEventListener("click", () => {
         Flash of Light | Infusion of Light active`,
     convertPasteToPriorityList(priorityListPastedCode);
     document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
-        adjustTextareaHeight(itemText, 40)
+        adjustTextareaHeight(itemText, 40);
     });
     updatePriorityList();
 });
@@ -632,6 +632,9 @@ document.addEventListener("mousedown", (e) => {
     if (!priorityListPasteModal.contains(e.target) && e.target !== priorityListPasteButton && priorityListPasteModal.style.display !== "none") {
         priorityListPasteModal.style.display = "none";
         convertPasteToPriorityList(priorityListPastedCode);
+        document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
+            adjustTextareaHeight(itemText, 40);
+        });
         updatePriorityList();
     };
 });

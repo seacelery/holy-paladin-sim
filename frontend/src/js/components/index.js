@@ -14,7 +14,7 @@ import { handleTabs } from "./simulation-options-tabs.js";
 import { setSimulationOptionsFromImportedData, generateBuffsConsumablesImages } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
 import { updateEquipmentFromImportedData, initialiseEquipment, generateFullItemData } from "./equipment-options.js";
-import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable, updateEquipmentWithEffectValues } from "../utils/misc-functions.js";
+import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable, updateEquipmentWithEffectValues, createTooltip, addTooltipFunctionality } from "../utils/misc-functions.js";
 
 // window.addEventListener("mouseover", (e) => {
 //     console.log(e.target)
@@ -521,7 +521,11 @@ const handleOptionImages = (images, attribute, optionType, toggle = false, multi
 };
 
 const raceImages = document.querySelectorAll(".race-image");
+const raceTooltip = createTooltip(null, "race-tooltip");
 handleOptionImages(raceImages, "race", "race");
+raceImages.forEach(image => {
+    addTooltipFunctionality(image, raceTooltip, image.getAttribute("data-race"));
+});
 
 const flaskImages = document.querySelectorAll(".flask-image");
 handleOptionImages(flaskImages, "flask", "consumable", true);

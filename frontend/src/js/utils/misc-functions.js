@@ -144,4 +144,39 @@ const updateEquipmentWithEffectValues = (data) => {
     });
 };
 
-export { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable, updateEquipmentWithEffectValues };
+const createTooltip = (tooltipId, tooltipClass) => {
+    const tooltip = document.createElement("div");
+    tooltip.id = tooltipId;
+    tooltip.classList.add(tooltipClass);
+
+    tooltip.style.display = "none";
+    tooltip.style.position = "absolute";
+    document.body.appendChild(tooltip);
+
+    return tooltip;
+};
+
+const addTooltipFunctionality = (container, tooltip, tooltipText=null, tooltipInnerHTML=null) => {
+    container.addEventListener("mousemove", (e) => {
+        const xOffset = 15;
+        const yOffset = 15;
+    
+        tooltip.style.left = e.pageX + xOffset + "px";
+        tooltip.style.top = e.pageY + yOffset + "px";
+    
+        tooltip.style.display = "block";
+    
+        tooltip.innerHTML = "";
+        if (tooltipText) {
+            tooltip.textContent = tooltipText;
+        } else if (tooltipInnerHTML) {
+            tooltip.innerHTML = tooltipInnerHTML;
+        };
+    });
+
+    container.addEventListener("mouseleave", () => {
+        tooltip.style.display = "none";
+    });
+};
+
+export { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable, updateEquipmentWithEffectValues, createTooltip, addTooltipFunctionality };

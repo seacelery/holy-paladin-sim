@@ -393,6 +393,23 @@ body {
     text-align: center;
 }
 
+.option-image-tooltip {
+    display: none;
+
+    padding: 8px;
+
+    word-wrap: break-word;
+    background-color: var(--panel-colour-2);
+
+    color: var(--light-font-colour);
+    font-size: 12px;
+
+    user-select: none; 
+    max-width: 300px;
+
+    border: 1px solid var(--border-colour-3);
+}
+
 .race-image, .flask-image, .augment-rune-image, .food-image, .weapon-imbue-image, .raid-buff-image, .external-buff-image, .potion-image {
     width: 49px;
     height: 49px;
@@ -735,6 +752,29 @@ body {
     color: var(--light-font-colour);
 
     z-index: 10;
+}
+
+.talent-tooltip, .race-tooltip {
+    display: none;
+
+    padding: 8px;
+
+    word-wrap: break-word;
+    background-color: var(--panel-colour-2);
+
+    color: var(--light-font-colour);
+    font-size: 12px;
+
+    user-select: none; 
+    max-width: 250px;
+
+    border: 1px solid var(--border-colour-3);
+    z-index: 10;
+}
+
+.talent-tooltip-top-row {
+    display: flex;
+    justify-content: space-between;
 }
 
 .split-talent-option {

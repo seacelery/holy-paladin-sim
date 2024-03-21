@@ -54,16 +54,16 @@ class Paladin:
         # self.class_talents = self.parse_talents(talent_data)[0]
         # self.spec_talents = self.parse_talents(talent_data)[1]
         
-        # self.talents = self.parse_talents(talent_data)
-        # self.class_talents = copy.deepcopy(self.talents.class_talents)
-        # self.spec_talents = copy.deepcopy(self.talents.spec_talents)
+        self.talents = self.parse_talents(talent_data)
+        self.class_talents = copy.deepcopy(self.talents.class_talents)
+        self.spec_talents = copy.deepcopy(self.talents.spec_talents)
         
         # self.class_talents = self.parse_talents(talent_data)
         # self.spec_talents = self.parse_talents(talent_data)
         
         # self.talents = self.parse_talents(talent_data)
-        self.class_talents = copy.deepcopy(test_active_class_talents)
-        self.spec_talents = copy.deepcopy(test_active_spec_talents)
+        # self.class_talents = copy.deepcopy(test_active_class_talents)
+        # self.spec_talents = copy.deepcopy(test_active_spec_talents)
         
         # self.class_talents = copy.deepcopy(base_active_class_talents)
         # self.spec_talents = copy.deepcopy(base_active_spec_talents)
@@ -220,7 +220,7 @@ class Paladin:
         self.timers_priority_queue = []
         
         # for reclamation
-        self.average_raid_health_percentage = 1
+        self.average_raid_health_percentage = 0.7
         
         # for results output only
         self.last_iteration = False
@@ -893,8 +893,8 @@ class Paladin:
     def parse_talents(self, talent_data):
         class_talents = {}
         spec_talents = {}
-        active_class_talents = test_active_class_talents
-        active_spec_talents = test_active_spec_talents
+        active_class_talents = base_active_class_talents
+        active_spec_talents = base_active_spec_talents
 
         class_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_class_talents"]
         for talent in class_talent_data:

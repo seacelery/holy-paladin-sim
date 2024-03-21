@@ -1,6 +1,7 @@
 import { baseClassTalents, baseSpecTalents, classTalentsDown, classTalentsDownLong, classTalentsLeft, classTalentsRight, specTalentsDown, specTalentsDownLong, specTalentsLeft, specTalentsRight } from "../utils/base-talents.js";
 import { createElement, updateCharacter, updateStats } from "./index.js";
 import { talentsToIcons } from "../utils/talents-to-icons-map.js";
+import { createTooltip, addTooltipFunctionality } from "../utils/misc-functions.js";
 
 const classTalents = [
     "", "Lay on Hands", "", "Blessing of Freedom", "", "Hammer of Wrath", "",
@@ -98,7 +99,7 @@ const updateTalentsFromImportedData = (importedTalents) => {
             const classTalents = document.getElementById("class-talents");
             classTalents.setAttribute("data-class-talents-count", classTalentsCount - freeTalentsCount);
         } else if (category === "spec") {
-            const freeTalentsCount = 1;
+            const freeTalentsCount = 0;
             const specTalents = document.getElementById("spec-talents");
             specTalents.setAttribute("data-specs-talents-count", specTalentsCount - freeTalentsCount);
         };
@@ -289,7 +290,6 @@ const createTalentGrid = () => {
     const specTalentsGridContainer = document.getElementById("spec-talents");
 
     const createTalentCells = (talentSet, baseTalentSet, container, category) => {
-
         talentSet.forEach((talentName, index) => {
             let cell = document.createElement("div");
             cell.classList.add("talent-option");
@@ -334,6 +334,8 @@ const createTalentGrid = () => {
             if (talentName === "") {
                 cell.style.backgroundColor = "transparent";
             };
+
+            const talentTooltip = createTooltip(null, "talent-tooltip");
     
             // if it's a multiple choice talent then create a split icon
             let splitTalent = talentName.split("/");
@@ -354,6 +356,9 @@ const createTalentGrid = () => {
                 talentIconLeft.classList.add("split-talent-icon-left");
                 talentIconLeft.src = talentsToIcons[talentNameLeft];
                 talentIconLeft.style.filter = talentDataLeft.ranks["current rank"] > 0 ? "saturate(1)" : "saturate(0)";
+
+                const talentInnerHTMLLeft = `<span style="color: var(--holy-font)">${talentNameLeft}</span>`;
+                addTooltipFunctionality(talentIconLeft, talentTooltip, null, talentInnerHTMLLeft);
 
                 talentIconLeft.addEventListener("click", (e) => {
                     if (e.button === 0 && e.target.id === formattedTalentNameLeft + "-icon" && talentDataLeft.ranks["current rank"] < talentDataLeft.ranks["max rank"]) {
@@ -378,6 +383,9 @@ const createTalentGrid = () => {
                 talentIconRight.classList.add("split-talent-icon-right");
                 talentIconRight.src = talentsToIcons[talentNameRight];
                 talentIconRight.style.filter = talentDataRight.ranks["current rank"] > 0 ? "saturate(1)" : "saturate(0)";
+
+                const talentInnerHTMLRight = `<span style="color: var(--holy-font)">${talentNameRight}</span>`;
+                addTooltipFunctionality(talentIconRight, talentTooltip, null, talentInnerHTMLRight);
 
                 talentIconRight.addEventListener("click", (e) => {
                     if (e.button === 0 && e.target.id === formattedTalentNameRight + "-icon" && talentDataRight.ranks["current rank"] < talentDataRight.ranks["max rank"]) {
@@ -407,6 +415,9 @@ const createTalentGrid = () => {
                 if (talentData) {
                     talentIcon.src = talentsToIcons[talentName];
                     talentIcon.style.filter = talentData.ranks["current rank"] > 0 ? "saturate(1)" : "saturate(0)";
+
+                    const talentInnerHTML = `<span style="color: var(--holy-font)">${talentName}</span>`;
+                    addTooltipFunctionality(talentIcon, talentTooltip, null, talentInnerHTML);
                     
                     cell.appendChild(talentIcon);
 
