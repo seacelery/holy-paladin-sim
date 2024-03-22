@@ -189,3 +189,52 @@ def test_imbued_infusions_charge_overlap():
     assert holy_shock_charges == expected_charges
     assert round(holy_shock_cooldown, 2) == expected_cooldown, "Holy Shock unexpected cooldown value"
     
+def test_crusaders_might():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {}, {"Light's Conviction": 1, "Crusader's Might": 1})
+    
+    holy_shock = paladin.abilities["Holy Shock"]
+    crusader_strike = paladin.abilities["Crusader Strike"]
+    
+    set_crit_to_max(paladin)
+    
+    target = [targets[0]]
+    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    paladin.global_cooldown = 0
+    _, _, _, _ = crusader_strike.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
+    
+    expected_cooldown = round(8.5 / 1.2548, 2) - 1.5
+    holy_shock_cooldown = holy_shock.remaining_cooldown
+
+    assert round(holy_shock_cooldown, 2) == expected_cooldown, "Holy Shock unexpected cooldown value"
+    
+def test_crusaders_might_charge_overlap():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {}, {"Light's Conviction": 1, "Crusader's Might": 1})
+    
+    holy_shock = paladin.abilities["Holy Shock"]
+    crusader_strike = paladin.abilities["Crusader Strike"]
+    
+    set_crit_to_max(paladin)
+    
+    target = [targets[0]]
+    holy_shock.current_charges = 1
+    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    holy_shock.remaining_cooldown = 1
+    paladin.global_cooldown = 0
+    _, _, _, _ = crusader_strike.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
+    
+    expected_charges = 1
+    expected_cooldown = round(8.5 / 1.2548, 2) - 0.5
+    holy_shock_charges = holy_shock.current_charges
+    holy_shock_cooldown = holy_shock.remaining_cooldown
+
+    assert holy_shock.max_charges == 2
+    assert holy_shock_charges == expected_charges
+    assert round(holy_shock_cooldown, 2) == expected_cooldown, "Holy Shock unexpected cooldown value"

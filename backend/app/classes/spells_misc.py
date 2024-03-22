@@ -15,7 +15,7 @@ class ArcaneTorrent(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
-            increment_holy_power(self, caster)
+            increment_holy_power(self, caster, current_time)
         
    
 class Potion(Spell):

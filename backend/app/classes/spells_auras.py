@@ -1,7 +1,7 @@
 import random
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff
+from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff
 from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts, update_spell_data_initialise_spell
 
 # APPLIES BUFFS   
@@ -57,7 +57,7 @@ class AvengingWrathSpell(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
-            caster.apply_buff_to_self(AvengingWrathBuff(), current_time)
+            caster.apply_buff_to_self(AvengingWrathBuff(caster), current_time)
    
             
 class DivineFavorSpell(Spell):
@@ -74,7 +74,22 @@ class DivineFavorSpell(Spell):
             caster.apply_buff_to_self(DivineFavorBuff(), current_time)
         
         return cast_success, spell_crit, heal_amount
-            
+     
+
+class HandOfDivinitySpell(Spell):
+    
+    BASE_COOLDOWN = 90
+    BASE_CAST_TIME = 1.5
+    
+    def __init__(self, caster):
+        super().__init__("Hand of Divinity", cooldown=HandOfDivinitySpell.BASE_COOLDOWN, base_cast_time=HandOfDivinitySpell.BASE_CAST_TIME)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            caster.apply_buff_to_self(HandOfDivinityBuff(), current_time)
+        
+        return cast_success, spell_crit, heal_amount   
             
 # class BlessingOfFreedomSpell(Spell):
     

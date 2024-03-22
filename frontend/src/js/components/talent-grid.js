@@ -33,6 +33,10 @@ const updateTalentsFromImportedData = (importedTalents) => {
     let importedClassTalents = importedTalents.class_talents;
     let importedSpecTalents = importedTalents.spec_talents;
 
+    console.log(importedClassTalents)
+
+    // createTalentGrid();
+
     const updateTalents = (imported, baseTalents, category) => {
         let classTalentsCount = 0;
         let specTalentsCount = 0;
@@ -288,6 +292,8 @@ const decrementTalent = (talentData, talentIcon, category) => {
 const createTalentGrid = () => {
     const classTalentsGridContainer = document.getElementById("class-talents");
     const specTalentsGridContainer = document.getElementById("spec-talents");
+    // classTalentsGridContainer.innerHTML = "";
+    // specTalentsGridContainer.innerHTML = "";
 
     const createTalentCells = (talentSet, baseTalentSet, container, category) => {
         talentSet.forEach((talentName, index) => {

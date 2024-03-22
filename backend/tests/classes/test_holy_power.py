@@ -302,7 +302,7 @@ def test_crusader_strike():
     crusader_strike = paladin.abilities["Crusader Strike"]
     
     target = [targets[0]]
-    _, _, _ = crusader_strike.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
+    _, _, _, _ = crusader_strike.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
     
     expected_holy_power = 1
     assert paladin.holy_power == expected_holy_power, "Crusader Strike holy power unexpected value"
@@ -317,7 +317,7 @@ def test_crusader_strike_holy_infusion():
     crusader_strike = paladin.abilities["Crusader Strike"]
     
     target = [targets[0]]
-    _, _, _ = crusader_strike.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
+    _, _, _, _ = crusader_strike.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
     
     expected_holy_power = 2
     assert paladin.holy_power == expected_holy_power, "Crusader Strike (Holy Infusion) holy power unexpected value"
@@ -333,7 +333,7 @@ def test_word_of_glory():
     
     target = [targets[0]]
     paladin.holy_power = 3
-    _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
     
     expected_holy_power = 0
     assert paladin.holy_power == expected_holy_power, "Word of Glory holy power unexpected value"
@@ -350,7 +350,7 @@ def test_word_of_glory_divine_purpose():
     target = [targets[0]]
     paladin.holy_power = 3
     paladin.apply_buff_to_self(DivinePurpose(), 0)
-    _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
     
     expected_holy_power = 3
     assert paladin.holy_power == expected_holy_power, "Word of Glory (Divine Purpose) holy power unexpected value"
@@ -366,7 +366,7 @@ def test_light_of_dawn():
     
     target = [targets[0]]
     paladin.holy_power = 3
-    _, _, _ = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _ = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
     
     expected_holy_power = 0
     assert paladin.holy_power == expected_holy_power, "Light of Dawn holy power unexpected value"
@@ -383,7 +383,7 @@ def test_light_of_dawn_divine_purpose():
     target = [targets[0]]
     paladin.holy_power = 3
     paladin.apply_buff_to_self(DivinePurpose(), 0)
-    _, _, _ = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _ = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
     
     expected_holy_power = 3
     assert paladin.holy_power == expected_holy_power, "Light of Dawn (Divine Purpose) holy power unexpected value"

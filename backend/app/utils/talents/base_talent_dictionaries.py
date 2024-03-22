@@ -1,6 +1,6 @@
 base_active_class_talents = {
     "row1": {
-        "Lay on Hands": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Lay on Hands": {"ranks": {"current rank": 0, "max rank": 1}},
         "Blessing of Freedom": {"ranks": {"current rank": 0, "max rank": 1}},
         "Hammer of Wrath": {"ranks": {"current rank": 0, "max rank": 1}}
     },

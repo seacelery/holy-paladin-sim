@@ -116,8 +116,11 @@ class HolyReverberation(HoT):
 # self buffs   
 class AvengingWrathBuff(Buff):
     
-    def __init__(self):
+    def __init__(self, caster):
         super().__init__("Avenging Wrath", 20, base_duration=20)
+        if caster.is_talent_active("Sanctified Wrath"):
+            self.duration = 25
+            self.base_duration = 25
         
     def apply_effect(self, caster, current_time=None):
         if "Avenging Wrath (Awakening)" in caster.active_auras:
@@ -131,12 +134,20 @@ class AvengingWrathBuff(Buff):
         caster.healing_multiplier *= 1.15
         caster.damage_multiplier *= 1.15
         
+        if caster.is_talent_active("Sanctified Wrath"):
+            caster.abilities["Holy Shock"].cooldown *= 0.8
+            caster.abilities["Holy Shock"].remaining_cooldown *= 0.8
+        
     def remove_effect(self, caster, current_time=None):
         if caster.is_talent_active("Avenging Wrath: Might"):
             caster.flat_crit -= 15
             caster.update_stat("crit", 0)
         caster.healing_multiplier /= 1.15
         caster.damage_multiplier /= 1.15
+        
+        if caster.is_talent_active("Sanctified Wrath"):
+            caster.abilities["Holy Shock"].cooldown /= 0.8
+            caster.abilities["Holy Shock"].remaining_cooldown /= 0.8
        
        
 class AvengingWrathAwakening(Buff):
@@ -183,7 +194,27 @@ class DivineFavorBuff(Buff):
             caster.abilities["Flash of Light"].spell_healing_modifier /= 1.6
             caster.abilities["Flash of Light"].cast_time_modifier /= 0.7
             caster.abilities["Flash of Light"].mana_cost_modifier /= 1
+ 
+
+class HandOfDivinityBuff(Buff):
+     
+    def __init__(self):
+        super().__init__("Hand of Divinity", 20, base_duration=20, current_stacks=2, max_stacks=2)
         
+    def apply_effect(self, caster, current_time=None):
+        if "Holy Light" in caster.abilities:
+            caster.abilities["Holy Light"].spell_healing_modifier *= 1.4
+            caster.abilities["Holy Light"].base_cast_time = 0
+            caster.abilities["Holy Light"].mana_cost_modifier *= 0.5
+            
+    def remove_effect(self, caster, current_time=None):
+        from ..classes.spells_healing import HolyLight
+        
+        if "Holy Light" in caster.abilities:
+            caster.abilities["Holy Light"].spell_healing_modifier /= 1.4
+            caster.abilities["Holy Light"].base_cast_time = HolyLight.BASE_CAST_TIME
+            caster.abilities["Holy Light"].mana_cost_modifier /= 0.5
+       
         
 class InfusionOfLight(Buff):
     
@@ -233,11 +264,53 @@ class DivineResonance(Buff):
         # target = [random.choice([t for t in caster.potential_healing_targets if t.name == "target18"])]
         DivineResonanceHolyShock(caster).cast_healing_spell(caster, target, current_time, is_heal=True, glimmer_targets=glimmer_targets)
         
+        
+class EmpyreanLegacy(Buff):
+    
+    def __init__(self):
+        super().__init__("Empyrean Legacy", 20, base_duration=20)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.apply_buff_to_self(EmpyreanLegacyCooldown(), current_time)
+    
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class EmpyreanLegacyCooldown(Buff):
+    
+    def __init__(self):
+        super().__init__("Empyrean Legacy Cooldown", 20, base_duration=20)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+    
+    def remove_effect(self, caster, current_time=None):
+        pass
+
+
+class RelentlessInquisitor(Buff):
+    
+    def __init__(self):
+        super().__init__("Relentless Inquisitor", 12, base_duration=12, current_stacks=1, max_stacks=5)
+        
+    def apply_effect(self, caster, current_time=None):
+        update_stat_with_multiplicative_percentage(caster, "haste", 1 * self.current_stacks, True)
+    
+    def remove_effect(self, caster, current_time=None):
+        update_stat_with_multiplicative_percentage(caster, "haste", 1 * self.current_stacks, False)
+
             
 class RisingSunlight(Buff):
     
     def __init__(self):
         super().__init__("Rising Sunlight", 30, base_duration=30, current_stacks=3, max_stacks=3)
+        
+
+class UnendingLight(Buff):
+    
+    def __init__(self, holy_power_spent):
+        super().__init__("Unending Light", 30, base_duration=30, current_stacks=holy_power_spent, max_stacks=9)
        
         
 class FirstLight(Buff):
@@ -297,15 +370,18 @@ class TyrsDeliveranceSelfBuff(Buff):
         from .spells_auras import TyrsDeliveranceHeal
         
         non_tyrs_targets = [target for target in caster.potential_healing_targets if "Tyr's Deliverance (target)" not in target.target_active_buffs]
-        target = [random.choice(non_tyrs_targets)]
+        if len(non_tyrs_targets) == 0:
+            target = [random.choice(caster.potential_healing_targets)]
+        else:
+            target = [random.choice(non_tyrs_targets)]
         # target = [random.choice([t for t in caster.potential_healing_targets if t.name == "target18"])]
         spell = TyrsDeliveranceHeal(caster)
         hasted_tick_interval = self.base_tick_interval / caster.haste_multiplier
 
         # with a low tick rate if it lines up perfectly it can try to divide by 0
-        spell.spell_healing_modifier *= (hasted_tick_interval - (hasted_tick_interval - self.last_tyr_tick_time - 0.0000001)) / hasted_tick_interval
+        spell.spell_healing_modifier *= (hasted_tick_interval - (hasted_tick_interval - self.last_tyr_tick_time - 0.0001)) / hasted_tick_interval
         spell.cast_healing_spell(caster, target, current_time, is_heal=True)
-        spell.spell_healing_modifier /= (hasted_tick_interval - (hasted_tick_interval - self.last_tyr_tick_time  - 0.0000001)) / hasted_tick_interval
+        spell.spell_healing_modifier /= (hasted_tick_interval - (hasted_tick_interval - self.last_tyr_tick_time  - 0.0001)) / hasted_tick_interval
         
         
 class DivinePurpose(Buff):

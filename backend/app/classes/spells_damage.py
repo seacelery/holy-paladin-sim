@@ -1,13 +1,12 @@
 from .spells import Spell
 from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals, update_self_buff_data, update_mana_gained
 from .auras_debuffs import JudgmentOfLightDebuff, GreaterJudgmentDebuff
-from .auras_buffs import BlessingOfDawn, AvengingWrathAwakening
+from .auras_buffs import BlessingOfDawn, AvengingWrathAwakening, EmpyreanLegacy
 from .spells_auras import AvengingWrathBuff
 from .target import Player
 
+
 # DAMAGE SPELLS
-
-
 class Judgment(Spell):
     
     SPELL_ID = 20271
@@ -31,7 +30,7 @@ class Judgment(Spell):
         if caster.is_talent_active("Divine Glimpse"):
             self.bonus_crit = Judgment.BONUS_CRIT
         
-        # justification (10% judge damage talent)
+        # justification
         if caster.is_talent_active("Justification"):
             self.spell_damage_modifier = 1.1
             
@@ -47,7 +46,7 @@ class Judgment(Spell):
         greater_judgment_healing = 0
         if cast_success:
             
-            increment_holy_power(self, caster)
+            increment_holy_power(self, caster, current_time)
             target = targets[0]
             
             # divine revelations
@@ -84,18 +83,19 @@ class Judgment(Spell):
                     # remove 30% damage buff
                     self.spell_damage_modifier /= 1.3
                     self.bonus_crit = 0
-                              
-                
             
-
-            # apply greater judgment, add talent condition
+            # empyrean legacy                  
+            if caster.is_talent_active("Empyrean Legacy") and "Empyrean Legacy Cooldown" not in caster.active_auras:
+                caster.apply_buff_to_self(EmpyreanLegacy(), current_time)    
+            
+            # greater judgment, add talent condition
             if caster.is_talent_active("Greater Judgment"):
                 greater_judgment_debuff = GreaterJudgmentDebuff()
                 target.apply_debuff_to_target(greater_judgment_debuff, current_time)
                 append_aura_applied_event(caster.events, "Greater Judgment", caster, target, current_time)
                 greater_judgment_healing = greater_judgment_debuff.consume_greater_judgment(caster, target, healing_targets, current_time)
             
-            # apply judgment of light, add talent condition
+            # judgment of light
             if caster.is_talent_active("Judgment of Light"):
                 judgment_of_light_debuff = JudgmentOfLightDebuff()
                 target.apply_debuff_to_target(judgment_of_light_debuff, current_time, stacks_to_apply=5, max_stacks=5)
@@ -165,7 +165,7 @@ class CrusaderStrike(Spell):
                     caster.apply_buff_to_self(BlessingOfDawn(), current_time, stacks_to_apply=1, max_stacks=2)
                     caster.blessing_of_dawn_counter = 0
             
-            increment_holy_power(self, caster)
+            increment_holy_power(self, caster, current_time)
             
             # crusader's reprieve is not affected by stats except health
             if caster.is_talent_active("Crusader's Reprieve"):
@@ -174,6 +174,16 @@ class CrusaderStrike(Spell):
                 
                 update_spell_data_heals(caster.ability_breakdown, "Crusader's Reprieve", caster, crusaders_reprieve_heal, False)
                 append_spell_heal_event(caster.events, "Crusader's Reprieve", caster, caster, crusaders_reprieve_heal, current_time, is_crit=False)
+               
+            # crusader's might 
+            if caster.is_talent_active("Crusader's Might"):
+                caster.abilities["Holy Shock"].remaining_cooldown -= 1.5
+                    
+                if caster.abilities["Holy Shock"].remaining_cooldown <= 0 and caster.is_talent_active("Light's Conviction"):
+                    caster.holy_shock_cooldown_overflow = abs(caster.abilities["Holy Shock"].remaining_cooldown)
+                    caster.abilities["Holy Shock"].remaining_cooldown = max(caster.abilities["Holy Shock"].calculate_cooldown(caster) - caster.holy_shock_cooldown_overflow, 0)
+                    if caster.abilities["Holy Shock"].current_charges < caster.abilities["Holy Shock"].max_charges:
+                        caster.abilities["Holy Shock"].current_charges += 1
                 
         return cast_success, spell_crit, spell_damage, crusaders_reprieve_heal
 

@@ -21,6 +21,7 @@ const spellToIconsMap = {
     "Gift of the Naaru": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holyprotection.jpg",
     "Glimmer of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_toweroflight.jpg",
     "Greater Judgment": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_righteousfury.jpg",
+    "Hand of Divinity": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_vindication.jpg",
     "Holy Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_surgeoflight.jpg",
     "Holy Reverberation": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_holybolts01.jpg",
     "Holy Shock": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_searinglight.jpg",

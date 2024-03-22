@@ -117,9 +117,7 @@ class Spell:
     def cast_healing_spell(self, caster, targets, current_time, is_heal, exclude_mastery=False):
         if not self.can_cast(caster):         
             return False, False, 0
-        
-        # print(current_time, self.name, targets[0].name)
-
+    
         if caster.innervate_active:
             self.mana_cost = 0
         elif self.name in ["Word of Glory", "Light of Dawn"] and "Divine Purpose" in caster.active_auras:
@@ -151,14 +149,14 @@ class Spell:
                      
         # add spells that cost mana and do heal       
         elif caster.mana >= self.get_mana_cost(caster) and is_heal: 
-            if self.name not in ["Tyr's Deliverance", "Light's Hammer", "Holy Shock (Divine Toll)", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Resonance)", "Holy Light", "Flash of Light"]:
+            if self.name not in ["Tyr's Deliverance", "Light's Hammer", "Holy Shock (Divine Toll)", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Resonance)", "Flash of Light"]:
                 update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)    
             
             target_count = self.healing_target_count
             if target_count > 1:  
                 multi_target_healing = [f"{self.name}: ", []]            
             for target in targets:            
-                # After calculate_heal, before it potentially modifies spell_crit
+                # after calculate_heal, before it potentially modifies spell_crit
                 healing_value, is_crit = self.calculate_heal(caster, bonus_crit=self.bonus_crit, bonus_versatility=self.bonus_versatility, bonus_mastery=self.bonus_mastery, exclude_mastery=exclude_mastery)
                 
                 mana_cost = self.get_mana_cost(caster)

@@ -257,7 +257,7 @@ class Simulation:
                 divine_favor_active = True
             
             if ability.healing_target_count > 1:
-                targets = self.choose_multiple_targets(ability, non_beacon_targets)
+                targets = self.paladin.choose_multiple_targets(ability, non_beacon_targets)
             elif "Smoldering Seedling active" in self.paladin.active_auras:
                 smoldering_seedling_target = next((target for target in self.paladin.potential_healing_targets if isinstance(target, SmolderingSeedling)), None)
                 targets = [smoldering_seedling_target]
@@ -271,6 +271,10 @@ class Simulation:
                 caster.global_cooldown = 0
                 
             ability.try_trigger_rppm_effects(caster, targets, current_time)
+            
+            self.previous_ability = ability.name
+            
+            print(ability.name, caster.global_cooldown)
             
     def action(self):
         if self.paladin.currently_casting:
@@ -289,7 +293,7 @@ class Simulation:
                             break
                         else:
                             if ability.healing_target_count > 1:
-                                targets = self.choose_multiple_targets(ability, non_beacon_targets)
+                                targets = self.paladin.choose_multiple_targets(ability, non_beacon_targets)
                             elif "Smoldering Seedling active" in self.paladin.active_auras:
                                 smoldering_seedling_target = next((target for target in self.paladin.potential_healing_targets if isinstance(target, SmolderingSeedling)), None)
                                 targets = [smoldering_seedling_target]
@@ -327,23 +331,6 @@ class Simulation:
                     elif ability.is_damage_spell:
                         targets = [random.choice(self.enemy_targets_list)]
                         ability.cast_damage_spell(self.paladin, targets, self.elapsed_time, non_beacon_targets)
-    
-    def choose_multiple_targets(self, ability, non_beacon_targets):
-        targets = []
-                    
-        beacon_targets = self.paladin.beacon_targets.copy()
-        
-        # 3 means beacon targets chosen 15% of the time for some reason i don't really know
-        num_beacon_targets = random.choices([0, 1], weights=[1, 3], k=1)[0]
-        
-        for _ in range(num_beacon_targets):
-            beacon_target = random.choice(beacon_targets)
-            targets.append(beacon_target)
-            beacon_targets.remove(beacon_target)
-            
-        remaining_targets_count = ability.healing_target_count - len(targets)
-        targets.extend(random.sample(non_beacon_targets, min(len(non_beacon_targets), remaining_targets_count)))
-        return targets
                     
     def decrement_cooldowns(self):
         for ability_name, ability_instance in self.abilities.items():

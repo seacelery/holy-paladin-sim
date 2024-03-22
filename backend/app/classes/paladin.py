@@ -14,7 +14,7 @@ from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
 from .spells_damage import Judgment, CrusaderStrike
-from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell
+from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell
 from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos
 from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
@@ -534,6 +534,9 @@ class Paladin:
         if self.is_talent_active("Divine Favor"):
             self.abilities["Divine Favor"] = DivineFavorSpell(self)
             
+        if self.is_talent_active("Hand of Divinity"):
+            self.abilities["Hand of Divinity"] = HandOfDivinitySpell(self)
+            
         # if self.is_talent_active("Blessing of Freedom"):
         #     self.abilities["Blessing of Freedom"] = BlessingOfFreedomSpell(self)
             
@@ -696,14 +699,18 @@ class Paladin:
         self.events.append(f"{format_time(current_time)}: {summon.name} created: {summon.duration}s")
         summon.apply_effect(self, current_time)
    
-    def apply_buff_to_self(self, buff, current_time, stacks_to_apply=1, max_stacks=1, reapply=False): 
+    def apply_buff_to_self(self, buff, current_time, stacks_to_apply=1, max_stacks=1, reapply=False, apply_effect_at_max_stacks=True): 
         if buff.name in self.active_auras and not reapply:
             append_aura_applied_event(self.events, f"{self.active_auras[buff.name].name} reapplied", self, self, current_time, self.active_auras[buff.name].duration)
+            if not apply_effect_at_max_stacks and buff.current_stacks == max_stacks:
+                pass
+            else:
+                buff.apply_effect(self, current_time)
+               
             if buff.current_stacks < max_stacks:
                 buff.current_stacks += stacks_to_apply
-                buff.duration = buff.base_duration
+            buff.duration = buff.base_duration
             self.active_auras[buff.name] = buff
-            buff.apply_effect(self, current_time)
         else:
             self.active_auras[buff.name] = buff
             buff.apply_effect(self, current_time)
@@ -734,6 +741,23 @@ class Paladin:
                     buff.remove_effect(self, current_time)
                 
                 update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "expired")
+                
+    def choose_multiple_targets(self, ability, non_beacon_targets):
+        targets = []
+                    
+        beacon_targets = self.beacon_targets.copy()
+        
+        # 3 means beacon targets chosen 15% of the time for some reason i don't really know
+        num_beacon_targets = random.choices([0, 1], weights=[1, 3], k=1)[0]
+        
+        for _ in range(num_beacon_targets):
+            beacon_target = random.choice(beacon_targets)
+            targets.append(beacon_target)
+            beacon_targets.remove(beacon_target)
+            
+        remaining_targets_count = ability.healing_target_count - len(targets)
+        targets.extend(random.sample(non_beacon_targets, min(len(non_beacon_targets), remaining_targets_count)))
+        return targets
     
     # functions for parsing gear and loadout    
     def parse_stats(self, stats_data):

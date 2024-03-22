@@ -221,7 +221,7 @@ def test_divine_purpose():
     
     target = [targets[0]]
     paladin.apply_buff_to_self(DivinePurpose(), 0)
-    _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
     paladin.global_cooldown = 0
     paladin.apply_buff_to_self(DivinePurpose(), 0)
     _, _, _, _ = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
@@ -246,7 +246,7 @@ def test_innervate():
     target = [targets[0]]
     paladin.apply_buff_to_self(Innervate(), 0)
     paladin.holy_power = 3
-    _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
     paladin.global_cooldown = 0
     paladin.holy_power = 3
     _, _, _, _ = light_of_dawn.cast_healing_spell(paladin, target, 0, True)

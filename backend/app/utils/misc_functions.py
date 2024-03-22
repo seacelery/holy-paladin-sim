@@ -13,14 +13,14 @@ def get_timestamp(event):
 def calculate_beacon_healing(spell_name, amount):
     return amount * beacon_transfer_rates_double_beacon.get(spell_name, 0)
 
-def increment_holy_power(ability, caster):
+def increment_holy_power(ability, caster, current_time):
     caster.holy_power += ability.holy_power_gain   
     if caster.holy_power >= caster.max_holy_power:
         caster.holy_power_wasted += caster.holy_power - caster.max_holy_power
         update_wasted_holy_power(caster.ability_breakdown, ability.name, caster.holy_power - caster.max_holy_power)
         caster.holy_power = caster.max_holy_power
         
-    caster.holy_power_gained += ability.holy_power_gain
+    caster.holy_power_gained += ability.holy_power_gain    
     
 def add_to_holy_power_by_ability(dict, ability, caster):
     caster.holy_power_by_ability[ability.name] = caster.holy_power_by_ability.get(ability.name, 0) + ability.holy_power_gain

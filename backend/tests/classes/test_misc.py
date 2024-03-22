@@ -168,7 +168,7 @@ def test_awakening():
     target = [targets[0]]
     while "Awakening READY!!!!!!" not in paladin.active_auras:
         paladin.holy_power = 3
-        _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
+        _, _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
         paladin.global_cooldown = 0
         
     _, _, _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
