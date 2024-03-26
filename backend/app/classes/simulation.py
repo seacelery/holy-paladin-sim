@@ -40,38 +40,6 @@ class Simulation:
             action_name, parsed_conditions = parse_condition(item)
             condition_lambda = condition_to_lambda(self, parsed_conditions)
             self.priority_list.append((action_name, condition_lambda))
-        # print(self.priority_list)
-        
-        # self.priority_list = [
-        #     ("Aerated Mana Potion", lambda: ((self.elapsed_time >= 50 and self.elapsed_time < 55) or (self.elapsed_time >= 410 and self.elapsed_time < 415)) and self.paladin.abilities["Potion"].check_potion_cooldown(self.elapsed_time)),
-        #     ("Elemental Potion of Ultimate Power", lambda: ((self.elapsed_time >= 55 and self.elapsed_time < 60) or (self.elapsed_time >= 390 and self.elapsed_time < 395)) and self.paladin.abilities["Potion"].check_potion_cooldown(self.elapsed_time)),
-        #     ("Divine Toll", lambda: self.previous_ability == "Daybreak"),
-        #     ("Blessing of the Seasons", lambda: True),
-        #     ("Arcane Torrent", lambda: self.paladin.race == "Blood Elf"),
-        #     ("Fireblood", lambda: self.paladin.race == "Dark Iron Dwarf"),
-        #     ("Gift of the Naaru", lambda: self.paladin.race == "Draenei"),
-        #     ("Avenging Wrath", lambda: True),
-        #     ("Light's Hammer", lambda: True),
-        #     ("Tyr's Deliverance", lambda: True),
-        #     ("Divine Favor", lambda: self.elapsed_time > 35),
-        #     ("Light of Dawn", lambda: self.paladin.holy_power == 5),
-        #     ("Daybreak", lambda: self.elapsed_time >= 12),
-        #     ("Holy Shock", lambda: True),
-            
-        #     # ("Word of Glory", lambda: True),
-        #     ("Judgment", lambda: True),
-        #     ("Crusader Strike", lambda: True),
-            
-        #     ("Holy Light", lambda: True),
-        #     ("Holy Shock", lambda: True),
-        #     ("Divine Toll", lambda: True),
-        #     ("Daybreak", lambda: True),
-        #     ("Holy Shock", lambda: True),
-        # ]  
-        
-        # self.priority_list = [
-        #     ("Flash of Light", lambda: "Phial of Tepid Versatility" in self.paladin.active_auras and self.paladin.mana > 250000 or "Phial of Elemental Chaos" in self.paladin.active_auras)
-        # ]
         
         # make tick rate smaller for better hot accuracy
         self.tick_rate = 0.05
@@ -89,10 +57,12 @@ class Simulation:
         self.previous_total_healing = 0
         self.aura_healing = {}
         self.aura_instances = {}
-        
+
+        self.paladin.set_beacon_targets()
+
         # apply beacon of light at the start of the simulation
         for target in self.paladin.beacon_targets:
-            target.apply_buff_to_target(BeaconOfLightBuff(), self.elapsed_time, caster=self.paladin)
+            target.apply_buff_to_target(BeaconOfLightBuff(self.paladin), self.elapsed_time, caster=self.paladin)
         
         # testing
         self.test_time_since_last = 0
@@ -247,7 +217,7 @@ class Simulation:
                 caster.delayed_casts.remove(cast)
     
     def complete_cast(self, caster, current_time):
-        non_beacon_targets = [target for target in self.healing_targets_list if not isinstance(target, BeaconOfLight)]
+        non_beacon_targets = [target for target in self.healing_targets_list if "Beacon of Light" not in target.target_active_buffs]
         
         ability = self.abilities.get(self.paladin.currently_casting)
         if ability:
@@ -274,13 +244,11 @@ class Simulation:
             
             self.previous_ability = ability.name
             
-            print(ability.name, caster.global_cooldown)
-            
     def action(self):
         if self.paladin.currently_casting:
             return
         
-        non_beacon_targets = [target for target in self.paladin.potential_healing_targets if not isinstance(target, BeaconOfLight)]
+        non_beacon_targets = [target for target in self.paladin.potential_healing_targets if "Beacon of Light" not in target.target_active_buffs]
         
         for ability_name, condition in self.priority_list:    
             if ability_name in self.abilities and condition():
@@ -439,8 +407,6 @@ class Simulation:
 
                 if new_buff_instances:
                     target.target_active_buffs[buff_name] = new_buff_instances
-                    # if "Holy Reverberation" in target.target_active_buffs:
-                    #     self.paladin.events.append(f"{self.elapsed_time}: {len(target.target_active_buffs['Holy Reverberation'])}")
                 else:
                     if buff_name in target.target_active_buffs:
                         if "Glimmer of Light" in target.target_active_buffs and buff_name == "Glimmer of Light":
@@ -451,6 +417,9 @@ class Simulation:
                                     self.paladin.events.append(f"{format_time(self.elapsed_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
                         append_aura_removed_event(self.paladin.events, buff_name, self.paladin, target, self.elapsed_time)
                         del target.target_active_buffs[buff_name]
+                        
+                        if buff_name == "Beacon of Light":
+                            self.paladin.beacon_targets.remove(target)
                         
                         update_target_buff_data(self.paladin.target_buff_breakdown, buff_name, self.elapsed_time, "expired", target.name)
             
@@ -586,6 +555,9 @@ class Simulation:
                 "Greater Judgment": "Judgment",
                 "Judgment of Light": "Judgment",
                 "Afterimage": "Word of Glory",
+                "Barrier of Faith (Holy Shock)": "Barrier of Faith",
+                "Barrier of Faith (Flash of Light)": "Barrier of Faith",
+                "Barrier of Faith (Holy Light)": "Barrier of Faith",
                 "Blessing of Summer": "Blessing of the Seasons",
                 "Blessing of Autumn": "Blessing of the Seasons",
                 "Blessing of Winter": "Blessing of the Seasons",
@@ -752,7 +724,8 @@ class Simulation:
                         "Glimmer of Light (Glistening Radiance (Light of Dawn))", "Glimmer of Light (Glistening Radiance (Word of Glory))", "Resplendent Light",
                         "Greater Judgment", "Judgment of Light", "Crusader's Reprieve", "Afterimage", "Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", 
                         "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", "Blessing of Summer", "Blessing of Autumn",
-                        "Blessing of Winter", "Blessing of Spring", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT"]:
+                        "Blessing of Winter", "Blessing of Spring", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT",
+                        "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", "Barrier of Faith (Holy Light)", ]:
                 if spell in ability_breakdown:
                     del ability_breakdown[spell]
                           

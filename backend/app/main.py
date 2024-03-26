@@ -49,11 +49,9 @@ def import_character(character_name, realm):
     equipment_data = cache.cached_get_equipment_data(access_token, character_data["equipment"]["href"])
     talent_data = cache.cached_get_talent_data(access_token, realm, character_name)
     
-    healing_targets = [Target(f"target{i + 1}") for i in range(18)] + [BeaconOfLight(f"beaconTarget{i + 1}") for i in range(2)]
-    beacon_targets = [target for target in healing_targets if isinstance(target, BeaconOfLight)]
+    healing_targets = [Target(f"target{i + 1}") for i in range(20)]
     
     paladin = Paladin(character_name, character_data, stats_data, talent_data=talent_data, equipment_data=equipment_data, potential_healing_targets=healing_targets)
-    paladin.set_beacon_targets(beacon_targets)
     
     return paladin, healing_targets
     

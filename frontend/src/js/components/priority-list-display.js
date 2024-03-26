@@ -23,7 +23,7 @@ const createPriorityListItem = (index) => {
         let abilityText = e.target.value.split(" ");
         
         abilityText = abilityText.map(word => {
-            if (!["of", "the"].includes(word)) {
+            if (!["of", "the", "on"].includes(word)) {
                 return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
             } else {
                 return word;
@@ -214,7 +214,7 @@ const createPriorityListDisplay = () => {
         let abilityText = e.target.value.split(" ");
             
         abilityText = abilityText.map(word => {
-            if (!["of", "the"].includes(word)) {
+            if (!["of", "the", "on"].includes(word)) {
                 return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
             } else {
                 return word;
@@ -590,6 +590,7 @@ standardPreset.addEventListener("click", () => {
     priorityListPastedCode = `Divine Toll | Previous Ability = Daybreak
         Aerated Mana Potion | Timers = [30]+
         Avenging Wrath | Timers = [18]+
+        Lay on Hands
         Divine Favor
         Light of Dawn | Holy Power = 5
         Nymue's Unraveling Spindle | Timers = [17]+

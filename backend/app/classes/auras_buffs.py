@@ -49,8 +49,7 @@ class HoT(Buff):
         
         
     def calculate_tick_healing(self, caster):
-        # spell_power = caster.stats.ratings["intellect"]
-        spell_power = 9340
+        spell_power = caster.stats.ratings["intellect"]
         
         total_healing = spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier
         
@@ -168,6 +167,19 @@ class AvengingWrathAwakening(Buff):
             caster.update_stat("crit", 0)
         caster.healing_multiplier /= 1.15
         caster.damage_multiplier /= 1.15
+        
+
+class BarrierOfFaithBuff(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Barrier of Faith", 24, base_duration=24)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+
         
 class DivineFavorBuff(Buff):
     
@@ -419,8 +431,11 @@ class SophicDevotion(Buff):
 # target buffs   
 class BeaconOfLightBuff(Buff):
     
-    def __init__(self):
+    def __init__(self, caster):
         super().__init__("Beacon of Light", 10000, base_duration=10000)
+        if caster.is_talent_active("Beacon of Virtue"):
+            self.duration = 8
+            self.base_duration = 8
         
              
 class GlimmerOfLightBuff(Buff):
@@ -537,7 +552,6 @@ class ElementalPotionOfUltimatePowerBuff(Buff):
     def __init__(self, caster):
         super().__init__("Elemental Potion of Ultimate Power", 30, base_duration=30)
         if "Potion Absorption Inhibitor" in caster.active_auras:
-            print("a", caster.active_auras["Potion Absorption Inhibitor"].current_stacks)
             self.duration *= 1 + (0.5 * caster.active_auras["Potion Absorption Inhibitor"].current_stacks)
             self.base_duration *= 1 + (0.5 * caster.active_auras["Potion Absorption Inhibitor"].current_stacks)
         
@@ -1779,7 +1793,6 @@ class DreamtendersCharm(Buff):
         self.stacks_to_apply = 1
         embellishment_effect = caster.embellishments[self.name]["effect"]
         embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
-        print(embellishment_values)
         
         self.embellishment_first_value = embellishment_values[0]
         caster.time_based_stacking_buffs[self] = 1

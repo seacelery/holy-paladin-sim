@@ -102,18 +102,32 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
     // leave cells blank for certain spells
     // "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", 
-    const excludedSpells = ["Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", "Aerated Mana Potion"];
+    const excludedSpells = [
+        "Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", 
+        "Aerated Mana Potion"
+    ];
     // displays only casts and resource gains
-    const excludedSpellsOnlyResourcesAndCasts = ["Blessing of the Seasons", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", "Divine Favor", "Avenging Wrath", "Arcane Torrent", "Aerated Mana Potion"];
+    const excludedSpellsOnlyResourcesAndCasts = [
+        "Blessing of the Seasons", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", 
+        "Divine Favor", "Avenging Wrath", "Arcane Torrent", "Aerated Mana Potion"
+    ];
     // displays casts with average as healing divided by casts
-    const excludedSpellsCasts = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", 
-                                 "Judgment of Light", "Greater Judgment", "Touch of Light", "Afterimage", "Glimmer of Light", "Glimmer of Light (Glistening Radiance (Light of Dawn))",
-                                 "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda", "Holy Reverberation", "Restorative Sands",
-                                 "Echoing Tyrstone", "Smoldering Seedling", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil"];
+    const excludedSpellsCasts = [
+        "Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Judgment of Light", "Greater Judgment", 
+        "Touch of Light", "Afterimage", "Glimmer of Light", "Glimmer of Light (Glistening Radiance (Light of Dawn))",
+        "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda", "Holy Reverberation", 
+        "Restorative Sands", "Echoing Tyrstone", "Smoldering Seedling", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT", 
+        "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", 
+        "Barrier of Faith (Holy Light)"
+    ];
     // displays casts with average as healing divided by hits
-    const excludedSpellsCastsAverageHits = ["Gift of the Naaru"];
-    const excludedSpellsCrit = ["Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", 
-                                "Crusader Strike", "Judgment", "Daybreak", "Divine Toll", "Smoldering Seedling", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil"];
+    const excludedSpellsCastsAverageHits = [
+        "Gift of the Naaru"
+    ];
+    const excludedSpellsCrit = [
+        "Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Crusader Strike", "Judgment", "Daybreak", 
+        "Divine Toll", "Smoldering Seedling", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Lay on Hands"
+    ];
 
     const tableContainer = document.getElementById(`ability-breakdown-table-container-${containerCount}`);
     tableContainer.innerHTML = "";

@@ -11,10 +11,10 @@ from ..utils.buff_class_map import buff_class_map
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
 from ..utils.stat_values import diminishing_returns_values, stat_conversions, calculate_stat_percent_with_dr, update_stat_with_multiplicative_percentage
 from .spells import Wait
-from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell
+from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell, LayOnHands
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
 from .spells_damage import Judgment, CrusaderStrike
-from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell
+from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell
 from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos
 from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
@@ -511,6 +511,7 @@ class Paladin:
                             "Crusader Strike": CrusaderStrike(self),
                             "Judgment": Judgment(self),
                             "Word of Glory": WordOfGlory(self),
+                            "Lay on Hands": LayOnHands(self),
                             "Aerated Mana Potion": AeratedManaPotion(self),
                             "Elemental Potion of Ultimate Power": ElementalPotionOfUltimatePowerPotion(self),
                             "Potion": Potion(self)
@@ -536,6 +537,15 @@ class Paladin:
             
         if self.is_talent_active("Hand of Divinity"):
             self.abilities["Hand of Divinity"] = HandOfDivinitySpell(self)
+            
+        if self.is_talent_active("Barrier of Faith"):
+            self.abilities["Barrier of Faith"] = BarrierOfFaithSpell(self)
+         
+        if self.is_talent_active("Beacon of Faith"):
+            self.abilities["Beacon of Faith"] = BeaconOfFaithSpell(self) 
+            
+        if self.is_talent_active("Beacon of Virtue"):
+            self.abilities["Beacon of Virtue"] = BeaconOfVirtueSpell(self)
             
         # if self.is_talent_active("Blessing of Freedom"):
         #     self.abilities["Blessing of Freedom"] = BlessingOfFreedomSpell(self)
@@ -673,7 +683,10 @@ class Paladin:
         if spell_name not in beacon_transfer_rates_single_beacon or spell_name not in beacon_transfer_rates_double_beacon:
             return
         
-        beacon_healing = calculate_beacon_healing(spell_name, initial_heal)
+        if spell_name == "Holy Light":
+            print(spell_name)
+        
+        beacon_healing = calculate_beacon_healing(spell_name, initial_heal, self)
         
         for beacon_target in self.beacon_targets:
             if target != beacon_target:
@@ -690,7 +703,14 @@ class Paladin:
         if self.global_cooldown > 0:
             self.global_cooldown = max(0, self.global_cooldown - tick_rate)
             
-    def set_beacon_targets(self, beacon_targets):
+    def set_beacon_targets(self):
+        beacon_targets = []
+        
+        if self.is_talent_active("Beacon of Faith"):
+            beacon_targets = random.sample(self.potential_healing_targets, 2)
+        elif not self.is_talent_active("Beacon of Virtue"):
+            beacon_targets = random.sample(self.potential_healing_targets, 1)
+        
         self.beacon_targets = beacon_targets
     
     # handle auras and summons on self
@@ -747,16 +767,20 @@ class Paladin:
                     
         beacon_targets = self.beacon_targets.copy()
         
-        # 3 means beacon targets chosen 15% of the time for some reason i don't really know
-        num_beacon_targets = random.choices([0, 1], weights=[1, 3], k=1)[0]
-        
-        for _ in range(num_beacon_targets):
-            beacon_target = random.choice(beacon_targets)
-            targets.append(beacon_target)
-            beacon_targets.remove(beacon_target)
+        if beacon_targets:
+            # 3 means beacon targets chosen 15% of the time for some reason i don't really know
+            num_beacon_targets = random.choices([0, 1], weights=[1, 3], k=1)[0]
+            
+            for _ in range(num_beacon_targets):
+                beacon_target = random.choice(beacon_targets)
+                targets.append(beacon_target)
+                beacon_targets.remove(beacon_target)
             
         remaining_targets_count = ability.healing_target_count - len(targets)
-        targets.extend(random.sample(non_beacon_targets, min(len(non_beacon_targets), remaining_targets_count)))
+        
+        num_targets_to_add = min(len(non_beacon_targets), remaining_targets_count)
+        if num_targets_to_add > 0:
+            targets.extend(random.sample(non_beacon_targets, min(len(non_beacon_targets), remaining_targets_count)))
         return targets
     
     # functions for parsing gear and loadout    

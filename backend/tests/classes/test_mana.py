@@ -37,11 +37,9 @@ equipment_data = load_data_from_file(path_to_equipment_data)
 updated_equipment_data = load_data_from_file(path_to_updated_equipment_data)
 
 def initialise_paladin():
-    healing_targets = [Target(f"target{i + 1}") for i in range(18)] + [BeaconOfLight(f"beaconTarget{i + 1}") for i in range(2)]
-    beacon_targets = [target for target in healing_targets if isinstance(target, BeaconOfLight)]
+    healing_targets = [Target(f"target{i + 1}") for i in range(20)]
 
-    paladin = Paladin("daisu", character_data, stats_data, talent_data, equipment_data, potential_healing_targets=healing_targets)
-    paladin.set_beacon_targets(beacon_targets)
+    paladin = Paladin("paladin1", character_data, stats_data, talent_data, equipment_data, potential_healing_targets=healing_targets)
     
     return paladin
 
@@ -85,10 +83,10 @@ def test_divine_revelations():
     set_crit_to_max(paladin)
     
     target = [targets[0]]
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
     paladin.crit = -100
-    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _ , _ = holy_light.cast_healing_spell(paladin, target, 0, True)
     
     divine_revelations_mana_gain = 1312.5
     remaining_mana = 262500 - 7000 - 6000
@@ -107,7 +105,7 @@ def test_divine_revelations():
     set_crit_to_max(paladin)
     
     target = [targets[0]]
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
     _, _, _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
     
@@ -130,7 +128,7 @@ def test_divine_revelations():
     
 #     target = [targets[0]]
 #     _, _, _ = divine_favor.cast_healing_spell(paladin, target, 0, False)
-#     _, _, _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
+#     _, _, _ , _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
     
 #     expected_remaining_mana = 262500 - 4500
 #     calculated_remaining_mana = paladin.max_mana - flash_of_light.base_mana_cost * paladin.base_mana * 0.5
@@ -152,7 +150,7 @@ def test_holy_light_divine_favor():
     
     target = [targets[0]]
     _, _, _ = divine_favor.cast_healing_spell(paladin, target, 0, False)
-    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _ , _ = holy_light.cast_healing_spell(paladin, target, 0, True)
     
     expected_remaining_mana = 262500 - 3000
     calculated_remaining_mana = paladin.max_mana - holy_light.base_mana_cost * paladin.base_mana * 0.5
@@ -173,10 +171,10 @@ def test_flash_of_light_infusion_of_light():
     set_crit_to_max(paladin)
     
     target = [targets[0]]
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
     paladin.crit = -100
-    _, _, _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _ , _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
     
     expected_remaining_mana = 262500 - 2700 - 7000
     calculated_remaining_mana = paladin.max_mana - flash_of_light.base_mana_cost * paladin.base_mana * 0.3 - holy_shock.base_mana_cost * paladin.base_mana
@@ -197,10 +195,10 @@ def test_flash_of_light_infusion_of_light_inflorescence_of_the_sunwell():
     set_crit_to_max(paladin)
     
     target = [targets[0]]
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
     paladin.crit = -100
-    _, _, _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _ , _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
     
     expected_remaining_mana = 262500 - 7000
     calculated_remaining_mana = paladin.max_mana - flash_of_light.base_mana_cost * paladin.base_mana * 0 - holy_shock.base_mana_cost * paladin.base_mana
@@ -251,11 +249,11 @@ def test_innervate():
     paladin.holy_power = 3
     _, _, _, _ = light_of_dawn.cast_healing_spell(paladin, target, 0, True)
     paladin.global_cooldown = 0
-    _, _, _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _ , _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
     paladin.global_cooldown = 0
-    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _ , _ = holy_light.cast_healing_spell(paladin, target, 0, True)
     paladin.global_cooldown = 0
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     
     expected_remaining_mana = 262500
     
@@ -275,7 +273,7 @@ def test_reclamation():
     paladin.average_raid_health_percentage = 0.7
     
     target = [targets[0]]
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     
     expected_remaining_mana = 262500 - 7000 + (7000 * 0.03)
     assert expected_remaining_mana == paladin.mana, "Holy Shock (Reclamation) mana reduction incorrect"

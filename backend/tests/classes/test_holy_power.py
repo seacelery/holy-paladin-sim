@@ -36,11 +36,9 @@ equipment_data = load_data_from_file(path_to_equipment_data)
 updated_equipment_data = load_data_from_file(path_to_updated_equipment_data)
 
 def initialise_paladin():
-    healing_targets = [Target(f"target{i + 1}") for i in range(18)] + [BeaconOfLight(f"beaconTarget{i + 1}") for i in range(2)]
-    beacon_targets = [target for target in healing_targets if isinstance(target, BeaconOfLight)]
+    healing_targets = [Target(f"target{i + 1}") for i in range(20)]
 
-    paladin = Paladin("daisu", character_data, stats_data, talent_data, equipment_data, potential_healing_targets=healing_targets)
-    paladin.set_beacon_targets(beacon_targets)
+    paladin = Paladin("paladin1", character_data, stats_data, talent_data, equipment_data, potential_healing_targets=healing_targets)
     
     return paladin
 
@@ -81,7 +79,7 @@ def test_holy_power_cap():
     holy_shock = paladin.abilities["Holy Shock"]
     
     target = [targets[0]]
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     
     expected_holy_power = 5
     assert paladin.holy_power == expected_holy_power, "Holy Power overcapped"
@@ -96,7 +94,7 @@ def test_holy_shock():
     holy_shock = paladin.abilities["Holy Shock"]
     
     target = [targets[0]]
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     
     expected_holy_power = 1
     assert paladin.holy_power == expected_holy_power, "Holy Shock holy power unexpected value"
@@ -111,7 +109,7 @@ def test_holy_shock_rising_sunlight():
     rising_sunlight_holy_shock = RisingSunlightHolyShock(paladin)
     
     target = [targets[0]]
-    _, _, _, _ = rising_sunlight_holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _, _ = rising_sunlight_holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     
     expected_holy_power = 1
     assert paladin.holy_power == expected_holy_power, "Holy Shock (Rising Sunlight) holy power unexpected value"
@@ -126,7 +124,7 @@ def test_holy_shock_divine_resonance():
     divine_resonance_holy_shock = DivineResonanceHolyShock(paladin)
     
     target = [targets[0]]
-    _, _, _, _ = divine_resonance_holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _, _ = divine_resonance_holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     
     expected_holy_power = 1
     assert paladin.holy_power == expected_holy_power, "Holy Shock (Divine Resonance) holy power unexpected value"
@@ -158,7 +156,7 @@ def test_holy_light():
     holy_light = paladin.abilities["Holy Light"]
     
     target = [targets[0]]
-    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _ , _ = holy_light.cast_healing_spell(paladin, target, 0, True)
     
     expected_holy_power = 0
     assert paladin.holy_power == expected_holy_power, "Holy Light holy power unexpected value"
@@ -174,7 +172,7 @@ def test_holy_light_tower_of_radiance():
     holy_light = paladin.abilities["Holy Light"]
     
     target = [targets[0]]
-    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _ , _ = holy_light.cast_healing_spell(paladin, target, 0, True)
     
     expected_holy_power = 1
     assert paladin.holy_power == expected_holy_power, "Holy Light (Tower of Radiance) holy power unexpected value"
@@ -193,10 +191,10 @@ def test_holy_light_tower_of_radiance_infusion_of_light():
     set_crit_to_max(paladin)
     
     target = [targets[0]]
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
     paladin.holy_power = 0
-    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _ , _ = holy_light.cast_healing_spell(paladin, target, 0, True)
     
     expected_holy_power = 3
     assert paladin.holy_power == expected_holy_power, "Holy Light (Tower of Radiance & Infusion of Light) holy power unexpected value"
@@ -216,19 +214,19 @@ def test_holy_light_tower_of_radiance_infusion_of_light_inflorescence_of_the_sun
     
     target = [targets[0]]
     # holy shock 1 for 2 infusion stacks
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
     paladin.holy_power = 0
     
     # holy light 1 for 3 holy power
-    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _ , _ = holy_light.cast_healing_spell(paladin, target, 0, True)
     expected_holy_power = 3
     assert paladin.holy_power == expected_holy_power, "Holy Light (Tower of Radiance & Infusion of Light /w Inflorescence of the Sunwell) holy power unexpected value"
     paladin.global_cooldown = 0
     paladin.holy_power = 0
     
     # holy light 2 for 3 holy power
-    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _ , _ = holy_light.cast_healing_spell(paladin, target, 0, True)
     expected_holy_power = 3
     assert paladin.holy_power == expected_holy_power, "Holy Light (Tower of Radiance & Infusion of Light /w Inflorescence of the Sunwell) holy power unexpected value"
     paladin.global_cooldown = 0
@@ -236,12 +234,12 @@ def test_holy_light_tower_of_radiance_infusion_of_light_inflorescence_of_the_sun
     
     # holy shock 2 for 2 infusion stacks
     holy_shock.remaining_cooldown = 0
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
     paladin.holy_power = 0
     
     # holy light 3 for 4 holy power
-    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _ , _ = holy_light.cast_healing_spell(paladin, target, 0, True)
     expected_holy_power = 4
     assert paladin.holy_power == expected_holy_power, "Holy Light (Tower of Radiance & Infusion of Light /w Inflorescence of the Sunwell) holy power unexpected value"
     
@@ -256,7 +254,7 @@ def test_flash_of_light():
     flash_of_light = paladin.abilities["Flash of Light"]
     
     target = [targets[0]]
-    _, _, _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _ , _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
     
     expected_holy_power = 0
     assert paladin.holy_power == expected_holy_power, "Flash of Light holy power unexpected value"
@@ -272,7 +270,7 @@ def test_flash_of_light_tower_of_radiance():
     flash_of_light = paladin.abilities["Flash of Light"]
     
     target = [targets[0]]
-    _, _, _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _ , _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
     
     expected_holy_power = 1
     assert paladin.holy_power == expected_holy_power, "Flash of Light (Tower of Radiance) holy power unexpected value"

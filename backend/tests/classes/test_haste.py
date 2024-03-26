@@ -38,11 +38,9 @@ equipment_data = load_data_from_file(path_to_equipment_data)
 updated_equipment_data = load_data_from_file(path_to_updated_equipment_data)
 
 def initialise_paladin():
-    healing_targets = [Target(f"target{i + 1}") for i in range(18)] + [BeaconOfLight(f"beaconTarget{i + 1}") for i in range(2)]
-    beacon_targets = [target for target in healing_targets if isinstance(target, BeaconOfLight)]
+    healing_targets = [Target(f"target{i + 1}") for i in range(20)]
 
-    paladin = Paladin("daisu", character_data, stats_data, talent_data, equipment_data, potential_healing_targets=healing_targets)
-    paladin.set_beacon_targets(beacon_targets)
+    paladin = Paladin("paladin1", character_data, stats_data, talent_data, equipment_data, potential_healing_targets=healing_targets)
     
     return paladin
 
@@ -84,7 +82,7 @@ def test_hasted_cooldown():
     paladin.crit = -100
     
     target = [targets[0]]
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     
     expected_cooldown = round(8.5 / 1.2548, 2)
     holy_shock_cooldown = holy_shock.remaining_cooldown
@@ -103,7 +101,7 @@ def test_hasted_cooldown_update():
     paladin.crit = -100
     
     target = [targets[0]]
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.apply_buff_to_self(TimeWarp(), 0)
     
     expected_cooldown = round((8.5 / 1.2548) / 1.3, 2)
@@ -127,9 +125,9 @@ def test_imbued_infusions():
     
     # holy light
     target = [targets[0]]
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
-    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
     
     expected_cooldown = round(8.5 / 1.2548, 2) - 2
     holy_shock_cooldown = holy_shock.remaining_cooldown
@@ -139,9 +137,9 @@ def test_imbued_infusions():
     # flash of light
     holy_shock.remaining_cooldown = 0
     paladin.global_cooldown = 0
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
-    _, _, _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _ = flash_of_light.cast_healing_spell(paladin, target, 0, True)
     
     expected_cooldown = round(8.5 / 1.2548, 2) - 2
     holy_shock_cooldown = holy_shock.remaining_cooldown
@@ -151,7 +149,7 @@ def test_imbued_infusions():
     # judgment
     holy_shock.remaining_cooldown = 0
     paladin.global_cooldown = 0
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
     _, _, _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
     
@@ -175,10 +173,10 @@ def test_imbued_infusions_charge_overlap():
     # holy light
     target = [targets[0]]
     holy_shock.current_charges = 1
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     holy_shock.remaining_cooldown = 1.5
     paladin.global_cooldown = 0
-    _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
+    _, _, _, _, _ = holy_light.cast_healing_spell(paladin, target, 0, True)
     
     expected_charges = 1
     expected_cooldown = round(8.5 / 1.2548, 2) - 0.5
@@ -202,7 +200,7 @@ def test_crusaders_might():
     set_crit_to_max(paladin)
     
     target = [targets[0]]
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
     _, _, _, _ = crusader_strike.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
     
@@ -225,7 +223,7 @@ def test_crusaders_might_charge_overlap():
     
     target = [targets[0]]
     holy_shock.current_charges = 1
-    _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+    _, _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     holy_shock.remaining_cooldown = 1
     paladin.global_cooldown = 0
     _, _, _, _ = crusader_strike.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)

@@ -38,11 +38,9 @@ equipment_data = load_data_from_file(path_to_equipment_data)
 updated_equipment_data = load_data_from_file(path_to_updated_equipment_data)
 
 def initialise_paladin():
-    healing_targets = [Target(f"target{i + 1}") for i in range(18)] + [BeaconOfLight(f"beaconTarget{i + 1}") for i in range(2)]
-    beacon_targets = [target for target in healing_targets if isinstance(target, BeaconOfLight)]
+    healing_targets = [Target(f"target{i + 1}") for i in range(20)]
 
-    paladin = Paladin("daisu", character_data, stats_data, talent_data, equipment_data, potential_healing_targets=healing_targets)
-    paladin.set_beacon_targets(beacon_targets)
+    paladin = Paladin("paladin1", character_data, stats_data, talent_data, equipment_data, potential_healing_targets=healing_targets)
     
     return paladin
 
@@ -87,7 +85,7 @@ def test_holy_shock_reset_with_charges():
         target = [targets[0]]
         holy_shock.current_charges = 1
         holy_shock.remaining_cooldown = 4.5
-        _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
         if holy_shock.current_charges == 1:
             holy_shock_cooldown = holy_shock.remaining_cooldown
             break
@@ -110,7 +108,7 @@ def test_holy_shock_resets():
         holy_shock = paladin.abilities["Holy Shock"]
         
         target = [targets[0]]
-        _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
         if holy_shock.remaining_cooldown <= 0:
             resets += 1
             
@@ -132,7 +130,7 @@ def test_holy_shock_resets_with_8_glimmers():
         targets, glimmer_targets = set_up_paladin(paladin)
         
         reset_talents(paladin)
-        update_talents(paladin, {}, {"Glorious Dawn": 1})
+        update_talents(paladin, {}, {"Glorious Dawn": 1, "Illumination": 1})
         
         holy_shock = paladin.abilities["Holy Shock"]
         
@@ -142,11 +140,43 @@ def test_holy_shock_resets_with_8_glimmers():
         glimmer_targets = [glimmer_target for glimmer_target in paladin.potential_healing_targets if "Glimmer of Light" in glimmer_target.target_active_buffs]
         
         target = [targets[0]]
-        _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
         if holy_shock.remaining_cooldown <= 0:
             resets += 1
             
     expected_resets = iterations * 0.22
+    observed_resets = resets
+    
+    print(f"Expected resets: {expected_resets}")
+    print(f"Observed resets: {observed_resets}")
+    
+    tolerance = 150
+    assert abs(observed_resets - expected_resets) <= tolerance, "Observed resets does not match expected resets"
+    
+def test_holy_shock_resets_with_3_glimmers():
+    iterations = 10000
+    resets = 0
+    
+    for _ in range(iterations):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {}, {"Glorious Dawn": 1, "Blessed Focus": 1})
+        
+        holy_shock = paladin.abilities["Holy Shock"]
+        
+        chosen_targets = random.sample(paladin.potential_healing_targets, 3)
+        for target in chosen_targets:
+            target.apply_buff_to_target(GlimmerOfLightBuff(), 0, caster=paladin)
+        glimmer_targets = [glimmer_target for glimmer_target in paladin.potential_healing_targets if "Glimmer of Light" in glimmer_target.target_active_buffs]
+        
+        target = [targets[0]]
+        _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        if holy_shock.remaining_cooldown <= 0:
+            resets += 1
+            
+    expected_resets = iterations * 0.145
     observed_resets = resets
     
     print(f"Expected resets: {expected_resets}")

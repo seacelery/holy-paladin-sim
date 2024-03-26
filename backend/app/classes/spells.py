@@ -114,7 +114,7 @@ class Spell:
 
         return True, spell_crit, damage_value
         
-    def cast_healing_spell(self, caster, targets, current_time, is_heal, exclude_mastery=False):
+    def cast_healing_spell(self, caster, targets, current_time, is_heal, exclude_mastery=False, ignore_spell_multiplier=False):
         if not self.can_cast(caster):         
             return False, False, 0
     
@@ -157,7 +157,7 @@ class Spell:
                 multi_target_healing = [f"{self.name}: ", []]            
             for target in targets:            
                 # after calculate_heal, before it potentially modifies spell_crit
-                healing_value, is_crit = self.calculate_heal(caster, bonus_crit=self.bonus_crit, bonus_versatility=self.bonus_versatility, bonus_mastery=self.bonus_mastery, exclude_mastery=exclude_mastery)
+                healing_value, is_crit = self.calculate_heal(caster, bonus_crit=self.bonus_crit, bonus_versatility=self.bonus_versatility, bonus_mastery=self.bonus_mastery, exclude_mastery=exclude_mastery, ignore_spell_multiplier=ignore_spell_multiplier)
                 
                 mana_cost = self.get_mana_cost(caster)
                 healing_value = round(healing_value) 
@@ -233,7 +233,7 @@ class Spell:
     def calculate_cast_time(self, caster):
         return (self.base_cast_time / caster.haste_multiplier) * self.cast_time_modifier
     
-    def calculate_heal(self, caster, bonus_crit=0, bonus_crit_healing=0, bonus_versatility=0, bonus_mastery=0, exclude_mastery=False):
+    def calculate_heal(self, caster, bonus_crit=0, bonus_crit_healing=0, bonus_versatility=0, bonus_mastery=0, exclude_mastery=False, ignore_spell_multiplier=False):
         spell_power = caster.spell_power
         
         crit_multiplier = 1
@@ -254,9 +254,14 @@ class Spell:
             
         versatility_multiplier = caster.versatility_multiplier + self.bonus_versatility
         
+        if ignore_spell_multiplier:
+            spell_healing_modifier = 1
+        else:
+            spell_healing_modifier = self.spell_healing_modifier
+        
         # print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
         
-        return spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier * versatility_multiplier * crit_multiplier * mastery_multiplier * self.spell_healing_modifier * caster_crit_healing_modifier, is_crit
+        return spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier * versatility_multiplier * crit_multiplier * mastery_multiplier * spell_healing_modifier * caster_crit_healing_modifier, is_crit
     
     def calculate_damage(self, caster, bonus_crit=0, bonus_versatility=0):
         spell_power = caster.spell_power

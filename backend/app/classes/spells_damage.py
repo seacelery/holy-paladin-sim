@@ -142,6 +142,10 @@ class CrusaderStrike(Spell):
         super().__init__("Crusader Strike", mana_cost=CrusaderStrike.MANA_COST, cooldown=CrusaderStrike.BASE_COOLDOWN, holy_power_gain=CrusaderStrike.HOLY_POWER_GAIN, hasted_cooldown=True) 
         self.is_damage_spell = True
         
+        # holy infusion
+        if caster.is_talent_active("Holy Infusion"):
+            self.holy_power_gain = 2
+        
     def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):  
         # reclamation
         if caster.is_talent_active("Reclamation"):
