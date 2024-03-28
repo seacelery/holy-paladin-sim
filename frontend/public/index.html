@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Meal Planner" />
+        <meta name="google" content="notranslate">
         <title>howy pawadin simuwator</title>
         <link rel="stylesheet" 
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,31 +25,74 @@
     <body>
         <div id="wrapper">
             <div id="content">
-                <div id="import-character-container">
-                    <label for="character-region-input" class="character-input-label">Region:</label>
-                    <select id="character-region-input" class="character-input-field">
-                        <option value="EU">EU</option>
-                        <option value="US">US</option>
-                    </select>
-
-                    <label for="character-realm-input" class="character-input-label">Realm:</label>
-                    <input type="text" id="character-realm-input" class="character-input-field">
-
-                    <label for="character-name-input" class="character-input-label">Character Name:</label>
-                    <input type="text" id="character-name-input" class="character-input-field">
-
-                    <button id="import-button">Import</button>
-                </div>
+                
 
                 <div id="simulation-options-container">
-                    <nav id="options-navbar-1">
-                        <div id="options-tab" class="options-tab active">Options</div>
-                        <div id="talents-tab" class="options-tab inactive">Talents</div>
-                        <div id="equipment-tab" class="options-tab inactive">Equipment</div>
-                        <div id="buffs-tab" class="options-tab inactive">Buffs & Consumables</div>
-                        <div id="priority-list-tab" class="options-tab inactive">Priority List</div>
-                        
-                    </nav>
+                    <div id="loading-corner"></div>
+                    <div id="loading-screen">
+                        <div id="import-button-loading-container">
+                            <div class="loading" id="loading-large"></div>
+                        </div>
+
+                        <div id="import-container-main">
+                            <div id="import-character-container-main">
+                                <div class="import-input-container-main">
+                                    <div class="import-character-reminder-main">Import a character</div>
+
+                                    <label for="character-region-input-main" class="character-input-label-main">Region:</label>
+                                    <select id="character-region-input-main" class="character-input-field-main">
+                                        <option value="EU">EU</option>
+                                        <option value="US">US</option>
+                                    </select>
+                                                             
+                                    <label for="character-realm-input-main" class="character-input-label-main">Realm:</label>
+                                    <select type="text" id="character-realm-input-main" class="character-input-field-main" translate="no"></select>
+                                
+                                    <label for="character-name-input-main" class="character-input-label-main">Character Name:</label>
+                                    <input type="text" id="character-name-input-main" class="character-input-field-main">
+                                    
+                
+                                    <button id="import-button-main">
+                                        <div id="import-button-text-main">Import</div>
+                                        <div id="import-button-main-loading-container">
+                                            <div class="loading"></div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>                                                                   
+                    </div>
+
+                    <div id="navbar-row-container">
+                        <nav id="options-navbar-1">
+                            <div id="options-tab" class="options-tab active">Options</div>
+                            <div id="talents-tab" class="options-tab inactive">Talents</div>
+                            <div id="equipment-tab" class="options-tab inactive">Equipment</div>
+                            <div id="buffs-tab" class="options-tab inactive">Buffs & Consumables</div>
+                            <div id="priority-list-tab" class="options-tab inactive">Priority List</div>
+                            
+                        </nav>
+    
+                        <div id="import-character-container">
+                            <div id="import-character-options-container">
+                                <!-- <label for="character-region-input" class="character-input-label"></label> -->
+                                <select id="character-region-input" class="character-input-field">
+                                    <option value="EU">EU</option>
+                                    <option value="US">US</option>
+                                </select>
+            
+                                <!-- <label for="character-realm-input" class="character-input-label"></label> -->
+                                <select type="text" id="character-realm-input" class="character-input-field" translate="no"></select>
+            
+                                <!-- <label for="character-name-input" class="character-input-label"></label> -->
+                                <input type="text" id="character-name-input" class="character-input-field">
+            
+                                <button id="import-button">Import</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
 
                     <div id="options-window">
                         <div id="options-content" class="options-tab-content">

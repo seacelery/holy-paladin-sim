@@ -65,6 +65,7 @@ html {
 body {
     margin: 0 auto;
     margin-bottom: 60px;
+    padding-top: 45px;
     background-color: var(--background-colour);
 }
 
@@ -84,35 +85,43 @@ body {
     background: var(--panel-colour-3);
 }
 
+#navbar-row-container {
+    display: flex;
+}
+
 /* character import bar */
 #import-character-container {
-    margin: 50px auto 30px auto;
-    padding: 11px 0 11px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-left: auto;
+    display: none;
+    align-items:end;
 
-    width: 1320px;
+    height: 45px;
 
+/* 
     border: 1px solid var(--panel-colour-4);
     border-radius: 3px;
     
-    background-color: var(--panel-colour);
+    background-color: var(--panel-colour); */
 }
 
-.character-input-label {
-    padding: 9px 10px 0 0;
+#import-character-options-container {
+    display: flex;
+    justify-content: right;
 
-    font-size: 17px;
-    color: var(--light-font-colour);
+    border-top: 1px solid var(--panel-colour-4);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 }
 
 .character-input-field {
-    margin-right: 25px;
     padding-left: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
 
     border: 1px solid var(--panel-colour-4);
-    border-radius: 3px;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
 
     font-size: 17px;
     color: var(--light-font-colour);
@@ -120,29 +129,62 @@ body {
 }
 
 #character-name-input, #character-realm-input {
-    width: 175px;
+    width: 140px;
     height: 27px;
+}
+
+#character-name-input {
+    width: 100px;
+}
+
+#character-name-label {
     font-size: 16px;
+    color: var(--light-font-colour);
+
+    width: 50px;
+    height: 20px;
+}
+
+#character-realm-input {
+    padding-left: 2px;
 }
 
 #character-region-input {
     width: 50px;
-    padding-left: 0px;
+    padding-left: 1px;
     height: 27px;
 }
 
+#character-region-input, #character-name-input, #character-realm-input {
+    font-size: 14px;
+
+    outline: none;
+}
+
+#character-realm-input::-webkit-scrollbar-thumb {
+    border-left: 2px solid var(--panel-colour-2);
+}
+
+#character-realm-input::-webkit-scrollbar-track {
+    background-color: var(--panel-colour-2);
+}
+
 #import-button {
-    width: 150px;
-    height: 30px;
-    margin-top: -1px;
+    width: 75px;
+    height: 27px;
     
     border: 1px solid var(--panel-colour-4);
+    border-top: none;
+    border-bottom: none;
     border-radius: 3px;
+    border-bottom-right-radius: 0px;
 
-    font-size: 18px;
+    font-size: 14px;
     color: var(--light-font-colour);
 
     background-color: var(--panel-colour-2);
+
+    outline: none;
 }
 
 #import-button:hover {
@@ -151,9 +193,203 @@ body {
     background-color: var(--background-colour);
 }
 
+#character-name-input {
+    color: var(--paladin-font) !important;
+}
+
+#loading-corner {
+    position: absolute;
+    transform: translateX(-1px);
+
+    width: 547px;
+    height: 45px;
+
+    background-color: #00000057;
+
+    z-index: 1000;
+}
+
+#loading-screen {
+    position: absolute;
+    transform: translate(-1px, 45px);
+
+    width: 1320px;
+    height: 651px;
+
+    background-color: #00000057;
+
+    z-index: 1000;
+}
+
+#import-button-main-loading-container, #import-button-loading-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+}
+
+#import-button-loading-container {
+    width: 100%;
+
+    transform: translateY(-40px);
+}
+
+.loading {
+    width: 25px;
+    aspect-ratio: 1;
+    display:grid;
+    mask: conic-gradient(from 15deg,#0000,#000);
+    animation: l26 1s infinite steps(12);
+}
+.loading,
+.loading:before,
+.loading:after{
+    background:
+        radial-gradient(closest-side at 50% 12.5%,
+        #ff98ab 96%,#0000) 50% 0/20% 80% repeat-y,
+        radial-gradient(closest-side at 12.5% 50%,
+        #ff98ab 96%,#0000) 0 50%/80% 20% repeat-x;
+}
+.loading:before,
+.loading:after {
+    content: "";
+    grid-area: 1/1;
+    transform: rotate(30deg);
+}
+.loading:after {
+    transform: rotate(60deg);
+}
+
+@keyframes l26 {
+    100% {transform:rotate(1turn)}
+}
+
+#loading-large {
+    width: 70px;
+}
+
+#import-container-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 90%;
+}
+
+#import-character-container-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    user-select: none;
+
+    width: 350px;
+
+    background-color: var(--panel-colour);
+    border: 1px solid var(--border-colour-3);
+
+    z-index: 1001;
+
+    color: var(--light-font-colour);
+    font-size: 18px;
+}
+
+.import-character-reminder-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+
+    height: 60px;
+
+    color: var(--light-font-colour);
+    font-size: 20px;
+}
+
+.character-input-label-main {
+    padding: 9px 10px 0 2px;
+
+    width: 275px;
+    text-align: left;
+
+    font-size: 16px;
+    color: var(--light-font-colour);
+}
+
+.import-input-container-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+}
+
+.character-input-field-main {
+    padding-left: 5px;
+    padding-bottom: 1px;
+
+    margin-top: -6px;
+    margin-bottom: 5px;
+
+    border: 1px solid var(--panel-colour-4);
+    border-radius: 3px;
+
+    font-size: 20px;
+    color: var(--light-font-colour);
+    background-color: var(--panel-colour-2);
+}
+
+#character-name-input-main, #character-realm-input-main, #character-region-input-main {
+    height: 40px;
+    width: 275px;
+    font-size: 16px;
+
+    padding-left: 5px;
+}
+
+#character-name-input-main {
+    padding-left: 10px;
+}
+
+#character-realm-input-main::-webkit-scrollbar-thumb {
+    border-left: 2px solid var(--panel-colour-2);
+}
+
+#character-realm-input-main::-webkit-scrollbar-track {
+    background-color: var(--panel-colour-2);
+}
+
+#import-button-main {
+    width: 150px;
+    height: 50px;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    
+    border: 1px solid var(--panel-colour-4);
+    border-radius: 3px;
+
+    font-size: 18px;
+    color: var(--light-font-colour);
+
+    background-color: var(--panel-colour-2);
+
+    outline: none;
+}
+
+#import-button-main:hover {
+    cursor: pointer;
+    user-select: none;
+    background-color: var(--background-colour);
+}
+
 /* character options window */
 #simulation-options-container {
-    margin: 0 auto 20px auto;
+    margin: 30px auto 20px auto;
 
     width: 1320px;
 
@@ -1708,9 +1944,9 @@ body {
     align-items: center;
     position: absolute;
     left: auto;
-    right: 6px;
+    right: 10px;
     bottom: 0;
-    top: 46px;
+    top: 64px;
     margin: auto;
 
     width: 25%;
@@ -1738,7 +1974,7 @@ body {
     align-items: center;
 
     width: 100%;
-    height: 450px;
+    height: 475px;
     padding: 10px;
 
     outline: none;
@@ -1817,6 +2053,14 @@ body {
     font-size: 16px;
 }
 
+#priority-list-paste-modal-textarea::-webkit-scrollbar-thumb {
+    border-left: 2px solid var(--panel-colour-2);
+}
+
+#priority-list-paste-modal-textarea::-webkit-scrollbar-track {
+    background-color: var(--panel-colour-2);
+}
+
 #priority-list-info {
     display: flex;
     justify-content: center;
@@ -1838,13 +2082,13 @@ body {
     padding: 10px;
     position: absolute;
     left: auto;
-    right: 6px;
+    right: 10px;
     bottom: 0;
     top: 61px;
     margin: auto;
 
     width: 25%;
-    height: 515px;
+    height: 525px;
     overflow: auto;
    
     border: 1px solid var(--border-colour-3);
@@ -1897,13 +2141,12 @@ body {
 }
 
 #priority-list-items-container::-webkit-scrollbar {
-    width: 6px;
-    
+    width: 8px;
 }
 
 #priority-list-items-container::-webkit-scrollbar-thumb {
     border-left: 1px solid var(--panel-colour-2);
-    border-right: 1px solid var(--panel-colour-2);
+    border-right: 2px solid var(--panel-colour);
     border-radius: 3px;
     background-color: var(--panel-colour-2);
 }
@@ -1919,6 +2162,10 @@ body {
     min-width: 60%;
 
     padding: 3px;
+}
+
+.priority-list-item-container:last-of-type {
+    padding-bottom: 15px;
 }
 
 .priority-list-item-icon {
@@ -1964,6 +2211,19 @@ body {
     background-color: var(--panel-colour-2);
 }
 
+.priority-list-item-ability-text::-webkit-scrollbar {
+    width: 6px;
+}
+
+.priority-list-item-ability-text::-webkit-scrollbar-thumb {
+    border-left: 2px solid var(--panel-colour-2);
+    border-right: 1px solid var(--panel-colour-2);
+}
+
+.priority-list-item-ability-text::-webkit-scrollbar-track {
+    background-color: var(--panel-colour-2);
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
@@ -1973,6 +2233,10 @@ input:-webkit-autofill:active{
 
 input:-webkit-autofill{
     -webkit-text-fill-color: var(--light-font-colour) !important;
+}
+
+#character-name-input:-webkit-autofill {
+    -webkit-text-fill-color: var(--paladin-font) !important;
 }
 
 .priority-list-item-condition {
@@ -2009,6 +2273,19 @@ input:-webkit-autofill{
     line-height: 40px;
     color: var(--light-font-colour);
     font-size: 13.5px;
+    background-color: var(--panel-colour-2);
+}
+
+.priority-list-item-condition-text::-webkit-scrollbar {
+    width: 6px;
+}
+
+.priority-list-item-condition-text::-webkit-scrollbar-thumb {
+    border-left: 2px solid var(--panel-colour-2);
+    border-right: 1px solid var(--panel-colour-2);
+}
+
+.priority-list-item-condition-text::-webkit-scrollbar-track {
     background-color: var(--panel-colour-2);
 }
 
@@ -3384,6 +3661,28 @@ tr {
     .priority-grid-container {
         scrollbar-width: thin;
         scrollbar-color: var(--border-colour-3) var(--panel-colour-6);
+    }
+
+    #priority-list-items-container {
+        scrollbar-width: thin;
+        scrollbar-color: var(--border-colour-3) var(--panel-colour);
+    }
+
+    #priority-list-info-modal-container {
+        scrollbar-width: thin;
+        scrollbar-color: var(--panel-colour) var(--panel-colour-2);
+        margin-right: 5px;
+    }
+
+    #character-realm-input {
+        scrollbar-width: thin;
+        scrollbar-color: var(--panel-colour) var(--panel-colour-2);
+        padding-left: 5px;
+    }
+
+    #character-region-input {
+        padding-left: 5px;
+        font-family: "Inter";
     }
 }
 

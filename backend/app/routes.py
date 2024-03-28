@@ -48,6 +48,9 @@ def import_character_route():
 
     return jsonify({
         "message": f"Character imported successfully, {character_name}, {realm}, {region}",
+        "character_name": character_name,
+        "character_realm": realm,
+        "character_region": region,
         "class_talents": paladin.class_talents,
         "spec_talents": paladin.spec_talents,
         "race": paladin.race,
@@ -78,7 +81,10 @@ def fetch_updated_stats_route():
     paladin.update_equipment(custom_equipment)
     
     return jsonify({
-        "message": f"Character imported successfully, {character_name}, {realm}",
+        "message": f"Character imported successfully, {character_name}, {realm}, {region}",
+        "character_name": character_name,
+        "character_realm": realm,
+        "character_region": region,
         "class_talents": paladin.class_talents,
         "spec_talents": paladin.spec_talents,
         "race": paladin.race,

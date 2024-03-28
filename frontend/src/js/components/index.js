@@ -1,7 +1,5 @@
 // TO DOS
 // colour spell names by spell type
-// change awakening triggers on the graph using the cooldown data instead
-// talents, equipment page resizing issues
 
 import { createAbilityBreakdown } from "./ability-breakdown.js";
 import { createBuffsBreakdown } from "./buffs-breakdown.js";
@@ -15,14 +13,7 @@ import { setSimulationOptionsFromImportedData, generateBuffsConsumablesImages } 
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
 import { updateEquipmentFromImportedData, initialiseEquipment, generateFullItemData } from "./equipment-options.js";
 import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable, updateEquipmentWithEffectValues, createTooltip, addTooltipFunctionality } from "../utils/misc-functions.js";
-
-// window.addEventListener("mouseover", (e) => {
-//     console.log(e.target)
-// })
-
-// window.addEventListener("click", (e) => {
-//     console.log(e.target)
-// })
+import { realmList } from "../utils/data/realm-list.js";
 
 // helper functions
 const createElement = (elementName, className = null, id = null) => {
@@ -61,11 +52,13 @@ let encounterLength = 30;
 let iterations = 1;
 let lastSliderChange = null;
 let isSimulationRunning = false;
+let isFirstImport = true;
 
 // save states for use in separate priority breakdowns
 export let cooldownFilterState = {};
 export let playerAurasFilterState = {};
 
+const importButtonMain = document.getElementById("import-button-main");
 const importButton = document.getElementById("import-button");
 
 const simulationName = document.getElementById("simulation-name-text-input");
@@ -91,14 +84,90 @@ socket.on("iteration_update", function(data) {
     };
 });
 
+const generateRealmOptions = () => {
+    const characterRegionFieldMain = document.getElementById("character-region-input-main");
+    const characterRealmFieldMain = document.getElementById("character-realm-input-main");
+    const characterNameFieldMain = document.getElementById("character-name-input-main");
+    characterNameFieldMain.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            characterNameFieldMain.value = characterNameFieldMain.value.charAt(0).toUpperCase() + characterNameFieldMain.value.slice(1).toLowerCase();
+        };
+    });
+
+    realmList[characterRegionFieldMain.value].forEach(realm => {
+        const realmOption = createElement("option", "realm-option", null);
+        realmOption.textContent = realm;
+        realmOption.name = realm;
+        characterRealmFieldMain.appendChild(realmOption);
+    });
+
+    characterRegionFieldMain.addEventListener("input", (e) => {
+        characterRealmFieldMain.innerHTML = "";
+    
+        realmList[e.target.value].forEach(realm => {
+            const realmOption = createElement("option", "realm-option", null);
+            realmOption.textContent = realm;
+            realmOption.name = realm;
+            characterRealmFieldMain.appendChild(realmOption);
+        });
+    });
+
+    const characterRegionField = document.getElementById("character-region-input");
+    const characterRealmField = document.getElementById("character-realm-input");
+    const characterNameField = document.getElementById("character-name-input");
+    characterNameField.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            characterNameField.value = characterNameField.value.charAt(0).toUpperCase() + characterNameField.value.slice(1).toLowerCase();
+        };
+    });
+    
+    characterRegionField.addEventListener("input", (e) => {
+        characterRealmField.innerHTML = "";
+    
+        realmList[e.target.value].forEach(realm => {
+            const realmOption = createElement("option", "realm-option", null);
+            realmOption.textContent = realm;
+            realmOption.name = realm;
+            characterRealmField.appendChild(realmOption);
+        });
+    });
+};
+
 // request functions
 const importCharacter = async () => {
     let characterName = document.getElementById("character-name-input").value.toLowerCase();
     let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
     let characterRegion = document.getElementById("character-region-input").value.toLowerCase();
 
+    if (!characterName) {
+        characterName = document.getElementById("character-name-input-main").value.toLowerCase();
+    };
+    if (!characterRealm) {
+        characterRealm = document.getElementById("character-realm-input-main").value.toLowerCase().replaceAll(" ", "-");
+    };
+    if (!characterRegion) {
+        characterRegion = document.getElementById("character-region-input-main").value.toLowerCase();
+    };
+
     // characterName = "daisu";
     // characterRealm = "aszune";
+    if (characterName && characterRealm && characterRegion && isFirstImport) {
+        const importButtonText = document.getElementById("import-button-text-main");
+        const importButtonLoading = document.getElementById("import-button-main-loading-container");
+        importButtonText.style.display = "none";
+        importButtonLoading.style.display = "flex";
+    };
+
+    if (characterName && characterRealm && characterRegion && !isFirstImport) {
+        const loadingScreen = document.getElementById("loading-screen");
+        loadingScreen.style.display = "flex";
+        const loadingCorner = document.getElementById("loading-corner");
+        loadingCorner.style.display = "flex";
+        const loadingIcon = document.getElementById("import-button-loading-container");
+        loadingIcon.style.display = "flex";
+        const importContainerMain = document.getElementById("import-container-main");
+        importContainerMain.style.display = "none";
+    };
 
     return fetch(`http://127.0.0.1:5000/import_character?character_name=${characterName}&realm=${characterRealm}&region=${characterRegion}`, {
         credentials: "include"
@@ -107,10 +176,29 @@ const importCharacter = async () => {
     .then(data => {
         console.log(data)
         updateEquipmentWithEffectValues(data);
-        updateUIAfterImport(data);
+        updateUIAfterImport(data, isFirstImport);
         initialiseEquipment();
+        isFirstImport = false;
     })
     .catch(error => { console.error("Error:", error);
+                    if (isFirstImport) {
+                        const importButtonText = document.getElementById("import-button-text-main");
+                        const importButtonLoading = document.getElementById("import-button-main-loading-container");
+                        importButtonText.style.display = "block";
+                        importButtonLoading.style.display = "none";
+                        // const simulationOptionsContainer = document.getElementById("simulation-options-container");
+                        // simulationOptionsContainer.style.marginTop = 0;
+                    };
+
+                    if (!isFirstImport) {
+                        const loadingScreen = document.getElementById("loading-screen");
+                        loadingScreen.style.display = "none";
+                        const loadingCorner = document.getElementById("loading-corner");
+                        loadingCorner.style.display = "none";
+                        const loadingIcon = document.getElementById("import-button-loading-container");
+                        loadingIcon.style.display = "none";
+                    };
+                    
                     if (!characterName) {
                         window.alert(`Character name missing`)
                     } else if (!characterRealm) {
@@ -413,16 +501,58 @@ let currentConsumables = {
     potion: {}
 };
 
+const minimiseImportContainer = (data) => {
+    const loadingScreen = document.getElementById("loading-screen");
+    const loadingCorner = document.getElementById("loading-corner");
+    loadingScreen.style.display = "none";
+    loadingCorner.style.display = "none";
+
+    const importCharacterContainerSmall = document.getElementById("import-character-container");
+    importCharacterContainerSmall.style.display = "flex";
+
+    const characterRegionField = document.getElementById("character-region-input");
+    const characterRealmField = document.getElementById("character-realm-input");
+    const characterNameField = document.getElementById("character-name-input");
+
+    realmList[data.character_region.toUpperCase()].forEach(realm => {
+        const realmOption = createElement("option", "realm-option", null);
+        realmOption.textContent = realm;
+        realmOption.name = realm;
+        document.getElementById("character-realm-input").appendChild(realmOption);
+    });
+
+    characterNameField.value = data.character_name.charAt(0).toUpperCase() + data.character_name.slice(1);
+    characterRegionField.value = data.character_region.toUpperCase();
+    characterRealmField.value = data.character_realm.replaceAll("-", " ")
+                                                    .split(" ")
+                                                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                                    .join(" ");
+};
+
 // update displayed information based on imported character
-const updateUIAfterImport = (data) => {
+const updateUIAfterImport = (data, isFirstImport) => {
     console.log(data);
     setSimulationOptionsFromImportedData(data);
 
+    if (isFirstImport) {
+        minimiseImportContainer(data);
+    } else {
+        const loadingScreen = document.getElementById("loading-screen");
+        loadingScreen.style.display = "none";
+        const loadingCorner = document.getElementById("loading-corner");
+        loadingCorner.style.display = "none";
+        const loadingIcon = document.getElementById("import-button-loading-container");
+        loadingIcon.style.display = "none";
+    };
+    
     updateTalentsFromImportedData(data);
     updateEquipmentFromImportedData(data);
 };
 
+generateRealmOptions();
+
 // event listeners
+importButtonMain.addEventListener("click", importCharacter);
 importButton.addEventListener("click", importCharacter);
 simulationProgressBarContainer.addEventListener("click", runSimulation);
 
