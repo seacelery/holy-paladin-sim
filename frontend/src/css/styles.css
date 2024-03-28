@@ -133,10 +133,6 @@ body {
     height: 27px;
 }
 
-#character-name-input {
-    width: 100px;
-}
-
 #character-name-label {
     font-size: 16px;
     color: var(--light-font-colour);

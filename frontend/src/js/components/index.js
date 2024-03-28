@@ -488,6 +488,8 @@ const createSimulationResults = (simulationData) => {
     // initialise tabs within the results
     handleTabs(`results-navbar-${containerCount}`, `results-tab-content-${containerCount}`, containerCount);
     handleTabs(`buffs-line-graph-navbar-${containerCount}`, `buffs-line-graph-tab-content-${containerCount}`, containerCount);
+
+    resultHeader.scrollIntoView({ behavior: "smooth" });
 };
 
 // update the paladin class when attributes are changed
