@@ -43,11 +43,11 @@ def save_data_to_file(data, filename):
     with open(filename, "w") as f:
         json.dump(data, f, indent=4)
 
-def import_character(character_name, realm):
-    character_data = cache.cached_get_character_data(access_token, realm, character_name)
+def import_character(character_name, realm, region):
+    character_data = cache.cached_get_character_data(access_token, realm, character_name, region)
     stats_data = cache.cached_get_stats_data(access_token, character_data["statistics"]["href"])
     equipment_data = cache.cached_get_equipment_data(access_token, character_data["equipment"]["href"])
-    talent_data = cache.cached_get_talent_data(access_token, realm, character_name)
+    talent_data = cache.cached_get_talent_data(access_token, realm, character_name, region)
     
     healing_targets = [Target(f"target{i + 1}") for i in range(20)]
     

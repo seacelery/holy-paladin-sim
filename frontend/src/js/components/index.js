@@ -95,11 +95,12 @@ socket.on("iteration_update", function(data) {
 const importCharacter = async () => {
     let characterName = document.getElementById("character-name-input").value.toLowerCase();
     let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
+    let characterRegion = document.getElementById("character-region-input").value.toLowerCase();
 
     // characterName = "daisu";
     // characterRealm = "aszune";
 
-    return fetch(`http://127.0.0.1:5000/import_character?character_name=${characterName}&realm=${characterRealm}`, {
+    return fetch(`http://127.0.0.1:5000/import_character?character_name=${characterName}&realm=${characterRealm}&region=${characterRegion}`, {
         credentials: "include"
     })
     .then(response => response.json())
@@ -123,12 +124,13 @@ const importCharacter = async () => {
 const updateStats = async () => {
     let characterName = document.getElementById("character-name-input").value.toLowerCase();
     let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
+    let characterRegion = document.getElementById("character-region-input").value.toLowerCase();
 
     // characterName = "daisu";
     // characterRealm = "aszune";
     const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
 
-    return fetch(`http://127.0.0.1:5000/fetch_updated_data?character_name=${characterName}&realm=${characterRealm}&custom_equipment=${customEquipment}`, {
+    return fetch(`http://127.0.0.1:5000/fetch_updated_data?character_name=${characterName}&realm=${characterRealm}&custom_equipment=${customEquipment}&region=${characterRegion}`, {
         credentials: "include"
     })
     .then(response => response.json())

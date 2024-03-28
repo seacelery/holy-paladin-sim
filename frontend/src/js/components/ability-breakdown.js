@@ -104,11 +104,11 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     // "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", 
     const excludedSpells = [
         "Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", 
-        "Aerated Mana Potion"
+        "Aerated Mana Potion", "Tirion's Devotion"
     ];
     // displays only casts and resource gains
     const excludedSpellsOnlyResourcesAndCasts = [
-        "Blessing of the Seasons", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", 
+        "Beacon of Virtue", "Beacon of Faith", "Blessing of the Seasons", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", 
         "Divine Favor", "Avenging Wrath", "Arcane Torrent", "Aerated Mana Potion"
     ];
     // displays casts with average as healing divided by casts
@@ -118,7 +118,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda", "Holy Reverberation", 
         "Restorative Sands", "Echoing Tyrstone", "Smoldering Seedling", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT", 
         "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", 
-        "Barrier of Faith (Holy Light)"
+        "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion"
     ];
     // displays casts with average as healing divided by hits
     const excludedSpellsCastsAverageHits = [
@@ -126,7 +126,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     ];
     const excludedSpellsCrit = [
         "Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Crusader Strike", "Judgment", "Daybreak", 
-        "Divine Toll", "Smoldering Seedling", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Lay on Hands"
+        "Divine Toll", "Smoldering Seedling", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Lay on Hands", "Leech"
     ];
 
     const tableContainer = document.getElementById(`ability-breakdown-table-container-${containerCount}`);

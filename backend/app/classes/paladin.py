@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
 from ..utils.buff_class_map import buff_class_map
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
-from ..utils.stat_values import diminishing_returns_values, stat_conversions, calculate_stat_percent_with_dr, update_stat_with_multiplicative_percentage
+from ..utils.stat_values import diminishing_returns_values, stat_conversions, calculate_stat_percent_with_dr, calculate_leech_percent_with_dr, update_stat_with_multiplicative_percentage
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell, LayOnHands
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
@@ -683,9 +683,6 @@ class Paladin:
         if spell_name not in beacon_transfer_rates_single_beacon or spell_name not in beacon_transfer_rates_double_beacon:
             return
         
-        if spell_name == "Holy Light":
-            print(spell_name)
-        
         beacon_healing = calculate_beacon_healing(spell_name, initial_heal, self)
         
         for beacon_target in self.beacon_targets:
@@ -934,7 +931,7 @@ class Paladin:
             
         versatility_percent = calculate_stat_percent_with_dr(self, "versatility", versatility_rating, self.flat_versatility)
         
-        leech_percent = leech_rating / stat_conversions["leech"]
+        leech_percent = calculate_leech_percent_with_dr(self, "leech", leech_rating, 0)
         
         return haste_percent, crit_percent, mastery_percent, versatility_percent, leech_percent
     

@@ -72,7 +72,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     const playerAurasModalIconOrder = [
         "Avenging Wrath", "Blessing of Dawn", "Blessing of Dusk", "Infusion of Light", "Divine Purpose", 
         "Tyr's Deliverance (self)", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring",
-        "Rising Sunlight", "First Light", "Divine Favor", "Awakening", "Awakening READY!!!!!!"
+        "Rising Sunlight", "First Light", "Divine Favor", "Awakening", "Awakening Ready!!!!!!"
     ];
     const currentSimulationPlayerAuras = [];
 

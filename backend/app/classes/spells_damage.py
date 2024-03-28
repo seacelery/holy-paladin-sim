@@ -36,7 +36,7 @@ class Judgment(Spell):
             
     def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):
         if caster.is_talent_active("Awakening"):
-            if "Awakening READY!!!!!!" in caster.active_auras:
+            if "Awakening Ready!!!!!!" in caster.active_auras:
                 # add 30% damage buff and guaranteed crit
                 self.bonus_crit = 1
                 self.spell_damage_modifier *= 1.3
@@ -65,18 +65,18 @@ class Judgment(Spell):
         
             # awakening
             if caster.is_talent_active("Awakening"):
-                if "Awakening READY!!!!!!" in caster.active_auras:
+                if "Awakening Ready!!!!!!" in caster.active_auras:
                     if "Avenging Wrath" in caster.active_auras:
                         caster.awakening_queued = True
                     else:
                         buff = AvengingWrathAwakening()
                         caster.apply_buff_to_self(buff, current_time)
                         
-                    del caster.active_auras["Awakening READY!!!!!!"]
+                    del caster.active_auras["Awakening Ready!!!!!!"]
                         
-                    update_self_buff_data(caster.self_buff_breakdown, "Awakening READY!!!!!!", current_time, "expired")
+                    update_self_buff_data(caster.self_buff_breakdown, "Awakening Ready!!!!!!", current_time, "expired")
              
-                    append_aura_removed_event(caster.events, "Awakening READY!!!!!!", caster, caster, current_time)
+                    append_aura_removed_event(caster.events, "Awakening Ready!!!!!!", caster, caster, current_time)
                     # buff.duration += 12
                     # buff.applied_duration = 12
                     

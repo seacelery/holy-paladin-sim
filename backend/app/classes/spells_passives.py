@@ -46,6 +46,34 @@ class TouchOfLight(Spell):
     
     def __init__(self, caster):
         super().__init__("Touch of Light")
+        
+
+class DreamingDevotion(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    BASE_PPM = 3
+    
+    def __init__(self, caster):
+        super().__init__("Dreaming Devotion")
+        
+    def apply_flat_healing(self, caster, targets, current_time, is_heal):
+        chosen_target = targets
+        secondary_targets = random.sample([target for target in caster.potential_healing_targets if target != chosen_target], random.randint(10, 19))
+        
+        chosen_targets = [chosen_target] + secondary_targets
+        
+        for target in chosen_targets:
+            dreaming_devotion_heal, dreaming_devotion_crit = DreamingDevotion(caster).calculate_heal(caster)
+            dreaming_devotion_heal = 16826 * caster.versatility_multiplier
+            
+            if dreaming_devotion_crit:
+                dreaming_devotion_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+                
+            if "Close to Heart" in caster.active_auras:
+                dreaming_devotion_heal *= 1.08
+            
+            target.receive_heal(dreaming_devotion_heal, caster)
+            update_spell_data_heals(caster.ability_breakdown, "Dreaming Devotion", target, dreaming_devotion_heal, dreaming_devotion_crit)
  
  
 class EmbraceOfAkunda(Spell):

@@ -34,18 +34,20 @@ def import_character_route():
     session.clear()
     character_name = request.args.get("character_name")
     realm = request.args.get("realm")
+    region = request.args.get("region")
 
-    paladin, healing_targets = import_character(character_name, realm)
+    paladin, healing_targets = import_character(character_name, realm, region)
     
     # paladin.reset_state()
     
     session["character_name"] = character_name
     session["realm"] = realm
+    session["region"] = region
     
     session["modifiable_data"] = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}, "equipment": {}}
 
     return jsonify({
-        "message": f"Character imported successfully, {character_name}, {realm}",
+        "message": f"Character imported successfully, {character_name}, {realm}, {region}",
         "class_talents": paladin.class_talents,
         "spec_talents": paladin.spec_talents,
         "race": paladin.race,
@@ -61,9 +63,10 @@ def import_character_route():
 def fetch_updated_stats_route():
     character_name = request.args.get("character_name")
     realm = request.args.get("realm")
+    region = request.args.get("region")
     custom_equipment = request.args.get("custom_equipment")
 
-    paladin, healing_targets = import_character(character_name, realm)
+    paladin, healing_targets = import_character(character_name, realm, region)
     modifiable_data = session.get("modifiable_data", {})
     paladin.update_character(
         race=modifiable_data.get("race"),
@@ -115,6 +118,7 @@ def update_character_route():
 def run_simulation_route():
     character_name = session.get("character_name")
     realm = session.get("realm")
+    region = session.get("region")
 
     if not character_name or not realm:
         return jsonify({"error": "Character name or realm not found in session"}), 400
@@ -130,7 +134,7 @@ def run_simulation_route():
     else:
         priority_list = default_priority_list
 
-    paladin, healing_targets = import_character(character_name, realm)
+    paladin, healing_targets = import_character(character_name, realm, region)
     
     print(session["modifiable_data"])
     

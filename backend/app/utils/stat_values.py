@@ -3,7 +3,7 @@ stat_conversions = {
     "crit": 180,
     "mastery": 120,
     "versatility": 205,
-    "leech": 148
+    "leech": 150
 }
 
 diminishing_returns_values = {
@@ -11,7 +11,7 @@ diminishing_returns_values = {
     "crit": [5400, 7200, 9000, 10800, 12600, 14400, 16200, 18000, 19800, 21600],
     "mastery": [5400, 7200, 9000, 10800, 12600, 14400, 16200, 18000, 19800, 21600],
     "versatility": [6150, 8200, 10250, 12300, 14350, 16400, 18450, 20500, 22550, 24600],
-    "leech": [1480, 1480, 2220, 2220, 2960, 2960, 3700, 3700, 4440, 4440, 5180, 5180]
+    "leech": [(stat_conversions["leech"] / 100) * i for i in range(1, 3000)]
 }
 
 def calculate_stat_percent_with_dr(caster, stat, rating, flat_percent):
@@ -58,6 +58,32 @@ def calculate_stat_percent_with_dr(caster, stat, rating, flat_percent):
             rating_to_percent = rating_to_percent * 1.02 + 2
         elif caster.is_talent_active("Seal of Alacrity") and caster.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 2:
             rating_to_percent = rating_to_percent * 1.04 + 4
+            
+    rating_to_percent += flat_percent
+    
+    return rating_to_percent
+
+def calculate_leech_percent_with_dr(caster, stat, rating, flat_percent):
+    dr_values = diminishing_returns_values["leech"]
+    remainder = 0
+    current_range_index = 0
+    
+    for i in range(len(dr_values)):
+        current_dr_value = dr_values[i]
+        if rating - current_dr_value < 0:
+            remainder = rating - dr_values[i - 1]
+            current_range_index = i - 1
+            break
+    
+    if rating >= dr_values[0]:
+        rating_to_percent = dr_values[0] / stat_conversions["leech"]
+        
+        for i in range(current_range_index):
+            rating_to_percent += ((dr_values[1] - dr_values[0]) / stat_conversions["leech"]) * (1 - ((i + 1) * 0.00015))
+        
+        rating_to_percent += (remainder / stat_conversions["leech"]) * (1 - ((current_range_index + 1) * 0.00015))
+    else:
+        rating_to_percent = rating / stat_conversions["leech"]
             
     rating_to_percent += flat_percent
     

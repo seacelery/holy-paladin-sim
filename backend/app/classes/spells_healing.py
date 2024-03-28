@@ -1425,4 +1425,6 @@ class LayOnHands(Spell):
             update_spell_data_casts(caster.ability_breakdown, self.name, 0, 0, self.holy_power_cost)
             
             if caster.is_talent_active("Tirion's Devotion"):
-                caster.mana += caster.max_mana * 0.05
+                tirions_devotion_mana_gain = caster.max_mana * 0.05
+                caster.mana += tirions_devotion_mana_gain
+                update_mana_gained(caster.ability_breakdown, "Tirion's Devotion", tirions_devotion_mana_gain)

@@ -43,6 +43,7 @@ const spellToIconsMap = {
     "Reclamation (Crusader Strike)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_longarmofthelaw.jpg",
     "Reclamation (Holy Shock)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_longarmofthelaw.jpg",
     "Resplendent Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_voidshift.jpg",
+    "Tirion's Devotion": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_revivechampion.jpg",
     "Touch of Light": "https://render.worldofwarcraft.com/eu/icons/56/achievment_raid_houroftwilight.jpg",
     "Tyr's Deliverance": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_2h_artifactsilverhand_d_01.jpg",
     "Word of Glory": "https://render.worldofwarcraft.com/eu/icons/56/inv_helmet_96.jpg",
@@ -62,7 +63,12 @@ const spellToIconsMap = {
     "Blossom of Amirdrassil Small HoT": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
     "Nymue's Unraveling Spindle": "https://render.worldofwarcraft.com/eu/icons/56/inv_cloth_outdooremeralddream_d_01_buckle.jpg",
 
-    "Wait": "https://render.worldofwarcraft.com/eu/icons/56/inv_gauntlets_06.jpg"
+    // enchants
+    "Dreaming Devotion": "https://render.worldofwarcraft.com/eu/icons/56/item_herbd.jpg",
+
+    // misc
+    "Wait": "https://render.worldofwarcraft.com/eu/icons/56/inv_gauntlets_06.jpg",
+    "Leech": "https://render.worldofwarcraft.com/eu/icons/56/spell_shadow_lifedrain02.jpg"
 };
 
 export { spellToIconsMap };

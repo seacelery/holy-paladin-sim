@@ -5,7 +5,7 @@ const buffsToIconsMap = {
     "Avenging Wrath": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_avenginewrath.jpg",
     "Avenging Wrath (Awakening)": "custom-icons/avenging-wrath-awakening.png",
     "Awakening": "https://render.worldofwarcraft.com/eu/icons/56/inv_helm_plate_raidpaladin_n_01.jpg",
-    "Awakening READY!!!!!!": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_judgementofthepure.jpg",
+    "Awakening Ready": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_judgementofthepure.jpg",
     "Barrier of Faith": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_barrieroffaith.jpg",
     "Beacon of Faith": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_beaconsoflight.jpg",
     "Beacon of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_beaconoflight.jpg",

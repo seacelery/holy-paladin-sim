@@ -1,6 +1,7 @@
 import random
 
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_double_beacon
+from ..utils.leech_abilities import leech_abilities
 from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts, update_spell_data_beacon_heals, update_self_buff_data, update_target_buff_data, update_priority_breakdown
 from collections import defaultdict
 
@@ -258,10 +259,19 @@ class Spell:
             spell_healing_modifier = 1
         else:
             spell_healing_modifier = self.spell_healing_modifier
+            
+        heal_amount = spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier * versatility_multiplier * crit_multiplier * mastery_multiplier * spell_healing_modifier * caster_crit_healing_modifier
         
+        if "Close to Heart" in caster.active_auras:
+            heal_amount *= 1.08
+        
+        if self.name in leech_abilities:   
+            leech_multiplier = 0.7
+            update_spell_data_heals(caster.ability_breakdown, "Leech", caster, heal_amount * (caster.leech / 100) * leech_multiplier, False)
+            
         # print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
         
-        return spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier * versatility_multiplier * crit_multiplier * mastery_multiplier * spell_healing_modifier * caster_crit_healing_modifier, is_crit
+        return heal_amount, is_crit
     
     def calculate_damage(self, caster, bonus_crit=0, bonus_versatility=0):
         spell_power = caster.spell_power
@@ -326,7 +336,7 @@ class Spell:
         caster.events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
         
     def try_trigger_rppm_effects(self, caster, targets, current_time):
-        from .spells_passives import TouchOfLight, EmbraceOfAkunda
+        from .spells_passives import TouchOfLight, EmbraceOfAkunda, DreamingDevotion
         from .auras_buffs import ( 
                                   SophicDevotion, EmbraceOfPaku, CoagulatedGenesaurBloodBuff, SustainingAlchemistStoneBuff, 
                                   AlacritousAlchemistStoneBuff, SeaStarBuff, PipsEmeraldFriendshipBadge, BestFriendsWithPipEmpowered, 
@@ -335,7 +345,7 @@ class Spell:
                                   AlliedChestplateOfGenerosity, ElementalLariat, VerdantTether, VerdantConduit
                                  )
         
-        def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False):
+        def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False):
             # time since last attempt makes it so the number of events happening has very little impact on the number of procs that occur
             proc_occurred = False
             
@@ -359,6 +369,8 @@ class Spell:
                     
                     update_spell_data_heals(caster.ability_breakdown, effect.name, target, effect_heal, is_crit)
                     append_spell_heal_event(caster.events, effect.name, caster, target, effect_heal, current_time, is_crit)
+                elif is_flat_healing:
+                    effect.apply_flat_healing(caster, target, current_time, True)
                     
                 if is_self_buff and effect.name in caster.active_auras:
                     if effect.max_stacks > 1:
@@ -381,6 +393,10 @@ class Spell:
         if "Sophic Devotion" in caster.bonus_enchants:
             sophic_devotion = SophicDevotion()
             try_proc_rppm_effect(sophic_devotion, is_hasted=False, is_self_buff=True)
+            
+        if "Dreaming Devotion" in caster.bonus_enchants:
+            dreaming_devotion = DreamingDevotion(caster)
+            try_proc_rppm_effect(dreaming_devotion, is_flat_healing=True)
             
         if caster.race == "Zandalari Troll":
             embrace_of_paku = EmbraceOfPaku()

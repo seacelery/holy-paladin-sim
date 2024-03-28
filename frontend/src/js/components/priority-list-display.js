@@ -61,18 +61,18 @@ const createPriorityListItem = (index) => {
     priorityListConditionButtonsContainer.appendChild(priorityListOrButton);
     priorityListItemContainer.appendChild(priorityListConditionButtonsContainer);
 
-    const priorityListArrowButtonsContainer = createElement("div", "priority-list-buttons-container", null);
-    const priorityListUpButton = createElement("div", "priority-list-up-button priority-list-button", null);
-    const arrowUpIcon = createElement("i", "fa-solid fa-arrow-up", null);
-    priorityListUpButton.appendChild(arrowUpIcon);
+    // const priorityListArrowButtonsContainer = createElement("div", "priority-list-buttons-container", null);
+    // const priorityListUpButton = createElement("div", "priority-list-up-button priority-list-button", null);
+    // const arrowUpIcon = createElement("i", "fa-solid fa-arrow-up", null);
+    // priorityListUpButton.appendChild(arrowUpIcon);
 
-    const priorityListDownButton = createElement("div", "priority-list-down-button priority-list-button", null);
-    const arrowDownIcon = createElement("i", "fa-solid fa-arrow-down", null);
-    priorityListDownButton.appendChild(arrowDownIcon);
+    // const priorityListDownButton = createElement("div", "priority-list-down-button priority-list-button", null);
+    // const arrowDownIcon = createElement("i", "fa-solid fa-arrow-down", null);
+    // priorityListDownButton.appendChild(arrowDownIcon);
 
-    priorityListArrowButtonsContainer.appendChild(priorityListUpButton);
-    priorityListArrowButtonsContainer.appendChild(priorityListDownButton);
-    priorityListItemContainer.appendChild(priorityListArrowButtonsContainer);
+    // priorityListArrowButtonsContainer.appendChild(priorityListUpButton);
+    // priorityListArrowButtonsContainer.appendChild(priorityListDownButton);
+    // priorityListItemContainer.appendChild(priorityListArrowButtonsContainer);
 
     const priorityListAddRemoveButtonsContainer = createElement("div", "priority-list-buttons-container", null);
     const priorityListAddItem = createElement("div", "priority-list-add-item priority-list-button", null);
@@ -585,8 +585,8 @@ priorityListPresetsButton.addEventListener("mousedown", () => {
     };
 });
 
-const standardPreset = document.getElementById("standard-preset");
-standardPreset.addEventListener("click", () => {
+const beaconOfFaithPreset = document.getElementById("standard-beacon-of-faith-preset");
+beaconOfFaithPreset.addEventListener("click", () => {
     priorityListPastedCode = `Divine Toll | Previous Ability = Daybreak
         Aerated Mana Potion | Timers = [30]+
         Avenging Wrath | Timers = [18]+
@@ -604,6 +604,55 @@ standardPreset.addEventListener("click", () => {
         Flash of Light | Infusion of Light active`,
     convertPasteToPriorityList(priorityListPastedCode);
     document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
+        adjustTextareaHeight(itemText, 40);
+    });
+    document.querySelectorAll(".priority-list-item-condition-text").forEach(itemText => {
+        adjustTextareaHeight(itemText, 40);
+    });
+    updatePriorityList();
+});
+
+const beaconOfVirtuePreset = document.getElementById("standard-beacon-of-virtue-preset");
+beaconOfVirtuePreset.addEventListener("click", () => {
+    priorityListPastedCode = `Divine Toll | Previous Ability = Daybreak
+        Word of Glory | Beacon of Virtue active | and | Holy Power = 5
+        Daybreak | Beacon of Virtue active
+        Holy Shock | Beacon of Virtue active
+        Holy Light | Beacon of Virtue active | and | Infusion of Light active | and | Divine Favor active
+        Flash of Light | Beacon of Virtue active | and | Infusion of Light active
+        Word of Glory | Beacon of Virtue active | and | Holy Power >= 3 
+        Aerated Mana Potion | Timers = [30]+
+        Avenging Wrath | Timers = [20, 131]
+        Lay on Hands | Blessing of Autumn active
+        Divine Favor
+        Nymue's Unraveling Spindle | Timers = [17]+
+        Beacon of Virtue | Timers = [22, 45, 64, 79, 106, 130, 161, 177]
+        Holy Shock
+        Blessing of the Seasons
+        Light of Dawn | Holy Power = 5
+        Tyr's Deliverance
+        Light's Hammer
+        Light of Dawn | Holy Power >= 3
+        Holy Light | Divine Favor active | and | Infusion of Light active
+        Flash of Light | Infusion of Light active`,
+    convertPasteToPriorityList(priorityListPastedCode);
+    document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
+        adjustTextareaHeight(itemText, 40);
+    });
+    document.querySelectorAll(".priority-list-item-condition-text").forEach(itemText => {
+        adjustTextareaHeight(itemText, 40);
+    });
+    updatePriorityList();
+});
+
+const clearPreset = document.getElementById("clear-preset");
+clearPreset.addEventListener("click", () => {
+    priorityListPastedCode = ` `,
+    convertPasteToPriorityList(priorityListPastedCode);
+    document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
+        adjustTextareaHeight(itemText, 40);
+    });
+    document.querySelectorAll(".priority-list-item-condition-text").forEach(itemText => {
         adjustTextareaHeight(itemText, 40);
     });
     updatePriorityList();
@@ -634,6 +683,9 @@ document.addEventListener("mousedown", (e) => {
         priorityListPasteModal.style.display = "none";
         convertPasteToPriorityList(priorityListPastedCode);
         document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
+            adjustTextareaHeight(itemText, 40);
+        });
+        document.querySelectorAll(".priority-list-item-condition-text").forEach(itemText => {
             adjustTextareaHeight(itemText, 40);
         });
         updatePriorityList();

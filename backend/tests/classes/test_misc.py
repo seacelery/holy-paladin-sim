@@ -196,7 +196,7 @@ def test_awakening():
     judgment = paladin.abilities["Judgment"]
     
     target = [targets[0]]
-    while "Awakening READY!!!!!!" not in paladin.active_auras:
+    while "Awakening Ready!!!!!!" not in paladin.active_auras:
         paladin.holy_power = 3
         _, _, _, _, _, _ = word_of_glory.cast_healing_spell(paladin, target, 0, True)
         paladin.global_cooldown = 0

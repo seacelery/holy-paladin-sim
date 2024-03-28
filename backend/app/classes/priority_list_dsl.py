@@ -220,7 +220,7 @@ def condition_to_lambda(sim_instance, all_conditions):
             
             for condition in group:
                 result = False
-
+                    
                 if "gcd" in str(condition["value"]).lower():
                     operator = re.search(r"[\+\-\*/]", str(condition["value"])).group() if re.search(r"[\+\-\*/]", str(condition["value"])) else "*"
                     operator_value = float(re.search(r"\d+", str(condition["value"])).group()) if re.search(r"\d+(?:\.\d+)?", str(condition["value"])) else 1
@@ -260,10 +260,24 @@ def condition_to_lambda(sim_instance, all_conditions):
                             break
                 
                 elif condition["keyword"].lower() == "active":
-                    result = condition["name"] in sim_instance.paladin.active_auras
+                    if condition["name"] in ["Beacon of Virtue", "Beacon of Faith"]:
+                        condition["name"] = "Beacon of Light"
+                    
+                    in_target_buffs = False
+                    for target in sim_instance.paladin.potential_healing_targets:
+                        if condition["name"] in target.target_active_buffs:
+                            in_target_buffs = True
+                    result = condition["name"] in sim_instance.paladin.active_auras or in_target_buffs
                     
                 elif condition["keyword"].lower() == "inactive":
-                    result = condition["name"] not in sim_instance.paladin.active_auras
+                    if condition["name"] in ["Beacon of Virtue", "Beacon of Faith"]:
+                        condition["name"] = "Beacon of Light"
+                    
+                    in_target_buffs = False
+                    for target in sim_instance.paladin.potential_healing_targets:
+                        if condition["name"] in target.target_active_buffs:
+                            in_target_buffs = True
+                    result = condition["name"] not in sim_instance.paladin.active_auras and not in_target_buffs
                     
                 elif condition["keyword"].lower() == "mana":
                     mana = sim_instance.paladin.mana                 

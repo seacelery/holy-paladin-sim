@@ -46,8 +46,7 @@ class HoT(Buff):
         self.total_ticks += 1 if not is_partial_tick else self.time_until_next_tick / self.base_tick_interval
         
         update_spell_data_heals(caster.ability_breakdown, self.name, target, total_heal_value, is_crit)
-        
-        
+             
     def calculate_tick_healing(self, caster):
         spell_power = caster.stats.ratings["intellect"]
         
@@ -71,6 +70,9 @@ class HoT(Buff):
         random_num = random.random() * 100
         if random_num <= crit_chance:
             is_crit = True
+            
+        if "Close to Heart" in caster.active_auras:
+            healing_per_tick *= 1.08
 
         return healing_per_tick, is_crit
 
@@ -347,7 +349,7 @@ class AwakeningStacks(Buff):
 class AwakeningTrigger(Buff):
     
     def __init__(self):
-        super().__init__("Awakening READY!!!!!!", 30, base_duration=30)
+        super().__init__("Awakening Ready", 30, base_duration=30)
         
         
 class TyrsDeliveranceSelfBuff(Buff):
@@ -1527,13 +1529,16 @@ class BlossomOfAmirdrassilLargeHoT(HoT):
         trinket_effect = caster.trinkets["Blossom of Amirdrassil"]["effect"]
         trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
         
-        # initial hot
+        # initial HoT
         self.trinket_first_value = trinket_values[0]
         
     def calculate_tick_healing(self, caster):
         total_healing = self.trinket_first_value * caster.versatility_multiplier
         
         if "Blessing of Spring" in caster.active_auras:
+            total_healing *= 1.15
+            
+        if "Close to Heart" in caster.active_auras:
             total_healing *= 1.15
         
         number_of_ticks = self.base_duration / self.base_tick_interval
@@ -1556,13 +1561,16 @@ class BlossomOfAmirdrassilSmallHoT(HoT):
         trinket_effect = caster.trinkets["Blossom of Amirdrassil"]["effect"]
         trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
         
-        # three target hot
+        # three target HoT
         self.trinket_second_value = trinket_values[1]
         
     def calculate_tick_healing(self, caster):
         total_healing = self.trinket_second_value * caster.versatility_multiplier
         
         if "Blessing of Spring" in caster.active_auras:
+            total_healing *= 1.15
+            
+        if "Close to Heart" in caster.active_auras:
             total_healing *= 1.15
         
         number_of_ticks = self.base_duration / self.base_tick_interval

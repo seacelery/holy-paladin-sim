@@ -2,12 +2,12 @@ from . import battlenet_api
 from functools import cache
 
 @cache
-def cached_get_character_data(access_token, realm, character_name):
-    return battlenet_api.get_character_data(access_token, realm, character_name)
+def cached_get_character_data(access_token, realm, character_name, region):
+    return battlenet_api.get_character_data(access_token, realm, character_name, region)
 
 @cache
-def cached_get_talent_data(access_token, realm, character_name):
-    return battlenet_api.get_talent_data(access_token, realm, character_name)
+def cached_get_talent_data(access_token, realm, character_name, region):
+    return battlenet_api.get_talent_data(access_token, realm, character_name, region)
 
 @cache
 def cached_get_stats_data(access_token, stats_url):
