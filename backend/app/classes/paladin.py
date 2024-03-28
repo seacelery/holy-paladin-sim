@@ -13,7 +13,7 @@ from ..utils.stat_values import diminishing_returns_values, stat_conversions, ca
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell, LayOnHands
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
-from .spells_damage import Judgment, CrusaderStrike
+from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath
 from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell
 from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos
 from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle
@@ -531,6 +531,9 @@ class Paladin:
             
         if self.is_talent_active("Avenging Wrath"):
             self.abilities["Avenging Wrath"] = AvengingWrathSpell(self)
+            
+        if self.is_talent_active("Hammer of Wrath"):
+            self.abilities["Hammer of Wrath"] = HammerOfWrath(self)
             
         if self.is_talent_active("Divine Favor"):
             self.abilities["Divine Favor"] = DivineFavorSpell(self)

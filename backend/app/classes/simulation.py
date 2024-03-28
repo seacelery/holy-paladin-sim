@@ -565,6 +565,7 @@ class Simulation:
                 "Blossom of Amirdrassil Large HoT": "Blossom of Amirdrassil",
                 "Blossom of Amirdrassil Small HoT": "Blossom of Amirdrassil",
                 "Blossom of Amirdrassil Absorb": "Blossom of Amirdrassil",
+                "Veneration": "Hammer of Wrath"
             }
 
         # time the function
@@ -725,7 +726,7 @@ class Simulation:
                         "Greater Judgment", "Judgment of Light", "Crusader's Reprieve", "Afterimage", "Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", 
                         "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", "Blessing of Summer", "Blessing of Autumn",
                         "Blessing of Winter", "Blessing of Spring", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT",
-                        "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", "Barrier of Faith (Holy Light)", ]:
+                        "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", "Barrier of Faith (Holy Light)", "Veneration"]:
                 if spell in ability_breakdown:
                     del ability_breakdown[spell]
                           
@@ -810,7 +811,7 @@ class Simulation:
                             sub_sub_spells[sub_spell]["holy_power_wasted"] = sub_spells[sub_spell]["holy_power_wasted"]
             
             # remove spells that aren't actually spells but have subspells               
-            for spell in ["Blossom of Amirdrassil"]:
+            for spell in ["Blossom of Amirdrassil", "Hammer of Wrath"]:
                 if spell in ability_breakdown:
                     if spell in ability_breakdown[spell]["sub_spells"]:
                         del ability_breakdown[spell]["sub_spells"][spell]

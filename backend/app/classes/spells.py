@@ -55,6 +55,9 @@ class Spell:
         update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)    
         
     def can_cast(self, caster, current_time=0):
+        if self.name in ["Hammer of Wrath"] and "Avenging Wrath" not in caster.active_auras:
+            return False
+        
         if not self.off_gcd and caster.global_cooldown > 0:
             return False
         if self.max_charges > 0:

@@ -27,6 +27,7 @@ const spellToIconsMap = {
     "Gift of the Naaru": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holyprotection.jpg",
     "Glimmer of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_toweroflight.jpg",
     "Greater Judgment": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_righteousfury.jpg",
+    "Hammer of Wrath": "https://render.worldofwarcraft.com/eu/icons/56/spell_paladin_hammerofwrath.jpg",
     "Hand of Divinity": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_vindication.jpg",
     "Holy Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_surgeoflight.jpg",
     "Holy Reverberation": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_holybolts01.jpg",
@@ -46,6 +47,7 @@ const spellToIconsMap = {
     "Tirion's Devotion": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_revivechampion.jpg",
     "Touch of Light": "https://render.worldofwarcraft.com/eu/icons/56/achievment_raid_houroftwilight.jpg",
     "Tyr's Deliverance": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_2h_artifactsilverhand_d_01.jpg",
+    "Veneration": "https://render.worldofwarcraft.com/eu/icons/56/ability_crown_of_the_heavens_icon.jpg",
     "Word of Glory": "https://render.worldofwarcraft.com/eu/icons/56/inv_helmet_96.jpg",
 
     // consumables

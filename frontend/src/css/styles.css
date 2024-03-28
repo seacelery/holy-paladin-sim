@@ -13,6 +13,7 @@
     --tooltip-colour: rgba(0, 0, 0, 0.233);
     --tooltip-colour-hover: rgba(63, 63, 63, 0.096);
     --tooltip-opaque-colour: rgb(20, 20, 20);
+    --hover-colour-dark: rgb(18, 18, 21);
 
     --light-font-colour: white;
     --dark-font-colour: rgb(0, 0, 0);
@@ -380,7 +381,7 @@ body {
 #import-button-main:hover {
     cursor: pointer;
     user-select: none;
-    background-color: var(--background-colour);
+    background-color: var(--hover-colour-dark);
 }
 
 /* character options window */

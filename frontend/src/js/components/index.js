@@ -156,6 +156,7 @@ const importCharacter = async () => {
         const importButtonLoading = document.getElementById("import-button-main-loading-container");
         importButtonText.style.display = "none";
         importButtonLoading.style.display = "flex";
+        importButtonMain.style.pointerEvents = "none";
     };
 
     if (characterName && characterRealm && characterRegion && !isFirstImport) {
@@ -186,8 +187,7 @@ const importCharacter = async () => {
                         const importButtonLoading = document.getElementById("import-button-main-loading-container");
                         importButtonText.style.display = "block";
                         importButtonLoading.style.display = "none";
-                        // const simulationOptionsContainer = document.getElementById("simulation-options-container");
-                        // simulationOptionsContainer.style.marginTop = 0;
+                        importButtonMain.style.pointerEvents = "auto";
                     };
 
                     if (!isFirstImport) {

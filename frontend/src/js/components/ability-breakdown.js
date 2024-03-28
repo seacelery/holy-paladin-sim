@@ -118,7 +118,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda", "Holy Reverberation", 
         "Restorative Sands", "Echoing Tyrstone", "Smoldering Seedling", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT", 
         "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", 
-        "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion"
+        "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion", "Veneration"
     ];
     // displays casts with average as healing divided by hits
     const excludedSpellsCastsAverageHits = [
@@ -126,7 +126,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     ];
     const excludedSpellsCrit = [
         "Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Crusader Strike", "Judgment", "Daybreak", 
-        "Divine Toll", "Smoldering Seedling", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Lay on Hands", "Leech"
+        "Divine Toll", "Smoldering Seedling", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Lay on Hands", "Leech", "Veneration"
     ];
 
     const tableContainer = document.getElementById(`ability-breakdown-table-container-${containerCount}`);

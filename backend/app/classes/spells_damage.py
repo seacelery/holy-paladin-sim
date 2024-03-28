@@ -1,3 +1,5 @@
+import random
+
 from .spells import Spell
 from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals, update_self_buff_data, update_mana_gained
 from .auras_debuffs import JudgmentOfLightDebuff, GreaterJudgmentDebuff
@@ -131,7 +133,7 @@ class Judgment(Spell):
             
 class CrusaderStrike(Spell):
     
-    # uses attack power not spell power
+    # uses attack power instead of spell power
     SPELL_ID = 35395
     SPELL_POWER_COEFFICIENT = 1.071 * 1.04
     BASE_COOLDOWN = 7.75
@@ -190,4 +192,54 @@ class CrusaderStrike(Spell):
                         caster.abilities["Holy Shock"].current_charges += 1
                 
         return cast_success, spell_crit, spell_damage, crusaders_reprieve_heal
+    
+
+class HammerOfWrath(Spell):
+    
+    # uses attack power instead of spell power
+    SPELL_ID = 24275
+    SPELL_POWER_COEFFICIENT = 1.302 * 1.04 * 1.38
+    BASE_COOLDOWN = 7.5
+    MANA_COST = 0.006
+    CHARGES = 1
+    HOLY_POWER_GAIN = 1
+    
+    def __init__(self, caster):
+        super().__init__("Hammer of Wrath", mana_cost=HammerOfWrath.MANA_COST, cooldown=HammerOfWrath.BASE_COOLDOWN, holy_power_gain=HammerOfWrath.HOLY_POWER_GAIN, max_charges=HammerOfWrath.CHARGES, hasted_cooldown=True) 
+        self.is_damage_spell = True
+        
+        # vanguard's momentum
+        if caster.is_talent_active("Vanguard's Momentum"):
+            self.max_charges = 2
+            self.current_charges = self.max_charges
+        
+    def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):          
+        cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
+        veneration_healing = 0
+        if cast_success:
+            # blessing of dawn
+            if caster.is_talent_active("Of Dusk and Dawn"):
+                caster.blessing_of_dawn_counter += 1
+                if caster.blessing_of_dawn_counter == 3:
+                    caster.apply_buff_to_self(BlessingOfDawn(), current_time, stacks_to_apply=1, max_stacks=2)
+                    caster.blessing_of_dawn_counter = 0
+            
+            increment_holy_power(self, caster, current_time)
+            
+            if caster.is_talent_active("Veneration"):
+                targets = random.sample(caster.potential_healing_targets, 5)
+                
+                print(spell_damage)
+                veneration_healing_per_target = spell_damage * 2 / len(targets)
+                
+                for target in targets:                   
+                    if "Close to Heart" in caster.active_auras:
+                        veneration_healing_per_target *= 1.08
+                    
+                    target.receive_heal(veneration_healing_per_target, caster)
+                    update_spell_data_heals(caster.ability_breakdown, "Veneration", target, veneration_healing_per_target, spell_crit)
+                    
+                    caster.handle_beacon_healing("Veneration", target, veneration_healing_per_target, current_time)
+                
+        return cast_success, spell_crit, spell_damage, veneration_healing
 
