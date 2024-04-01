@@ -290,7 +290,7 @@ class Spell:
             update_spell_data_heals(caster.ability_breakdown, "Leech", caster, heal_amount * (caster.leech / 100) * leech_multiplier, False)
             
         # print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
-        
+        print(f"Calculating heal for {self.name}, {heal_amount}")
         return heal_amount, is_crit
     
     def calculate_damage(self, caster, bonus_crit=0, bonus_versatility=0):
@@ -307,6 +307,7 @@ class Spell:
             is_crit = True
             
         versatility_multiplier = caster.versatility_multiplier + bonus_versatility
+        
         return spell_power * self.SPELL_POWER_COEFFICIENT * caster.damage_multiplier * versatility_multiplier * crit_multiplier * self.spell_damage_modifier * caster_crit_damage_modifier, is_crit
     
     def get_mana_cost(self, caster):

@@ -151,7 +151,7 @@ def test_imbued_infusions():
     paladin.global_cooldown = 0
     _, _, _, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
-    _, _, _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
+    _, _, _, _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
     
     expected_cooldown = round(8.5 / 1.2548, 2) - 2
     holy_shock_cooldown = holy_shock.remaining_cooldown

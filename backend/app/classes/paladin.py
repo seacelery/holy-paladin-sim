@@ -11,7 +11,7 @@ from ..utils.buff_class_map import buff_class_map
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
 from ..utils.stat_values import diminishing_returns_values, stat_conversions, calculate_stat_percent_with_dr, calculate_leech_percent_with_dr, update_stat_with_multiplicative_percentage
 from .spells import Wait
-from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell, LayOnHands, HolyPrism
+from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell, LayOnHands, HolyPrism, LightOfTheMartyr
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion, AuraMastery
 from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
 from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell
@@ -30,8 +30,6 @@ client_secret = os.getenv("CLIENT_SECRET")
 pp = pprint.PrettyPrinter(width=200)
 
 # TODO
-# avenging crusader tests
-# light of the martyr/untempered dedication/maraad's dying breath
 # saved by the light
 # seal of the crusader
 
@@ -555,6 +553,9 @@ class Paladin:
          
         if self.is_talent_active("Aura Mastery"):
             self.abilities["Aura Mastery"] = AuraMastery(self) 
+        
+        if self.is_talent_active("Light of the Martyr"):
+            self.abilities["Light of the Martyr"] = LightOfTheMartyr(self)
             
         if self.is_talent_active("Barrier of Faith"):
             self.abilities["Barrier of Faith"] = BarrierOfFaithSpell(self)
@@ -705,6 +706,9 @@ class Paladin:
         
     def handle_beacon_healing(self, spell_name, target, initial_heal, current_time, spell_display_name=None):      
         if spell_name not in beacon_transfer_rates_single_beacon or spell_name not in beacon_transfer_rates_double_beacon:
+            return
+        
+        if spell_name == "Light of the Martyr" and "Maraad's Dying Breath" not in self.active_auras:
             return
         
         beacon_healing = calculate_beacon_healing(spell_name, initial_heal, self)

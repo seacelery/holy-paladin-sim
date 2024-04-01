@@ -536,6 +536,30 @@ class PowerOfTheSilverHandStoredHealing(Buff):
         
     def remove_effect(self, caster, current_time=None):
         pass
+    
+
+class UntemperedDedication(Buff):
+    
+    def __init__(self):
+        super().__init__("Untempered Dedication", 15, base_duration=15, current_stacks=1, max_stacks=5)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+    
+class MaraadsDyingBreath(Buff):
+    
+    def __init__(self, stacks_to_apply):
+        super().__init__("Maraad's Dying Breath", 10, base_duration=10, current_stacks=stacks_to_apply, max_stacks=5)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
         
 
 class Veneration(Buff):

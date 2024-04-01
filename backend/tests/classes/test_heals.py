@@ -7,7 +7,7 @@ import math
 from app.classes.paladin import Paladin
 from app.classes.target import Target, BeaconOfLight, EnemyTarget
 from app.classes.spells_auras import TyrsDeliveranceHeal
-from app.classes.auras_buffs import DivinePurpose, BlessingOfDawn, GlimmerOfLightBuff, AvengingWrathBuff, BlessingOfSpring, AvengingWrathAwakening
+from app.classes.auras_buffs import DivinePurpose, BlessingOfDawn, GlimmerOfLightBuff, AvengingWrathBuff, BlessingOfSpring, AvengingWrathAwakening, AvengingCrusaderBuff, AvengingCrusaderAwakening, UntemperedDedication, MaraadsDyingBreath
 from app.classes.spells_healing import DivineResonanceHolyShock, RisingSunlightHolyShock, DivineTollHolyShock
 from app.classes.spells_passives import TouchOfLight
 
@@ -826,7 +826,7 @@ def test_light_of_dawn_empyrean_legacy():
        
     target = [targets[0]]
     paladin.crit = -100
-    _, _, _, _, _ = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    _, _, _, _, _, _ = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
     paladin.global_cooldown = 0
     paladin.holy_power = 3
     _, _, _, _, _, light_of_dawn_healing = word_of_glory.cast_healing_spell(paladin, target, 0, True)
@@ -1603,7 +1603,7 @@ def test_judgment_of_light():
     paladin.crit = -100
     
     target = [targets[0]]
-    _, _, _, judgment_of_light_healing, _ = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    _, _, _, judgment_of_light_healing, _, _ = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
     
     expected_heal_amount = round(2050 * 5 / 10) * 10
     assert expected_heal_amount - 100 <= round(judgment_of_light_healing / 10) * 10 <= expected_heal_amount + 100, "Judgment of Light unexpected value"
@@ -1621,7 +1621,7 @@ def test_greater_judgment():
     paladin.crit = -100
     
     target = [targets[0]]
-    _, _, _, _, greater_judgment_healing = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    _, _, _, _, greater_judgment_healing, _ = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
     
     expected_heal_amount = round(21365 / 10) * 10
     assert expected_heal_amount - 100 <= round(greater_judgment_healing / 10) * 10 <= expected_heal_amount + 100, "Greater Judgment unexpected value"
@@ -1642,7 +1642,7 @@ def test_greater_judgment_infusion_of_light():
     _, _, heal_amount, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
     paladin.crit = -100
-    _, _, _, _, greater_judgment_healing = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    _, _, _, _, greater_judgment_healing, _ = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
     
     expected_heal_amount = round(21365 * 2 / 10) * 10
     assert expected_heal_amount - 100 <= round(greater_judgment_healing / 10) * 10 <= expected_heal_amount + 100, "Greater Judgment (Infusion of Light) unexpected value"
@@ -1663,7 +1663,7 @@ def test_greater_judgment_infusion_of_light_inflorescence_of_the_sunwell():
     _, _, heal_amount, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
     paladin.crit = -100
-    _, _, _, _, greater_judgment_healing = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    _, _, _, _, greater_judgment_healing, _ = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
     
     expected_heal_amount = round(21365 * 2.5 / 10) * 10
     assert expected_heal_amount - 100 <= round(greater_judgment_healing / 10) * 10 <= expected_heal_amount + 100, "Greater Judgment (Infusion of Light, Inflorescence of the Sunwell) unexpected value"
@@ -1682,7 +1682,7 @@ def test_greater_judgment_avenging_wrath():
     paladin.apply_buff_to_self(AvengingWrathBuff(paladin), 0)
     
     target = [targets[0]]
-    _, _, _, _, greater_judgment_healing = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    _, _, _, _, greater_judgment_healing, _ = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
     
     expected_heal_amount = round(21365 * 1.15 / 10) * 10
     assert expected_heal_amount - 100 <= round(greater_judgment_healing / 10) * 10 <= expected_heal_amount + 100, "Greater Judgment unexpected value"
@@ -1802,3 +1802,113 @@ def test_barrier_of_faith_flash_of_light():
     
     expected_heal_amount = 46210 * 0.25
     assert expected_heal_amount - 100 <= round(barrier_of_faith_flash_of_light_healing / 10) * 10 <= expected_heal_amount + 100, "Barrier of Light (Flash of Light) unexpected value"
+    
+def test_avenging_crusader_judgment():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {"Avenging Wrath": 1}, {"Avenging Crusader": 1})
+    
+    judgment = paladin.abilities["Judgment"]
+    enemy_target = EnemyTarget("enemyTarget1")
+    
+    paladin.crit = -100
+    paladin.apply_buff_to_self(AvengingCrusaderBuff(paladin), 0)
+    
+    target = [targets[0]]
+    _, _, _, _, _, avenging_crusader_healing = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    
+    expected_heal_amount = round(59000 / 5 / 10) * 10
+    assert expected_heal_amount - 1000 <= round(avenging_crusader_healing / 10) * 10 <= expected_heal_amount + 1000, "Avenging Crusader (Judgment) unexpected value"
+    
+def test_avenging_crusader_judgment_justification():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {"Avenging Wrath": 1, "Justification": 1}, {"Avenging Crusader": 1})
+    
+    judgment = paladin.abilities["Judgment"]
+    enemy_target = EnemyTarget("enemyTarget1")
+    
+    paladin.crit = -100
+    paladin.apply_buff_to_self(AvengingCrusaderBuff(paladin), 0)
+    
+    target = [targets[0]]
+    _, _, _, _, _, avenging_crusader_healing = judgment.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    
+    expected_heal_amount = round(59000 * 1.1 / 5 / 10) * 10
+    assert expected_heal_amount - 1000 <= round(avenging_crusader_healing / 10) * 10 <= expected_heal_amount + 1000, "Avenging Crusader (Judgment), Justification unexpected value"
+   
+def test_avenging_crusader_crusader_strike():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {"Avenging Wrath": 1}, {"Avenging Crusader": 1})
+    
+    crusader_strike = paladin.abilities["Crusader Strike"]
+    enemy_target = EnemyTarget("enemyTarget1")
+    
+    paladin.crit = -100
+    paladin.apply_buff_to_self(AvengingCrusaderBuff(paladin), 0)
+    
+    target = [targets[0]]
+    _, _, _, _, avenging_crusader_healing = crusader_strike.cast_damage_spell(paladin, [enemy_target], 0, targets)
+    
+    expected_heal_amount = round(60500 / 5 / 10) * 10
+    assert expected_heal_amount - 1000 <= round(avenging_crusader_healing / 10) * 10 <= expected_heal_amount + 1000, "Avenging Crusader (Crusader Strike) unexpected value" 
+    
+def test_light_of_the_martyr():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {}, {"Light of the Martyr": 1})
+    
+    light_of_the_martyr = paladin.abilities["Light of the Martyr"]
+    
+    paladin.crit = -100
+    target = [targets[0]]
+    _, _, light_of_the_martyr_healing = light_of_the_martyr.cast_healing_spell(paladin, target, 0, True)
+    
+    expected_heal_amount = 26750
+    assert expected_heal_amount - 300 <= round(light_of_the_martyr_healing / 10) * 10 <= expected_heal_amount + 300, "Light of the Martyr unexpected value"
+    
+def test_light_of_the_martyr_untempered_dedication():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {}, {"Light of the Martyr": 1, "Untempered Dedication": 1})
+    
+    light_of_the_martyr = paladin.abilities["Light of the Martyr"]
+    paladin.apply_buff_to_self(UntemperedDedication(), 0)
+    paladin.active_auras["Untempered Dedication"].current_stacks = 5
+    
+    paladin.crit = -100
+    target = [targets[0]]
+    _, _, light_of_the_martyr_healing = light_of_the_martyr.cast_healing_spell(paladin, target, 0, True)
+    
+    expected_heal_amount = 26750 * 1.5
+    assert expected_heal_amount - 300 <= round(light_of_the_martyr_healing / 10) * 10 <= expected_heal_amount + 300, "Light of the Martyr (Untempered Dedication) unexpected value"
+    
+def test_light_of_the_martyr_untempered_dedication_maraads_dying_breath():
+    paladin = initialise_paladin()
+    targets, glimmer_targets = set_up_paladin(paladin)
+    
+    reset_talents(paladin)
+    update_talents(paladin, {}, {"Light of the Martyr": 1, "Untempered Dedication": 1, "Maraad's Dying Breath": 1})
+    
+    light_of_the_martyr = paladin.abilities["Light of the Martyr"]
+    paladin.apply_buff_to_self(UntemperedDedication(), 0)
+    paladin.active_auras["Untempered Dedication"].current_stacks = 5
+    paladin.apply_buff_to_self(MaraadsDyingBreath(5), 0)
+    
+    paladin.crit = -100
+    target = [targets[0]]
+    _, _, light_of_the_martyr_healing = light_of_the_martyr.cast_healing_spell(paladin, target, 0, True)
+    
+    expected_heal_amount = 26750 * 1.5 * 1.5
+    assert expected_heal_amount - 300 <= round(light_of_the_martyr_healing / 10) * 10 <= expected_heal_amount + 300, "Light of the Martyr (Untempered Dedication, Maraad's Dying Breath) unexpected value"

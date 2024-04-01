@@ -118,7 +118,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda", "Holy Reverberation", 
         "Restorative Sands", "Echoing Tyrstone", "Smoldering Seedling", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT", 
         "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", 
-        "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion", "Veneration", "Merciful Auras"
+        "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion", "Veneration", "Merciful Auras", "Light of the Martyr "
     ];
     // displays casts with average as healing divided by hits
     const excludedSpellsCastsAverageHits = [
@@ -126,7 +126,8 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     ];
     const excludedSpellsCrit = [
         "Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Crusader Strike", "Judgment", "Daybreak", 
-        "Divine Toll", "Smoldering Seedling", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Lay on Hands", "Leech", "Veneration"
+        "Divine Toll", "Smoldering Seedling", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Lay on Hands", "Leech", "Veneration",
+        "Light of the Martyr "
     ];
 
     const tableContainer = document.getElementById(`ability-breakdown-table-container-${containerCount}`);
@@ -306,10 +307,17 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     let overallHolyPower = 0;
     let overallCPM = 0;
 
+    console.log(sortedAbilityBreakdownData)
+
     // overall required for some cells in the main table
     for (const spellName in sortedAbilityBreakdownData) {
         const spellData = sortedAbilityBreakdownData[spellName];
-        overallHealing += spellData.total_healing;
+        if (spellData.total_healing > 0) {
+            overallHealing += spellData.total_healing;
+        } else {
+            overallHealing -= spellData.total_healing;
+        };
+        
         overallHPS += spellData.total_healing / encounterLength;
         overallCasts += spellData.casts;
         overallManaSpent += spellData.mana_spent;
@@ -410,7 +418,11 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         if (excludedSpellsOnlyResourcesAndCasts.includes(spellName)) {
             percentHealingCell.textContent = "";
         } else {
-            percentHealingCell.textContent = Number(formatNumbersNoRounding(((spellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
+            if (spellData.total_healing > 0) {
+                percentHealingCell.textContent = Number(formatNumbersNoRounding(((spellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
+            } else{
+                percentHealingCell.textContent = Number(formatNumbersNoRounding(((spellData.total_healing / overallHealing) * 100 * 10) / 10)).toFixed(1) + "%";
+            };
         };
         
         const healingCell = row.insertCell();
@@ -419,6 +431,9 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             healingCell.textContent = "";
         } else {
             healingCell.textContent = formatNumbers(spellData.total_healing);
+            if (spellData.total_healing < 0) {
+                healingCell.style.color = "var(--red-font-hover)";
+            };
         };
         
         const HPSCell = row.insertCell();
@@ -427,6 +442,9 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             HPSCell.textContent = "";
         } else {
             HPSCell.textContent = formatNumbers(spellData.total_healing / encounterLength);
+            if (spellData.total_healing < 0) {
+                HPSCell.style.color = "var(--red-font-hover)";
+            };
         };
         
         const castsCell = row.insertCell();
@@ -440,14 +458,20 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         };
         
         const avgCastsCell = row.insertCell();
-        avgCastsCell.className = "table-cell-right";
+        avgCastsCell.className = "table-cell-right average-healing-cell";
 
         if (excludedSpellsCasts.includes(spellName) || excludedSpellsCastsAverageHits.includes(spellName)) {
             avgCastsCell.textContent = formatNumbers(spellData.total_healing / spellData.hits);
+            if (spellData.total_healing < 0) {
+                avgCastsCell.style.color = "var(--red-font-hover)";
+            };
         } else if (excludedSpellsOnlyResourcesAndCasts.includes(spellName)) {
             avgCastsCell.textContent = "";
         } else {
             avgCastsCell.textContent = formatNumbers(spellData.total_healing / spellData.casts);
+            if (spellData.total_healing < 0) {
+                avgCastsCell.style.color = "var(--red-font-hover)";
+            };
         };
         if (avgCastsCell.textContent === "Infinity") {
             avgCastsCell.textContent = "0";
@@ -555,7 +579,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             castsCell.className = "table-sub-cell-right";
             
             const avgCastsCell = sourceSpellRow.insertCell();
-            avgCastsCell.className = "table-sub-cell-right";
+            avgCastsCell.className = "table-sub-cell-right average-healing-cell";
             avgCastsCell.textContent = formatNumbers(sourceSpellData.healing / sourceSpellData.hits);
 
             const hitsCell = sourceSpellRow.insertCell();
@@ -690,7 +714,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             };
             
             const avgCastsCell = subRow.insertCell();
-            avgCastsCell.className = "table-sub-cell-right";
+            avgCastsCell.className = "table-sub-cell-right average-healing-cell";
 
             if (excludedSpellsCasts.includes(subSpellName) || excludedSpellsCastsAverageHits.includes(spellName)) {
                 avgCastsCell.textContent = formatNumbers(subSpellData.total_healing / subSpellData.hits);
@@ -806,7 +830,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
                 };
     
                 const avgCastsCell = subRow.insertCell();
-                avgCastsCell.className = "table-sub-sub-cell-right";
+                avgCastsCell.className = "table-sub-sub-cell-right average-healing-cell";
                 avgCastsCell.textContent = formatNumbers(subSubSpellData.total_healing / subSubSpellData.casts);
     
                 const hitsCell = subRow.insertCell();

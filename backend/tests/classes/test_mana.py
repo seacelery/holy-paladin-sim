@@ -107,7 +107,7 @@ def test_divine_revelations():
     target = [targets[0]]
     _, _, _, _ , _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
     paladin.global_cooldown = 0
-    _, _, _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
+    _, _, _, _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
     
     divine_revelations_mana_gain = 1312.5
     expected_remaining_mana = 262500 - 7000 - 6000 + divine_revelations_mana_gain

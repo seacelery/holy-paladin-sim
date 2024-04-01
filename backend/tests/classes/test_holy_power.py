@@ -285,7 +285,7 @@ def test_judgment():
     judgment = paladin.abilities["Judgment"]
     
     target = [targets[0]]
-    _, _, _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
+    _, _, _, _, _, _ = judgment.cast_damage_spell(paladin, [EnemyTarget("enemyTarget1")], 0, True)
     
     expected_holy_power = 1
     assert paladin.holy_power == expected_holy_power, "Judgment holy power unexpected value"

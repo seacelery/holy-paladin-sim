@@ -45,6 +45,8 @@ const spellToIconsMap = {
     "Lay on Hands": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_layonhands.jpg",
     "Light of Dawn": "https://render.worldofwarcraft.com/eu/icons/56/spell_paladin_lightofdawn.jpg",
     "Light's Hammer": "https://render.worldofwarcraft.com/eu/icons/56/spell_paladin_lightshammer.jpg",
+    "Light of the Martyr": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_lightofthemartyr.jpg",
+    "Light of the Martyr ": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_lightofthemartyr.jpg",
     "Merciful Auras": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_blessedlife.jpg",
     "Overflowing Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holyguidance.jpg",
     "Reclamation (Crusader Strike)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_longarmofthelaw.jpg",

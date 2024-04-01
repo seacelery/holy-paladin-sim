@@ -2,7 +2,7 @@ import random
 import copy
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, BlessingOfFreedomBuff, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration
+from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, BlessingOfFreedomBuff, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
 from .target import BeaconOfLight
@@ -457,6 +457,11 @@ class RisingSunlightHolyShock(Spell):
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Shock)", target, barrier_of_faith_absorb, False)
                         
+            # power of the silver hand            
+            if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" not in caster.active_auras and "Power of the Silver Hand Stored Healing" in caster.active_auras:
+                del caster.active_auras["Power of the Silver Hand Stored Healing"]     
+                update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
+                        
         return cast_success, spell_crit, heal_amount, total_glimmer_healing, barrier_of_faith_absorb
             
                     
@@ -651,6 +656,11 @@ class DivineTollHolyShock(Spell):
                         barrier_of_faith_absorb = heal_amount * 0.25
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Shock)", target, barrier_of_faith_absorb, False)
+                        
+            # power of the silver hand            
+            if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" not in caster.active_auras and "Power of the Silver Hand Stored Healing" in caster.active_auras:
+                del caster.active_auras["Power of the Silver Hand Stored Healing"]     
+                update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
                     
         return cast_success, spell_crit, heal_amount, total_glimmer_healing, barrier_of_faith_absorb
             
@@ -766,6 +776,11 @@ class DivineResonanceHolyShock(Spell):
                         barrier_of_faith_absorb = heal_amount * 0.25
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Shock)", target, barrier_of_faith_absorb, False)
+                        
+            # power of the silver hand            
+            if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" not in caster.active_auras and "Power of the Silver Hand Stored Healing" in caster.active_auras:
+                del caster.active_auras["Power of the Silver Hand Stored Healing"]     
+                update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
                         
         return cast_success, spell_crit, heal_amount, 0, barrier_of_faith_absorb
 
@@ -1436,6 +1451,21 @@ class LightOfDawn(Spell):
                 else:
                     caster.apply_buff_to_self(RelentlessInquisitor(), current_time, stacks_to_apply=1, max_stacks=5)
                     
+            # maraad's dying breath
+            if caster.is_talent_active("Maraad's Dying Breath"):
+                if"Maraad's Dying Breath" in caster.active_auras:
+                    maraads_dying_breath = caster.active_auras["Maraad's Dying Breath"]
+                    
+                    if maraads_dying_breath.current_stacks < maraads_dying_breath.max_stacks:
+                        maraads_dying_breath.current_stacks += len(targets)
+                        if maraads_dying_breath.current_stacks > maraads_dying_breath.max_stacks:
+                            maraads_dying_breath.current_stacks = maraads_dying_breath.max_stacks
+                    
+                    maraads_dying_breath.duration = maraads_dying_breath.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Maraad's Dying Breath", current_time, "applied", maraads_dying_breath.duration, maraads_dying_breath.current_stacks)                      
+                else:
+                    caster.apply_buff_to_self(MaraadsDyingBreath(len(targets)), current_time, stacks_to_apply=len(targets), max_stacks=5)
+                    
         return cast_success, spell_crit, heal_amount, total_glimmer_healing
 
 
@@ -1457,7 +1487,6 @@ class HolyPrism(Spell):
 
 class LightsHammerSpell(Spell):
     
-    SPELL_ID = 114158
     BASE_COOLDOWN = 60
     MANA_COST = 0.036
     
@@ -1472,7 +1501,6 @@ class LightsHammerSpell(Spell):
                 
 class LightsHammerHeal(Spell):
     
-    SPELL_ID = 114158
     SPELL_POWER_COEFFICIENT = 0.4 * 0.8
     TARGET_COUNT = 6
     
@@ -1528,3 +1556,59 @@ class LayOnHands(Spell):
                 tirions_devotion_mana_gain = caster.max_mana * 0.05
                 caster.mana += tirions_devotion_mana_gain
                 update_mana_gained(caster.ability_breakdown, "Tirion's Devotion", tirions_devotion_mana_gain)
+                
+                
+class LightOfTheMartyr(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 2.31 * 0.8
+    MANA_COST = 0.016
+    
+    def __init__(self, caster):
+        super().__init__("Light of the Martyr", is_heal=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        # untempered dedication
+        if caster.is_talent_active("Untempered Dedication") and "Untempered Dedication" in caster.active_auras:
+            untempered_dedication = caster.active_auras["Untempered Dedication"]
+            untempered_dedication_modifier = (1 + (0.1 * untempered_dedication.current_stacks))
+            self.spell_healing_modifier *= untempered_dedication_modifier
+            
+        # maraad's dying breath
+        if caster.is_talent_active("Maraad's Dying Breath") and "Maraad's Dying Breath" in caster.active_auras:
+            maraads_dying_breath = caster.active_auras["Maraad's Dying Breath"]
+            maraads_dying_breath_modifier = (1 + (0.1 * maraads_dying_breath.current_stacks))
+            self.spell_healing_modifier *= maraads_dying_breath_modifier
+        
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            light_of_the_martyr_negative_healing = heal_amount * 0.6 * -1
+            target = targets[0]
+            target.receive_heal(light_of_the_martyr_negative_healing, caster)
+            
+            update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
+            
+            # untempered dedication
+            if caster.is_talent_active("Untempered Dedication"):
+                if "Untempered Dedication" in caster.active_auras:
+                    untempered_dedication = caster.active_auras["Untempered Dedication"]
+                    self.spell_healing_modifier /= (1 + (0.1 * untempered_dedication.current_stacks))    
+                    
+                    if untempered_dedication.current_stacks < untempered_dedication.max_stacks:
+                        untempered_dedication.current_stacks += 1
+                    
+                    untempered_dedication.duration = untempered_dedication.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Untempered Dedication", current_time, "applied", untempered_dedication.duration, untempered_dedication.current_stacks)                      
+                else:
+                    caster.apply_buff_to_self(UntemperedDedication(), current_time, stacks_to_apply=1, max_stacks=5)
+                
+            # maraad's dying breath
+            if caster.is_talent_active("Maraad's Dying Breath") and "Maraad's Dying Breath" in caster.active_auras:
+                maraads_dying_breath = caster.active_auras["Maraad's Dying Breath"]
+                maraads_dying_breath_modifier = (1 + (0.1 * maraads_dying_breath.current_stacks))
+                self.spell_healing_modifier /= maraads_dying_breath_modifier
+                
+                del caster.active_auras["Maraad's Dying Breath"]
+                update_self_buff_data(caster.self_buff_breakdown, "Maraad's Dying Breath", current_time, "expired")
+                
+        return cast_success, spell_crit, heal_amount
+                

@@ -68,7 +68,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
         "Grand Banquet of the Kalu'ak", "Timely Demise", "Filet of Fangs", "Seamoth Surprise", "Salt-Baked Fishcake",
         "Feisty Fish Sticks", "Aromatic Seafood Platter", "Sizzling Seafood Medley", "Revenge, Served Cold",
         "Thousandbone Tongueslicer", "Great Cerulean Sea", "Pip's Emerald Friendship Badge", "Elemental Lariat",
-        "Close to Heart", "Allied Wristguards of Companionship"
+        "Close to Heart", "Allied Wristguards of Companionship", "Potion Absorption Inhibitor"
     ];
     const playerAurasModalIconOrder = [
         "Avenging Wrath", "Blessing of Dawn", "Blessing of Dusk", "Infusion of Light", "Divine Purpose", 

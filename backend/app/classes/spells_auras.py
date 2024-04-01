@@ -115,13 +115,16 @@ class AvengingWrathSpell(Spell):
 class AvengingCrusaderSpell(Spell):
     
     BASE_COOLDOWN = 60
+    MANA_COST = 0.036
+    HOLY_POWER_COST = 3
     
     def __init__(self, caster):
-        super().__init__("Avenging Crusader", cooldown=AvengingCrusaderSpell.BASE_COOLDOWN, off_gcd=True)
+        super().__init__("Avenging Crusader", cooldown=AvengingCrusaderSpell.BASE_COOLDOWN, mana_cost=AvengingCrusaderSpell.MANA_COST, holy_power_cost=AvengingCrusaderSpell.HOLY_POWER_COST, off_gcd=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
+            caster.holy_power -= self.holy_power_cost
             caster.apply_buff_to_self(AvengingCrusaderBuff(caster), current_time)
    
             

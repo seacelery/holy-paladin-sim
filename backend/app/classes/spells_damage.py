@@ -12,7 +12,7 @@ from .summons import ConsecrationSummon, RighteousJudgmentSummon
 # DAMAGE SPELLS
 class Judgment(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.125
+    SPELL_POWER_COEFFICIENT = 1.125 / 1.04
     BASE_COOLDOWN = 12
     MANA_COST = 0.024
     HOLY_POWER_GAIN = 1
@@ -45,14 +45,14 @@ class Judgment(Spell):
                 self.spell_damage_modifier *= 1.3
         
         # avenging crusader        
-        if caster.is_talent_active("Avenging Crusader"):
+        if caster.is_talent_active("Avenging Crusader") and "Avenging Crusader" in caster.active_auras:
             self.spell_damage_modifier *= 1.3
             
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
-        print(self.name, spell_damage, spell_crit)
         
         judgment_of_light_healing = 0
         greater_judgment_healing = 0
+        avenging_crusader_healing = 0
         if cast_success: 
             increment_holy_power(self, caster, current_time)
             target = targets[0]
@@ -106,8 +106,11 @@ class Judgment(Spell):
                     self.bonus_crit = 0
                     
             # avenging crusader        
-            if caster.is_talent_active("Avenging Crusader"):
+            if caster.is_talent_active("Avenging Crusader") and "Avenging Crusader" in caster.active_auras:
                 avenging_crusader_healing = spell_damage * 3.6 / 5
+                print(self.spell_damage_modifier)
+                print(spell_damage, spell_crit)
+                print(avenging_crusader_healing)
                 for avenging_crusader_target in random.sample(caster.potential_healing_targets, 5):
                     avenging_crusader_target.receive_heal(avenging_crusader_healing, caster)
                     
@@ -164,7 +167,7 @@ class Judgment(Spell):
                     update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "expired")
                     append_aura_removed_event(caster.buff_events, "Infusion of Light", caster, caster, current_time)
                 
-        return cast_success, spell_crit, spell_damage, judgment_of_light_healing, greater_judgment_healing
+        return cast_success, spell_crit, spell_damage, judgment_of_light_healing, greater_judgment_healing, avenging_crusader_healing
            
             
 class CrusaderStrike(Spell):
@@ -194,8 +197,8 @@ class CrusaderStrike(Spell):
             self.spell_damage_modifier *= 1.3
         
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
-        print(self.name, spell_damage, spell_crit)
         
+        avenging_crusader_healing = 0
         crusaders_reprieve_heal = 0
         if cast_success:
             # reset reclamation
@@ -255,7 +258,7 @@ class CrusaderStrike(Spell):
                     if caster.abilities["Holy Shock"].current_charges < caster.abilities["Holy Shock"].max_charges:
                         caster.abilities["Holy Shock"].current_charges += 1
                 
-        return cast_success, spell_crit, spell_damage, crusaders_reprieve_heal
+        return cast_success, spell_crit, spell_damage, crusaders_reprieve_heal, avenging_crusader_healing
     
 
 class HammerOfWrath(Spell):

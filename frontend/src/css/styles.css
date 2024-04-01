@@ -3023,7 +3023,7 @@ tr {
     font-weight: 300;
 }
 
-.healing-cell, .HPS-cell {
+.healing-cell, .HPS-cell, .average-healing-cell {
     color: var(--healing-font);
 }
 
