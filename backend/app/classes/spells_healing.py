@@ -2,7 +2,7 @@ import random
 import copy
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, BlessingOfFreedomBuff, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight
+from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, BlessingOfFreedomBuff, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
 from .target import BeaconOfLight
@@ -211,6 +211,11 @@ class HolyShock(Spell):
                         barrier_of_faith_absorb = heal_amount * 0.25
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Shock)", target, barrier_of_faith_absorb, False)
+            
+            # power of the silver hand            
+            if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" not in caster.active_auras and "Power of the Silver Hand Stored Healing" in caster.active_auras:
+                del caster.active_auras["Power of the Silver Hand Stored Healing"]     
+                update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
                         
             return cast_success, spell_crit, heal_amount, total_glimmer_healing, barrier_of_faith_absorb
             
@@ -793,6 +798,18 @@ class HolyLight(Spell):
         resplendent_light_healing = 0
         barrier_of_faith_absorb = 0
         if cast_success:
+            # veneration
+            if caster.is_talent_active("Veneration"):
+                if spell_crit:
+                    if caster.is_talent_active("Vanguard's Momentum"):
+                        if caster.abilities["Hammer of Wrath"].current_charges < caster.abilities["Hammer of Wrath"].max_charges:
+                            caster.abilities["Hammer of Wrath"].current_charges += 1
+                        else:
+                            caster.abilities["Hammer of Wrath"].remaining_cooldown = 0
+                    else:
+                        caster.abilities["Hammer of Wrath"].remaining_cooldown = 0
+                    caster.apply_buff_to_self(Veneration(), current_time) 
+            
             # divine revelations
             if caster.is_talent_active("Divine Revelations"):
                 if "Infusion of Light" in caster.active_auras:
@@ -942,6 +959,17 @@ class FlashOfLight(Spell):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         barrier_of_faith_absorb = 0
         if cast_success:
+            # veneration
+            if caster.is_talent_active("Veneration"):
+                if spell_crit:
+                    if caster.is_talent_active("Vanguard's Momentum"):
+                        if caster.abilities["Hammer of Wrath"].current_charges < caster.abilities["Hammer of Wrath"].max_charges:
+                            caster.abilities["Hammer of Wrath"].current_charges += 1
+                        else:
+                            caster.abilities["Hammer of Wrath"].remaining_cooldown = 0
+                    else:
+                        caster.abilities["Hammer of Wrath"].remaining_cooldown = 0
+                    caster.apply_buff_to_self(Veneration(), current_time) 
             
             # blessing of dawn
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -1047,10 +1075,24 @@ class WordOfGlory(Spell):
                 elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
                     self.spell_healing_modifier *= 1.6
         
+        # unending light
         unending_light_modifier = 1           
         if caster.is_talent_active("Unending Light") and "Unending Light" in caster.active_auras:
             unending_light_modifier = 1 + (0.05 * caster.active_auras["Unending Light"].current_stacks)
             self.spell_healing_modifier *= unending_light_modifier
+            
+        # strength of conviction
+        strength_of_conviction_modifier = 1        
+        if caster.is_talent_active("Strength of Conviction"):
+            consecration_active = False
+            for summon_name, summon_instance in caster.active_summons.items():
+                if summon_name.startswith("Consecration"):
+                    consecration_active = True
+            if consecration_active and caster.class_talents["row8"]["Strength of Conviction"]["ranks"]["current rank"] == 1:
+                strength_of_conviction_modifier *= 1.1
+            elif consecration_active and caster.class_talents["row8"]["Strength of Conviction"]["ranks"]["current rank"] == 2:
+                strength_of_conviction_modifier *= 1.2
+        self.spell_healing_modifier *= strength_of_conviction_modifier
         
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         total_glimmer_healing = 0
@@ -1079,6 +1121,11 @@ class WordOfGlory(Spell):
                     append_aura_removed_event(caster.buff_events, "Blessing of Dawn", caster, caster, current_time)
                     caster.apply_buff_to_self(BlessingOfDusk(), current_time)
                     
+            # strength of conviction
+            if caster.is_talent_active("Strength of Conviction"):
+                self.spell_healing_modifier /= strength_of_conviction_modifier
+            
+            # unending light        
             if caster.is_talent_active("Unending Light") and "Unending Light" in caster.active_auras:
                 self.spell_healing_modifier /= unending_light_modifier
                 
@@ -1205,9 +1252,20 @@ class WordOfGlory(Spell):
                     
                 caster.remove_or_decrement_buff_on_self(caster.active_auras["Empyrean Legacy"], current_time)
             
-            # relentless inquisitor    
+            # relentless inquisitor        
             if caster.is_talent_active("Relentless Inquisitor"):
-                caster.apply_buff_to_self(RelentlessInquisitor(), current_time, stacks_to_apply=1, max_stacks=5)
+                if "Relentless Inquisitor" in caster.active_auras:
+                    relentless_inquisitor = caster.active_auras["Relentless Inquisitor"]
+                    
+                    if relentless_inquisitor.current_stacks < relentless_inquisitor.max_stacks:
+                        relentless_inquisitor.remove_effect(caster)
+                        relentless_inquisitor.current_stacks += 1
+                        relentless_inquisitor.apply_effect(caster)
+                    
+                    relentless_inquisitor.duration = relentless_inquisitor.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Relentless Inquisitor", current_time, "applied", relentless_inquisitor.duration, relentless_inquisitor.current_stacks)               
+                else:
+                    caster.apply_buff_to_self(RelentlessInquisitor(), current_time, stacks_to_apply=1, max_stacks=5)
                     
         return cast_success, spell_crit, heal_amount, total_glimmer_healing, afterimage_heal, empyrean_legacy_light_of_dawn_healing
            
@@ -1381,6 +1439,22 @@ class LightOfDawn(Spell):
         return cast_success, spell_crit, heal_amount, total_glimmer_healing
 
 
+class HolyPrism(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 2.45 * 0.8 * 0.8
+    BASE_COOLDOWN = 20
+    MANA_COST = 0.026
+    TARGET_COUNT = 5
+    
+    def __init__(self, caster):
+        super().__init__("Holy Prism", mana_cost=HolyPrism.MANA_COST, cooldown=HolyPrism.BASE_COOLDOWN, healing_target_count=HolyPrism.TARGET_COUNT, is_heal=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            pass
+
+
 class LightsHammerSpell(Spell):
     
     SPELL_ID = 114158
@@ -1404,6 +1478,32 @@ class LightsHammerHeal(Spell):
     
     def __init__(self, caster):
         super().__init__("Light's Hammer", healing_target_count=LightsHammerHeal.TARGET_COUNT, off_gcd=True)
+      
+
+class GoldenPathHeal(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0.05 * 1.04
+    TARGET_COUNT = 6
+    
+    def __init__(self, caster):
+        super().__init__("Golden Path", healing_target_count=GoldenPathHeal.TARGET_COUNT, off_gcd=True)
+        
+
+class SealOfMercyHeal(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0.05 * 1.04
+    TARGET_COUNT = 1
+    
+    def __init__(self, caster):
+        super().__init__("Seal of Mercy", healing_target_count=SealOfMercyHeal.TARGET_COUNT, off_gcd=True)
+        
+
+class MercifulAurasHeal(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0.207 * 0.8
+    
+    def __init__(self, caster):
+        super().__init__("Merciful Auras", off_gcd=True)
         
 
 class LayOnHands(Spell):

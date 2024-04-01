@@ -11,11 +11,11 @@ from ..utils.buff_class_map import buff_class_map
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
 from ..utils.stat_values import diminishing_returns_values, stat_conversions, calculate_stat_percent_with_dr, calculate_leech_percent_with_dr, update_stat_with_multiplicative_percentage
 from .spells import Wait
-from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell, LayOnHands
-from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion
-from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath
-from .spells_auras import AvengingWrathSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell
-from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos
+from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell, LayOnHands, HolyPrism
+from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion, AuraMastery
+from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
+from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell
+from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras
 from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
@@ -29,6 +29,11 @@ client_secret = os.getenv("CLIENT_SECRET")
 
 pp = pprint.PrettyPrinter(width=200)
 
+# TODO
+# avenging crusader tests
+# light of the martyr/untempered dedication/maraad's dying breath
+# saved by the light
+# seal of the crusader
 
 class Stats:
     
@@ -163,7 +168,7 @@ class Paladin:
         # initialise stats with racials
         self.update_stats_with_racials()
         
-        self.mastery_effectiveness = 1
+        self.mastery_effectiveness = 0.95
         
         self.base_global_cooldown = 1.5
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
@@ -218,6 +223,7 @@ class Paladin:
         self.holy_shock_resets = 0
         self.external_buff_timers = {}
         self.timers_priority_queue = []
+        self.extra_consecration_count = 0
         
         # for reclamation
         self.average_raid_health_percentage = 0.7
@@ -240,6 +246,8 @@ class Paladin:
         
         self.total_glimmer_healing = 0
         self.glimmer_hits = 0
+        
+        self.is_enemy_below_20_percent = False
         
     def reset_state(self):
         current_state = copy.deepcopy(self.initial_state)
@@ -511,6 +519,7 @@ class Paladin:
                             "Crusader Strike": CrusaderStrike(self),
                             "Judgment": Judgment(self),
                             "Word of Glory": WordOfGlory(self),
+                            "Consecration": Consecration(self),
                             "Lay on Hands": LayOnHands(self),
                             "Aerated Mana Potion": AeratedManaPotion(self),
                             "Elemental Potion of Ultimate Power": ElementalPotionOfUltimatePowerPotion(self),
@@ -530,7 +539,10 @@ class Paladin:
             self.abilities["Light of Dawn"] = LightOfDawn(self)
             
         if self.is_talent_active("Avenging Wrath"):
-            self.abilities["Avenging Wrath"] = AvengingWrathSpell(self)
+            if self.is_talent_active("Avenging Crusader"):
+                self.abilities["Avenging Crusader"] = AvengingCrusaderSpell(self)
+            else:
+                self.abilities["Avenging Wrath"] = AvengingWrathSpell(self)
             
         if self.is_talent_active("Hammer of Wrath"):
             self.abilities["Hammer of Wrath"] = HammerOfWrath(self)
@@ -540,6 +552,9 @@ class Paladin:
             
         if self.is_talent_active("Hand of Divinity"):
             self.abilities["Hand of Divinity"] = HandOfDivinitySpell(self)
+         
+        if self.is_talent_active("Aura Mastery"):
+            self.abilities["Aura Mastery"] = AuraMastery(self) 
             
         if self.is_talent_active("Barrier of Faith"):
             self.abilities["Barrier of Faith"] = BarrierOfFaithSpell(self)
@@ -558,6 +573,9 @@ class Paladin:
           
         if self.is_talent_active("Light's Hammer"):
             self.abilities["Light's Hammer"] = LightsHammerSpell(self)
+            
+        if self.is_talent_active("Holy Prism"):
+            self.abilities["Holy Prism"] = HolyPrism(self)
             
         if self.is_talent_active("Blessing of Summer"):
             self.abilities["Blessing of the Seasons"] = BlessingOfTheSeasons(self)
@@ -593,6 +611,9 @@ class Paladin:
         if self.is_trinket_equipped("Pip's Emerald Friendship Badge"):
             self.apply_buff_to_self(PipsEmeraldFriendshipBadge(self), 0)
             self.apply_buff_to_self(random.choice([BestFriendsWithPip(self), BestFriendsWithAerwyn(self), BestFriendsWithUrctos(self)]), 0)
+            
+        if self.is_talent_active("Merciful Auras"):
+            self.apply_buff_to_self(MercifulAuras(), 0)
     
     # misc simulation functions 
     def print_stats(self, current_time):

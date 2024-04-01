@@ -115,6 +115,51 @@ class HolyReverberation(HoT):
     
     
 # self buffs   
+class AuraMasteryBuff(Buff):
+    
+    def __init__(self):
+        super().__init__("Aura Mastery", 8, base_duration=8)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+    
+class MercifulAuras(Buff):
+    
+    def __init__(self):
+        super().__init__("Merciful Auras", 10000, base_duration=10000)
+        self.timer = 0
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+    def trigger_passive_heal(self, caster, current_time):
+        from .spells_healing import MercifulAurasHeal
+        
+        target_count = 3
+        healing_modifier = 1
+        
+        if "Aura Mastery" in caster.active_auras:
+            target_count = 20
+            healing_modifier = 1.2
+        
+        targets = random.sample(caster.potential_healing_targets, target_count)
+        for target in targets:            
+            merciful_auras_heal, merciful_auras_crit = MercifulAurasHeal(caster).calculate_heal(caster)
+            merciful_auras_heal *= healing_modifier
+
+            target.receive_heal(merciful_auras_heal, caster)
+            update_spell_data_heals(caster.ability_breakdown, "Merciful Auras", target, merciful_auras_heal, merciful_auras_crit)
+            
+            caster.handle_beacon_healing("Merciful Auras", target, merciful_auras_heal, current_time)
+
+
 class AvengingWrathBuff(Buff):
     
     def __init__(self, caster):
@@ -170,6 +215,42 @@ class AvengingWrathAwakening(Buff):
         caster.healing_multiplier /= 1.15
         caster.damage_multiplier /= 1.15
         
+
+class AvengingCrusaderBuff(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Avenging Crusader", 12, base_duration=12)
+        if caster.is_talent_active("Sanctified Wrath"):
+            self.duration = 15
+            self.base_duration = 15
+        
+    def apply_effect(self, caster, current_time=None):
+        if "Avenging Crusader (Awakening)" in caster.active_auras:
+            caster.active_auras["Avenging Crusader (Awakening)"].remove_effect(caster)
+            del caster.active_auras["Avenging Crusader (Awakening)"]   
+            update_self_buff_data(caster.self_buff_breakdown, "Avenging Crusader (Awakening)", current_time, "expired")      
+        
+        if caster.is_talent_active("Sanctified Wrath"):
+            caster.abilities["Holy Shock"].cooldown *= 0.8
+            caster.abilities["Holy Shock"].remaining_cooldown *= 0.8
+        
+    def remove_effect(self, caster, current_time=None):
+        if caster.is_talent_active("Sanctified Wrath"):
+            caster.abilities["Holy Shock"].cooldown /= 0.8
+            caster.abilities["Holy Shock"].remaining_cooldown /= 0.8
+      
+      
+class AvengingCrusaderAwakening(Buff):
+     
+    def __init__(self):
+        super().__init__("Avenging Crusader (Awakening)", 8, base_duration=8)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+  
 
 class BarrierOfFaithBuff(Buff):
     
@@ -428,6 +509,45 @@ class SophicDevotion(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.spell_power -= caster.get_effective_spell_power(932)
+        
+
+class PowerOfTheSilverHand(Buff):
+    
+    BASE_PPM = 2
+    
+    def __init__(self):
+        super().__init__("Power of the Silver Hand", 10, base_duration=10)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.apply_buff_to_self(PowerOfTheSilverHandStoredHealing(), current_time)
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class PowerOfTheSilverHandStoredHealing(Buff):
+    
+    def __init__(self):
+        super().__init__("Power of the Silver Hand Stored Healing", 10, base_duration=10)
+        self.stored_healing = 0
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+        
+
+class Veneration(Buff):
+    
+    def __init__(self):
+        super().__init__("Veneration", 15, base_duration=15)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
  
  
 # target buffs   
@@ -565,6 +685,30 @@ class ElementalPotionOfUltimatePowerBuff(Buff):
         
 
 # phials
+class IcedPhialOfCorruptingRage(Buff):
+    
+    def __init__(self):
+        super().__init__("Iced Phial of Corrupting Rage", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.apply_buff_to_self(CorruptingRage(), current_time)
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class CorruptingRage(Buff):
+    
+    def __init__(self):
+        super().__init__("Corrupting Rage", 65, base_duration=65)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("crit", 1118)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("crit", -1118)
+
+
 class PhialOfTepidVersatility(Buff):
     
     def __init__(self):
@@ -1539,7 +1683,10 @@ class BlossomOfAmirdrassilLargeHoT(HoT):
             total_healing *= 1.15
             
         if "Close to Heart" in caster.active_auras:
-            total_healing *= 1.15
+            total_healing *= 1.08
+            
+        if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
+            total_healing *= 1.1
         
         number_of_ticks = self.base_duration / self.base_tick_interval
         healing_per_tick = total_healing / number_of_ticks
@@ -1571,7 +1718,10 @@ class BlossomOfAmirdrassilSmallHoT(HoT):
             total_healing *= 1.15
             
         if "Close to Heart" in caster.active_auras:
-            total_healing *= 1.15
+            total_healing *= 1.08
+            
+        if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
+            total_healing *= 1.1
         
         number_of_ticks = self.base_duration / self.base_tick_interval
         healing_per_tick = total_healing / number_of_ticks

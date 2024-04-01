@@ -5,13 +5,14 @@ from ..classes.auras_buffs import (
                                    GreatCeruleanSeaFood, BuzzingRune, ChirpingRune, HowlingRune, HissingRune, ArcaneIntellect, MarkOfTheWild, 
                                    CloseToHeart, RetributionAura, SourceOfMagic, PowerInfusion, Innervate, PotionAbsorptionInhibitor,
                                    AlliedChestplateOfGenerosity, AlliedWristguardOfCompanionship, VerdantConduit, VerdantTether, ElementalLariat,
-                                   DreamtendersCharm
+                                   DreamtendersCharm, IcedPhialOfCorruptingRage
                                   )
 
 buff_class_map = {
     # flasks
     "Phial of Tepid Versatility": PhialOfTepidVersatility,
     "Phial of Elemental Chaos": PhialOfElementalChaos,
+    "Iced Phial of Corrupting Rage": IcedPhialOfCorruptingRage,
     
     # augment runes
     "Draconic Augment Rune": DraconicAugmentRune,

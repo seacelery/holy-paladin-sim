@@ -615,6 +615,7 @@ beaconOfFaithPreset.addEventListener("click", () => {
 const beaconOfVirtuePreset = document.getElementById("standard-beacon-of-virtue-preset");
 beaconOfVirtuePreset.addEventListener("click", () => {
     priorityListPastedCode = `Divine Toll | Previous Ability = Daybreak
+        Judgment | Awakening Ready active
         Word of Glory | Beacon of Virtue active | and | Holy Power = 5
         Daybreak | Beacon of Virtue active
         Holy Shock | Beacon of Virtue active

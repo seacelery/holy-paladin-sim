@@ -1,7 +1,7 @@
 import random
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff
+from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff
 from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts, update_spell_data_initialise_spell
 
 
@@ -64,7 +64,6 @@ class BeaconOfVirtueSpell(Spell):
 
 class TyrsDeliveranceSpell(Spell):
     
-    SPELL_ID = 200652
     BASE_COOLDOWN = 120
     BASE_CAST_TIME = 2
     MANA_COST = 0.024
@@ -84,7 +83,6 @@ class TyrsDeliveranceSpell(Spell):
             
 class TyrsDeliveranceHeal(Spell):
     
-    SPELL_ID = 200652
     SPELL_POWER_COEFFICIENT = 0.626875
     
     def __init__(self, caster):
@@ -103,7 +101,6 @@ class TyrsDeliveranceHeal(Spell):
     
 class AvengingWrathSpell(Spell):
     
-    SPELL_ID = 31884
     BASE_COOLDOWN = 120
     
     def __init__(self, caster):
@@ -113,11 +110,23 @@ class AvengingWrathSpell(Spell):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             caster.apply_buff_to_self(AvengingWrathBuff(caster), current_time)
+            
+            
+class AvengingCrusaderSpell(Spell):
+    
+    BASE_COOLDOWN = 60
+    
+    def __init__(self, caster):
+        super().__init__("Avenging Crusader", cooldown=AvengingCrusaderSpell.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            caster.apply_buff_to_self(AvengingCrusaderBuff(caster), current_time)
    
             
 class DivineFavorSpell(Spell):
     
-    SPELL_ID = 210294
     BASE_COOLDOWN = 30
     
     def __init__(self, caster):
@@ -213,7 +222,6 @@ class FirebloodSpell(Spell):
 
 class GiftOfTheNaaruSpell(Spell):
     
-    SPELL_ID = 121093
     BASE_COOLDOWN = 180
     
     def __init__(self, caster):

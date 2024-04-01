@@ -67,12 +67,13 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
         "Phial of Tepid Versatility", "Phial of Elemental Chaos", "Iced Phial of Corrupting Rage", "Draconic Augment Rune",
         "Grand Banquet of the Kalu'ak", "Timely Demise", "Filet of Fangs", "Seamoth Surprise", "Salt-Baked Fishcake",
         "Feisty Fish Sticks", "Aromatic Seafood Platter", "Sizzling Seafood Medley", "Revenge, Served Cold",
-        "Thousandbone Tongueslicer", "Great Cerulean Sea", "Pip's Emerald Friendship Badge", "Elemental Lariat"
+        "Thousandbone Tongueslicer", "Great Cerulean Sea", "Pip's Emerald Friendship Badge", "Elemental Lariat",
+        "Close to Heart", "Allied Wristguards of Companionship"
     ];
     const playerAurasModalIconOrder = [
         "Avenging Wrath", "Blessing of Dawn", "Blessing of Dusk", "Infusion of Light", "Divine Purpose", 
         "Tyr's Deliverance (self)", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring",
-        "Rising Sunlight", "First Light", "Divine Favor", "Awakening", "Awakening Ready!!!!!!"
+        "Rising Sunlight", "First Light", "Divine Favor", "Awakening", "Awakening Ready"
     ];
     const currentSimulationPlayerAuras = [];
 
@@ -337,7 +338,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const majorCooldownRow = createElement("div", "priority-grid-cooldown-row", null);
 
             // select the order for each row
-            const generatorRowOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath"];
+            const generatorRowOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath", "Consecration"];
             const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Tyr's Deliverance", 
                                            "Light's Hammer", "Blessing of the Seasons", "Divine Favor", "Arcane Torrent",
                                            "Fireblood", "Gift of the Naaru", "Aerated Mana Potion", "Elemental Potion of Ultimate Power"];

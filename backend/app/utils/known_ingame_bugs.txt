@@ -1,3 +1,6 @@
-Flash of Light does not receive the mana reduction from Divine Favor
-Glimmer of Light's stacking 4% healing increase does not apply at 1 glimmer, going from a 0% increase at 1 glimmer to 8% at 2
-Divine Toll heals 6 targets instead of 5 most of the time
+Flash of Light does not receive the mana reduction from Divine Favor.
+Glimmer of Light's stacking 4% healing increase does not apply at 1 glimmer, going from a 0% increase at 1 glimmer to 8% at 2.
+Divine Toll heals 6 targets instead of 5 most of the time.
+Hammer of Wrath's cooldown is 19.6 instead of 7.5.
+Holy Prism receives its -20% modifier twice.
+Swapping from Avenging Crusader to Avenging Wrath: Might causes Awakening to last 8 seconds instead of 12.

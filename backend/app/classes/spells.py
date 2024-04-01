@@ -55,7 +55,7 @@ class Spell:
         update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)    
         
     def can_cast(self, caster, current_time=0):
-        if self.name in ["Hammer of Wrath"] and "Avenging Wrath" not in caster.active_auras:
+        if self.name in ["Hammer of Wrath"] and "Avenging Wrath" not in caster.active_auras and "Veneration" not in caster.active_auras and not caster.is_enemy_below_20_percent:
             return False
         
         if not self.off_gcd and caster.global_cooldown > 0:
@@ -101,7 +101,10 @@ class Spell:
             update_spell_data_heals(caster.ability_breakdown, self.name, target, 0, is_crit)        
             
             append_spell_damage_event(caster.events, self.name, caster, target, damage_value, current_time, is_crit, spends_mana=True)     
-            append_spell_cast_event(caster.ability_cast_events, self.name, caster, current_time, target)    
+            append_spell_cast_event(caster.ability_cast_events, self.name, caster, current_time, target) 
+            
+            if is_crit:
+                spell_crit = True   
         
         if self.current_charges == self.max_charges:    
             self.start_cooldown(caster)
@@ -153,7 +156,7 @@ class Spell:
                      
         # add spells that cost mana and do heal       
         elif caster.mana >= self.get_mana_cost(caster) and is_heal: 
-            if self.name not in ["Tyr's Deliverance", "Light's Hammer", "Holy Shock (Divine Toll)", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Resonance)", "Flash of Light"]:
+            if self.name not in ["Tyr's Deliverance", "Light's Hammer", "Holy Shock (Divine Toll)", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Resonance)", "Flash of Light", "Golden Path"]:
                 update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)    
             
             target_count = self.healing_target_count
@@ -265,9 +268,23 @@ class Spell:
             
         heal_amount = spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier * versatility_multiplier * crit_multiplier * mastery_multiplier * spell_healing_modifier * caster_crit_healing_modifier
         
+        if self.name in ["Holy Shock", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)"] and "Power of the Silver Hand Stored Healing" in caster.active_auras:
+            if is_crit:
+                heal_amount += caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing * 2
+            else:
+                heal_amount += caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing
+            caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing = 0
+        
         if "Close to Heart" in caster.active_auras:
             heal_amount *= 1.08
-        
+            
+        if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
+            heal_amount *= 1.1
+            
+        if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" in caster.active_auras:
+            caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing += heal_amount * 0.1
+            caster.active_auras["Power of the Silver Hand Stored Healing"].duration = caster.active_auras["Power of the Silver Hand Stored Healing"].base_duration
+            
         if self.name in leech_abilities:   
             leech_multiplier = 0.7
             update_spell_data_heals(caster.ability_breakdown, "Leech", caster, heal_amount * (caster.leech / 100) * leech_multiplier, False)
@@ -281,7 +298,7 @@ class Spell:
         
         crit_multiplier = 1
         is_crit = False
-        crit_chance = caster.crit + (bonus_crit * 100)
+        crit_chance = caster.crit + (self.bonus_crit * 100)
         caster_crit_damage_modifier = 1
         random_num = random.random() * 100
         if random_num <= crit_chance:
@@ -345,7 +362,8 @@ class Spell:
                                   AlacritousAlchemistStoneBuff, SeaStarBuff, PipsEmeraldFriendshipBadge, BestFriendsWithPipEmpowered, 
                                   BestFriendsWithAerwynEmpowered, BestFriendsWithUrctosEmpowered, IdolOfTheSpellWeaverStacks,
                                   IdolOfTheDreamerStacks, IdolOfTheEarthWarderStacks, IdolOfTheLifeBinderStacks,
-                                  AlliedChestplateOfGenerosity, ElementalLariat, VerdantTether, VerdantConduit
+                                  AlliedChestplateOfGenerosity, ElementalLariat, VerdantTether, VerdantConduit,
+                                  PowerOfTheSilverHand
                                  )
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False):
@@ -392,6 +410,10 @@ class Spell:
         if caster.is_talent_active("Touch of Light"):        
             touch_of_light = TouchOfLight(caster)        
             try_proc_rppm_effect(touch_of_light, is_heal=True, exclude_mastery=True)
+            
+        if caster.is_talent_active("Power of the Silver Hand") and (self.name == "Holy Light" or self.name == "Flash of Light" or self.name == "Judgment"):
+            power_of_the_silver_hand = PowerOfTheSilverHand()
+            try_proc_rppm_effect(power_of_the_silver_hand, is_hasted=False, is_self_buff=True)
             
         if "Sophic Devotion" in caster.bonus_enchants:
             sophic_devotion = SophicDevotion()

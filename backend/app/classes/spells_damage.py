@@ -3,16 +3,16 @@ import random
 from .spells import Spell
 from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals, update_self_buff_data, update_mana_gained
 from .auras_debuffs import JudgmentOfLightDebuff, GreaterJudgmentDebuff
-from .auras_buffs import BlessingOfDawn, AvengingWrathAwakening, EmpyreanLegacy
+from .auras_buffs import BlessingOfDawn, AvengingWrathAwakening, AvengingCrusaderAwakening, EmpyreanLegacy, Veneration
 from .spells_auras import AvengingWrathBuff
 from .target import Player
+from .summons import ConsecrationSummon, RighteousJudgmentSummon
 
 
 # DAMAGE SPELLS
 class Judgment(Spell):
     
-    SPELL_ID = 20271
-    SPELL_POWER_COEFFICIENT = 0.610542 
+    SPELL_POWER_COEFFICIENT = 1.125
     BASE_COOLDOWN = 12
     MANA_COST = 0.024
     HOLY_POWER_GAIN = 1
@@ -37,19 +37,37 @@ class Judgment(Spell):
             self.spell_damage_modifier = 1.1
             
     def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):
+        # awakening
         if caster.is_talent_active("Awakening"):
-            if "Awakening Ready!!!!!!" in caster.active_auras:
+            if "Awakening Ready" in caster.active_auras:
                 # add 30% damage buff and guaranteed crit
                 self.bonus_crit = 1
                 self.spell_damage_modifier *= 1.3
+        
+        # avenging crusader        
+        if caster.is_talent_active("Avenging Crusader"):
+            self.spell_damage_modifier *= 1.3
             
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
+        print(self.name, spell_damage, spell_crit)
+        
         judgment_of_light_healing = 0
         greater_judgment_healing = 0
-        if cast_success:
-            
+        if cast_success: 
             increment_holy_power(self, caster, current_time)
             target = targets[0]
+            
+            # veneration
+            if caster.is_talent_active("Veneration"):
+                if spell_crit:
+                    if caster.is_talent_active("Vanguard's Momentum"):
+                        if caster.abilities["Hammer of Wrath"].current_charges < caster.abilities["Hammer of Wrath"].max_charges:
+                            caster.abilities["Hammer of Wrath"].current_charges += 1
+                        else:
+                            caster.abilities["Hammer of Wrath"].remaining_cooldown = 0
+                    else:
+                        caster.abilities["Hammer of Wrath"].remaining_cooldown = 0
+                    caster.apply_buff_to_self(Veneration(), current_time) 
             
             # divine revelations
             if caster.is_talent_active("Divine Revelations"):
@@ -67,24 +85,36 @@ class Judgment(Spell):
         
             # awakening
             if caster.is_talent_active("Awakening"):
-                if "Awakening Ready!!!!!!" in caster.active_auras:
-                    if "Avenging Wrath" in caster.active_auras:
+                if "Awakening Ready" in caster.active_auras:
+                    if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras:
                         caster.awakening_queued = True
                     else:
-                        buff = AvengingWrathAwakening()
+                        if caster.is_talent_active("Avenging Crusader"):
+                            buff = AvengingCrusaderAwakening()
+                        else:
+                            buff = AvengingWrathAwakening()
                         caster.apply_buff_to_self(buff, current_time)
                         
-                    del caster.active_auras["Awakening Ready!!!!!!"]
+                    del caster.active_auras["Awakening Ready"]
                         
-                    update_self_buff_data(caster.self_buff_breakdown, "Awakening Ready!!!!!!", current_time, "expired")
+                    update_self_buff_data(caster.self_buff_breakdown, "Awakening Ready", current_time, "expired")
              
-                    append_aura_removed_event(caster.events, "Awakening Ready!!!!!!", caster, caster, current_time)
-                    # buff.duration += 12
-                    # buff.applied_duration = 12
+                    append_aura_removed_event(caster.events, "Awakening Ready", caster, caster, current_time)
                     
                     # remove 30% damage buff
                     self.spell_damage_modifier /= 1.3
                     self.bonus_crit = 0
+                    
+            # avenging crusader        
+            if caster.is_talent_active("Avenging Crusader"):
+                avenging_crusader_healing = spell_damage * 3.6 / 5
+                for avenging_crusader_target in random.sample(caster.potential_healing_targets, 5):
+                    avenging_crusader_target.receive_heal(avenging_crusader_healing, caster)
+                    
+                    update_spell_data_heals(caster.ability_breakdown, "Avenging Crusader (Judgment)", avenging_crusader_target, avenging_crusader_healing, spell_crit)
+                    caster.handle_beacon_healing("Avenging Crusader (Judgment)", avenging_crusader_target, avenging_crusader_healing, current_time)
+                
+                self.spell_damage_modifier /= 1.3
             
             # empyrean legacy                  
             if caster.is_talent_active("Empyrean Legacy") and "Empyrean Legacy Cooldown" not in caster.active_auras:
@@ -103,6 +133,12 @@ class Judgment(Spell):
                 target.apply_debuff_to_target(judgment_of_light_debuff, current_time, stacks_to_apply=5, max_stacks=5)
                 append_aura_applied_event(caster.events, "Judgment of Light", caster, target, current_time, current_stacks=5, max_stacks=5)
                 judgment_of_light_healing = judgment_of_light_debuff.consume_stacks(caster, target, healing_targets, current_time)
+                
+            # righteous judgment
+            if caster.is_talent_active("Righteous Judgment"):
+                random_num = random.random()
+                if random_num <= 0.3:
+                    caster.apply_summon(RighteousJudgmentSummon(caster), current_time)
                 
             # decrement stacks or remove infusion of light
             if "Infusion of Light" in caster.active_auras:
@@ -152,8 +188,14 @@ class CrusaderStrike(Spell):
         # reclamation
         if caster.is_talent_active("Reclamation"):
             self.spell_damage_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
+            
+        # avenging crusader        
+        if caster.is_talent_active("Avenging Crusader"):
+            self.spell_damage_modifier *= 1.3
         
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
+        print(self.name, spell_damage, spell_crit)
+        
         crusaders_reprieve_heal = 0
         if cast_success:
             # reset reclamation
@@ -163,6 +205,17 @@ class CrusaderStrike(Spell):
                 reclamation_mana = self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
                 caster.mana += reclamation_mana
                 update_mana_gained(caster.ability_breakdown, "Reclamation (Crusader Strike)", reclamation_mana)
+                
+            # avenging crusader        
+            if caster.is_talent_active("Avenging Crusader"):
+                avenging_crusader_healing = spell_damage * 3.6 / 5
+                for avenging_crusader_target in random.sample(caster.potential_healing_targets, 5):
+                    avenging_crusader_target.receive_heal(avenging_crusader_healing, caster)
+                    
+                    update_spell_data_heals(caster.ability_breakdown, "Avenging Crusader (Crusader Strike)", avenging_crusader_target, avenging_crusader_healing, spell_crit)
+                    caster.handle_beacon_healing("Avenging Crusader (Crusader Strike)", avenging_crusader_target, avenging_crusader_healing, current_time)
+                
+                self.spell_damage_modifier /= 1.3
             
             # blessing of dawn
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -180,6 +233,17 @@ class CrusaderStrike(Spell):
                 
                 update_spell_data_heals(caster.ability_breakdown, "Crusader's Reprieve", caster, crusaders_reprieve_heal, False)
                 append_spell_heal_event(caster.events, "Crusader's Reprieve", caster, caster, crusaders_reprieve_heal, current_time, is_crit=False)
+                
+            # avenging crusader        
+            if caster.is_talent_active("Avenging Crusader"):
+                avenging_crusader_healing = spell_damage * 3.6 / 5
+                for target in random.sample(caster.potential_healing_targets, 5):
+                    target.receive_heal(avenging_crusader_healing, caster)
+                    
+                    update_spell_data_heals(caster.ability_breakdown, "Avenging Crusader (Judgment)", target, avenging_crusader_healing, spell_crit)
+                    caster.handle_beacon_healing("Avenging Crusader (Judgment)", target, avenging_crusader_healing, current_time)
+                
+                self.spell_damage_modifier /= 1.3
                
             # crusader's might 
             if caster.is_talent_active("Crusader's Might"):
@@ -224,22 +288,48 @@ class HammerOfWrath(Spell):
                     caster.apply_buff_to_self(BlessingOfDawn(), current_time, stacks_to_apply=1, max_stacks=2)
                     caster.blessing_of_dawn_counter = 0
             
+            # vanguard's momentum
+            if caster.is_talent_active("Vanguard's Momentum") and caster.is_enemy_below_20_percent:
+                self.holy_power_gain = 2
+            else:
+                self.holy_power_gain = 1
+            
             increment_holy_power(self, caster, current_time)
             
             if caster.is_talent_active("Veneration"):
                 targets = random.sample(caster.potential_healing_targets, 5)
                 
-                print(spell_damage)
                 veneration_healing_per_target = spell_damage * 2 / len(targets)
                 
                 for target in targets:                   
                     if "Close to Heart" in caster.active_auras:
                         veneration_healing_per_target *= 1.08
+                        
+                    if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
+                        veneration_healing_per_target *= 1.1
                     
                     target.receive_heal(veneration_healing_per_target, caster)
                     update_spell_data_heals(caster.ability_breakdown, "Veneration", target, veneration_healing_per_target, spell_crit)
                     
                     caster.handle_beacon_healing("Veneration", target, veneration_healing_per_target, current_time)
+                    
+                if "Veneration" in caster.active_auras:
+                    del caster.active_auras["Veneration"]
+                    update_self_buff_data(caster.self_buff_breakdown, "Veneration", current_time, "expired")
                 
         return cast_success, spell_crit, spell_damage, veneration_healing
-
+    
+    
+class Consecration(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    BASE_COOLDOWN = 9
+    
+    def __init__(self, caster):
+        super().__init__("Consecration", cooldown=Consecration.BASE_COOLDOWN, hasted_cooldown=True)
+        self.is_damage_spell = True
+        
+    def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):
+        cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
+        if cast_success:
+            caster.apply_summon(ConsecrationSummon(), current_time)

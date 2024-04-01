@@ -19,9 +19,13 @@ beacon_transfer_rates_single_beacon = {
     "Golden Path": single_beacon_transfer_st,
     "Light of the Martyr": single_beacon_transfer_st,
     "Veneration": single_beacon_transfer_st,
+    "Merciful Auras": single_beacon_transfer_st,
+    "Avenging Crusader (Judgment)": single_beacon_transfer_st,
+    "Avenging Crusader (Crusader Strike)": single_beacon_transfer_st,
     "Light of Dawn": single_beacon_transfer_aoe,
     "Glimmer of Light": single_beacon_transfer_aoe,
-    "Light's Hammer": single_beacon_transfer_aoe
+    "Light's Hammer": single_beacon_transfer_aoe,
+    "Holy Prism": single_beacon_transfer_aoe
 }
 
 beacon_transfer_rates_double_beacon = {
@@ -40,7 +44,11 @@ beacon_transfer_rates_double_beacon = {
     "Golden Path": double_beacon_transfer_st,
     "Light of the Martyr": double_beacon_transfer_st,
     "Veneration": double_beacon_transfer_st,
+    "Merciful Auras": double_beacon_transfer_st,
+    "Avenging Crusader (Judgment)": double_beacon_transfer_st,
+    "Avenging Crusader (Crusader Strike)": double_beacon_transfer_st,
     "Light of Dawn": double_beacon_transfer_aoe,
     "Glimmer of Light": double_beacon_transfer_aoe,
-    "Light's Hammer": double_beacon_transfer_aoe
+    "Light's Hammer": double_beacon_transfer_aoe,
+    "Holy Prism": double_beacon_transfer_aoe
 }

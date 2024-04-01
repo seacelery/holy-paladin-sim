@@ -11,7 +11,7 @@ from flask_socketio import emit
 from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
-from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, DreamtendersCharm
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
 from .priority_list_dsl import parse_condition, condition_to_lambda
 
@@ -49,6 +49,9 @@ class Simulation:
         self.time_warp_recharge_timer = 0
         self.time_warp_recharging = False
         
+        self.iced_phial_active = False
+        self.iced_phial_timer = 0
+        
         self.times_direct_healed = {}
         self.previous_ability = None
         
@@ -72,44 +75,14 @@ class Simulation:
                
     def simulate(self):
         while self.elapsed_time < self.encounter_length:
-            
-            # handle time warp
-            if self.elapsed_time > self.time_warp_time and not self.time_warp_recharging:
-                self.paladin.apply_buff_to_self(TimeWarp(), self.elapsed_time)
-                self.time_warp_recharging = True
-            if self.time_warp_recharging:
-                self.time_warp_recharge_timer += self.tick_rate
-            if self.time_warp_recharge_timer >= 600:
-                self.time_warp_recharge_timer = 0
-                self.time_warp_recharging = False
-                
-            # handle external buffs
+            self.handle_time_warp()
             self.paladin.check_external_buff_timers(self.elapsed_time)
-            
-            # handle cast time spells
-            if self.paladin.currently_casting is not None:
-                self.paladin.remaining_cast_time -= self.tick_rate
-                if self.paladin.remaining_cast_time <= 0:
-                    self.complete_cast(self.paladin, self.elapsed_time)
-                    self.paladin.currently_casting = None
-            
-            # increment effects that trigger other effects
-            if "Divine Resonance" in self.paladin.active_auras:
-                self.paladin.active_auras["Divine Resonance"].increment_divine_resonance(self.paladin, self.elapsed_time, self.tick_rate)      
-            if "Tyr's Deliverance (self)" in self.paladin.active_auras:
-                self.paladin.active_auras["Tyr's Deliverance (self)"].increment_tyrs_deliverance(self.paladin, self.elapsed_time, self.tick_rate)  
-            if "Light's Hammer" in self.paladin.active_summons:
-                self.paladin.active_summons["Light's Hammer"].increment_lights_hammer(self.paladin, self.elapsed_time, self.tick_rate)
-            if "Blessing of Winter" in self.paladin.active_auras:
-                self.paladin.active_auras["Blessing of Winter"].increment_blessing_of_winter(self.paladin, self.elapsed_time, self.tick_rate)
-               
-            # increment rppm effects 
-            for effect in self.paladin.time_since_last_rppm_proc_attempt:
-                self.paladin.time_since_last_rppm_proc_attempt[effect] += self.tick_rate
-                self.paladin.time_since_last_rppm_proc[effect] += self.tick_rate
-                
-            for effect in self.paladin.conditional_effect_cooldowns:
-                self.paladin.conditional_effect_cooldowns[effect] -= self.tick_rate
+            self.handle_cast_time_spells()
+
+            self.check_under_20_percent()
+                    
+            self.increment_effects_with_additional_triggers()
+            self.increment_rppm_effects()
             
             self.action()
             self.paladin.update_gcd(self.tick_rate)
@@ -121,9 +94,8 @@ class Simulation:
             self.decrement_summons()
             self.decrement_trinkets()
             self.increment_time_based_stacking_buffs()
+            self.increment_passive_heal_over_time_effects()
             self.regen_mana()
-            
-            # print(self.elapsed_time, self.paladin.abilities["Holy Shock"].remaining_cooldown, self.paladin.abilities["Holy Shock"].current_charges)
             
             # TESTING ONLY
             self.test_time_since_last += self.tick_rate
@@ -302,17 +274,15 @@ class Simulation:
                     
     def decrement_cooldowns(self):
         for ability_name, ability_instance in self.abilities.items():
-            # keep an eye on this v
-            # if ability_instance.remaining_cooldown > 0:
-                # seal of order 10% cdr for holy power generators, blessing of autumn 30% cdr on all abilities
-                if "Blessing of Dusk" in self.paladin.active_auras and ability_name in ["Divine Toll", "Holy Shock", "Crusader Strike", "Judgment", "Hammer of Wrath"] and "Blessing of Autumn" in self.paladin.active_auras and self.paladin.is_talent_active("Seal of Order"):
-                    ability_instance.remaining_cooldown -= (self.tick_rate * (1 + 0.1 + 0.3))
-                elif "Blessing of Dusk" in self.paladin.active_auras and ability_name in ["Divine Toll", "Holy Shock", "Crusader Strike", "Judgment", "Hammer of Wrath"] and self.paladin.is_talent_active("Seal of Order"):
-                    ability_instance.remaining_cooldown -= (self.tick_rate * (1 + 0.1))
-                elif "Blessing of Autumn" in self.paladin.active_auras:
-                    ability_instance.remaining_cooldown -= (self.tick_rate * (1 + 0.3))
-                else:
-                    ability_instance.remaining_cooldown -= self.tick_rate
+            if ability_instance.remaining_cooldown > 0:
+                # seal of order 10% cdr for holy power generators, blessing of autumn 30% cdr on all abilities, avenging crusader 30% cdr for judgment and crusader strike                   
+                if "Blessing of Dusk" in self.paladin.active_auras and ability_name in ["Divine Toll", "Holy Shock", "Crusader Strike", "Judgment", "Hammer of Wrath"] and self.paladin.is_talent_active("Seal of Order"):
+                    ability_instance.remaining_cooldown -= self.tick_rate * 0.1
+                if "Blessing of Autumn" in self.paladin.active_auras:
+                    ability_instance.remaining_cooldown -= self.tick_rate * 0.3
+                if ("Avenging Crusader" in self.paladin.active_auras or "Avenging Crusader (Awakening)" in self.paladin.active_auras) and ability_name in ["Judgment", "Crusader Strike"]:
+                    ability_instance.remaining_cooldown -= self.tick_rate * 0.3
+                ability_instance.remaining_cooldown -= self.tick_rate
                 
                 # add a charge and restart cooldown when the cooldown of an ability with charges reaches 0
                 if ability_instance.remaining_cooldown <= 0 and ability_instance.current_charges < ability_instance.max_charges:
@@ -334,6 +304,72 @@ class Simulation:
                 if self.time_since_last_buff_interval[buff.name] >= buff_interval and buff.current_stacks < buff.max_stacks:
                     self.paladin.apply_buff_to_self(buff, self.elapsed_time, buff.stacks_to_apply, buff.max_stacks)
                     self.time_since_last_buff_interval[buff.name] = 0
+                    
+    def increment_rppm_effects(self):
+        for effect in self.paladin.time_since_last_rppm_proc_attempt:
+            self.paladin.time_since_last_rppm_proc_attempt[effect] += self.tick_rate
+            self.paladin.time_since_last_rppm_proc[effect] += self.tick_rate
+            
+        for effect in self.paladin.conditional_effect_cooldowns:
+            self.paladin.conditional_effect_cooldowns[effect] -= self.tick_rate
+                    
+    def increment_passive_heal_over_time_effects(self):
+        if self.paladin.is_talent_active("Merciful Auras"):
+            merciful_auras = self.paladin.active_auras["Merciful Auras"]
+            merciful_auras.timer += self.tick_rate
+            
+            if merciful_auras.timer >= 2:
+                merciful_auras.trigger_passive_heal(self.paladin, self.elapsed_time)
+                merciful_auras.timer = 0
+            
+        
+    def increment_effects_with_additional_triggers(self):
+        if "Divine Resonance" in self.paladin.active_auras:
+            self.paladin.active_auras["Divine Resonance"].increment_divine_resonance(self.paladin, self.elapsed_time, self.tick_rate)  
+                
+        if "Tyr's Deliverance (self)" in self.paladin.active_auras:
+            self.paladin.active_auras["Tyr's Deliverance (self)"].increment_tyrs_deliverance(self.paladin, self.elapsed_time, self.tick_rate)  
+            
+        if "Light's Hammer" in self.paladin.active_summons:
+            self.paladin.active_summons["Light's Hammer"].increment_lights_hammer(self.paladin, self.elapsed_time, self.tick_rate)
+            
+        if "Consecration" in self.paladin.active_summons:
+            self.paladin.active_summons["Consecration"].increment_consecration(self.paladin, self.elapsed_time, self.tick_rate)
+        for summon_name, summon_instance in self.paladin.active_summons.items():
+            if summon_name.startswith("Consecration (Righteous Judgment)"):
+                summon_instance.increment_consecration(self.paladin, self.elapsed_time, self.tick_rate)
+            
+        if "Blessing of Winter" in self.paladin.active_auras:
+            self.paladin.active_auras["Blessing of Winter"].increment_blessing_of_winter(self.paladin, self.elapsed_time, self.tick_rate)
+            
+        if "Iced Phial of Corrupting Rage" in self.paladin.active_auras:
+            self.iced_phial_active = True
+        if self.iced_phial_active and "Corrupting Rage" not in self.paladin.active_auras:
+            self.iced_phial_timer += self.tick_rate
+            if self.iced_phial_timer >= 15:
+                self.iced_phial_timer = 0
+                self.paladin.apply_buff_to_self(CorruptingRage(), self.elapsed_time)
+                
+    def handle_time_warp(self):
+        if self.elapsed_time > self.time_warp_time and not self.time_warp_recharging:
+            self.paladin.apply_buff_to_self(TimeWarp(), self.elapsed_time)
+            self.time_warp_recharging = True
+        if self.time_warp_recharging:
+            self.time_warp_recharge_timer += self.tick_rate
+        if self.time_warp_recharge_timer >= 600:
+            self.time_warp_recharge_timer = 0
+            self.time_warp_recharging = False
+            
+    def handle_cast_time_spells(self):
+        if self.paladin.currently_casting is not None:
+            self.paladin.remaining_cast_time -= self.tick_rate
+            if self.paladin.remaining_cast_time <= 0:
+                self.complete_cast(self.paladin, self.elapsed_time)
+                self.paladin.currently_casting = None
+                
+    def check_under_20_percent(self):
+        if not self.paladin.is_enemy_below_20_percent and self.elapsed_time >= self.encounter_length * 0.8:
+            self.paladin.is_enemy_below_20_percent = True   
                                  
     def decrement_buffs_on_self(self):
         # for buff_name, buff in self.paladin.active_auras.items():
@@ -352,6 +388,10 @@ class Simulation:
                                   
             if buff_name == "Avenging Wrath" and self.paladin.awakening_queued:
                 self.paladin.apply_buff_to_self(AvengingWrathAwakening(), self.elapsed_time)
+                self.paladin.awakening_queued = False
+                
+            if buff_name == "Avenging Crusader" and self.paladin.awakening_queued:
+                self.paladin.apply_buff_to_self(AvengingCrusaderAwakening(), self.elapsed_time)
                 self.paladin.awakening_queued = False
 
             self.paladin.active_auras[buff_name].remove_effect(self.paladin, self.elapsed_time)
@@ -460,6 +500,9 @@ class Simulation:
                 
             self.paladin.active_summons[summon_name].remove_effect(self.paladin)
             del self.paladin.active_summons[summon_name]
+            
+            if "Righteous Judgment" in summon_name:
+                self.paladin.extra_consecration_count -= 1
         
     def regen_mana(self):
         if self.paladin.mana + self.paladin.mana_regen_per_second * self.tick_rate > self.paladin.max_mana:
@@ -565,7 +608,11 @@ class Simulation:
                 "Blossom of Amirdrassil Large HoT": "Blossom of Amirdrassil",
                 "Blossom of Amirdrassil Small HoT": "Blossom of Amirdrassil",
                 "Blossom of Amirdrassil Absorb": "Blossom of Amirdrassil",
-                "Veneration": "Hammer of Wrath"
+                "Veneration": "Hammer of Wrath",
+                "Golden Path": "Consecration",
+                "Seal of Mercy": "Consecration",
+                "Avenging Crusader (Judgment)": "Avenging Crusader",
+                "Avenging Crusader (Crusader Strike)": "Avenging Crusader",
             }
 
         # time the function
@@ -576,7 +623,7 @@ class Simulation:
             # reset simulation states
             print(i)
             if not self.test:
-                emit('iteration_update', {'iteration': i + 1}, broadcast=True, namespace='/')
+                emit("iteration_update", {"iteration": i + 1}, broadcast=True, namespace='/')
                 self.paladin.reset_state()
                 self.reset_simulation()
                 self.paladin.apply_consumables()
@@ -601,12 +648,6 @@ class Simulation:
             mana_timeline = self.paladin.mana_timeline
             holy_power_timeline = self.paladin.holy_power_timeline
             cooldowns_breakdown = self.aura_healing
-            
-            # pp.pprint(self.paladin.events)           
-            # pp.pprint(ability_breakdown)
-            # pp.pprint(healing_timeline)
-            
-            # pp.pprint(cooldowns_breakdown)
             
             # accumulate cooldown breakdown results
             for aura, instances in cooldowns_breakdown.items():
@@ -659,6 +700,27 @@ class Simulation:
                     del beacon_sources[key]
 
                 beacon_sources[prefix] = combined_source
+            
+            def add_spell_if_sub_spell_but_no_casts(main_spell, sub_spell):
+                if sub_spell in ability_breakdown and main_spell not in ability_breakdown:
+                    ability_breakdown[main_spell] = {
+                        "total_healing": 0,
+                        "casts": 0,
+                        "hits": 0,
+                        "targets": {},
+                        "crits": 0,
+                        "mana_spent": 0,
+                        "mana_gained": 0,
+                        "holy_power_gained": 0,
+                        "holy_power_spent": 0,
+                        "holy_power_wasted": 0,
+                        "sub_spells": {},
+                        "source_spells": {}
+                    } 
+                
+            add_spell_if_sub_spell_but_no_casts("Consecration", "Golden Path")
+            add_spell_if_sub_spell_but_no_casts("Avenging Crusader", "Avenging Crusader (Judgment)")
+            add_spell_if_sub_spell_but_no_casts("Avenging Crusader", "Avenging Crusader (Crusader Strike)")
             
             # process data to include crit percent
             for spell, data in ability_breakdown.items():
@@ -720,13 +782,16 @@ class Simulation:
                     # primary_data["crit_percent"] = round((total_crits / total_hits) * 100, 1) if total_hits > 0 else 0
             
             # remove the primary spell data for sub-spells        
-            for spell in ["Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)", "Holy Shock (Rising Sunlight)" , "Glimmer of Light", 
-                        "Glimmer of Light (Daybreak)", "Glimmer of Light (Rising Sunlight)", "Glimmer of Light (Divine Toll)", 
-                        "Glimmer of Light (Glistening Radiance (Light of Dawn))", "Glimmer of Light (Glistening Radiance (Word of Glory))", "Resplendent Light",
-                        "Greater Judgment", "Judgment of Light", "Crusader's Reprieve", "Afterimage", "Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", 
-                        "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", "Blessing of Summer", "Blessing of Autumn",
-                        "Blessing of Winter", "Blessing of Spring", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT",
-                        "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", "Barrier of Faith (Holy Light)", "Veneration"]:
+            for spell in [
+                "Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)", "Holy Shock (Rising Sunlight)" , "Glimmer of Light", 
+                "Glimmer of Light (Daybreak)", "Glimmer of Light (Rising Sunlight)", "Glimmer of Light (Divine Toll)", 
+                "Glimmer of Light (Glistening Radiance (Light of Dawn))", "Glimmer of Light (Glistening Radiance (Word of Glory))", 
+                "Resplendent Light", "Greater Judgment", "Judgment of Light", "Crusader's Reprieve", "Afterimage", "Reclamation (Holy Shock)", 
+                "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", "Blessing of Summer", 
+                "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil Large HoT", 
+                "Blossom of Amirdrassil Small HoT", "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", "Barrier of Faith (Holy Light)", 
+                "Veneration", "Golden Path", "Seal of Mercy", "Avenging Crusader (Judgment)", "Avenging Crusader (Crusader Strike)"
+                ]:
                 if spell in ability_breakdown:
                     del ability_breakdown[spell]
                           
@@ -811,7 +876,7 @@ class Simulation:
                             sub_sub_spells[sub_spell]["holy_power_wasted"] = sub_spells[sub_spell]["holy_power_wasted"]
             
             # remove spells that aren't actually spells but have subspells               
-            for spell in ["Blossom of Amirdrassil", "Hammer of Wrath"]:
+            for spell in ["Blossom of Amirdrassil", "Hammer of Wrath", "Consecration", "Avenging Crusader"]:
                 if spell in ability_breakdown:
                     if spell in ability_breakdown[spell]["sub_spells"]:
                         del ability_breakdown[spell]["sub_spells"][spell]

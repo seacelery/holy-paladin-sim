@@ -118,7 +118,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda", "Holy Reverberation", 
         "Restorative Sands", "Echoing Tyrstone", "Smoldering Seedling", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT", 
         "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", 
-        "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion", "Veneration"
+        "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion", "Veneration", "Merciful Auras"
     ];
     // displays casts with average as healing divided by hits
     const excludedSpellsCastsAverageHits = [
@@ -448,6 +448,9 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
             avgCastsCell.textContent = "";
         } else {
             avgCastsCell.textContent = formatNumbers(spellData.total_healing / spellData.casts);
+        };
+        if (avgCastsCell.textContent === "Infinity") {
+            avgCastsCell.textContent = "0";
         };
 
         const hitsCell = row.insertCell();

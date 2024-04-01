@@ -71,6 +71,9 @@ class DreamingDevotion(Spell):
                 
             if "Close to Heart" in caster.active_auras:
                 dreaming_devotion_heal *= 1.08
+                
+            if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
+                dreaming_devotion_heal *= 1.1
             
             target.receive_heal(dreaming_devotion_heal, caster)
             update_spell_data_heals(caster.ability_breakdown, "Dreaming Devotion", target, dreaming_devotion_heal, dreaming_devotion_crit)

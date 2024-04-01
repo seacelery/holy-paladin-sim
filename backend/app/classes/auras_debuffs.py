@@ -52,9 +52,6 @@ class GreaterJudgmentDebuff(Debuff):
         greater_judgment_target = damage_targets
         greater_judgment_spell = GreaterJudgmentSpell(caster)
         
-        for buff in caster.active_auras:
-            print(caster.active_auras[buff].name)
-        
         if "Infusion of Light" in caster.active_auras and caster.is_talent_active("Inflorescence of the Sunwell"):
             greater_judgment_spell.spell_healing_modifier = 2.5
         elif "Infusion of Light" in caster.active_auras:

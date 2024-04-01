@@ -1,6 +1,21 @@
 from .spells import Spell
-from .auras_buffs import ElementalPotionOfUltimatePowerBuff
+from .auras_buffs import ElementalPotionOfUltimatePowerBuff, AuraMasteryBuff
 from ..utils.misc_functions import increment_holy_power, update_spell_holy_power_gain, update_mana_gained
+
+
+class AuraMastery(Spell):
+    
+    BASE_COOLDOWN = 180
+    
+    def __init__(self, caster):
+        super().__init__("Aura Mastery", cooldown=AuraMastery.BASE_COOLDOWN)
+        if caster.is_talent_active("Unwavering Spirit"):
+            self.cooldown -= 30
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            caster.apply_buff_to_self(AuraMasteryBuff(), current_time)
 
 
 class ArcaneTorrent(Spell):
