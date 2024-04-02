@@ -52,6 +52,7 @@ const spellToIconsMap = {
     "Reclamation (Crusader Strike)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_longarmofthelaw.jpg",
     "Reclamation (Holy Shock)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_longarmofthelaw.jpg",
     "Resplendent Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_voidshift.jpg",
+    "Saved by the Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_savedbythelight.jpg",
     "Seal of Mercy": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_greaterblessingofsalvation.jpg",
     "Tirion's Devotion": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_revivechampion.jpg",
     "Touch of Light": "https://render.worldofwarcraft.com/eu/icons/56/achievment_raid_houroftwilight.jpg",

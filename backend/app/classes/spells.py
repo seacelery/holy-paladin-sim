@@ -246,7 +246,6 @@ class Spell:
         crit_multiplier = 1
         is_crit = False
         crit_chance = caster.crit + (self.bonus_crit * 100)
-        # print(crit_chance)
         caster_crit_healing_modifier = 1
         random_num = random.random() * 100
         if random_num <= crit_chance:
@@ -290,7 +289,6 @@ class Spell:
             update_spell_data_heals(caster.ability_breakdown, "Leech", caster, heal_amount * (caster.leech / 100) * leech_multiplier, False)
             
         # print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
-        print(f"Calculating heal for {self.name}, {heal_amount}")
         return heal_amount, is_crit
     
     def calculate_damage(self, caster, bonus_crit=0, bonus_versatility=0):

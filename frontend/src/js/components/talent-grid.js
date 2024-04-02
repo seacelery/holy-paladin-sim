@@ -117,6 +117,8 @@ const updateTalentsFromImportedData = (importedTalents) => {
 };
 
 const updateTalentCounts = (category, pointsToAdd = 0) => {
+
+    console.log(category, pointsToAdd)
     if (category === "class") {
         const classTalents = document.getElementById("class-talents");
         let classTalentsCount = Number(classTalents.getAttribute("data-class-talents-count"));
@@ -125,7 +127,6 @@ const updateTalentCounts = (category, pointsToAdd = 0) => {
         const classTalentsCountText = document.getElementById("class-talents-count");
         const classTalentsTotalText = document.getElementById("class-talents-total");
         classTalentsCountText.textContent = classTalentsCount;
-
         
         classTalents.setAttribute("data-class-talents-count", classTalentsCount);
 
@@ -163,29 +164,50 @@ const updateTalentCounts = (category, pointsToAdd = 0) => {
     };
 }
 
-const handleTalentChange = (talentName, talentData) => {
-    const talentValue = talentData.ranks["current rank"];
-
-    let talentUpdate = {};
-
-    const isClassTalent = classTalents.some(t => t.includes(talentName));
-    const isSpecTalent = specTalents.some(t => t.includes(talentName));
-
-    if (isClassTalent) {
-        console.log("Updating class talent");
-        talentUpdate = {
-            "class_talents": {
-                [talentName]: talentValue
-            }
-        };
-    } else if (isSpecTalent) {
-        console.log("Updating spec talent");
-        talentUpdate = {
-            "spec_talents": {
-                [talentName]: talentValue
-            }
-        };
+const handleTalentChange = (talentName, talentData, multipleTalentChanges = false) => {
+    let talentUpdate = {
+        "class_talents": {},
+        "spec_talents": {}
     };
+
+    if (multipleTalentChanges) {
+        for (let i = 0; i < talentName.length; i++) {
+            const currentTalentName = talentName[i];
+            const currentTalentData = talentData[i];
+            const talentValue = currentTalentData.ranks["current rank"];
+
+            const isClassTalent = classTalents.some(t => t.includes(currentTalentName));
+            const isSpecTalent = specTalents.some(t => t.includes(currentTalentName));
+
+            if (isClassTalent) {
+                console.log("Updating class talent");
+                talentUpdate.class_talents[currentTalentName] = talentValue;
+            } else if (isSpecTalent) {
+                console.log("Updating spec talent");
+                talentUpdate.spec_talents[currentTalentName] = talentValue;
+            };
+        }
+    } else {
+        const talentValue = talentData.ranks["current rank"];
+
+        const isClassTalent = classTalents.some(t => t.includes(talentName));
+        const isSpecTalent = specTalents.some(t => t.includes(talentName));
+
+        if (isClassTalent) {
+            console.log("Updating class talent");
+            talentUpdate.class_talents[talentName] = talentValue;
+        } else if (isSpecTalent) {
+            console.log("Updating spec talent");
+            talentUpdate.spec_talents[talentName] = talentValue;
+        }
+    }
+
+    if (Object.keys(talentUpdate.class_talents).length === 0) {
+        delete talentUpdate.class_talents;
+    }
+    if (Object.keys(talentUpdate.spec_talents).length === 0) {
+        delete talentUpdate.spec_talents;
+    }
 
     updateCharacter(talentUpdate);
 };
@@ -353,8 +375,11 @@ const createTalentGrid = () => {
     
                 let talentDataLeft = findTalentInTalentsData(baseTalentSet, splitTalent[0]);
                 let talentDataRight = findTalentInTalentsData(baseTalentSet, splitTalent[1]);
-    
+
                 let talentIconLeft = document.createElement("img");
+                let talentIconRight = document.createElement("img");
+    
+                talentIconLeft.draggable = false;
                 let formattedTalentNameLeft = talentNameLeft.toLowerCase().replaceAll(" ", "-").replaceAll("'", "").replaceAll(":", "");
                 talentIconLeft.id = formattedTalentNameLeft + "-icon";
     
@@ -368,10 +393,13 @@ const createTalentGrid = () => {
 
                 talentIconLeft.addEventListener("click", (e) => {
                     if (e.button === 0 && e.target.id === formattedTalentNameLeft + "-icon" && talentDataLeft.ranks["current rank"] < talentDataLeft.ranks["max rank"]) {
+                        if (talentDataRight.ranks["current rank"] > 0) {
+                            decrementTalent(talentDataRight, talentIconRight, category);
+                        };
                         incrementTalent(talentDataLeft, talentIconLeft, category);
-                        handleTalentChange(talentNameLeft, talentDataLeft);
-                    };
-                    
+
+                        handleTalentChange([talentNameRight, talentNameLeft], [talentDataRight, talentDataLeft], true);
+                    };              
                 });
     
                 cell.addEventListener("contextmenu", (e) => {
@@ -380,9 +408,9 @@ const createTalentGrid = () => {
                         decrementTalent(talentDataLeft, talentIconLeft, category);
                         handleTalentChange(talentNameLeft, talentDataLeft);
                     };
-                });
-    
-                let talentIconRight = document.createElement("img");
+                });  
+                
+                talentIconRight.draggable = false;
                 let formattedTalentNameRight = talentNameRight.toLowerCase().replaceAll(" ", "-").replaceAll("'", "").replaceAll(":", "");
                 talentIconRight.id = formattedTalentNameRight + "-icon";
                 talentIconRight.classList.add("talent-icon");
@@ -395,8 +423,12 @@ const createTalentGrid = () => {
 
                 talentIconRight.addEventListener("click", (e) => {
                     if (e.button === 0 && e.target.id === formattedTalentNameRight + "-icon" && talentDataRight.ranks["current rank"] < talentDataRight.ranks["max rank"]) {
+                        if (talentDataLeft.ranks["current rank"] > 0) {
+                            decrementTalent(talentDataLeft, talentIconLeft, category);
+                        };
                         incrementTalent(talentDataRight, talentIconRight, category);
-                        handleTalentChange(talentNameRight, talentDataRight);
+                        
+                        handleTalentChange([talentNameRight, talentNameLeft], [talentDataRight, talentDataLeft], true);
                     };                 
                 });
     
@@ -413,6 +445,7 @@ const createTalentGrid = () => {
     
             } else if (talentName !== "") {
                 let talentIcon = document.createElement("img");
+                talentIcon.draggable = false;
                 talentIcon.id = formattedTalentName + "-icon";
                 talentIcon.classList.add("talent-icon");
     

@@ -1533,6 +1533,14 @@ class MercifulAurasHeal(Spell):
     def __init__(self, caster):
         super().__init__("Merciful Auras", off_gcd=True)
         
+    
+class SavedByTheLightHeal(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 9
+    
+    def __init__(self, caster):
+        super().__init__("Saved by the Light", off_gcd=True)
+        
 
 class LayOnHands(Spell):
     

@@ -160,6 +160,40 @@ class MercifulAuras(Buff):
             caster.handle_beacon_healing("Merciful Auras", target, merciful_auras_heal, current_time)
 
 
+class SavedByTheLight(Buff):
+    
+    def __init__(self):
+        super().__init__("Saved by the Light", 10000, base_duration=10000)
+        self.timer = 65
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+    def trigger_passive_heal(self, caster, current_time):
+        from .spells_healing import SavedByTheLightHeal
+        
+        if caster.is_talent_active("Beacon of Virtue"):
+            target_count = 4
+        elif caster.is_talent_active("Beacon of Faith"):
+            target_count = 2
+        else:
+            target_count = 1
+        
+        targets = random.sample(caster.potential_healing_targets, target_count)
+        for target in targets:            
+            saved_by_the_light_heal, saved_by_the_light_crit = SavedByTheLightHeal(caster).calculate_heal(caster)
+            if saved_by_the_light_crit:
+                saved_by_the_light_heal /= 2
+
+            target.receive_heal(saved_by_the_light_heal, caster)
+            update_spell_data_heals(caster.ability_breakdown, "Saved by the Light", target, saved_by_the_light_heal, False)
+            
+            caster.handle_beacon_healing("Saved by the Light", target, saved_by_the_light_heal, current_time)
+
+
 class AvengingWrathBuff(Buff):
     
     def __init__(self, caster):

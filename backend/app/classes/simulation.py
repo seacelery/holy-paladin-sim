@@ -321,6 +321,20 @@ class Simulation:
             if merciful_auras.timer >= 2:
                 merciful_auras.trigger_passive_heal(self.paladin, self.elapsed_time)
                 merciful_auras.timer = 0
+                
+        if self.paladin.is_talent_active("Saved by the Light"):
+            saved_by_the_light = self.paladin.active_auras["Saved by the Light"]
+            saved_by_the_light.timer += self.tick_rate
+            
+            if self.paladin.is_talent_active("Beacon of Virtue"):
+                virtue_active = any("Beacon of Light" in target.target_active_buffs for target in self.paladin.potential_healing_targets)
+                if saved_by_the_light.timer >= 70 and virtue_active:
+                    saved_by_the_light.trigger_passive_heal(self.paladin, self.elapsed_time)
+                    saved_by_the_light.timer = 0
+            else:
+                if saved_by_the_light.timer >= 70:
+                    saved_by_the_light.trigger_passive_heal(self.paladin, self.elapsed_time)
+                    saved_by_the_light.timer = 0
             
         
     def increment_effects_with_additional_triggers(self):
