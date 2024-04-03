@@ -37,7 +37,7 @@ class LightsHammerSummon(Summon):
         from .spells_healing import LightsHammerHeal
         
         targets = []
-        for _ in range(LightsHammerHeal(caster).TARGET_COUNT):
+        for _ in range(LightsHammerHeal(caster).healing_target_count):
             targets.append(random.choice(caster.potential_healing_targets))
         LightsHammerHeal(caster).cast_healing_spell(caster, targets, current_time, is_heal=True)
             

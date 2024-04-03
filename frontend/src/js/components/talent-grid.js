@@ -29,13 +29,32 @@ const specTalents = [
     "", "Rising Sunlight", "", "Glorious Dawn", "Sanctified Wrath/Awakening", "Inflorescence of the Sunwell/Empyrean Legacy", "", "Boundless Salvation", "", 
 ];
 
+const toggleTalentOptions = (talentName, talentData) => {
+    switch(true) {
+        case talentName === "Light of Dawn" && talentData.ranks["current rank"] === 1:
+            document.getElementById("light-of-dawn-option-container").style.display = "flex";
+            break;
+        case talentName === "Light of Dawn" && talentData.ranks["current rank"] === 0:
+            document.getElementById("light-of-dawn-option-container").style.display = "none";
+            break;
+        case talentName === "Light's Hammer" && talentData.ranks["current rank"] === 1:
+            document.getElementById("lights-hammer-option-container").style.display = "flex";
+            break;
+        case talentName === "Light's Hammer" && talentData.ranks["current rank"] === 0:
+            document.getElementById("lights-hammer-option-container").style.display = "none";
+            break;
+        case talentName === "Resplendent Light" && talentData.ranks["current rank"] === 1:
+            document.getElementById("resplendent-light-option-container").style.display = "flex";
+            break;
+        case talentName === "Resplendent Light" && talentData.ranks["current rank"] === 0:
+            document.getElementById("resplendent-light-option-container").style.display = "none";   
+            break;
+    };
+};
+
 const updateTalentsFromImportedData = (importedTalents) => {
     let importedClassTalents = importedTalents.class_talents;
     let importedSpecTalents = importedTalents.spec_talents;
-
-    console.log(importedClassTalents)
-
-    // createTalentGrid();
 
     const updateTalents = (imported, baseTalents, category) => {
         let classTalentsCount = 0;
@@ -62,6 +81,8 @@ const updateTalentsFromImportedData = (importedTalents) => {
                         talentIcon.parentElement.style.boxShadow = "0px 0px 4px var(--gold-font)";
                         talentIcon.style.boxShadow = "0px 0px 1px var(--border-colour-2)";
                     };
+
+                    toggleTalentOptions(talentName, talentData);
 
                     if (category === "class") {
                         classTalentsCount += talentData.ranks["current rank"];
@@ -117,8 +138,6 @@ const updateTalentsFromImportedData = (importedTalents) => {
 };
 
 const updateTalentCounts = (category, pointsToAdd = 0) => {
-
-    console.log(category, pointsToAdd)
     if (category === "class") {
         const classTalents = document.getElementById("class-talents");
         let classTalentsCount = Number(classTalents.getAttribute("data-class-talents-count"));
@@ -221,7 +240,7 @@ const findTalentInTalentsData = (baseTalents, talentName) => {
     return null;
 };
 
-const incrementTalent = (talentData, talentIcon, category) => {
+const incrementTalent = (talentName, talentData, talentIcon, category) => {
     if (talentData.ranks["current rank"] < talentData.ranks["max rank"]) {
         talentData.ranks["current rank"] += 1;
     };
@@ -236,6 +255,8 @@ const incrementTalent = (talentData, talentIcon, category) => {
         talentIcon.parentElement.style.boxShadow = "0px 0px 4px var(--gold-font)";
         talentIcon.style.boxShadow = "none";
     };
+
+    toggleTalentOptions(talentName, talentData);
 
     updateTalentCounts(category, 1);
 
@@ -266,7 +287,7 @@ const incrementTalent = (talentData, talentIcon, category) => {
     };
 };
 
-const decrementTalent = (talentData, talentIcon, category) => {
+const decrementTalent = (talentName, talentData, talentIcon, category) => {
     if (talentData.ranks["current rank"] > 0) {
         talentData.ranks["current rank"] -= 1;
     };
@@ -281,6 +302,8 @@ const decrementTalent = (talentData, talentIcon, category) => {
         talentIcon.style.boxShadow = "0px 0px 1px var(--border-colour-2)";
         talentIcon.parentElement.style.boxShadow = "none";
     };
+
+    toggleTalentOptions(talentName, talentData);
 
     updateTalentCounts(category, -1);
 
@@ -394,9 +417,9 @@ const createTalentGrid = () => {
                 talentIconLeft.addEventListener("click", (e) => {
                     if (e.button === 0 && e.target.id === formattedTalentNameLeft + "-icon" && talentDataLeft.ranks["current rank"] < talentDataLeft.ranks["max rank"]) {
                         if (talentDataRight.ranks["current rank"] > 0) {
-                            decrementTalent(talentDataRight, talentIconRight, category);
+                            decrementTalent(talentNameRight, talentDataRight, talentIconRight, category);
                         };
-                        incrementTalent(talentDataLeft, talentIconLeft, category);
+                        incrementTalent(talentNameLeft, talentDataLeft, talentIconLeft, category);
 
                         handleTalentChange([talentNameRight, talentNameLeft], [talentDataRight, talentDataLeft], true);
                     };              
@@ -405,7 +428,7 @@ const createTalentGrid = () => {
                 cell.addEventListener("contextmenu", (e) => {
                     e.preventDefault();
                     if (e.target.id === formattedTalentNameLeft + "-icon" && talentDataLeft.ranks["current rank"] > 0) {                 
-                        decrementTalent(talentDataLeft, talentIconLeft, category);
+                        decrementTalent(talentNameLeft, talentDataLeft, talentIconLeft, category);
                         handleTalentChange(talentNameLeft, talentDataLeft);
                     };
                 });  
@@ -424,9 +447,9 @@ const createTalentGrid = () => {
                 talentIconRight.addEventListener("click", (e) => {
                     if (e.button === 0 && e.target.id === formattedTalentNameRight + "-icon" && talentDataRight.ranks["current rank"] < talentDataRight.ranks["max rank"]) {
                         if (talentDataLeft.ranks["current rank"] > 0) {
-                            decrementTalent(talentDataLeft, talentIconLeft, category);
+                            decrementTalent(talentNameLeft, talentDataLeft, talentIconLeft, category);
                         };
-                        incrementTalent(talentDataRight, talentIconRight, category);
+                        incrementTalent(talentNameRight, talentDataRight, talentIconRight, category);
                         
                         handleTalentChange([talentNameRight, talentNameLeft], [talentDataRight, talentDataLeft], true);
                     };                 
@@ -435,7 +458,7 @@ const createTalentGrid = () => {
                 cell.addEventListener("contextmenu", (e) => {
                     e.preventDefault();   
                     if (e.target.id === formattedTalentNameRight + "-icon" && talentDataRight.ranks["current rank"] > 0) {                 
-                        decrementTalent(talentDataRight, talentIconRight, category);
+                        decrementTalent(talentNameRight, talentDataRight, talentIconRight, category);
                         handleTalentChange(talentNameRight, talentDataRight);
                     };
                 });
@@ -468,7 +491,7 @@ const createTalentGrid = () => {
     
                     cell.addEventListener("click", (e) => {   
                         if (e.button === 0 && talentData.ranks["current rank"] < talentData.ranks["max rank"]) {
-                            incrementTalent(talentData, talentIcon, category);
+                            incrementTalent(talentName, talentData, talentIcon, category);
                             handleTalentChange(talentName, talentData);
                         };
                     });
@@ -476,7 +499,7 @@ const createTalentGrid = () => {
                     cell.addEventListener("contextmenu", (e) => {
                         e.preventDefault();
                         if (talentData.ranks["current rank"] > 0) {
-                            decrementTalent(talentData, talentIcon, category);
+                            decrementTalent(talentName, talentData, talentIcon, category);
                             handleTalentChange(talentName, talentData);
                         };
                     });

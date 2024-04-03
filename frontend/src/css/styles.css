@@ -26,6 +26,7 @@
     --holy-font: #f4f8cd;
     --gold-font: rgb(243, 203, 130);
     --paladin-font: #e7afc7;
+    --dark-paladin-font: #79475d;
 
     --holy-power-gain: rgb(101, 214, 129);
     --holy-power-loss: rgb(214, 101, 101);
@@ -68,6 +69,7 @@ body {
     margin-bottom: 60px;
     padding-top: 45px;
     background-color: var(--background-colour);
+    overflow: auto;
 }
 
 ::-webkit-scrollbar {
@@ -479,12 +481,14 @@ body {
 .options-half {
     flex: 1;
     padding: 10px;
+
+    width: 33.3%;
 }
 
 .option-container {
     position: relative;
     display: flex;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 
     justify-content: space-between;    
 }
@@ -493,13 +497,29 @@ body {
     flex-grow: 1;
 }
 
+.options-header {
+    margin-bottom: 10px;
+
+    font-size: 19px;
+    color: var(--light-font-colour);
+}
+
+.options-divider {
+    height: 1px;
+    margin-left: -1px;
+    margin-bottom: 30px;
+
+    width: 92%;
+
+    background-color: var(--border-colour-3);
+}
+
 .options-option {
     display: block;
 
     margin-right: 130px;
     padding-left: 6px;
 
-    max-width: 200px;
     width: 175px;
     height: 25px;
 
@@ -509,38 +529,124 @@ body {
     font-size: 15px;
 }
 
+.option-checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 37px;
+    padding-top: 1px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--light-font-colour);
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+.option-checkbox-container input {
+    position: absolute;
+    height: 0;
+    width: 0;
+
+    opacity: 0;
+    cursor: pointer;
+}
+  
+.options-checkbox-checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 24px;
+    width: 24px;
+
+    background-color: var(--panel-colour-2);
+    border: 1px solid var(--border-colour-3);
+}
+  
+.option-checkbox-container:hover input ~ .options-checkbox-checkmark {
+    background-color: var(--background-colour);
+}
+  
+  .option-checkbox-container input:checked ~ .options-checkbox-checkmark {
+    background-color: var(--dark-paladin-font);
+    border: 1px solid var(--paladin-font);
+}
+  
+.options-checkbox-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+.option-checkbox-container input:checked ~ .options-checkbox-checkmark:after {
+    display: block;
+}
+  
+.option-checkbox-container .options-checkbox-checkmark:after {
+    left: 7px;
+    top: 1px;
+    width: 8px;
+    height: 16px;
+
+    border: 1px solid var(--light-font-colour);
+    border-width: 0 3px 3px 0;
+
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
 .options-option-label {
+    display: flex;
+
     margin-right: 10px;
+    padding-top: 1px;
     padding-right: 5px;
     min-width: 160px;
+
+    height: 30px;
+    font-size: 14px;
 
     color: var(--light-font-colour);
 }
 
-#iterations-option-label, #encounter-length-option-label {
-    display: flex;
-    align-items: center;
+#raid-health-option-container, #light-of-dawn-option-container, #lights-hammer-option-container, #resplendent-light-option-container {
+    display: none;
 }
 
 .option-slider { 
     -webkit-appearance: none;
     appearance: none;
-    height: 5px;
+    height: 8px;
+    margin-left: 4px;
 
     width: 200px;
 
-    background: var(--panel-colour-2);
+    background: var(--background-colour);
 }
 
 .option-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--paladin-font);
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.option-slider::-moz-range-thumb {
     width: 10px;
     height: 10px;
     background: var(--paladin-font);
     cursor: pointer;
     border-radius: 20px;
-  }
+}
 
 .slider-container, .options-option-container {
     width: 100%;
@@ -549,8 +655,10 @@ body {
 .slider-value-container {
     display: flex;
     justify-content: center;
+    margin-left: 4px;
 
     width: 200px;
+    margin-bottom: 2px;
 }
 
 .slider-value {
@@ -577,7 +685,7 @@ body {
     color: var(--light-font-colour)
 }
 
-#encounter-length-minutes {
+.slider-value-minutes {
     min-width: 18px;
     text-align: right;
 }
@@ -587,7 +695,13 @@ body {
 }
 
 .race-filter-option {
+    
     min-width: 200px;
+}
+
+#race-container {
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .options-option-container {

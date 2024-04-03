@@ -14,6 +14,7 @@ import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.j
 import { updateEquipmentFromImportedData, initialiseEquipment, generateFullItemData } from "./equipment-options.js";
 import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable, updateEquipmentWithEffectValues, createTooltip, addTooltipFunctionality } from "../utils/misc-functions.js";
 import { realmList } from "../utils/data/realm-list.js";
+import { createOptionsSliders, roundIterations } from "../components/create-options-sliders.js";
 
 // helper functions
 const createElement = (elementName, className = null, id = null) => {
@@ -50,8 +51,8 @@ let savedDataTimeout;
 let containerCount = 0;
 let encounterLength = 30;
 let iterations = 1;
-let lastSliderChange = null;
 let isSimulationRunning = false;
+let abortController;
 let isFirstImport = true;
 
 // save states for use in separate priority breakdowns
@@ -284,29 +285,54 @@ const playCheckmarkAnimation = () => {
     }, 3000);    
 };
 
+function handleSimulationCancel() {
+    if (abortController) {
+        abortController.abort();
+        simulationProgressBarContainer.style.opacity = "0";
+        simulationProgressBar.style.width = "0%";
+
+        fetch("http://127.0.0.1:5000/cancel_simulation", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.error(err));
+    };
+};
+
 const runSimulation = async () => {
+    abortController = new AbortController();
+    const { signal } = abortController;
+
     encounterLength = document.getElementById("encounter-length-option").value;
 
-    if (lastSliderChange === "Slider") {
+    if (window.lastSliderChange === "Slider") {
         iterations = roundIterations(document.getElementById("iterations-option").value);
     } else {
         iterations = document.getElementById("iterations-option").value;
     };
     
-    console.log("iterations", iterations)
-    const timeWarpTime = document.getElementById("time-warp-time").value;
-    console.log(timeWarpTime)
+    const timeWarpTime = document.getElementById("time-warp-option").value;
+    const tickRate = document.getElementById("tick-rate-option").value;
+    const raidHealth = document.getElementById("raid-health-option").value;
+    const masteryEffectiveness = document.getElementById("mastery-effectiveness-option").value;
+    const lightOfDawnTargets = document.getElementById("light-of-dawn-option").value;
+    const lightsHammerTargets = document.getElementById("lights-hammer-option").value;
+    const resplendentLightTargets = document.getElementById("resplendent-light-option").value;
 
     simulationProgressBarContainer.style.opacity = "100";
-
     isSimulationRunning = true;
 
-    const priorityListJson = encodeURIComponent(JSON.stringify(priorityList));
+    simulationProgressBarContainer.addEventListener("click", handleSimulationCancel);
 
+    const priorityListJson = encodeURIComponent(JSON.stringify(priorityList));
     const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
 
-    return fetch(`http://127.0.0.1:5000/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}&time_warp_time=${timeWarpTime}&priority_list=${priorityListJson}&custom_equipment=${customEquipment}`, {
-        credentials: "include"
+    return fetch(`http://127.0.0.1:5000/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}&time_warp_time=${timeWarpTime}&priority_list=${priorityListJson}&custom_equipment=${customEquipment}&tick_rate=${tickRate}&raid_health=${raidHealth}&mastery_effectiveness=${masteryEffectiveness}&light_of_dawn_targets=${lightOfDawnTargets}&lights_hammer_targets=${lightsHammerTargets}&resplendent_light_targets=${resplendentLightTargets}`, {
+        credentials: "include",
+        signal: signal
     })
     .then(response => response.json())
     .then(data => {
@@ -318,10 +344,16 @@ const runSimulation = async () => {
         playCheckmarkAnimation();
            
         isSimulationRunning = false;
+        simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
     })
     .catch(error => {
-        console.error("Error:", error);
+        if (error.name === "AbortError") {
+            console.log("Fetch aborted:", error);
+        } else {
+            console.error("Error:", error);
+        }
         isSimulationRunning = false;
+        simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
     });
 };
 
@@ -862,93 +894,7 @@ createPotionTimers("Aerated Mana Potion", 300);
 createPotionTimers("Elemental Potion of Ultimate Power", 300);
 
 // option sliders
-const updateSliderStep = (value, slider, sliderText) => {
-    if (value < 100) {
-        slider.step = 1;
-        sliderText.textContent = value;
-    } else {
-        slider.step = 50;
-        sliderText.textContent = roundIterations(value);
-    };
-};
-
-const roundIterations = (number) => {
-    if (number < 100) {
-        return number
-    } else {
-        return Math.round(number / 10) * 10;
-    };
-};
-
-// iterations slider
-const iterationsSlider = document.getElementById("iterations-option");
-const iterationsValue = document.getElementById("iterations-value");
-const baseMaxIterations = 1001;
-
-iterationsSlider.addEventListener("input", () => {
-    iterationsSlider.max = baseMaxIterations;
-
-    const value = iterationsSlider.value
-    updateSliderStep(value, iterationsSlider, iterationsValue);
-    lastSliderChange = "Slider";
-});
-iterationsValue.textContent = iterationsSlider.value;
-makeFieldEditable(iterationsValue, 1, iterationsSlider);
-
-iterationsValue.addEventListener("input", (e) => {
-    iterationsSlider.max = baseMaxIterations;
-
-    // reset step to 1 to allow setting any number
-    iterationsSlider.step = 1;
-    let newValue = Number(iterationsValue.textContent);
-
-    if (newValue > baseMaxIterations) {
-        iterationsSlider.max = newValue;
-    };
-
-    iterationsSlider.value = newValue;
-    lastSliderChange = "Value";
-});
-
-// encounter length slider
-const encounterLengthSlider = document.getElementById("encounter-length-option");
-const encounterLengthMinutes = document.getElementById("encounter-length-minutes");
-const encounterLengthSeconds = document.getElementById("encounter-length-seconds");
-const baseMaxEncounterLength = 600;
-
-const updateEncounterLengthDisplay = (secondsValue) => {
-    const minutes = Math.floor(secondsValue / 60);
-    const seconds = secondsValue % 60;
-    encounterLengthMinutes.textContent = minutes;
-    encounterLengthSeconds.textContent = seconds.toString().padStart(2, "0");
-};
-
-// initial encounter length display
-updateEncounterLengthDisplay(parseInt(encounterLengthSlider.value, 10));
-
-encounterLengthSlider.addEventListener("input", () => {
-    encounterLengthSlider.max = baseMaxEncounterLength;
-    updateEncounterLengthDisplay(parseInt(encounterLengthSlider.value, 10));
-});
-
-makeFieldEditable(encounterLengthMinutes, { charLimit: 2 });
-makeFieldEditable(encounterLengthSeconds, { charLimit: 2 });
-
-[encounterLengthMinutes, encounterLengthSeconds].forEach(field => {
-    field.addEventListener("input", (e) => {
-        const minutes = parseInt(encounterLengthMinutes.textContent, 10) || 0;
-        const seconds = parseInt(encounterLengthSeconds.textContent, 10) || 0;
-        let totalSeconds = (minutes * 60) + seconds;
-
-        if (totalSeconds > baseMaxEncounterLength) {
-            encounterLengthSlider.max = totalSeconds;
-        } else {
-            encounterLengthSlider.max = baseMaxEncounterLength;
-        };
-
-        encounterLengthSlider.value = totalSeconds;
-    });
-});
+createOptionsSliders();
 
 // equipment display
 initialiseEquipment();

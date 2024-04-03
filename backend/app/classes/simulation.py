@@ -14,13 +14,14 @@ from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
 from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
 from .priority_list_dsl import parse_condition, condition_to_lambda
+from .simulation_state import check_cancellation, reset_simulation
 
 pp = pprint.PrettyPrinter(width=200)
 
 
 class Simulation:
     
-    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, access_token, test=False):
+    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets, access_token, test=False):
 
         self.access_token = access_token
 
@@ -42,7 +43,7 @@ class Simulation:
             self.priority_list.append((action_name, condition_lambda))
         
         # make tick rate smaller for better hot accuracy
-        self.tick_rate = 0.05
+        self.tick_rate = float(tick_rate)
         self.abilities = paladin.abilities
         
         self.time_warp_time = time_warp_time
@@ -66,6 +67,13 @@ class Simulation:
         # apply beacon of light at the start of the simulation
         for target in self.paladin.beacon_targets:
             target.apply_buff_to_target(BeaconOfLightBuff(self.paladin), self.elapsed_time, caster=self.paladin)
+        
+        self.paladin.average_raid_health_percentage = int(raid_health) / 100
+        self.paladin.mastery_effectiveness = int(mastery_effectiveness) / 100
+        self.paladin.variable_target_counts["Light of Dawn"] = int(light_of_dawn_targets)
+        self.paladin.abilities["Light of Dawn"].healing_target_count = self.paladin.variable_target_counts["Light of Dawn"]
+        self.paladin.variable_target_counts["Light's Hammer"] = int(lights_hammer_targets)
+        self.paladin.variable_target_counts["Resplendent Light"] = int(resplendent_light_targets)
         
         # testing
         self.test_time_since_last = 0
@@ -634,6 +642,10 @@ class Simulation:
         
         # complete all simulation iterations and process the data of each
         for i in range(self.iterations):
+            if check_cancellation():
+                reset_simulation()
+                return
+            
             # reset simulation states
             print(i)
             if not self.test:

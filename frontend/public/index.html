@@ -98,6 +98,9 @@
                         <div id="options-content" class="options-tab-content">
                             <div id="options-container">
                                 <div class="options-half options-half-left">
+                                    <div class="options-header">Encounter</div>
+                                    <div class="options-divider"></div>
+
                                     <div class="option-container">
                                         <label for="iterations-option" id="iterations-option-label" class="options-option-label">Iterations:</label>
                                         <div id="iterations-slider-container" class="slider-container">
@@ -112,15 +115,42 @@
                                         <label for="encounter-length-option" id="encounter-length-option-label" class="options-option-label">Encounter Length:</label>
                                         <div id="encounter-length-slider-container" class="slider-container">
                                             <div id="encounter-length-value-container" class="slider-value-container">
-                                                <div id="encounter-length-minutes" class="slider-value-time">5</div>
+                                                <div id="encounter-length-minutes" class="slider-value-time slider-value-minutes">5</div>
                                                 <span class="slider-value-time-divider">:</span>
-                                                <div id="encounter-length-seconds" class="slider-value-time">00</div>
+                                                <div id="encounter-length-seconds" class="slider-value-time slider-value-seconds">00</div>
                                             </div>
                                             <input type="range" id="encounter-length-option" class="options-option option-slider" value="4" min="1" max="600" step="1">
                                         </div>
                                     </div>
 
                                     <div class="option-container">
+                                        <label for="time-warp-option" id="time-warp-option-label" class="options-option-label">Time Warp:</label>
+                                        <div id="time-warp-slider-container" class="slider-container">
+                                            <div id="time-warp-value-container" class="slider-value-container">
+                                                <div id="time-warp-minutes" class="slider-value-time slider-value-minutes">5</div>
+                                                <span class="slider-value-time-divider">:</span>
+                                                <div id="time-warp-seconds" class="slider-value-time slider-value-seconds">00</div>
+                                            </div>
+                                            <input type="range" id="time-warp-option" class="options-option option-slider" value="0" min="0" max="600" step="1">
+                                        </div>
+                                    </div>
+
+                                    <div class="option-container">
+                                        <label for="tick-rate-option" id="tick-rate-option-label" class="options-option-label">Tick Rate:</label>
+                                        <div id="tick-rate-slider-container" class="slider-container">
+                                            <div id="tick-rate-value-container" class="slider-value-container">
+                                                <div id="tick-rate-value" class="slider-value">1</div>
+                                            </div>
+                                            <input type="range" id="tick-rate-option" class="options-option option-slider" value="0.05" min="0" max="0.1" step="0.01">                              
+                                        </div>                              
+                                    </div>
+                                </div>    
+
+                                <div class="options-half options-half-center">
+                                    <div class="options-header">Player</div>
+                                    <div class="options-divider"></div>
+
+                                    <div class="option-container" id="race-container">
                                         <div id="race-filter-label" class="options-option-label">Race:</div>
                                         <div id="race-filter-container" class="options-option-container">
                                             <img class="race-image" data-race="Human" src="https://render.worldofwarcraft.com/eu/icons/56/race_human_female.jpg">
@@ -133,17 +163,66 @@
                                             <img class="race-image" data-race="Zandalari Troll" src="https://wow.zamimg.com/images/wow/icons/large/race_zandalaritroll_female.jpg">
                                         </div>
                                     </div>
-                                </div>    
 
-                                <div class="options-half options-half-center">
                                     <div class="option-container">
-                                        <label for="time-warp-time" id="time-warp-time-label" class="options-option-label">Time Warp Timer:</label>
-                                        <input id="time-warp-time" class="options-option" value="0">
+                                        <label for="mastery-effectiveness-option" id="mastery-effectiveness-option-label" class="options-option-label">Mastery Effectiveness:</label>
+                                        <div id="mastery-effectiveness-slider-container" class="slider-container">
+                                            <div id="mastery-effectiveness-value-container" class="slider-value-container">
+                                                <div id="mastery-effectiveness-value" class="slider-value">1</div>
+                                            </div>
+                                            <input type="range" id="mastery-effectiveness-option" class="options-option option-slider" value="95" min="0" max="100" step="1">                              
+                                        </div>                              
                                     </div>
+
+                                    <div class="option-container" id="raid-health-option-container">
+                                        <label for="raid-health-option" id="raid-health-option-label" class="options-option-label">Raid Health:</label>
+                                        <div id="raid-health-slider-container" class="slider-container">
+                                            <div id="raid-health-value-container" class="slider-value-container">
+                                                <div id="raid-health-value" class="slider-value">1</div>
+                                            </div>
+                                            <input type="range" id="raid-health-option" class="options-option option-slider" value="70" min="0" max="100" step="1">                              
+                                        </div>                              
+                                    </div>
+                                                                     
+                                    <div class="option-container" id="light-of-dawn-option-container">
+                                        <label for="light-of-dawn-option" id=light-of-dawns-option-label" class="options-option-label">Light of Dawn Targets:</label>
+                                        <div id="light-of-dawn-slider-container" class="slider-container">
+                                            <div id="light-of-dawn-value-container" class="slider-value-container">
+                                                <div id="light-of-dawn-value" class="slider-value">1</div>
+                                            </div>
+                                            <input type="range" id="light-of-dawn-option" class="options-option option-slider" value="5" min="1" max="5" step="1">                              
+                                        </div>                              
+                                    </div>
+
+                                    <div class="option-container" id="lights-hammer-option-container">
+                                        <label for="lights-hammer-option" id="lights-hammer-option-label" class="options-option-label">Light's Hammer Targets:</label>
+                                        <div id="lights-hammer-slider-container" class="slider-container">
+                                            <div id="lights-hammer-value-container" class="slider-value-container">
+                                                <div id="lights-hammer-value" class="slider-value">1</div>
+                                            </div>
+                                            <input type="range" id="lights-hammer-option" class="options-option option-slider" value="6" min="1" max="6" step="1">                              
+                                        </div>                              
+                                    </div>
+
+                                    <div class="option-container" id="resplendent-light-option-container">
+                                        <label for="resplendent-light-option" id="resplendent-light-option-label" class="options-option-label">Resplendent Light Targets:</label>
+                                        <div id="resplendent-light-slider-container" class="slider-container">
+                                            <div id="resplendent-light-value-container" class="slider-value-container">
+                                                <div id="resplendent-light-value" class="slider-value">1</div>
+                                            </div>
+                                            <input type="range" id="resplendent-light-option" class="options-option option-slider" value="5" min="1" max="5" step="1">                              
+                                        </div>                              
+                                    </div>                             
                                 </div>
                                 
                                 <div class="options-half options-half-right">
-                                    
+                                    <div class="options-header">Miscellaneous</div>
+                                    <div class="options-divider"></div>
+
+                                    <label class="option-checkbox-container">Show Healing Graph
+                                        <input type="checkbox" id="hide-healing-graph-option" class="option-checkbox" checked="checked">                                                        
+                                        <span class="options-checkbox-checkmark"></span>                                      
+                                    </label>
                                 </div>
                             </div>
                             
@@ -569,55 +648,6 @@
                                                 <img class="external-buff-image" data-external-buff="Source of Magic" src="https://render.worldofwarcraft.com/eu/icons/56/ability_evoker_blue_01.jpg">            
                                             </div>   
                                         </div>
-                                        <!-- <div id="external-buff-timers-container">
-                                            <div class="external-buff-timer-container">
-                                                <div class="external-buff-left">
-                                                    <div class="external-buff-name">Power Infusion:</div>
-                                                </div>
-                                                <div class="external-buff-right">
-                                                    <div class="external-buff-options">
-                                                        <div class="external-buff-checkbox">
-                                                            <input class="external-buff-checkbox-input" type="checkbox" checked="true">
-                                                            <div class="external-buff-checkbox-text">Automatic</div>
-                                                        </div>
-
-                                                        <div class="external-buff-timers">
-                                                            <div class="external-buff-timer">
-                                                                <input class="external-buff-timer-input">
-                                                            </div>
-                                                            <div class="external-buff-add-timer-button">
-                                                                <i class="fa-solid fa-plus"></i>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="external-buff-timer-container">
-                                                <div class="external-buff-left">
-                                                    <div class="external-buff-name">Innervate:</div>
-                                                </div>
-                                                <div class="external-buff-right">
-                                                    <div class="external-buff-options">
-                                                        <div class="external-buff-checkbox">
-                                                            <input class="external-buff-checkbox-input" type="checkbox" checked="true">
-                                                            <div class="external-buff-checkbox-text">Automatic</div>
-                                                        </div>
-
-                                                        <div class="external-buff-timers">
-                                                            <div class="external-buff-timer">
-                                                                <input class="external-buff-timer-input">
-                                                            </div>
-                                                            <div class="external-buff-add-timer-button">
-                                                                <i class="fa-solid fa-plus"></i>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
                                     </div>
                                 </div>
                                 
@@ -718,7 +748,7 @@
 
                         <div id="simulate-button-container">
                             <input id="simulation-name-text-input">
-                            <button id="simulate-button">lets go!!!!!</button>
+                            <button id="simulate-button">Simulate</button>
 
                             <div id="simulation-progress-bar-container">                      
                                 <div id="simulation-progress-bar"></div>

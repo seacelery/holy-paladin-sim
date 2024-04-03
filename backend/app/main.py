@@ -1,22 +1,9 @@
 # DO NEXT
 # fix
-# append each sim at the top of the list, make collapsible
-# mana, holy power, glimmer, tyrs targets graphs
 
 # awakening cancelaura
 # movement every so often
 # breakdowns in cooldown windows
-
-# commanding light
-
-# known issues
-# glorious dawn calculation before or after glimmer application - currently assuming before
-# assuming afterimage cannot proc divine purpose or glistening radiance after testing
-# seal of might gives 3% mastery per point for reasons??
-# light's hammer bad fix on casts vs hits
-# it's slow
-# touch of light weird rppm interaction?
-# reset priority on tab swap to remove lag
 
 # options to include
 # heals on beacons, light of dawn targets hit, resplendent, mastery effectiveness, overheal for overflowing and reclamation
@@ -55,8 +42,8 @@ def import_character(character_name, realm, region):
     
     return paladin, healing_targets
     
-def initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list=None, custom_equipment=None, test=False):
-    simulation = Simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, access_token, test)
+def initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list=None, custom_equipment=None, tick_rate=None, raid_health=None, mastery_effectiveness=None, light_of_dawn_targets=None, lights_hammer_targets=None, resplendent_light_targets=None, test=False):
+    simulation = Simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets, access_token, test)
     return simulation
 
 def fetch_updated_data(paladin):

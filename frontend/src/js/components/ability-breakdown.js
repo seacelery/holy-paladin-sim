@@ -133,16 +133,19 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     const tableContainer = document.getElementById(`ability-breakdown-table-container-${containerCount}`);
     tableContainer.innerHTML = "";
 
-    const healingTimelineData = simulationData.results.healing_timeline;
-    const manaTimelineData = simulationData.results.mana_timeline;
-    const healingGraphContainer = createElement("div", `healing-graph-container-${containerCount}`, `healing-graph-content`);
-    const healingGraph = createElement("div", null, `healing-graph`);
+    const healingGraphCheckbox = document.getElementById("hide-healing-graph-option");
+    if (healingGraphCheckbox.checked) {
+        const healingTimelineData = simulationData.results.healing_timeline;
+        const manaTimelineData = simulationData.results.mana_timeline;
+        const healingGraphContainer = createElement("div", `healing-graph-container-${containerCount}`, `healing-graph-content`);
+        const healingGraph = createElement("div", null, `healing-graph`);
 
-    tableContainer.appendChild(healingGraphContainer);
-    healingGraphContainer.appendChild(healingGraph);
+        tableContainer.appendChild(healingGraphContainer);
+        healingGraphContainer.appendChild(healingGraph);
 
-    createHealingLineGraph(healingTimelineData, manaTimelineData, `#healing-graph-${containerCount}`, "Healing", "var(--healing-font)");
-
+        createHealingLineGraph(healingTimelineData, manaTimelineData, `#healing-graph-${containerCount}`, "Healing", "var(--healing-font)");
+    };
+    
     // convert to array and back to sort the data by healing
     const abilityBreakdownData = simulationData.results.ability_breakdown;
     let abilityBreakdownArray = Object.entries(abilityBreakdownData);

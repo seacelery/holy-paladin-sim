@@ -787,7 +787,6 @@ class DivineResonanceHolyShock(Spell):
 
 class HolyLight(Spell):
     
-    SPELL_ID = 82326
     SPELL_POWER_COEFFICIENT = 5.096 * 0.8
     MANA_COST = 0.024
     HOLY_POWER_GAIN = 0
@@ -843,7 +842,7 @@ class HolyLight(Spell):
             if caster.is_talent_active("Resplendent Light"):
                 resplendent_light_healing = heal_amount * 0.08
                 target_pool = copy.deepcopy(caster.potential_healing_targets)
-                for _ in range(5):
+                for _ in range(caster.variable_target_counts["Resplendent Light"]):
                     target = random.choice(target_pool)
                     target.receive_heal(resplendent_light_healing, caster)
                     target_pool.remove(target)
@@ -1287,7 +1286,6 @@ class WordOfGlory(Spell):
             
 class LightOfDawn(Spell):
     
-    SPELL_ID = 85222
     SPELL_POWER_COEFFICIENT = 0.8334 * 0.8
     MANA_COST = 0.012
     HOLY_POWER_COST = 3
@@ -1505,7 +1503,7 @@ class LightsHammerHeal(Spell):
     TARGET_COUNT = 6
     
     def __init__(self, caster):
-        super().__init__("Light's Hammer", healing_target_count=LightsHammerHeal.TARGET_COUNT, off_gcd=True)
+        super().__init__("Light's Hammer", healing_target_count=caster.variable_target_counts["Light's Hammer"], off_gcd=True)
       
 
 class GoldenPathHeal(Spell):

@@ -30,7 +30,6 @@ client_secret = os.getenv("CLIENT_SECRET")
 pp = pprint.PrettyPrinter(width=200)
 
 # TODO
-# saved by the light
 # seal of the crusader
 
 class Stats:
@@ -199,6 +198,8 @@ class Paladin:
         self.beacon_targets = []
         self.glimmer_application_counter = 0
         self.glimmer_removal_counter = 0
+        
+        self.variable_target_counts = {"Light of Dawn": 5, "Light's Hammer": 6, "Resplendent Light": 5}
         
         self.time_based_stacking_buffs = {}
         self.active_summons = {}

@@ -6,6 +6,7 @@ from flask import Blueprint, request, jsonify, session
 from app.main import import_character, run_simulation, initialise_simulation, fetch_updated_data
 from app.socketio_setup import socketio
 from flask_socketio import emit
+from app.classes.simulation_state import cancel_simulation
 
 main = Blueprint("main", __name__)
 pp = pprint.PrettyPrinter(width=200)
@@ -28,6 +29,12 @@ def log_session_size():
     # not compatible with pypy
     # session_size = sys.getsizeof(str(session))
     # print(f"Session size: {session_size} bytes")
+    
+@main.route("/cancel_simulation", methods=["POST"])
+def cancel_simulation_route():
+    print("Cancel simulation route hit")
+    cancel_simulation()
+    return jsonify({"message": "Simulation cancellation requested."})
 
 @main.route("/import_character", methods=["GET"])
 def import_character_route():
@@ -134,6 +141,12 @@ def run_simulation_route():
     time_warp_time = request.args.get("time_warp_time", default=0, type=int)
     priority_list_json = request.args.get("priority_list", default="")
     custom_equipment = request.args.get("custom_equipment")
+    tick_rate = request.args.get("tick_rate")
+    raid_health = request.args.get("raid_health")
+    mastery_effectiveness = request.args.get("mastery_effectiveness")
+    light_of_dawn_targets = request.args.get("light_of_dawn_targets")
+    lights_hammer_targets = request.args.get("lights_hammer_targets")
+    resplendent_light_targets = request.args.get("resplendent_light_targets")
     
     if priority_list_json:
         priority_list = json.loads(priority_list_json)
@@ -152,7 +165,7 @@ def run_simulation_route():
         consumables=modifiable_data.get("consumables")
     )
         
-    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, custom_equipment)
+    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets)
 
     # pp.pprint(paladin.class_talents)
     results = run_simulation(simulation)

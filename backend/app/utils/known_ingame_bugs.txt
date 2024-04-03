@@ -4,3 +4,4 @@ Divine Toll heals 6 targets instead of 5 most of the time.
 Hammer of Wrath's cooldown is 19.6 instead of 7.5.
 Holy Prism receives its -20% modifier twice.
 Swapping from Avenging Crusader to Avenging Wrath: Might causes Awakening to last 8 seconds instead of 12.
+Seal of Might gives 3% mastery per point.
