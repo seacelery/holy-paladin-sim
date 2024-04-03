@@ -1,4 +1,5 @@
 const spellToIconsMap = {
+    // paladin abilities
     "Afterimage": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_aspiration.jpg",
     "Arcane Torrent": "https://render.worldofwarcraft.com/eu/icons/56/spell_shadow_teleport.jpg",
     "Aura Mastery": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_auramastery.jpg",
@@ -64,6 +65,7 @@ const spellToIconsMap = {
     "Aerated Mana Potion": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape1_blue.jpg",
     "Elemental Potion of Ultimate Power": "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_dpotion_b20.jpg",
     "Potion": "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_dpotion_b20.jpg",
+    "Chirping Rune": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_09.jpg",
 
     // trinkets
     "Mirror of Fractured Tomorrows": "https://render.worldofwarcraft.com/eu/icons/56/achievement_dungeon_ulduarraid_misc_06.jpg",
@@ -80,7 +82,10 @@ const spellToIconsMap = {
 
     // misc
     "Wait": "https://render.worldofwarcraft.com/eu/icons/56/inv_gauntlets_06.jpg",
-    "Leech": "https://render.worldofwarcraft.com/eu/icons/56/spell_shadow_lifedrain02.jpg"
+    "Leech": "https://render.worldofwarcraft.com/eu/icons/56/spell_shadow_lifedrain02.jpg",
+    "Source of Magic": "https://render.worldofwarcraft.com/eu/icons/56/ability_evoker_blue_01.jpg",
+    "Mana Spring Totem": "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_manaregentotem.jpg",
+    "Symbol of Hope": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_symbolofhope.jpg"
 };
 
 export { spellToIconsMap };

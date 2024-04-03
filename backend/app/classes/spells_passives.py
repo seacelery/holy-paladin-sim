@@ -2,15 +2,12 @@ import random
 import re
 
 from .spells import Spell
-from ..utils.misc_functions import update_spell_data_heals
+from ..utils.misc_functions import update_spell_data_heals, add_talent_healing_multipliers
+
 
 # PASSIVE SPELLS
-
-
 class GlimmerOfLightSpell(Spell):
     
-    # glorious dawn multiplier
-    SPELL_ID = 287269
     SPELL_POWER_COEFFICIENT = 1.6416 * 0.8
     
     def __init__(self, caster):
@@ -22,7 +19,6 @@ class GlimmerOfLightSpell(Spell):
     
 class JudgmentOfLightSpell(Spell):
     
-    SPELL_ID = 183778
     SPELL_POWER_COEFFICIENT = 0.175 * 0.8
     
     def __init__(self, caster):
@@ -31,7 +27,6 @@ class JudgmentOfLightSpell(Spell):
 
 class GreaterJudgmentSpell(Spell):
     
-    SPELL_ID = 231644
     SPELL_POWER_COEFFICIENT = 1.84
     
     def __init__(self, caster):
@@ -40,12 +35,32 @@ class GreaterJudgmentSpell(Spell):
         
 class TouchOfLight(Spell):
     
-    SPELL_ID = 385349
     SPELL_POWER_COEFFICIENT = 0.45 * 5
     BASE_PPM = 3
     
     def __init__(self, caster):
         super().__init__("Touch of Light")
+        
+
+class ChirpingRune(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    BASE_PPM = 6
+    
+    def __init__(self, caster):
+        super().__init__("Chirping Rune")
+        
+    def apply_flat_healing(self, caster, target, current_time, is_heal):     
+        chirping_rune_heal, chirping_rune_crit = ChirpingRune(caster).calculate_heal(caster)
+        chirping_rune_heal = 7987 * caster.versatility_multiplier
+        
+        if chirping_rune_crit:
+            chirping_rune_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+            
+        chirping_rune_heal = add_talent_healing_multipliers(chirping_rune_heal, caster)
+        
+        target.receive_heal(chirping_rune_heal, caster)
+        update_spell_data_heals(caster.ability_breakdown, "Chirping Rune", target, chirping_rune_heal, chirping_rune_crit)
         
 
 class DreamingDevotion(Spell):
@@ -69,11 +84,7 @@ class DreamingDevotion(Spell):
             if dreaming_devotion_crit:
                 dreaming_devotion_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
                 
-            if "Close to Heart" in caster.active_auras:
-                dreaming_devotion_heal *= 1.08
-                
-            if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
-                dreaming_devotion_heal *= 1.1
+            dreaming_devotion_heal = add_talent_healing_multipliers(dreaming_devotion_heal, caster)
             
             target.receive_heal(dreaming_devotion_heal, caster)
             update_spell_data_heals(caster.ability_breakdown, "Dreaming Devotion", target, dreaming_devotion_heal, dreaming_devotion_crit)
@@ -81,7 +92,6 @@ class DreamingDevotion(Spell):
  
 class EmbraceOfAkunda(Spell):
     
-    SPELL_ID = 292359
     SPELL_POWER_COEFFICIENT = 1.04 * 0.66
     BASE_PPM = 2
     

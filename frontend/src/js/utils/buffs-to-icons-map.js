@@ -1,4 +1,5 @@
 const buffsToIconsMap = {
+    // paladin buffs
     "Afterimage": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_aspiration.jpg",
     "Aura Mastery": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_auramastery.jpg",
     "Avenging Crusader": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_veneration.jpg",
@@ -80,7 +81,10 @@ const buffsToIconsMap = {
     "Arcane Intellect": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_magicalsentry.jpg",
     "Mark of the Wild": "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_regeneration.jpg",
     "Close to Heart": "https://render.worldofwarcraft.com/eu/icons/56/inv_offhand_1h_pvppandarias2_c_01.jpg",
+    "Retribution Aura ": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusade.jpg",
     "Retribution Aura": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusade.jpg",
+    "Mana Spring Totem": "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_manaregentotem.jpg",
+    "Symbol of Hope": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_symbolofhope.jpg",
 
     // external buffs
     "Source of Magic": "https://render.worldofwarcraft.com/eu/icons/56/ability_evoker_blue_01.jpg",

@@ -27,6 +27,15 @@ def increment_holy_power(ability, caster, current_time):
     
 def add_to_holy_power_by_ability(dict, ability, caster):
     caster.holy_power_by_ability[ability.name] = caster.holy_power_by_ability.get(ability.name, 0) + ability.holy_power_gain
+    
+def add_talent_healing_multipliers(heal_amount, caster):
+    if "Close to Heart" in caster.active_auras:
+        heal_amount *= 1.08
+                
+    if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
+        heal_amount *= 1.1
+        
+    return heal_amount
 
 # data tracking functions
 def append_spell_heal_event(array, spell_name, caster, target, amount, current_time, is_crit, spends_mana=False, is_absorb=False):

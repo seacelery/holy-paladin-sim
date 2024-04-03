@@ -103,23 +103,26 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
     manaContainer.appendChild(manaBreakdown);
     holyPowerContainer.appendChild(holyPowerBreakdown);
 
-    const manaGraphContainer = createElement("div", `mana-graph-container-${containerCount}`, `mana-graph-content`);
-    const manaGraph = createElement("div", null, `mana-graph`);
+    const resourceGraphCheckbox = document.getElementById("hide-resource-graph-option");
+    if (resourceGraphCheckbox.checked) {
+        const manaGraphContainer = createElement("div", `mana-graph-container-${containerCount}`, `mana-graph-content`);
+        const manaGraph = createElement("div", null, `mana-graph`);
 
-    const holyPowerGraphContainer = createElement("div", `holy-power-graph-container-${containerCount}`, `holy-power-graph-content`);
-    const holyPowerGraph = createElement("div", null, `holy-power-graph`);
+        const holyPowerGraphContainer = createElement("div", `holy-power-graph-container-${containerCount}`, `holy-power-graph-content`);
+        const holyPowerGraph = createElement("div", null, `holy-power-graph`);
 
-    manaGraphContainer.appendChild(manaGraph);
-    manaBreakdown.appendChild(manaGraphContainer);
+        manaGraphContainer.appendChild(manaGraph);
+        manaBreakdown.appendChild(manaGraphContainer);
 
-    const manaTimelineData = simulationData.results.mana_timeline;
-    createResourceGraph(manaTimelineData, `#mana-graph-${containerCount}`, "Mana", "var(--mana)");
+        const manaTimelineData = simulationData.results.mana_timeline;
+        createResourceGraph(manaTimelineData, `#mana-graph-${containerCount}`, "Mana", "var(--mana)");
 
-    holyPowerGraphContainer.appendChild(holyPowerGraph);
-    holyPowerBreakdown.appendChild(holyPowerGraphContainer);
+        holyPowerGraphContainer.appendChild(holyPowerGraph);
+        holyPowerBreakdown.appendChild(holyPowerGraphContainer);
 
-    const holyPowerTimelineData = simulationData.results.holy_power_timeline;
-    createResourceGraph(holyPowerTimelineData, `#holy-power-graph-${containerCount}`, "Holy Power", "var(--holy-font");
+        const holyPowerTimelineData = simulationData.results.holy_power_timeline;
+        createResourceGraph(holyPowerTimelineData, `#holy-power-graph-${containerCount}`, "Holy Power", "var(--holy-font");
+    };
 
     const createArrowIcon = (spellName = null) => {
         const iconContainer = document.createElement("div");

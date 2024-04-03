@@ -158,23 +158,7 @@ class HandOfDivinitySpell(Spell):
         
         return cast_success, spell_crit, heal_amount   
     
-            
-# class BlessingOfFreedomSpell(Spell):
-    
-#     MANA_COST = 0.014
-#     BASE_COOLDOWN = 25
-    
-#     def __init__(self, caster):
-#         super().__init__("Blessing of Freedom", mana_cost=BlessingOfFreedomSpell.MANA_COST, cooldown=BlessingOfFreedomSpell.BASE_COOLDOWN, applies_buff_to_target=True)
-        
-#     def cast_healing_spell(self, caster, targets, current_time, is_heal):
-#         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
-#         if cast_success:
-#             chosen_target = random.choice(targets)
-#             chosen_target.apply_buff_to_target(BlessingOfFreedomBuff(), current_time)
-#             append_aura_applied_event(caster.buff_events, self.name, caster, chosen_target, current_time)
-            
-            
+             
 class BlessingOfTheSeasons(Spell):
     
     MANA_COST = 0.01
@@ -234,16 +218,3 @@ class GiftOfTheNaaruSpell(Spell):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             targets[0].apply_buff_to_target(GiftOfTheNaaruBuff(caster), current_time, caster=caster)
-            
-
-# class TimeWarp(Spell):
-    
-#     BASE_COOLDOWN = 300
-    
-#     def __init__(self, caster):
-#         super().__init__("Time Warp", cooldown=TimeWarp.BASE_COOLDOWN, off_gcd=True)
-        
-#     def cast_healing_spell(self, caster, targets, current_time, is_heal):
-#         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
-#         if cast_success:
-#             caster.apply_buff_to_self(TimeWarpBuff(), current_time, caster=caster)

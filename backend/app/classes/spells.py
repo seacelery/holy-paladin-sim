@@ -355,7 +355,7 @@ class Spell:
         caster.events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
         
     def try_trigger_rppm_effects(self, caster, targets, current_time):
-        from .spells_passives import TouchOfLight, EmbraceOfAkunda, DreamingDevotion
+        from .spells_passives import TouchOfLight, EmbraceOfAkunda, DreamingDevotion, ChirpingRune
         from .auras_buffs import ( 
                                   SophicDevotion, EmbraceOfPaku, CoagulatedGenesaurBloodBuff, SustainingAlchemistStoneBuff, 
                                   AlacritousAlchemistStoneBuff, SeaStarBuff, PipsEmeraldFriendshipBadge, BestFriendsWithPipEmpowered, 
@@ -421,6 +421,10 @@ class Spell:
         if "Dreaming Devotion" in caster.bonus_enchants:
             dreaming_devotion = DreamingDevotion(caster)
             try_proc_rppm_effect(dreaming_devotion, is_flat_healing=True)
+            
+        if "Chirping Rune" in caster.active_auras:
+            chirping_rune = ChirpingRune(caster)
+            try_proc_rppm_effect(chirping_rune, is_flat_healing=True)
             
         if caster.race == "Zandalari Troll":
             embrace_of_paku = EmbraceOfPaku()

@@ -5,7 +5,7 @@ from ..classes.auras_buffs import (
                                    GreatCeruleanSeaFood, BuzzingRune, ChirpingRune, HowlingRune, HissingRune, ArcaneIntellect, MarkOfTheWild, 
                                    CloseToHeart, RetributionAura, SourceOfMagic, PowerInfusion, Innervate, PotionAbsorptionInhibitor,
                                    AlliedChestplateOfGenerosity, AlliedWristguardOfCompanionship, VerdantConduit, VerdantTether, ElementalLariat,
-                                   DreamtendersCharm, IcedPhialOfCorruptingRage
+                                   DreamtendersCharm, IcedPhialOfCorruptingRage, ManaSpringTotem, SymbolOfHope
                                   )
 
 buff_class_map = {
@@ -41,6 +41,8 @@ buff_class_map = {
     "Mark of the Wild": MarkOfTheWild,
     "Close to Heart": CloseToHeart,
     "Retribution Aura": RetributionAura,
+    "Symbol of Hope": SymbolOfHope,
+    "Mana Spring Totem": ManaSpringTotem,
     
     # external buffs
     "Source of Magic": SourceOfMagic,

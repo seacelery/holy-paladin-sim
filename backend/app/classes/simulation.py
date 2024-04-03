@@ -11,8 +11,8 @@ from flask_socketio import emit
 from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
-from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage
-from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger
+from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data, update_mana_gained
 from .priority_list_dsl import parse_condition, condition_to_lambda
 from .simulation_state import check_cancellation, reset_simulation
 
@@ -52,6 +52,10 @@ class Simulation:
         
         self.iced_phial_active = False
         self.iced_phial_timer = 0
+        self.retribution_aura_timer = 40
+        self.source_of_magic_timer = 0
+        self.symbol_of_hope_timer = 150 if encounter_length > 210 else 30
+        self.mana_spring_totem_timer = 0
         
         self.times_direct_healed = {}
         self.previous_ability = None
@@ -372,6 +376,36 @@ class Simulation:
                 self.iced_phial_timer = 0
                 self.paladin.apply_buff_to_self(CorruptingRage(), self.elapsed_time)
                 
+        if "Retribution Aura " in self.paladin.active_auras:
+            self.retribution_aura_timer += self.tick_rate
+            if self.retribution_aura_timer >= 45:
+                self.retribution_aura_timer = 0
+                self.paladin.apply_buff_to_self(RetributionAuraTrigger(), self.elapsed_time)
+                
+        if "Source of Magic" in self.paladin.active_auras:
+            self.source_of_magic_timer += self.tick_rate
+            if self.source_of_magic_timer >= 10:
+                self.source_of_magic_timer = 0
+                source_of_magic_mana_gain = self.paladin.max_mana * 0.0025
+                self.paladin.mana += source_of_magic_mana_gain
+                update_mana_gained(self.paladin.ability_breakdown, "Source of Magic", source_of_magic_mana_gain)
+                
+        if "Mana Spring Totem" in self.paladin.active_auras:
+            self.mana_spring_totem_timer += self.tick_rate
+            if self.mana_spring_totem_timer >= 5.5:
+                self.mana_spring_totem_timer = 0
+                mana_spring_totem_mana_gain = 150
+                self.paladin.mana += mana_spring_totem_mana_gain
+                update_mana_gained(self.paladin.ability_breakdown, "Mana Spring Totem", mana_spring_totem_mana_gain)
+                
+        if "Symbol of Hope" in self.paladin.active_auras:
+            self.symbol_of_hope_timer += self.tick_rate
+            if self.symbol_of_hope_timer >= 180:
+                self.symbol_of_hope_timer = 0
+                symbol_of_hope_mana_gain = (self.paladin.max_mana - self.paladin.mana) * 0.1
+                self.paladin.mana += symbol_of_hope_mana_gain
+                update_mana_gained(self.paladin.ability_breakdown, "Symbol of Hope", symbol_of_hope_mana_gain)
+                
     def handle_time_warp(self):
         if self.elapsed_time > self.time_warp_time and not self.time_warp_recharging:
             self.paladin.apply_buff_to_self(TimeWarp(), self.elapsed_time)
@@ -394,8 +428,6 @@ class Simulation:
             self.paladin.is_enemy_below_20_percent = True   
                                  
     def decrement_buffs_on_self(self):
-        # for buff_name, buff in self.paladin.active_auras.items():
-            # print(f"{self.elapsed_time}: buff name: {buff_name}, duration: {buff.duration}, charges: {buff.current_stacks}")
         expired_buffs = []
         for buff_name, buff in self.paladin.active_auras.items():
             buff.duration -= self.tick_rate
@@ -422,8 +454,6 @@ class Simulation:
             if self.paladin.active_auras[buff_name].duration <= 0:
                 del self.paladin.active_auras[buff_name]    
                 update_self_buff_data(self.paladin.self_buff_breakdown, buff_name, self.elapsed_time, "expired")
-                
-            # print(f"new crit %: {self.paladin.crit}")
         
     def decrement_buffs_on_targets(self):
         for target in self.paladin.potential_healing_targets:            
@@ -539,38 +569,6 @@ class Simulation:
                     last_instance = instances[last_instance_number]
                     if last_instance["end_time"] is None:
                         last_instance["end_time"] = self.encounter_length
-    
-    # old maybe useful idk
-    # def get_spell_ids_from_module(self, module_name):
-    #     spell_ids = {}
-    #     for name, obj in inspect.getmembers(sys.modules[module_name]):
-    #         if inspect.isclass(obj) and hasattr(obj, "SPELL_ID"):
-    #             spell_id = getattr(obj, "SPELL_ID")
-    #             spell_ids[spell_id] = name
-    #     return spell_ids
-    
-    # def get_spell_ids(self):
-    #     modules = [
-    #         "app.classes.spells_healing",
-    #         "app.classes.spells_damage",
-    #         "app.classes.spells_auras",
-    #         "app.classes.spells_passives",
-    #         "app.classes.auras_buffs",
-    #         "app.classes.auras_debuffs"
-    #     ]
-        
-    #     all_spell_ids = {}
-    #     for module in modules:
-    #         all_spell_ids.update(self.get_spell_ids_from_module(module))
-        
-    #     # add misc spells    
-    #     all_spell_ids.update({53563: "BeaconOfLight"})
-    #     all_spell_ids.update({414127: "OverflowingLight"})
-    #     all_spell_ids.update({392902: "ResplendentLight"})
-    #     all_spell_ids.update({403042: "CrusadersReprieve"})
-    #     all_spell_ids.update({385414: "Afterimage"})
-        
-    #     return all_spell_ids
     
     def reset_simulation(self):
         current_state = copy.deepcopy(self.initial_state)

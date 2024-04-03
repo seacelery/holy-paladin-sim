@@ -631,8 +631,11 @@ const handleOptionImages = (images, attribute, optionType, toggle = false, multi
                         timers.forEach(timer => {
                             timer.style.display = "none";
                         });
-                        repeatButton.style.display = "none";
-                        addTimerButton.style.display = "none";
+                        if (repeatButton && addTimerButton) {
+                            repeatButton.style.display = "none";
+                            addTimerButton.style.display = "none";
+                        };
+                        
                         removePotionFromPriorityList(attributeName);
                     };
                   

@@ -47,6 +47,7 @@ const generateBuffsConsumablesImages = () => {
     for (const flask in flasks) {
         const flaskImage = createElement("img", "flask-image", null);
         flaskImage.src = flasks[flask].image;
+        flaskImage.draggable = false;
         flaskImage.setAttribute("data-flask", flask);
         flaskFilterContainer.appendChild(flaskImage);
 
@@ -59,6 +60,7 @@ const generateBuffsConsumablesImages = () => {
     for (const food in foodItems) {
         const foodImage = createElement("img", "food-image", null);
         foodImage.src = foodItems[food].image;
+        foodImage.draggable = false;
         foodImage.setAttribute("data-food", food);
         foodFilterContainer.appendChild(foodImage);
 
@@ -71,6 +73,7 @@ const generateBuffsConsumablesImages = () => {
     for (const weaponImbue in weaponImbues) {
         const weaponImbueImage = createElement("img", "weapon-imbue-image", null);
         weaponImbueImage.src = weaponImbues[weaponImbue].image;
+        weaponImbueImage.draggable = false;
         weaponImbueImage.setAttribute("data-weapon-imbue", weaponImbue);
         weaponImbueFilterContainer.appendChild(weaponImbueImage);
 
@@ -83,6 +86,7 @@ const generateBuffsConsumablesImages = () => {
     for (const augmentRune in augmentRunes) {
         const augmentRuneImage = createElement("img", "augment-rune-image", null);
         augmentRuneImage.src = augmentRunes[augmentRune].image;
+        augmentRuneImage.draggable = false;
         augmentRuneImage.setAttribute("data-augment-rune", augmentRune);
         augmentRuneFilterContainer.appendChild(augmentRuneImage);
 
@@ -94,6 +98,7 @@ const generateBuffsConsumablesImages = () => {
     const manaPotionTooltip = createTooltip("mana-potion-tooltip", "option-image-tooltip");
     const manaPotionImage = manaPotionContainer.querySelector(".potion-image");
     manaPotionImage.src = potions["Aerated Mana Potion"].image;
+    manaPotionImage.draggable = false;
     manaPotionImage.setAttribute("data-potion", "Aerated Mana Potion");
 
     const manaPotionInnerHTML = `Aerated Mana Potion<br><br>` + colourStatWords(potions["Aerated Mana Potion"].effect);
@@ -103,6 +108,7 @@ const generateBuffsConsumablesImages = () => {
     const intellectPotionTooltip = createTooltip("intellect-potion-tooltip", "option-image-tooltip");
     const intellectPotionImage = intellectPotionContainer.querySelector(".potion-image");
     intellectPotionImage.src = potions["Elemental Potion of Ultimate Power"].image;
+    intellectPotionImage.draggable = false;
     intellectPotionImage.setAttribute("data-potion", "Elemental Potion of Ultimate Power");
 
     const intellectPotionInnerHTML = `Elemental Potion of Ultimate Power<br><br>` + colourStatWords(potions["Elemental Potion of Ultimate Power"].effect);
@@ -113,6 +119,7 @@ const generateBuffsConsumablesImages = () => {
     for (const raidBuff in raidBuffs) {
         const raidBuffImage = createElement("img", "raid-buff-image", null);
         raidBuffImage.src = raidBuffs[raidBuff].image;
+        raidBuffImage.draggable = false;
         raidBuffImage.setAttribute("data-raid-buff", raidBuff);
         raidBuffsFilterContainer.appendChild(raidBuffImage);
 
@@ -124,6 +131,7 @@ const generateBuffsConsumablesImages = () => {
     const powerInfusionTooltip = createTooltip("power-infusion-tooltip", "option-image-tooltip");
     const powerInfusionImage = powerInfusionContainer.querySelector(".external-buff-image");
     powerInfusionImage.src = externalBuffs["Power Infusion"].image;
+    powerInfusionImage.draggable = false;
     powerInfusionImage.setAttribute("data-external-buff", "Power Infusion");
 
     const powerInfusionInnerHTML = `Power Infusion<br><br>` + colourStatWords(externalBuffs["Power Infusion"].effect);
@@ -133,6 +141,7 @@ const generateBuffsConsumablesImages = () => {
     const innervateTooltip = createTooltip("innervate-tooltip", "option-image-tooltip");
     const innervateImage = innervateContainer.querySelector(".external-buff-image");
     innervateImage.src = externalBuffs["Innervate"].image;
+    innervateImage.draggable = false;
     innervateImage.setAttribute("data-external-buff", "Innervate");
 
     const innervateInnerHTML = `Innervate<br><br>` + colourStatWords(externalBuffs["Innervate"].effect);
@@ -142,6 +151,7 @@ const generateBuffsConsumablesImages = () => {
     const sourceOfMagicTooltip = createTooltip("source-of-magic-tooltip", "option-image-tooltip");
     const sourceOfMagicImage = sourceOfMagicContainer.querySelector(".external-buff-image");
     sourceOfMagicImage.src = externalBuffs["Source of Magic"].image;
+    sourceOfMagicImage.draggable = false;
     sourceOfMagicImage.setAttribute("data-external-buff", "Source of Magic");
 
     const sourceOfMagicInnerHTML = `Source of Magic<br><br>` + colourStatWords(externalBuffs["Source of Magic"].effect);

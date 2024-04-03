@@ -1139,7 +1139,43 @@ class CloseToHeart(Buff):
 class RetributionAura(Buff):
     
     def __init__(self):
-        super().__init__("Retribution Aura", 10000, base_duration=10000)
+        super().__init__("Retribution Aura ", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class RetributionAuraTrigger(Buff):
+    
+    def __init__(self):
+        super().__init__("Retribution Aura", 30, base_duration=30)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.healing_mutliplier *= 1.02
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.healing_multiplier /= 1.02
+        
+
+class ManaSpringTotem(Buff):
+    
+    def __init__(self):
+        super().__init__("Mana Spring Totem", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class SymbolOfHope(Buff):
+    
+    def __init__(self):
+        super().__init__("Symbol of Hope", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
         pass
