@@ -2335,6 +2335,54 @@ body {
     background-color: var(--panel-colour-2);
 }
 
+.ability-autocomplete-container {
+    position: absolute;
+    margin-left: -9px;
+    margin-top: 1px;
+
+    width: 150px;
+    max-height: 280px;
+    overflow: auto;
+
+    list-style: none;
+
+    background-color: var(--panel-colour-2);
+}
+
+.ability-autocomplete-suggestion {
+    cursor: pointer;
+    padding: 8px;
+    padding-top: 10px;
+    height: 40px;
+
+    border-top: 1px solid var(--border-colour-3);
+    border-right: 1px solid var(--border-colour-3);
+
+    font-size: 13px;
+    color: var(--light-font-colour);
+}
+
+.ability-autocomplete-suggestion:first-of-type {
+    border-top: none;
+}
+
+.ability-autocomplete-suggestion:hover {
+    background-color: var(--panel-colour-4);
+}
+
+.ability-autocomplete-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ability-autocomplete-container::-webkit-scrollbar-thumb {
+    border-left: 2px solid var(--panel-colour-2);
+    border-right: 2px solid var(--panel-colour-2);
+}
+
+.ability-autocomplete-container::-webkit-scrollbar-track {
+    background-color: var(--panel-colour-2);
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
@@ -2421,6 +2469,8 @@ input:-webkit-autofill{
 .priority-list-item-number {
     margin-left: 0;
     margin-right: 5px;
+    padding-top: 1px;
+    padding-right: 1px;
 
     font-size: 17px;
 }

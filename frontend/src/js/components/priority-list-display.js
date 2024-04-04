@@ -4,6 +4,60 @@ import { spellToIconsMap } from "../utils/spell-to-icons-map.js";
 let draggedItem = null;
 const transparentImage = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
 
+const abilityNames = [
+    "Holy Shock", "Holy Light", "Flash of Light", "Word of Glory", "Light of Dawn", "Divine Toll", 
+    "Daybreak", "Light's Hammer", "Holy Prism", "Beacon of Virtue", "Divine Favor", "Hand of Divinity",
+    "Lay on Hands", "Blessing of the Seasons", "Tyr's Deliverance", "Aerated Mana Potion",
+    "Elemental Potion of Ultimate Power", "Avenging Wrath", "Avenging Crusader", "Judgment",
+    "Crusader Strike", "Nymue's Unraveling Spindle", "Mirror of Fractured Tomorrows",
+    "Light of the Martyr", "Consecration", "Barrier of Faith", "Aura Mastery", "Hammer of Wrath"
+];
+
+const abilityAutocomplete = (element, abilityNames, icon) => {
+    const autocompleteContainer = createElement("ul", "ability-autocomplete-container", null);
+
+    element.addEventListener("input", () => {
+        const input = element.value;
+        const matchedAbilities = abilityNames.filter(abilityName => abilityName.toLowerCase().includes(input.toLowerCase()));
+
+        autocompleteContainer.innerHTML = "";
+        autocompleteContainer.style.border = "1px solid var(--border-colour-3)";
+        autocompleteContainer.style.borderTop = "none";
+
+        autocompleteContainer.style.left = `${element.offsetLeft}px`;
+        autocompleteContainer.style.top = `${element.offsetTop + element.offsetHeight}px`;
+
+        matchedAbilities.forEach(abilityName => {
+            const autocompleteSuggestion = createElement("li", "ability-autocomplete-suggestion", null);
+            
+            autocompleteSuggestion.textContent = abilityName;
+            if (autocompleteSuggestion.textContent.length > 21 || autocompleteSuggestion.textContent === "Aerated Mana Potion") {
+                autocompleteSuggestion.style.paddingTop = "0px";
+            };
+
+            autocompleteSuggestion.addEventListener("click", () => {
+                element.value = abilityName;
+                autocompleteContainer.style.border = "none";
+
+                if (spellToIconsMap.hasOwnProperty(abilityName)) {
+                    icon.src = spellToIconsMap[abilityName];
+                    element.value = abilityName;
+                } else {
+                    icon.src = "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg";
+                };
+                autocompleteContainer.innerHTML = "";
+                document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
+                    adjustTextareaHeight(itemText, 40);
+                });
+                updatePriorityList();
+            });
+            autocompleteContainer.appendChild(autocompleteSuggestion);
+        });
+    });
+
+    return autocompleteContainer;
+};
+
 const createPriorityListItem = (index) => {
     const priorityListItemContainer = createElement("div", "priority-list-item-container", null);
 
@@ -42,8 +96,11 @@ const createPriorityListItem = (index) => {
         updatePriorityList();
     });
 
+    const abilityAutocompleteSuggestions = abilityAutocomplete(priorityListItemAbilityText, abilityNames, priorityListItemIcon);
+
     priorityListItemAbility.appendChild(priorityListItemAbilityText);
     priorityListItemContainer.appendChild(priorityListItemAbility);
+    priorityListItemContainer.appendChild(abilityAutocompleteSuggestions);
 
     const priorityListItemCondition = createElement("div", "priority-list-item-condition", null);
     const priorityListItemConditionText = createElement("textarea", "priority-list-item-condition-text", null);
@@ -60,19 +117,6 @@ const createPriorityListItem = (index) => {
     priorityListConditionButtonsContainer.appendChild(priorityListAndButton);
     priorityListConditionButtonsContainer.appendChild(priorityListOrButton);
     priorityListItemContainer.appendChild(priorityListConditionButtonsContainer);
-
-    // const priorityListArrowButtonsContainer = createElement("div", "priority-list-buttons-container", null);
-    // const priorityListUpButton = createElement("div", "priority-list-up-button priority-list-button", null);
-    // const arrowUpIcon = createElement("i", "fa-solid fa-arrow-up", null);
-    // priorityListUpButton.appendChild(arrowUpIcon);
-
-    // const priorityListDownButton = createElement("div", "priority-list-down-button priority-list-button", null);
-    // const arrowDownIcon = createElement("i", "fa-solid fa-arrow-down", null);
-    // priorityListDownButton.appendChild(arrowDownIcon);
-
-    // priorityListArrowButtonsContainer.appendChild(priorityListUpButton);
-    // priorityListArrowButtonsContainer.appendChild(priorityListDownButton);
-    // priorityListItemContainer.appendChild(priorityListArrowButtonsContainer);
 
     const priorityListAddRemoveButtonsContainer = createElement("div", "priority-list-buttons-container", null);
     const priorityListAddItem = createElement("div", "priority-list-add-item priority-list-button", null);
@@ -233,6 +277,10 @@ const createPriorityListDisplay = () => {
         updatePriorityList();
     });
 
+    const abilityText = document.getElementById("priority-list-item-ability-text");
+    const abilityAutocompleteSuggestions = abilityAutocomplete(abilityText, abilityNames, firstPriorityListItemIcon);
+    priorityListItemsContainer.appendChild(abilityAutocompleteSuggestions);
+
     const firstPriorityListItemConditionText = document.getElementById("priority-list-item-condition-text");
     firstPriorityListItemConditionText.addEventListener("input", (e) => {
         updatePriorityList();
@@ -263,7 +311,7 @@ const createPriorityListDisplay = () => {
 
     // add and condition
     priorityListItemsContainer.addEventListener("click", function(event) {
-        if (event.target.classList.contains("priority-list-and-button") || event.target.parentNode.classList.contains("priority-list-and-button")) {
+        if (event.target.classList.contains("priority-list-and-button") || (event.target.parentNode && event.target.parentNode.classList.contains("priority-list-and-button"))) {
             const item = event.target.closest(".priority-list-item-container");
 
             const currentConditions = item.querySelectorAll(".priority-list-item-condition");
@@ -295,7 +343,7 @@ const createPriorityListDisplay = () => {
 
     // add or condition
     priorityListItemsContainer.addEventListener("click", function(event) {
-        if (event.target.classList.contains("priority-list-or-button") || event.target.parentNode.classList.contains("priority-list-or-button")) {
+        if (event.target.classList.contains("priority-list-or-button") || (event.target.parentNode && event.target.parentNode.classList.contains("priority-list-or-button"))) {
             const item = event.target.closest(".priority-list-item-container");
 
             const currentConditions = item.querySelectorAll(".priority-list-item-condition");
@@ -327,7 +375,7 @@ const createPriorityListDisplay = () => {
 
     // add item
     priorityListItemsContainer.addEventListener("click", function(event) {
-        if (event.target.classList.contains("priority-list-add-item") || event.target.parentNode.classList.contains("priority-list-add-item")) {
+        if (event.target.classList.contains("priority-list-add-item") || (event.target.parentNode && event.target.parentNode.classList.contains("priority-list-add-item"))) {
             const item = event.target.closest(".priority-list-item-container");
             const index = Array.from(priorityListItemsContainer.children).indexOf(item);
             const newListItem = createPriorityListItem(index + 1);
@@ -364,7 +412,7 @@ const createPriorityListDisplay = () => {
 
     // delete item
     priorityListItemsContainer.addEventListener("click", function(event) {
-        if (event.target.classList.contains("priority-list-delete-item") || event.target.parentNode.classList.contains("priority-list-delete-item")) {
+        if (event.target.classList.contains("priority-list-delete-item") || (event.target.parentNode && event.target.parentNode.classList.contains("priority-list-delete-item"))) {
             const item = event.target.closest(".priority-list-item-container");
             priorityListItemsContainer.removeChild(item);
 
