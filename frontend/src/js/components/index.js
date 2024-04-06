@@ -59,6 +59,21 @@ let isFirstImport = true;
 export let cooldownFilterState = {};
 export let playerAurasFilterState = {};
 
+const themeToggle = document.getElementById("theme-toggle");
+const themeToggleCircle = document.getElementById("theme-circle");
+const themePaladinIcon = document.getElementById("theme-paladin-icon");
+const themeMoonIcon = document.getElementById("theme-moon-icon");
+themeToggle.addEventListener("click", () => {
+    themeToggleCircle.classList.toggle("theme-checked");
+    themePaladinIcon.classList.toggle("theme-icon-hidden");
+    themeMoonIcon.classList.toggle("theme-icon-hidden");
+
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "plain" ? "paladin" : "plain";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+});
+
 const importButtonMain = document.getElementById("import-button-main");
 const importButton = document.getElementById("import-button");
 
@@ -376,22 +391,24 @@ const createSimulationResults = (simulationData) => {
     const resultArrowIconContainer = createElement("div", `result-arrow-container`, null);
     const resultArrowIcon = createElement("i", `fa-solid fa-sort-down result-arrow-icon`, null);
     resultArrowIconContainer.appendChild(resultArrowIcon);
-    resultArrowIconContainer.addEventListener("click", (e) => {
-        if (resultArrowIcon.classList.contains("fa-sort-down")) {
-            resultArrowIcon.classList.remove("fa-sort-down");
-            resultArrowIcon.classList.add("fa-caret-right");
-            resultContainer.style.display = "none";
-            resultHeader.style.display = "flex";
-        } else if (resultArrowIcon.classList.contains("fa-caret-right")) {
-            resultArrowIcon.classList.remove("fa-caret-right");
-            resultArrowIcon.classList.add("fa-sort-down");
-            resultContainer.style.display = "block";
+    resultHeader.addEventListener("click", (e) => {
+        if (!e.target.id.startsWith("result-text") || e.target === resultArrowIcon) {
+            if (resultArrowIcon.classList.contains("fa-sort-down")) {
+                resultArrowIcon.classList.remove("fa-sort-down");
+                resultArrowIcon.classList.add("fa-caret-right");
+                resultContainer.style.display = "none";
+                resultHeader.style.display = "flex";
+            } else if (resultArrowIcon.classList.contains("fa-caret-right")) {
+                resultArrowIcon.classList.remove("fa-caret-right");
+                resultArrowIcon.classList.add("fa-sort-down");
+                resultContainer.style.display = "block";
+            };
         };
     });
     leftSideContainer.appendChild(resultArrowIconContainer);
 
     // auto-generate new title if no input given
-    const resultText = createElement("div", `result-text-${containerCount}`, null);
+    const resultText = createElement("div", `result-text-${containerCount}`, "result-text");
     resultText.textContent = simulationName.value;
     if (simulationName.value.includes (`Simulation ${containerCount}`)) {
         simulationName.value = `Simulation ${containerCount + 1}`;
@@ -521,7 +538,7 @@ const createSimulationResults = (simulationData) => {
     handleTabs(`results-navbar-${containerCount}`, `results-tab-content-${containerCount}`, containerCount);
     handleTabs(`buffs-line-graph-navbar-${containerCount}`, `buffs-line-graph-tab-content-${containerCount}`, containerCount);
 
-    resultHeader.scrollIntoView({ behavior: "smooth" });
+    simulateButton.scrollIntoView({ behavior: "smooth" });
 };
 
 // update the paladin class when attributes are changed
@@ -589,6 +606,14 @@ generateRealmOptions();
 importButtonMain.addEventListener("click", importCharacter);
 importButton.addEventListener("click", importCharacter);
 simulationProgressBarContainer.addEventListener("click", runSimulation);
+
+const tickRateInfoCircle = document.getElementById("tick-rate-info-circle");
+const tickRateTooltip = createTooltip("tick-rate-tooltip", "tick-rate-tooltip");
+addTooltipFunctionality(tickRateInfoCircle, tickRateTooltip, null, `<span>Reducing this will increase HoT accuracy but it will be much slower.</span>`);
+
+const raidHealthInfoCircle = document.getElementById("raid-health-info-circle");
+const raidHealthTooltip = createTooltip("raid-health-tooltip", "raid-health-tooltip");
+addTooltipFunctionality(raidHealthInfoCircle, raidHealthTooltip, null, `<span>This only affects Reclamation.</span>`);
 
 generateBuffsConsumablesImages();
 

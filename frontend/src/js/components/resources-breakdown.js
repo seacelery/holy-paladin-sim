@@ -193,7 +193,6 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
         let overallHolyPowerGained = 0;
         let overallHolyPowerSpent = 0;
         let overallHolyPowerWasted = 0;
-        let holyShockTotalManaGained = 0;
 
         for (const spellName in data) {
             const spellData = data[spellName];

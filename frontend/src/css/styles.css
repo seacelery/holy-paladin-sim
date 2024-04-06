@@ -1,22 +1,36 @@
 :root {
-    --background-colour: rgb(12, 12, 15);
-    --panel-colour: #323138;
-    --panel-colour-2: #17171a;
-    --panel-colour-3: #3f3e44;
-    --panel-colour-4: #56545a;
-    --panel-colour-5: #2c2b30;
-    --panel-colour-6: rgb(16, 16, 20);
+    --background-colour: rgb(7, 3, 5);
+    --panel-colour: #0a0709;
+    --panel-colour-2: rgb(20, 9, 16);
+    --panel-colour-3: rgb(46, 24, 38);
+    --panel-colour-4: rgb(134, 94, 118);
+    --panel-colour-5: rgb(58, 34, 48);
+    --panel-colour-6: rgb(19, 9, 15);
+    --panel-colour-background: #0a0709;
+    --panel-colour-table: rgb(29, 15, 24);
+    --panel-colour-table-2: rgb(14, 6, 10);
+    --panel-colour-table-3: rgb(10, 4, 7);
+    --panel-colour-table-4: rgb(9, 4, 6);
     --border-colour: #3c3241;
-    --border-colour-2: #1b1a1f;
+    --border-colour-2: rgb(17, 8, 14);
     --transparent-border-colour-2: #1b1a1fd7;
-    --border-colour-3: #56545a;
-    --tooltip-colour: rgba(0, 0, 0, 0.233);
+    --border-colour-3: #573b4e;
+    --border-colour-4: rgb(133, 10, 94);
+    --tooltip-colour: rgba(0, 0, 0, 0.438);
     --tooltip-colour-hover: rgba(63, 63, 63, 0.096);
     --tooltip-opaque-colour: rgb(20, 20, 20);
     --hover-colour-dark: rgb(18, 18, 21);
-
-    --light-font-colour: white;
+    --hover-colour-light: rgb(85, 50, 71);
+    --subrow-arrow-colour: #cca1ddef;
+    --subrow-arrow-colour-hover: #c8add3c9;
+    --subrow-arrow-colour-active: #c790ddc9;
+    --sorting-arrow-colour: #91fcd8c9;
+    --light-font-colour: #fff3f8;
     --dark-font-colour: rgb(0, 0, 0);
+    --info-circle-colour: #79475d;
+    --info-circle-colour-2: #e7afc7;
+
+    --highlight-font: rgba(255, 255, 255, 0.877);
     --green-font: rgb(101, 214, 129);
     --red-font: rgb(214, 96, 96);
     --red-font-hover: rgb(209, 119, 119);
@@ -39,17 +53,93 @@
     --stat-mastery: #c1a1fd;
     --stat-versatility: #A3EDFF;
 
-    --subrow-arrow-colour: #cca1ddef;
-    --subrow-arrow-colour-hover: #c8add3c9;
-    --subrow-arrow-colour-active: #c790ddc9;
-    --sorting-arrow-colour: #91fcd8c9;
-
     --rarity-epic: #a335ee;
     --rarity-rare: #0070dd;
     --rarity-uncommon: #1eff00;
     --rarity-common: #fff;
     --rarity-poor: var(--border-colour-3);
 }
+
+[data-theme="plain"] {
+    --background-colour: rgb(12, 12, 15);
+    --panel-colour: #323138;
+    --panel-colour-2: #17171a;
+    --panel-colour-3: #3f3e44;
+    --panel-colour-4: #56545a;
+    --panel-colour-5: #2c2b30;
+    --panel-colour-6: rgb(16, 16, 20);
+    --panel-colour-background: rgb(16, 16, 20);
+    --panel-colour-table: #323138;
+    --panel-colour-table-2: #17171a;
+    --panel-colour-table-3: rgb(12, 12, 15);
+    --panel-colour-table-4: rgba(0, 0, 0, 0.233);
+    --border-colour: #3c3241;
+    --border-colour-2: #1b1a1f;
+    --transparent-border-colour-2: #1b1a1fd7;
+    --border-colour-3: #56545a;
+    --border-colour-4: #56545a;
+    --tooltip-colour: rgba(0, 0, 0, 0.233);
+    --tooltip-colour-hover: rgba(63, 63, 63, 0.096);
+    --tooltip-opaque-colour: rgb(20, 20, 20);
+    --hover-colour-dark: rgb(18, 18, 21);
+    --hover-colour-light: #2c2b30;
+    --subrow-arrow-colour: #cca1ddef;
+    --subrow-arrow-colour-hover: #c8add3c9;
+    --subrow-arrow-colour-active: #c790ddc9;
+    --sorting-arrow-colour: #91fcd8c9;
+    --light-font-colour: white;
+    --dark-font-colour: rgb(0, 0, 0);
+    --info-circle-colour: #9c9597;
+    --info-circle-colour-2: rgb(18, 18, 21);
+}
+
+/* --background-colour: rgb(10, 5, 8);
+    --panel-colour: #2e1c29;
+    --panel-colour-2: rgb(26, 12, 20);
+    --panel-colour-3: rgb(61, 32, 50);
+    --panel-colour-4: rgb(134, 94, 118);
+    --panel-colour-5: rgb(58, 34, 48);
+    --panel-colour-6: rgb(19, 9, 15);
+    --border-colour: #3c3241;
+    --border-colour-2: rgb(26, 12, 20);
+    --transparent-border-colour-2: #1b1a1fd7;
+    --border-colour-3: #573b4e;
+    --border-colour-4: rgb(185, 55, 144);
+    --tooltip-colour: rgba(0, 0, 0, 0.233);
+    --tooltip-colour-hover: rgba(63, 63, 63, 0.096);
+    --tooltip-opaque-colour: rgb(20, 20, 20);
+    --hover-colour-dark: rgb(18, 18, 21);
+    --hover-colour-light: rgb(85, 50, 71);
+    --subrow-arrow-colour: #cca1ddef;
+    --subrow-arrow-colour-hover: #c8add3c9;
+    --subrow-arrow-colour-active: #c790ddc9;
+    --sorting-arrow-colour: #91fcd8c9;
+    --light-font-colour: #fff3f8;
+    --dark-font-colour: rgb(0, 0, 0); */
+
+/* [data-theme="paladin"] {
+    --background-colour: rgb(45, 45, 94);
+    --panel-colour: #323138;
+    --panel-colour-2: #17171a;
+    --panel-colour-3: #3f3e44;
+    --panel-colour-4: #56545a;
+    --panel-colour-5: #2c2b30;
+    --panel-colour-6: rgb(16, 16, 20);
+    --border-colour: #3c3241;
+    --border-colour-2: #1b1a1f;
+    --transparent-border-colour-2: #1b1a1fd7;
+    --border-colour-3: #56545a;
+    --tooltip-colour: rgba(0, 0, 0, 0.233);
+    --tooltip-colour-hover: rgba(63, 63, 63, 0.096);
+    --tooltip-opaque-colour: rgb(20, 20, 20);
+    --hover-colour-dark: rgb(18, 18, 21);
+    --subrow-arrow-colour: #cca1ddef;
+    --subrow-arrow-colour-hover: #c8add3c9;
+    --subrow-arrow-colour-active: #c790ddc9;
+    --sorting-arrow-colour: #91fcd8c9;
+    --light-font-colour: white;
+    --dark-font-colour: rgb(0, 0, 0);
+} */
 
 * {
     font-family: "Inter";
@@ -67,7 +157,6 @@ html {
 body {
     margin: 0 auto;
     margin-bottom: 60px;
-    padding-top: 45px;
     background-color: var(--background-colour);
     overflow: auto;
 }
@@ -88,6 +177,99 @@ body {
     background: var(--panel-colour-3);
 }
 
+#theme-toggle-container {
+    display: flex;
+    align-items: center;
+
+    margin-left: auto;
+    margin-bottom: 45px;
+    margin-right: 15px;
+    padding-top: 20px;
+
+    width: 60px;
+    color: var(--light-font-colour);
+
+    transition: all 0.4s ease-out;
+    user-select: none;
+}
+
+#theme-moon-icon {
+    position: absolute;
+    font-size: 20px;
+
+    color: var(--info-circle-colour);
+    transform: rotate(-15deg);
+    transition: opacity 0.15s ease-in-out;
+}
+
+#theme-paladin-icon {
+    position: absolute;
+
+    height: 28px;
+    width: 28px;
+
+    border-radius: 50%;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.theme-icon-hidden {
+    opacity: 0;
+}
+
+#theme-toggle {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    width: 60px;
+    height: 31px;
+
+    border-radius: 30px;
+
+    background-color: var(--info-circle-colour);
+    cursor: pointer;
+}
+
+#theme-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    width: 25px;
+    height: 25px;
+
+    position: absolute;
+    left: 3px;
+
+    border-radius: 50%;
+    background: var(--info-circle-colour-2);
+    transition: all 0.1s ease-in;
+}
+
+#theme-circle.theme-checked {
+    left: 32px;
+}
+
+/* #theme-toggle::before {
+    content: "";
+    width: 25px;
+    height: 25px;
+
+    position: absolute;
+    top: 50%;
+    left: 3px;
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+    background: var(--paladin-font);
+    transition: all 0.5s ease-in;
+} */
+
 #navbar-row-container {
     display: flex;
 }
@@ -99,12 +281,6 @@ body {
     align-items:end;
 
     height: 45px;
-
-/* 
-    border: 1px solid var(--panel-colour-4);
-    border-radius: 3px;
-    
-    background-color: var(--panel-colour); */
 }
 
 #import-character-options-container {
@@ -189,7 +365,7 @@ body {
 #import-button:hover {
     cursor: pointer;
     user-select: none;
-    background-color: var(--background-colour);
+    background-color: var(--panel-colour-4);
 }
 
 #character-name-input {
@@ -388,7 +564,7 @@ body {
 
 /* character options window */
 #simulation-options-container {
-    margin: 30px auto 20px auto;
+    margin: 30px auto 60px auto;
 
     width: 1320px;
 
@@ -448,12 +624,12 @@ body {
 
 .options-tab.inactive:hover, [class^="results-tab"].inactive:hover, [class^="buffs-line-graph-tab"].inactive:hover {
     cursor: pointer;
-    background-color: var(--panel-colour-5);
+    background-color: var(--hover-colour-light);
     user-select: none;
 }
 
 #options-window {
-    height: 600px;
+    height: 603px;
 
     border-right: 1px solid var(--border-colour-3);
     border-top: 1px solid var(--border-colour-3);
@@ -512,6 +688,47 @@ body {
     width: 92%;
 
     background-color: var(--border-colour-3);
+}
+
+.option-info-circle {
+    position: absolute;
+
+    top: 4px;
+    left: 70px;
+
+    font-size: 18px;
+
+    color: var(--info-circle-colour);
+}
+
+.option-info-circle:hover {
+    color: var(--paladin-font);
+
+    transition: color 0.1s ease-in-out;
+}
+
+.tick-rate-tooltip, .raid-health-tooltip {
+    padding: 8px;
+
+    word-wrap: break-word;
+    background-color: var(--panel-colour-2);
+
+    color: var(--light-font-colour);
+    font-size: 12px;
+
+    user-select: none; 
+    max-width: 300px;
+
+    border: 1px solid var(--border-colour-3);
+}
+
+#raid-health-info-circle {
+    top: 3px;
+    left: 84px;
+}
+
+#cooldown-tracking-header {
+    margin-top: 65px;
 }
 
 .options-option {
@@ -615,7 +832,7 @@ body {
     color: var(--light-font-colour);
 }
 
-#raid-health-option-container, #light-of-dawn-option-container, #lights-hammer-option-container, #resplendent-light-option-container {
+#raid-health-option-container, #light-of-dawn-option-container, #lights-hammer-option-container, #resplendent-light-option-container, .cooldown-tracking-option {
     display: none;
 }
 
@@ -761,8 +978,13 @@ body {
     width: 49px;
     height: 49px;
 
-    border: 1px solid var(--border-colour-3);
+    border: 1px solid var(--border-colour-4);
     border-radius: 2px;
+}
+
+.race-image:hover, .flask-image:hover, .augment-rune-image:hover, .food-image:hover, .weapon-imbue-image:hover, .raid-buff-image:hover, .external-buff-image:hover, .potion-image:hover {
+    box-shadow: 0px 0px 3px 1px var(--paladin-font);
+    transition: box-shadow 0.05s ease-in-out;
 }
 
 .race-selected, .flask-selected, .augment-rune-selected, .food-selected, .weapon-imbue-selected, .raid-buff-selected, .external-buff-selected, .potion-selected {
@@ -771,7 +993,7 @@ body {
 }
 
 .race-unselected, .flask-unselected, .augment-rune-unselected, .food-unselected, .weapon-imbue-unselected, .raid-buff-unselected, .external-buff-unselected, .potion-unselected {
-    border: 1px solid var(--border-colour-3);
+    border: 1px solid var(--border-colour-4);
     filter: grayscale(0.7);
 }
 
@@ -1243,11 +1465,6 @@ body {
     user-select: none;
 }
 
-.item-slot:hover .item-slot-hover {
-    opacity: 1;
-    background-color: var(--tooltip-colour-hover) !important;
-}
-
 .item-slot-hover {
     z-index: 1;
     position: absolute;
@@ -1265,12 +1482,18 @@ body {
     border: 1px solid var(--border-colour-3);
 }
 
-.item-slot-hover:hover {
+.item-slot:hover .item-slot-hover {
+    opacity: 1;
     background-color: var(--tooltip-colour-hover) !important;
 }
 
 .item-slot-selected {
     border: 1px solid var(--paladin-font);
+    background-color: var(--panel-colour-5) !important;
+}
+
+.item-slot:hover .item-slot-selected {
+    background-color: var(--panel-colour-5) !important;
 }
 
 .item-slot-icon-container, .item-slot-info {
@@ -1397,7 +1620,7 @@ body {
 
     width: 100%;
     height: 135px;
-    margin-bottom: 5px;
+    margin-bottom: 9px;
 
     background-color: var(--border-colour-2);
     border: 1px solid var(--border-colour-3);
@@ -1997,7 +2220,7 @@ body {
 #priority-list-container {
     display: flex;
     
-    padding: 25px 0 0 25px;
+    padding: 10px 0 0 10px;
 
     font-size: 15px;
 }
@@ -2016,7 +2239,8 @@ body {
 #priority-list-header-ability {
     margin-left: 97px;
     padding: 5px;
-    padding-left: 8px;
+    padding-left: 16px;
+    height: 42px;
 
     width: 150px;
 
@@ -2027,7 +2251,8 @@ body {
 .priority-list-header-condition {
     margin-left: 3px;
     padding: 5px;
-    padding-left: 8px;
+    padding-left: 16px;
+    height: 42px;
 
     width: 165px;
     
@@ -2055,9 +2280,9 @@ body {
     align-items: center;
     position: absolute;
     left: auto;
-    right: 10px;
+    right: 19px;
     bottom: 0;
-    top: 64px;
+    top: 70px;
     margin: auto;
 
     width: 25%;
@@ -2124,14 +2349,13 @@ body {
     justify-content: center;
     align-items: center;
     position: absolute;
-    left: 0;
-    right: 0;
+    right: 19px;
     bottom: 0;
-    top: 46px;
+    top: 70px;
     margin: auto;
 
     width: 60%;
-    height: 515px;
+    height: 525px;
 }
 
 #priority-list-paste-modal-header {
@@ -2151,7 +2375,7 @@ body {
 
 #priority-list-paste-modal-textarea {
     width: 100%;
-    height: 450px;
+    height: 525px;
     padding: 10px;
 
     outline: none;
@@ -2178,7 +2402,7 @@ body {
     align-items: center;
     margin-left: auto;
     margin-right: 30px;
-    transform: translateY(-12px);
+    transform: translateY(-5px);
 
     color: var(--light-font-colour);
     font-size: 24px;
@@ -2193,9 +2417,9 @@ body {
     padding: 10px;
     position: absolute;
     left: auto;
-    right: 10px;
+    right: 19px;
     bottom: 0;
-    top: 61px;
+    top: 70px;
     margin: auto;
 
     width: 25%;
@@ -2248,7 +2472,10 @@ body {
 #priority-list-items-container {
     overflow: auto;
 
-    height: 525px;
+    height: 538px;
+    border: 1px solid var(--border-colour-3);
+    width: 99%;
+    padding-left: 5px;
 }
 
 #priority-list-items-container::-webkit-scrollbar {
@@ -2481,6 +2708,8 @@ input:-webkit-autofill{
     transition: opacity 0.05s ease-in-out;
 }
 
+
+
 .buttons-visible {
     opacity: 1;
     pointer-events: all;
@@ -2557,7 +2786,7 @@ input:-webkit-autofill{
     margin-left: 0px;
 
     font-size: 26px;
-    color: var(--panel-colour-6);
+    color: var(--panel-colour-4)
 }
 
 .priority-list-item-handle:hover {
@@ -2577,6 +2806,7 @@ input:-webkit-autofill{
     width: 100%;
 
     border-top: 1px solid var(--border-colour-3);
+    border-right: 1px solid var(--border-colour-3);
     border-radius: 1px;
 
     background-color: var(--panel-colour-3);
@@ -2807,6 +3037,8 @@ input:focus {
     font-size: 18px;
     color: var(--light-font-colour);
     background-color: var(--panel-colour-6);
+
+    cursor: pointer;
 }
 
 .result-left-side, .result-right-side {
@@ -2938,7 +3170,7 @@ input:focus {
     border-radius: 3px;
     border-top-left-radius: 0px;
     border-right: 1px solid var(--border-colour-3);
-    background-color: var(--panel-colour-6);
+    background-color: var(--panel-colour-background);
 }
 
 [id^="healing-tab-"], [id^="buffs-window-tab-"], [id^="resources-tab-"], [id^="priority-tab"] {
@@ -3011,7 +3243,7 @@ tr {
 
     text-align: center;
 
-    background-color: var(--panel-colour);
+    background-color: var(--panel-colour-table);
 }
 
 .table-header .fa-sort-down {
@@ -3050,7 +3282,7 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 }
 
 .table-cell-right {
@@ -3066,7 +3298,7 @@ tr {
     font-size: 17px;
     text-align: right;
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 }
 
 .table-sub-cell-left {
@@ -3081,7 +3313,7 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour-1);
+    background-color: var(--panel-colour-table-3);
 }
 
 .table-sub-cell-left::before {
@@ -3109,7 +3341,7 @@ tr {
     font-size: 17px;
     text-align: right;
 
-    background-color: var(--panel-colour-1);
+    background-color: var(--panel-colour-table-3);
 }
 
 .table-sub-sub-cell-left {
@@ -3124,7 +3356,7 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: rgba(0, 0, 0, 0.233);
+    background-color: var(--panel-colour-table-4);
 }
 
 .table-sub-sub-cell-left::before {
@@ -3152,7 +3384,7 @@ tr {
     font-size: 17px;
     text-align: right;
 
-    background-color: rgba(0, 0, 0, 0.233);
+    background-color: var(--panel-colour-table-4);
 }
 
 .spell-name-cell {
@@ -3304,7 +3536,7 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour);
+    background-color: var(--panel-colour-table);
 }
 
 .table-cell-bottom-right {
@@ -3319,7 +3551,7 @@ tr {
     font-size: 17px;
     text-align: right;
 
-    background-color: var(--panel-colour);
+    background-color: var(--panel-colour-table);
 }
 
 [id^="overall-healing-percent-cell-"], [id^="overall-mana-gained-cell-"], [id^="overall-holy-power-gained-cell-"], [id^="overall-holy-power-spent-cell-"], [id^="overall-holy-power-wasted-cell-"], [id^="overall-CPM-cell"] {
@@ -3500,7 +3732,7 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 }
 
 .buff-table-cell-right {
@@ -3516,7 +3748,7 @@ tr {
     font-size: 17px;
     text-align: right;
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 }
 
 .buff-table-sub-cell-left {
@@ -3530,7 +3762,7 @@ tr {
     font-size: 17px;
     border: none !important;
 
-    background-color: var(--panel-colour-1);
+    background-color: var(--panel-colour-table-3);
 }
 
 .buff-table-sub-cell-right {
@@ -3546,7 +3778,7 @@ tr {
     font-size: 17px;
     text-align: right;
 
-    background-color: var(--panel-colour-1);
+    background-color: var(--panel-colour-table-3);
 }
 
 .buff-table-sub-cell-left::before {
@@ -3641,12 +3873,14 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 }
 
 .resources-table-sub-cell-left {
     position: relative;
-    padding-left: 5px;
+    padding-left: 35px;
+    padding-top: 1px;
+    margin-left: 0.5px;
 
     min-width: 300px;
     height: 35px;
@@ -3654,7 +3888,20 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour-1);
+    background-color: var(--panel-colour-table-3);
+}
+
+.resources-table-sub-cell-left::before {
+    position: absolute;
+    left: 19px;
+    top: 0px;
+
+    height: 50%;
+    width: 15px;
+
+    content: "";
+    border-bottom: 1.5px solid var(--border-colour-3);
+    border-left: 1.5px solid var(--border-colour-3);
 }
 
 .resources-table-cell-bottom-left {
@@ -3671,7 +3918,7 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour);
+    background-color: var(--panel-colour-table);
 }
 
 .resources-mana-cell {
@@ -3817,7 +4064,6 @@ tr {
     width: 8px;
 }
 
-/* work around for chrome supporting scrollbar-width/color */
 @-moz-document url-prefix() {
     .priority-grid-container {
         scrollbar-width: thin;
@@ -3890,14 +4136,14 @@ tr {
 
     border: 1px solid var(--border-colour-3);
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 
     text-align: center;
 }
   
 .priority-grid-header-cell {
     padding: 10px 0 10px 0;
-    background-color: var(--panel-colour);
+    background-color: var(--panel-colour-table);
     border-right: none;
 }
 

@@ -21,11 +21,24 @@
         <link rel="stylesheet" href="../src/css/styles.css" />
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
+        <script>
+            (function() {
+              const savedTheme = localStorage.getItem("theme");
+              document.documentElement.setAttribute("data-theme", savedTheme);
+            })();
+          </script>
     </head>
     <body>
         <div id="wrapper">
             <div id="content">
-                
+                <div id="theme-toggle-container">                   
+                    <div id="theme-toggle">
+                        <div id="theme-circle">
+                            <i class="fa-solid fa-moon theme-icon-hidden" id="theme-moon-icon"></i>
+                            <img id="theme-paladin-icon" src="custom-icons/paladin-pink.png">
+                        </div>                        
+                    </div>
+                </div>
 
                 <div id="simulation-options-container">
                     <div id="loading-corner"></div>
@@ -69,31 +82,22 @@
                             <div id="talents-tab" class="options-tab inactive">Talents</div>
                             <div id="equipment-tab" class="options-tab inactive">Equipment</div>
                             <div id="buffs-tab" class="options-tab inactive">Buffs & Consumables</div>
-                            <div id="priority-list-tab" class="options-tab inactive">Priority List</div>
-                            
+                            <div id="priority-list-tab" class="options-tab inactive">Priority List</div>                          
                         </nav>
     
                         <div id="import-character-container">
                             <div id="import-character-options-container">
-                                <!-- <label for="character-region-input" class="character-input-label"></label> -->
                                 <select id="character-region-input" class="character-input-field">
                                     <option value="EU">EU</option>
                                     <option value="US">US</option>
                                 </select>
-            
-                                <!-- <label for="character-realm-input" class="character-input-label"></label> -->
                                 <select type="text" id="character-realm-input" class="character-input-field" translate="no"></select>
-            
-                                <!-- <label for="character-name-input" class="character-input-label"></label> -->
-                                <input type="text" id="character-name-input" class="character-input-field">
-            
+                                <input type="text" id="character-name-input" class="character-input-field">         
                                 <button id="import-button">Import</button>
-                            </div>
-                            
+                            </div>                            
                         </div>
                     </div>
                     
-
                     <div id="options-window">
                         <div id="options-content" class="options-tab-content">
                             <div id="options-container">
@@ -102,7 +106,7 @@
                                     <div class="options-divider"></div>
 
                                     <div class="option-container">
-                                        <label for="iterations-option" id="iterations-option-label" class="options-option-label">Iterations:</label>
+                                        <label for="iterations-option" id="iterations-option-label" class="options-option-label">Iterations</label>
                                         <div id="iterations-slider-container" class="slider-container">
                                             <div id="iterations-value-container" class="slider-value-container">
                                                 <div id="iterations-value" class="slider-value">1</div>
@@ -112,19 +116,19 @@
                                     </div>
 
                                     <div class="option-container">
-                                        <label for="encounter-length-option" id="encounter-length-option-label" class="options-option-label">Encounter Length:</label>
+                                        <label for="encounter-length-option" id="encounter-length-option-label" class="options-option-label">Encounter Length</label>
                                         <div id="encounter-length-slider-container" class="slider-container">
                                             <div id="encounter-length-value-container" class="slider-value-container">
                                                 <div id="encounter-length-minutes" class="slider-value-time slider-value-minutes">5</div>
                                                 <span class="slider-value-time-divider">:</span>
                                                 <div id="encounter-length-seconds" class="slider-value-time slider-value-seconds">00</div>
                                             </div>
-                                            <input type="range" id="encounter-length-option" class="options-option option-slider" value="4" min="1" max="600" step="1">
+                                            <input type="range" id="encounter-length-option" class="options-option option-slider" value="300" min="1" max="600" step="1">
                                         </div>
                                     </div>
 
                                     <div class="option-container">
-                                        <label for="time-warp-option" id="time-warp-option-label" class="options-option-label">Time Warp:</label>
+                                        <label for="time-warp-option" id="time-warp-option-label" class="options-option-label">Time Warp</label>
                                         <div id="time-warp-slider-container" class="slider-container">
                                             <div id="time-warp-value-container" class="slider-value-container">
                                                 <div id="time-warp-minutes" class="slider-value-time slider-value-minutes">5</div>
@@ -136,7 +140,8 @@
                                     </div>
 
                                     <div class="option-container">
-                                        <label for="tick-rate-option" id="tick-rate-option-label" class="options-option-label">Tick Rate:</label>
+                                        <label for="tick-rate-option" id="tick-rate-option-label" class="options-option-label">Tick Rate</label>
+                                        <i class="fas fa-info-circle option-info-circle" id="tick-rate-info-circle"></i>
                                         <div id="tick-rate-slider-container" class="slider-container">
                                             <div id="tick-rate-value-container" class="slider-value-container">
                                                 <div id="tick-rate-value" class="slider-value">1</div>
@@ -165,7 +170,7 @@
                                     </div>
 
                                     <div class="option-container">
-                                        <label for="mastery-effectiveness-option" id="mastery-effectiveness-option-label" class="options-option-label">Mastery Effectiveness:</label>
+                                        <label for="mastery-effectiveness-option" id="mastery-effectiveness-option-label" class="options-option-label">Mastery Effectiveness</label>
                                         <div id="mastery-effectiveness-slider-container" class="slider-container">
                                             <div id="mastery-effectiveness-value-container" class="slider-value-container">
                                                 <div id="mastery-effectiveness-value" class="slider-value">1</div>
@@ -175,7 +180,8 @@
                                     </div>
 
                                     <div class="option-container" id="raid-health-option-container">
-                                        <label for="raid-health-option" id="raid-health-option-label" class="options-option-label">Raid Health:</label>
+                                        <label for="raid-health-option" id="raid-health-option-label" class="options-option-label">Raid Health</label>
+                                        <i class="fas fa-info-circle option-info-circle" id="raid-health-info-circle"></i>
                                         <div id="raid-health-slider-container" class="slider-container">
                                             <div id="raid-health-value-container" class="slider-value-container">
                                                 <div id="raid-health-value" class="slider-value">1</div>
@@ -185,7 +191,7 @@
                                     </div>
                                                                      
                                     <div class="option-container" id="light-of-dawn-option-container">
-                                        <label for="light-of-dawn-option" id=light-of-dawns-option-label" class="options-option-label">Light of Dawn Targets:</label>
+                                        <label for="light-of-dawn-option" id=light-of-dawns-option-label" class="options-option-label">Light of Dawn Targets</label>
                                         <div id="light-of-dawn-slider-container" class="slider-container">
                                             <div id="light-of-dawn-value-container" class="slider-value-container">
                                                 <div id="light-of-dawn-value" class="slider-value">1</div>
@@ -195,7 +201,7 @@
                                     </div>
 
                                     <div class="option-container" id="lights-hammer-option-container">
-                                        <label for="lights-hammer-option" id="lights-hammer-option-label" class="options-option-label">Light's Hammer Targets:</label>
+                                        <label for="lights-hammer-option" id="lights-hammer-option-label" class="options-option-label">Light's Hammer Targets</label>
                                         <div id="lights-hammer-slider-container" class="slider-container">
                                             <div id="lights-hammer-value-container" class="slider-value-container">
                                                 <div id="lights-hammer-value" class="slider-value">1</div>
@@ -205,7 +211,7 @@
                                     </div>
 
                                     <div class="option-container" id="resplendent-light-option-container">
-                                        <label for="resplendent-light-option" id="resplendent-light-option-label" class="options-option-label">Resplendent Light Targets:</label>
+                                        <label for="resplendent-light-option" id="resplendent-light-option-label" class="options-option-label">Resplendent Light Targets</label>
                                         <div id="resplendent-light-slider-container" class="slider-container">
                                             <div id="resplendent-light-value-container" class="slider-value-container">
                                                 <div id="resplendent-light-value" class="slider-value">1</div>
@@ -226,6 +232,29 @@
 
                                     <label class="option-checkbox-container">Show Resource Graphs
                                         <input type="checkbox" id="hide-resource-graph-option" class="option-checkbox" checked="checked">                                                        
+                                        <span class="options-checkbox-checkmark"></span>                                      
+                                    </label>
+
+                                    <div class="options-header" id="cooldown-tracking-header">Cooldown Tracking</div>
+                                    <div class="options-divider"></div>
+
+                                    <label class="option-checkbox-container cooldown-tracking-option" id="cooldown-tracking-avenging-wrath-option">Avenging Wrath
+                                        <input type="checkbox" class="option-checkbox cooldown-tracking-checkbox" id="cooldown-tracking-avenging-wrath-checkbox" checked="checked">                                                        
+                                        <span class="options-checkbox-checkmark"></span>                                      
+                                    </label>
+
+                                    <label class="option-checkbox-container cooldown-tracking-option" id="cooldown-tracking-avenging-wrath-awakening-option">Avenging Wrath (Awakening)
+                                        <input type="checkbox" class="option-checkbox cooldown-tracking-checkbox" id="cooldown-tracking-avenging-wrath-awakening-checkbox" checked="checked">                                                        
+                                        <span class="options-checkbox-checkmark"></span>                                      
+                                    </label>
+
+                                    <label class="option-checkbox-container cooldown-tracking-option" id="cooldown-tracking-first-light-option">Daybreak (First Light)
+                                        <input type="checkbox" class="option-checkbox cooldown-tracking-checkbox" id="cooldown-tracking-first-light-checkbox" checked="checked">                                                        
+                                        <span class="options-checkbox-checkmark"></span>                                      
+                                    </label>
+
+                                    <label class="option-checkbox-container cooldown-tracking-option" id="cooldown-tracking-blessing-of-spring-option">Blessing of Spring
+                                        <input type="checkbox" class="option-checkbox cooldown-tracking-checkbox" id="cooldown-tracking-blessing-of-spring-checkbox" checked="checked">                                                        
                                         <span class="options-checkbox-checkmark"></span>                                      
                                     </label>
                                 </div>
@@ -500,6 +529,7 @@
                                                 <option class="choose-slot-option">Trinket 2</option>
                                             </select>
                                         </div>
+
                                         <div id="equipped-items-edit-container">
                                             <div id="equipped-items-edit-top-half">
                                                 
@@ -518,6 +548,7 @@
                                                 </div>
                                                 
                                             </div>
+
                                             <div id="equipped-items-edit-bottom-half">
                                                 <div id="new-equipped-item-container">
                                                     <div id="item-search-container">
@@ -534,8 +565,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        
+                                        </div>                                    
                                     </div>
                                 </div>
                             </div>
@@ -611,9 +641,7 @@
                                 <div class="options-half options-half-right">
                                     <div class="option-container">
                                         <div class="options-option-label">Raid Buffs:</div>
-                                        <div id="raid-buffs-filter-container" class="options-option-container">
-                                            
-                                        </div>
+                                        <div id="raid-buffs-filter-container" class="options-option-container"></div>
                                     </div>
 
                                     <div class="option-container">
@@ -631,9 +659,9 @@
                                                 </div>                                     
                                                 <div class="option-image-button power-infusion-timer" style="display:none">
                                                     <input class="external-buff-timer-input" value="0">
-                                                </div>
-                                                
+                                                </div>                                             
                                             </div>
+
                                             <div class="option-image-container" id="innervate-container">
                                                 <img class="external-buff-image" data-external-buff="Innervate" src="https://render.worldofwarcraft.com/eu/icons/56/spell_nature_lightning.jpg">
                                                 <div class="option-image-double-buttons">
@@ -690,7 +718,7 @@
                                         </div>  
                                     </div>
 
-                                    <div id="priority-list-divider"></div>
+                                    <!-- <div id="priority-list-divider"></div> -->
 
                                     <div id="priority-list-items-container">
                                         <div class="priority-list-item-container">
@@ -716,16 +744,6 @@
                                                     OR
                                                 </div>
                                             </div>
-                                            
-                                            <!-- <div class="priority-list-buttons-container">
-                                                <div class="priority-list-up-button priority-list-button">
-                                                    <i class="fa-solid fa-arrow-up"></i>
-                                                </div>
-                
-                                                <div class="priority-list-down-button priority-list-button">
-                                                    <i class="fa-solid fa-arrow-down"></i>
-                                                </div>
-                                            </div> -->
 
                                             <div class="priority-list-buttons-container">
                                                 <div class="priority-list-add-item priority-list-button">
@@ -769,9 +787,7 @@
                     </div>
                 </div>
 
-                <div id="results-container">
-
-                </div>
+                <div id="results-container"></div>
             </div>
             
             <div class="footer"></div>

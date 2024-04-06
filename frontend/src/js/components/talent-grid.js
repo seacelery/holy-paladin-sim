@@ -31,23 +31,29 @@ const specTalents = [
 
 const toggleTalentOptions = (talentName, talentData) => {
     switch(true) {
-        case talentName === "Light of Dawn" && talentData.ranks["current rank"] === 1:
-            document.getElementById("light-of-dawn-option-container").style.display = "flex";
+        case talentName === "Light of Dawn":
+            document.getElementById("light-of-dawn-option-container").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
             break;
-        case talentName === "Light of Dawn" && talentData.ranks["current rank"] === 0:
-            document.getElementById("light-of-dawn-option-container").style.display = "none";
+        case talentName === "Light's Hammer":
+            document.getElementById("lights-hammer-option-container").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
             break;
-        case talentName === "Light's Hammer" && talentData.ranks["current rank"] === 1:
-            document.getElementById("lights-hammer-option-container").style.display = "flex";
+        case talentName === "Resplendent Light":
+            document.getElementById("resplendent-light-option-container").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";  
             break;
-        case talentName === "Light's Hammer" && talentData.ranks["current rank"] === 0:
-            document.getElementById("lights-hammer-option-container").style.display = "none";
+        case talentName === "Reclamation":
+            document.getElementById("raid-health-option-container").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";  
             break;
-        case talentName === "Resplendent Light" && talentData.ranks["current rank"] === 1:
-            document.getElementById("resplendent-light-option-container").style.display = "flex";
+        case talentName === "Avenging Wrath":
+            document.getElementById("cooldown-tracking-avenging-wrath-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none"; 
             break;
-        case talentName === "Resplendent Light" && talentData.ranks["current rank"] === 0:
-            document.getElementById("resplendent-light-option-container").style.display = "none";   
+        case talentName === "Awakening":
+            document.getElementById("cooldown-tracking-avenging-wrath-awakening-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none"; 
+            break;
+        case talentName === "Daybreak":
+            document.getElementById("cooldown-tracking-first-light-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";  
+            break;
+        case talentName === "Blessing of Summer":
+            document.getElementById("cooldown-tracking-blessing-of-spring-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
             break;
     };
 };
@@ -337,8 +343,6 @@ const decrementTalent = (talentName, talentData, talentIcon, category) => {
 const createTalentGrid = () => {
     const classTalentsGridContainer = document.getElementById("class-talents");
     const specTalentsGridContainer = document.getElementById("spec-talents");
-    // classTalentsGridContainer.innerHTML = "";
-    // specTalentsGridContainer.innerHTML = "";
 
     const createTalentCells = (talentSet, baseTalentSet, container, category) => {
         talentSet.forEach((talentName, index) => {
