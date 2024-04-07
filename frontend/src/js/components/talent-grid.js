@@ -466,9 +466,14 @@ const createTalentGrid = () => {
                         handleTalentChange(talentNameRight, talentDataRight);
                     };
                 });
+
+                const divider = createElement("div", "talent-icon-divider", null);
+                divider.id = formattedTalentNameLeft + "divider";
     
                 cell.appendChild(talentIconLeft);
+                cell.appendChild(divider);
                 cell.appendChild(talentIconRight);
+                
     
             } else if (talentName !== "") {
                 let talentIcon = document.createElement("img");

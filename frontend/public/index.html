@@ -52,16 +52,23 @@
                                 <div class="import-input-container-main">
                                     <div class="import-character-reminder-main">Import a character</div>
 
-                                    <label for="character-region-input-main" class="character-input-label-main">Region:</label>
-                                    <select id="character-region-input-main" class="character-input-field-main">
-                                        <option value="EU">EU</option>
-                                        <option value="US">US</option>
-                                    </select>
+                                    <div class="character-input-label-main">Region:</div>
+                                    <div type="text" id="character-region-input-main" class="character-input-field-main" translate="no" tabindex="0">
+                                        <div id="character-region-selected-region">EU</div>
+                                        <i class="fa-solid fa-chevron-down custom-select-arrow-down"></i>
+                                        <div id="character-region-input-suggestions-container">
+                                        </div>
+                                    </div>
                                                              
-                                    <label for="character-realm-input-main" class="character-input-label-main">Realm:</label>
-                                    <select type="text" id="character-realm-input-main" class="character-input-field-main" translate="no"></select>
+                                    <div class="character-input-label-main">Realm:</div>
+                                    <div type="text" id="character-realm-input-main" class="character-input-field-main" translate="no" tabindex="0">
+                                        <div id="character-realm-selected-realm"></div>
+                                        <i class="fa-solid fa-chevron-down custom-select-arrow-down"></i>
+                                        <div id="character-realm-input-suggestions-container"></div>
+                                    </div>
+                                    
                                 
-                                    <label for="character-name-input-main" class="character-input-label-main">Character Name:</label>
+                                    <label for="character-name-input-main" class="character-input-label-main" id="character-name-input-label-main">Character Name:</label>
                                     <input type="text" id="character-name-input-main" class="character-input-field-main">
                                     
                 

@@ -81,6 +81,7 @@ const simulationName = document.getElementById("simulation-name-text-input");
 simulationName.value = "Simulation 1";
 
 const simulateButton = document.getElementById("simulate-button");
+const simulationProgressBarCheck = document.querySelector(".simulation-progress-bar-check-container");
 const simulationProgressBarContainer = document.getElementById("simulation-progress-bar-container");
 const simulationProgressBar = document.getElementById("simulation-progress-bar");
 const simulationProgressBarText = document.getElementById("simulation-progress-bar-text");
@@ -100,51 +101,188 @@ socket.on("iteration_update", function(data) {
     };
 });
 
-const generateRealmOptions = () => {
-    const characterRegionFieldMain = document.getElementById("character-region-input-main");
-    const characterRealmFieldMain = document.getElementById("character-realm-input-main");
+const handleCharacterName = () => {
     const characterNameFieldMain = document.getElementById("character-name-input-main");
     characterNameFieldMain.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
             characterNameFieldMain.value = characterNameFieldMain.value.charAt(0).toUpperCase() + characterNameFieldMain.value.slice(1).toLowerCase();
         };
     });
+};
 
-    realmList[characterRegionFieldMain.value].forEach(realm => {
-        const realmOption = createElement("option", "realm-option", null);
-        realmOption.textContent = realm;
-        realmOption.name = realm;
-        characterRealmFieldMain.appendChild(realmOption);
+const generateRealmOptions = () => {
+    let searchString = "";
+    let suggestedOption = "";
+
+    const scrollToMatchingOption = (searchString) => {
+        const options = realmSuggestionsContainer.querySelectorAll(".realm-option");
+
+        options.forEach(option => {
+            const normalizedOptionText = option.textContent.replace(/\u00A0/g, " ").toLowerCase();
+            const normalizedSearchString = searchString.replace(/\u00A0/g, " ").toLowerCase();
+
+            option.classList.remove("option-highlighted");
+        
+            if (normalizedOptionText.startsWith(normalizedSearchString)) {
+                const matchEnd = searchString.length;
+
+                let beforeMatch = option.textContent.slice(0, matchEnd);
+                let afterMatch = option.textContent.slice(matchEnd);
+
+                const highlightedText = `<span class="highlighted-text">${beforeMatch}</span>${afterMatch.replace(/ /g, "&nbsp;")}`;
+                option.innerHTML = highlightedText;
+
+                if (searchString.length > 0) {
+                    option.classList.add("option-highlighted");   
+                    selectedRealmDisplay.innerHTML = highlightedText;  
+                };
+
+                suggestedOption = option.textContent;
+                if (searchString.length > 0) {
+                    option.scrollIntoView({ block: "nearest" });
+                };
+            };
+        });
+    };
+
+    const characterRegionFieldMain = document.getElementById("character-region-input-main");
+    const characterRealmFieldMain = document.getElementById("character-realm-input-main");
+
+    const realmSuggestionsContainer = document.getElementById("character-realm-input-suggestions-container");
+    const selectedRealmDisplay = characterRealmFieldMain.querySelector("#character-realm-selected-realm");
+
+    characterRealmFieldMain.addEventListener("click", () => {
+        realmSuggestionsContainer.style.display = realmSuggestionsContainer.style.display === "block" ? "none" : "block";
+        scrollToMatchingOption(searchString);
+    });
+    
+    window.addEventListener("click", (e) => {
+        if (!characterRealmFieldMain.contains(e.target) && !realmSuggestionsContainer.contains(e.target)) {
+            realmSuggestionsContainer.style.display = "none";
+        };
     });
 
-    characterRegionFieldMain.addEventListener("input", (e) => {
-        characterRealmFieldMain.innerHTML = "";
-    
-        realmList[e.target.value].forEach(realm => {
-            const realmOption = createElement("option", "realm-option", null);
-            realmOption.textContent = realm;
-            realmOption.name = realm;
-            characterRealmFieldMain.appendChild(realmOption);
+    const selectedRegionDisplay = characterRegionFieldMain.querySelector("#character-region-selected-region");
+    selectedRealmDisplay.textContent = realmList[selectedRegionDisplay.textContent][0];
+
+    realmList[selectedRegionDisplay.textContent].forEach(realm => {
+        const realmOption = createElement("div", "realm-option", null);
+        realmOption.textContent = realm;
+        realmOption.dataset.name = realm;
+        realmSuggestionsContainer.appendChild(realmOption);
+
+        realmOption.addEventListener("click", (e) => {
+            e.stopPropagation();
+            selectedRealmDisplay.textContent = realmOption.dataset.name;
+            realmSuggestionsContainer.style.display = "none";
         });
     });
 
-    const characterRegionField = document.getElementById("character-region-input");
-    const characterRealmField = document.getElementById("character-realm-input");
-    const characterNameField = document.getElementById("character-name-input");
-    characterNameField.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-            characterNameField.value = characterNameField.value.charAt(0).toUpperCase() + characterNameField.value.slice(1).toLowerCase();
+    characterRegionFieldMain.addEventListener("input", (e) => {
+        while (realmSuggestionsContainer.firstChild) {
+            realmSuggestionsContainer.removeChild(realmSuggestionsContainer.firstChild);
         };
-    });
-    
-    characterRegionField.addEventListener("input", (e) => {
-        characterRealmField.innerHTML = "";
+
+        selectedRealmDisplay.textContent = realmList[e.target.value][0];
     
         realmList[e.target.value].forEach(realm => {
-            const realmOption = createElement("option", "realm-option", null);
+            const realmOption = createElement("div", "realm-option", null);
             realmOption.textContent = realm;
-            realmOption.name = realm;
-            characterRealmField.appendChild(realmOption);
+            realmOption.dataset.name = realm;
+            realmSuggestionsContainer.appendChild(realmOption);
+    
+            realmOption.addEventListener("click", (e) => {
+                e.stopPropagation();
+                selectedRealmDisplay.textContent = realmOption.dataset.name;
+                realmSuggestionsContainer.style.display = "none";
+            });
+        });
+    });
+
+    characterRealmFieldMain.addEventListener("keydown", (e) => {
+        if (e.key.length === 1) {
+            searchString += e.key;
+            scrollToMatchingOption(searchString);
+        } else if (e.key === "Backspace") {
+            searchString = searchString.slice(0, -1);
+            scrollToMatchingOption(searchString);
+
+            if (searchString.length === 0) {
+                selectedRealmDisplay.textContent = realmList[document.getElementById("character-region-selected-region").textContent][0];
+            };
+        } else if (e.key === "Enter") {
+            realmSuggestionsContainer.style.display = "none";
+            selectedRealmDisplay.innerHTML = suggestedOption;
+            
+            suggestedOption = "";
+            searchString = "";
+        };
+    });
+};
+
+const generateRegionOptions = () => {
+    let searchString = "";
+    let suggestedOption = "";
+
+    const scrollToMatchingOption = (searchString) => {
+        const options = regionSuggestionsContainer.querySelectorAll(".region-option");
+
+        options.forEach(option => {
+            const normalizedOptionText = option.textContent.replace(/\u00A0/g, " ").toLowerCase();
+            const normalizedSearchString = searchString.replace(/\u00A0/g, " ").toLowerCase();
+
+            option.classList.remove("option-highlighted");
+        
+            if (normalizedOptionText.startsWith(normalizedSearchString)) {
+                const matchEnd = searchString.length;
+
+                let beforeMatch = option.textContent.slice(0, matchEnd);
+                let afterMatch = option.textContent.slice(matchEnd);
+
+                const highlightedText = `<span class="highlighted-text">${beforeMatch}</span>${afterMatch.replace(/ /g, "&nbsp;")}`;
+                option.innerHTML = highlightedText;
+
+                if (searchString.length > 0) {
+                    option.classList.add("option-highlighted");   
+                    selectedRegionDisplay.innerHTML = highlightedText;  
+                };
+
+                suggestedOption = option.textContent;
+                if (searchString.length > 0) {
+                    option.scrollIntoView({ block: "nearest" });
+                };
+            };
+        });
+    };
+
+    const characterRegionFieldMain = document.getElementById("character-region-input-main");
+
+    const regionSuggestionsContainer = document.getElementById("character-region-input-suggestions-container");
+    const selectedRegionDisplay = characterRegionFieldMain.querySelector("#character-region-selected-region");
+
+    characterRegionFieldMain.addEventListener("click", () => {
+        regionSuggestionsContainer.style.display = regionSuggestionsContainer.style.display === "block" ? "none" : "block";
+        scrollToMatchingOption(searchString);
+    });
+    
+    window.addEventListener("click", (e) => {
+        if (!characterRegionFieldMain.contains(e.target) && !regionSuggestionsContainer.contains(e.target)) {
+            regionSuggestionsContainer.style.display = "none";
+        };
+    });
+
+    selectedRegionDisplay.textContent = "EU";
+
+    ["EU", "US"].forEach(region => {
+        const regionOption = createElement("div", "region-option", null);
+        regionOption.textContent = region;
+        regionOption.dataset.name = region;
+        regionSuggestionsContainer.appendChild(regionOption);
+
+        regionOption.addEventListener("click", (e) => {
+            e.stopPropagation();
+            selectedRegionDisplay.textContent = regionOption.dataset.name;
+            regionSuggestionsContainer.style.display = "none";
         });
     });
 };
@@ -159,14 +297,12 @@ const importCharacter = async () => {
         characterName = document.getElementById("character-name-input-main").value.toLowerCase();
     };
     if (!characterRealm) {
-        characterRealm = document.getElementById("character-realm-input-main").value.toLowerCase().replaceAll(" ", "-");
+        characterRealm = document.getElementById("character-realm-selected-realm").textContent.toLowerCase().replace(/\u00A0/g, "-");
     };
     if (!characterRegion) {
-        characterRegion = document.getElementById("character-region-input-main").value.toLowerCase();
+        characterRegion = document.getElementById("character-region-selected-region").textContent.toLowerCase();
     };
 
-    // characterName = "daisu";
-    // characterRealm = "aszune";
     if (characterName && characterRealm && characterRegion && isFirstImport) {
         const importButtonText = document.getElementById("import-button-text-main");
         const importButtonLoading = document.getElementById("import-button-main-loading-container");
@@ -230,8 +366,6 @@ const updateStats = async () => {
     let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
     let characterRegion = document.getElementById("character-region-input").value.toLowerCase();
 
-    // characterName = "daisu";
-    // characterRealm = "aszune";
     const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
 
     return fetch(`http://127.0.0.1:5000/fetch_updated_data?character_name=${characterName}&realm=${characterRealm}&custom_equipment=${customEquipment}&region=${characterRegion}`, {
@@ -300,7 +434,7 @@ const playCheckmarkAnimation = () => {
     }, 3000);    
 };
 
-function handleSimulationCancel() {
+const handleSimulationCancel = () => {
     if (abortController) {
         abortController.abort();
         simulationProgressBarContainer.style.opacity = "0";
@@ -344,6 +478,8 @@ const runSimulation = async () => {
 
     const priorityListJson = encodeURIComponent(JSON.stringify(priorityList));
     const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
+
+    simulateButton.style.boxShadow = "";
 
     return fetch(`http://127.0.0.1:5000/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}&time_warp_time=${timeWarpTime}&priority_list=${priorityListJson}&custom_equipment=${customEquipment}&tick_rate=${tickRate}&raid_health=${raidHealth}&mastery_effectiveness=${masteryEffectiveness}&light_of_dawn_targets=${lightOfDawnTargets}&lights_hammer_targets=${lightsHammerTargets}&resplendent_light_targets=${resplendentLightTargets}`, {
         credentials: "include",
@@ -582,7 +718,6 @@ const minimiseImportContainer = (data) => {
 
 // update displayed information based on imported character
 const updateUIAfterImport = (data, isFirstImport) => {
-    console.log(data);
     setSimulationOptionsFromImportedData(data);
 
     if (isFirstImport) {
@@ -600,12 +735,23 @@ const updateUIAfterImport = (data, isFirstImport) => {
     updateEquipmentFromImportedData(data);
 };
 
+handleCharacterName();
 generateRealmOptions();
+generateRegionOptions();
 
 // event listeners
 importButtonMain.addEventListener("click", importCharacter);
 importButton.addEventListener("click", importCharacter);
 simulationProgressBarContainer.addEventListener("click", runSimulation);
+
+simulationProgressBarCheck.addEventListener("mouseenter", () => {
+    simulateButton.style.boxShadow = "0px 0px 3px 2px var(--info-circle-colour)";
+    simulateButton.style.transition = "box-shadow 0.1s ease-in-out";
+});
+  
+simulationProgressBarCheck.addEventListener("mouseleave", () => {
+    simulateButton.style.boxShadow = "";
+});
 
 const tickRateInfoCircle = document.getElementById("tick-rate-info-circle");
 const tickRateTooltip = createTooltip("tick-rate-tooltip", "tick-rate-tooltip");

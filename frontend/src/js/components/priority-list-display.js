@@ -32,7 +32,7 @@ const abilityAutocomplete = (element, abilityNames, icon) => {
             
             autocompleteSuggestion.textContent = abilityName;
             if (autocompleteSuggestion.textContent.length > 21 || autocompleteSuggestion.textContent === "Aerated Mana Potion") {
-                autocompleteSuggestion.style.paddingTop = "0px";
+                autocompleteSuggestion.style.paddingTop = "5px";
             };
 
             autocompleteSuggestion.addEventListener("click", () => {

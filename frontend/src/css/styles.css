@@ -182,7 +182,7 @@ body {
     align-items: center;
 
     margin-left: auto;
-    margin-bottom: 45px;
+    margin-bottom: 40px;
     margin-right: 15px;
     padding-top: 20px;
 
@@ -461,7 +461,7 @@ body {
 
     user-select: none;
 
-    width: 350px;
+    width: 390px;
 
     background-color: var(--panel-colour);
     border: 1px solid var(--border-colour-3);
@@ -486,13 +486,17 @@ body {
 }
 
 .character-input-label-main {
-    padding: 9px 10px 0 2px;
+    padding: 9px 10px 10px 2px;
 
     width: 275px;
     text-align: left;
 
     font-size: 16px;
     color: var(--light-font-colour);
+}
+
+#character-name-input-label-main {
+    padding-bottom: 3px;
 }
 
 .import-input-container-main {
@@ -525,6 +529,107 @@ body {
     font-size: 16px;
 
     padding-left: 5px;
+}
+
+#character-realm-input-main, #character-region-input-main {
+    position: relative;
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    padding-left: 10px;
+}
+
+#character-realm-selected-realm, #character-region-selected-region {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 10px;
+    position: absolute;
+    top: -2px;
+    left: -1px;
+
+    height: 40px;
+    width: 275px;
+}
+
+#character-realm-input-suggestions-container {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: -1px;
+
+    text-align: left;
+
+    height: 240px;
+    width: 275px;
+
+    overflow: auto;
+
+    background-color: var(--panel-colour-2);
+    border-left: 1px solid var(--border-colour-3);
+    border-right: 1px solid var(--border-colour-3);
+    border-bottom: 1px solid var(--border-colour-3);
+}
+
+#character-realm-input-suggestions-container::-webkit-scrollbar-thumb {
+    border-left: 2px solid var(--panel-colour-6);
+}
+
+#character-realm-input-suggestions-container::-webkit-scrollbar-track {
+    background-color: 1px solid var(--panel-colour-6);
+}
+
+#character-region-input-suggestions-container {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: -1px;
+
+    text-align: left;
+
+    height: 80px;
+    width: 275px;
+
+    overflow: hidden;
+
+    background-color: var(--panel-colour-2);
+    border-left: 1px solid var(--border-colour-3);
+    border-right: 1px solid var(--border-colour-3);
+    border-bottom: 1px solid var(--border-colour-3);
+
+    z-index: 100;
+}
+
+.custom-select-arrow-down {
+    position: absolute;
+    top: 11px;
+    left: 250px;
+
+    font-size: 14px;
+}
+
+.highlighted-text {
+    color: var(--paladin-font);
+}
+
+.realm-option, .region-option {
+    display: flex;
+    align-items: center;
+
+    padding-left: 10px;
+
+    height: 40px;
+    width: 100%;
+}
+
+.realm-option:hover, .region-option:hover {
+    background-color: var(--panel-colour-5);
+}
+
+.option-highlighted {
+    background-color: var(--panel-colour-5);
 }
 
 #character-name-input-main {
@@ -649,7 +754,7 @@ body {
 #options-container {
     display: flex;
 
-    padding: 15px 0 0 15px;
+    padding: 15px 0 0 35px;
 
     font-size: 15px;
 }
@@ -1368,6 +1473,20 @@ body {
     clip-path: polygon(100% 100%, 0 100%, 100% 0);
 }
 
+.talent-icon-divider {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 138%;
+    height: 0;
+    border-top: 1px solid var(--dark-font-colour);
+    transform: rotate(-45deg);
+    transform-origin: 0 0; 
+
+    z-index: 2;
+}
+
 #equipment-content {
     width: 100%;
     height: 100%;
@@ -1547,12 +1666,11 @@ body {
 }
 
 .item-slot-info::-webkit-scrollbar {
-    width: 7px;
+    width: 4px;
 }
 
 .item-slot-info::-webkit-scrollbar-thumb {
-    border: 1px solid var(--panel-colour-6);
-    border-left: 2px solid var(--panel-colour-6);
+    border: 0px solid var(--panel-colour-6);
     border-radius: 2px;
 
     background: var(--border-colour-3);
@@ -1562,6 +1680,8 @@ body {
     color: var(--rarity-epic);
     font-size: 11px;
     padding-top: 5px;
+
+    width: 150px;
 
     text-overflow: ellipsis;
     overflow: hidden;
@@ -2332,14 +2452,14 @@ body {
     width: 95%;
     height: 50px;
 
-    background-color: var(--panel-colour-5);
+    background-color: var(--panel-colour-3);
     border: 1px solid var(--border-colour-3);
 }
 
 .priority-list-preset:hover {
     cursor: pointer;
     user-select: none;
-    background-color: var(--panel-colour-3);
+    background-color: var(--panel-colour-5);
 }
 
 #priority-list-paste-modal {
@@ -2474,7 +2594,7 @@ body {
 
     height: 538px;
     border: 1px solid var(--border-colour-3);
-    width: 99%;
+    width: 99.2%;
     padding-left: 5px;
 }
 
@@ -2579,11 +2699,12 @@ body {
 .ability-autocomplete-suggestion {
     cursor: pointer;
     padding: 8px;
-    padding-top: 10px;
+    padding-top: 12px;
     height: 40px;
+    line-height: 15px;
 
-    border-top: 1px solid var(--border-colour-3);
-    border-right: 1px solid var(--border-colour-3);
+    /* border-top: 1px solid var(--border-colour-3); */
+    /* border-right: 1px solid var(--border-colour-3); */
 
     font-size: 13px;
     color: var(--light-font-colour);
@@ -2865,7 +2986,7 @@ input:focus {
 #simulation-name-text-input {
     position: absolute;
     right: 200px;
-    top: 7px;
+    top: 6px;
 
     margin-right: 10px;
     padding-left: 6px;
@@ -2883,7 +3004,7 @@ input:focus {
 
 #simulate-button, #simulation-progress-bar-container {
     position: absolute;
-    top: 6px;
+    top: 5px;
     right: 6px;
 
     width: 200px;
@@ -2937,6 +3058,8 @@ input:focus {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    transition: box-shadow 1s ease-in-out;
 }
 
 .simulation-progress-bar-checkmark {
@@ -4642,12 +4765,26 @@ tr {
 .loadout-priority-container {
     display: flex;
     justify-content: left;
+    position: relative;
     margin-bottom: 3px;
 
     margin-top: 5px;
     padding-left: 5px;
 
-    border-bottom: 1px solid var(--border-colour-3);
+    box-shadow: 1px 0px 0px 0px var(--border-colour-3);
+    /* border-right: 1px solid var(--border-colour-3); */
+}
+
+.loadout-priority-list::-webkit-scrollbar {
+    width: 7px;
+}
+
+.loadout-priority-list::-webkit-scrollbar-thumb {
+    border: 1px solid var(--panel-colour-6);
+    border-left: 2px solid var(--panel-colour-6);
+    border-radius: 2px;
+
+    background: var(--border-colour-3);
 }
 
 .loadout-priority-icon {
