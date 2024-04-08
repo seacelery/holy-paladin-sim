@@ -158,6 +158,8 @@ class Paladin:
         self.embellishments = {}
         self.update_embellishments()
         
+        self.set_bonuses = {"season_1": 0, "season_2": 0, "season_3": 0}
+        
         # initialise abilities
         self.abilities = {}      
         self.load_abilities_based_on_talents()
@@ -913,7 +915,18 @@ class Paladin:
         gems_from_equipment = []
         bonus_effect_enchants = []
         
+        self.set_bonuses = {"season_1": 0, "season_2": 0, "season_3": 0}
+        
         for item_slot, item_data in equipment.items():
+            
+            name = item_data.get("name", "")
+            if "Virtuous Silver" in name:
+                self.set_bonuses["season_1"] += 1
+            if "Heartfire Sentinel" in name:
+                self.set_bonuses["season_2"] += 1
+            if "Zealous Pyreknight" in name:
+                self.set_bonuses["season_3"] += 1
+            
             stats = item_data.get("stats", {})
             if stats:
                 for stat in stats:
@@ -935,7 +948,6 @@ class Paladin:
         return_gem_stats(self, gems_from_equipment, stat_values_from_equipment)
          
         stat_values_from_equipment["intellect"] += 2089
-        # stat_values_from_equipment["intellect"] *= 1.05
         
         stat_values_from_equipment["stamina"] += 3848
         if self.is_talent_active("Sanctified Plates") and self.class_talents["row6"]["Sanctified Plates"]["ranks"]["current rank"] == 1:

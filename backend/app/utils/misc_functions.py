@@ -37,6 +37,12 @@ def add_talent_healing_multipliers(heal_amount, caster):
         
     return heal_amount
 
+def handle_flat_cdr(spell, amount):
+    spell.remaining_cooldown -= amount
+    
+    if spell.remaining_cooldown < 0:
+        spell.remaining_cooldown = 0.05
+
 # data tracking functions
 def append_spell_heal_event(array, spell_name, caster, target, amount, current_time, is_crit, spends_mana=False, is_absorb=False):
     if is_absorb:

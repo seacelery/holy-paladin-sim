@@ -6,7 +6,7 @@ from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, Bl
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
 from .target import BeaconOfLight
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals, update_spell_data_beacon_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals, update_spell_data_beacon_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
 
 # KNOWN BUGS
 # glimmer's stacking 4% healing skips the first glimmer so 0% at 1 glimmer -> 8% at 2 glimmers
@@ -14,12 +14,14 @@ from ..utils.misc_functions import format_time, append_spell_heal_event, append_
 def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_targets):
     if len(glimmer_targets) > max_glimmer_targets:             
         oldest_active_glimmer = min(glimmer_targets, key=lambda glimmer_target: glimmer_target.target_active_buffs["Glimmer of Light"][0].duration)
-        oldest_active_glimmer.apply_buff_to_target(HolyReverberation(caster), current_time, caster=caster)
         
-        longest_reverberation_duration = max(buff_instance.duration for buff_instance in oldest_active_glimmer.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in oldest_active_glimmer.target_active_buffs and oldest_active_glimmer.target_active_buffs["Holy Reverberation"] else None
-        if "Holy Reverberation" in oldest_active_glimmer.target_active_buffs:
-            if len(oldest_active_glimmer.target_active_buffs["Holy Reverberation"]) > 0:
-                caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(oldest_active_glimmer.target_active_buffs['Holy Reverberation'])}) applied to {oldest_active_glimmer.name}: {longest_reverberation_duration}s duration")
+        if caster.set_bonuses["season_3"] >= 2:
+            oldest_active_glimmer.apply_buff_to_target(HolyReverberation(caster), current_time, caster=caster)
+            
+            longest_reverberation_duration = max(buff_instance.duration for buff_instance in oldest_active_glimmer.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in oldest_active_glimmer.target_active_buffs and oldest_active_glimmer.target_active_buffs["Holy Reverberation"] else None
+            if "Holy Reverberation" in oldest_active_glimmer.target_active_buffs:
+                if len(oldest_active_glimmer.target_active_buffs["Holy Reverberation"]) > 0:
+                    caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(oldest_active_glimmer.target_active_buffs['Holy Reverberation'])}) applied to {oldest_active_glimmer.name}: {longest_reverberation_duration}s duration")
         
         append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, oldest_active_glimmer, current_time, oldest_active_glimmer.target_active_buffs["Glimmer of Light"][0].duration)
         del oldest_active_glimmer.target_active_buffs["Glimmer of Light"]
@@ -107,6 +109,13 @@ class HolyShock(Spell):
             
             # if crits, apply Infusion of Light 
             if spell_crit:
+                if caster.set_bonuses["season_2"] >= 2:
+                    if caster.is_talent_active("Holy Prism"):
+                        handle_flat_cdr(caster.abilities["Holy Prism"], 1)
+                    elif caster.is_talent_active("Light's Hammer"):
+                        handle_flat_cdr(caster.abilities["Light's Hammer"], 2)
+                    
+                
                 if caster.is_talent_active("Inflorescence of the Sunwell"):
                     caster.apply_buff_to_self(InfusionOfLight(caster), current_time, stacks_to_apply=2, max_stacks=2)
                 else:
@@ -247,7 +256,8 @@ class Daybreak(Spell):
                 caster.apply_buff_to_self(RisingSunlight(), current_time, stacks_to_apply=3, max_stacks=3)
             
             # tier season 3 4pc  
-            caster.apply_buff_to_self(FirstLight(), current_time)
+            if caster.set_bonuses["season_3"] >= 4:
+                caster.apply_buff_to_self(FirstLight(), current_time)
             
             # adjust for daybreak 200% glimmer healing
             for glimmer_target in glimmer_targets:
@@ -295,12 +305,13 @@ class Daybreak(Spell):
                 update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", target.name)
                 glimmer_targets.remove(target)
                 
-                target.apply_buff_to_target(HolyReverberation(caster), current_time, caster=caster)
-                
-                longest_reverberation_duration = max(buff_instance.duration for buff_instance in target.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in target.target_active_buffs and target.target_active_buffs["Holy Reverberation"] else None
-                if "Holy Reverberation" in target.target_active_buffs:
-                    if len(target.target_active_buffs["Holy Reverberation"]) > 0:
-                        caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
+                if caster.set_bonuses["season_3"] >= 2:
+                    target.apply_buff_to_target(HolyReverberation(caster), current_time, caster=caster)
+                    
+                    longest_reverberation_duration = max(buff_instance.duration for buff_instance in target.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in target.target_active_buffs and target.target_active_buffs["Holy Reverberation"] else None
+                    if "Holy Reverberation" in target.target_active_buffs:
+                        if len(target.target_active_buffs["Holy Reverberation"]) > 0:
+                            caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
         
         return cast_success, spell_crit, heal_amount, total_glimmer_healing
             
@@ -374,6 +385,12 @@ class RisingSunlightHolyShock(Spell):
             
             # if crits, apply Infusion of Light 
             if spell_crit:
+                if caster.set_bonuses["season_2"] >= 2:
+                    if caster.is_talent_active("Holy Prism"):
+                        handle_flat_cdr(caster.abilities["Holy Prism"], 1)
+                    elif caster.is_talent_active("Light's Hammer"):
+                        handle_flat_cdr(caster.abilities["Light's Hammer"], 2)
+                
                 if caster.is_talent_active("Inflorescence of the Sunwell"):
                     caster.apply_buff_to_self(InfusionOfLight(caster), current_time, stacks_to_apply=2, max_stacks=2)
                 else:
@@ -573,6 +590,12 @@ class DivineTollHolyShock(Spell):
             
             # if crits, apply Infusion of Light 
             if spell_crit:
+                if caster.set_bonuses["season_2"] >= 2:
+                    if caster.is_talent_active("Holy Prism"):
+                        handle_flat_cdr(caster.abilities["Holy Prism"], 1)
+                    elif caster.is_talent_active("Light's Hammer"):
+                        handle_flat_cdr(caster.abilities["Light's Hammer"], 2)
+                
                 if caster.is_talent_active("Inflorescence of the Sunwell"):
                     caster.apply_buff_to_self(InfusionOfLight(caster), current_time, stacks_to_apply=2, max_stacks=2)
                 else:
@@ -734,6 +757,12 @@ class DivineResonanceHolyShock(Spell):
             
             # if crits, apply Infusion of Light 
             if spell_crit:
+                if caster.set_bonuses["season_2"] >= 2:
+                    if caster.is_talent_active("Holy Prism"):
+                        handle_flat_cdr(caster.abilities["Holy Prism"], 1)
+                    elif caster.is_talent_active("Light's Hammer"):
+                        handle_flat_cdr(caster.abilities["Light's Hammer"], 2)
+                
                 if caster.is_talent_active("Inflorescence of the Sunwell"):
                     caster.apply_buff_to_self(InfusionOfLight(caster), current_time, stacks_to_apply=2, max_stacks=2)
                 else:
@@ -1118,9 +1147,9 @@ class WordOfGlory(Spell):
             # tirion's devotion
             if caster.is_talent_active("Tirion's Devotion"):
                 if "Divine Purpose" in caster.active_auras:
-                    caster.abilities["Lay on Hands"].remaining_cooldown -= 1.5 * 3
+                    handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * 3)
                 else:
-                    caster.abilities["Lay on Hands"].remaining_cooldown -= 1.5 * self.holy_power_cost
+                    handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * self.holy_power_cost)
             
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -1331,9 +1360,9 @@ class LightOfDawn(Spell):
             # tirion's devotion
             if caster.is_talent_active("Tirion's Devotion"):
                 if "Divine Purpose" in caster.active_auras:
-                    caster.abilities["Lay on Hands"].remaining_cooldown -= 1.5 * 3
+                    handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * 3)
                 else:
-                    caster.abilities["Lay on Hands"].remaining_cooldown -= 1.5 * self.holy_power_cost
+                    handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * self.holy_power_cost)
                     
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -1476,11 +1505,15 @@ class HolyPrism(Spell):
     
     def __init__(self, caster):
         super().__init__("Holy Prism", mana_cost=HolyPrism.MANA_COST, cooldown=HolyPrism.BASE_COOLDOWN, healing_target_count=HolyPrism.TARGET_COUNT, is_heal=True)
+        if caster.set_bonuses["season_2"] >= 4:
+            self.spell_healing_modifier *= 1.4
+            self.holy_power_gain = 1
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
-            pass
+            increment_holy_power(self, caster, current_time)
+            update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
 
 
 class LightsHammerSpell(Spell):
@@ -1494,7 +1527,7 @@ class LightsHammerSpell(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
-            caster.apply_summon(LightsHammerSummon(), current_time)
+            caster.apply_summon(LightsHammerSummon(caster), current_time)
                 
                 
 class LightsHammerHeal(Spell):

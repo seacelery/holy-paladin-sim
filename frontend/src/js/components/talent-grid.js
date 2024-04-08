@@ -49,8 +49,8 @@ const toggleTalentOptions = (talentName, talentData) => {
         case talentName === "Awakening":
             document.getElementById("cooldown-tracking-avenging-wrath-awakening-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none"; 
             break;
-        case talentName === "Daybreak":
-            document.getElementById("cooldown-tracking-first-light-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";  
+        case talentName === "Rising Sunlight":
+            document.getElementById("cooldown-tracking-rising-sunlight-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";  
             break;
         case talentName === "Blessing of Summer":
             document.getElementById("cooldown-tracking-blessing-of-spring-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
@@ -515,6 +515,9 @@ const createTalentGrid = () => {
                 };
             };
     
+            if (!cell.id) {
+                cell.style.pointerEvents = "none";
+            };
             container.appendChild(cell);
         });
     };

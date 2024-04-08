@@ -274,6 +274,10 @@ class Spell:
                 heal_amount += caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing
             caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing = 0
         
+        # season 2 tier 2pc   
+        if self.name in ["Holy Shock", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)"] and caster.set_bonuses["season_2"] >= 2 and is_crit:
+            heal_amount *= 1.8
+        
         if "Close to Heart" in caster.active_auras:
             heal_amount *= 1.08
             
@@ -339,6 +343,9 @@ class Spell:
     def apply_holy_reverberation(self, caster, target, current_time):
         from .auras_buffs import HolyReverberation
         
+        if caster.set_bonuses["season_3"] < 2:
+            return
+        
         new_buff = HolyReverberation(caster)
         if "Holy Reverberation" in target.target_active_buffs:
             if len(target.target_active_buffs["Holy Reverberation"]) >= 6:
@@ -355,7 +362,7 @@ class Spell:
         caster.events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
         
     def try_trigger_rppm_effects(self, caster, targets, current_time):
-        from .spells_passives import TouchOfLight, EmbraceOfAkunda, DreamingDevotion, ChirpingRune
+        from .spells_passives import TouchOfLight, EmbraceOfAkunda, DreamingDevotion, ChirpingRune, LarodarsFieryReverie
         from .auras_buffs import ( 
                                   SophicDevotion, EmbraceOfPaku, CoagulatedGenesaurBloodBuff, SustainingAlchemistStoneBuff, 
                                   AlacritousAlchemistStoneBuff, SeaStarBuff, PipsEmeraldFriendshipBadge, BestFriendsWithPipEmpowered, 
@@ -421,6 +428,10 @@ class Spell:
         if "Dreaming Devotion" in caster.bonus_enchants:
             dreaming_devotion = DreamingDevotion(caster)
             try_proc_rppm_effect(dreaming_devotion, is_flat_healing=True)
+            
+        if "Incandescent Essence" in caster.bonus_enchants:
+            incandescent_essence = LarodarsFieryReverie(caster)
+            try_proc_rppm_effect(incandescent_essence, is_flat_healing=True, is_hasted=True)
             
         if "Chirping Rune" in caster.active_auras:
             chirping_rune = ChirpingRune(caster)

@@ -88,6 +88,29 @@ class DreamingDevotion(Spell):
             
             target.receive_heal(dreaming_devotion_heal, caster)
             update_spell_data_heals(caster.ability_breakdown, "Dreaming Devotion", target, dreaming_devotion_heal, dreaming_devotion_crit)
+            
+
+class LarodarsFieryReverie(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    BASE_PPM = 1
+    
+    def __init__(self, caster):
+        super().__init__("Larodar's Fiery Reverie")
+        
+    def apply_flat_healing(self, caster, target, current_time, is_heal):     
+        larodars_fiery_reverie_heal, larodars_fiery_reverie_crit = LarodarsFieryReverie(caster).calculate_heal(caster)
+        scaled_larodars_fiery_reverie_heal = (314488 / pow(1.014, 528)) * pow(1.014, caster.equipment["head"]["item_level"])
+        
+        larodars_fiery_reverie_heal = scaled_larodars_fiery_reverie_heal * caster.versatility_multiplier
+        
+        if larodars_fiery_reverie_crit:
+            larodars_fiery_reverie_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+            
+        larodars_fiery_reverie_heal = add_talent_healing_multipliers(larodars_fiery_reverie_heal, caster)
+        
+        target.receive_heal(larodars_fiery_reverie_heal, caster)
+        update_spell_data_heals(caster.ability_breakdown, "Larodar's Fiery Reverie", target, larodars_fiery_reverie_heal, larodars_fiery_reverie_crit)
  
  
 class EmbraceOfAkunda(Spell):

@@ -1,4 +1,5 @@
 import random
+from ..utils.misc_functions import increment_holy_power, update_spell_holy_power_gain
 
 
 class Summon:
@@ -16,10 +17,15 @@ class Summon:
         
 class LightsHammerSummon(Summon):
     
-    def __init__(self):
+    def __init__(self, caster):
         super().__init__("Light's Hammer", 14)
         self.last_tick_time = 0
-        self.base_tick_interval = 2 
+        
+        if caster.set_bonuses["season_2"] >= 4:
+            self.base_tick_interval = 1
+            self.last_holy_power_time = 0
+        else:
+            self.base_tick_interval = 2 
         
     def apply_effect(self, caster, current_time):
         self.last_tick_time = 0
@@ -32,6 +38,16 @@ class LightsHammerSummon(Summon):
         if self.last_tick_time >= self.base_tick_interval - 0.001:
             self.trigger_lights_hammer_tick(caster, current_time)
             self.last_tick_time = 0
+            
+        if caster.set_bonuses["season_2"] >= 4:
+            self.last_holy_power_time += tick_rate
+            if self.last_holy_power_time >= 4:
+                lights_hammer = caster.abilities["Light's Hammer"]
+                lights_hammer.holy_power_gain = 1
+                increment_holy_power(lights_hammer, caster, current_time)
+                update_spell_holy_power_gain(caster.ability_breakdown, lights_hammer.name, lights_hammer.holy_power_gain)
+                lights_hammer.holy_power_gain = 0
+                self.last_holy_power_time = 0
             
     def trigger_lights_hammer_tick(self, caster, current_time):
         from .spells_healing import LightsHammerHeal

@@ -7,6 +7,10 @@ def convert_enchants_to_stats(enchants_list):
     
     for enchant in enchants_list:
         enchant_parts = enchant.split("|")
+
+        if len(enchant_parts) > 1 and "Incandescent Essence" in enchant_parts[1]:
+            formatted_enchants.append("Incandescent Essence")
+            
         formatted_enchant = enchant_parts[0].split(": ")
         if len(formatted_enchant) == 1:
             formatted_enchant = formatted_enchant[0].strip()

@@ -43179,7 +43179,11 @@ const itemData = [
             {
                 "name": "Conjured Chillglobe",
                 "id": 396391,
-                "description": "Use: If your mana is above 65%, toss the Chillglobe at your target, inflicting 51,980 Frost damage.\r\n\r\nIf your mana is below 65%, instead drink from the Chillglobe to restore 11,735 mana instantly. (1 Min Cooldown)"
+                "description": "Use: If your mana is above 65%, toss the Chillglobe at your target, inflicting *51,981 Frost damage.\r\n\r\nIf your mana is below 65%, instead drink from the Chillglobe to restore *3,521 mana instantly. (1 Min Cooldown)",
+                "effect_values": [
+                    {"base_value": 51981, "effect_type": "scalar", "effect_coefficient": 133.4993, "allocation_type": "flat_healing"},
+                    {"base_value": 3521, "effect_type": "scalar", "effect_coefficient": 9.0419, "allocation_type": "flat_healing"},
+                ]
             }
         ],
         "stats": {

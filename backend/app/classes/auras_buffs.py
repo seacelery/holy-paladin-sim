@@ -2,7 +2,7 @@ import random
 import re
 
 from .auras import Buff
-from ..utils.misc_functions import append_spell_heal_event, format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
+from ..utils.misc_functions import append_spell_heal_event, format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event, add_talent_healing_multipliers
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
 from ..utils.stat_values import update_stat_with_multiplicative_percentage
 
@@ -71,8 +71,7 @@ class HoT(Buff):
         if random_num <= crit_chance:
             is_crit = True
             
-        if "Close to Heart" in caster.active_auras:
-            healing_per_tick *= 1.08
+        healing_per_tick = add_talent_healing_multipliers(healing_per_tick, caster)
 
         return healing_per_tick, is_crit
 
@@ -104,6 +103,7 @@ class GiftOfTheNaaruBuff(HoT):
             is_crit = True
 
         return healing_per_tick, is_crit
+        
         
 class HolyReverberation(HoT):
     
@@ -1154,7 +1154,7 @@ class RetributionAuraTrigger(Buff):
         super().__init__("Retribution Aura", 30, base_duration=30)
         
     def apply_effect(self, caster, current_time=None):
-        caster.healing_mutliplier *= 1.02
+        caster.healing_multiplier *= 1.02
         
     def remove_effect(self, caster, current_time=None):
         caster.healing_multiplier /= 1.02

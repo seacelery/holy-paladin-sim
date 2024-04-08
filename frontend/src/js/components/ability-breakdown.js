@@ -119,7 +119,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         "Restorative Sands", "Echoing Tyrstone", "Smoldering Seedling", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT", 
         "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", 
         "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion", "Veneration", "Merciful Auras", "Light of the Martyr ", "Saved by the Light",
-        "Chirping Rune"
+        "Chirping Rune", "Larodar's Fiery Reverie"
     ];
     // displays casts with average as healing divided by hits
     const excludedSpellsCastsAverageHits = [

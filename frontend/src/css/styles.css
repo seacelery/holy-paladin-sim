@@ -589,7 +589,7 @@ body {
 
     text-align: left;
 
-    height: 80px;
+    height: 81px;
     width: 275px;
 
     overflow: hidden;
@@ -664,7 +664,7 @@ body {
 #import-button-main:hover {
     cursor: pointer;
     user-select: none;
-    background-color: var(--hover-colour-dark);
+    background-color: var(--panel-colour-table);
 }
 
 /* character options window */
@@ -1089,7 +1089,8 @@ body {
 
 .race-image:hover, .flask-image:hover, .augment-rune-image:hover, .food-image:hover, .weapon-imbue-image:hover, .raid-buff-image:hover, .external-buff-image:hover, .potion-image:hover {
     box-shadow: 0px 0px 3px 1px var(--paladin-font);
-    transition: box-shadow 0.05s ease-in-out;
+    filter: saturate(0.8);
+    transition: all 0.05s ease-in-out;
 }
 
 .race-selected, .flask-selected, .augment-rune-selected, .food-selected, .weapon-imbue-selected, .raid-buff-selected, .external-buff-selected, .potion-selected {
@@ -1404,6 +1405,15 @@ body {
     border-radius: 2px;
 
     filter: saturate(0);
+}
+
+.talent-option:hover {
+    box-shadow: 0px 0px 4px 1px var(--healing-font) !important;
+    transition: box-shadow 0.05s ease-in-out;
+}
+
+.talent-icon-right:hover {
+    border-bottom: 1px solid var(--paladin-font)
 }
 
 .talent-rank-display {
@@ -1970,6 +1980,10 @@ body {
     user-select: none;
 }
 
+#current-equipped-item-enchants-0, #new-equipped-item-enchants-0 {
+    border-bottom: none !important;
+}
+
 .current-equipped-item-enchant-options, .current-equipped-item-embellishment-options, .new-equipped-item-enchant-options, .new-equipped-item-embellishment-options {
     z-index: 5;
     display: none;
@@ -1987,8 +2001,25 @@ body {
     background-color: var(--panel-colour-2);
 }
 
+.current-equipped-item-embellishment-options::-webkit-scrollbar, .new-equipped-item-embellishment-options::-webkit-scrollbar {
+    width: 4px;
+}
+
+.current-equipped-item-embellishment-options::-webkit-scrollbar-thumb, .new-equipped-item-embellishment-options::-webkit-scrollbar-thumb {
+    border: 0px solid var(--panel-colour-6);
+    border-radius: 2px;
+
+    background: var(--border-colour-3);
+}
+
+.current-equipped-item-enchant-options, .new-equipped-item-enchant-options {
+    margin-top: -1px;
+}
+
 .current-equipped-item-embellishment-options, .new-equipped-item-embellishment-options {
     height: 133px;
+
+    background-color: var(--panel-colour-2);
 }
 
 .current-equipped-item-default-enchant-option, .current-equipped-item-default-embellishment-option, .current-equipped-item-trinket-effect, .new-equipped-item-default-enchant-option, .new-equipped-item-default-embellishment-option, .new-equipped-item-trinket-effect {

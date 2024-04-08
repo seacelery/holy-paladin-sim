@@ -79,6 +79,7 @@ const spellToIconsMap = {
 
     // enchants
     "Dreaming Devotion": "https://render.worldofwarcraft.com/eu/icons/56/item_herbd.jpg",
+    "Larodar's Fiery Reverie": "https://render.worldofwarcraft.com/eu/icons/56/10_2_raidability_burningroots.jpg",
 
     // misc
     "Wait": "https://render.worldofwarcraft.com/eu/icons/56/inv_gauntlets_06.jpg",

@@ -56,6 +56,9 @@ def set_up_paladin(paladin):
     targets = paladin.potential_healing_targets
     glimmer_targets = [glimmer_target for glimmer_target in paladin.potential_healing_targets if "Glimmer of Light" in glimmer_target.target_active_buffs]
     
+    paladin.mastery_effectiveness = 1
+    paladin.set_bonuses = {"season_1": 0, "season_2": 0, "season_3": 0}
+    
     return targets, glimmer_targets
 
 def reset_talents(paladin):
@@ -90,6 +93,46 @@ def test_holy_shock():
         
         expected_heal_amount = 17980
         assert round(heal_amount / 10) * 10 == expected_heal_amount, "Holy Shock (no talents, no crit) unexpected value"
+        
+def test_holy_shock_season_2_tier_2pc():
+    # no talents, no crit, season 2 tier 2pc
+    for _ in range(100):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {}, {})
+        
+        holy_shock = paladin.abilities["Holy Shock"]
+        
+        set_crit_to_max(paladin)
+        paladin.set_bonuses["season_2"] = 2
+        
+        target = [targets[0]]
+        _, _, heal_amount, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        
+        expected_heal_amount = 17980 * 2 * 1.8
+        assert expected_heal_amount - 100 <= round(heal_amount / 10) * 10 <= expected_heal_amount + 100, "Holy Shock (no talents, no crit, Season 2 Tier 2pc) unexpected value"
+        
+def test_holy_shock_mastery_effectiveness():
+    # no talents, no crit, no mastery effectiveness
+    for _ in range(100):
+        paladin = initialise_paladin()
+        targets, glimmer_targets = set_up_paladin(paladin)
+        
+        reset_talents(paladin)
+        update_talents(paladin, {}, {})
+        
+        holy_shock = paladin.abilities["Holy Shock"]
+        
+        paladin.crit = -10
+        paladin.mastery_effectiveness = 0
+        
+        target = [targets[0]]
+        _, _, heal_amount, _, _ = holy_shock.cast_healing_spell(paladin, target, 0, True, glimmer_targets)
+        
+        expected_heal_amount = 14260
+        assert round(heal_amount / 10) * 10 == expected_heal_amount, "Holy Shock (no talents, no crit, no mastery effectiveness) unexpected value"
     
 def test_holy_shock_reclamation():        
     # no talents, no crit, reclamation at 70%

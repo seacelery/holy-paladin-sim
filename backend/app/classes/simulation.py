@@ -142,7 +142,7 @@ class Simulation:
         self.paladin.healing_timeline[round(self.elapsed_time, 2)] = healing_this_second
         
         # check healing during specific auras
-        auras_to_track = set(["Avenging Wrath", "Avenging Wrath (Awakening)", "First Light", "Blessing of Spring"])
+        auras_to_track = set(["Avenging Wrath", "Avenging Wrath (Awakening)", "Rising Sunlight", "Blessing of Spring"])
 
         # active_auras is a dictionary with aura names as keys
         active_auras = set(self.paladin.active_auras.keys())
@@ -501,7 +501,7 @@ class Simulation:
                     target.target_active_buffs[buff_name] = new_buff_instances
                 else:
                     if buff_name in target.target_active_buffs:
-                        if "Glimmer of Light" in target.target_active_buffs and buff_name == "Glimmer of Light":
+                        if "Glimmer of Light" in target.target_active_buffs and buff_name == "Glimmer of Light" and self.paladin.set_bonuses["season_3"] >= 2:
                             target.apply_buff_to_target(HolyReverberation(self.paladin), self.elapsed_time, caster=self.paladin)
                             longest_reverberation_duration = max(buff_instance.duration for buff_instance in target.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in target.target_active_buffs and target.target_active_buffs["Holy Reverberation"] else None
                             if "Holy Reverberation" in target.target_active_buffs:

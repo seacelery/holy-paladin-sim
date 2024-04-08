@@ -153,12 +153,16 @@ const generateRealmOptions = () => {
 
     characterRealmFieldMain.addEventListener("click", () => {
         realmSuggestionsContainer.style.display = realmSuggestionsContainer.style.display === "block" ? "none" : "block";
+        searchString = "";
         scrollToMatchingOption(searchString);
     });
     
     window.addEventListener("click", (e) => {
         if (!characterRealmFieldMain.contains(e.target) && !realmSuggestionsContainer.contains(e.target)) {
-            realmSuggestionsContainer.style.display = "none";
+            if (realmSuggestionsContainer.style.display !== "none") {
+                realmSuggestionsContainer.style.display = "none";
+                selectedRealmDisplay.innerHTML = selectedRealmDisplay.textContent;
+            };
         };
     });
 
@@ -175,27 +179,6 @@ const generateRealmOptions = () => {
             e.stopPropagation();
             selectedRealmDisplay.textContent = realmOption.dataset.name;
             realmSuggestionsContainer.style.display = "none";
-        });
-    });
-
-    characterRegionFieldMain.addEventListener("input", (e) => {
-        while (realmSuggestionsContainer.firstChild) {
-            realmSuggestionsContainer.removeChild(realmSuggestionsContainer.firstChild);
-        };
-
-        selectedRealmDisplay.textContent = realmList[e.target.value][0];
-    
-        realmList[e.target.value].forEach(realm => {
-            const realmOption = createElement("div", "realm-option", null);
-            realmOption.textContent = realm;
-            realmOption.dataset.name = realm;
-            realmSuggestionsContainer.appendChild(realmOption);
-    
-            realmOption.addEventListener("click", (e) => {
-                e.stopPropagation();
-                selectedRealmDisplay.textContent = realmOption.dataset.name;
-                realmSuggestionsContainer.style.display = "none";
-            });
         });
     });
 
@@ -253,6 +236,35 @@ const generateRegionOptions = () => {
                 };
             };
         });
+
+        const characterRealmFieldMain = document.getElementById("character-realm-input-main");
+        const realmSuggestionsContainer = document.getElementById("character-realm-input-suggestions-container");
+        const selectedRealmDisplay = characterRealmFieldMain.querySelector("#character-realm-selected-realm");
+        const selectedRegionDisplay = characterRegionFieldMain.querySelector("#character-region-selected-region");
+        
+        const regionOptions = document.querySelectorAll(".region-option");
+        regionOptions.forEach(option => {
+            option.addEventListener("click", (e) => {
+                while (realmSuggestionsContainer.firstChild) {
+                    realmSuggestionsContainer.removeChild(realmSuggestionsContainer.firstChild);
+                };
+        
+                selectedRealmDisplay.textContent = realmList[e.target.dataset.name][0];
+            
+                realmList[e.target.dataset.name].forEach(realm => {
+                    const realmOption = createElement("div", "realm-option", null);
+                    realmOption.textContent = realm;
+                    realmOption.dataset.name = realm;
+                    realmSuggestionsContainer.appendChild(realmOption);
+            
+                    realmOption.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        selectedRealmDisplay.textContent = realmOption.dataset.name;
+                        realmSuggestionsContainer.style.display = "none";
+                    });
+                });
+            });
+    });
     };
 
     const characterRegionFieldMain = document.getElementById("character-region-input-main");
