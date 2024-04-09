@@ -76,6 +76,10 @@ const spellToIconsMap = {
     "Blossom of Amirdrassil Large HoT": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
     "Blossom of Amirdrassil Small HoT": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
     "Nymue's Unraveling Spindle": "https://render.worldofwarcraft.com/eu/icons/56/inv_cloth_outdooremeralddream_d_01_buckle.jpg",
+    "Conjured Chillglobe": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_specialreagentfoozles_primalistrune_frost.jpg",
+    "Rashok's Molten Heart": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_trinket6oih_orb4.jpg",
+    "Time-Breaching Talon": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_explorer_trinket_3_color3.jpg",
+    "Spoils of Neltharus": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_dragon_trinket_4_bronze.jpg",
 
     // enchants
     "Dreaming Devotion": "https://render.worldofwarcraft.com/eu/icons/56/item_herbd.jpg",

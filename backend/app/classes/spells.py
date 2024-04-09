@@ -369,7 +369,8 @@ class Spell:
                                   BestFriendsWithAerwynEmpowered, BestFriendsWithUrctosEmpowered, IdolOfTheSpellWeaverStacks,
                                   IdolOfTheDreamerStacks, IdolOfTheEarthWarderStacks, IdolOfTheLifeBinderStacks,
                                   AlliedChestplateOfGenerosity, ElementalLariat, VerdantTether, VerdantConduit,
-                                  PowerOfTheSilverHand
+                                  PowerOfTheSilverHand, NeltharionsCallToChaos, InspiredByFrostAndEarth, ScreamingBlackDragonscale,
+                                  RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond
                                  )
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False):
@@ -398,7 +399,7 @@ class Spell:
                     append_spell_heal_event(caster.events, effect.name, caster, target, effect_heal, current_time, is_crit)
                 elif is_flat_healing:
                     effect.apply_flat_healing(caster, target, current_time, True)
-                    
+                 
                 if is_self_buff and effect.name in caster.active_auras:
                     if effect.max_stacks > 1:
                         caster.apply_buff_to_self(caster.active_auras[effect.name], current_time, effect.current_stacks, effect.max_stacks)
@@ -443,7 +444,33 @@ class Spell:
             embrace_of_akunda = EmbraceOfAkunda(caster)
             try_proc_rppm_effect(embrace_of_akunda, is_heal=True)
             
+        if "Voice of the Silent Star" in caster.equipment["back"]["name"]:
+            voice_from_beyond = VoiceFromBeyond(caster)
+            if "The Silent Star" not in caster.active_auras:
+                try_proc_rppm_effect(voice_from_beyond, is_hasted=False, is_self_buff=True)
+            
         # trinkets
+        if "Emerald Coach's Whistle" in caster.trinkets:
+            emerald_coachs_whistle = EmeraldCoachsWhistle(caster)
+            try_proc_rppm_effect(emerald_coachs_whistle, is_hasted=False, is_self_buff=True)
+        
+        if "Rashok's Molten Heart" in caster.trinkets:
+            rashoks_molten_heart = RashoksMoltenHeart(caster)
+            try_proc_rppm_effect(rashoks_molten_heart, is_hasted=False, is_self_buff=True)
+        
+        if "Screaming Black Dragonscale" in caster.trinkets:
+            screaming_black_dragonscale = ScreamingBlackDragonscale(caster)
+            try_proc_rppm_effect(screaming_black_dragonscale, is_hasted=False, is_self_buff=True)
+        
+        if "Whispering Incarnate Icon" in caster.trinkets:
+            whispering_incarnate_icon = InspiredByFrostAndEarth(caster)
+            try_proc_rppm_effect(whispering_incarnate_icon, is_hasted=False, is_self_buff=True)
+        
+        if "Neltharion's Call to Chaos" in caster.trinkets:
+            neltharions_call_to_chaos = NeltharionsCallToChaos(caster)
+            if self.name in ["Light of Dawn", "Consecration", "Light's Hammer"]:
+                try_proc_rppm_effect(neltharions_call_to_chaos, is_hasted=False, is_self_buff=True)
+        
         if "Coagulated Genesaur Blood" in caster.trinkets:
             coagulated_genesaur_blood = CoagulatedGenesaurBloodBuff(caster)
             try_proc_rppm_effect(coagulated_genesaur_blood, is_hasted=False, is_self_buff=True)

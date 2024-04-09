@@ -1,5 +1,8 @@
+import re
+
 from .spells import Spell
 from .auras_buffs import MirrorOfFracturedTomorrowsBuff, SmolderingSeedlingActive, NymuesUnravelingSpindleBuff
+from ..utils.misc_functions import update_mana_gained
 
 
 class Trinket(Spell):
@@ -61,3 +64,58 @@ class NymuesUnravelingSpindle(Trinket):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             caster.apply_buff_to_self(NymuesUnravelingSpindleBuff(caster), current_time)
+            
+
+class ConjuredChillglobe(Trinket):
+    
+    BASE_COOLDOWN = 60
+    
+    def __init__(self, caster):
+        super().__init__("Conjured Chillglobe", cooldown=ConjuredChillglobe.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            trinket_effect = caster.trinkets[self.name]["effect"]
+            trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+            
+            # damage
+            self.trinket_first_value = trinket_values[0]
+            # mana gain
+            self.trinket_second_value = trinket_values[1]
+            
+            if caster.mana > caster.max_mana * 0.65:
+                pass
+            else:
+                caster.mana += self.trinket_second_value
+                update_mana_gained(caster.ability_breakdown, self.name, self.trinket_second_value)
+                
+
+class TimeBreachingTalon(Trinket):
+    
+    BASE_COOLDOWN = 150
+    
+    def __init__(self, caster):
+        super().__init__("Time-Breaching Talon", cooldown=TimeBreachingTalon.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            from .auras_buffs import TimeBreachingTalonPlus
+            
+            caster.apply_buff_to_self(TimeBreachingTalonPlus(caster), current_time)
+            
+
+class SpoilsOfNeltharus(Trinket):
+    
+    BASE_COOLDOWN = 120
+    
+    def __init__(self, caster):
+        super().__init__("Spoils of Neltharus", cooldown=SpoilsOfNeltharus.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            from .auras_buffs import SpoilsOfNeltharusBuff
+            
+            caster.apply_buff_to_self(SpoilsOfNeltharusBuff(caster), current_time)

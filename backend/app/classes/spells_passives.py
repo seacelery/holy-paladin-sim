@@ -130,6 +130,15 @@ class RestorativeSands(Spell):
     def __init__(self, caster):
         super().__init__("Restorative Sands")
         
+
+# Rashok's Molten Heart heal
+class RashoksMoltenHeartHeal(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    
+    def __init__(self, caster):
+        super().__init__("Rashok's Molten Heart")
+        
         
 # Echoing Tyrstone conditional proc
 class EchoingTyrstoneProc(Spell):

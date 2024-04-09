@@ -41156,13 +41156,11 @@ const itemData = [
         "effects": [
             {
                 "name": "Emerald Coach's Whistle",
-                "id": 398396,
-                "description": "Use: Select a target friendly player to coach. (1 Sec Cooldown)"
-            },
-            {
-                "name": "Emerald Coach's Whistle",
                 "id": 383798,
-                "description": "Equip: Your helpful spells and abilities have a chance to pep up you and your Coached ally, granting you both 169 Mastery for 10 sec. \r\n"
+                "description": "Equip: Your helpful spells and abilities have a chance to pep up you and your Coached ally, granting you both *169 Mastery for 10 sec. \r\n",
+                "effect_values": [
+                    {"base_value": 169, "effect_type": "scalar", "effect_coefficient": 0.780421, "allocation_type": "rating_multiplier"}
+                ]
             }
         ],
         "stats": {
@@ -42138,12 +42136,10 @@ const itemData = [
             {
                 "name": "Spoils of Neltharus",
                 "id": 381768,
-                "description": "Use: Open the spoils and loot the first item you find to gain its fleeting power, increasing a secondary stat by 547 for 20 sec. (2 Min Cooldown)"
-            },
-            {
-                "name": "Spoils of Neltharus",
-                "id": 381766,
-                "description": "Equip: Your spells have a chance to jostle the spoils, reordering the treasure within."
+                "description": "Use: Open the spoils and loot the first item you find to gain its fleeting power, increasing a secondary stat by *547 for 20 sec. (2 Min Cooldown)",
+                "effect_values": [
+                    {"base_value": 547, "effect_type": "scalar", "effect_coefficient": 2.521002, "allocation_type": "rating_multiplier"}
+                ]
             }
         ],
         "stats": {
@@ -42457,7 +42453,11 @@ const itemData = [
             {
                 "name": "Time-Breaching Talon",
                 "id": 385884,
-                "description": "Use: Tear through time and steal power from your future self, gaining 498 Intellect for 20 sec, then losing 158 Intellect for 20 sec. (2 Min 30 Sec Cooldown)"
+                "description": "Use: Tear through time and steal power from your future self, gaining *498 Intellect for 20 sec, then losing *158 Intellect for 20 sec. (2 Min 30 Sec Cooldown)",
+                "effect_values": [
+                    {"base_value": 498, "effect_type": "scalar", "effect_coefficient": 2.294699, "allocation_type": "rating_multiplier"},
+                    {"base_value": 158, "effect_type": "scalar", "effect_coefficient": 0.730131, "allocation_type": "rating_multiplier"}
+                ]
             }
         ],
         "stats": {
@@ -43204,7 +43204,11 @@ const itemData = [
             {
                 "name": "Whispering Incarnate Icon",
                 "id": 377452,
-                "description": "Equip: Succumb to the Icon's whispers and become Infused with Frost, increasing your Critical Strike by 445. \r\n\r\nFighting alongside allies who are Infused with Earth or Fire has a chance to grant you 241 of their Infusion's stat for 12 sec.\r\n\r\nInfusion based on your current specialization."
+                "description": "Equip: Succumb to the Icon's whispers and become Infused with Fire, increasing your Haste by *445. \r\n\r\nFighting alongside allies who are Infused with Earth or Frost has a chance to grant you *241 of their Infusion's stat for 12 sec.\r\n\r\nInfusion based on your current specialization.",
+                "effect_values": [
+                    {"base_value": 445, "effect_type": "scalar", "effect_coefficient": 0.599658, "allocation_type": "no_multiplier"},
+                    {"base_value": 241, "effect_type": "scalar", "effect_coefficient": 0.137528, "allocation_type": "rating_multiplier"}
+                ]
             }
         ],
         "stats": {
@@ -43316,17 +43320,21 @@ const itemData = [
         "name": "Broodkeeper's Promise",
         "item_slot": "Trinket",
         "icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_primalist_trinket_3_omni.jpg",
-        "base_item_level": 398,
+        "base_item_level": 411,
         "quality": "Epic",
         "effects": [
             {
                 "name": "Broodkeeper's Promise",
                 "id": 377462,
-                "description": "Use: Designate another player to bond with, becoming their Guardian for 1 hour.\r\n\r\nWhile bonded, you and your ally gain 76 Versatility and restore 1,279 health per second. If you are within 15 yards of one another, these bonuses are increased. \r\n\r\nalid only for healer specializations.\r\n (5 Sec Cooldown)"
+                "description": "Use: Designate another player to bond with, becoming their Guardian for 1 hour.\r\n\r\nWhile bonded, you and your ally gain *82 Versatility and restore *1,509 health per second. If you are within 15 yards of one another, these bonuses are increased. \r\n\r\nValid only for healer specializations.\r\n (5 Sec Cooldown)",
+                "effect_values": [
+                    {"base_value": 82, "effect_type": "scalar", "effect_coefficient": 0.096854, "allocation_type": "rating_multiplier"},
+                    {"base_value": 1509, "effect_type": "scalar", "effect_coefficient": 1.29544, "allocation_type": "flat_healing"}
+                ]
             }
         ],
         "stats": {
-            "Intellect": 382
+            "Intellect": 431
         },
         "limit": null,
         "enchantments": [],
@@ -72973,13 +72981,12 @@ const itemData = [
             {
                 "name": "Screaming Flight",
                 "id": 401468,
-                "description": "Equip: Your attacks and abilities have a chance to grant you ephemeral dragon wings, increasing your Critical Strike by 1,017 and your Leech by 283 for 15 sec.\r\n\r\n"
+                "description": "Equip: Your attacks and abilities have a chance to grant you ephemeral dragon wings, increasing your Critical Strike by *1,017 and your Leech by *283 for 15 sec.\r\n\r\n",
+                "effect_values": [
+                    {"base_value": 1017, "effect_type": "scalar", "effect_coefficient": 0.919472, "allocation_type": "rating_multiplier"},
+                    {"base_value": 283, "effect_type": "scalar", "effect_coefficient": 0.256105, "allocation_type": "rating_multiplier"}
+                ]
             },
-            {
-                "name": "Seething Descent",
-                "id": 405940,
-                "description": "Use: Call upon an echo of Neltharion's power to crash to the ground below you, dealing 22,061 Shadowflame damage to nearby enemies if you have traveled at least 15 yards. (3 Min Cooldown)"
-            }
         ],
         "stats": {
             "Intellect": 473
@@ -73018,7 +73025,12 @@ const itemData = [
             {
                 "name": "Rashok's Molten Heart",
                 "id": 401183,
-                "description": "Equip: Your healing spells have a chance to awaken the Heart, restoring 1,494 mana over 10 sec and causing your healing spells to restore 13,591 additional health over 10 sec.\r\n\r\nOverhealing from this effect invigorates your target, granting them up to 421 Versatility for 12 sec."
+                "description": "Equip: Your healing spells have a chance to awaken the Heart, restoring *1,494 mana over 10 sec and causing your healing spells to restore *13,591 additional health over 10 sec.\r\n\r\nOverhealing from this effect invigorates your target, granting them up to *421 Versatility for 12 sec.",
+                "effect_values": [
+                    {"base_value": 1494, "effect_type": "scalar", "effect_coefficient": 0.244196 * 10, "allocation_type": "flat_healing"},
+                    {"base_value": 13591, "effect_type": "scalar", "effect_coefficient": 2.221365 * 10, "allocation_type": "flat_healing"},
+                    {"base_value": 421, "effect_type": "scalar", "effect_coefficient": 0.386485, "allocation_type": "rating_multiplier"},
+                ]
             }
         ],
         "stats": {
@@ -73682,13 +73694,12 @@ const itemData = [
             {
                 "name": "Glimmering Chromatic Orb",
                 "id": 401513,
-                "description": "Equip: Resonate with the power of your sworn dragonflight, granting you 473 secondary stat. Allies sworn to a different dragonflight gain 52 secondary stat from your Resonance. You may only benefit from one Resonance per Flight. \r\n\r\n"
+                "description": "Equip: Resonate with the power of your sworn dragonflight, granting you *473 secondary stat. Allies sworn to a different dragonflight gain *52 secondary stat from your Resonance. You may only benefit from one Resonance per Flight. \r\n\r\n",
+                "effect_values": [
+                    {"base_value": 473, "effect_type": "scalar", "effect_coefficient": 0.434074, "allocation_type": "rating_multiplier"},
+                    {"base_value": 52, "effect_type": "scalar", "effect_coefficient": 0.046006, "allocation_type": "rating_multiplier"}
+                ]
             },
-            {
-                "name": "Chromatic Resonance",
-                "id": 401515,
-                "description": "Use: Attune with a nearby dragonflight Oathstone in the Dragon Isles."
-            }
         ],
         "stats": {
             "Intellect": 460
@@ -74480,7 +74491,10 @@ const itemData = [
             {
                 "name": "Neltharion's Call to Chaos",
                 "id": 403366,
-                "description": "Equip: Your area effect spells and abilities have a chance to grant you 2,109 Intellect and increase damage you receive by 5% for 18 sec."
+                "description": "Equip: Your area effect spells and abilities have a chance to grant you *2,109 Intellect and increase damage you receive by 5% for 18 sec.",
+                "effect_values": [
+                    {"base_value": 2109, "effect_type": "scalar", "effect_coefficient": 2.029274, "allocation_type": "no_multiplier"},
+                ]
             }
         ],
         "stats": {
@@ -75606,7 +75620,11 @@ const itemData = [
             {
                 "name": "The Silent Star",
                 "id": 409434,
-                "description": "Equip: Whenever nearby allies take damage, the Voice has a chance to beckon you. Upon hearing its call 10 times you fully submit to its influence, stealing 117 of the 4 nearest allies' lowest secondary stat, and giving you the stolen amount plus 1,764 to your highest secondary stat for 8 sec."
+                "description": "Equip: Whenever nearby allies take damage, the Voice has a chance to beckon you. Upon hearing its call 10 times you fully submit to its influence, stealing *117 of the 4 nearest allies' lowest secondary stat, and giving you the stolen amount plus *1,764 to your highest secondary stat for 8 sec.",
+                "effect_values": [
+                    {"base_value": 117, "effect_type": "scalar", "effect_coefficient": 0.101511, "allocation_type": "rating_multiplier"},
+                    {"base_value": 1764, "effect_type": "scalar", "effect_coefficient": 1.519776, "allocation_type": "rating_multiplier"}
+                ]
             }
         ],
         "stats": {

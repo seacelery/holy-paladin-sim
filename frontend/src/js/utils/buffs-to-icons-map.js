@@ -99,6 +99,18 @@ const buffsToIconsMap = {
     "Sea Star": "https://render.worldofwarcraft.com/eu/icons/56/inv_datacrystal05.jpg",
     "Sustaining Alchemist Stone": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_alchemystone_color2.jpg",
     "Alacritous Alchemist Stone": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_alchemystone_color1.jpg",
+    "Neltharion's Call to Chaos": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_dragon_trinket_5_red.jpg",
+    "Screaming Black Dragonscale": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rubysanctum2.jpg",
+    "Rashok's Molten Heart": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_trinket6oih_orb4.jpg",
+    "Ominous Chromatic Essence": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_orb_blue.jpg",
+    "Emerald Coach's Whistle": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_head_dragon_green.jpg",
+    "Spoils of Neltharus": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_dragon_trinket_4_bronze.jpg",
+
+    "Time-Breaching Talon ": "https://render.worldofwarcraft.com/eu/icons/56/spell_chargepositive.jpg",
+    "Time-Breaching Talon  ": "https://render.worldofwarcraft.com/eu/icons/56/spell_chargenegative.jpg",
+
+    "Whispering Incarnate Icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_primalist_necklace_1_omni.jpg",
+    "Inspired by Frost and Earth": "https://render.worldofwarcraft.com/eu/icons/56/spell_shaman_spiritlink.jpg",
 
     "Pip's Emerald Friendship Badge": "https://render.worldofwarcraft.com/eu/icons/56/10_2_raidability_green.jpg",
     "Best Friends with Pip": "https://render.worldofwarcraft.com/eu/icons/56/inv_achievement_raidemeralddream_dreamcouncil.jpg",
@@ -126,6 +138,9 @@ const buffsToIconsMap = {
     "Blossom of Amirdrassil Small HoT": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_herb_starflower.jpg",
 
     "Nymue's Unraveling Spindle": "https://render.worldofwarcraft.com/eu/icons/56/inv_cloth_outdooremeralddream_d_01_buckle.jpg",
+
+    "Voice from Beyond": "https://wow.zamimg.com/images/wow/icons/large/inv_cosmicvoid_nova.jpg",
+    "The Silent Star": "https://wow.zamimg.com/images/wow/icons/large/inv_cosmicvoid_debuff.jpg",
 
     // embellishments
     "Potion Absorption Inhibitor": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_gooamber_drop.jpg",

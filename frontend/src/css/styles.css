@@ -1,23 +1,25 @@
 :root {
-    --background-colour: rgb(7, 3, 5);
-    --panel-colour: #0a0709;
+    --background-colour: rgb(4, 1, 2);
+    --panel-colour: #070506;
+    /* #0a0709; */
+    /* #070506; */
     --panel-colour-2: rgb(20, 9, 16);
     --panel-colour-3: rgb(46, 24, 38);
     --panel-colour-4: rgb(134, 94, 118);
-    --panel-colour-5: rgb(58, 34, 48);
+    --panel-colour-5: rgb(51, 29, 42);
     --panel-colour-6: rgb(19, 9, 15);
-    --panel-colour-background: #0a0709;
-    --panel-colour-table: rgb(29, 15, 24);
-    --panel-colour-table-2: rgb(14, 6, 10);
-    --panel-colour-table-3: rgb(10, 4, 7);
-    --panel-colour-table-4: rgb(9, 4, 6);
+    --panel-colour-background: #070506;
+    --panel-colour-table: rgb(20, 8, 15);
+    --panel-colour-table-2: rgb(10, 4, 7);
+    --panel-colour-table-3: rgb(7, 3, 5);
+    --panel-colour-table-4: rgb(7, 3, 5);
     --border-colour: #3c3241;
     --border-colour-2: rgb(17, 8, 14);
     --transparent-border-colour-2: #1b1a1fd7;
     --border-colour-3: #573b4e;
     --border-colour-4: rgb(133, 10, 94);
-    --tooltip-colour: rgba(0, 0, 0, 0.438);
-    --tooltip-colour-hover: rgba(63, 63, 63, 0.096);
+    --tooltip-colour: rgba(36, 36, 36, 0.034);
+    --tooltip-colour-hover: rgba(184, 131, 175, 0.13);
     --tooltip-opaque-colour: rgb(20, 20, 20);
     --hover-colour-dark: rgb(18, 18, 21);
     --hover-colour-light: rgb(85, 50, 71);
@@ -61,17 +63,17 @@
 }
 
 [data-theme="plain"] {
-    --background-colour: rgb(12, 12, 15);
-    --panel-colour: #323138;
+    --background-colour: rgb(8, 8, 10);
+    --panel-colour: rgb(12, 12, 15);
     --panel-colour-2: #17171a;
-    --panel-colour-3: #3f3e44;
-    --panel-colour-4: #56545a;
+    --panel-colour-3: #39383d;
+    --panel-colour-4: #6a6770;
     --panel-colour-5: #2c2b30;
     --panel-colour-6: rgb(16, 16, 20);
     --panel-colour-background: rgb(16, 16, 20);
     --panel-colour-table: #323138;
     --panel-colour-table-2: #17171a;
-    --panel-colour-table-3: rgb(12, 12, 15);
+    --panel-colour-table-3: rgb(15, 15, 19);
     --panel-colour-table-4: rgba(0, 0, 0, 0.233);
     --border-colour: #3c3241;
     --border-colour-2: #1b1a1f;
@@ -82,7 +84,7 @@
     --tooltip-colour-hover: rgba(63, 63, 63, 0.096);
     --tooltip-opaque-colour: rgb(20, 20, 20);
     --hover-colour-dark: rgb(18, 18, 21);
-    --hover-colour-light: #2c2b30;
+    --hover-colour-light: #434149;
     --subrow-arrow-colour: #cca1ddef;
     --subrow-arrow-colour-hover: #c8add3c9;
     --subrow-arrow-colour-active: #c790ddc9;
@@ -1089,12 +1091,12 @@ body {
 
 .race-image:hover, .flask-image:hover, .augment-rune-image:hover, .food-image:hover, .weapon-imbue-image:hover, .raid-buff-image:hover, .external-buff-image:hover, .potion-image:hover {
     box-shadow: 0px 0px 3px 1px var(--paladin-font);
-    filter: saturate(0.8);
+    filter: saturate(1);
     transition: all 0.05s ease-in-out;
 }
 
 .race-selected, .flask-selected, .augment-rune-selected, .food-selected, .weapon-imbue-selected, .raid-buff-selected, .external-buff-selected, .potion-selected {
-    border: 1px solid var(--paladin-font);
+    box-shadow: 0px 0px 3px 1px var(--paladin-font);
     filter: grayscale(0);
 }
 
@@ -1148,7 +1150,7 @@ body {
     width: 44%;
     height: 100%;
 
-    background-color: var(--border-colour-2);
+    background-color:var(--panel-colour-table-4);
     border: 1px solid var(--border-colour-3);
     border-radius: 5px;
     box-shadow: 1px 1px 1px var(--border-colour-2);
@@ -1171,7 +1173,7 @@ body {
 
     border: 1px solid var(--border-colour-3);
 
-    background-color: var(--tooltip-colour);
+    background-color: var(--panel-colour-2);
 }
 
 #class-talents-count, #spec-talents-count {
@@ -1197,7 +1199,7 @@ body {
     width: 54%;
     height: 100%;
 
-    background-color: var(--border-colour-2);
+    background-color:var(--panel-colour-table-4);
     border: 1px solid var(--border-colour-3);
     border-radius: 5px;
     box-shadow: 1px 1px 1px var(--border-colour-2);
@@ -1515,7 +1517,7 @@ body {
     width: 54%;
     height: 100%;
 
-    background-color: var(--border-colour-2);
+    background-color:var(--panel-colour-table-4);
     border: 1px solid var(--border-colour-3);
     border-radius: 5px;
     box-shadow: 1px 1px 1px var(--border-colour-2);
@@ -1752,7 +1754,7 @@ body {
     height: 135px;
     margin-bottom: 9px;
 
-    background-color: var(--border-colour-2);
+    background-color:var(--panel-colour-table-4);
     border: 1px solid var(--border-colour-3);
     border-radius: 5px;
     box-shadow: 1px 1px 1px var(--border-colour-2);
@@ -1796,7 +1798,7 @@ body {
     width: 100%;
     height: 443px;
 
-    background-color: var(--border-colour-2);
+    background-color:var(--panel-colour-table-4);
     border: 1px solid var(--border-colour-3);
     border-radius: 5px;
     box-shadow: 1px 1px 1px var(--border-colour-2);
@@ -1856,7 +1858,6 @@ body {
 
     border: 1px solid var(--border-colour-3);
 
-    background-color: var(--tooltip-colour);
 }
 
 #current-equipped-item-icon, #new-equipped-item-icon {
@@ -1900,7 +1901,7 @@ body {
 }
 
 #new-equipped-item-search {
-    padding-top: 0px;
+    padding-bottom: 3px;
     margin-top: -2px;
 }
 
@@ -2028,7 +2029,7 @@ body {
 
     padding: 6.5px;
     padding-left: 5px;
-    padding-top: 7.5px;
+    padding-top: 6.5px;
     cursor: pointer;
     user-select: none;
 
@@ -2051,7 +2052,7 @@ body {
     border-bottom: none;
 
     font-size: 11px;
-    background-color: var(--tooltip-colour);
+
 }
 
 .current-equipped-item-trinket-effect:hover, .new-equipped-item-trinket-effect:hover {
@@ -2469,7 +2470,7 @@ body {
 
     border: 1px solid var(--border-colour-3);
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-3);
     color: var(--light-font-colour);
     font-size: 16px;
 }
@@ -2483,7 +2484,7 @@ body {
     width: 95%;
     height: 50px;
 
-    background-color: var(--panel-colour-3);
+    background-color: var(--panel-colour-table);
     border: 1px solid var(--border-colour-3);
 }
 
@@ -2534,7 +2535,7 @@ body {
 
     border: 1px solid var(--border-colour-3);
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
     color: var(--light-font-colour);
     font-size: 16px;
 }
@@ -2579,7 +2580,7 @@ body {
    
     border: 1px solid var(--border-colour-3);
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 
     color: var(--light-font-colour);
     font-size: 14px;
@@ -3961,7 +3962,7 @@ tr {
     border-radius: 3px;
     border-top-left-radius: 0px;
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 }
 
 [id^="buffs-line-graph-navbar-"] {
@@ -4148,13 +4149,12 @@ tr {
 
 .priority-grid-cooldown-filter-modal, .priority-grid-player-auras-filter-modal {
     position: absolute;
-    top: -26px;
-    left: 41px;
-    padding: 5px;
+    bottom: 35px;
+    left: -135px;
+    padding: 8px;
     z-index: 1000;
 
-    min-height: 80px;
-    min-width: 187px;
+    min-width: 300px;
     max-width: 200px;
 
     border: 1px solid var(--border-colour-3);
@@ -4162,26 +4162,31 @@ tr {
 
     background-color: var(--panel-colour-2);
     transition: opacity 0.1s ease-in-out;
+    pointer-events: none;
+}
+
+.modal-active {
+    pointer-events: auto;
 }
 
 .priority-grid-cooldown-filter-modal::before, .priority-grid-cooldown-filter-modal::after, .priority-grid-player-auras-filter-modal::before, .priority-grid-player-auras-filter-modal::after {
     content: "";
     position: absolute;
-    transform: rotate(-90deg);
+    transform: rotate(180deg);
     border-left: 11px solid transparent;
     border-right: 11px solid transparent;
 }
 
 .priority-grid-cooldown-filter-modal::before, .priority-grid-player-auras-filter-modal::before {
-    top: 33px;
-    left: -16px;
+    bottom: -9px;
+    left: 138px;
     z-index: 2;
     border-bottom: 11px solid var(--panel-colour-2);
 }
 
 .priority-grid-cooldown-filter-modal::after, .priority-grid-player-auras-filter-modal::after {
-    top: 34px;
-    left: -17px;
+    bottom: -10px;
+    left: 138px;
     border-bottom: 10px solid var(--border-colour-3);
 }
 
@@ -4194,6 +4199,10 @@ tr {
 [class*="priority-grid-cooldown-modal-icon-container"], [class*="priority-grid-player-auras-modal-icon-container"] {
     display: inline-block;
     opacity: 1;
+
+    height: 30px;
+
+    z-index: 10000;
 }
 
 /* priority grid css */
@@ -4290,7 +4299,7 @@ tr {
 
     border: 1px solid var(--border-colour-3);
 
-    background-color: var(--panel-colour-table-2);
+    background-color: var(--panel-colour-table-3);
 
     text-align: center;
 }
@@ -4430,13 +4439,15 @@ tr {
 
 [class*="priority-grid-player-auras-icon-container"], [class*="priority-grid-cooldown-icon-container"], .priority-grid-cooldown-icon-container, [class*="priority-grid-cooldown-modal-icon-container"], [class*="priority-grid-player-auras-modal-icon-container"] {
     position: relative;
+    z-index: 0;
 }
 
 [class*="priority-grid-player-auras-icon-container"], [class*="priority-grid-cooldown-icon-container"], [class*="priority-grid-cooldown-modal-icon-container"], [class*="priority-grid-player-auras-modal-icon-container"] {
     margin: 2.5px;
+    z-index: 0;
 
     width: 30px;
-    height: 45px;
+    height: 35px;
 }
 
 .aura-icon-overlay-container, .cooldown-icon-overlay-container {
@@ -4444,14 +4455,19 @@ tr {
 
     width: 30px;
     height: 30px;
+
+    z-index: 0;
 }
 
 .priority-grid-aura-icon, .priority-grid-cooldown-icon, .priority-grid-cooldown-modal-icon, .priority-grid-player-auras-modal-icon {
-
     width: 30px;
     height: 30px;
 
     border: 1px solid var(--border-colour-3);
+}
+
+.priority-grid-cooldown-modal-icon {
+    z-index: 10000;
 }
 
 .priority-grid-aura-duration-text, .priority-grid-aura-counts-text {
@@ -4511,6 +4527,8 @@ tr {
 
     width: 100%;
     height: 50px;
+
+    z-index: 0;
 }
 
 /* COOLDOWNS CONTENT */
@@ -4543,6 +4561,8 @@ tr {
 
     border: 1px solid var(--border-colour-3);
     border-radius: 3px;
+
+    background-color: var(--panel-colour-table-3);
 }
 
 .cooldowns-breakdown-cooldown-container {

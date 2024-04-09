@@ -15,8 +15,8 @@ from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, H
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion, AuraMastery
 from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
 from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell
-from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight
-from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle
+from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence
+from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
@@ -307,6 +307,7 @@ class Paladin:
                     
     def update_equipment(self, equipment_data):        
         self.equipment = json.loads(equipment_data)
+        
         formatted_equipment_data = self.calculate_stats_from_equipment(self.equipment)
         self.stats = Stats(formatted_equipment_data[0], self.convert_stat_ratings_to_percent(formatted_equipment_data[0]))
         self.bonus_enchants = formatted_equipment_data[1]
@@ -594,6 +595,15 @@ class Paladin:
         if self.is_trinket_equipped("Nymue's Unraveling Spindle"):
             self.abilities["Nymue's Unraveling Spindle"] = NymuesUnravelingSpindle(self)
             
+        if self.is_trinket_equipped("Conjured Chillglobe"):
+            self.abilities["Conjured Chillglobe"] = ConjuredChillglobe(self)
+            
+        if self.is_trinket_equipped("Time-Breaching Talon"):
+            self.abilities["Time-Breaching Talon"] = TimeBreachingTalon(self)
+            
+        if self.is_trinket_equipped("Spoils of Neltharus"):
+            self.abilities["Spoils of Neltharus"] = SpoilsOfNeltharus(self)
+            
     def is_talent_active(self, talent_name):
         for row, talents in self.class_talents.items():
             if talent_name in talents and talents[talent_name]["ranks"]["current rank"] > 0:
@@ -615,6 +625,9 @@ class Paladin:
         if self.is_trinket_equipped("Pip's Emerald Friendship Badge"):
             self.apply_buff_to_self(PipsEmeraldFriendshipBadge(self), 0)
             self.apply_buff_to_self(random.choice([BestFriendsWithPip(self), BestFriendsWithAerwyn(self), BestFriendsWithUrctos(self)]), 0)
+            
+        if self.is_trinket_equipped("Ominous Chromatic Essence"):
+            self.apply_buff_to_self(OminousChromaticEssence(self), 0)
             
         if self.is_talent_active("Merciful Auras"):
             self.apply_buff_to_self(MercifulAuras(), 0)
@@ -760,8 +773,8 @@ class Paladin:
                
             if buff.current_stacks < max_stacks:
                 buff.current_stacks += stacks_to_apply
-            buff.duration = buff.base_duration
-            self.active_auras[buff.name] = buff
+                buff.duration = buff.base_duration
+                self.active_auras[buff.name] = buff
         else:
             self.active_auras[buff.name] = buff
             buff.apply_effect(self, current_time)

@@ -14,14 +14,6 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             remainingSeconds = 0;
         };
 
-        // if (seconds > 59.99 && remainingSeconds < 10) {
-        //     return `${minutes}:0${String(remainingSeconds).padStart(2, '0')}`;
-        // } else if (seconds > 59.99 && remainingSeconds > 10) {
-        //     return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
-        // } else {
-        //     return Number(seconds).toFixed(2);
-        // };
-
         if (remainingSeconds < 10) {
             return `${minutes}:0${String(remainingSeconds).padStart(2, '0')}`;
         } else if (remainingSeconds >= 10) {
@@ -56,6 +48,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     playerAurasFilterButton.appendChild(playerAurasFilterIcon);
     playerAurasFilterButton.addEventListener("click", (e) => {
         playerAurasFilterModal.style.opacity = playerAurasFilterModal.style.opacity === "0" ? "1" : "0";
+        playerAurasFilterModal.classList.toggle("modal-active");
     });
 
     playerAurasFilter.appendChild(playerAurasFilterModal);
@@ -69,7 +62,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
         "Feisty Fish Sticks", "Aromatic Seafood Platter", "Sizzling Seafood Medley", "Revenge, Served Cold",
         "Thousandbone Tongueslicer", "Great Cerulean Sea", "Pip's Emerald Friendship Badge", "Elemental Lariat",
         "Close to Heart", "Allied Wristguards of Companionship", "Potion Absorption Inhibitor", "Saved by the Light",
-        "Retribution Aura ", "Source of Magic"
+        "Retribution Aura ", "Source of Magic", "Symbol of Hope", "Mana Spring Totem", "Ominous Chromatic Essence"
     ];
     const playerAurasModalIconOrder = [
         "Avenging Wrath", "Blessing of Dawn", "Blessing of Dusk", "Infusion of Light", "Divine Purpose", 
@@ -134,6 +127,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     cooldownFilterButton.appendChild(cooldownFilterIcon);
     cooldownFilterButton.addEventListener("click", (e) => {
         cooldownFilterModal.style.opacity = cooldownFilterModal.style.opacity === "0" ? "1" : "0";
+        cooldownFilterModal.classList.toggle("modal-active");
     });
 
     cooldownFilter.appendChild(cooldownFilterModal);
@@ -341,7 +335,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             // select the order for each row
             const generatorRowOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath", "Consecration"];
             const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Tyr's Deliverance", 
-                                           "Light's Hammer", "Blessing of the Seasons", "Divine Favor", "Arcane Torrent",
+                                           "Light's Hammer", "Blessing of the Seasons", "Divine Favor", "Lay on Hands", "Arcane Torrent",
                                            "Fireblood", "Gift of the Naaru", "Aerated Mana Potion", "Elemental Potion of Ultimate Power"];
 
             // only append if the cooldown is actually present in the current simulation
