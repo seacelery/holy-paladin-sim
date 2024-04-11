@@ -1,6 +1,7 @@
 import sys
 import pprint
 import json
+import os
 
 from flask import Blueprint, request, jsonify, session, send_file
 from app.main import import_character, run_simulation, initialise_simulation, fetch_updated_data
@@ -32,7 +33,7 @@ def log_session_size():
     
 @main.route('/')
 def index():
-    return send_file('../frontend/public/index.html')
+    return send_file(os.path.join('..', 'frontend', 'public', 'index.html'))
     
 @main.route("/cancel_simulation", methods=["POST"])
 def cancel_simulation_route():
