@@ -30,7 +30,7 @@ def log_session_size():
     # session_size = sys.getsizeof(str(session))
     # print(f"Session size: {session_size} bytes")
     
-@app.route('/test')
+@main.route('/test')
 def test_route():
     return 'Backend is running!'
     
