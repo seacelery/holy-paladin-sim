@@ -8,7 +8,7 @@ from app.routes import main as main_blueprint
 flask_secret_key = os.getenv("FLASK_SECRET_KEY")
 
 def create_app():
-    app = Flask(__name__, static_folder='../frontend/src')
+    app = Flask(__name__, static_folder='../frontend/public')
     app.secret_key = flask_secret_key
     CORS(app, supports_credentials=True)
     app.register_blueprint(main_blueprint)

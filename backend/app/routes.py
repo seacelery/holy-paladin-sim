@@ -4,7 +4,7 @@ import json
 import os
 from pathlib import Path
 
-from flask import Blueprint, request, jsonify, session, send_from_directory
+from flask import Blueprint, request, jsonify, session, send_from_directory, current_app
 from app.main import import_character, run_simulation, initialise_simulation, fetch_updated_data
 from app.socketio_setup import socketio
 from flask_socketio import emit
@@ -34,8 +34,7 @@ def log_session_size():
     
 @main.route('/')
 def index():
-    frontend_dir = os.path.join(os.path.dirname(__file__), '..', 'frontend', 'public')
-    return send_from_directory(frontend_dir, 'index.html')
+    return current_app.send_static_file('index.html')
     
 @main.route("/cancel_simulation", methods=["POST"])
 def cancel_simulation_route():
