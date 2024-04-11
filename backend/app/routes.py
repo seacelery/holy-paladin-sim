@@ -30,6 +30,10 @@ def log_session_size():
     # session_size = sys.getsizeof(str(session))
     # print(f"Session size: {session_size} bytes")
     
+@app.route('/test')
+def test_route():
+    return 'Backend is running!'
+    
 @main.route("/cancel_simulation", methods=["POST"])
 def cancel_simulation_route():
     print("Cancel simulation route hit")
