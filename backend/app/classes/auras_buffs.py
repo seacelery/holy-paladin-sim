@@ -2326,3 +2326,27 @@ class DreamtendersCharm(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.update_stat("crit", self.embellishment_first_value * self.current_stacks)
+        
+
+class MagazineOfHealingDarts(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Dreamtender's Charm", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class BronzedGripWrappings(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Dreamtender's Charm", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass

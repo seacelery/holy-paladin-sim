@@ -20,7 +20,6 @@ class AuraMastery(Spell):
 
 class ArcaneTorrent(Spell):
     
-    SPELL_ID = 155145
     HOLY_POWER_GAIN = 1
     BASE_COOLDOWN = 120
     

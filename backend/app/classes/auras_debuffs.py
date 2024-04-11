@@ -9,8 +9,6 @@ from .spells_passives import JudgmentOfLightSpell, GreaterJudgmentSpell
 
 class JudgmentOfLightDebuff(Debuff):
     
-    SPELL_ID = 183778
-    
     def __init__(self):
         super().__init__("Judgment of Light", 30, base_duration=30, current_stacks=5, max_stacks=5)
     
@@ -42,8 +40,6 @@ class JudgmentOfLightDebuff(Debuff):
             
             
 class GreaterJudgmentDebuff(Debuff):
-    
-    SPELL_ID = 231644
     
     def __init__(self):
         super().__init__("Greater Judgment", 15, base_duration=15)

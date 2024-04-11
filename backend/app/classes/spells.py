@@ -362,16 +362,20 @@ class Spell:
         caster.events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
         
     def try_trigger_rppm_effects(self, caster, targets, current_time):
-        from .spells_passives import TouchOfLight, EmbraceOfAkunda, DreamingDevotion, ChirpingRune, LarodarsFieryReverie
-        from .auras_buffs import ( 
-                                  SophicDevotion, EmbraceOfPaku, CoagulatedGenesaurBloodBuff, SustainingAlchemistStoneBuff, 
-                                  AlacritousAlchemistStoneBuff, SeaStarBuff, PipsEmeraldFriendshipBadge, BestFriendsWithPipEmpowered, 
-                                  BestFriendsWithAerwynEmpowered, BestFriendsWithUrctosEmpowered, IdolOfTheSpellWeaverStacks,
-                                  IdolOfTheDreamerStacks, IdolOfTheEarthWarderStacks, IdolOfTheLifeBinderStacks,
-                                  AlliedChestplateOfGenerosity, ElementalLariat, VerdantTether, VerdantConduit,
-                                  PowerOfTheSilverHand, NeltharionsCallToChaos, InspiredByFrostAndEarth, ScreamingBlackDragonscale,
-                                  RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond
-                                 )
+        from .spells_passives import (
+            TouchOfLight, EmbraceOfAkunda, DreamingDevotion, ChirpingRune, LarodarsFieryReverie,
+            MagazineOfHealingDarts, BronzedGripWrappings
+        )
+        
+        from .auras_buffs import (
+            SophicDevotion, EmbraceOfPaku, CoagulatedGenesaurBloodBuff, SustainingAlchemistStoneBuff, 
+            AlacritousAlchemistStoneBuff, SeaStarBuff, PipsEmeraldFriendshipBadge, BestFriendsWithPipEmpowered, 
+            BestFriendsWithAerwynEmpowered, BestFriendsWithUrctosEmpowered, IdolOfTheSpellWeaverStacks,
+            IdolOfTheDreamerStacks, IdolOfTheEarthWarderStacks, IdolOfTheLifeBinderStacks,
+            AlliedChestplateOfGenerosity, ElementalLariat, VerdantTether, VerdantConduit,
+            PowerOfTheSilverHand, NeltharionsCallToChaos, InspiredByFrostAndEarth, ScreamingBlackDragonscale,
+            RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond
+        )
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False):
             # time since last attempt makes it so the number of events happening has very little impact on the number of procs that occur
@@ -549,6 +553,14 @@ class Spell:
             verdant_conduit = VerdantConduit(caster)
             if "Verdant Conduit" not in caster.active_auras:
                 try_proc_rppm_effect(verdant_conduit, is_hasted=False, is_self_buff=True)
+                
+        if "Magazine of Healing Darts" in caster.embellishments:
+            healing_dart = MagazineOfHealingDarts(caster)
+            try_proc_rppm_effect(healing_dart, is_flat_healing=True)
+            
+        if "Bronzed Grip Wrappings" in caster.embellishments:
+            bronzed_grip_wrappings = BronzedGripWrappings(caster)
+            try_proc_rppm_effect(bronzed_grip_wrappings, is_flat_healing=True)
                 
     def try_trigger_conditional_effects(self, caster, targets, current_time):
         from .spells_passives import EchoingTyrstoneProc, BlossomOfAmirdrassilProc

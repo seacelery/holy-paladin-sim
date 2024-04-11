@@ -147,6 +147,8 @@ const buffsToIconsMap = {
     "Verdant Tether": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_tailoring_tailoringconsumable_color4.jpg",
     "Verdant Conduit": "https://render.worldofwarcraft.com/eu/icons/56/inv_trinket_ardenweald_01_orange.jpg",
     "Dreamtender's Charm": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_trinket_stonedragon3_color3.jpg",
+    "Magazine of Healing Darts": "https://render.worldofwarcraft.com/eu/icons/56/inv_gizmo_runichealthinjector.jpg",
+    "Bronzed Grip Wrappings": "https://render.worldofwarcraft.com/eu/icons/56/inv_holiday_tow_spicebandage.jpg",
     
     "Elemental Lariat": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_necklace_necklace1_color3.jpg",
     "Elemental Lariat - Haste": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_elementalcombinedfoozles_air.jpg",

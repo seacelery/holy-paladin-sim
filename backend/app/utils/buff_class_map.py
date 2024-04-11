@@ -5,7 +5,8 @@ from ..classes.auras_buffs import (
                                    GreatCeruleanSeaFood, BuzzingRune, ChirpingRune, HowlingRune, HissingRune, ArcaneIntellect, MarkOfTheWild, 
                                    CloseToHeart, RetributionAura, SourceOfMagic, PowerInfusion, Innervate, PotionAbsorptionInhibitor,
                                    AlliedChestplateOfGenerosity, AlliedWristguardOfCompanionship, VerdantConduit, VerdantTether, ElementalLariat,
-                                   DreamtendersCharm, IcedPhialOfCorruptingRage, ManaSpringTotem, SymbolOfHope
+                                   DreamtendersCharm, IcedPhialOfCorruptingRage, ManaSpringTotem, SymbolOfHope, MagazineOfHealingDarts,
+                                   BronzedGripWrappings
                                   )
 
 buff_class_map = {
@@ -54,6 +55,8 @@ buff_class_map = {
     "Verdant Tether": VerdantTether,
     "Verdant Conduit": VerdantConduit,
     "Dreamtender's Charm": DreamtendersCharm,
+    "Magazine of Healing Darts": MagazineOfHealingDarts,
+    "Bronzed Grip Wrappings": BronzedGripWrappings,
     
     "Elemental Lariat": ElementalLariat,
     "Allied Chestplate of Generosity": AlliedChestplateOfGenerosity,

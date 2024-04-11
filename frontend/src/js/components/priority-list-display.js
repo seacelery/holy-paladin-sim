@@ -16,6 +16,13 @@ const abilityNames = [
 const abilityAutocomplete = (element, abilityNames, icon) => {
     const autocompleteContainer = createElement("ul", "ability-autocomplete-container", null);
 
+    window.addEventListener("click", (e) => {
+        if (e.target !== autocompleteContainer) {
+            autocompleteContainer.innerHTML = "";
+            autocompleteContainer.style.border = "none";
+        };
+    });
+
     element.addEventListener("input", () => {
         const input = element.value;
         const matchedAbilities = abilityNames.filter(abilityName => abilityName.toLowerCase().includes(input.toLowerCase()));

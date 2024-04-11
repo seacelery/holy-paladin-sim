@@ -85,6 +85,10 @@ const spellToIconsMap = {
     "Dreaming Devotion": "https://render.worldofwarcraft.com/eu/icons/56/item_herbd.jpg",
     "Larodar's Fiery Reverie": "https://render.worldofwarcraft.com/eu/icons/56/10_2_raidability_burningroots.jpg",
 
+    // embellishments
+    "Magazine of Healing Darts": "https://render.worldofwarcraft.com/eu/icons/56/inv_gizmo_runichealthinjector.jpg",
+    "Bronzed Grip Wrappings": "https://render.worldofwarcraft.com/eu/icons/56/inv_holiday_tow_spicebandage.jpg",
+
     // misc
     "Wait": "https://render.worldofwarcraft.com/eu/icons/56/inv_gauntlets_06.jpg",
     "Leech": "https://render.worldofwarcraft.com/eu/icons/56/spell_shadow_lifedrain02.jpg",

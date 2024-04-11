@@ -70,8 +70,11 @@
                                 
                                     <label for="character-name-input-main" class="character-input-label-main" id="character-name-input-label-main">Character Name:</label>
                                     <input type="text" id="character-name-input-main" class="character-input-field-main">
-                                    
-                
+
+                                    <div id="character-name-error-modal" class="error-modal">
+                                        <div id="character-name-error-modal-message"></div>
+                                    </div>
+                                                  
                                     <button id="import-button-main">
                                         <div id="import-button-text-main">Import</div>
                                         <div id="import-button-main-loading-container">
@@ -780,13 +783,22 @@
                             <input id="simulation-name-text-input">
                             <button id="simulate-button">Simulate</button>
 
+                            <div id="simulate-button-error-modal" class="error-modal">
+                                <div id="simulate-button-error-modal-message">Add a priority list before simulating</div>
+                            </div>
+
                             <div id="simulation-progress-bar-container">                      
                                 <div id="simulation-progress-bar"></div>
                                 <span id="simulation-progress-bar-text"></span>
                                 <div class="simulation-progress-bar-check-container"> 
                                     <svg class="simulation-progress-bar-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> 
                                         <circle class="simulation-progress-bar-checkmark-circle" cx="26" cy="26" r="25" fill="none"/> 
-                                        <path class="simulation-progress-bar-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                        <path class="simulation-progress-bar-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>                    
+                                    </svg>
+
+                                    <svg class="simulation-progress-bar-cancel" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" style="display:none"> 
+                                        <circle class="simulation-progress-bar-cancel-circle" cx="26" cy="26" r="25" fill="none"/> 
+                                        <path class="simulation-progress-bar-cancel-x" fill="none" d="M16 16 L36 36 M36 16 L16 36"/>
                                     </svg>
                                 </div>
                             </div>          

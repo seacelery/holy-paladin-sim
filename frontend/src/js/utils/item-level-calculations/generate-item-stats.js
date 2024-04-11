@@ -42,7 +42,7 @@ const calculateStatAllocations = (stats, itemSlot) => {
         statAllocations["leech"] = leechAllocated;
     };
 
-    const secondaryStats = Object.entries(stats).filter(([key]) => !["intellect", "leech", "stamina", "Intellect", "Leech", "Stamina"].includes(key));
+    const secondaryStats = Object.entries(stats).filter(([key]) => !["intellect", "leech", "stamina", "Intellect", "Leech", "Stamina", "combat_rating_sturdiness"].includes(key));
     secondaryStats.sort((a, b) => b[1] - a[1]);
 
     const numSecondaryStats = secondaryStats.length;
@@ -60,12 +60,10 @@ const calculateStatAllocations = (stats, itemSlot) => {
         statAllocations[lowestSecondaryName] = totalSecondariesAllocated / (ratio + 1);
     };
 
-    // console.log(statAllocations)
     return statAllocations;
 };
 
 const generateItemStats = (stats, itemSlot, itemLevel) => {
-    // console.log(stats)
     let ratingMultiplier;
     let staminaMultiplier = ratingMultiplierStamina[itemLevel] ? ratingMultiplierStamina[itemLevel] : 1;
 
@@ -118,7 +116,6 @@ const generateItemStats = (stats, itemSlot, itemLevel) => {
         };
     };
 
-    // console.log(finalStats)
     return finalStats;
 };
 

@@ -59,7 +59,7 @@ const embellishmentsData = {
 const itemSlotBonuses = {
     "Main Hand": {"enchants": ["No enchant", "Sophic Devotion", "Dreaming Devotion"], "embellishments": embellishmentsData},
     "Off Hand":  {"enchants": [], "embellishments": embellishmentsData},
-    "Head": {"enchants": [], "embellishments": embellishmentsData},
+    "Head": {"enchants": ["No enchant", "Incandescent Essence"], "embellishments": embellishmentsData},
     "Necklace":  {"enchants": [], "embellishments": embellishmentsData},
     "Shoulders": {"enchants": [], "embellishments": embellishmentsData},
     "Cloak":  {"enchants": ["No enchant", "Regenerative Leech", "Graceful Avoidance"], "embellishments": embellishmentsData},

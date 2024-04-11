@@ -82,8 +82,14 @@ const updateEquipmentFromImportedData = (data) => {
             for (const enchant in itemEnchants) {
                 let enchantText = itemEnchants[enchant];
                 let formattedEnchantText = enchantText.split(":");
+
                 if (formattedEnchantText.length > 1) {
-                    formattedEnchantText = formattedEnchantText[1].split("|")[0];
+                    if (formattedEnchantText[2] && formattedEnchantText[2].includes("Incandescent Essence")) {
+                        formattedEnchantText = "Incandescent Essence";
+                    } else {
+                        const parts = formattedEnchantText[1].split("|");
+                        formattedEnchantText = parts[0];
+                    };
                 };
 
                 const excludedEnchants = [
@@ -253,7 +259,6 @@ const clearNewItem = () => {
 
     newItemInfo.innerHTML = "";
 
-    newItemIcon.src = "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg";
     newItemIcon.style.opacity = 0.2;
     newItemIcon.style.filter = "grayscale(1)";
 
@@ -307,9 +312,13 @@ const initialiseEquipment = () => {
 
         const currentItemLevelBlur = () => {
             let fullItemData = generateFullItemData();
-            const newItemLevel = currentItemLevel.textContent;
+            let newItemLevel = currentItemLevel.textContent;
+            
             const currentItemSlot = itemSlotsMap[itemSlot.getAttribute("data-item-slot").toLowerCase()];
-            console.log(itemSlotData)
+
+            if (newItemLevel.length === 0 || newItemLevel.length > 3) {
+                newItemLevel = fullItemData.equipment[currentItemSlot].item_level;
+            };
 
             const newStats = generateItemStats(itemSlotData.stats, currentItemSlot, newItemLevel);
             fullItemData.equipment[currentItemSlot].stats = newStats;
@@ -426,7 +435,12 @@ const initialiseEquipment = () => {
             const currentItemEnchantSelect = createElement("div", "current-equipped-item-field-right", "current-equipped-item-enchants");
             const defaultEnchantOption = createElement("div", "current-equipped-item-default-enchant-option", null);
             if (itemSlotData["enchantments"] && itemSlotData["enchantments"].length > 0) {
-                defaultEnchantOption.textContent = itemSlotData["enchantments"][0].split("|")[0];
+                if (itemSlotData["enchantments"][0].split("|")[1] && itemSlotData["enchantments"][0].split("|")[1].includes("Incandescent Essence")) {
+                    defaultEnchantOption.textContent = "Enchanted: Incandescent Essence";
+                } else {
+                    defaultEnchantOption.textContent = itemSlotData["enchantments"][0].split("|")[0];
+                };
+
                 defaultEnchantOption.style.color = "var(--rarity-uncommon)";
             } else if (itemSlotData["enchantments"] && itemSlotData["enchantments"].length == 0) {
                 defaultEnchantOption.textContent = "No enchant";
@@ -709,7 +723,7 @@ const initialiseEquipment = () => {
 
         itemSlots.forEach(itemSlot => {
             itemSlot.querySelector(".item-slot-hover").classList.remove("item-slot-selected");
-            itemSlot.querySelector(".item-slot-hover").style.backgroundColor = "var(--tooltip-colour)";
+            itemSlot.querySelector(".item-slot-hover").style.backgroundColor = "var(--panel-colour-7)";
         })
         itemSlot.querySelector(".item-slot-hover").classList.add("item-slot-selected");
         itemSlot.querySelector(".item-slot-hover").style.backgroundColor = "var(--panel-colour-5)";
@@ -845,8 +859,13 @@ const initialiseEquipment = () => {
             newItemLevel.style.outline = "none";
 
             const newItemLevelBlur = () => {
-                const newItemLevelText = newItemLevel.textContent;
+                let newItemLevelText = newItemLevel.textContent;
                 const selectedItemSlot = document.getElementById("equipped-items-edit-choose-slot-dropdown").value;
+
+                if (newItemLevelText.length === 0 || newItemLevelText.length > 3) {
+                    newItemLevelText = item.base_item_level;
+                };
+
                 const newStats = generateItemStats(item.stats, itemSlotsMap[selectedItemSlot.toLowerCase()], newItemLevelText);
                 item.stats = newStats;
                 item.base_item_level = newItemLevelText;

@@ -8,8 +8,6 @@ from .summons import LightsHammerSummon
 from .target import BeaconOfLight
 from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals, update_spell_data_beacon_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
 
-# KNOWN BUGS
-# glimmer's stacking 4% healing skips the first glimmer so 0% at 1 glimmer -> 8% at 2 glimmers
 
 def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_targets):
     if len(glimmer_targets) > max_glimmer_targets:             
@@ -35,7 +33,6 @@ def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_ta
 # generators
 class HolyShock(Spell):
     
-    SPELL_ID = 20473
     SPELL_POWER_COEFFICIENT = 1.535 * 0.8
     MANA_COST = 0.028
     BASE_MANA_COST = 0.028
@@ -231,7 +228,6 @@ class HolyShock(Spell):
             
 class Daybreak(Spell):
     
-    SPELL_ID = 414170
     BASE_COOLDOWN = 45
     
     def __init__(self, caster):
@@ -318,7 +314,6 @@ class Daybreak(Spell):
                
 class RisingSunlightHolyShock(Spell):
     
-    SPELL_ID = 20473
     SPELL_POWER_COEFFICIENT = 1.535 * 0.8
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
@@ -484,7 +479,6 @@ class RisingSunlightHolyShock(Spell):
                     
 class DivineToll(Spell):
     
-    SPELL_ID = 375576
     MANA_COST = 0.03
     BASE_COOLDOWN = 60
     
@@ -521,7 +515,6 @@ class DivineToll(Spell):
   
 class DivineTollHolyShock(Spell):
     
-    SPELL_ID = 20473
     SPELL_POWER_COEFFICIENT = 1.535 * 0.8
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
@@ -690,7 +683,6 @@ class DivineTollHolyShock(Spell):
             
 class DivineResonanceHolyShock(Spell):
     
-    SPELL_ID = 20473
     SPELL_POWER_COEFFICIENT = 1.535 * 0.8
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
@@ -966,7 +958,6 @@ class HolyLight(Spell):
 
 class FlashOfLight(Spell):
     
-    SPELL_ID = 19750
     SPELL_POWER_COEFFICIENT = 2.63 * 1.2
     MANA_COST = 0.036 
     BASE_MANA_COST = 0.036
@@ -1093,7 +1084,6 @@ class FlashOfLight(Spell):
 # spenders
 class WordOfGlory(Spell):
     
-    SPELL_ID = 85673
     SPELL_POWER_COEFFICIENT = 3.15 * 0.88
     MANA_COST = 0.012
     HOLY_POWER_COST = 3

@@ -224,6 +224,22 @@ class MagazineOfHealingDarts(Spell):
     
     def __init__(self, caster):
         super().__init__("Magazine of Healing Darts")
+        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        
+    def apply_flat_healing(self, caster, target, current_time, is_heal):     
+        healing_dart_heal, healing_dart_crit = MagazineOfHealingDarts(caster).calculate_heal(caster)
+        healing_dart_heal = self.embellishment_first_value * caster.versatility_multiplier
+        
+        if healing_dart_crit:
+            healing_dart_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+            
+        healing_dart_heal = add_talent_healing_multipliers(healing_dart_heal, caster)
+        
+        target.receive_heal(healing_dart_heal, caster)
+        update_spell_data_heals(caster.ability_breakdown, "Magazine of Healing Darts", target, healing_dart_heal, healing_dart_crit)
         
         
 class BronzedGripWrappings(Spell):
@@ -234,4 +250,19 @@ class BronzedGripWrappings(Spell):
     
     def __init__(self, caster):
         super().__init__("Bronzed Grip Wrappings")
-    
+        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        
+    def apply_flat_healing(self, caster, target, current_time, is_heal):     
+        bronzed_grip_wrappings_heal, bronzed_grip_wrappings_crit = BronzedGripWrappings(caster).calculate_heal(caster)
+        bronzed_grip_wrappings_heal = self.embellishment_first_value * caster.versatility_multiplier
+        
+        if bronzed_grip_wrappings_crit:
+            bronzed_grip_wrappings_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+            
+        bronzed_grip_wrappings_heal = add_talent_healing_multipliers(bronzed_grip_wrappings_heal, caster)
+        
+        target.receive_heal(bronzed_grip_wrappings_heal, caster)
+        update_spell_data_heals(caster.ability_breakdown, "Bronzed Grip Wrappings", target, bronzed_grip_wrappings_heal, bronzed_grip_wrappings_crit)

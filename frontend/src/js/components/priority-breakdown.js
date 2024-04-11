@@ -62,7 +62,8 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
         "Feisty Fish Sticks", "Aromatic Seafood Platter", "Sizzling Seafood Medley", "Revenge, Served Cold",
         "Thousandbone Tongueslicer", "Great Cerulean Sea", "Pip's Emerald Friendship Badge", "Elemental Lariat",
         "Close to Heart", "Allied Wristguards of Companionship", "Potion Absorption Inhibitor", "Saved by the Light",
-        "Retribution Aura ", "Source of Magic", "Symbol of Hope", "Mana Spring Totem", "Ominous Chromatic Essence"
+        "Retribution Aura ", "Source of Magic", "Symbol of Hope", "Mana Spring Totem", "Ominous Chromatic Essence",
+        "Magazine of Healing Darts", "Bronzed Grip Wrappings"
     ];
     const playerAurasModalIconOrder = [
         "Avenging Wrath", "Blessing of Dawn", "Blessing of Dusk", "Infusion of Light", "Divine Purpose", 

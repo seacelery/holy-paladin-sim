@@ -692,6 +692,30 @@ const itemDataEffects = [
         "enchantments": [],
         "gems": []
     },
+    {
+        "id": 207788,
+        "name": "Vakash, the Shadowed Inferno",
+        "item_slot": "One-Hand",
+        "icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_1h_emeralddreamraid_d_01.jpg",
+        "base_item_level": 441,
+        "quality": "Epic",
+        "effects": [
+            {
+                "name": "Hungering Shadowflame",
+                "id": 424320,
+                "description": "Equip: Your spells and abilities have a chance to draw on the corruption within, dealing an additional 16,099 Shadowflame damage to you and your target.\r\n\r\nDamage increased by 400% against enemies above 90% health."
+            }
+        ],
+        "stats": {
+            "Intellect": 1747,
+            "Stamina": 1112,
+            "Haste": 129,
+            "Mastery": 297
+        },
+        "limit": null,
+        "enchantments": [],
+        "gems": []
+    },
 ];
 
 export default itemDataEffects;

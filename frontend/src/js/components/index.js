@@ -85,6 +85,19 @@ const simulationProgressBarCheck = document.querySelector(".simulation-progress-
 const simulationProgressBarContainer = document.getElementById("simulation-progress-bar-container");
 const simulationProgressBar = document.getElementById("simulation-progress-bar");
 const simulationProgressBarText = document.getElementById("simulation-progress-bar-text");
+const simulateButtonErrorModal = document.getElementById("simulate-button-error-modal");
+
+window.addEventListener("click", (e) => {
+    if (e.target !== document.getElementById("simulate-button-error-modal-message") && e.target !== simulationProgressBarCheck && e.target !== document.querySelector(".simulation-progress-bar-checkmark")) {
+        simulateButtonErrorModal.style.display = "none";
+    };
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target !== document.getElementById("character-name-error-modal-message")) {
+        document.getElementById("character-name-error-modal").style.display = "none";
+    };
+});
 
 const fullResultsContainer = document.getElementById("results-container");
 
@@ -177,7 +190,8 @@ const generateRealmOptions = () => {
 
         realmOption.addEventListener("click", (e) => {
             e.stopPropagation();
-            selectedRealmDisplay.textContent = realmOption.dataset.name;
+            suggestedOption = realmOption.dataset.name;
+            selectedRealmDisplay.innerHTML = suggestedOption;
             realmSuggestionsContainer.style.display = "none";
         });
     });
@@ -309,7 +323,7 @@ const importCharacter = async () => {
         characterName = document.getElementById("character-name-input-main").value.toLowerCase();
     };
     if (!characterRealm) {
-        characterRealm = document.getElementById("character-realm-selected-realm").textContent.toLowerCase().replace(/\u00A0/g, "-");
+        characterRealm = document.getElementById("character-realm-selected-realm").textContent.toLowerCase().replace(/\u00A0/g, "-").replace(" ", "-");
     };
     if (!characterRegion) {
         characterRegion = document.getElementById("character-region-selected-region").textContent.toLowerCase();
@@ -363,12 +377,13 @@ const importCharacter = async () => {
                         loadingIcon.style.display = "none";
                     };
                     
+                    document.getElementById("character-name-error-modal").style.display = "flex";
                     if (!characterName) {
-                        window.alert(`Character name missing`)
+                        document.getElementById("character-name-error-modal-message").textContent = "Character name missing";
                     } else if (!characterRealm) {
-                        window.alert(`Character realm missing`)
+                        document.getElementById("character-name-error-modal-message").textContent = "Character realm missing";
                     } else {
-                        window.alert(`Character not found`)
+                        document.getElementById("character-name-error-modal-message").textContent = "Character not found";
                     };          
     });
 };
@@ -446,11 +461,34 @@ const playCheckmarkAnimation = () => {
     }, 3000);    
 };
 
+const playCancelledAnimation = () => {
+    simulationProgressBar.style.background = "var(--red-font-cancelled)";
+
+    document.querySelector(".simulation-progress-bar-cancel-circle").classList.add("animate-circle");
+    document.querySelector(".simulation-progress-bar-cancel-x").classList.add("animate-x");
+    
+    setTimeout(() => {         
+        simulateButton.style.opacity = "100";
+        simulationProgressBarContainer.style.opacity = "0";
+        simulationProgressBar.style.width = "0%";
+        document.querySelector(".simulation-progress-bar-cancel-circle").classList.remove("animate-circle");
+        document.querySelector(".simulation-progress-bar-cancel-x").classList.remove("animate-x");
+        document.querySelector(".simulation-progress-bar-cancel").style.display = "none";
+    }, 3000);
+
+    setTimeout(() => {
+        simulationProgressBar.style.background = "linear-gradient(to bottom, #16a137 0%,#15b12c 50%,#12aa2b 51%,#17c52e 100%)";
+    }, 4000);
+};
+
 const handleSimulationCancel = () => {
     if (abortController) {
         abortController.abort();
-        simulationProgressBarContainer.style.opacity = "0";
-        simulationProgressBar.style.width = "0%";
+
+        document.querySelector(".simulation-progress-bar-checkmark").style.display = "none";
+        const cancelSVG = document.querySelector(".simulation-progress-bar-cancel");
+        cancelSVG.style.display = "block";
+        playCancelledAnimation();
 
         fetch("http://127.0.0.1:5000/cancel_simulation", {
             method: "POST",
@@ -464,6 +502,11 @@ const handleSimulationCancel = () => {
 };
 
 const runSimulation = async () => {
+    if (priorityList.length === 0) {
+        simulateButtonErrorModal.style.display = "flex";
+        return;
+    };
+
     abortController = new AbortController();
     const { signal } = abortController;
 
@@ -491,7 +534,7 @@ const runSimulation = async () => {
     const priorityListJson = encodeURIComponent(JSON.stringify(priorityList));
     const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
 
-    simulateButton.style.boxShadow = "";
+    simulateButton.style.boxShadow = "";  
 
     return fetch(`http://127.0.0.1:5000/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}&time_warp_time=${timeWarpTime}&priority_list=${priorityListJson}&custom_equipment=${customEquipment}&tick_rate=${tickRate}&raid_health=${raidHealth}&mastery_effectiveness=${masteryEffectiveness}&light_of_dawn_targets=${lightOfDawnTargets}&lights_hammer_targets=${lightsHammerTargets}&resplendent_light_targets=${resplendentLightTargets}`, {
         credentials: "include",
@@ -501,11 +544,13 @@ const runSimulation = async () => {
     .then(data => {
         let simulationData = data;     
         console.log(simulationData)
-        createSimulationResults(simulationData);
-
+        
         simulationProgressBarText.textContent = "";
-        playCheckmarkAnimation();
-           
+        if (simulationData) {
+            createSimulationResults(simulationData);
+            playCheckmarkAnimation();
+        };
+         
         isSimulationRunning = false;
         simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
     })
@@ -515,6 +560,7 @@ const runSimulation = async () => {
         } else {
             console.error("Error:", error);
         }
+        
         isSimulationRunning = false;
         simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
     });
