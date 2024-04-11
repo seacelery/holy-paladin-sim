@@ -3,7 +3,7 @@ services:
   myapp:
     image: holy-paladin-sim-image
     ports:
-      - "5500:5500"
+      - "5500:5000"
     environment:
       CLIENT_ID: "57cdb961fae04b8f9dc4d3caea3716db"
       CLIENT_SECRET: "rIIdFk2In9dQfBUxbPmH6ee4DDDO6oUV"
