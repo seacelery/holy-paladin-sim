@@ -1,5 +1,5 @@
+import os
 import requests
-from .config import CLIENT_ID, CLIENT_SECRET
 from functools import cache
 
 class APIClient:
@@ -15,8 +15,10 @@ class APIClient:
     @staticmethod
     def _get_access_token():
         url = "https://eu.battle.net/oauth/token"
+        client_id = os.getenv("CLIENT_ID")
+        client_secret = os.getenv("CLIENT_SECRET")
         APIClient.api_call_count += 1
-        response = requests.post(url, data={'grant_type': 'client_credentials'}, auth=(CLIENT_ID, CLIENT_SECRET))
+        response = requests.post(url, data={'grant_type': 'client_credentials'}, auth=(client_id, client_secret))
         return response.json()["access_token"]
 
     @cache

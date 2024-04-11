@@ -10,11 +10,12 @@ from app.classes.simulation import Simulation
 from app.classes.paladin import Paladin
 from app.classes.target import Target, BeaconOfLight
 from app.utils import cache, battlenet_api
-from app.classes.config import CLIENT_ID, CLIENT_SECRET
 
 pp = pprint.PrettyPrinter(width=200)
 
-access_token = battlenet_api.get_access_token(CLIENT_ID, CLIENT_SECRET)
+client_id = os.getenv("CLIENT_ID")
+client_secret = os.getenv("CLIENT_SECRET")
+access_token = battlenet_api.get_access_token(client_id, client_secret)
 
 def save_data_to_file(data, filename):
     with open(filename, "w") as f:
