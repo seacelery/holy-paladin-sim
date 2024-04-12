@@ -116,6 +116,7 @@ def update_character_route():
     user_input = request.json
     print("User Input:", user_input)
     modifiable_data = session.get("modifiable_data", {})
+    print("Modifiable Data before accessing 'spec_talents':", modifiable_data)  # Debugging
     
     if "class_talents" in user_input:
         for talent, value in user_input["class_talents"].items():
