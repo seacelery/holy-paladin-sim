@@ -60,6 +60,7 @@ def import_character_route():
     session["region"] = region
     
     session["modifiable_data"] = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}, "equipment": {}}
+    print("Session modifiable_data set:", session["modifiable_data"])
 
     return jsonify({
         "message": f"Character imported successfully, {character_name}, {realm}, {region}",
@@ -113,6 +114,7 @@ def fetch_updated_stats_route():
 
 @main.route("/update_character", methods=["POST"])
 def update_character_route():
+    print("Session modifiable_data received:", session.get("modifiable_data"))
     user_input = request.json
     print("User Input:", user_input)
     modifiable_data = session.get("modifiable_data", {})
