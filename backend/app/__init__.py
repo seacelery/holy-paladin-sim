@@ -13,6 +13,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 def create_app():
     app = Flask(__name__, static_url_path='', static_folder='../../docs')
+    app.logger.setLevel(logging.DEBUG)
     app.secret_key = flask_secret_key
     CORS(app, supports_credentials=True)
     app.register_blueprint(main_blueprint)
