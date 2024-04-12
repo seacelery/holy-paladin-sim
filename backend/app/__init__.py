@@ -7,6 +7,10 @@ from app.routes import main as main_blueprint
 
 flask_secret_key = os.getenv("FLASK_SECRET_KEY")
 
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+
 def create_app():
     app = Flask(__name__, static_url_path='', static_folder='../../docs')
     app.secret_key = flask_secret_key
