@@ -33,7 +33,7 @@ const createElement = (elementName, className = null, id = null) => {
 };
 
 // socket to allow the server to send updates while the simulation is ongoing
-const socket = io("http://localhost:5500");
+const socket = io("https://holy-paladin-sim-4805ca42c860.herokuapp.com");
 
 socket.on("connect", function() {
     console.log("Connected to the server");
@@ -348,7 +348,7 @@ const importCharacter = async () => {
         importContainerMain.style.display = "none";
     };
 
-    return fetch(`http://localhost:5500/import_character?character_name=${characterName}&realm=${characterRealm}&region=${characterRegion}`, {
+    return fetch(`https://holy-paladin-sim-4805ca42c860.herokuapp.com/import_character?character_name=${characterName}&realm=${characterRealm}&region=${characterRegion}`, {
         credentials: "include"
     })
     .then(response => response.json())
@@ -395,7 +395,7 @@ const updateStats = async () => {
 
     const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
 
-    return fetch(`http://localhost:5500/fetch_updated_data?character_name=${characterName}&realm=${characterRealm}&custom_equipment=${customEquipment}&region=${characterRegion}`, {
+    return fetch(`https://holy-paladin-sim-4805ca42c860.herokuapp.com/fetch_updated_data?character_name=${characterName}&realm=${characterRealm}&custom_equipment=${customEquipment}&region=${characterRegion}`, {
         credentials: "include"
     })
     .then(response => response.json())
@@ -428,7 +428,7 @@ const updateCharacter = async (data) => {
 
     handleSavedDataStatus();
 
-    return fetch("http://localhost:5500/update_character", {
+    return fetch("https://holy-paladin-sim-4805ca42c860.herokuapp.com/update_character", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -490,7 +490,7 @@ const handleSimulationCancel = () => {
         cancelSVG.style.display = "block";
         playCancelledAnimation();
 
-        fetch("http://localhost:5500/cancel_simulation", {
+        fetch("https://holy-paladin-sim-4805ca42c860.herokuapp.com/cancel_simulation", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -536,7 +536,7 @@ const runSimulation = async () => {
 
     simulateButton.style.boxShadow = "";  
 
-    return fetch(`http://localhost:5500/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}&time_warp_time=${timeWarpTime}&priority_list=${priorityListJson}&custom_equipment=${customEquipment}&tick_rate=${tickRate}&raid_health=${raidHealth}&mastery_effectiveness=${masteryEffectiveness}&light_of_dawn_targets=${lightOfDawnTargets}&lights_hammer_targets=${lightsHammerTargets}&resplendent_light_targets=${resplendentLightTargets}`, {
+    return fetch(`https://holy-paladin-sim-4805ca42c860.herokuapp.com/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}&time_warp_time=${timeWarpTime}&priority_list=${priorityListJson}&custom_equipment=${customEquipment}&tick_rate=${tickRate}&raid_health=${raidHealth}&mastery_effectiveness=${masteryEffectiveness}&light_of_dawn_targets=${lightOfDawnTargets}&lights_hammer_targets=${lightsHammerTargets}&resplendent_light_targets=${resplendentLightTargets}`, {
         credentials: "include",
         signal: signal
     })
