@@ -551,8 +551,7 @@ const runSimulation = async () => {
 
     simulationProgressBarContainer.addEventListener("click", handleSimulationCancel);
 
-    const priorityListJson = JSON.stringify(priorityList);
-    const customEquipment = JSON.stringify(generateFullItemData()["equipment"]);
+    const customEquipment = generateFullItemData()["equipment"];
 
     simulateButton.style.boxShadow = "";  
 
