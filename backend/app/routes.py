@@ -128,8 +128,6 @@ def fetch_updated_stats_route():
 
 @main.route("/update_character", methods=["POST"])
 def update_character_route():
-    
-    
     session_token = request.cookies.get('session_token')
     if not session_token:
         return jsonify({"error": "No session token provided"}), 400
@@ -163,8 +161,11 @@ def update_character_route():
 
     return jsonify({"message": "Character updated successfully"})
 
-@main.route("/run_simulation", methods=["GET"])
+@main.route("/run_simulation", methods=["POST"])
+@cross_origin(origins=["https://seacelery.github.io"], supports_credentials=True)
 def run_simulation_route():
+    data = request.json
+    
     session_token = request.cookies.get('session_token')
     if not session_token:
         return jsonify({"error": "No session token provided"}), 400
@@ -175,22 +176,22 @@ def run_simulation_route():
 
     modifiable_data = json.loads(session_data)
 
-    encounter_length = request.args.get("encounter_length", default=60, type=int)
-    iterations = request.args.get("iterations", default=1, type=int)
-    time_warp_time = request.args.get("time_warp_time", default=0, type=int)
-    priority_list_json = request.args.get("priority_list", default="")
-    custom_equipment = request.args.get("custom_equipment")
-    tick_rate = request.args.get("tick_rate")
-    raid_health = request.args.get("raid_health")
-    mastery_effectiveness = request.args.get("mastery_effectiveness")
-    light_of_dawn_targets = request.args.get("light_of_dawn_targets")
-    lights_hammer_targets = request.args.get("lights_hammer_targets")
-    resplendent_light_targets = request.args.get("resplendent_light_targets")
+    # encounter_length = request.args.get("encounter_length", default=60, type=int)
+    # iterations = request.args.get("iterations", default=1, type=int)
+    # time_warp_time = request.args.get("time_warp_time", default=0, type=int)
+    # priority_list_json = request.args.get("priority_list", default="")
+    # custom_equipment = request.args.get("custom_equipment")
+    # tick_rate = request.args.get("tick_rate")
+    # raid_health = request.args.get("raid_health")
+    # mastery_effectiveness = request.args.get("mastery_effectiveness")
+    # light_of_dawn_targets = request.args.get("light_of_dawn_targets")
+    # lights_hammer_targets = request.args.get("lights_hammer_targets")
+    # resplendent_light_targets = request.args.get("resplendent_light_targets")
     
-    if priority_list_json:
-        priority_list = json.loads(priority_list_json)
-    else:
-        priority_list = default_priority_list
+    # if priority_list_json:
+    #     priority_list = json.loads(priority_list_json)
+    # else:
+    #     priority_list = default_priority_list
 
     paladin, healing_targets = import_character(
         modifiable_data['character_name'],
@@ -204,8 +205,22 @@ def run_simulation_route():
         spec_talents=modifiable_data.get("spec_talents"),
         consumables=modifiable_data.get("consumables")
     )
-        
-    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets)
+      
+    simulation = initialise_simulation(
+        paladin, 
+        healing_targets, 
+        data['encounter_length'], 
+        data['iterations'], 
+        data['time_warp_time'], 
+        json.loads(data['priority_list']), 
+        json.loads(data['custom_equipment']), 
+        data['tick_rate'], 
+        data['raid_health'], 
+        data['mastery_effectiveness'], 
+        data['light_of_dawn_targets'], 
+        data['lights_hammer_targets'], 
+        data['resplendent_light_targets']
+    )  
 
     # pp.pprint(paladin.class_talents)
     results = run_simulation(simulation)

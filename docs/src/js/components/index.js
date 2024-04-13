@@ -556,26 +556,26 @@ const runSimulation = async () => {
 
     simulateButton.style.boxShadow = "";  
 
-    return fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/run_simulation?encounter_length=${encounterLength}&iterations=${iterations}&time_warp_time=${timeWarpTime}&priority_list=${priorityListJson}&custom_equipment=${customEquipment}&tick_rate=${tickRate}&raid_health=${raidHealth}&mastery_effectiveness=${masteryEffectiveness}&light_of_dawn_targets=${lightOfDawnTargets}&lights_hammer_targets=${lightsHammerTargets}&resplendent_light_targets=${resplendentLightTargets}`, {
-        credentials: "include",
-        signal: signal,
+    return fetch("https://holy-paladin-sim-6479e85b188f.herokuapp.com/run_simulation", {
+        method: "POST",
         headers: {
             'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        let simulationData = data;     
-        console.log(simulationData)
-        
-        simulationProgressBarText.textContent = "";
-        if (simulationData) {
-            createSimulationResults(simulationData);
-            playCheckmarkAnimation();
-        };
-         
-        isSimulationRunning = false;
-        simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
+        },
+        body: JSON.stringify({
+            encounter_length: encounterLength,
+            iterations: iterations,
+            time_warp_time: timeWarpTime,
+            priority_list: priorityListJson,
+            custom_equipment: customEquipment,
+            tick_rate: tickRate,
+            raid_health: raidHealth,
+            mastery_effectiveness: masteryEffectiveness,
+            light_of_dawn_targets: lightOfDawnTargets,
+            lights_hammer_targets: lightsHammerTargets,
+            resplendent_light_targets: resplendentLightTargets
+        }),
+        credentials: "include",
+        signal: signal
     })
     .catch(error => {
         if (error.name === "AbortError") {
