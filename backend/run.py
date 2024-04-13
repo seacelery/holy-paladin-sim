@@ -1,5 +1,5 @@
 import eventlet
-eventlet.monkey_patch()
+eventlet.monkey_patch(socket=True, select=True, time=True, os=True, thread=False)
 
 import os
 from dotenv import load_dotenv
