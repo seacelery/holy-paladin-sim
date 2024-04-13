@@ -6,6 +6,7 @@ import copy
 import time
 import cProfile
 import json
+import eventlet
 from flask_socketio import emit
 
 from collections import defaultdict
@@ -653,6 +654,8 @@ class Simulation:
                 self.paladin.apply_consumables()
                 self.paladin.apply_item_effects()
                 self.paladin.apply_buffs_on_encounter_start()
+                
+            eventlet.sleep(0)
             
             # only record some data on the last iteration
             if i == self.iterations - 1:
