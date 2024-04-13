@@ -1,6 +1,7 @@
 import sys
 import pprint
 import json
+import uuid
 
 from flask import Blueprint, request, jsonify, session, send_from_directory, current_app
 from app.main import import_character, run_simulation, initialise_simulation, fetch_updated_data
@@ -16,6 +17,31 @@ default_priority_list = [
     ("Arcane Torrent | Race = Blood Elf"),
     ("Judgment | Infusion of Light duration < 5"),
 ]
+
+@main.route('/login', methods=['POST'])
+def login():
+    user_id = request.form['username']  # This is just an example
+    session_token = str(uuid.uuid4())
+    session_redis = current_app.config['SESSION_REDIS']
+
+    # Store user_id in Redis with session_token as the key
+    session_redis.setex(session_token, 3600, user_id)  # Expires in 3600 seconds (1 hour)
+
+    response = jsonify({'message': 'You are logged in!'})
+    response.set_cookie('session_id', session_token)
+    return response
+
+@main.route('/logout', methods=['GET'])
+def logout():
+    session_id = request.cookies.get('session_id')
+    session_redis = current_app.config['SESSION_REDIS']
+    
+    if session_id:
+        session_redis.delete(session_id)
+    
+    response = jsonify({'message': 'You are logged out!'})
+    response.set_cookie('session_id', '', expires=0)  # Clear the session_id cookie
+    return response
 
 @socketio.on("my event")
 def handle_my_custom_event(json):
