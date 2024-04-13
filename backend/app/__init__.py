@@ -17,7 +17,8 @@ def create_app():
     app.logger.setLevel(logging.DEBUG)
 
     # Update CORS setup here
-    CORS(app, supports_credentials=True, origins=["https://seacelery.github.io"])
+    CORS(app, supports_credentials=True, origins=["https://seacelery.github.io"], allow_headers=[
+        "Content-Type", "Authorization", "X-Requested-With"], allow_methods=["GET", "POST", "OPTIONS"])
 
     from app.socketio_setup import socketio
     socketio.init_app(app, cors_allowed_origins="https://seacelery.github.io")
