@@ -23,9 +23,9 @@ def handle_my_custom_event(json):
     print("received json: " + str(json))
     emit("my response", {"data": "got it!"})
 
-def log_session_size():
-    session_keys_count = len(session.keys())
-    print(f"Session contains {session_keys_count} keys")
+# def log_session_size():
+#     session_keys_count = len(session.keys())
+#     print(f"Session contains {session_keys_count} keys")
     
     # not compatible with pypy
     # session_size = sys.getsizeof(str(session))
@@ -41,7 +41,6 @@ def test_route():
     
 @main.route("/cancel_simulation", methods=["POST"])
 def cancel_simulation_route():
-    print("Cancel simulation route hit")
     cancel_simulation()
     return jsonify({"message": "Simulation cancellation requested."})
 
@@ -134,10 +133,7 @@ def update_character_route():
         return jsonify({"error": "Session not found"}), 404
 
     modifiable_data = json.loads(session_data)
-    current_app.logger.debug("Session received in update_character: %s", session.get("modifiable_data"))
     user_input = request.json
-    print("User Input:", user_input)
-    print("Modifiable Data before accessing 'spec_talents':", modifiable_data)  # Debugging
     
     # if "class_talents" in user_input:
     #     for talent, value in user_input["class_talents"].items():
