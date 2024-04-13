@@ -564,7 +564,7 @@ const runSimulation = async () => {
             encounter_length: encounterLength,
             iterations: iterations,
             time_warp_time: timeWarpTime,
-            priority_list: priorityListJson,
+            priority_list: priorityList,
             custom_equipment: customEquipment,
             tick_rate: tickRate,
             raid_health: raidHealth,
@@ -575,6 +575,20 @@ const runSimulation = async () => {
         }),
         credentials: "include",
         signal: signal
+    })
+    .then(response => response.json())
+    .then(data => {
+        let simulationData = data;     
+        console.log(simulationData)
+        
+        simulationProgressBarText.textContent = "";
+        if (simulationData) {
+            createSimulationResults(simulationData);
+            playCheckmarkAnimation();
+        };
+         
+        isSimulationRunning = false;
+        simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
     })
     .catch(error => {
         if (error.name === "AbortError") {
