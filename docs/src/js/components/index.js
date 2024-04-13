@@ -110,7 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // increment the percentage on the progress bar when the server sends an iteration update
 socket.on("iteration_update", function(data) {
+    console.log("Received iteration update:", data);
     if (isSimulationRunning) {
+        console.log("Changing progress bar");
         const progressPercentage = Math.round((data.iteration / iterations) * 100);
         simulationProgressBar.style.width = progressPercentage + "%";
         simulationProgressBarText.textContent = progressPercentage + "%";
