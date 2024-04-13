@@ -79,20 +79,17 @@ def import_character_route():
     response.set_cookie('session_token', session_token, samesite='None', secure=True, httponly=True)
     return response
     
-@main.route("/fetch_updated_data", methods=["GET"])
+@main.route("/fetch_updated_data", methods=["POST"])
 @cross_origin(origins=["https://seacelery.github.io"], supports_credentials=True)
 def fetch_updated_stats_route():
-    
-    current_app.logger.debug("Received headers: %s", request.headers)
-    current_app.logger.debug("Received cookies: %s", request.cookies)
-    
-    character_name = request.args.get("character_name")
-    realm = request.args.get("realm")
-    region = request.args.get("region")
-    custom_equipment = request.args.get("custom_equipment")
+    data = request.json
+    character_name = data['character_name']
+    realm = data['realm']
+    region = data['region']
+    custom_equipment = data['custom_equipment']
 
     paladin, healing_targets = import_character(character_name, realm, region)
-    
+
     session_token = request.cookies.get('session_token')
     if not session_token:
         return jsonify({"error": "No session token provided"}), 400
@@ -109,11 +106,10 @@ def fetch_updated_stats_route():
         spec_talents=modifiable_data.get("spec_talents"),
         consumables=modifiable_data.get("consumables")
     )
-
     paladin.update_equipment(custom_equipment)
     
     return jsonify({
-        "message": f"Character imported successfully, {character_name}, {realm}, {region}",
+        "message": "Character updated successfully",
         "character_name": character_name,
         "character_realm": realm,
         "character_region": region,
@@ -122,10 +118,12 @@ def fetch_updated_stats_route():
         "race": paladin.race,
         "consumable": paladin.consumables,
         "equipment": paladin.equipment,
-        "stats": {"haste": round(paladin.haste_rating), "crit": round(paladin.crit_rating), "mastery": round(paladin.mastery_rating), "versatility": round(paladin.versatility_rating), 
-                  "intellect": round(paladin.spell_power), "health": round(paladin.max_health), "leech": round(paladin.leech_rating), "mana": round(paladin.max_mana),
-                  "haste_percent": round(paladin.haste, 2), "crit_percent": round(paladin.crit, 2), "mastery_percent": round(paladin.mastery, 2), 
-                  "versatility_percent": round(paladin.versatility, 2), "leech_percent": round(paladin.leech, 2)}
+        "stats": {
+            "haste": round(paladin.haste_rating), "crit": round(paladin.crit_rating), "mastery": round(paladin.mastery_rating), "versatility": round(paladin.versatility_rating), 
+            "intellect": round(paladin.spell_power), "health": round(paladin.max_health), "leech": round(paladin.leech_rating), "mana": round(paladin.max_mana),
+            "haste_percent": round(paladin.haste, 2), "crit_percent": round(paladin.crit, 2), "mastery_percent": round(paladin.mastery, 2), 
+            "versatility_percent": round(paladin.versatility, 2), "leech_percent": round(paladin.leech, 2)
+        }
     })
 
 @main.route("/update_character", methods=["POST"])
