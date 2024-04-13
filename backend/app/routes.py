@@ -124,7 +124,8 @@ def fetch_updated_stats_route():
 
 @main.route("/update_character", methods=["POST"])
 def update_character_route():
-    print(request.cookies)
+    current_app.logger.debug(f"Cookies received: {request.cookies}")
+    
     session_token = request.cookies.get('session_token')
     if not session_token:
         return jsonify({"error": "No session token provided"}), 400
@@ -154,6 +155,7 @@ def update_character_route():
 
     # Save the updated data back to Redis
     current_app.redis.setex(session_token, 3600, json.dumps(modifiable_data))
+    current_app.logger.debug(f"Modifiable data after update: {modifiable_data}")
 
     return jsonify({"message": "Character updated successfully"})
 
