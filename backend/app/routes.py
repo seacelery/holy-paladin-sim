@@ -176,23 +176,6 @@ def run_simulation_route():
 
     modifiable_data = json.loads(session_data)
 
-    # encounter_length = request.args.get("encounter_length", default=60, type=int)
-    # iterations = request.args.get("iterations", default=1, type=int)
-    # time_warp_time = request.args.get("time_warp_time", default=0, type=int)
-    # priority_list_json = request.args.get("priority_list", default="")
-    # custom_equipment = request.args.get("custom_equipment")
-    # tick_rate = request.args.get("tick_rate")
-    # raid_health = request.args.get("raid_health")
-    # mastery_effectiveness = request.args.get("mastery_effectiveness")
-    # light_of_dawn_targets = request.args.get("light_of_dawn_targets")
-    # lights_hammer_targets = request.args.get("lights_hammer_targets")
-    # resplendent_light_targets = request.args.get("resplendent_light_targets")
-    
-    # if priority_list_json:
-    #     priority_list = json.loads(priority_list_json)
-    # else:
-    #     priority_list = default_priority_list
-
     paladin, healing_targets = import_character(
         modifiable_data['character_name'],
         modifiable_data['realm'],
@@ -212,8 +195,8 @@ def run_simulation_route():
         data['encounter_length'], 
         data['iterations'], 
         data['time_warp_time'], 
-        json.loads(data['priority_list']), 
-        json.loads(data['custom_equipment']), 
+        data['priority_list'], 
+        data['custom_equipment'], 
         data['tick_rate'], 
         data['raid_health'], 
         data['mastery_effectiveness'], 
