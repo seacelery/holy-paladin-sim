@@ -4,6 +4,7 @@ import json
 import uuid
 
 from flask import Blueprint, request, jsonify, session, send_from_directory, current_app
+from flask_cors import cross_origin
 from app.main import import_character, run_simulation, initialise_simulation, fetch_updated_data
 from app.socketio_setup import socketio
 from flask_socketio import emit
@@ -79,7 +80,12 @@ def import_character_route():
     return response
     
 @main.route("/fetch_updated_data", methods=["GET"])
+@cross_origin(origins=["https://seacelery.github.io"], supports_credentials=True)
 def fetch_updated_stats_route():
+    
+    current_app.logger.debug("Received headers: %s", request.headers)
+    current_app.logger.debug("Received cookies: %s", request.cookies)
+    
     character_name = request.args.get("character_name")
     realm = request.args.get("realm")
     region = request.args.get("region")
@@ -124,8 +130,7 @@ def fetch_updated_stats_route():
 
 @main.route("/update_character", methods=["POST"])
 def update_character_route():
-    current_app.logger.debug("Received headers: %s", request.headers)
-    current_app.logger.debug("Received cookies: %s", request.cookies)
+    
     
     session_token = request.cookies.get('session_token')
     if not session_token:
