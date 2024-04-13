@@ -1,11 +1,11 @@
 import os
 
 from flask import Flask
-from flask_socketio import SocketIO
 import redis
 from app.routes import main as main_blueprint
 import logging
 from flask_cors import CORS
+from flask_socketio import SocketIO
 
 def create_app():
     app = Flask(__name__, static_url_path='', static_folder='../../docs')
@@ -16,16 +16,17 @@ def create_app():
     logging.basicConfig(level=logging.DEBUG)
     app.logger.setLevel(logging.DEBUG)
 
-    # Update CORS setup here
     CORS(app, supports_credentials=True, origins=["https://seacelery.github.io"], allow_headers=[
         "Content-Type", "Authorization", "X-Requested-With"], allow_methods=["GET", "POST", "OPTIONS"])
-
-    from app.socketio_setup import socketio
-    socketio.init_app(app, cors_allowed_origins="https://seacelery.github.io")
 
     app.register_blueprint(main_blueprint)
 
     return app
+
+def create_socketio(app):
+    # Initialize SocketIO with eventlet explicitly only here
+    socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
+    return socketio
 
 # import os
 
