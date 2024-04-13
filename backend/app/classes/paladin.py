@@ -306,7 +306,7 @@ class Paladin:
                     row[talent_name]["ranks"]["current rank"] = new_rank 
                     
     def update_equipment(self, equipment_data):        
-        self.equipment = json.loads(equipment_data)
+        self.equipment = equipment_data
         
         formatted_equipment_data = self.calculate_stats_from_equipment(self.equipment)
         self.stats = Stats(formatted_equipment_data[0], self.convert_stat_ratings_to_percent(formatted_equipment_data[0]))
