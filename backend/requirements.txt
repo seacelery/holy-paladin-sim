@@ -34,3 +34,5 @@ wsproto==1.2.0
 gunicorn
 eventlet
 redis
+gevent
+gevent-websocket
