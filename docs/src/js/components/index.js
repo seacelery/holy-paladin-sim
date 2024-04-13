@@ -352,7 +352,12 @@ const importCharacter = async () => {
     };
 
     return fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/import_character?character_name=${characterName}&realm=${characterRealm}&region=${characterRegion}`, {
-        credentials: "include"
+        method: 'GET', // or POST, PUT, etc.
+        mode: 'cors',  // Make sure CORS mode is set
+        credentials: 'include', // or 'same-origin' if needed
+        headers: {
+            'Content-Type': 'application/json'
+        }
     })
     .then(response => response.json())
     .then(data => {
