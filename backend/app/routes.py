@@ -124,7 +124,8 @@ def fetch_updated_stats_route():
 
 @main.route("/update_character", methods=["POST"])
 def update_character_route():
-    current_app.logger.debug(f"Cookies received: {request.cookies}")
+    current_app.logger.debug("Received headers: %s", request.headers)
+    current_app.logger.debug("Received cookies: %s", request.cookies)
     
     session_token = request.cookies.get('session_token')
     if not session_token:
