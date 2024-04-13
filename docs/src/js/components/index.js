@@ -401,7 +401,8 @@ const updateStats = async () => {
     let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
     let characterRegion = document.getElementById("character-region-input").value.toLowerCase();
 
-    const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
+    // const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
+    const customEquipment = generateFullItemData()["equipment"];
 
     return fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/fetch_updated_data`, {
         method: 'POST', // Changed from 'GET' to 'POST'
