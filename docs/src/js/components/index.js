@@ -33,7 +33,12 @@ const createElement = (elementName, className = null, id = null) => {
 };
 
 // socket to allow the server to send updates while the simulation is ongoing
-const socket = io("https://holy-paladin-sim-6479e85b188f.herokuapp.com");
+const socket = io('https://holy-paladin-sim-6479e85b188f.herokuapp.com', {
+    withCredentials: true,
+    extraHeaders: {
+        "my-custom-header": "abcd"
+    }
+});
 
 socket.on("connect", function() {
     console.log("Connected to the server");
