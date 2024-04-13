@@ -1,10 +1,10 @@
 import os
 
 from flask import Flask
-from flask_cors import CORS
 from flask_socketio import SocketIO
 import redis
 from app.routes import main as main_blueprint
+import logging
 
 def create_app():
     app = Flask(__name__, static_url_path='', static_folder='../../docs')
@@ -12,15 +12,15 @@ def create_app():
     app.redis = redis.Redis.from_url(app.config['REDIS_URL'])
     
     app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
+    
+    logging.basicConfig(level=logging.DEBUG)
+    app.logger.setLevel(logging.DEBUG)
 
-    # Setup CORS globally for all domains
-    CORS(app, resources={r"/*": {"origins": "*"}})  # Adjust the origins as needed
-
-    # Initialize SocketIO without specifying CORS here since Flask-CORS handles it
-    socketio = SocketIO(app)
+    # Assuming the socketio setup is already imported and initialized in socketio_setup.py
+    from app.socketio_setup import socketio
+    socketio.init_app(app, cors_allowed_origins="https://seacelery.github.io")
 
     app.register_blueprint(main_blueprint)
-    socketio.init_app(app)
 
     return app
 
