@@ -648,7 +648,7 @@ class Simulation:
             # reset simulation states
             print(i)
             if not self.test:
-                emit("iteration_update", {"iteration": i + 1}, broadcast=True, namespace='/')
+                emit("iteration_update", {"iteration": i + 1}, broadcast=True, namespace="/")
                 self.paladin.reset_state()
                 self.reset_simulation()
                 self.paladin.apply_consumables()

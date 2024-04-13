@@ -8,9 +8,9 @@ from flask_cors import CORS
 from flask_socketio import SocketIO
 
 def create_app():
-    app = Flask(__name__, static_url_path='', static_folder='../../docs')
-    app.config['REDIS_URL'] = os.getenv('REDIS_URL', 'redis://localhost:6379')
-    app.redis = redis.Redis.from_url(app.config['REDIS_URL'])
+    app = Flask(__name__, static_url_path="", static_folder="../../docs")
+    app.config["REDIS_URL"] = os.getenv("REDIS_URL", "redis://localhost:6379")
+    app.redis = redis.Redis.from_url(app.config["REDIS_URL"])
     app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
     
     logging.basicConfig(level=logging.DEBUG)
@@ -24,8 +24,7 @@ def create_app():
     return app
 
 def create_socketio(app):
-    # Initialize SocketIO with eventlet explicitly only here
-    socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
+    socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
     return socketio
 
 # import os
