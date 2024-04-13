@@ -56,7 +56,7 @@ def import_character_route():
     # paladin.reset_state()
     
     session_token = str(uuid.uuid4())
-    modifiable_data = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}, "equipment": {}}
+    modifiable_data = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}, "equipment": {}, "character_name": character_name, "realm": realm, "region": region}
     
     current_app.redis.setex(session_token, 3600, json.dumps(modifiable_data))
 
