@@ -404,7 +404,12 @@ const updateStats = async () => {
     const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
 
     return fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/fetch_updated_data?character_name=${characterName}&realm=${characterRealm}&custom_equipment=${customEquipment}&region=${characterRegion}`, {
-        credentials: "include"
+        method: 'GET', // or POST, PUT, etc.
+        mode: 'cors',  // Make sure CORS mode is set
+        credentials: 'include', // or 'same-origin' if needed
+        headers: {
+            'Content-Type': 'application/json'
+        }
     })
     .then(response => response.json())
     .then(data => {
@@ -500,6 +505,7 @@ const handleSimulationCancel = () => {
 
         fetch("https://holy-paladin-sim-6479e85b188f.herokuapp.com/cancel_simulation", {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },

@@ -124,6 +124,7 @@ def fetch_updated_stats_route():
 
 @main.route("/update_character", methods=["POST"])
 def update_character_route():
+    print(request.cookies)
     session_token = request.cookies.get('session_token')
     if not session_token:
         return jsonify({"error": "No session token provided"}), 400
