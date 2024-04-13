@@ -192,17 +192,17 @@ def run_simulation_route():
     simulation = initialise_simulation(
         paladin, 
         healing_targets, 
-        data['encounter_length'], 
-        data['iterations'], 
-        data['time_warp_time'], 
+        int(data['encounter_length']), 
+        int(data['iterations']), 
+        int(data['time_warp_time']), 
         data['priority_list'], 
         data['custom_equipment'], 
-        data['tick_rate'], 
-        data['raid_health'], 
-        data['mastery_effectiveness'], 
-        data['light_of_dawn_targets'], 
-        data['lights_hammer_targets'], 
-        data['resplendent_light_targets']
+        float(data['tick_rate']), 
+        int(data['raid_health']), 
+        int(data['mastery_effectiveness']), 
+        int(data['light_of_dawn_targets']), 
+        int(data['lights_hammer_targets']), 
+        int(data['resplendent_light_targets'])
     )  
 
     # pp.pprint(paladin.class_talents)
