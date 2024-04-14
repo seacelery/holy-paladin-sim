@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 import redis
+import certifi
 from app.routes import main as main_blueprint
 import logging
 from flask_cors import CORS
@@ -11,18 +12,26 @@ app = Flask(__name__, static_url_path="", static_folder="../../docs")
 app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
 app.redis = redis.Redis.from_url(
     app.config["REDIS_TLS_URL"],
-    ssl_cert_reqs='none'  # Not recommended for production
+    ssl_cert_reqs='required',  # Ensuring SSL is required
+    ssl_ca_certs=certifi.where()  # Using certifi to specify CA certs
 )
 
+# Configure Celery with SSL settings properly for rediss:// URLs
 app.config.update(
     CELERY_BROKER_URL=app.config["REDIS_TLS_URL"],
     CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"],
     BROKER_USE_SSL={
-        'ssl_cert_reqs': 'required'  # This should also use the system's default CA certificates
+        'ssl_cert_reqs': 'required',  # Require SSL certificate
+        'ssl_ca_certs': certifi.where()  # Path to CA certs via certifi
+    },
+    RESULT_BACKEND_USE_SSL={
+        'ssl_cert_reqs': 'required',  # Require SSL certificate
+        'ssl_ca_certs': certifi.where()  # Path to CA certs via certifi
     }
 )
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
+
 logging.basicConfig(level=logging.DEBUG)
 app.logger.setLevel(logging.DEBUG)
 
@@ -30,6 +39,8 @@ CORS(app, supports_credentials=True, origins=["https://seacelery.github.io"], al
     "Content-Type", "Authorization", "X-Requested-With"], allow_methods=["GET", "POST", "OPTIONS"])
 
 app.register_blueprint(main_blueprint)
+
+# Initialize Celery
 celery = make_celery(app)
 
 def create_app():
