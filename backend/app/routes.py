@@ -204,7 +204,6 @@ def run_simulation_route():
         "light_of_dawn_targets": int(data['light_of_dawn_targets']), 
         "lights_hammer_targets": int(data['lights_hammer_targets']), 
         "resplendent_light_targets":  int(data['resplendent_light_targets']),
-        "access_token": data["access_token"]
     }
 
     run_simulation_task.delay(simulation_params)
