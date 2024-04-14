@@ -5,7 +5,7 @@ from app.routes import main as main_blueprint
 import logging
 from flask_cors import CORS
 from flask_socketio import SocketIO
-from celery_config import make_celery  # Assuming celery_config.py is in the same directory
+from celery_config import make_celery
 
 app = Flask(__name__, static_url_path="", static_folder="../../docs")
 app.config["REDIS_URL"] = os.getenv("REDIS_URL", "redis://localhost:6379")

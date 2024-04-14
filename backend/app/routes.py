@@ -9,6 +9,7 @@ from app.main import import_character, run_simulation, initialise_simulation, fe
 from app.socketio_setup import socketio
 from flask_socketio import emit
 from app.classes.simulation_state import cancel_simulation
+from app.classes.simulation import run_simulation_task
 
 main = Blueprint("main", __name__)
 pp = pprint.PrettyPrinter(width=200)
@@ -188,27 +189,27 @@ def run_simulation_route():
         spec_talents=modifiable_data.get("spec_talents"),
         consumables=modifiable_data.get("consumables")
     )
-      
-    simulation = initialise_simulation(
-        paladin, 
-        healing_targets, 
-        int(data['encounter_length']), 
-        int(data['iterations']), 
-        int(data['time_warp_time']), 
-        data['priority_list'], 
-        data['custom_equipment'], 
-        float(data['tick_rate']), 
-        int(data['raid_health']), 
-        int(data['mastery_effectiveness']), 
-        int(data['light_of_dawn_targets']), 
-        int(data['lights_hammer_targets']), 
-        int(data['resplendent_light_targets'])
-    )  
+    
+    simulation_params = {
+        "paladin": paladin,
+        "healing_targets_list": healing_targets, 
+        "encounter_length": int(data['encounter_length']), 
+        "iterations": int(data['iterations']), 
+        "time_warp_time": int(data['time_warp_time']), 
+        "priority_list": data["priority_list"],
+        "custom_equipment": data["custom_equipment"],
+        "tick_rate": float(data['tick_rate']), 
+        "raid_health": int(data['raid_health']), 
+        "mastery_effectiveness": int(data['mastery_effectiveness']), 
+        "light_of_dawn_targets": int(data['light_of_dawn_targets']), 
+        "lights_hammer_targets": int(data['lights_hammer_targets']), 
+        "resplendent_light_targets":  int(data['resplendent_light_targets']),
+        "access_token": data["access_token"]
+    }
 
-    # pp.pprint(paladin.class_talents)
-    results = run_simulation(simulation)
+    run_simulation_task.delay(simulation_params)
 
-    return jsonify(results)
+    return jsonify({"message": "Simulation started successfully, monitor progress via WebSocket."})
 
 # import sys
 # import pprint
