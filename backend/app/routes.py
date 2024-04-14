@@ -210,6 +210,55 @@ def run_simulation_route():
 
     return jsonify({"message": "Simulation started successfully, monitor progress via WebSocket."})
 
+# @main.route("/run_simulation", methods=["POST"])
+# @cross_origin(origins=["https://seacelery.github.io"], supports_credentials=True)
+# def run_simulation_route():
+#     data = request.json
+    
+#     session_token = request.cookies.get('session_token')
+#     if not session_token:
+#         return jsonify({"error": "No session token provided"}), 400
+
+#     session_data = current_app.redis.get(session_token)
+#     if not session_data:
+#         return jsonify({"error": "Session not found"}), 404
+
+#     modifiable_data = json.loads(session_data)
+
+#     paladin, healing_targets = import_character(
+#         modifiable_data['character_name'],
+#         modifiable_data['realm'],
+#         modifiable_data['region']
+#     )
+    
+#     paladin.update_character(
+#         race=modifiable_data.get("race"),
+#         class_talents=modifiable_data.get("class_talents"),
+#         spec_talents=modifiable_data.get("spec_talents"),
+#         consumables=modifiable_data.get("consumables")
+#     )
+      
+#     simulation = initialise_simulation(
+#         paladin, 
+#         healing_targets, 
+#         int(data['encounter_length']), 
+#         int(data['iterations']), 
+#         int(data['time_warp_time']), 
+#         data['priority_list'], 
+#         data['custom_equipment'], 
+#         float(data['tick_rate']), 
+#         int(data['raid_health']), 
+#         int(data['mastery_effectiveness']), 
+#         int(data['light_of_dawn_targets']), 
+#         int(data['lights_hammer_targets']), 
+#         int(data['resplendent_light_targets'])
+#     )  
+
+#     # pp.pprint(paladin.class_talents)
+#     results = run_simulation(simulation)
+
+#     return jsonify(results)
+
 # import sys
 # import pprint
 # import json
