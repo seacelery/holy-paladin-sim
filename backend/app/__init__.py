@@ -12,17 +12,13 @@ app = Flask(__name__, static_url_path="", static_folder="../../docs")
 app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
 app.redis = redis.Redis.from_url(
     app.config["REDIS_TLS_URL"],
-    ssl_cert_reqs='required',
+    ssl_cert_reqs='none',  # This is not secure but can help in verifying if the issue is strictly SSL cert related
     ssl_ca_certs=certifi.where()
 )
 
 app.config.update(
     CELERY_BROKER_URL=app.config["REDIS_TLS_URL"],
     CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"],
-    BROKER_USE_SSL={
-        'ssl_cert_reqs': 'required',
-        'ssl_ca_certs': certifi.where()
-    }
 )
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
