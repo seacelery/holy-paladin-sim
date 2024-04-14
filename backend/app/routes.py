@@ -2,6 +2,7 @@ import sys
 import pprint
 import json
 import uuid
+import pickle
 
 from flask import Blueprint, request, jsonify, session, send_from_directory, current_app
 from flask_cors import cross_origin
@@ -190,9 +191,12 @@ def run_simulation_route():
         consumables=modifiable_data.get("consumables")
     )
     
+    paladin_pickled = pickle.dumps(paladin)
+    healing_targets_pickled = pickle.dumps(healing_targets)
+    
     simulation_params = {
-        "paladin": paladin,
-        "healing_targets_list": healing_targets, 
+        "paladin": paladin_pickled,
+        "healing_targets_list": healing_targets_pickled, 
         "encounter_length": int(data['encounter_length']), 
         "iterations": int(data['iterations']), 
         "time_warp_time": int(data['time_warp_time']), 

@@ -2,6 +2,7 @@ import os
 from flask import Flask
 import redis
 import certifi
+import pickle
 from app.routes import main as main_blueprint
 import logging
 from flask_cors import CORS
@@ -20,10 +21,9 @@ ssl_options = {
     'ssl_ca_certs': certifi.where()
 }
 
-# Configure Celery with SSL settings properly for rediss:// URLs
 app.config.update(
-    CELERY_BROKER_URL=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',  # Temporarily ignore SSL cert requirements
-    CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',  # Temporarily ignore SSL cert requirements
+    CELERY_BROKER_URL=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
+    CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
 )
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
@@ -45,6 +45,14 @@ def create_app():
 def create_socketio(app):
     socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
     return socketio
+
+@celery.task
+def process_paladin(paladin_data):
+    # Deserialize the Paladin object
+    paladin = pickle.loads(paladin_data)
+    # Here you can add the code to process the Paladin object
+    # For example, simulate or calculate results
+    return paladin
 
 # import os
 
