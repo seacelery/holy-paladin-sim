@@ -14,11 +14,11 @@ app.config.update(
     CELERY_RESULT_BACKEND=app.config["REDIS_URL"]
 )
 
-# Modify this part to include SSL parameters
+# Adjusting SSL settings correctly for Redis connection
 app.redis = redis.Redis.from_url(
     app.config["REDIS_URL"],
-    ssl=True,  # Enable SSL
-    ssl_cert_reqs='required'  # Force certificate verification
+    ssl=True,
+    ssl_cert_reqs='required'
 )
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
