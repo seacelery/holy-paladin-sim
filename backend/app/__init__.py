@@ -30,7 +30,7 @@ celery = make_celery(app)
 def create_app():
     return app
 
-def create_socketio():
+def create_socketio(app):
     socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
     return socketio
 
