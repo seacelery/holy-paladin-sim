@@ -9,7 +9,7 @@ from app.main import import_character, run_simulation, initialise_simulation, fe
 from app.socketio_setup import socketio
 from flask_socketio import emit
 from app.classes.simulation_state import cancel_simulation
-from app.classes.simulation import run_simulation_task
+from app.classes.run_simulation_task import run_simulation_task
 
 main = Blueprint("main", __name__)
 pp = pprint.PrettyPrinter(width=200)
