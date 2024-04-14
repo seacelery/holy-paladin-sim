@@ -9,7 +9,7 @@ import json
 import eventlet
 from flask import current_app
 from flask_socketio import emit, SocketIO
-from celery_config import shared_task
+from celery import shared_task
 
 from collections import defaultdict
 
