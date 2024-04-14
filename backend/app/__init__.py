@@ -7,18 +7,29 @@ from flask_cors import CORS
 from flask_socketio import SocketIO
 from celery_config import make_celery
 import certifi
+import ssl
 
 app = Flask(__name__, static_url_path="", static_folder="../../docs")
 app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
+
+ssl_context = ssl.create_default_context(cafile=certifi.where())
+ssl_context.check_hostname = False
+ssl_context.verify_mode = ssl.CERT_NONE
+
 app.redis = redis.Redis.from_url(
     app.config["REDIS_TLS_URL"],
-    ssl_cert_reqs='CERT_NONE',  # This is not secure but can help in verifying if the issue is strictly SSL cert related
+    ssl_cert_reqs='none',
     ssl_ca_certs=certifi.where()
 )
 
 app.config.update(
     CELERY_BROKER_URL=app.config["REDIS_TLS_URL"],
     CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"],
+    BROKER_USE_SSL={
+        'ssl_cert_reqs': ssl.CERT_NONE,
+        'ssl_ca_certs': certifi.where(),
+        'ssl_check_hostname': False
+    }
 )
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
