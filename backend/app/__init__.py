@@ -1,5 +1,4 @@
 import os
-import ssl
 from flask import Flask
 import redis
 from app.routes import main as main_blueprint
@@ -9,17 +8,17 @@ from flask_socketio import SocketIO
 from celery_config import make_celery
 
 app = Flask(__name__, static_url_path="", static_folder="../../docs")
-app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
+app.config["REDIS_URL"] = os.getenv("REDIS_TLS_URL")
 app.config.update(
-    CELERY_BROKER_URL=app.config["REDIS_TLS_URL"],
-    CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"]
+    CELERY_BROKER_URL=app.config["REDIS_URL"],
+    CELERY_RESULT_BACKEND=app.config["REDIS_URL"]
 )
 
-# Set up a secure Redis connection with SSL certificate requirements
+# Modify this part to include SSL parameters
 app.redis = redis.Redis.from_url(
-    app.config["REDIS_TLS_URL"],
-    ssl_cert_reqs=ssl.CERT_REQUIRED,
-    ssl_ca_certs='/path/to/your/ca/cert'  # Path to your CA certificate
+    app.config["REDIS_URL"],
+    ssl=True,  # Enable SSL
+    ssl_cert_reqs='required'  # Force certificate verification
 )
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
