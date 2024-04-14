@@ -22,10 +22,8 @@ ssl_options = {
 
 # Configure Celery with SSL settings properly for rediss:// URLs
 app.config.update(
-    CELERY_BROKER_URL=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=required',
-    CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=required',
-    BROKER_USE_SSL=ssl_options,
-    RESULT_BACKEND_USE_SSL=ssl_options
+    CELERY_BROKER_URL=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',  # Temporarily ignore SSL cert requirements
+    CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',  # Temporarily ignore SSL cert requirements
 )
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
