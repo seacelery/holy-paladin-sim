@@ -36,4 +36,3 @@ eventlet
 redis
 celery
 certifi
-pickle
