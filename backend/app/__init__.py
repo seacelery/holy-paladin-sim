@@ -14,7 +14,7 @@ app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
 
 ssl_context = ssl.create_default_context(cafile=certifi.where())
 ssl_context.check_hostname = False
-ssl_context.verify_mode = ssl.CERT_NONE
+ssl_context.verify_mode = ssl.CERT_OPTIONAL
 
 app.redis = redis.Redis.from_url(
     app.config["REDIS_TLS_URL"],
@@ -26,7 +26,7 @@ app.config.update(
     CELERY_BROKER_URL=app.config["REDIS_TLS_URL"],
     CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"],
     BROKER_USE_SSL={
-        'ssl_cert_reqs': ssl.CERT_NONE,
+        'ssl_cert_reqs': ssl.CERT_OPTIONAL,
         'ssl_ca_certs': certifi.where(),
         'ssl_check_hostname': False
     }
