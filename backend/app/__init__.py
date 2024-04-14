@@ -11,7 +11,7 @@ app = Flask(__name__, static_url_path="", static_folder="../../docs")
 app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
 app.redis = redis.Redis.from_url(
     app.config["REDIS_TLS_URL"],
-    ssl_cert_reqs='required'  # Use the system's default CA certificates
+    ssl_cert_reqs='none'  # Not recommended for production
 )
 
 app.config.update(
