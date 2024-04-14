@@ -16,11 +16,6 @@ app.redis = redis.Redis.from_url(
     ssl_cert_reqs='none'
 )
 
-ssl_options = {
-    'ssl_cert_reqs': 'required',
-    'ssl_ca_certs': certifi.where()
-}
-
 app.config.update(
     CELERY_BROKER_URL=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
     CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
