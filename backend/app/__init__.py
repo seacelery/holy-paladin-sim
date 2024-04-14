@@ -15,7 +15,16 @@ app.redis = redis.Redis.from_url(
     ssl_cert_reqs='required',
     ssl_ca_certs=certifi.where()
 )
-app.redis = redis.Redis.from_url(app.config["REDIS_URL"])
+
+app.config.update(
+    CELERY_BROKER_URL=app.config["REDIS_TLS_URL"],
+    CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"],
+    BROKER_USE_SSL={
+        'ssl_cert_reqs': 'required',
+        'ssl_ca_certs': certifi.where()
+    }
+)
+
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
 
 logging.basicConfig(level=logging.DEBUG)
