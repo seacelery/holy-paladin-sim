@@ -26,7 +26,7 @@ app.config.update(
     CELERY_BROKER_URL=app.config["REDIS_TLS_URL"],
     CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"],
     BROKER_USE_SSL={
-        'ssl_cert_reqs': ssl.CERT_OPTIONAL,
+        'ssl_cert_reqs': "CERT_OPTIONAL",
         'ssl_ca_certs': certifi.where(),
         'ssl_check_hostname': False
     }
