@@ -6,12 +6,14 @@ import logging
 from flask_cors import CORS
 from flask_socketio import SocketIO
 from celery_config import make_celery
+import certifi
 
 app = Flask(__name__, static_url_path="", static_folder="../../docs")
-app.config["REDIS_URL"] = os.getenv("REDIS_TLS_URL")  # Use TLS URL from environment
-app.config.update(
-    CELERY_BROKER_URL=app.config["REDIS_URL"],
-    CELERY_RESULT_BACKEND=app.config["REDIS_URL"]
+app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
+app.redis = redis.Redis.from_url(
+    app.config["REDIS_TLS_URL"],
+    ssl_cert_reqs='required',
+    ssl_ca_certs=certifi.where()
 )
 app.redis = redis.Redis.from_url(app.config["REDIS_URL"])
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")

@@ -35,3 +35,4 @@ gunicorn
 eventlet
 redis
 celery
+certifi
