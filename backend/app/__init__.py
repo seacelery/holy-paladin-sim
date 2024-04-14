@@ -12,8 +12,7 @@ app = Flask(__name__, static_url_path="", static_folder="../../docs")
 app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
 app.redis = redis.Redis.from_url(
     app.config["REDIS_TLS_URL"],
-    ssl_cert_reqs='required',  # Ensuring SSL is required
-    ssl_ca_certs=certifi.where()  # Using certifi to specify CA certs
+    ssl_cert_reqs='none'
 )
 
 # Configure Celery with SSL settings properly for rediss:// URLs
