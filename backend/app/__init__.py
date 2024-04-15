@@ -39,22 +39,22 @@ def create_app():
 
 def create_socketio(app):
     socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet", logger=True, engineio_logger=True)
-    # register_socketio_events(socketio)
+    register_socketio_events(socketio)
     return socketio
 
-# def register_socketio_events(socketio):
-#     @socketio.on('connect')
-#     def handle_connect():
-#         print('Client connected')
+def register_socketio_events(socketio):
+    @socketio.on('connect')
+    def handle_connect():
+        print('Client connected')
 
-#     @socketio.on('disconnect')
-#     def handle_disconnect():
-#         print('Client disconnected')
+    @socketio.on('disconnect')
+    def handle_disconnect():
+        print('Client disconnected')
 
-#     @socketio.on('start_simulation')
-#     def handle_start_simulation(data):
-#         print("Received start_simulation data:", data)
-#         emit('simple_response', {'message': 'Simple check complete'})
+    @socketio.on('start_simulation')
+    def handle_start_simulation(data):
+        print("Received start_simulation data:", data)
+        emit('simple_response', {'message': 'Simple check complete'})
 
 @celery.task
 def process_paladin(paladin_data):
