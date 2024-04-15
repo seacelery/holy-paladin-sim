@@ -9,6 +9,7 @@ import sys
 @shared_task(bind=True)
 def run_simulation_task(self):
     print("Task started")
+    sys.stdout.flush()
     return "Task completed"
 
 # @shared_task(bind=True)
