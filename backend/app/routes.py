@@ -3,6 +3,7 @@ import pprint
 import json
 import uuid
 import pickle
+import logging
 
 from flask import Blueprint, request, jsonify, session, send_from_directory, current_app
 from flask_cors import cross_origin
@@ -11,6 +12,9 @@ from app.socketio_setup import socketio
 from flask_socketio import emit
 from app.classes.simulation_state import cancel_simulation
 from app.classes.run_simulation_task import run_simulation_task
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 main = Blueprint("main", __name__)
 pp = pprint.PrettyPrinter(width=200)
@@ -165,8 +169,8 @@ def update_character_route():
 
 @socketio.on('start_simulation')
 def handle_start_simulation(data):
-    # Assuming data received from the socket contains the session token
     session_token = data.get('session_token')
+    logger.debug(session_token)
     if not session_token:
         emit('error', {"error": "No session token provided"})
         return
