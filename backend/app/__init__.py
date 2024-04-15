@@ -106,6 +106,7 @@ def register_socketio_events(socketio):
         }
 
         print("Emitting simulation complete event.")
+        sys.stdout.flush()
         result = run_simulation_task.delay(simulation_parameters=simulation_params)
         emit('simulation_started', {'message': "Simulation started successfully, monitor progress via WebSocket.", 'task_id': str(result.id)})
 
@@ -116,6 +117,14 @@ def process_paladin(paladin_data):
     # Here you can add the code to process the Paladin object
     # For example, simulate or calculate results
     return paladin
+
+@app.task
+def simple_task():
+    print("Running simple task")
+    sys.stdout.flush()
+
+# And dispatch this in your Flask app
+simple_task.delay()
 
 # import os
 
