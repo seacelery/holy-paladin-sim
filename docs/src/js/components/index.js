@@ -363,6 +363,7 @@ const importCharacter = async () => {
     })
     .then(response => response.json())
     .then(data => {
+        sessionStorage.setItem('sessionToken', data.session_token);
         console.log(data)
         updateEquipmentWithEffectValues(data);
         updateUIAfterImport(data, isFirstImport);
@@ -554,7 +555,7 @@ const startSimulation = () => {
         return;
     };
 
-    const sessionToken = getCookie('session_token');
+    sessionStorage.getItem('sessionToken')
     if (!sessionToken) {
         console.log("Session token not found");
         return;
