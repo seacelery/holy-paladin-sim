@@ -577,8 +577,13 @@ const startSimulation = () => {
         custom_equipment: generateFullItemData()["equipment"]
     };
 
+    console.log("Sending simulation data:", simulationData);
     socket.emit('start_simulation', simulationData);
 }
+
+socket.on('simulation_started', function(data) {
+    console.log("Simulation started:", data);
+});
 
 simulationProgressBarContainer.addEventListener("click", startSimulation);
 
