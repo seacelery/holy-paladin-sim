@@ -523,6 +523,66 @@ const handleSimulationCancel = () => {
     };
 };
 
+socket.on('simulation_progress', function(data) {
+    console.log('Simulation progress:', data);
+    
+});
+
+socket.on('simulation_complete', function(data) {
+    console.log('Simulation complete:', data);
+    createSimulationResults(data);
+    playCheckmarkAnimation();
+    isSimulationRunning = false;
+    simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
+});
+
+function getCookie(name) {
+    let cookieArray = document.cookie.split(';');
+    for(let i = 0; i < cookieArray.length; i++) {
+        let cookiePair = cookieArray[i].split('=');
+        if(name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
+}
+
+simulationProgressBarContainer.addEventListener("click", () => {
+    
+})
+
+const startSimulation = () => {
+    if (priorityList.length === 0) {
+        simulateButtonErrorModal.style.display = "flex";
+        return;
+    };
+
+    const sessionToken = getCookie('session_token');
+    if (!sessionToken) {
+        console.log("Session token not found");
+        return;
+    }
+
+    const simulationData = {
+        session_token: sessionToken,
+        encounter_length: document.getElementById("encounter-length-option").value,
+        iterations: document.getElementById("iterations-option").value,
+        time_warp_time: document.getElementById("time-warp-option").value,
+        tick_rate: document.getElementById("tick-rate-option").value,
+        raid_health: document.getElementById("raid-health-option").value,
+        mastery_effectiveness: document.getElementById("mastery-effectiveness-option").value,
+        light_of_dawn_targets: document.getElementById("light-of-dawn-option").value,
+        lights_hammer_targets: document.getElementById("lights-hammer-option").value,
+        resplendent_light_targets: document.getElementById("resplendent-light-option").value,
+        priority_list: priorityList,
+        custom_equipment: generateFullItemData()["equipment"]
+    };
+
+    socket.emit('start_simulation', simulationData);
+}
+
+simulationProgressBarContainer.addEventListener("click", startSimulation);
+
 const runSimulation = async () => {
     if (priorityList.length === 0) {
         simulateButtonErrorModal.style.display = "flex";
@@ -838,7 +898,7 @@ generateRegionOptions();
 // event listeners
 importButtonMain.addEventListener("click", importCharacter);
 importButton.addEventListener("click", importCharacter);
-simulationProgressBarContainer.addEventListener("click", runSimulation);
+// simulationProgressBarContainer.addEventListener("click", runSimulation);
 
 simulationProgressBarCheck.addEventListener("mouseenter", () => {
     simulateButton.style.boxShadow = "0px 0px 3px 2px var(--info-circle-colour)";
