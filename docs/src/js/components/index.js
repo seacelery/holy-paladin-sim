@@ -550,35 +550,37 @@ function getCookie(name) {
 }
 
 const startSimulation = () => {
-    if (priorityList.length === 0) {
-        simulateButtonErrorModal.style.display = "flex";
-        return;
-    };
+    // if (priorityList.length === 0) {
+    //     simulateButtonErrorModal.style.display = "flex";
+    //     return;
+    // };
 
-    const sessionToken = sessionStorage.getItem('sessionToken')
-    console.log(sessionToken)
-    if (!sessionToken) {
-        console.log("Session token not found");
-        return;
-    }
+    // const sessionToken = sessionStorage.getItem('sessionToken')
+    // console.log(sessionToken)
+    // if (!sessionToken) {
+    //     console.log("Session token not found");
+    //     return;
+    // }
 
-    const simulationData = {
-        session_token: sessionToken,
-        encounter_length: document.getElementById("encounter-length-option").value,
-        iterations: document.getElementById("iterations-option").value,
-        time_warp_time: document.getElementById("time-warp-option").value,
-        tick_rate: document.getElementById("tick-rate-option").value,
-        raid_health: document.getElementById("raid-health-option").value,
-        mastery_effectiveness: document.getElementById("mastery-effectiveness-option").value,
-        light_of_dawn_targets: document.getElementById("light-of-dawn-option").value,
-        lights_hammer_targets: document.getElementById("lights-hammer-option").value,
-        resplendent_light_targets: document.getElementById("resplendent-light-option").value,
-        priority_list: priorityList,
-        custom_equipment: generateFullItemData()["equipment"]
-    };
+    // const simulationData = {
+    //     session_token: sessionToken,
+    //     encounter_length: document.getElementById("encounter-length-option").value,
+    //     iterations: document.getElementById("iterations-option").value,
+    //     time_warp_time: document.getElementById("time-warp-option").value,
+    //     tick_rate: document.getElementById("tick-rate-option").value,
+    //     raid_health: document.getElementById("raid-health-option").value,
+    //     mastery_effectiveness: document.getElementById("mastery-effectiveness-option").value,
+    //     light_of_dawn_targets: document.getElementById("light-of-dawn-option").value,
+    //     lights_hammer_targets: document.getElementById("lights-hammer-option").value,
+    //     resplendent_light_targets: document.getElementById("resplendent-light-option").value,
+    //     priority_list: priorityList,
+    //     custom_equipment: generateFullItemData()["equipment"]
+    // };
 
-    console.log("Sending simulation data:", simulationData);
-    socket.emit('start_simulation', simulationData);
+    // console.log("Sending simulation data:", simulationData);
+    // socket.emit('start_simulation', simulationData);
+
+    socket.emit('start_simulation', { test: 'Hello World' });
 }
 
 socket.on('simulation_started', function(data) {
