@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 from flask import Flask, current_app
 import redis
@@ -58,6 +59,8 @@ def register_socketio_events(socketio):
     @socketio.on('start_simulation')
     def handle_start_simulation(data):
         session_token = data.get('session_token')
+        print(f"data received {session_token}")
+        sys.stdout.flush()
         if not session_token:
             emit('error', {"error": "No session token provided"})
             return
