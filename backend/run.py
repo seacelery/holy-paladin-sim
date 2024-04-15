@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-from app import create_app, create_socketio
+from app import create_app, create_socketio, celery
 
 app = create_app()
 socketio = create_socketio(app)
