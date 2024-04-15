@@ -5,6 +5,7 @@ load_dotenv()
 
 from app import create_app, create_socketio, celery
 print("Initializing Celery in run:", celery)
+print(celery.conf)
 sys.stdout.flush()
 
 app = create_app()
