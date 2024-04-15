@@ -555,7 +555,8 @@ const startSimulation = () => {
         return;
     };
 
-    sessionStorage.getItem('sessionToken')
+    const sessionToken = sessionStorage.getItem('sessionToken')
+    console.log(sessionToken)
     if (!sessionToken) {
         console.log("Session token not found");
         return;
