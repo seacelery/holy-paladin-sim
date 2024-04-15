@@ -169,14 +169,13 @@ def update_character_route():
 
     return jsonify({"message": "Character updated successfully"})
 
-@socketio.on('start_simulation')
-def handle_start_simulation(data):
-    print("Simple data received:", data)
-    sys.stdout.flush()
-    emit('simple_response', {'message': 'Simple check complete'})
-    return 'Simple Received'
+# @socketio.on('start_simulation')
+# def handle_start_simulation(data):
+#     print("Simple data received:", data)
+#     sys.stdout.flush()
+#     emit('simple_response', {'message': 'Simple check complete'})
+#     return 'Simple Received'
     # session_token = data.get('session_token')
-    # logger.debug(session_token)
     # if not session_token:
     #     emit('error', {"error": "No session token provided"})
     #     return
