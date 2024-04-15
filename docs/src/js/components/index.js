@@ -570,8 +570,6 @@ const startSimulation = () => {
 
     console.log("start simulation clicked")
 
-    socket.emit('start_simulation', console.log("awawa"));
-
     socket.emit('start_simulation', { test: 'Hello World' }, (response) => {
         console.log('Server responded with:', response);
     });
