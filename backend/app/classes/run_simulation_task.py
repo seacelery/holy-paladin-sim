@@ -2,6 +2,7 @@ from celery import shared_task
 from .simulation import Simulation, check_cancellation, reset_simulation
 from flask_socketio import SocketIO
 from flask import current_app
+from app.main import initialise_simulation
 import eventlet
 import pickle
 import sys
@@ -19,7 +20,7 @@ def run_simulation_task(self, simulation_parameters):
     app = current_app._get_current_object()
     socketio = SocketIO(app, async_mode='eventlet')
     
-    simulation = Simulation(**simulation_parameters)
+    simulation = initialise_simulation(**simulation_parameters)
     
     paladin_pickled = simulation_parameters.pop('paladin_pickled')
     paladin = pickle.loads(paladin_pickled)
