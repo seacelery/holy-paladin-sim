@@ -53,6 +53,8 @@ def cancel_simulation_route():
 
 @main.route("/import_character", methods=["GET"])
 def import_character_route():
+    print("importing character")
+    sys.stdout.flush()
     character_name = request.args.get("character_name")
     realm = request.args.get("realm")
     region = request.args.get("region")
@@ -170,6 +172,7 @@ def update_character_route():
 @socketio.on('start_simulation')
 def handle_start_simulation(data):
     print("Simple data received:", data)
+    sys.stdout.flush()
     emit('simple_response', {'message': 'Simple check complete'})
     return 'Simple Received'
     # session_token = data.get('session_token')
