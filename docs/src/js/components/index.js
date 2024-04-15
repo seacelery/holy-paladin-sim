@@ -538,6 +538,7 @@ socket.on('simulation_complete', function(data) {
 
 function getCookie(name) {
     let cookieArray = document.cookie.split(';');
+    console.log(cookieArray)
     for(let i = 0; i < cookieArray.length; i++) {
         let cookiePair = cookieArray[i].split('=');
         if(name == cookiePair[0].trim()) {
@@ -546,10 +547,6 @@ function getCookie(name) {
     }
     return null;
 }
-
-simulationProgressBarContainer.addEventListener("click", () => {
-    
-})
 
 const startSimulation = () => {
     if (priorityList.length === 0) {
