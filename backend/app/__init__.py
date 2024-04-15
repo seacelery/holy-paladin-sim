@@ -105,6 +105,7 @@ def register_socketio_events(socketio):
             "resplendent_light_targets": int(data['resplendent_light_targets']),
         }
 
+        print("Emitting simulation complete event.")
         result = run_simulation_task.delay(simulation_parameters=simulation_params)
         emit('simulation_started', {'message': "Simulation started successfully, monitor progress via WebSocket.", 'task_id': str(result.id)})
 

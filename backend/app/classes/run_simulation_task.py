@@ -4,6 +4,7 @@ from flask_socketio import SocketIO
 from flask import current_app
 import eventlet
 import pickle
+import sys
 
 @shared_task(bind=True)
 def run_simulation_task(self, simulation_parameters):
@@ -587,6 +588,8 @@ def run_simulation_task(self, simulation_parameters):
         "priority_list": simulation.priority_list_text
     }
 
+    print("Emitting simulation complete event.")
+    sys.stdout.flush()
     socketio.emit("simulation_complete", full_results, namespace="/")
     return {"results": full_results, "simulation_details": simulation_details}
     
