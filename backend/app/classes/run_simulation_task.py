@@ -5,13 +5,10 @@ from flask import current_app
 import eventlet
 import pickle
 import sys
-from app import app
 
 @shared_task(bind=True)
 def run_simulation_task(self):
     print("Task started")
-    socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet", logger=True, engineio_logger=True)
-    socketio.emit("simulation_complete", {}, namespace="/")
     return "Task completed"
 
 # @shared_task(bind=True)
