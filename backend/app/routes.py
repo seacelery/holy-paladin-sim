@@ -8,7 +8,7 @@ import logging
 from flask import Blueprint, request, jsonify, session, send_from_directory, current_app
 from flask_cors import cross_origin
 from app.main import import_character, run_simulation, initialise_simulation, fetch_updated_data
-from app.socketio_setup import socketio
+from run import socketio
 from flask_socketio import emit
 from app.classes.simulation_state import cancel_simulation
 from app.classes.run_simulation_task import run_simulation_task
@@ -169,12 +169,12 @@ def update_character_route():
 
     return jsonify({"message": "Character updated successfully"})
 
-# @socketio.on('start_simulation')
-# def handle_start_simulation(data):
-#     print("Simple data received:", data)
-#     sys.stdout.flush()
-#     emit('simple_response', {'message': 'Simple check complete'})
-#     return 'Simple Received'
+@socketio.on('start_simulation')
+def handle_start_simulation(data):
+    print("Simple data received:", data)
+    sys.stdout.flush()
+    emit('simple_response', {'message': 'Simple check complete'})
+    return 'Simple Received'
     # session_token = data.get('session_token')
     # if not session_token:
     #     emit('error', {"error": "No session token provided"})
