@@ -16,7 +16,8 @@ def make_celery(app):
         task_serializer='pickle',
         result_serializer='pickle',
         enable_utc=True,
-        timezone='UTC'
+        timezone='UTC',
+        broker_connection_retry_on_startup=True
     )
 
     class ContextTask(celery.Task):
