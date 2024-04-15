@@ -8,6 +8,8 @@ import sys
 
 @shared_task(bind=True)
 def run_simulation_task(self, simulation_parameters):
+    print("Simulation task RUNNING")
+    sys.stdout.flush()
     app = current_app._get_current_object()
     socketio = SocketIO(app, async_mode='eventlet')
     
