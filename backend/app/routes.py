@@ -171,6 +171,9 @@ def update_character_route():
 def handle_start_simulation(data):
     print("Received start_simulation data:", data)
     logger.debug(data)
+    
+    print("Received data:", data)
+    return 'Received!'
     # session_token = data.get('session_token')
     # logger.debug(session_token)
     # if not session_token:

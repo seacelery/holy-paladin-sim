@@ -580,7 +580,11 @@ const startSimulation = () => {
     // console.log("Sending simulation data:", simulationData);
     // socket.emit('start_simulation', simulationData);
 
-    socket.emit('start_simulation', { test: 'Hello World' });
+    // socket.emit('start_simulation', { test: 'Hello World' });
+
+    socket.emit('start_simulation', { test: 'Hello World' }, (response) => {
+        console.log('Server responded with:', response);
+    });
 }
 
 socket.on('simulation_started', function(data) {
