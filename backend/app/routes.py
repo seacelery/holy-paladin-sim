@@ -169,11 +169,9 @@ def update_character_route():
 
 @socketio.on('start_simulation')
 def handle_start_simulation(data):
-    print("Received start_simulation data:", data)
-    logger.debug(data)
-    
-    print("Received data:", data)
-    return 'Received!'
+    print("Simple data received:", data)
+    emit('simple_response', {'message': 'Simple check complete'})
+    return 'Simple Received'
     # session_token = data.get('session_token')
     # logger.debug(session_token)
     # if not session_token:

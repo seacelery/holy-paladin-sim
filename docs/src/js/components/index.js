@@ -587,6 +587,10 @@ const startSimulation = () => {
     });
 }
 
+socket.on("simple_response", function(data) {
+    console.log("response received:", data);
+})
+
 socket.on('simulation_started', function(data) {
     console.log("Simulation started:", data);
 });
