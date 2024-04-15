@@ -537,18 +537,6 @@ socket.on('simulation_complete', function(data) {
     simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
 });
 
-function getCookie(name) {
-    let cookieArray = document.cookie.split(';');
-    console.log(cookieArray)
-    for(let i = 0; i < cookieArray.length; i++) {
-        let cookiePair = cookieArray[i].split('=');
-        if(name == cookiePair[0].trim()) {
-            return decodeURIComponent(cookiePair[1]);
-        }
-    }
-    return null;
-}
-
 const startSimulation = () => {
     // if (priorityList.length === 0) {
     //     simulateButtonErrorModal.style.display = "flex";
@@ -579,6 +567,8 @@ const startSimulation = () => {
 
     // console.log("Sending simulation data:", simulationData);
     // socket.emit('start_simulation', simulationData);
+
+    console.log("start simulation clicked")
 
     socket.emit('start_simulation', console.log("awawa"));
 
