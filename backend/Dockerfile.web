@@ -33,27 +33,4 @@ EXPOSE 5500
 
 ENV FLASK_APP=run.py
 
-# Use the base image with PyPy
-FROM pypy:3.10-slim
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Install any necessary dependencies
-RUN apt-get update && apt-get install -y git
-
-# Copy the Python requirements file and install dependencies
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of your application's code into the container
-COPY . /app
-
-# Specify the port on which the container listens
-EXPOSE 5500
-
-# Set the environment variable for the Flask application
-ENV FLASK_APP=run.py
-
-# Define the command to run your web application using Flask directly
-CMD ["pypy", "-m", "flask", "run", "--host=0.0.0.0", "--port=$PORT"]
+CMD ["sh", "-c", "pypy run.py run --host=0.0.0.0 --port=$PORT"]
