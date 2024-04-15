@@ -26,6 +26,11 @@ app.config.update(
     CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
 )
 
+print(app.config["CELERY_BROKER_URL"])
+sys.stdout.flush()
+print(app.config["CELERY_RESULT_BACKEND"])
+sys.stdout.flush()
+
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
 
 logging.basicConfig(level=logging.DEBUG)
