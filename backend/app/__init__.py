@@ -38,6 +38,8 @@ app.register_blueprint(main_blueprint)
 
 # Initialize Celery
 celery = make_celery(app)
+print("Initializing Celery in app:", celery)
+sys.stdout.flush()
 
 def create_app():
     return app
