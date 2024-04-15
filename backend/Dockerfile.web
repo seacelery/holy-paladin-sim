@@ -33,4 +33,5 @@ EXPOSE 5500
 
 ENV FLASK_APP=run.py
 
-CMD ["sh", "-c", "pypy run.py run --host=0.0.0.0 --port=$PORT"]
+# CMD ["sh", "-c", "pypy run.py run --host=0.0.0.0 --port=$PORT"]
+CMD ["gunicorn", "run:app", "--config", "gunicorn_config.py", "--log-file", "-"]
