@@ -78,7 +78,7 @@ def import_character_route():
                   "versatility_percent": round(paladin.versatility, 2), "leech_percent": round(paladin.leech, 2)},
         "session_token": session_token
     })
-    response.set_cookie('session_token', session_token, samesite='None', secure=True, httponly=True)
+    response.set_cookie('session_token', session_token, samesite='None', secure=True, httponly=False)
     return response
     
 @main.route("/fetch_updated_data", methods=["POST"])
