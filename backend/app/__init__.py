@@ -118,14 +118,6 @@ def process_paladin(paladin_data):
     # For example, simulate or calculate results
     return paladin
 
-@app.task
-def simple_task():
-    print("Running simple task")
-    sys.stdout.flush()
-
-# And dispatch this in your Flask app
-simple_task.delay()
-
 # import os
 
 # from flask import Flask
