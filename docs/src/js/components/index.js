@@ -714,6 +714,7 @@ const runSimulation = async () => {
 
 // main function to bring the components together
 const createSimulationResults = (simulationData) => {
+    console.log("creating", simulationData)
     containerCount++;
 
     const simulationContainer = createElement("div", "simulation-container", "simulation-container");
