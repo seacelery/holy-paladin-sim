@@ -708,7 +708,7 @@ body {
     font-size: 16px;
     font-weight: 300;
     color: var(--light-font-colour);
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 
     user-select: none;
 }
@@ -3468,7 +3468,7 @@ tr {
 
     text-align: center;
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table);
 }
 
 .table-header .fa-sort-down {
@@ -3761,7 +3761,7 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table);
 }
 
 .table-cell-bottom-right {
@@ -3776,7 +3776,7 @@ tr {
     font-size: 17px;
     text-align: right;
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table);
 }
 
 [id^="overall-healing-percent-cell-"], [id^="overall-mana-gained-cell-"], [id^="overall-holy-power-gained-cell-"], [id^="overall-holy-power-spent-cell-"], [id^="overall-holy-power-wasted-cell-"], [id^="overall-CPM-cell"] {
@@ -4032,7 +4032,7 @@ tr {
     border-radius: 3px;
     border-top-left-radius: 0px;
 
-    background-color: var(--panel-colour-table-2);
+    background-color: var(--panel-colour-table-3);
 }
 
 [id^="buffs-line-graph-navbar-"] {
@@ -4143,7 +4143,7 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table);
 }
 
 .resources-mana-cell {
@@ -4210,7 +4210,7 @@ tr {
 
     border: 1px solid var(--border-colour-3);
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-3);
 }
 
 .priority-grid-cooldown-filter-icon, .priority-grid-player-auras-filter-icon {
