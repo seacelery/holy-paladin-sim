@@ -3,9 +3,7 @@ import sys
 from dotenv import load_dotenv
 load_dotenv()
 
-from app import create_app, socketio, celery
-print("Initializing Celery in run:", celery)
-print(celery.conf)
+from app import create_app, socketio
 sys.stdout.flush()
 
 app = create_app()
