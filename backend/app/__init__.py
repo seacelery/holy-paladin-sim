@@ -145,6 +145,9 @@ def run_simulation_task(self, simulation_parameters):
     print("Simulation task RUNNING")
     sys.stdout.flush()
     
+    redis = current_app.redis  # Assuming your Flask app is configured to share Redis connection
+    task_id = self.request.id
+    
     paladin = pickle.loads(simulation_parameters.pop('paladin'))
     healing_targets = pickle.loads(simulation_parameters.pop('healing_targets_list'))
 
@@ -216,6 +219,8 @@ def run_simulation_task(self, simulation_parameters):
         print(i)
         if not simulation.test:
             socketio.emit("iteration_update", {"iteration": i + 1}, namespace="/")
+            redis.set(f'iteration_{task_id}', i + 1)
+            redis.expire(f'iteration_{task_id}', 3600)
             simulation.paladin.reset_state()
             simulation.reset_simulation()
             simulation.paladin.apply_consumables()
@@ -737,6 +742,15 @@ def get_results(task_id):
         return jsonify({"error": "Task failed", "details": str(task.info)}), 500
     else:
         return jsonify({"state": task.state}), 202   
+    
+@app.route('/iteration/<task_id>', methods=['GET'])
+def get_iteration_status(task_id):
+    redis = current_app.redis
+    iteration_data = redis.get(f'iteration_{task_id}')
+    if iteration_data:
+        return jsonify({"iteration": int(iteration_data)}), 200
+    else:
+        return jsonify({"error": "No iteration data found"}), 404
 
 # @celery.task(bind=True)
 # def run_simulation_task(self, simulation_parameters):

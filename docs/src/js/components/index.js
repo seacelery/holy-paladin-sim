@@ -119,6 +119,28 @@ socket.on("iteration_update", function(data) {
     };
 });
 
+function fetchIteration(taskId) {
+    const interval = setInterval(() => {
+        fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/iteration/${taskId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (response.status === 200) {
+                    console.log(`Current Iteration: ${data.iteration} of ${data.total}`);
+                    const progressPercentage = Math.round((data.iteration / iterations) * 100);
+                    simulationProgressBar.style.width = progressPercentage + "%";
+                    simulationProgressBarText.textContent = progressPercentage + "%";
+                } else {
+                    clearInterval(interval);
+                    console.log('Iteration data not available.');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching iteration data:', error);
+                clearInterval(interval);
+            });
+    }, 100); // Adjust the polling interval as necessary
+}
+
 const handleCharacterName = () => {
     const characterNameFieldMain = document.getElementById("character-name-input-main");
     characterNameFieldMain.addEventListener("keydown", (e) => {
@@ -626,6 +648,7 @@ socket.on("simple_response", function(data) {
 
 socket.on('simulation_started', function(data) {
     console.log("Simulation started:", data);
+    fetchIteration(data.task_id);
     fetchResults(data.task_id);
 });
 
@@ -714,7 +737,6 @@ const runSimulation = async () => {
 
 // main function to bring the components together
 const createSimulationResults = (simulationData) => {
-    console.log("creating", simulationData)
     containerCount++;
 
     const simulationContainer = createElement("div", "simulation-container", "simulation-container");
