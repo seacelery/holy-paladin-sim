@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-from flask import Flask, current_app
+from flask import Flask
 import redis
 import certifi
 import pickle
@@ -82,7 +82,7 @@ def register_socketio_events(socketio):
             emit('error', {"error": "No session token provided"})
             return
 
-        session_data = current_app.redis.get(session_token)
+        session_data = app.redis.get(session_token)
         if not session_data:
             emit('error', {"error": "Session not found"})
             return
@@ -139,7 +139,7 @@ def process_paladin(paladin_data):
 # def run_simulation_task(self, simulation_parameters):
 #     print("Simulation task RUNNING")
 #     sys.stdout.flush()
-#     app = current_app._get_current_object()
+#     app = app._get_current_object()
 #     socketio = SocketIO(app, async_mode='eventlet')
     
 #     simulation = Simulation(**simulation_parameters)
