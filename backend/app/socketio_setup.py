@@ -4,4 +4,4 @@ socketio = SocketIO(cors_allowed_origins="*")
 
 def init_socketio(app):
     redis_url = app.config["REDIS_TLS_URL"]
-    socketio.init_app(app, async_mode='eventlet', message_queue=redis_url, logger=True, engineio_logger=True)
+    socketio.init_app(app, async_mode='eventlet', logger=True, engineio_logger=True)
