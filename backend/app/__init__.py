@@ -1,3 +1,6 @@
+import eventlet
+eventlet.monkey_patch()
+
 import os
 import sys
 import json
@@ -11,7 +14,6 @@ import logging
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 from celery_config import make_celery
-import eventlet
 from .socketio_setup import socketio, init_socketio
 from app.classes.simulation import check_cancellation, reset_simulation
 from app.main import initialise_simulation
