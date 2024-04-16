@@ -90,7 +90,7 @@ def run_simulation_task(self, simulation_parameters):
         # reset simulation states
         print(i)
         if not simulation.test:
-            socketio.emit("iteration_update", {"iteration": i + 1}, broadcast=True, namespace="/")
+            socketio.emit("iteration_update", {"iteration": i + 1}, namespace="/", broadcast=True)
             simulation.paladin.reset_state()
             simulation.reset_simulation()
             simulation.paladin.apply_consumables()
