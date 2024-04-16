@@ -20,15 +20,15 @@ def run_simulation_task(self, simulation_parameters):
     app = current_app._get_current_object()
     socketio = SocketIO(app, async_mode='eventlet')
     
-    simulation = initialise_simulation(**simulation_parameters)
-    
-    paladin_pickled = simulation_parameters.pop('paladin_pickled')
-    paladin = pickle.loads(paladin_pickled)
+    paladin = pickle.loads(simulation_parameters.pop('paladin_pickled'))
+    healing_targets = pickle.loads(simulation_parameters.pop('healing_targets_pickled'))
+
+    # Add correct keys for `paladin` and `healing_targets`
     simulation_parameters['paladin'] = paladin
-    
-    healing_targets_pickled = simulation_parameters.pop('healing_targets_pickled')
-    healing_targets = pickle.loads(healing_targets_pickled)
-    simulation_parameters['healing_targets_list'] = healing_targets
+    simulation_parameters['healing_targets'] = healing_targets
+
+    # Initialize the simulation
+    simulation = initialise_simulation(**simulation_parameters)
         
     full_ability_breakdown_results = {}
     full_self_buff_breakdown_results = {}
