@@ -18,6 +18,8 @@ from .socketio_setup import socketio, init_socketio
 from app.classes.simulation import check_cancellation, reset_simulation
 from app.main import initialise_simulation
 
+import psutil
+
 # from app.classes.run_simulation_task import run_simulation_task
 # from app.classes.simulation import Simulation, check_cancellation, reset_simulation
 
@@ -143,6 +145,12 @@ def process_paladin(paladin_data):
 @celery.task(bind=True)
 def run_simulation_task(self, simulation_parameters):
     print("Simulation task RUNNING")
+    sys.stdout.flush()
+    
+    process = psutil.Process(os.getpid())
+    initial_memory = process.memory_info().rss / (1024 * 1024)  # Memory in MB
+
+    print(f"Initial memory usage: {initial_memory} MB")
     sys.stdout.flush()
     
     redis = current_app.redis  # Assuming your Flask app is configured to share Redis connection
@@ -726,6 +734,10 @@ def run_simulation_task(self, simulation_parameters):
         "talents": {"class_talents": simulation.paladin.class_talents, "spec_talents": simulation.paladin.spec_talents},
         "priority_list": simulation.priority_list_text
     }
+    
+    final_memory = process.memory_info().rss / (1024 * 1024)  # Memory in MB
+    print(f"Final memory usage: {final_memory} MB")
+    sys.stdout.flush()
 
     print("Emitting simulation complete event.")
     sys.stdout.flush()
