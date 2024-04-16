@@ -554,7 +554,10 @@ function fetchResults(taskId) {
                 } else {
                     clearInterval(interval);
                     console.log('Simulation results:', data);
-                    // Handle the data, update the UI accordingly
+                    createSimulationResults(data);
+                    playCheckmarkAnimation();
+                    isSimulationRunning = false;
+                    simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
                 }
             })
             .catch(error => {
