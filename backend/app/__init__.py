@@ -722,7 +722,8 @@ def run_simulation_task(self, simulation_parameters):
 
     print("Emitting simulation complete event.")
     sys.stdout.flush()
-    socketio.emit("simulation_complete", {"results": full_results, "simulation_details": simulation_details})
+    with current_app.app_context():
+        socketio.emit("simulation_complete", {"results": full_results, "simulation_details": simulation_details})
     return {"results": full_results, "simulation_details": simulation_details}
     
 
