@@ -144,7 +144,7 @@ def run_simulation_task(self, simulation_parameters):
     print("Simulation task RUNNING")
     sys.stdout.flush()
     
-    socketio2 = SocketIO(message_queue='rediss://:p07047fba795b7692e9c289c32b9129f04db91f5a51dadc7949bc932ea6d05bc0@ec2-34-250-232-88.eu-west-1.compute.amazonaws.com:10760', ssl_cert_reqs=None)
+    socketio2 = SocketIO(message_queue='redis://:p07047fba795b7692e9c289c32b9129f04db91f5a51dadc7949bc932ea6d05bc0@ec2-34-250-232-88.eu-west-1.compute.amazonaws.com:10759', ssl_cert_reqs=None)
     
     paladin = pickle.loads(simulation_parameters.pop('paladin'))
     healing_targets = pickle.loads(simulation_parameters.pop('healing_targets_list'))
