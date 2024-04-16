@@ -3,6 +3,7 @@ from .simulation import Simulation, check_cancellation, reset_simulation
 from flask_socketio import SocketIO
 from flask import current_app
 from app.main import initialise_simulation
+from app import socketio
 import eventlet
 import pickle
 import sys
@@ -18,7 +19,6 @@ def run_simulation_task(self, simulation_parameters):
     print("Simulation task RUNNING")
     sys.stdout.flush()
     app = current_app._get_current_object()
-    socketio = SocketIO(app, async_mode='eventlet')
     
     paladin = pickle.loads(simulation_parameters.pop('paladin'))
     healing_targets = pickle.loads(simulation_parameters.pop('healing_targets_list'))
@@ -599,8 +599,6 @@ def run_simulation_task(self, simulation_parameters):
 
     print("Emitting simulation complete event.")
     sys.stdout.flush()
-    socketio.broadcast.emit("simulation_complete", {"results": full_results, "simulation_details": simulation_details}, namespace="/")
-    # print({"results": full_results, "simulation_details": simulation_details})
-    sys.stdout.flush()
+    socketio.emit("simulation_complete", {"results": full_results, "simulation_details": simulation_details}, namespace="/")
     return {"results": full_results, "simulation_details": simulation_details}
     
