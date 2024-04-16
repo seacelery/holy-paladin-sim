@@ -58,7 +58,7 @@ def import_character_route():
     session_token = str(uuid.uuid4())
     modifiable_data = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}, "equipment": {}, "character_name": character_name, "realm": realm, "region": region}
     
-    current_app.redis.setex(session_token, 1800, json.dumps(modifiable_data))
+    current_app.redis.setex(session_token, 1200, json.dumps(modifiable_data))
 
     response = jsonify({
         "message": f"Character imported successfully, {character_name}, {realm}, {region}",
@@ -144,7 +144,7 @@ def update_character_route():
             modifiable_data[key].update(value)
 
     # Save the updated data back to Redis
-    current_app.redis.setex(session_token, 1800, json.dumps(modifiable_data))
+    current_app.redis.setex(session_token, 1200, json.dumps(modifiable_data))
     current_app.logger.debug(f"Modifiable data after update: {modifiable_data}")
 
     return jsonify({"message": "Character updated successfully"})
