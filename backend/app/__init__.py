@@ -17,7 +17,10 @@ from .socketio_setup import socketio, init_socketio
 from app.classes.run_simulation_task import run_simulation_task
 # from app.classes.simulation import Simulation, check_cancellation, reset_simulation
 
+celery = None
+
 def create_app():
+    global celery
     app = Flask(__name__, static_url_path="", static_folder="../../docs")
     init_socketio(app)
     
