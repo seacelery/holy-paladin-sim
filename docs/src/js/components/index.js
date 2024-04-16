@@ -539,7 +539,14 @@ socket.on('simulation_complete', function(data) {
 
 function fetchResults(taskId) {
     const interval = setInterval(() => {
-        fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/results/${taskId}`)
+        fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/results/${taskId}`, {
+            method: 'GET', // or POST, PUT, etc.
+            mode: 'cors',  // Make sure CORS mode is set
+            credentials: 'include', // or 'same-origin' if needed
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 if (data.state && data.state !== 'SUCCESS') {
