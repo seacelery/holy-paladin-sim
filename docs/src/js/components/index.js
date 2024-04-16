@@ -109,26 +109,25 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // increment the percentage on the progress bar when the server sends an iteration update
-socket.on("iteration_update", function(data) {
-    console.log("Received iteration update:", data);
-    if (isSimulationRunning) {
-        console.log("Changing progress bar");
-        const progressPercentage = Math.round((data.iteration / iterations) * 100);
-        simulationProgressBar.style.width = progressPercentage + "%";
-        simulationProgressBarText.textContent = progressPercentage + "%";
-    };
-});
+// socket.on("iteration_update", function(data) {
+//     console.log("Received iteration update:", data);
+//     if (isSimulationRunning) {
+//         console.log("Changing progress bar");
+//         const progressPercentage = Math.round((data.iteration / iterations) * 100);
+//         simulationProgressBar.style.width = progressPercentage + "%";
+//         simulationProgressBarText.textContent = progressPercentage + "%";
+//     };
+// });
 
 function monitorSimulation(taskId) {
-    console.log("a")
+    console.log("awawa")
     let iterationInterval = setInterval(() => {
-        // Poll for iteration updates
         fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/iteration/${taskId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.iteration) {
-                    console.log(`Current Iteration: ${data.iteration} of ${data.total}`);
-                    const progressPercentage = Math.round((data.iteration / data.total) * 100);
+                    console.log(`Current Iteration: ${data.iteration} of ${iterations}`);
+                    const progressPercentage = Math.round((data.iteration / iterations) * 100);
                     simulationProgressBar.style.width = progressPercentage + "%";
                     simulationProgressBarText.textContent = progressPercentage + "%";
                 }
@@ -136,21 +135,20 @@ function monitorSimulation(taskId) {
             .catch(error => {
                 console.error('Error fetching iteration data:', error);
             });
-    }, 100); // Fast interval for iteration updates
+    }, 1000);
 
     let resultInterval = setInterval(() => {
-        // Poll for final results
         fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/results/${taskId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.state && data.state !== 'SUCCESS') {
-                    console.log(`Task state: ${data.state}`); // Still processing
-                } else if (data.results) {
-                    // Successfully got results
-                    clearInterval(iterationInterval); // Stop the iteration polling
-                    clearInterval(resultInterval); // Stop the results polling
+                    console.log(`Task state: ${data.state}`);
+                } else if (data) {
+                    clearInterval(iterationInterval);
+                    clearInterval(resultInterval);
                     console.log('Simulation results:', data);
-                    createSimulationResults(data.results);
+                    simulationProgressBarText.textContent = "";
+                    createSimulationResults(data);
                     playCheckmarkAnimation();
                     isSimulationRunning = false;
                     simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
@@ -159,8 +157,9 @@ function monitorSimulation(taskId) {
             .catch(error => {
                 console.error('Error fetching results:', error);
             });
-    }, 2000); // Slower interval for results
+    }, 2000);
 }
+
 
 const handleCharacterName = () => {
     const characterNameFieldMain = document.getElementById("character-name-input-main");
@@ -567,18 +566,18 @@ const handleSimulationCancel = () => {
     };
 };
 
-socket.on('simulation_progress', function(data) {
-    console.log('Simulation progress:', data);
+// socket.on('simulation_progress', function(data) {
+//     console.log('Simulation progress:', data);
     
-});
+// });
 
-socket.on('simulation_complete', function(data) {
-    console.log('Simulation complete:', data);
-    createSimulationResults(data);
-    playCheckmarkAnimation();
-    isSimulationRunning = false;
-    simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
-});
+// socket.on('simulation_complete', function(data) {
+//     console.log('Simulation complete:', data);
+//     createSimulationResults(data);
+//     playCheckmarkAnimation();
+//     isSimulationRunning = false;
+//     simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
+// });
 
 
 
@@ -587,6 +586,16 @@ const startSimulation = () => {
         simulateButtonErrorModal.style.display = "flex";
         return;
     };
+
+    if (window.lastSliderChange === "Slider") {
+        iterations = roundIterations(document.getElementById("iterations-option").value);
+    } else {
+        iterations = document.getElementById("iterations-option").value;
+    };
+
+    simulationProgressBarContainer.style.opacity = "100";
+    isSimulationRunning = true;
+    simulateButton.style.boxShadow = "";  
 
     const sessionToken = sessionStorage.getItem('sessionToken')
     console.log(sessionToken)
