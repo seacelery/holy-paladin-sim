@@ -3468,7 +3468,7 @@ tr {
 
     text-align: center;
 
-    background-color: var(--panel-colour-table);
+    background-color: var(--panel-colour-table-2);
 }
 
 .table-header .fa-sort-down {
@@ -3507,7 +3507,7 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour-table-2);
+    background-color: var(--panel-colour-table-3);
 }
 
 .table-cell-right {
@@ -3957,7 +3957,7 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour-table-2);
+    background-color: var(--panel-colour-table-3);
 }
 
 .buff-table-cell-right {
@@ -4098,7 +4098,7 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour-table-2);
+    background-color: var(--panel-colour-table-3);
 }
 
 .resources-table-sub-cell-left {
