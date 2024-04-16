@@ -19,6 +19,8 @@ def make_celery(app):
         timezone='UTC',
         broker_connection_retry_on_startup=True
     )
+    
+    celery.conf.result_expires = 120
 
     class ContextTask(celery.Task):
         def __call__(self, *args, **kwargs):
