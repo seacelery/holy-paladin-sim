@@ -12,46 +12,47 @@ from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 from celery_config import make_celery
 import eventlet
+from .socketio_setup import socketio, init_socketio
 
 from app.classes.run_simulation_task import run_simulation_task
 # from app.classes.simulation import Simulation, check_cancellation, reset_simulation
 
-app = Flask(__name__, static_url_path="", static_folder="../../docs")
-
-os.environ['REDIS_TLS_URL'] = 'rediss://:p07047fba795b7692e9c289c32b9129f04db91f5a51dadc7949bc932ea6d05bc0@ec2-34-250-232-88.eu-west-1.compute.amazonaws.com:10760'
-
-app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
-app.redis = redis.Redis.from_url(
-    app.config["REDIS_TLS_URL"],
-    ssl_cert_reqs='none'
-)
-
-app.config.update(
-    CELERY_BROKER_URL=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
-    CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
-)
-
-print(app.config["CELERY_BROKER_URL"])
-sys.stdout.flush()
-print(app.config["CELERY_RESULT_BACKEND"])
-sys.stdout.flush()
-
-app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
-
-logging.basicConfig(level=logging.DEBUG)
-app.logger.setLevel(logging.DEBUG)
-
-CORS(app, supports_credentials=True, origins=["https://seacelery.github.io"], allow_headers=[
-    "Content-Type", "Authorization", "X-Requested-With"], allow_methods=["GET", "POST", "OPTIONS"])
-
-app.register_blueprint(main_blueprint)
-
-# Initialize Celery
-celery = make_celery(app)
-print("Initializing Celery in app:", celery)
-sys.stdout.flush()
-
 def create_app():
+    app = Flask(__name__, static_url_path="", static_folder="../../docs")
+    init_socketio(app)
+    
+    os.environ['REDIS_TLS_URL'] = 'rediss://:p07047fba795b7692e9c289c32b9129f04db91f5a51dadc7949bc932ea6d05bc0@ec2-34-250-232-88.eu-west-1.compute.amazonaws.com:10760'
+
+    app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
+    app.redis = redis.Redis.from_url(
+        app.config["REDIS_TLS_URL"],
+        ssl_cert_reqs='none'
+    )
+
+    app.config.update(
+        CELERY_BROKER_URL=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
+        CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
+    )
+
+    print(app.config["CELERY_BROKER_URL"])
+    sys.stdout.flush()
+    print(app.config["CELERY_RESULT_BACKEND"])
+    sys.stdout.flush()
+
+    app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
+
+    logging.basicConfig(level=logging.DEBUG)
+    app.logger.setLevel(logging.DEBUG)
+
+    CORS(app, supports_credentials=True, origins=["https://seacelery.github.io"], allow_headers=[
+        "Content-Type", "Authorization", "X-Requested-With"], allow_methods=["GET", "POST", "OPTIONS"])
+
+    app.register_blueprint(main_blueprint)
+
+    # Initialize Celery
+    celery = make_celery(app)
+    print("Initializing Celery in app:", celery)
+    sys.stdout.flush()
     return app
 
 def create_socketio(app):
@@ -126,13 +127,6 @@ def register_socketio_events(socketio):
         result = run_simulation_task.delay(simulation_parameters=simulation_params)
         emit('simulation_started', {'message': "Simulation started successfully, monitor progress via WebSocket.", 'task_id': str(result.id)})
 
-@celery.task
-def process_paladin(paladin_data):
-    # Deserialize the Paladin object
-    paladin = pickle.loads(paladin_data)
-    # Here you can add the code to process the Paladin object
-    # For example, simulate or calculate results
-    return paladin
 
 # @celery.task(bind=True)
 # def run_simulation_task(self, simulation_parameters):

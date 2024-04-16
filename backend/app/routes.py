@@ -29,14 +29,6 @@ default_priority_list = [
 def handle_my_custom_event(json):
     print("received json: " + str(json))
     emit("my response", {"data": "got it!"})
-
-# def log_session_size():
-#     session_keys_count = len(session.keys())
-#     print(f"Session contains {session_keys_count} keys")
-    
-    # not compatible with pypy
-    # session_size = sys.getsizeof(str(session))
-    # print(f"Session size: {session_size} bytes")
     
 @main.route('/')
 def serve_index():
@@ -146,18 +138,6 @@ def update_character_route():
 
     modifiable_data = json.loads(session_data)
     user_input = request.json
-    
-    # if "class_talents" in user_input:
-    #     for talent, value in user_input["class_talents"].items():
-    #         modifiable_data["class_talents"][talent] = value
-
-    # if "spec_talents" in user_input:
-    #     for talent, value in user_input["spec_talents"].items():
-    #         modifiable_data["spec_talents"][talent] = value
-            
-    # for item in user_input:
-    #     if item not in ["class_talents", "spec_talents"]:
-    #         modifiable_data[item] = user_input[item]
             
     for key, value in user_input.items():
         if key in modifiable_data:
@@ -168,60 +148,6 @@ def update_character_route():
     current_app.logger.debug(f"Modifiable data after update: {modifiable_data}")
 
     return jsonify({"message": "Character updated successfully"})
-
-# @socketio.on('start_simulation')
-# def handle_start_simulation(data):
-    # print("Simple data received:", data)
-    # sys.stdout.flush()
-    # emit('simple_response', {'message': 'Simple check complete'})
-    # return 'Simple Received'
-    # session_token = data.get('session_token')
-    # if not session_token:
-    #     emit('error', {"error": "No session token provided"})
-    #     return
-
-    # session_data = current_app.redis.get(session_token)
-    # if not session_data:
-    #     emit('error', {"error": "Session not found"})
-    #     return
-
-    # modifiable_data = json.loads(session_data)
-
-    # # Assuming import_character and other functions are accessible here
-    # paladin, healing_targets = import_character(
-    #     modifiable_data['character_name'],
-    #     modifiable_data['realm'],
-    #     modifiable_data['region']
-    # )
-
-    # paladin.update_character(
-    #     race=modifiable_data.get("race"),
-    #     class_talents=modifiable_data.get("class_talents"),
-    #     spec_talents=modifiable_data.get("spec_talents"),
-    #     consumables=modifiable_data.get("consumables")
-    # )
-
-    # paladin_pickled = pickle.dumps(paladin)
-    # healing_targets_pickled = pickle.dumps(healing_targets)
-
-    # simulation_params = {
-    #     "paladin": paladin_pickled,
-    #     "healing_targets_list": healing_targets_pickled,
-    #     "encounter_length": int(data['encounter_length']),
-    #     "iterations": int(data['iterations']),
-    #     "time_warp_time": int(data['time_warp_time']),
-    #     "priority_list": data["priority_list"],
-    #     "custom_equipment": data["custom_equipment"],
-    #     "tick_rate": float(data['tick_rate']),
-    #     "raid_health": int(data['raid_health']),
-    #     "mastery_effectiveness": int(data['mastery_effectiveness']),
-    #     "light_of_dawn_targets": int(data['light_of_dawn_targets']),
-    #     "lights_hammer_targets": int(data['lights_hammer_targets']),
-    #     "resplendent_light_targets": int(data['resplendent_light_targets']),
-    # }
-
-    # result = run_simulation_task.delay(**simulation_params)
-    # emit('simulation_started', {'message': "Simulation started successfully, monitor progress via WebSocket.", 'task_id': str(result.id)})
 
 @main.route("/run_simulation", methods=["POST"])
 @cross_origin(origins=["https://seacelery.github.io"], supports_credentials=True)
