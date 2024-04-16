@@ -3,7 +3,6 @@ from .simulation import Simulation, check_cancellation, reset_simulation
 from flask_socketio import SocketIO
 from flask import current_app
 from app.main import initialise_simulation
-from app import socketio
 import eventlet
 import pickle
 import sys

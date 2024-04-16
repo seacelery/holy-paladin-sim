@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-from flask import Flask
+from flask import Flask, current_app
 import redis
 import certifi
 import pickle
@@ -16,16 +16,7 @@ import eventlet
 from app.classes.run_simulation_task import run_simulation_task
 # from app.classes.simulation import Simulation, check_cancellation, reset_simulation
 
-def create_app():
-    return app
-
-def create_socketio(app):
-    socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet", logger=True, engineio_logger=True)
-    register_socketio_events(socketio)
-    return socketio
-
 app = Flask(__name__, static_url_path="", static_folder="../../docs")
-socketio = create_socketio(app)
 
 os.environ['REDIS_TLS_URL'] = 'rediss://:p07047fba795b7692e9c289c32b9129f04db91f5a51dadc7949bc932ea6d05bc0@ec2-34-250-232-88.eu-west-1.compute.amazonaws.com:10760'
 
@@ -60,6 +51,14 @@ celery = make_celery(app)
 print("Initializing Celery in app:", celery)
 sys.stdout.flush()
 
+def create_app():
+    return app
+
+def create_socketio(app):
+    socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet", logger=True, engineio_logger=True)
+    register_socketio_events(socketio)
+    return socketio
+
 def register_socketio_events(socketio):
     @socketio.on('connect')
     def handle_connect():
@@ -82,7 +81,7 @@ def register_socketio_events(socketio):
             emit('error', {"error": "No session token provided"})
             return
 
-        session_data = app.redis.get(session_token)
+        session_data = current_app.redis.get(session_token)
         if not session_data:
             emit('error', {"error": "Session not found"})
             return
@@ -139,7 +138,7 @@ def process_paladin(paladin_data):
 # def run_simulation_task(self, simulation_parameters):
 #     print("Simulation task RUNNING")
 #     sys.stdout.flush()
-#     app = app._get_current_object()
+#     app = current_app._get_current_object()
 #     socketio = SocketIO(app, async_mode='eventlet')
     
 #     simulation = Simulation(**simulation_parameters)
