@@ -343,9 +343,9 @@ const importCharacter = async () => {
     };
 
     return fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/import_character?character_name=${characterName}&realm=${characterRealm}&region=${characterRegion}`, {
-        method: 'GET', // or POST, PUT, etc.
-        mode: 'cors',  // Make sure CORS mode is set
-        credentials: 'include', // or 'same-origin' if needed
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         }
@@ -397,7 +397,7 @@ const updateStats = async () => {
     const customEquipment = generateFullItemData()["equipment"];
 
     return fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/fetch_updated_data`, {
-        method: 'POST', // Changed from 'GET' to 'POST'
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -407,7 +407,7 @@ const updateStats = async () => {
             region: characterRegion,
             custom_equipment: customEquipment
         }),
-        credentials: 'include' // To handle cookies
+        credentials: 'include'
     })
     .then(response => response.json())
     .then(data => {
@@ -513,19 +513,6 @@ const handleSimulationCancel = () => {
     };
 };
 
-// socket.on('simulation_progress', function(data) {
-//     console.log('Simulation progress:', data);
-    
-// });
-
-// socket.on('simulation_complete', function(data) {
-//     console.log('Simulation complete:', data);
-//     createSimulationResults(data);
-//     playCheckmarkAnimation();
-//     isSimulationRunning = false;
-//     simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
-// });
-
 const monitorSimulation = (taskId) => {
     let iterationInterval = setInterval(() => {
         fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/iteration/${taskId}`)
@@ -587,7 +574,7 @@ const startSimulation = () => {
     if (!sessionToken) {
         console.log("Session token not found");
         return;
-    }
+    };
 
     const simulationData = {
         session_token: sessionToken,
@@ -606,32 +593,7 @@ const startSimulation = () => {
 
     console.log("Sending simulation data:", simulationData);
     socket.emit('start_simulation', simulationData);
-
-    console.log("start simulation clicked")
-
-    // socket.emit('start_simulation', { test: 'Hello World' }, (response) => {
-    //     console.log('Server responded with:', response);
-    // });
-}
-
-
-
-// const startSimulation = () => {
-//     console.log("start simulation clicked");
-//     console.log("Socket connected:", socket.connected);  // Confirm connection status
-
-//     if (socket.connected) {
-//         socket.emit('start_simulation', { test: 'Hello World' }, (response) => {
-//             console.log('Server responded with:', response);
-//         });
-//     } else {
-//         console.log("Socket not connected");
-//     }
-// }
-
-socket.on("simple_response", function(data) {
-    console.log("response received:", data);
-})
+};
 
 socket.on('simulation_started', function(data) {
     console.log("Simulation started:", data);
@@ -640,86 +602,86 @@ socket.on('simulation_started', function(data) {
 
 simulationProgressBarContainer.addEventListener("click", startSimulation);
 
-const runSimulation = async () => {
-    if (priorityList.length === 0) {
-        simulateButtonErrorModal.style.display = "flex";
-        return;
-    };
+// const runSimulation = async () => {
+//     if (priorityList.length === 0) {
+//         simulateButtonErrorModal.style.display = "flex";
+//         return;
+//     };
 
-    abortController = new AbortController();
-    const { signal } = abortController;
+//     abortController = new AbortController();
+//     const { signal } = abortController;
 
-    encounterLength = document.getElementById("encounter-length-option").value;
+//     encounterLength = document.getElementById("encounter-length-option").value;
 
-    if (window.lastSliderChange === "Slider") {
-        iterations = roundIterations(document.getElementById("iterations-option").value);
-    } else {
-        iterations = document.getElementById("iterations-option").value;
-    };
+//     if (window.lastSliderChange === "Slider") {
+//         iterations = roundIterations(document.getElementById("iterations-option").value);
+//     } else {
+//         iterations = document.getElementById("iterations-option").value;
+//     };
     
-    const timeWarpTime = document.getElementById("time-warp-option").value;
-    const tickRate = document.getElementById("tick-rate-option").value;
-    const raidHealth = document.getElementById("raid-health-option").value;
-    const masteryEffectiveness = document.getElementById("mastery-effectiveness-option").value;
-    const lightOfDawnTargets = document.getElementById("light-of-dawn-option").value;
-    const lightsHammerTargets = document.getElementById("lights-hammer-option").value;
-    const resplendentLightTargets = document.getElementById("resplendent-light-option").value;
+//     const timeWarpTime = document.getElementById("time-warp-option").value;
+//     const tickRate = document.getElementById("tick-rate-option").value;
+//     const raidHealth = document.getElementById("raid-health-option").value;
+//     const masteryEffectiveness = document.getElementById("mastery-effectiveness-option").value;
+//     const lightOfDawnTargets = document.getElementById("light-of-dawn-option").value;
+//     const lightsHammerTargets = document.getElementById("lights-hammer-option").value;
+//     const resplendentLightTargets = document.getElementById("resplendent-light-option").value;
 
-    simulationProgressBarContainer.style.opacity = "100";
-    isSimulationRunning = true;
+//     simulationProgressBarContainer.style.opacity = "100";
+//     isSimulationRunning = true;
 
-    simulationProgressBarContainer.addEventListener("click", handleSimulationCancel);
+//     simulationProgressBarContainer.addEventListener("click", handleSimulationCancel);
 
-    const customEquipment = generateFullItemData()["equipment"];
+//     const customEquipment = generateFullItemData()["equipment"];
 
-    simulateButton.style.boxShadow = "";  
+//     simulateButton.style.boxShadow = "";  
 
-    return fetch("https://holy-paladin-sim-6479e85b188f.herokuapp.com/run_simulation", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            encounter_length: encounterLength,
-            iterations: iterations,
-            time_warp_time: timeWarpTime,
-            priority_list: priorityList,
-            custom_equipment: customEquipment,
-            tick_rate: tickRate,
-            raid_health: raidHealth,
-            mastery_effectiveness: masteryEffectiveness,
-            light_of_dawn_targets: lightOfDawnTargets,
-            lights_hammer_targets: lightsHammerTargets,
-            resplendent_light_targets: resplendentLightTargets
-        }),
-        credentials: "include",
-        signal: signal
-    })
-    .then(response => response.json())
-    .then(data => {
-        let simulationData = data;     
-        console.log(simulationData)
+//     return fetch("https://holy-paladin-sim-6479e85b188f.herokuapp.com/run_simulation", {
+//         method: "POST",
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             encounter_length: encounterLength,
+//             iterations: iterations,
+//             time_warp_time: timeWarpTime,
+//             priority_list: priorityList,
+//             custom_equipment: customEquipment,
+//             tick_rate: tickRate,
+//             raid_health: raidHealth,
+//             mastery_effectiveness: masteryEffectiveness,
+//             light_of_dawn_targets: lightOfDawnTargets,
+//             lights_hammer_targets: lightsHammerTargets,
+//             resplendent_light_targets: resplendentLightTargets
+//         }),
+//         credentials: "include",
+//         signal: signal
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         let simulationData = data;     
+//         console.log(simulationData)
         
-        simulationProgressBarText.textContent = "";
-        if (simulationData) {
-            createSimulationResults(simulationData);
-            playCheckmarkAnimation();
-        };
+//         simulationProgressBarText.textContent = "";
+//         if (simulationData) {
+//             createSimulationResults(simulationData);
+//             playCheckmarkAnimation();
+//         };
          
-        isSimulationRunning = false;
-        simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
-    })
-    .catch(error => {
-        if (error.name === "AbortError") {
-            console.log("Fetch aborted:", error);
-        } else {
-            console.error("Error:", error);
-        }
+//         isSimulationRunning = false;
+//         simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
+//     })
+//     .catch(error => {
+//         if (error.name === "AbortError") {
+//             console.log("Fetch aborted:", error);
+//         } else {
+//             console.error("Error:", error);
+//         }
         
-        isSimulationRunning = false;
-        simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
-    });
-};
+//         isSimulationRunning = false;
+//         simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
+//     });
+// };
 
 // main function to bring the components together
 const createSimulationResults = (simulationData) => {

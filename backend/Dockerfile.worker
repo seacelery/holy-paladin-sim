@@ -1,18 +1,12 @@
-# Use the base image with PyPy
 FROM pypy:3.10-slim
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Install any necessary dependencies
 RUN apt-get update && apt-get install -y git
 
-# Copy the Python requirements file and install dependencies
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your application's code into the container
 COPY . /app
 
-# Command to run the Celery worker
 CMD ["celery", "-A", "app.celery", "worker", "-P", "solo", "--loglevel=info"]
