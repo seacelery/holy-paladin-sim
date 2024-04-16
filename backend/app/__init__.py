@@ -1,10 +1,10 @@
 import eventlet
-eventlet.monkey_patch()
 
 import os
 import sys
 import json
-from flask import Flask, current_app
+from flask import Flask, current_app, jsonify, request
+from celery.result import AsyncResult
 import redis
 import certifi
 import pickle
@@ -145,8 +145,6 @@ def run_simulation_task(self, simulation_parameters):
     print("Simulation task RUNNING")
     sys.stdout.flush()
     
-    socketio2 = SocketIO(message_queue='redis://:p07047fba795b7692e9c289c32b9129f04db91f5a51dadc7949bc932ea6d05bc0@ec2-34-250-232-88.eu-west-1.compute.amazonaws.com:10759', ssl_cert_reqs=None)
-    
     paladin = pickle.loads(simulation_parameters.pop('paladin'))
     healing_targets = pickle.loads(simulation_parameters.pop('healing_targets_list'))
 
@@ -217,7 +215,7 @@ def run_simulation_task(self, simulation_parameters):
         # reset simulation states
         print(i)
         if not simulation.test:
-            socketio2.emit("iteration_update", {"iteration": i + 1}, namespace="/")
+            socketio.emit("iteration_update", {"iteration": i + 1}, namespace="/")
             simulation.paladin.reset_state()
             simulation.reset_simulation()
             simulation.paladin.apply_consumables()
@@ -727,9 +725,18 @@ def run_simulation_task(self, simulation_parameters):
     print("Emitting simulation complete event.")
     sys.stdout.flush()
     with current_app.app_context():
-        socketio2.emit("simulation_complete", {"results": full_results, "simulation_details": simulation_details})
+        socketio.emit("simulation_complete", {"results": full_results, "simulation_details": simulation_details})
     return {"results": full_results, "simulation_details": simulation_details}
-    
+
+@app.route('/results/<task_id>', methods=['GET'])
+def get_results(task_id):
+    task = AsyncResult(task_id)
+    if task.state == 'SUCCESS':
+        return jsonify(task.get()), 200  # Assuming your task returns JSON-compatible data
+    elif task.state == 'FAILURE':
+        return jsonify({"error": "Task failed", "details": str(task.info)}), 500
+    else:
+        return jsonify({"state": task.state}), 202   
 
 # @celery.task(bind=True)
 # def run_simulation_task(self, simulation_parameters):

@@ -537,6 +537,26 @@ socket.on('simulation_complete', function(data) {
     simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
 });
 
+function fetchResults(taskId) {
+    const interval = setInterval(() => {
+        fetch(`https://your-domain.com/results/${taskId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.state && data.state !== 'SUCCESS') {
+                    console.log(`Task state: ${data.state}`); // Still processing
+                } else {
+                    clearInterval(interval);
+                    console.log('Simulation results:', data);
+                    // Handle the data, update the UI accordingly
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching results:', error);
+                clearInterval(interval);
+            });
+    }, 2000); // Adjust polling interval as necessary
+}
+
 const startSimulation = () => {
     if (priorityList.length === 0) {
         simulateButtonErrorModal.style.display = "flex";
@@ -575,6 +595,8 @@ const startSimulation = () => {
     // });
 }
 
+
+
 // const startSimulation = () => {
 //     console.log("start simulation clicked");
 //     console.log("Socket connected:", socket.connected);  // Confirm connection status
@@ -594,6 +616,7 @@ socket.on("simple_response", function(data) {
 
 socket.on('simulation_started', function(data) {
     console.log("Simulation started:", data);
+    fetchResults(data.task_id);
 });
 
 simulationProgressBarContainer.addEventListener("click", startSimulation);
