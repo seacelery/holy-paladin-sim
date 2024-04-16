@@ -3881,7 +3881,7 @@ tr {
     text-align: center;
     font-size: 16px;
     font-weight: 300;
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 }
 
 [id^="paladin-buffs-tab-"] {

@@ -108,59 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
     createTalentGrid();
 });
 
-// increment the percentage on the progress bar when the server sends an iteration update
-// socket.on("iteration_update", function(data) {
-//     console.log("Received iteration update:", data);
-//     if (isSimulationRunning) {
-//         console.log("Changing progress bar");
-//         const progressPercentage = Math.round((data.iteration / iterations) * 100);
-//         simulationProgressBar.style.width = progressPercentage + "%";
-//         simulationProgressBarText.textContent = progressPercentage + "%";
-//     };
-// });
-
-function monitorSimulation(taskId) {
-    console.log("awawa")
-    let iterationInterval = setInterval(() => {
-        fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/iteration/${taskId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.iteration) {
-                    console.log(`Current Iteration: ${data.iteration} of ${iterations}`);
-                    const progressPercentage = Math.round((data.iteration / iterations) * 100);
-                    simulationProgressBar.style.width = progressPercentage + "%";
-                    simulationProgressBarText.textContent = progressPercentage + "%";
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching iteration data:', error);
-            });
-    }, 1000);
-
-    let resultInterval = setInterval(() => {
-        fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/results/${taskId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.state && data.state !== 'SUCCESS') {
-                    console.log(`Task state: ${data.state}`);
-                } else if (data) {
-                    clearInterval(iterationInterval);
-                    clearInterval(resultInterval);
-                    console.log('Simulation results:', data);
-                    simulationProgressBarText.textContent = "";
-                    createSimulationResults(data);
-                    playCheckmarkAnimation();
-                    isSimulationRunning = false;
-                    simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching results:', error);
-            });
-    }, 2000);
-}
-
-
 const handleCharacterName = () => {
     const characterNameFieldMain = document.getElementById("character-name-input-main");
     characterNameFieldMain.addEventListener("keydown", (e) => {
@@ -579,7 +526,44 @@ const handleSimulationCancel = () => {
 //     simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
 // });
 
+const monitorSimulation = (taskId) => {
+    let iterationInterval = setInterval(() => {
+        fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/iteration/${taskId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.iteration) {
+                    console.log(`Current Iteration: ${data.iteration} of ${iterations}`);
+                    const progressPercentage = Math.round((data.iteration / iterations) * 100);
+                    simulationProgressBar.style.width = progressPercentage + "%";
+                    simulationProgressBarText.textContent = progressPercentage + "%";
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching iteration data:', error);
+            });
+    }, 1000);
 
+    let resultInterval = setInterval(() => {
+        fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/results/${taskId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.state && data.state !== 'SUCCESS') {
+                    console.log(`Task state: ${data.state}`);
+                } else if (data) {
+                    clearInterval(iterationInterval);
+                    clearInterval(resultInterval);
+                    simulationProgressBarText.textContent = "";
+                    createSimulationResults(data);
+                    playCheckmarkAnimation();
+                    isSimulationRunning = false;
+                    simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching results:', error);
+            });
+    }, 2000);
+};
 
 const startSimulation = () => {
     if (priorityList.length === 0) {
@@ -596,6 +580,7 @@ const startSimulation = () => {
     simulationProgressBarContainer.style.opacity = "100";
     isSimulationRunning = true;
     simulateButton.style.boxShadow = "";  
+    simulationProgressBarText.textContent = "0%";
 
     const sessionToken = sessionStorage.getItem('sessionToken')
     console.log(sessionToken)
