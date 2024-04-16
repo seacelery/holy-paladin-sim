@@ -3,6 +3,7 @@ from .simulation import Simulation, check_cancellation, reset_simulation
 from flask_socketio import SocketIO
 from flask import current_app
 from app.main import initialise_simulation
+from app import socketio
 import eventlet
 import pickle
 import sys
@@ -17,8 +18,6 @@ import sys
 def run_simulation_task(self, simulation_parameters):
     print("Simulation task RUNNING")
     sys.stdout.flush()
-    app = current_app._get_current_object()
-    socketio = SocketIO(app, async_mode='eventlet')
     
     paladin = pickle.loads(simulation_parameters.pop('paladin'))
     healing_targets = pickle.loads(simulation_parameters.pop('healing_targets_list'))
