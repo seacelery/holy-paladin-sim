@@ -18,8 +18,6 @@ from .socketio_setup import socketio, init_socketio
 from app.classes.simulation import check_cancellation, reset_simulation
 from app.main import initialise_simulation
 
-import psutil
-
 # from app.classes.run_simulation_task import run_simulation_task
 # from app.classes.simulation import Simulation, check_cancellation, reset_simulation
 
