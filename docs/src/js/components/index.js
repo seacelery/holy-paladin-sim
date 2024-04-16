@@ -539,7 +539,7 @@ socket.on('simulation_complete', function(data) {
 
 function fetchResults(taskId) {
     const interval = setInterval(() => {
-        fetch(`https://your-domain.com/results/${taskId}`)
+        fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/results/${taskId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.state && data.state !== 'SUCCESS') {
