@@ -119,32 +119,47 @@ socket.on("iteration_update", function(data) {
     };
 });
 
-function fetchIteration(taskId) {
-    console.log("updated")
-    const interval = setInterval(() => {
+function monitorSimulation(taskId) {
+    console.log("a")
+    let iterationInterval = setInterval(() => {
+        // Poll for iteration updates
         fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/iteration/${taskId}`)
-            .then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                } else {
-                    clearInterval(interval);
-                    console.log('Iteration data not available.');
-                    return null;
-                }
-            })
+            .then(response => response.json())
             .then(data => {
-                if (data) {
+                if (data.iteration) {
                     console.log(`Current Iteration: ${data.iteration} of ${data.total}`);
-                    const progressPercentage = Math.round((data.iteration / iterations) * 100);
+                    const progressPercentage = Math.round((data.iteration / data.total) * 100);
                     simulationProgressBar.style.width = progressPercentage + "%";
                     simulationProgressBarText.textContent = progressPercentage + "%";
                 }
             })
             .catch(error => {
                 console.error('Error fetching iteration data:', error);
-                clearInterval(interval);
             });
-    }, 100); // Adjust the polling interval as necessary
+    }, 100); // Fast interval for iteration updates
+
+    let resultInterval = setInterval(() => {
+        // Poll for final results
+        fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/results/${taskId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.state && data.state !== 'SUCCESS') {
+                    console.log(`Task state: ${data.state}`); // Still processing
+                } else if (data.results) {
+                    // Successfully got results
+                    clearInterval(iterationInterval); // Stop the iteration polling
+                    clearInterval(resultInterval); // Stop the results polling
+                    console.log('Simulation results:', data);
+                    createSimulationResults(data.results);
+                    playCheckmarkAnimation();
+                    isSimulationRunning = false;
+                    simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching results:', error);
+            });
+    }, 2000); // Slower interval for results
 }
 
 const handleCharacterName = () => {
@@ -565,35 +580,7 @@ socket.on('simulation_complete', function(data) {
     simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
 });
 
-function fetchResults(taskId) {
-    const interval = setInterval(() => {
-        fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/results/${taskId}`, {
-            method: 'GET', // or POST, PUT, etc.
-            mode: 'cors',  // Make sure CORS mode is set
-            credentials: 'include', // or 'same-origin' if needed
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.state && data.state !== 'SUCCESS') {
-                    console.log(`Task state: ${data.state}`); // Still processing
-                } else {
-                    clearInterval(interval);
-                    console.log('Simulation results:', data);
-                    createSimulationResults(data);
-                    playCheckmarkAnimation();
-                    isSimulationRunning = false;
-                    simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching results:', error);
-                clearInterval(interval);
-            });
-    }, 2000); // Adjust polling interval as necessary
-}
+
 
 const startSimulation = () => {
     if (priorityList.length === 0) {
@@ -654,8 +641,7 @@ socket.on("simple_response", function(data) {
 
 socket.on('simulation_started', function(data) {
     console.log("Simulation started:", data);
-    fetchIteration(data.task_id);
-    fetchResults(data.task_id);
+    monitorSimulation(data.task_id);
 });
 
 simulationProgressBarContainer.addEventListener("click", startSimulation);
