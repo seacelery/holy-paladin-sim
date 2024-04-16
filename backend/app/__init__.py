@@ -128,6 +128,12 @@ def register_socketio_events(socketio):
         result = run_simulation_task.delay(simulation_parameters=simulation_params)
         emit('simulation_started', {'message': "Simulation started successfully, monitor progress via WebSocket.", 'task_id': str(result.id)})
 
+@celery.task
+def process_paladin(paladin_data):
+    # Deserialize the Paladin object
+    paladin = pickle.loads(paladin_data)
+    # Processing code here
+    return paladin
 
 # @celery.task(bind=True)
 # def run_simulation_task(self, simulation_parameters):
