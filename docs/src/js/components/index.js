@@ -120,18 +120,24 @@ socket.on("iteration_update", function(data) {
 });
 
 function fetchIteration(taskId) {
+    console.log("updated")
     const interval = setInterval(() => {
         fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/iteration/${taskId}`)
-            .then(response => response.json())
-            .then(data => {
+            .then(response => {
                 if (response.status === 200) {
+                    return response.json();
+                } else {
+                    clearInterval(interval);
+                    console.log('Iteration data not available.');
+                    return null;
+                }
+            })
+            .then(data => {
+                if (data) {
                     console.log(`Current Iteration: ${data.iteration} of ${data.total}`);
                     const progressPercentage = Math.round((data.iteration / iterations) * 100);
                     simulationProgressBar.style.width = progressPercentage + "%";
                     simulationProgressBarText.textContent = progressPercentage + "%";
-                } else {
-                    clearInterval(interval);
-                    console.log('Iteration data not available.');
                 }
             })
             .catch(error => {
