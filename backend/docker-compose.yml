@@ -1,10 +1,27 @@
 version: '3.8'
 services:
-  myapp:
-    image: holy-paladin-sim-image
+  web:
+    build: .
     ports:
       - "5500:5500"
+    volumes:
+      - .:/code
+    command: python app.py
     environment:
-      CLIENT_ID: "57cdb961fae04b8f9dc4d3caea3716db"
-      CLIENT_SECRET: "rIIdFk2In9dQfBUxbPmH6ee4DDDO6oUV"
-      FLASK_SECRET_KEY: "dhjwa36yuajwdoa29d8djaiwdjia82djawd82auaj"
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+      - worker
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
+  worker:
+    build: .
+    command: celery -A app.celery worker --loglevel=info
+    volumes:
+      - .:/code
+    depends_on:
+      - redis

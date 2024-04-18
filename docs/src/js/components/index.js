@@ -15,6 +15,7 @@ import { updateEquipmentFromImportedData, initialiseEquipment, generateFullItemD
 import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable, updateEquipmentWithEffectValues, createTooltip, addTooltipFunctionality } from "../utils/misc-functions.js";
 import { realmList } from "../utils/data/realm-list.js";
 import { createOptionsSliders, roundIterations } from "../components/create-options-sliders.js";
+import { CONFIG } from "./config.js";
 
 // helper functions
 const createElement = (elementName, className = null, id = null) => {
@@ -33,7 +34,7 @@ const createElement = (elementName, className = null, id = null) => {
 };
 
 // socket to allow the server to send updates while the simulation is ongoing
-const socket = io("https://holy-paladin-sim-6479e85b188f.herokuapp.com", {
+const socket = io(CONFIG.backendUrl, {
     withCredentials: true,
     transports: ["websocket"]
 });
@@ -342,7 +343,7 @@ const importCharacter = async () => {
         importContainerMain.style.display = "none";
     };
 
-    return fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/import_character?character_name=${characterName}&realm=${characterRealm}&region=${characterRegion}`, {
+    return fetch(`${CONFIG.backendUrl}/import_character?character_name=${characterName}&realm=${characterRealm}&region=${characterRegion}`, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
@@ -396,7 +397,7 @@ const updateStats = async () => {
     // const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
     const customEquipment = generateFullItemData()["equipment"];
 
-    return fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/fetch_updated_data`, {
+    return fetch(`${CONFIG.backendUrl}/fetch_updated_data`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -439,7 +440,7 @@ const updateCharacter = async (data) => {
 
     handleSavedDataStatus();
 
-    return fetch("https://holy-paladin-sim-6479e85b188f.herokuapp.com/update_character", {
+    return fetch(`${CONFIG.backendUrl}/update_character`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -501,7 +502,7 @@ const handleSimulationCancel = () => {
         cancelSVG.style.display = "block";
         playCancelledAnimation();
 
-        fetch("https://holy-paladin-sim-6479e85b188f.herokuapp.com/cancel_simulation", {
+        fetch(`${CONFIG.backendUrl}/cancel_simulation`, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -515,7 +516,7 @@ const handleSimulationCancel = () => {
 
 const monitorSimulation = (taskId) => {
     let iterationInterval = setInterval(() => {
-        fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/iteration/${taskId}`)
+        fetch(`${CONFIG.backendUrl}/iteration/${taskId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.iteration) {
@@ -531,7 +532,7 @@ const monitorSimulation = (taskId) => {
     }, 1000);
 
     let resultInterval = setInterval(() => {
-        fetch(`https://holy-paladin-sim-6479e85b188f.herokuapp.com/results/${taskId}`)
+        fetch(`${CONFIG.backendUrl}/results/${taskId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.state && data.state !== 'SUCCESS') {

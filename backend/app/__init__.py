@@ -92,7 +92,7 @@ app.redis = redis.Redis.from_url(
 app.config.update(
     CELERY_BROKER_URL=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
     CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
-)
+)   
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
 
