@@ -36,7 +36,7 @@ const createElement = (elementName, className = null, id = null) => {
 // socket to allow the server to send updates while the simulation is ongoing
 const socket = io(CONFIG.backendUrl, {
     withCredentials: true,
-    transports: ["websocket"]
+    transports: ["websocket"],
 });
 
 socket.on("connect", function() {
