@@ -81,6 +81,9 @@ app = Flask(__name__, static_url_path="", static_folder="../../docs")
 init_socketio(app)
 register_socketio_events(socketio)
 
+print("Current FLASK_ENV:", os.getenv("FLASK_ENV"))
+sys.stdout.flush()
+
 os.environ['REDIS_TLS_URL'] = 'rediss://:p07047fba795b7692e9c289c32b9129f04db91f5a51dadc7949bc932ea6d05bc0@ec2-34-250-232-88.eu-west-1.compute.amazonaws.com:10760'
 
 if os.getenv("FLASK_ENV") == "development":

@@ -66,7 +66,7 @@ def import_character_route():
     return response
     
 @main.route("/fetch_updated_data", methods=["POST"])
-@cross_origin(origins=["https://seacelery.github.io"], supports_credentials=True)
+@cross_origin(origins=["https://seacelery.github.io", "http://localhost:5000"], supports_credentials=True)
 def fetch_updated_stats_route():
     data = request.json
     character_name = data['character_name']
