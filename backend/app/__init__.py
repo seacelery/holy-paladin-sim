@@ -83,16 +83,29 @@ register_socketio_events(socketio)
 
 os.environ['REDIS_TLS_URL'] = 'rediss://:p07047fba795b7692e9c289c32b9129f04db91f5a51dadc7949bc932ea6d05bc0@ec2-34-250-232-88.eu-west-1.compute.amazonaws.com:10760'
 
-app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
-app.redis = redis.Redis.from_url(
-    app.config["REDIS_TLS_URL"],
-    ssl_cert_reqs='none'
-)
+if os.getenv("FLASK_ENV") == "development":
+    app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
+    app.redis = redis.Redis.from_url(
+        app.config["REDIS_TLS_URL"],
+        ssl_cert_reqs='none'
+    )
 
-app.config.update(
-    CELERY_BROKER_URL=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
-    CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
-)   
+    app.config.update(
+        CELERY_BROKER_URL=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
+        CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
+    ) 
+else:
+    redis_url = os.getenv("REDIS_LOCAL_URL")
+    
+    app.config["REDIS_TLS_URL"] = redis_url
+    app.redis = redis.Redis.from_url(
+        redis_url,
+    )
+
+    app.config.update(
+        CELERY_BROKER_URL=redis_url,
+        CELERY_RESULT_BACKEND=redis_url,
+    ) 
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
 
