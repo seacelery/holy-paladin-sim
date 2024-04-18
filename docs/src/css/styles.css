@@ -2,7 +2,7 @@
     --background-colour: rgb(4, 1, 2);
     --panel-colour: #070506;
     --panel-colour-2: rgb(20, 9, 16);
-    --panel-colour-3: rgb(46, 24, 38);
+    --panel-colour-3: rgb(46, 24, 39);
     --panel-colour-4: rgb(134, 94, 118);
     --panel-colour-5: rgb(51, 29, 42);
     --panel-colour-6: rgb(19, 9, 15);
@@ -11,12 +11,12 @@
     --panel-colour-table: rgb(20, 8, 15);
     --panel-colour-table-2: rgb(10, 4, 7);
     --panel-colour-table-3: rgb(7, 3, 5);
-    --panel-colour-table-4: rgb(7, 3, 5);
+    --panel-colour-table-4: rgb(6, 2, 4);
     --panel-colour-table-5: rgb(15, 7, 12);
     --border-colour: #3c3241;
     --border-colour-2: rgb(17, 8, 14);
     --transparent-border-colour-2: #1b1a1fd7;
-    --border-colour-3: #573b4e;
+    --border-colour-3: #4e3546;
     --border-colour-4: rgb(133, 10, 94);
     --tooltip-colour: rgba(36, 36, 36, 0.034);
     --tooltip-colour-hover: rgba(184, 131, 175, 0.13);
@@ -1155,10 +1155,10 @@ body {
     width: 44%;
     height: 100%;
 
-    background-color:var(--panel-colour-table-4);
-    border: 1px solid var(--border-colour-3);
-    border-radius: 5px;
-    box-shadow: 1px 1px 1px var(--border-colour-2);
+    /* background-color:var(--panel-colour-table-4); */
+    /* border: 1px solid var(--border-colour-3); */
+    /* border-radius: 5px;
+    box-shadow: 1px 1px 1px var(--border-colour-2); */
     user-select: none;
 }
 
@@ -1204,10 +1204,10 @@ body {
     width: 54%;
     height: 100%;
 
-    background-color:var(--panel-colour-table-4);
-    border: 1px solid var(--border-colour-3);
-    border-radius: 5px;
-    box-shadow: 1px 1px 1px var(--border-colour-2);
+    /* background-color:var(--panel-colour-table-4); */
+    /* border: 1px solid var(--border-colour-3); */
+    /* border-radius: 5px;
+    box-shadow: 1px 1px 1px var(--border-colour-2); */
     user-select: none;
 }
 
@@ -1522,10 +1522,10 @@ body {
     width: 54%;
     height: 100%;
 
-    background-color:var(--panel-colour-table-4);
+    /* background-color:var(--panel-colour-table-4);
     border: 1px solid var(--border-colour-3);
     border-radius: 5px;
-    box-shadow: 1px 1px 1px var(--border-colour-2);
+    box-shadow: 1px 1px 1px var(--border-colour-2); */
 }
 
 #equipped-items-container {
@@ -1759,10 +1759,10 @@ body {
     height: 135px;
     margin-bottom: 9px;
 
-    background-color:var(--panel-colour-table-4);
+    /* background-color:var(--panel-colour-table-4);
     border: 1px solid var(--border-colour-3);
     border-radius: 5px;
-    box-shadow: 1px 1px 1px var(--border-colour-2);
+    box-shadow: 1px 1px 1px var(--border-colour-2); */
 
     color: var(--light-font-colour);
 }
@@ -1801,11 +1801,13 @@ body {
 
 #equipped-items-edit-equipment-container {
     width: 100%;
-    height: 443px;
+    height: 435px;
 
     background-color:var(--panel-colour-table-4);
     border: 1px solid var(--border-colour-3);
     border-radius: 5px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     box-shadow: 1px 1px 1px var(--border-colour-2);
 
     color: var(--light-font-colour);
@@ -2387,6 +2389,10 @@ body {
 
 #priority-list-headers {
     display: flex;
+
+    width: 99%;
+    border-bottom: 1px solid var(--border-colour-3);
+    margin-bottom: 5px;
 }
 
 #priority-list-header-ability {
@@ -2612,7 +2618,7 @@ body {
     margin-left: 3px;
     margin-bottom: 10px;
 
-    width: calc(100% - 30px);
+    width: calc(100% - 40px);
 
     background-color: var(--border-colour-3);
 }
@@ -2626,9 +2632,8 @@ body {
     overflow: auto;
 
     height: 538px;
-    border: 1px solid var(--border-colour-3);
-    width: 99.2%;
-    padding-left: 5px;
+    
+    width: 100%;
 }
 
 #priority-list-items-container::-webkit-scrollbar {
@@ -2963,7 +2968,7 @@ input:-webkit-autofill{
     border-right: 1px solid var(--border-colour-3);
     border-radius: 1px;
 
-    background-color: var(--panel-colour-3);
+    background-color: var(--panel-colour-2);
 
     position: relative;
 }
@@ -3033,7 +3038,8 @@ input:focus {
     border-radius: 3px;
 
     font-size: 16px;
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
+
     color: var(--light-font-colour);
 }
 
@@ -3051,7 +3057,7 @@ input:focus {
     font-size: 20px;
     color: var(--light-font-colour);
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 }
 
 #simulate-button {
