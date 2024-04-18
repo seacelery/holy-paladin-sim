@@ -2,11 +2,14 @@ FROM pypy:3.10-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app
+
+RUN adduser --disabled-password --gecos '' myuser
+USER myuser
 
 CMD ["celery", "-A", "app.celery", "worker", "-P", "solo", "--loglevel=info"]
