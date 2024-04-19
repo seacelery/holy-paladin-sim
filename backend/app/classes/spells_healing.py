@@ -877,6 +877,8 @@ class HolyLight(Spell):
         
                 # add beacon healing here
             
+            print(targets[0])
+            print(targets[0].name)
             print(targets[0].target_active_buffs)
             sys.stdout.flush()
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
