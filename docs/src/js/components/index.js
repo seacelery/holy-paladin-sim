@@ -63,6 +63,29 @@ let isFirstImport = true;
 export let cooldownFilterState = {};
 export let playerAurasFilterState = {};
 
+// version dropdown
+const versionInput = document.getElementById("version-input");
+const versionSuggestions = document.getElementById("version-suggestions");
+const selectedVersion = document.getElementById("version-selected-version");
+
+versionInput.addEventListener("click", () => {
+    versionSuggestions.style.display = versionSuggestions.style.display === "block" ? "none" : "block";
+});
+
+versionSuggestions.addEventListener("click", (e) => {
+    selectedVersion.textContent = e.target.textContent;
+    versionSuggestions.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+    if (!versionInput.contains(e.target) && !versionSuggestions.contains(e.target)) {
+        if (versionSuggestions.style.display !== "none") {
+            versionSuggestions.style.display = "none";
+        };
+    };
+});
+
+// theme toggle
 const themeToggle = document.getElementById("theme-toggle");
 const themeToggleCircle = document.getElementById("theme-circle");
 const themePaladinIcon = document.getElementById("theme-paladin-icon");
