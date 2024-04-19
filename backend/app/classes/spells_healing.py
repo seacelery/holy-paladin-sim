@@ -882,6 +882,12 @@ class HolyLight(Spell):
                 sys.stdout.flush()
                 self.spell_healing_modifier /= 1.15
                 
+                print(targets[0].target_active_buffs)
+                sys.stdout.flush()
+                
+                print(caster.is_talent_active("Boundless Salvation"))
+                sys.stdout.flush()
+                
                 # boundless salvation
                 if caster.is_talent_active("Boundless Salvation"):
                     print("boundless salvation active")
