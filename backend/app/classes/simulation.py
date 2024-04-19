@@ -203,6 +203,8 @@ class Simulation:
     
     def complete_cast(self, caster, current_time):
         non_beacon_targets = [target for target in self.healing_targets_list if "Beacon of Light" not in target.target_active_buffs]
+        print(non_beacon_targets)
+        sys.stdout.flush()
         
         ability = self.abilities.get(self.paladin.currently_casting)
         if ability:
