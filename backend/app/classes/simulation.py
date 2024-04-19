@@ -202,7 +202,7 @@ class Simulation:
                 caster.delayed_casts.remove(cast)
     
     def complete_cast(self, caster, current_time):
-        non_beacon_targets = [target for target in self.healing_targets_list if "Beacon of Light" not in target.target_active_buffs]
+        non_beacon_targets = [target for target in self.paladin.potential_healing_targets if "Beacon of Light" not in target.target_active_buffs]
         
         
         ability = self.abilities.get(self.paladin.currently_casting)
