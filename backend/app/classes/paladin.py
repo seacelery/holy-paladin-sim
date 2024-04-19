@@ -48,10 +48,11 @@ class Talents:
 
 class Paladin:
     
-    def __init__(self, name, character_data=None, stats_data=None, talent_data=None, equipment_data=None, buffs=None, consumables=None, potential_healing_targets=None):
+    def __init__(self, name, character_data=None, stats_data=None, talent_data=None, equipment_data=None, buffs=None, consumables=None, potential_healing_targets=None, test=False):
         self.character_data = character_data if character_data else None
         self.race = self.character_data["race"]["name"] if self.character_data else None
         self.name = name[0].upper() + name[1:]
+        self.test = test
         # self.stats = self.parse_stats(stats_data)
         # self.class_talents = self.parse_talents(talent_data)[0]
         # self.spec_talents = self.parse_talents(talent_data)[1]
@@ -92,7 +93,7 @@ class Paladin:
         
         if equipment_data:
             self.equipment = self.parse_equipment(equipment_data)
-            # pp.pprint(self.equipment)
+
             formatted_equipment_data = self.calculate_stats_from_equipment(self.equipment)
             # print(formatted_equipment_data)
             self.stats = Stats(formatted_equipment_data[0], self.convert_stat_ratings_to_percent(formatted_equipment_data[0]))
@@ -305,8 +306,11 @@ class Paladin:
                 if talent_name in row:
                     row[talent_name]["ranks"]["current rank"] = new_rank 
                     
-    def update_equipment(self, equipment_data):        
-        self.equipment = equipment_data
+    def update_equipment(self, equipment_data):  
+        if self.test:      
+            self.equipment = json.loads(equipment_data)
+        else:
+            self.equipment = equipment_data
         
         formatted_equipment_data = self.calculate_stats_from_equipment(self.equipment)
         self.stats = Stats(formatted_equipment_data[0], self.convert_stat_ratings_to_percent(formatted_equipment_data[0]))
@@ -911,7 +915,7 @@ class Paladin:
             "haste_rating": "haste",
             "mastery_rating": "mastery"
         }
-
+        
         for item_slot, item_data in equipment.items():
             stats = item_data.get("stats", {})
             for old_key, new_key in rename_dict.items():
@@ -930,6 +934,8 @@ class Paladin:
         
         self.set_bonuses = {"season_1": 0, "season_2": 0, "season_3": 0}
         
+        # pp.pprint(equipment)
+        # print(type(equipment))
         for item_slot, item_data in equipment.items():
             
             name = item_data.get("name", "")

@@ -14,6 +14,7 @@ from app.classes.spells_passives import TouchOfLight
 pp = pprint.PrettyPrinter(width=200)
 
 def load_data_from_file(filename):
+    print(filename)
     with open(filename, "r") as file:
         return json.load(file)
 
@@ -40,7 +41,7 @@ updated_equipment_data = load_data_from_file(path_to_updated_equipment_data)
 def initialise_paladin():
     healing_targets = [Target(f"target{i + 1}") for i in range(20)]
 
-    paladin = Paladin("paladin1", character_data, stats_data, talent_data, equipment_data, potential_healing_targets=healing_targets)
+    paladin = Paladin("paladin1", character_data, stats_data, talent_data, equipment_data, potential_healing_targets=healing_targets, test=True)
     
     return paladin
 
