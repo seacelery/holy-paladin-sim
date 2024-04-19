@@ -203,10 +203,17 @@ class Simulation:
     
     def complete_cast(self, caster, current_time):
         non_beacon_targets = [target for target in self.healing_targets_list if "Beacon of Light" not in target.target_active_buffs]
-        print(non_beacon_targets)
-        sys.stdout.flush()
+        
         
         ability = self.abilities.get(self.paladin.currently_casting)
+        
+        print(f"ability {ability.name}")
+        sys.stdout.flush()
+        for target in non_beacon_targets:
+            if "Tyr's Deliverance (target)" in target.target_active_auras:
+                print(f"tyrs on {target.name}")
+                sys.stdout.flush()
+       
         if ability:
             # handle divine favor exception: flash of light cast time < global cooldown
             divine_favor_active = False
