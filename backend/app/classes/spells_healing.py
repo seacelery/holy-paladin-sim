@@ -1,5 +1,6 @@
 import random
 import copy
+import sys
 
 from .spells import Spell
 from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, BlessingOfFreedomBuff, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath
@@ -878,17 +879,21 @@ class HolyLight(Spell):
             
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
                 print(f"Holy Light casting on target with tyr's")
+                sys.stdout.flush()
                 self.spell_healing_modifier /= 1.15
                 
                 # boundless salvation
                 if caster.is_talent_active("Boundless Salvation"):
                     print("boundless salvation active")
+                    sys.stdout.flush()
                     key = "Tyr's Deliverance (self)"
                     
                     
                     if "Tyr's Deliverance (self)" in caster.active_auras:
                         print(f"Attempting to extend tyr's, currently extended by {caster.tyrs_deliverance_extended_by}")
+                        sys.stdout.flush()
                         print(f"Current duration {caster.active_auras[key].duration}")
+                        sys.stdout.flush()
                         if caster.tyrs_deliverance_extended_by <= 32:
                             caster.extend_buff_on_self(caster.active_auras["Tyr's Deliverance (self)"], current_time, 8)
                             caster.tyrs_deliverance_extended_by += 8
@@ -897,6 +902,7 @@ class HolyLight(Spell):
                             caster.tyrs_deliverance_extended_by += 40 - caster.tyrs_deliverance_extended_by
                             
                         print(f"New duration {caster.active_auras[key].duration}")
+                        sys.stdout.flush()
             
             # decrement stacks or remove infusion of light
             if "Infusion of Light" in caster.active_auras:
