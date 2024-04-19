@@ -4,6 +4,7 @@ import heapq
 import os
 import json
 import random
+import sys
 from dotenv import load_dotenv
 
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
@@ -789,8 +790,14 @@ class Paladin:
 
     def extend_buff_on_self(self, buff, current_time, time_extension):
         if buff.name in self.active_auras:
+            print(f"{self.active_auras[buff.name].name} attempting extend")
+            sys.stdout.flush()
+            print(f"before: {self.active_auras[buff.name].duration}")
+            sys.stdout.flush()
             self.active_auras[buff.name].duration += time_extension
             self.events.append(f"{format_time(current_time)}: {buff.name} extended by {time_extension}s to {round(self.active_auras[buff.name].duration, 2)}s")
+            print(f"after: {self.active_auras[buff.name].duration}")
+            sys.stdout.flush()
             
         update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "extended", buff.duration, buff.current_stacks, time_extension)
     

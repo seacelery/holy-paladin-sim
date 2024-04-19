@@ -881,13 +881,20 @@ class HolyLight(Spell):
                 
                 # boundless salvation
                 if caster.is_talent_active("Boundless Salvation"):
+                    key = "Tyr's Deliverance (self)"
+                    
+                    
                     if "Tyr's Deliverance (self)" in caster.active_auras:
+                        print(f"Attempting to extend tyr's, currently extended by {caster.tyrs_deliverance_extended_by}")
+                        print(f"Current duration {caster.active_auras[key].duration}")
                         if caster.tyrs_deliverance_extended_by <= 32:
                             caster.extend_buff_on_self(caster.active_auras["Tyr's Deliverance (self)"], current_time, 8)
                             caster.tyrs_deliverance_extended_by += 8
                         elif 32 < caster.tyrs_deliverance_extended_by < 40:
                             caster.extend_buff_on_self(caster.active_auras["Tyr's Deliverance (self)"], current_time, 40 - caster.tyrs_deliverance_extended_by)
                             caster.tyrs_deliverance_extended_by += 40 - caster.tyrs_deliverance_extended_by
+                            
+                        print(f"New duration {caster.active_auras[key].duration}")
             
             # decrement stacks or remove infusion of light
             if "Infusion of Light" in caster.active_auras:

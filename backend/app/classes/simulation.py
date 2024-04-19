@@ -1196,5 +1196,6 @@ class Simulation:
         # average_ability_breakdown, self.elapsed_time, None, average_self_buff_breakdown, average_target_buff_breakdown, 
         # average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, 
         # average_tyrs_counts, average_awakening_counts, average_healing_timeline, average_mana_timeline, full_awakening_trigger_times_results, average_holy_power_timeline
-        emit("simulation_complete", {"results": full_results, "simulation_details": simulation_details}, broadcast=True, namespace="/")
+        if not self.test:
+            emit("simulation_complete", {"results": full_results, "simulation_details": simulation_details}, broadcast=True, namespace="/")
         return {"results": full_results, "simulation_details": simulation_details}
