@@ -2439,9 +2439,9 @@ body {
     align-items: center;
     position: absolute;
     left: auto;
-    right: 19px;
+    right: 14px;
     bottom: 0;
-    top: 70px;
+    top: 77px;
     margin: auto;
 
     width: 25%;
@@ -2633,7 +2633,7 @@ body {
 
     height: 538px;
     
-    width: 100%;
+    width: calc(100% - 4px);
 }
 
 #priority-list-items-container::-webkit-scrollbar {
@@ -2658,6 +2658,7 @@ body {
     min-width: 60%;
 
     padding: 3px;
+    padding-left: 0px;
 }
 
 .priority-list-item-container:last-of-type {
