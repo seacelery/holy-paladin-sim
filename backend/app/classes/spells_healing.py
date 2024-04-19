@@ -877,10 +877,12 @@ class HolyLight(Spell):
                 # add beacon healing here
             
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
+                print(f"Holy Light casting on target with tyr's")
                 self.spell_healing_modifier /= 1.15
                 
                 # boundless salvation
                 if caster.is_talent_active("Boundless Salvation"):
+                    print("boundless salvation active")
                     key = "Tyr's Deliverance (self)"
                     
                     
