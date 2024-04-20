@@ -1,6 +1,9 @@
 // TO DOS
 // colour spell names by spell type
 
+import { initialiseSocket } from "./config/socket-config.js";
+import { initialiseTheme } from "./config/theme-config.js";
+import { initialiseVersion } from "./config/version-config.js";
 import { createAbilityBreakdown } from "./ability-breakdown.js";
 import { createBuffsBreakdown } from "./buffs-breakdown.js";
 import { createResourcesBreakdown } from "./resources-breakdown.js";
@@ -32,110 +35,6 @@ const createElement = (elementName, className = null, id = null) => {
     };
     return element;
 };
-
-// socket to allow the server to send updates while the simulation is ongoing
-const socket = io(CONFIG.backendUrl, {
-    withCredentials: true,
-    transports: ["websocket"],
-});
-
-socket.on("connect", function() {
-    console.log("Connected to the server");
-});
-
-socket.on("disconnect", function() {
-    console.log("Disconnected from the server");
-});
-
-socket.on("connect_error", (error) => {
-    console.log("Connection failed:", error);
-});
-
-let savedDataTimeout;
-let containerCount = 0;
-let encounterLength = 30;
-let iterations = 1;
-let isSimulationRunning = false;
-let abortController;
-let isFirstImport = true;
-
-// save states for use in separate priority breakdowns
-export let cooldownFilterState = {};
-export let playerAurasFilterState = {};
-
-// version dropdown
-const versionInput = document.getElementById("version-input");
-const versionSuggestions = document.getElementById("version-suggestions");
-const selectedVersion = document.getElementById("version-selected-version");
-
-versionInput.addEventListener("click", () => {
-    versionSuggestions.style.display = versionSuggestions.style.display === "block" ? "none" : "block";
-});
-
-versionSuggestions.addEventListener("click", (e) => {
-    selectedVersion.textContent = e.target.textContent;
-    versionSuggestions.style.display = "none";
-    document.documentElement.setAttribute("data-version", e.target.textContent);
-    localStorage.setItem("version", e.target.textContent);
-    window.location.reload();
-});
-
-selectedVersion.textContent = document.documentElement.getAttribute("data-version");
-
-window.addEventListener("click", (e) => {
-    if (!versionInput.contains(e.target) && !versionSuggestions.contains(e.target)) {
-        if (versionSuggestions.style.display !== "none") {
-            versionSuggestions.style.display = "none";
-        };
-    };
-});
-
-// theme toggle
-const themeToggle = document.getElementById("theme-toggle");
-const themeToggleCircle = document.getElementById("theme-circle");
-const themePaladinIcon = document.getElementById("theme-paladin-icon");
-const themeMoonIcon = document.getElementById("theme-moon-icon");
-themeToggle.addEventListener("click", () => {
-    themeToggleCircle.classList.toggle("theme-checked");
-    themePaladinIcon.classList.toggle("theme-icon-hidden");
-    themeMoonIcon.classList.toggle("theme-icon-hidden");
-
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    const newTheme = currentTheme === "plain" ? "paladin" : "plain";
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-});
-
-const importButtonMain = document.getElementById("import-button-main");
-const importButton = document.getElementById("import-button");
-
-const simulationName = document.getElementById("simulation-name-text-input");
-simulationName.value = "Simulation 1";
-
-const simulateButton = document.getElementById("simulate-button");
-const simulationProgressBarCheck = document.querySelector(".simulation-progress-bar-check-container");
-const simulationProgressBarContainer = document.getElementById("simulation-progress-bar-container");
-const simulationProgressBar = document.getElementById("simulation-progress-bar");
-const simulationProgressBarText = document.getElementById("simulation-progress-bar-text");
-const simulateButtonErrorModal = document.getElementById("simulate-button-error-modal");
-
-window.addEventListener("click", (e) => {
-    if (e.target !== document.getElementById("simulate-button-error-modal-message") && e.target !== simulationProgressBarCheck && e.target !== document.querySelector(".simulation-progress-bar-checkmark")) {
-        simulateButtonErrorModal.style.display = "none";
-    };
-});
-
-window.addEventListener("click", (e) => {
-    if (e.target !== document.getElementById("character-name-error-modal-message")) {
-        document.getElementById("character-name-error-modal").style.display = "none";
-    };
-});
-
-const fullResultsContainer = document.getElementById("results-container");
-
-document.addEventListener("DOMContentLoaded", () => {
-    createTalentGrid();
-});
 
 const handleCharacterName = () => {
     const characterNameFieldMain = document.getElementById("character-name-input-main");
@@ -631,87 +530,6 @@ socket.on('simulation_started', function(data) {
 
 simulationProgressBarContainer.addEventListener("click", startSimulation);
 
-// const runSimulation = async () => {
-//     if (priorityList.length === 0) {
-//         simulateButtonErrorModal.style.display = "flex";
-//         return;
-//     };
-
-//     abortController = new AbortController();
-//     const { signal } = abortController;
-
-//     encounterLength = document.getElementById("encounter-length-option").value;
-
-//     if (window.lastSliderChange === "Slider") {
-//         iterations = roundIterations(document.getElementById("iterations-option").value);
-//     } else {
-//         iterations = document.getElementById("iterations-option").value;
-//     };
-    
-//     const timeWarpTime = document.getElementById("time-warp-option").value;
-//     const tickRate = document.getElementById("tick-rate-option").value;
-//     const raidHealth = document.getElementById("raid-health-option").value;
-//     const masteryEffectiveness = document.getElementById("mastery-effectiveness-option").value;
-//     const lightOfDawnTargets = document.getElementById("light-of-dawn-option").value;
-//     const lightsHammerTargets = document.getElementById("lights-hammer-option").value;
-//     const resplendentLightTargets = document.getElementById("resplendent-light-option").value;
-
-//     simulationProgressBarContainer.style.opacity = "100";
-//     isSimulationRunning = true;
-
-//     simulationProgressBarContainer.addEventListener("click", handleSimulationCancel);
-
-//     const customEquipment = generateFullItemData()["equipment"];
-
-//     simulateButton.style.boxShadow = "";  
-
-//     return fetch("https://holy-paladin-sim-6479e85b188f.herokuapp.com/run_simulation", {
-//         method: "POST",
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             encounter_length: encounterLength,
-//             iterations: iterations,
-//             time_warp_time: timeWarpTime,
-//             priority_list: priorityList,
-//             custom_equipment: customEquipment,
-//             tick_rate: tickRate,
-//             raid_health: raidHealth,
-//             mastery_effectiveness: masteryEffectiveness,
-//             light_of_dawn_targets: lightOfDawnTargets,
-//             lights_hammer_targets: lightsHammerTargets,
-//             resplendent_light_targets: resplendentLightTargets
-//         }),
-//         credentials: "include",
-//         signal: signal
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         let simulationData = data;     
-//         console.log(simulationData)
-        
-//         simulationProgressBarText.textContent = "";
-//         if (simulationData) {
-//             createSimulationResults(simulationData);
-//             playCheckmarkAnimation();
-//         };
-         
-//         isSimulationRunning = false;
-//         simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
-//     })
-//     .catch(error => {
-//         if (error.name === "AbortError") {
-//             console.log("Fetch aborted:", error);
-//         } else {
-//             console.error("Error:", error);
-//         }
-        
-//         isSimulationRunning = false;
-//         simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
-//     });
-// };
-
 // main function to bring the components together
 const createSimulationResults = (simulationData) => {
     containerCount++;
@@ -881,17 +699,6 @@ const createSimulationResults = (simulationData) => {
     simulateButton.scrollIntoView({ behavior: "smooth" });
 };
 
-// update the paladin class when attributes are changed
-let currentConsumables = {
-    flask: [],
-    food: [],
-    weapon_imbue: [],
-    augment_rune: [],
-    raid_buff: [],
-    external_buff: {},
-    potion: {}
-};
-
 const minimiseImportContainer = (data) => {
     const loadingScreen = document.getElementById("loading-screen");
     const loadingCorner = document.getElementById("loading-corner");
@@ -920,7 +727,6 @@ const minimiseImportContainer = (data) => {
                                                     .join(" ");
 };
 
-// update displayed information based on imported character
 const updateUIAfterImport = (data, isFirstImport) => {
     setSimulationOptionsFromImportedData(data);
 
@@ -939,35 +745,6 @@ const updateUIAfterImport = (data, isFirstImport) => {
     updateEquipmentFromImportedData(data);
 };
 
-handleCharacterName();
-generateRealmOptions();
-generateRegionOptions();
-
-// event listeners
-importButtonMain.addEventListener("click", importCharacter);
-importButton.addEventListener("click", importCharacter);
-// simulationProgressBarContainer.addEventListener("click", runSimulation);
-
-simulationProgressBarCheck.addEventListener("mouseenter", () => {
-    simulateButton.style.boxShadow = "0px 0px 3px 2px var(--info-circle-colour)";
-    simulateButton.style.transition = "box-shadow 0.1s ease-in-out";
-});
-  
-simulationProgressBarCheck.addEventListener("mouseleave", () => {
-    simulateButton.style.boxShadow = "";
-});
-
-const tickRateInfoCircle = document.getElementById("tick-rate-info-circle");
-const tickRateTooltip = createTooltip("tick-rate-tooltip", "tick-rate-tooltip");
-addTooltipFunctionality(tickRateInfoCircle, tickRateTooltip, null, `<span>Reducing this will increase HoT accuracy but it will be much slower.</span>`);
-
-const raidHealthInfoCircle = document.getElementById("raid-health-info-circle");
-const raidHealthTooltip = createTooltip("raid-health-tooltip", "raid-health-tooltip");
-addTooltipFunctionality(raidHealthInfoCircle, raidHealthTooltip, null, `<span>This only affects Reclamation.</span>`);
-
-generateBuffsConsumablesImages();
-
-// allows options images to be clicked to change/toggle options
 const handleOptionImages = (images, attribute, optionType, toggle = false, multipleAllowed = false) => {
     const formattedAttribute = attribute.replaceAll("-", "_");
 
@@ -1064,35 +841,6 @@ const handleOptionImages = (images, attribute, optionType, toggle = false, multi
     });
 };
 
-const raceImages = document.querySelectorAll(".race-image");
-const raceTooltip = createTooltip(null, "race-tooltip");
-handleOptionImages(raceImages, "race", "race");
-raceImages.forEach(image => {
-    addTooltipFunctionality(image, raceTooltip, image.getAttribute("data-race"));
-});
-
-const flaskImages = document.querySelectorAll(".flask-image");
-handleOptionImages(flaskImages, "flask", "consumable", true);
-
-const foodImages = document.querySelectorAll(".food-image");
-handleOptionImages(foodImages, "food", "consumable", true);
-
-const weaponImbueImages = document.querySelectorAll(".weapon-imbue-image");
-handleOptionImages(weaponImbueImages, "weapon-imbue", "consumable", true);
-
-const augmentRuneImages = document.querySelectorAll(".augment-rune-image");
-handleOptionImages(augmentRuneImages, "augment-rune", "consumable", true);
-
-const raidBuffImages = document.querySelectorAll(".raid-buff-image");
-handleOptionImages(raidBuffImages, "raid-buff", "consumable", true, true);
-
-const externalBuffImages = document.querySelectorAll(".external-buff-image");
-handleOptionImages(externalBuffImages, "external-buff", "consumable", true, true);
-
-const potionImages = document.querySelectorAll(".potion-image");
-handleOptionImages(potionImages, "potion", "consumable", true, true);
-
-// handle external buff & potion timers
 const updateTimerValues = (name, consumableType) => {
     if (!currentConsumables[consumableType].hasOwnProperty(name)) return;
 
@@ -1192,9 +940,6 @@ const createExternalBuffTimers = (buffName, buffCooldown) => {
     });
 };
 
-createExternalBuffTimers("Power Infusion", 120);
-createExternalBuffTimers("Innervate", 180);
-
 const createPotionTimers = (potionName, potionCooldown) => {
     const formattedPotionName = potionName.replaceAll(" ", "-").toLowerCase();
 
@@ -1268,24 +1013,126 @@ const createPotionTimers = (potionName, potionCooldown) => {
     });
 };
 
-createPotionTimers("Aerated Mana Potion", 300);
-createPotionTimers("Elemental Potion of Ultimate Power", 300);
+const socket = initialiseSocket();
+initialiseTheme();
+initialiseVersion();
 
-// option sliders
+let savedDataTimeout;
+let containerCount = 0;
+let encounterLength = 30;
+let iterations = 1;
+let isSimulationRunning = false;
+let abortController;
+let isFirstImport = true;
+let currentConsumables = {
+    flask: [],
+    food: [],
+    weapon_imbue: [],
+    augment_rune: [],
+    raid_buff: [],
+    external_buff: {},
+    potion: {}
+};
+
+// save states for use in separate priority breakdowns
+export let cooldownFilterState = {};
+export let playerAurasFilterState = {};
+
+const importButtonMain = document.getElementById("import-button-main");
+const importButton = document.getElementById("import-button");
+
+const simulationName = document.getElementById("simulation-name-text-input");
+simulationName.value = "Simulation 1";
+
+const simulateButton = document.getElementById("simulate-button");
+const simulationProgressBarCheck = document.querySelector(".simulation-progress-bar-check-container");
+const simulationProgressBarContainer = document.getElementById("simulation-progress-bar-container");
+const simulationProgressBar = document.getElementById("simulation-progress-bar");
+const simulationProgressBarText = document.getElementById("simulation-progress-bar-text");
+const simulateButtonErrorModal = document.getElementById("simulate-button-error-modal");
+
+window.addEventListener("click", (e) => {
+    if (e.target !== document.getElementById("simulate-button-error-modal-message") && e.target !== simulationProgressBarCheck && e.target !== document.querySelector(".simulation-progress-bar-checkmark")) {
+        simulateButtonErrorModal.style.display = "none";
+    };
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target !== document.getElementById("character-name-error-modal-message")) {
+        document.getElementById("character-name-error-modal").style.display = "none";
+    };
+});
+
+const fullResultsContainer = document.getElementById("results-container");
+
+handleCharacterName();
+generateRealmOptions();
+generateRegionOptions();
+
+importButtonMain.addEventListener("click", importCharacter);
+importButton.addEventListener("click", importCharacter);
+
+simulationProgressBarCheck.addEventListener("mouseenter", () => {
+    simulateButton.style.boxShadow = "0px 0px 3px 2px var(--info-circle-colour)";
+    simulateButton.style.transition = "box-shadow 0.1s ease-in-out";
+});
+  
+simulationProgressBarCheck.addEventListener("mouseleave", () => {
+    simulateButton.style.boxShadow = "";
+});
+
+const tickRateInfoCircle = document.getElementById("tick-rate-info-circle");
+const tickRateTooltip = createTooltip("tick-rate-tooltip", "tick-rate-tooltip");
+addTooltipFunctionality(tickRateInfoCircle, tickRateTooltip, null, `<span>Reducing this will increase HoT accuracy but it will be much slower.</span>`);
+
+const raidHealthInfoCircle = document.getElementById("raid-health-info-circle");
+const raidHealthTooltip = createTooltip("raid-health-tooltip", "raid-health-tooltip");
+addTooltipFunctionality(raidHealthInfoCircle, raidHealthTooltip, null, `<span>This only affects Reclamation.</span>`);
+
+createTalentGrid();
 createOptionsSliders();
-
-// equipment display
 initialiseEquipment();
-
-// priority list display
+generateBuffsConsumablesImages();
 createPriorityListDisplay();
 
 // prevent forbidden cursor
 document.addEventListener("dragenter", (e) => {
     e.preventDefault();
 });
-
-// initialise tabs for primary navbar
 handleTabs(`options-navbar-1`, "options-tab-content");
+
+const raceImages = document.querySelectorAll(".race-image");
+const raceTooltip = createTooltip(null, "race-tooltip");
+handleOptionImages(raceImages, "race", "race");
+raceImages.forEach(image => {
+    addTooltipFunctionality(image, raceTooltip, image.getAttribute("data-race"));
+});
+
+const flaskImages = document.querySelectorAll(".flask-image");
+handleOptionImages(flaskImages, "flask", "consumable", true);
+
+const foodImages = document.querySelectorAll(".food-image");
+handleOptionImages(foodImages, "food", "consumable", true);
+
+const weaponImbueImages = document.querySelectorAll(".weapon-imbue-image");
+handleOptionImages(weaponImbueImages, "weapon-imbue", "consumable", true);
+
+const augmentRuneImages = document.querySelectorAll(".augment-rune-image");
+handleOptionImages(augmentRuneImages, "augment-rune", "consumable", true);
+
+const raidBuffImages = document.querySelectorAll(".raid-buff-image");
+handleOptionImages(raidBuffImages, "raid-buff", "consumable", true, true);
+
+const externalBuffImages = document.querySelectorAll(".external-buff-image");
+handleOptionImages(externalBuffImages, "external-buff", "consumable", true, true);
+
+const potionImages = document.querySelectorAll(".potion-image");
+handleOptionImages(potionImages, "potion", "consumable", true, true);
+
+createExternalBuffTimers("Power Infusion", 120);
+createExternalBuffTimers("Innervate", 180);
+
+createPotionTimers("Aerated Mana Potion", 300);
+createPotionTimers("Elemental Potion of Ultimate Power", 300);
 
 export { updateCharacter, formatNumbers, formatNumbersNoRounding, formatThousands, formatTime, createElement, updateStats };

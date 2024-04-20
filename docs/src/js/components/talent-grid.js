@@ -2,7 +2,7 @@ import { baseClassTalents, baseSpecTalents, classTalentsDown, classTalentsDownLo
 import { createElement, updateCharacter, updateStats } from "./index.js";
 import { talentsToIcons } from "../utils/talents-to-icons-map.js";
 import { createTooltip, addTooltipFunctionality } from "../utils/misc-functions.js";
-import { futurePatchSelected } from "./version-config.js";
+import { futurePatchSelected } from "./config/version-config.js";
 
 const classTalents = [
     "", "Lay on Hands", "", "Blessing of Freedom", "", "Hammer of Wrath", "",
