@@ -326,7 +326,6 @@ const initialiseEquipment = () => {
 
             const newEffects = generateItemEffects(itemSlotData.effects, currentItemSlot, newItemLevel);
             fullItemData.equipment[currentItemSlot].effects = newEffects;
-            console.log(fullItemData)
 
             updateEquipmentFromImportedData(fullItemData);
             updateEquippedItemDisplay(itemSlot, itemSlots);
@@ -434,6 +433,10 @@ const initialiseEquipment = () => {
         const createItemBonusesDisplay = () => {
             const currentItemEnchantSelect = createElement("div", "current-equipped-item-field-right", "current-equipped-item-enchants");
             const defaultEnchantOption = createElement("div", "current-equipped-item-default-enchant-option", null);
+
+            const selectedItemSlot = document.getElementById("equipped-items-edit-choose-slot-dropdown").value;
+            const availableEnchants = itemSlotBonuses[selectedItemSlot]["enchants"];
+
             if (itemSlotData["enchantments"] && itemSlotData["enchantments"].length > 0) {
                 if (itemSlotData["enchantments"][0].split("|")[1] && itemSlotData["enchantments"][0].split("|")[1].includes("Incandescent Essence")) {
                     defaultEnchantOption.textContent = "Enchanted: Incandescent Essence";
@@ -442,7 +445,7 @@ const initialiseEquipment = () => {
                 };
 
                 defaultEnchantOption.style.color = "var(--rarity-uncommon)";
-            } else if (itemSlotData["enchantments"] && itemSlotData["enchantments"].length == 0) {
+            } else if (availableEnchants.length > 0) {
                 defaultEnchantOption.textContent = "No enchant";
                 defaultEnchantOption.style.color = "var(--rarity-common)";
             } else {
@@ -814,10 +817,10 @@ const initialiseEquipment = () => {
         };
 
         itemSlot.addEventListener("click", () => {
-            updateEquippedItemDisplay(itemSlot, itemSlots);
-
             const dataItemSlot = itemSlot.getAttribute("data-item-slot");
             itemSlotDropdown.value = dataItemSlot;
+            updateEquippedItemDisplay(itemSlot, itemSlots);
+
             clearNewItem();
 
             const newItemIcon = document.getElementById("new-equipped-item-icon");
