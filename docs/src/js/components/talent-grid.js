@@ -1,50 +1,8 @@
-import { baseClassTalents, baseSpecTalents, classTalentsDown, classTalentsDownLong, classTalentsLeft, classTalentsRight, specTalentsDown, specTalentsDownLong, specTalentsLeft, specTalentsRight, baseLightsmithTalents, baseHeraldOfTheSunTalents, lightsmithTalentsDown, lightsmithTalentsLeft, lightsmithTalentsRight, heraldOfTheSunTalentsDown, heraldOfTheSunTalentsLeft, heraldOfTheSunTalentsRight } from "../utils/base-talents.js";
+import { classTalentsLive, classTalentsPTR, specTalentsLive, specTalentsPTR, baseClassTalentsLive, baseClassTalentsPTR, baseSpecTalentsLive, baseSpecTalentsPTR, classTalentsArrowsLive, classTalentsArrowsPTR, specTalentsArrowsLive, specTalentsArrowsPTR, heroTalentsLightsmith, heroTalentsHeraldOfTheSun, baseLightsmithTalents, baseHeraldOfTheSunTalents, lightsmithTalentsArrows, heraldOfTheSunTalentsArrows } from "../utils/base-talents.js";
 import { createElement, updateCharacter, updateStats } from "./index.js";
 import { talentsToIcons } from "../utils/talents-to-icons-map.js";
 import { createTooltip, addTooltipFunctionality } from "../utils/misc-functions.js";
 import { futurePatchSelected } from "./config/version-config.js";
-
-const classTalents = [
-    "", "Lay on Hands", "", "Blessing of Freedom", "", "Hammer of Wrath", "",
-    "Improved Cleanse", "", "Auras of the Resolute", "Obduracy", "Auras of Swift Vengeance", "", "Turn Evil",
-    "", "Fist of Justice", "", "Divine Steed", "", "Greater Judgment", "",
-    "Repentance/Blinding Light", "", "Cavalier", "", "Seasoned Warhorse", "", "Rebuke",
-    "", "Holy Aegis", "", "Avenging Wrath", "", "Justification", "Punishment",
-    "Golden Path", "Echoing Blessings", "Blessing of Sacrifice", "Sanctified Plates", "Blessing of Protection", "", "Lightforged Blessing",
-    "Seal of Mercy", "Afterimage", "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Improved Blessing of Protection", "Crusader's Reprieve", "",
-    "Strength of Conviction", "Judgment of Light", "Seal of Might", "Divine Purpose", "Seal of Alacrity", "Incandescence/Touch of Light", "Faith's Armor",
-    "", "Of Dusk and Dawn", "", "Divine Toll", "", "Seal of the Crusader", "",
-    "", "Seal of Order/Fading Light", "", "Divine Resonance/Quickened Invocation", "", "Vanguard's Momentum", ""
-];
-
-const specTalents = [
-    "", "", "", "", "Holy Shock", "", "", "", "",
-    "", "", "", "Glimmer of Light", "", "Light of Dawn", "", "", "", 
-    "", "", "Light's Conviction", "", "Aura Mastery", "", "Beacon of the Lightbringer", "", "", 
-    "", "Moment of Compassion/Resplendent Light", "", "Tirion's Devotion", "", "Unending Light", "", "Awestruck/Holy Infusion", "", 
-    "Divine Favor/Hand of Divinity", "", "Glistening Radiance", "", "Unwavering Spirit/Protection of Tyr", "", "Imbued Infusions", "", "Light of the Martyr", 
-    "", "Illumination/Blessed Focus", "Saved by the Light", "Light's Hammer/Holy Prism", "Power of the Silver Hand", "Light's Protection", "Overflowing Light", "Shining Righteousness", "", 
-    "Divine Revelations", "", "Commanding Light", "Righteous Judgment", "Breaking Dawn", "Tower of Radiance", "Divine Glimpse", "", "Untempered Dedication", 
-    "", "Beacon of Faith/Beacon of Virtue", "", "Veneration", "", "Avenging Wrath: Might/Avenging Crusader", "", "Reclamation/Barrier of Faith", "Maraad's Dying Breath", 
-    "", "Daybreak", "Crusader's Might", "", "Merciful Auras/Blessing of Summer", "", "Relentless Inquisitor", "Tyr's Deliverance", "", 
-    "", "Rising Sunlight", "", "Glorious Dawn", "Sanctified Wrath/Awakening", "Inflorescence of the Sunwell/Empyrean Legacy", "", "Boundless Salvation", "", 
-];
-
-const heroTalentsLightsmith = [
-    "", "Holy Bulwark", "",
-    "Rite of Sanctification/Rite of Adjuration", "Solidarity", "Divine Guidance/Blessed Assurance",
-    "Laying Down Arms", "Divine Inspiration/Forewarning", "Fear No Evil/Excoriation",
-    "Shared Resolve", "Valiance", "Hammer and Anvil",
-    "", "Blessing of the Forge", ""
-];
-
-const heroTalentsHeraldOfTheSun = [
-    "", "Dawnlight", "",
-    "Morning Star/Gleaming Rays", "Eternal Flame", "Luminosity",
-    "Illumine/Will of the Dawn", "Blessing of An'she/Lingering Radiance", "Sun Sear",
-    "Aurora", "Solar Grace", "Second Sunrise",
-    "", "Sun's Avatar", ""
-];
 
 const toggleTalentOptions = (talentName, talentData) => {
     switch(true) {
@@ -169,8 +127,13 @@ const updateTalentsFromImportedData = (importedTalents) => {
         updateTalentCounts("spec");
     };
 
-    updateTalents(importedClassTalents, baseClassTalents, "class");
-    updateTalents(importedSpecTalents, baseSpecTalents, "spec");    
+    if (futurePatchSelected) {
+        updateTalents(importedClassTalents, baseClassTalentsPTR, "class");
+        updateTalents(importedSpecTalents, baseSpecTalentsPTR, "spec");  
+    } else {
+        updateTalents(importedClassTalents, baseClassTalentsLive, "class");
+        updateTalents(importedSpecTalents, baseSpecTalentsLive, "spec");  
+    };
 };
 
 const updateTalentCounts = (category, pointsToAdd = 0) => {
@@ -380,8 +343,16 @@ const handleTalentChange = (talentName, talentData, multipleTalentChanges = fals
             const currentTalentData = talentData[i];
             const talentValue = currentTalentData.ranks["current rank"];
 
-            const isClassTalent = classTalents.some(t => t.includes(currentTalentName));
-            const isSpecTalent = specTalents.some(t => t.includes(currentTalentName));
+            let isClassTalent, isSpecTalent;
+
+            if (futurePatchSelected) {
+                isClassTalent = classTalentsPTR.some(t => t.includes(currentTalentName));
+                isSpecTalent = specTalentsPTR.some(t => t.includes(currentTalentName));
+            } else {
+                isClassTalent = classTalentsLive.some(t => t.includes(currentTalentName));
+                isSpecTalent = specTalentsLive.some(t => t.includes(currentTalentName));
+            };
+            
             const isLightsmithTalent = heroTalentsLightsmith.some(t => t.includes(currentTalentName));
             const isHeraldOfTheSunTalent = heroTalentsHeraldOfTheSun.some(t => t.includes(currentTalentName));
 
@@ -402,8 +373,16 @@ const handleTalentChange = (talentName, talentData, multipleTalentChanges = fals
     } else {
         const talentValue = talentData.ranks["current rank"];
 
-        const isClassTalent = classTalents.some(t => t.includes(talentName));
-        const isSpecTalent = specTalents.some(t => t.includes(talentName));
+        let isClassTalent, isSpecTalent;
+
+        if (futurePatchSelected) {
+            isClassTalent = classTalentsPTR.some(t => t.includes(talentName));
+            isSpecTalent = specTalentsPTR.some(t => t.includes(talentName));
+        } else {
+            isClassTalent = classTalentsLive.some(t => t.includes(talentName));
+            isSpecTalent = specTalentsLive.some(t => t.includes(talentName));
+        };
+
         const isLightsmithTalent = heroTalentsLightsmith.some(t => t.includes(talentName));
         const isHeraldOfTheSunTalent = heroTalentsHeraldOfTheSun.some(t => t.includes(talentName));
 
@@ -577,38 +556,74 @@ const createTalentGrid = () => {
             let cell = document.createElement("div");
             cell.classList.add("talent-option");
 
-            if (classTalentsDown.includes(talentName)) {
-                const downPseudoElement = createElement("div", "class-talents-option-down", null);
-                cell.appendChild(downPseudoElement);
-            };              
-            if (classTalentsDownLong.includes(talentName)) {
-                const downLongPseudoElement = createElement("div", "class-talents-option-down-long", null);
-                cell.appendChild(downLongPseudoElement);
-            };             
-            if (classTalentsLeft.includes(talentName)) {
-                const leftPseudoElement = createElement("div", "class-talents-option-left", null);
-                cell.appendChild(leftPseudoElement);
-            };          
-            if (classTalentsRight.includes(talentName)) {
-                const rightPseudoElement = createElement("div", "class-talents-option-right", null);
-                cell.appendChild(rightPseudoElement);
-            };
-            
-            if (specTalentsDown.includes(talentName)) {
-                const downPseudoElement = createElement("div", "spec-talents-option-down", null);
-                cell.appendChild(downPseudoElement);
-            };              
-            if (specTalentsDownLong.includes(talentName)) {
-                const downLongPseudoElement = createElement("div", "spec-talents-option-down-long", null);
-                cell.appendChild(downLongPseudoElement);
-            };             
-            if (specTalentsLeft.includes(talentName)) {
-                const leftPseudoElement = createElement("div", "spec-talents-option-left", null);
-                cell.appendChild(leftPseudoElement);
-            };          
-            if (specTalentsRight.includes(talentName)) {
-                const rightPseudoElement = createElement("div", "spec-talents-option-right", null);
-                cell.appendChild(rightPseudoElement);
+            if (futurePatchSelected) {
+                if (classTalentsArrowsPTR["down"].includes(talentName)) {
+                    const downPseudoElement = createElement("div", "class-talents-option-down", null);
+                    cell.appendChild(downPseudoElement);
+                };              
+                if (classTalentsArrowsPTR["downLong"].includes(talentName)) {
+                    const downLongPseudoElement = createElement("div", "class-talents-option-down-long", null);
+                    cell.appendChild(downLongPseudoElement);
+                };             
+                if (classTalentsArrowsPTR["left"].includes(talentName)) {
+                    const leftPseudoElement = createElement("div", "class-talents-option-left", null);
+                    cell.appendChild(leftPseudoElement);
+                };          
+                if (classTalentsArrowsPTR["right"].includes(talentName)) {
+                    const rightPseudoElement = createElement("div", "class-talents-option-right", null);
+                    cell.appendChild(rightPseudoElement);
+                };
+                
+                if (specTalentsArrowsPTR["down"].includes(talentName)) {
+                    const downPseudoElement = createElement("div", "spec-talents-option-down", null);
+                    cell.appendChild(downPseudoElement);
+                };              
+                if (specTalentsArrowsPTR["downLong"].includes(talentName)) {
+                    const downLongPseudoElement = createElement("div", "spec-talents-option-down-long", null);
+                    cell.appendChild(downLongPseudoElement);
+                };             
+                if (specTalentsArrowsPTR["left"].includes(talentName)) {
+                    const leftPseudoElement = createElement("div", "spec-talents-option-left", null);
+                    cell.appendChild(leftPseudoElement);
+                };          
+                if (specTalentsArrowsPTR["right"].includes(talentName)) {
+                    const rightPseudoElement = createElement("div", "spec-talents-option-right", null);
+                    cell.appendChild(rightPseudoElement);
+                };
+            } else {
+                if (classTalentsArrowsLive["down"].includes(talentName)) {
+                    const downPseudoElement = createElement("div", "class-talents-option-down", null);
+                    cell.appendChild(downPseudoElement);
+                };              
+                if (classTalentsArrowsLive["downLong"].includes(talentName)) {
+                    const downLongPseudoElement = createElement("div", "class-talents-option-down-long", null);
+                    cell.appendChild(downLongPseudoElement);
+                };             
+                if (classTalentsArrowsLive["left"].includes(talentName)) {
+                    const leftPseudoElement = createElement("div", "class-talents-option-left", null);
+                    cell.appendChild(leftPseudoElement);
+                };          
+                if (classTalentsArrowsLive["right"].includes(talentName)) {
+                    const rightPseudoElement = createElement("div", "class-talents-option-right", null);
+                    cell.appendChild(rightPseudoElement);
+                };
+                
+                if (specTalentsArrowsLive["down"].includes(talentName)) {
+                    const downPseudoElement = createElement("div", "spec-talents-option-down", null);
+                    cell.appendChild(downPseudoElement);
+                };              
+                if (specTalentsArrowsLive["downLong"].includes(talentName)) {
+                    const downLongPseudoElement = createElement("div", "spec-talents-option-down-long", null);
+                    cell.appendChild(downLongPseudoElement);
+                };             
+                if (specTalentsArrowsLive["left"].includes(talentName)) {
+                    const leftPseudoElement = createElement("div", "spec-talents-option-left", null);
+                    cell.appendChild(leftPseudoElement);
+                };          
+                if (specTalentsArrowsLive["right"].includes(talentName)) {
+                    const rightPseudoElement = createElement("div", "spec-talents-option-right", null);
+                    cell.appendChild(rightPseudoElement);
+                };
             };
     
             let formattedTalentName = talentName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "").replaceAll(":", "");
@@ -750,9 +765,14 @@ const createTalentGrid = () => {
         });
     };
 
-    createTalentCells(classTalents, baseClassTalents, classTalentsGridContainer, "class");
-    createTalentCells(specTalents, baseSpecTalents, specTalentsGridContainer, "spec");
-
+    if (futurePatchSelected) {
+        createTalentCells(classTalentsPTR, baseClassTalentsPTR, classTalentsGridContainer, "class");
+        createTalentCells(specTalentsPTR, baseSpecTalentsPTR, specTalentsGridContainer, "spec");
+    } else {
+        createTalentCells(classTalentsLive, baseClassTalentsLive, classTalentsGridContainer, "class");
+        createTalentCells(specTalentsLive, baseSpecTalentsLive, specTalentsGridContainer, "spec");
+    };
+    
     const createHeroTalentCells = (talentSet, baseTalentSet, container, category) => {
         talentSet.forEach((talentName, index) => {
             let cell = document.createElement("div");
@@ -766,28 +786,28 @@ const createTalentGrid = () => {
                 cell.style.backgroundColor = "transparent";
             };
 
-            if (lightsmithTalentsDown.includes(talentName)) {
+            if (lightsmithTalentsArrows["down"].includes(talentName)) {
                 const downPseudoElement = createElement("div", "hero-talents-option-down", null);
                 cell.appendChild(downPseudoElement);
             };                      
-            if (lightsmithTalentsLeft.includes(talentName)) {
+            if (lightsmithTalentsArrows["left"].includes(talentName)) {
                 const leftPseudoElement = createElement("div", "hero-talents-option-left", null);
                 cell.appendChild(leftPseudoElement);
             };          
-            if (lightsmithTalentsRight.includes(talentName)) {
+            if (lightsmithTalentsArrows["right"].includes(talentName)) {
                 const rightPseudoElement = createElement("div", "hero-talents-option-right", null);
                 cell.appendChild(rightPseudoElement);
             };
             
-            if (heraldOfTheSunTalentsDown.includes(talentName)) {
+            if (heraldOfTheSunTalentsArrows["down"].includes(talentName)) {
                 const downPseudoElement = createElement("div", "hero-talents-option-down", null);
                 cell.appendChild(downPseudoElement);
             };                         
-            if (heraldOfTheSunTalentsLeft.includes(talentName)) {
+            if (heraldOfTheSunTalentsArrows["left"].includes(talentName)) {
                 const leftPseudoElement = createElement("div", "hero-talents-option-left", null);
                 cell.appendChild(leftPseudoElement);
             };          
-            if (heraldOfTheSunTalentsRight.includes(talentName)) {
+            if (heraldOfTheSunTalentsArrows["right"].includes(talentName)) {
                 const rightPseudoElement = createElement("div", "hero-talents-option-right", null);
                 cell.appendChild(rightPseudoElement);
             };

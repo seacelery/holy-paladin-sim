@@ -107,6 +107,7 @@ const talentsToIcons = {
     "Inflorescence of the Sunwell": "https://render.worldofwarcraft.com/eu/icons/56/spell_lfieblood.jpg",
     "Empyrean Legacy": "https://render.worldofwarcraft.com/eu/icons/56/item_holyspark.jpg",
     "Boundless Salvation": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_selflesshealer.jpg",
+    "Bestow Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_sheathoflight.jpg",
 
     // lightsmith talents
     "Holy Bulwark": "https://render.worldofwarcraft.com/eu/icons/56/inv_shield_1h_artifactnorgannon_d_06.jpg",
