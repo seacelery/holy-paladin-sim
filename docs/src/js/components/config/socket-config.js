@@ -1,5 +1,10 @@
+import { CONFIG } from "../config";
+
 const initialiseSocket = () => {
-    const socket = io("http://localhost:5000");
+    const socket = io(CONFIG.backendUrl, {
+        withCredentials: true,
+        transports: ["websocket"],
+    });
 
     socket.on("connect", function() {
         console.log("Connected to the server");
