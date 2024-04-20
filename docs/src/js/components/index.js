@@ -523,13 +523,6 @@ const startSimulation = () => {
     socket.emit('start_simulation', simulationData);
 };
 
-socket.on('simulation_started', function(data) {
-    console.log("Simulation started:", data);
-    monitorSimulation(data.task_id);
-});
-
-simulationProgressBarContainer.addEventListener("click", startSimulation);
-
 // main function to bring the components together
 const createSimulationResults = (simulationData) => {
     containerCount++;
@@ -1062,6 +1055,13 @@ window.addEventListener("click", (e) => {
         document.getElementById("character-name-error-modal").style.display = "none";
     };
 });
+
+socket.on("simulation_started", function(data) {
+    console.log("Simulation started:", data);
+    monitorSimulation(data.task_id);
+});
+
+simulationProgressBarContainer.addEventListener("click", startSimulation);
 
 const fullResultsContainer = document.getElementById("results-container");
 
