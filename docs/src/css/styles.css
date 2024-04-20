@@ -1269,6 +1269,10 @@ body {
     color: var(--paladin-font)
 }
 
+#talents-content {
+    position: relative;
+}
+
 #all-talents-container {
     display: flex;
     justify-content: space-evenly;
@@ -1345,6 +1349,73 @@ body {
     user-select: none;
 }
 
+#hero-talents-button-container {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+
+    background-color: var(--panel-colour-2);
+    border: 1px solid var(--border-colour-3);
+    border-bottom: none;
+    border-radius: 2px;
+
+    width: 112px;
+    cursor: pointer;
+
+    z-index: 101;
+}
+
+#hero-talents-button-container:hover {
+    box-shadow: 0px 0px 3px 1px var(--paladin-font);
+}
+
+#hero-talents-info, #hero-talents-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 112px;
+    height: 27px;
+    margin-left: -1px;
+
+    background-color: var(--panel-colour-2);
+    border: 1px solid var(--border-colour-3);
+    border-radius: 2px;
+
+    color: var(--light-font-colour);
+    font-size: 15px;
+}
+
+#hero-talents-total {
+    margin-left: 5px;
+}
+
+#hero-talents-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    padding: 2px;
+}
+
+#hero-talents-lightsmith-button, #hero-talents-herald-of-the-sun-button {
+    padding: 2px;
+
+    transition: all 0.05s ease-in-out;
+}
+
+.hero-talents-spec-icon {
+    width: 50px;
+    height: 50px;
+
+    border: 1px solid var(--border-colour-3);
+}
+
+.hero-talents-spec-icon-toggled {
+    box-shadow: 0px 0px 3px 1px var(--paladin-font);
+    filter: grayscale(0) !important
+}
+
 .talent-option {
     display: flex;
     align-items: center;
@@ -1355,7 +1426,7 @@ body {
     width: 40px;
     height: 40px;
 
-    border-radius: 5px;
+    /* border-radius: 5px; */
 
     font-size: 10px;
 }
@@ -1443,10 +1514,10 @@ body {
     content: "";
     position: absolute;
     width: 2px;
-    height: 40px;
+    height: 38px;
     background-color: var(--border-colour-3);
     left: -48%;
-    top: 65%; 
+    top: 70%; 
     transform: rotate(63deg);
     z-index: 0;
     box-shadow: 0px 0px 1px var(--holy-font);
@@ -1456,7 +1527,7 @@ body {
     content: "";
     position: absolute;
     left: -98%;
-    top: calc(109% + 10px);
+    top: calc(109% + 9px);
     border: solid var(--border-colour-3);
     border-width: 0 2px 2px 0;
     padding: 2px;
@@ -1467,8 +1538,8 @@ body {
 .spec-talents-option-left::after {
     content: "";
     position: absolute;
-    left: -86%;
-    top: calc(104% + 10px);
+    left: -80%;
+    top: calc(104% + 9px);
     border: solid var(--border-colour-3);
     border-width: 0 2px 2px 0;
     padding: 2px;
@@ -1493,10 +1564,10 @@ body {
     content: "";
     position: absolute;
     width: 2px;
-    height: 40px;
+    height: 38px;
     background-color: var(--border-colour-3);
     left: 143%;
-    top: 65%; 
+    top: 69%; 
     transform: rotate(-63deg);
     z-index: 4;
     box-shadow: 0px 0px 1px var(--holy-font);
@@ -1506,7 +1577,7 @@ body {
     content: "";
     position: absolute;
     left: 198%;
-    top: calc(109% + 10px);
+    top: calc(109% + 9px);
     border: solid var(--border-colour-3);
     border-width: 0 2px 2px 0;
     padding: 2px;
@@ -1517,22 +1588,13 @@ body {
 .spec-talents-option-right::after {
     content: "";
     position: absolute;
-    left: 188%;
-    top: calc(104% + 10px);
+    left: 183%;
+    top: calc(104% + 9px);
     border: solid var(--border-colour-3);
     border-width: 0 2px 2px 0;
     padding: 2px;
     transform: translateX(-50%) rotate(-15deg);
     z-index: 5;
-}
-
-.talent-option-highlighted::before {
-    background-color:  var(--gold-font);
-}
-
-.talent-option-highlighted::after {
-    border: solid var(--gold-font);
-    border-width: 0 2px 2px 0;
 }
 
 .talent-icon {
@@ -1546,11 +1608,12 @@ body {
     border-radius: 2px;
 
     filter: saturate(0);
+    cursor: pointer;
 }
 
 .talent-option:hover {
-    box-shadow: 0px 0px 4px 1px var(--healing-font) !important;
-    transition: box-shadow 0.05s ease-in-out;
+    box-shadow: 0px 0px 4px 1px var(--holy-font) !important;
+    transition: box-shadow 0.01s ease-in-out;
 }
 
 .talent-icon-right:hover {
@@ -1564,7 +1627,7 @@ body {
     align-items: center;
     padding-top: 1px;
 
-    bottom: 1px;
+    bottom: -1px;
     right: 1px;
 
     width: 38px;
@@ -1576,7 +1639,7 @@ body {
     background-color: var(--transparent-border-colour-2);
     color: var(--light-font-colour);
 
-    z-index: 10;
+    z-index: 8;
 }
 
 .talent-tooltip, .race-tooltip {
@@ -1585,7 +1648,7 @@ body {
     padding: 8px;
 
     word-wrap: break-word;
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour);
 
     color: var(--light-font-colour);
     font-size: 12px;
@@ -1594,7 +1657,7 @@ body {
     max-width: 250px;
 
     border: 1px solid var(--border-colour-3);
-    z-index: 10;
+    z-index: 102;
 }
 
 .talent-tooltip-top-row {
@@ -1638,6 +1701,212 @@ body {
     z-index: 2;
 }
 
+#hero-talents-screen-cover {
+    display: none;
+    position: absolute;
+
+    width: 100%;
+    height: 603px;
+
+    background-color: #00000057;
+
+    z-index: 100;
+}
+
+#hero-talents-modal {
+    display: none;
+    position: absolute;
+    left: 285px;
+    top: 21px;
+    right: 0;
+    bottom: 0;
+
+    width: 750px;
+    height: 560px;
+
+    background-color: var(--panel-colour);
+    border: 1px solid var(--border-colour-3);
+    border-radius: 3px;
+    /* box-shadow: 0px 0px 3px 1px var(--paladin-font); */
+
+    z-index: 9;
+}
+
+#lightsmith-container {
+    border-right: 1px solid var(--border-colour-3);
+
+    width: 50%;
+    height: 100%;
+}
+
+#lightsmith-header, #herald-of-the-sun-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 50px;
+
+    border-bottom: 1px solid var(--border-colour-3);
+
+    font-size: 18px;
+    color: var(--light-font-colour);
+
+    background-color: var(--panel-colour-2);
+    user-select: none;
+}
+
+#lightsmith-talent-grid, #herald-of-the-sun-talent-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-template-rows: repeat(5, 1fr); /* 5 rows */
+
+    justify-items: center;
+    align-items: center;
+
+    position: relative;
+
+    padding-right: 10px;
+    padding-bottom: 10px;
+
+    width: 100%;
+    height: calc(100% - 50px);
+
+    user-select: none;
+}
+
+#herald-of-the-sun-container {
+    width: 50%;
+    height: 100%;
+}
+
+.hero-talent-icon {
+    width: 50px;
+    height: 50px;
+
+    border: 1px solid var(--border-colour-3);
+
+    z-index: 6;
+}
+
+.hero-talent-option {
+    width: 50px;
+    height: 50px;
+
+    z-index: 6;
+}
+
+.hero-talent-icon-divider {
+    content: "";
+    position: absolute;
+    top: 49px;
+    left: 0;
+    width: 138%;
+    height: 0;
+    border-top: 2px solid var(--dark-font-colour);
+    transform: rotate(-45deg);
+    transform-origin: 0 0; 
+
+    z-index: 2;
+}
+
+.hero-talents-option-down::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 48px;
+    background-color: var(--border-colour-3);
+    left: 50%;
+    top: 99%; 
+    transform: translateX(-50%);
+    z-index: 4;
+    box-shadow: 0px 0px 1px var(--holy-font);
+}
+
+.hero-talents-option-down::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 37px);
+    border: solid var(--border-colour-3);
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: translateX(-50%) rotate(45deg);
+    z-index: 5;
+    box-shadow: 0px 0px 0px var(--holy-font);
+}
+
+.hero-talents-option-left::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 82px;
+    background-color: var(--border-colour-3);
+    left: -66%;
+    top: 60%; 
+    transform: rotate(57deg);
+    z-index: 0;
+    box-shadow: 0px 0px 1px var(--holy-font);
+}
+
+.hero-talents-option-left::after {
+    content: "";
+    position: absolute;
+    left: -130%;
+    top: calc(109% + 33px);
+    border: solid var(--border-colour-3);
+    border-width: 0 4px 4px 0;
+    padding: 3px;
+    transform: translateX(-50%) rotate(100deg);
+    z-index: 5;
+}
+
+.hero-talents-option-right::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 84px;
+    background-color: var(--border-colour-3);
+    left: 171%;
+    top: 60%; 
+    transform: rotate(-57deg);
+    z-index: 0;
+    box-shadow: 0px 0px 1px var(--holy-font);
+}
+
+.hero-talents-option-right::after {
+    content: "";
+    position: absolute;
+    left: 235%;
+    top: calc(109% + 33px);
+    border: solid var(--border-colour-3);
+    border-width: 0 4px 4px 0;
+    padding: 3px;
+    transform: translateX(-50%) rotate(-5deg);
+    z-index: 5;
+}
+
+.talent-option-highlighted::before {
+    background-color:  var(--gold-font);
+}
+
+.talent-option-highlighted::after {
+    border: solid var(--gold-font);
+    border-width: 0 2px 2px 0;
+}
+
+.hero-talent-option-highlighted::before {
+    background-color:  var(--gold-font);
+    width: 3px;
+}
+
+.hero-talent-option-highlighted::after {
+    border: solid var(--gold-font);
+    border-width: 0 4px 4px 0;
+}
+
+/* EQUIPMENT */
 #equipment-content {
     width: 100%;
     height: 100%;

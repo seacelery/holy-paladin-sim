@@ -193,5 +193,87 @@ const specTalentsRight = [
     "Light's Protection", "Divine Revelations", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Beacon of Faith/Beacon of Virtue",
     "Veneration", "Avenging Wrath: Might/Avenging Crusader", "Crusader's Might", "Merciful Auras/Blessing of Summer"
 ];
+
+
+let baseLightsmithTalents = {
+    "row1": {
+        "Holy Bulwark": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+    "row2": {
+        "Rite of Sanctification": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Rite of Adjuration": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Solidarity": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Guidance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blessed Assurance": {"ranks": {"current rank": 0, "max rank": 1}}
+    },
+    "row3": {
+        "Laying Down Arms": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Inspiration": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Forewarning": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Fear No Evil": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Excoriation": {"ranks": {"current rank": 0, "max rank": 1}}
+    },
+    "row4": {
+        "Shared Resolve": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Valiance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Hammer and Anvil": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+    "row5": {
+        "Blessing of the Forge": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+};
+
+const lightsmithTalentsDown = [
+    "Holy Bulwark", "Rite of Sanctification/Rite of Adjuration", "Solidarity", "Divine Guidance/Blessed Assurance",
+    "Laying Down Arms", "Divine Inspiration/Forewarning", "Fear No Evil/Excoriation", "Valiance"
+]
+
+const lightsmithTalentsLeft = [
+    "Holy Bulwark", "Hammer and Anvil"
+]
+
+const lightsmithTalentsRight = [
+    "Holy Bulwark", "Shared Resolve"
+]
+
+let baseHeraldOfTheSunTalents = {
+    "row1": {
+        "Dawnlight": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+    "row2": {
+        "Morning Star": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Gleaming Rays": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Eternal Flame": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Luminosity": {"ranks": {"current rank": 0, "max rank": 1}},      
+    },
+    "row3": {
+        "Illumine": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Will of the Dawn": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blessing of An'she": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Lingering Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sun Sear": {"ranks": {"current rank": 0, "max rank": 1}}
+    },
+    "row4": {
+        "Aurora": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Solar Grace": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Second Sunrise": {"ranks": {"current rank": 0, "max rank": 1}}
+    },
+    "row5": {
+        "Sun's Avatar": {"ranks": {"current rank": 0, "max rank": 1}}
+    },
+};
+
+const heraldOfTheSunTalentsDown = [
+    "Dawnlight", "Morning Star/Gleaming Rays", "Eternal Flame", "Luminosity", "Illumine/Will of the Dawn",
+    "Blessing of An'she/Lingering Radiance", "Sun Sear", "Solar Grace"
+];
+
+const heraldOfTheSunTalentsLeft = [
+    "Dawnlight", "Second Sunrise"
+];
+
+const heraldOfTheSunTalentsRight = [
+    "Dawnlight", "Aurora"
+];
         
-export { baseClassTalents, baseSpecTalents, classTalentsDown, classTalentsDownLong, classTalentsLeft, classTalentsRight, specTalentsDown, specTalentsDownLong, specTalentsLeft, specTalentsRight };
+export { baseClassTalents, baseSpecTalents, classTalentsDown, classTalentsDownLong, classTalentsLeft, classTalentsRight, specTalentsDown, specTalentsDownLong, specTalentsLeft, specTalentsRight, baseLightsmithTalents, baseHeraldOfTheSunTalents, lightsmithTalentsDown, lightsmithTalentsLeft, lightsmithTalentsRight, heraldOfTheSunTalentsDown, heraldOfTheSunTalentsLeft, heraldOfTheSunTalentsRight };

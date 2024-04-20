@@ -75,7 +75,12 @@ versionInput.addEventListener("click", () => {
 versionSuggestions.addEventListener("click", (e) => {
     selectedVersion.textContent = e.target.textContent;
     versionSuggestions.style.display = "none";
+    document.documentElement.setAttribute("data-version", e.target.textContent);
+    localStorage.setItem("version", e.target.textContent);
+    window.location.reload();
 });
+
+selectedVersion.textContent = document.documentElement.getAttribute("data-version");
 
 window.addEventListener("click", (e) => {
     if (!versionInput.contains(e.target) && !versionSuggestions.contains(e.target)) {

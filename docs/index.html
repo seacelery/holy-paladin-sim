@@ -25,6 +25,9 @@
             (function() {
               const savedTheme = localStorage.getItem("theme");
               document.documentElement.setAttribute("data-theme", savedTheme);
+
+              const savedVersion = localStorage.getItem("version");
+              document.documentElement.setAttribute("data-version", savedVersion);
             })();
           </script>
     </head>
@@ -285,6 +288,19 @@
                             
                         </div>
                         <div id="talents-content" class="options-tab-content">
+                            <div id="hero-talents-screen-cover">
+                                <div id="hero-talents-modal" data-hero-talents-count="0">
+                                    <div id="lightsmith-container">
+                                        <div id="lightsmith-header">Lightsmith</div>
+                                        <div id="lightsmith-talent-grid" data-lightsmith-talents-count="0"></div>
+                                    </div>
+                                    <div id="herald-of-the-sun-container">
+                                        <div id="herald-of-the-sun-header">Herald of the Sun</div>
+                                        <div id="herald-of-the-sun-talent-grid" data-herald-of-the-sun-talents-count="0"></div>
+                                    </div>
+                                </div>  
+                            </div>
+
                             <div id="all-talents-container">
                                 <div id="class-talents" class="talents-container">
                                     <div id="class-talents-info">
@@ -293,6 +309,22 @@
                                     </div>
                                 </div>
                                 <div id="spec-talents" class="talents-container">
+                                    <div id="hero-talents-button-container">
+                                        <div id="hero-talents-header">Hero Talents</div>
+                                        <div id="hero-talents-buttons-container">
+                                            <div id="hero-talents-lightsmith-button">
+                                                <img src="https://render.worldofwarcraft.com/eu/icons/56/inv_shield_1h_artifactnorgannon_d_06.jpg" id="lightsmith-icon" class="hero-talents-spec-icon" draggable="false">
+                                            </div>
+                                            <div id="hero-talents-herald-of-the-sun-button">
+                                                <img src="https://render.worldofwarcraft.com/eu/icons/56/ability_priest_flashoflight.jpg" id="herald-of-the-sun-icon" class="hero-talents-spec-icon" draggable="false">
+                                            </div>
+                                        </div>
+                                        <div id="hero-talents-info">
+                                            <div id="hero-talents-count">0</div>
+                                            <div id="hero-talents-total">/ 11</div>
+                                        </div>                                                                           
+                                    </div>
+
                                     <div id="spec-talents-info">
                                         <div id="spec-talents-count">0</div>
                                         <div id="spec-talents-total">/ 30</div>

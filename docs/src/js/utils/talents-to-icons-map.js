@@ -1,4 +1,5 @@
 const talentsToIcons = {
+    // class talents
     "Lay on Hands": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_layonhands.jpg",
     "Blessing of Freedom": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_sealofvalor.jpg",
     "Hammer of Wrath" : "https://render.worldofwarcraft.com/eu/icons/56/spell_paladin_hammerofwrath.jpg",
@@ -49,6 +50,7 @@ const talentsToIcons = {
     "Quickened Invocation": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_pureofheart.jpg",
     "Vanguard's Momentum": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_speedoflight.jpg",
 
+    // spec talents
     "Holy Shock": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_searinglight.jpg",
     "Glimmer of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_toweroflight.jpg",
     "Light of Dawn": "https://render.worldofwarcraft.com/eu/icons/56/spell_paladin_lightofdawn.jpg",
@@ -104,7 +106,40 @@ const talentsToIcons = {
     "Awakening": "https://render.worldofwarcraft.com/eu/icons/56/inv_helm_plate_raidpaladin_n_01.jpg",
     "Inflorescence of the Sunwell": "https://render.worldofwarcraft.com/eu/icons/56/spell_lfieblood.jpg",
     "Empyrean Legacy": "https://render.worldofwarcraft.com/eu/icons/56/item_holyspark.jpg",
-    "Boundless Salvation": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_selflesshealer.jpg"
+    "Boundless Salvation": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_selflesshealer.jpg",
+
+    // lightsmith talents
+    "Holy Bulwark": "https://render.worldofwarcraft.com/eu/icons/56/inv_shield_1h_artifactnorgannon_d_06.jpg",
+    "Rite of Sanctification": "https://render.worldofwarcraft.com/eu/icons/56/inv_inscription_weaponscroll01.jpg",
+    "Rite of Adjuration": "https://render.worldofwarcraft.com/eu/icons/56/inv_inscription_armorscroll02.jpg",
+    "Solidarity": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_heroism.jpg",
+    "Divine Guidance": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_lightsgrace.jpg",
+    "Blessed Assurance": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_blessedlife.jpg",
+    "Laying Down Arms": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_infusionoflight.jpg",
+    "Divine Inspiration": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_flashoflight.jpg",
+    "Forewarning": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_gaurdedbythelight.jpg",
+    "Fear No Evil": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_senseundead.jpg",
+    "Excoriation": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_sanctifiedwrath.jpg",
+    "Shared Resolve": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_devotionaura.jpg",
+    "Valiance": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_47.jpg",
+    "Hammer and Anvil": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_blacksmithing_consumable_repairhammer_color1.jpg",
+    "Blessing of the Forge": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_1h_artifactnorgannon_d_06.jpg",
+
+    // herald of the sun talents
+    "Dawnlight": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_flashoflight.jpg",
+    "Morning Star": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_persecution.jpg",
+    "Gleaming Rays": "https://wow.zamimg.com/images/wow/icons/large/spell_priest_power-word.jpg",
+    "Eternal Flame": "https://render.worldofwarcraft.com/eu/icons/56/inv_torch_thrown.jpg",
+    "Luminosity": "https://render.worldofwarcraft.com/eu/icons/56/inv_qirajidol_sun.jpg",
+    "Illumine": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_divineillumination.jpg",
+    "Will of the Dawn": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_divineprovidence.jpg",
+    "Blessing of An'she": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holynova.jpg",
+    "Lingering Radiance": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_mindvision.jpg",
+    "Sun Sear": "https://render.worldofwarcraft.com/eu/icons/56/spell_priest_burningwill.jpg",
+    "Aurora": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_rune.jpg",
+    "Solar Grace": "https://render.worldofwarcraft.com/eu/icons/56/ability_malkorok_blightofyshaarj_yellow.jpg",
+    "Second Sunrise": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_halo.jpg",
+    "Sun's Avatar": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_holyavenger.jpg"
 };
 
 export { talentsToIcons };
