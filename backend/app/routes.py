@@ -129,10 +129,8 @@ def update_character_route():
     modifiable_data = json.loads(session_data)
     user_input = request.json
     
-    print(user_input)
-    sys.stdout.flush()
-    print(user_input.items())
-    sys.stdout.flush()
+    current_app.logger.debug(f"Modifiable data before update: {modifiable_data}")
+    current_app.logger.debug(f"User input {user_input}")
             
     for key, value in user_input.items():
         if key in modifiable_data:
