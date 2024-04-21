@@ -85,6 +85,11 @@ class Paladin:
         self.mana_regen_per_second = 2000
         self.innervate_active = False
         
+        self.base_flat_haste = 0
+        self.base_flat_crit = 5
+        self.base_flat_mastery = 12
+        self.base_flat_versatility = 0
+        
         self.flat_haste = 0
         self.flat_crit = 5
         self.flat_mastery = 12
@@ -96,26 +101,19 @@ class Paladin:
         
         if equipment_data:
             self.equipment = self.parse_equipment(equipment_data)
-
             formatted_equipment_data = self.calculate_stats_from_equipment(self.equipment)
-            # print(formatted_equipment_data)
             self.stats = Stats(formatted_equipment_data[0], self.convert_stat_ratings_to_percent(formatted_equipment_data[0]))
             self.bonus_enchants = formatted_equipment_data[1]
-            # print(self.stats.ratings)
             
-            self.spell_power = self.stats.ratings["intellect"]
-            # print(self.spell_power)
-            
+            self.spell_power = self.stats.ratings["intellect"]          
             self.haste_rating = self.stats.ratings["haste"]
             self.crit_rating = self.stats.ratings["crit"]
             self.mastery_rating = self.stats.ratings["mastery"]
             self.versatility_rating = self.stats.ratings["versatility"]
             self.max_health = self.stats.ratings["stamina"] * 20
             self.leech_rating = self.stats.ratings["leech"]
-            # print(self.haste_rating, self.crit_rating, self.mastery_rating, self.versatility_rating)
             
             self.haste, self.crit, self.mastery, self.versatility, self.leech = self.convert_stat_ratings_to_percent(self.stats.ratings)
-            # print(self.haste, self.crit, self.mastery, self.versatility)
             
             # initialise base stats for use in race changes
             self.base_spell_power = self.get_effective_spell_power(self.spell_power)
@@ -130,26 +128,13 @@ class Paladin:
             self.base_mastery_rating = self.mastery_rating
             self.base_versatility_rating = self.versatility_rating
         else:
-            self.spell_power = 9340
-            self.haste = 22.98
-            self.crit = 19.12
-            # self.crit = 100
-            self.mastery = 24.79
-            self.versatility = 21.49
-            self.stats = Stats({}, None)
-            self.stats.ratings["health"] = 450000
+            self.spell_power, self.haste, self.crit, self.mastery, self.leech = 0
             self.bonus_enchants = []
         
-        # print(f"haste: {self.haste}, crit: {self.crit}, mastery: {self.mastery}, Vers: {self.versatility}")
-        
+        self.base_crit_damage_modifier = 1
+        self.base_crit_healing_modifier = 1
         self.crit_damage_modifier = 1
         self.crit_healing_modifier = 1
-        
-        # self.haste_multiplier = (self.haste / 100) + 1
-        # self.crit_multiplier = (self.crit / 100) + 1
-        # self.mastery_multiplier = (self.mastery / 100) + 1
-        # self.versatility_multiplier = (self.versatility / 100) + 1
-        # print(self.haste_multiplier, self.crit_multiplier, self.mastery_multiplier, self.versatility_multiplier)
         
         # initialise raid buffs & consumables
         self.buffs = buffs
@@ -172,6 +157,8 @@ class Paladin:
         self.update_stats_with_racials()
         
         self.mastery_effectiveness = 0.95
+        self.average_raid_health_percentage = 0.7
+        self.is_enemy_below_20_percent = False
         
         self.base_global_cooldown = 1.5
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
@@ -229,10 +216,7 @@ class Paladin:
         self.external_buff_timers = {}
         self.timers_priority_queue = []
         self.extra_consecration_count = 0
-        
-        # for reclamation
-        self.average_raid_health_percentage = 0.7
-        
+              
         # for results output only
         self.last_iteration = False
         self.ability_breakdown = {}
@@ -251,8 +235,6 @@ class Paladin:
         
         self.total_glimmer_healing = 0
         self.glimmer_hits = 0
-        
-        self.is_enemy_below_20_percent = False
         
     def reset_state(self):
         current_state = copy.deepcopy(self.initial_state)
@@ -468,6 +450,9 @@ class Paladin:
         self.mastery_rating = self.base_mastery_rating
         self.versatility_rating = self.base_versatility_rating
         
+        self.crit_damage_modifier = self.base_crit_damage_modifier
+        self.crit_healing_modifier = self.base_crit_healing_modifier
+        
         # update stats based on race
         if self.race == "Human":
             # self.haste = (self.base_haste - 4) * 1.02 + 4
@@ -484,19 +469,20 @@ class Paladin:
                                                                                                                       "mastery": self.mastery_rating, "versatility": self.versatility_rating, 
                                                                                                                       "leech": self.leech_rating})
         elif self.race == "Dwarf":
-            self.crit_damage_modifier += 0.02
-            self.crit_healing_modifier += 0.02
+            self.crit_damage_modifier = self.base_crit_damage_modifier + 0.02
+            self.crit_healing_modifier = self.base_crit_healing_modifier + 0.02
         elif self.race == "Draenei":
-            self.spell_power += (113 * 1.05 * 1.04)
+            self.spell_power = self.base_spell_power + (113 * 1.05 * 1.04)
         elif self.race == "Lightforged Draenei":
             pass
         elif self.race == "Dark Iron Dwarf":
             pass
         elif self.race == "Blood Elf":
-            self.crit = self.base_crit + 1  
+            self.flat_crit = self.base_flat_crit + 1
+            self.update_stat("crit", 0)
         elif self.race == "Tauren":
-            self.crit_damage_modifier += 0.02
-            self.crit_healing_modifier += 0.02
+            self.crit_damage_modifier = self.base_crit_damage_modifier + 0.02
+            self.crit_healing_modifier = self.base_crit_healing_modifier + 0.02
             self.max_health += 197 * 20
         elif self.race == "Zandalari Troll":
             pass
