@@ -52,3 +52,28 @@ beacon_transfer_rates_double_beacon = {
     "Light's Hammer": double_beacon_transfer_aoe,
     "Holy Prism": double_beacon_transfer_aoe
 }
+
+beacon_transfer = {
+    "Holy Shock": "single_target",
+    "Holy Shock (Divine Toll)": "single_target",
+    "Holy Shock (Divine Resonance)": "single_target",
+    "Holy Shock (Rising Sunlight)": "single_target",
+    "Flash of Light": "single_target",
+    "Holy Light": "single_target",
+    "Word of Glory": "single_target",
+    "Tyr's Deliverance": "single_target",
+    "Resplendent Light": "single_target",
+    "Afterimage": "single_target",
+    "Holy Reverberation": "single_target",
+    "Seal of the Crusader": "single_target",
+    "Golden Path": "single_target",
+    "Light of the Martyr": "single_target",
+    "Veneration": "single_target",
+    "Merciful Auras": "single_target",
+    "Avenging Crusader (Judgment)": "single_target",
+    "Avenging Crusader (Crusader Strike)": "single_target",
+    "Light of Dawn": "aoe",
+    "Glimmer of Light": "aoe",
+    "Light's Hammer": "aoe",
+    "Holy Prism": "aoe"
+}

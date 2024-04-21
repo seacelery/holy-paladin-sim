@@ -11,10 +11,26 @@ def get_timestamp(event):
 
 # calculations & increments
 def calculate_beacon_healing(spell_name, amount, caster):
-    if caster.is_talent_active("Beacon of Faith"):    
-        return amount * beacon_transfer_rates_double_beacon.get(spell_name, 0)
-    else: 
-        return amount * beacon_transfer_rates_single_beacon.get(spell_name, 0)
+    single_beacon_transfer = 0.25
+    
+    if caster.is_talent_active("Commanding Light"):
+        single_beacon_transfer += 0.1
+        
+    if caster.ptr:
+        single_beacon_transfer -= 0.1
+    
+    double_beacon_transfer = single_beacon_transfer * 0.7
+    
+    if beacon_transfer.get(spell_name, 0) == "single_target":
+        if caster.is_talent_active("Beacon of Faith"):
+            return amount * double_beacon_transfer
+        else:
+            return amount * single_beacon_transfer
+    elif beacon_transfer.get(spell_name, 0) == "aoe":
+        if caster.is_talent_active("Beacon of Faith"):
+            return amount * double_beacon_transfer * 0.5
+        else:
+            return amount * single_beacon_transfer * 0.5
 
 def increment_holy_power(ability, caster, current_time):
     caster.holy_power += ability.holy_power_gain   

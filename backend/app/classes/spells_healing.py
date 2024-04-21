@@ -1,13 +1,11 @@
 import random
 import copy
-import sys
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, DivineFavorBuff, InfusionOfLight, BlessingOfFreedomBuff, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath
+from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
-from .target import BeaconOfLight
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, calculate_beacon_healing, append_spell_beacon_event, update_spell_data_casts, update_spell_data_heals, update_spell_data_beacon_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, update_spell_data_casts, update_spell_data_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
 
 
 def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_targets):
@@ -44,6 +42,9 @@ class HolyShock(Spell):
     
     def __init__(self, caster):
         super().__init__("Holy Shock", mana_cost=HolyShock.MANA_COST, base_mana_cost=HolyShock.BASE_MANA_COST, cooldown=HolyShock.BASE_COOLDOWN, holy_power_gain=HolyShock.HOLY_POWER_GAIN, max_charges=HolyShock.CHARGES, hasted_cooldown=True, is_heal=True)
+        if caster.ptr:
+            self.SPELL_POWER_COEFFICIENT = 1.4736
+            
         # light's conviction
         if caster.is_talent_active("Light's Conviction"):
             self.max_charges = 2
@@ -64,9 +65,6 @@ class HolyShock(Spell):
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
             self.spell_healing_modifier *= 1.15
-            
-        if caster.ptr:
-            self.spell_healing_modifier *= 1000
             
         # reclamation
         if caster.is_talent_active("Reclamation"):
@@ -148,11 +146,7 @@ class HolyShock(Spell):
                     
                     caster.total_glimmer_healing += glimmer_heal_value
                     caster.glimmer_hits += 1
-                    
-                    # see healing by target for each glimmer proc
-                    # glimmer_healing.append(f"{glimmer_target.name}: {glimmer_heal_value}, {glimmer_crit}")
-                    # print(glimmer_healing)
-                    
+
                     glimmer_target.receive_heal(glimmer_heal_value, caster)
                     caster.healing_by_ability["Glimmer of Light"] = caster.healing_by_ability.get("Glimmer of Light", 0) + glimmer_heal_value
                     
@@ -218,7 +212,10 @@ class HolyShock(Spell):
             if caster.is_talent_active("Barrier of Faith"):
                 for target in caster.potential_healing_targets:
                     if "Barrier of Faith" in target.target_active_buffs:
-                        barrier_of_faith_absorb = heal_amount * 0.25
+                        if caster.ptr:
+                            barrier_of_faith_absorb = heal_amount * 0.2
+                        else:
+                            barrier_of_faith_absorb = heal_amount * 0.25
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Shock)", target, barrier_of_faith_absorb, False)
             
@@ -241,8 +238,6 @@ class Daybreak(Spell):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         total_glimmer_healing = 0
         if cast_success:
-            # caster.events.append(f"{current_time}: mana: {caster.mana}")
-            # caster.events.append(f"{current_time}: Glimmers before daybreak: {glimmer_targets}")
             caster.events.append(f"{format_time(current_time)}: {caster.name} cast {self.name}")
             
             number_of_glimmers_removed = len(glimmer_targets)
@@ -469,7 +464,10 @@ class RisingSunlightHolyShock(Spell):
             if caster.is_talent_active("Barrier of Faith"):
                 for target in caster.potential_healing_targets:
                     if "Barrier of Faith" in target.target_active_buffs:
-                        barrier_of_faith_absorb = heal_amount * 0.25
+                        if caster.ptr:
+                            barrier_of_faith_absorb = heal_amount * 0.2
+                        else:
+                            barrier_of_faith_absorb = heal_amount * 0.25
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Shock)", target, barrier_of_faith_absorb, False)
                         
@@ -673,7 +671,10 @@ class DivineTollHolyShock(Spell):
             if caster.is_talent_active("Barrier of Faith"):
                 for target in caster.potential_healing_targets:
                     if "Barrier of Faith" in target.target_active_buffs:
-                        barrier_of_faith_absorb = heal_amount * 0.25
+                        if caster.ptr:
+                            barrier_of_faith_absorb = heal_amount * 0.2
+                        else:
+                            barrier_of_faith_absorb = heal_amount * 0.25
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Shock)", target, barrier_of_faith_absorb, False)
                         
@@ -798,7 +799,10 @@ class DivineResonanceHolyShock(Spell):
             if caster.is_talent_active("Barrier of Faith"):
                 for target in caster.potential_healing_targets:
                     if "Barrier of Faith" in target.target_active_buffs:
-                        barrier_of_faith_absorb = heal_amount * 0.25
+                        if caster.ptr:
+                            barrier_of_faith_absorb = heal_amount * 0.2
+                        else:
+                            barrier_of_faith_absorb = heal_amount * 0.25
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Shock)", target, barrier_of_faith_absorb, False)
                         
@@ -880,41 +884,18 @@ class HolyLight(Spell):
         
                 # add beacon healing here
             
-            print(targets[0])
-            print(targets[0].name)
-            print(targets[0].target_active_buffs)
-            sys.stdout.flush()
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                print(f"Holy Light casting on target with tyr's")
-                sys.stdout.flush()
                 self.spell_healing_modifier /= 1.15
-                
-                
-                
-                print(caster.is_talent_active("Boundless Salvation"))
-                sys.stdout.flush()
                 
                 # boundless salvation
                 if caster.is_talent_active("Boundless Salvation"):
-                    print("boundless salvation active")
-                    sys.stdout.flush()
-                    key = "Tyr's Deliverance (self)"
-                    
-                    
                     if "Tyr's Deliverance (self)" in caster.active_auras:
-                        print(f"Attempting to extend tyr's, currently extended by {caster.tyrs_deliverance_extended_by}")
-                        sys.stdout.flush()
-                        print(f"Current duration {caster.active_auras[key].duration}")
-                        sys.stdout.flush()
                         if caster.tyrs_deliverance_extended_by <= 32:
                             caster.extend_buff_on_self(caster.active_auras["Tyr's Deliverance (self)"], current_time, 8)
                             caster.tyrs_deliverance_extended_by += 8
                         elif 32 < caster.tyrs_deliverance_extended_by < 40:
                             caster.extend_buff_on_self(caster.active_auras["Tyr's Deliverance (self)"], current_time, 40 - caster.tyrs_deliverance_extended_by)
                             caster.tyrs_deliverance_extended_by += 40 - caster.tyrs_deliverance_extended_by
-                            
-                        print(f"New duration {caster.active_auras[key].duration}")
-                        sys.stdout.flush()
             
             # decrement stacks or remove infusion of light
             if "Infusion of Light" in caster.active_auras:
@@ -976,7 +957,10 @@ class HolyLight(Spell):
             if caster.is_talent_active("Barrier of Faith"):
                 for target in caster.potential_healing_targets:
                     if "Barrier of Faith" in target.target_active_buffs:
-                        barrier_of_faith_absorb = heal_amount * 0.25
+                        if caster.ptr:
+                            barrier_of_faith_absorb = heal_amount * 0.2
+                        else:
+                            barrier_of_faith_absorb = heal_amount * 0.25
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Light)", target, barrier_of_faith_absorb, False)
                 
@@ -1101,7 +1085,10 @@ class FlashOfLight(Spell):
             if caster.is_talent_active("Barrier of Faith"):
                 for target in caster.potential_healing_targets:
                     if "Barrier of Faith" in target.target_active_buffs:
-                        barrier_of_faith_absorb = heal_amount * 0.25
+                        if caster.ptr:
+                            barrier_of_faith_absorb = heal_amount * 0.2
+                        else:
+                            barrier_of_faith_absorb = heal_amount * 0.25
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Flash of Light)", target, barrier_of_faith_absorb, False)
                 
@@ -1120,6 +1107,9 @@ class WordOfGlory(Spell):
         super().__init__("Word of Glory", mana_cost=WordOfGlory.MANA_COST, holy_power_cost=WordOfGlory.HOLY_POWER_COST, max_charges=0, is_heal=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        if caster.ptr:
+            self.SPELL_POWER_COEFFICIENT = 3.15 * 1.11
+        
         # divine purpose
         if caster.is_talent_active("Divine Purpose"): 
             if "Divine Purpose" in caster.active_auras:
@@ -1342,6 +1332,9 @@ class LightOfDawn(Spell):
         super().__init__("Light of Dawn", mana_cost=LightOfDawn.MANA_COST, holy_power_cost=LightOfDawn.HOLY_POWER_COST, healing_target_count=LightOfDawn.TARGET_COUNT, is_heal=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        if caster.ptr:
+            self.SPELL_POWER_COEFFICIENT = 0.8
+        
         # divine purpose
         if caster.is_talent_active("Divine Purpose"): 
             if "Divine Purpose" in caster.active_auras:

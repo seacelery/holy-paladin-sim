@@ -320,21 +320,16 @@ class Paladin:
         formatted_equipment_data = self.calculate_stats_from_equipment(self.equipment)
         self.stats = Stats(formatted_equipment_data[0], self.convert_stat_ratings_to_percent(formatted_equipment_data[0]))
         self.bonus_enchants = formatted_equipment_data[1]
-        # print(self.stats.ratings)
         
-        self.spell_power = self.stats.ratings["intellect"]
-        # print(self.spell_power)
-        
+        self.spell_power = self.stats.ratings["intellect"]       
         self.haste_rating = self.stats.ratings["haste"]
         self.crit_rating = self.stats.ratings["crit"]
         self.mastery_rating = self.stats.ratings["mastery"]
         self.versatility_rating = self.stats.ratings["versatility"]
         self.max_health = self.stats.ratings["stamina"] * 20
         self.leech_rating = self.stats.ratings["leech"]
-        # print(self.haste_rating, self.crit_rating, self.mastery_rating, self.versatility_rating)
         
         self.haste, self.crit, self.mastery, self.versatility, self.leech = self.convert_stat_ratings_to_percent(self.stats.ratings)
-        # print(self.haste, self.crit, self.mastery, self.versatility)
         
         # initialise base stats for use in race changes
         self.base_spell_power = self.get_effective_spell_power(self.spell_power)
@@ -566,9 +561,6 @@ class Paladin:
          
         if self.is_talent_active("Aura Mastery"):
             self.abilities["Aura Mastery"] = AuraMastery(self) 
-        
-        if self.is_talent_active("Light of the Martyr"):
-            self.abilities["Light of the Martyr"] = LightOfTheMartyr(self)
             
         if self.is_talent_active("Barrier of Faith"):
             self.abilities["Barrier of Faith"] = BarrierOfFaithSpell(self)
@@ -579,20 +571,21 @@ class Paladin:
         if self.is_talent_active("Beacon of Virtue"):
             self.abilities["Beacon of Virtue"] = BeaconOfVirtueSpell(self)
             
-        # if self.is_talent_active("Blessing of Freedom"):
-        #     self.abilities["Blessing of Freedom"] = BlessingOfFreedomSpell(self)
-            
         if self.is_talent_active("Tyr's Deliverance") and self.is_talent_active("Holy Shock"):
             self.abilities["Tyr's Deliverance"] = TyrsDeliveranceSpell(self)
-          
-        if self.is_talent_active("Light's Hammer"):
-            self.abilities["Light's Hammer"] = LightsHammerSpell(self)
             
         if self.is_talent_active("Holy Prism"):
             self.abilities["Holy Prism"] = HolyPrism(self)
             
         if self.is_talent_active("Blessing of Summer"):
             self.abilities["Blessing of the Seasons"] = BlessingOfTheSeasons(self)
+            
+        if not self.ptr:
+            if self.is_talent_active("Light's Hammer"):
+                self.abilities["Light's Hammer"] = LightsHammerSpell(self)
+            
+            if self.is_talent_active("Light of the Martyr"):
+                self.abilities["Light of the Martyr"] = LightOfTheMartyr(self)
             
         # trinkets
         if self.is_trinket_equipped("Mirror of Fractured Tomorrows"):
@@ -612,6 +605,14 @@ class Paladin:
             
         if self.is_trinket_equipped("Spoils of Neltharus"):
             self.abilities["Spoils of Neltharus"] = SpoilsOfNeltharus(self)
+            
+        # ptr abilities
+        if self.ptr:
+            pass
+        
+        # ptr trinkets
+        if self.ptr:
+            pass
             
     def is_talent_active(self, talent_name):
         for row, talents in self.class_talents.items():

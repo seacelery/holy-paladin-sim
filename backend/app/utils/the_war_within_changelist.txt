@@ -1,0 +1,19 @@
+Ability changes:
+Beacon of Light transfer -10%
+Holy Shock healing +20%
+Word of Glory healing +25%
+Light of Dawn healing +20%
+Barrier of Faith transfer -5%
+Tyr's Deliverance healing -15%
+Tyr's Deliverance bugfix, now works with Avenging Wrath healing
+Blessing of Sacrifice damage reduction +10%
+Blessing of Summer redesigned
+Sacrifice of the Just reduced to 15 seconds cooldown reduction
+Light's Hammer removed
+Light of the Martyr redesigned
+
+Talent tree changes:
+Hero talents added
+New talent: Bestow Light
+Barrier of Faith/Holy Prism choice node
+Tyr's Deliverance & Reclamation moved
