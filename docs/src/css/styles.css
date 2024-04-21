@@ -200,6 +200,8 @@ body {
 
     color: var(--light-font-colour);
     font-size: 14px;
+
+    user-select: none;
 }
 
 .custom-version-select-arrow-down {
@@ -1716,18 +1718,18 @@ body {
 #hero-talents-modal {
     display: none;
     position: absolute;
-    left: 285px;
-    top: 21px;
+    left: 310px;
+    top: 50px;
     right: 0;
     bottom: 0;
 
-    width: 750px;
-    height: 560px;
+    width: 700px;
+    height: 500px;
 
     background-color: var(--panel-colour);
     border: 1px solid var(--border-colour-3);
     border-radius: 3px;
-    /* box-shadow: 0px 0px 3px 1px var(--paladin-font); */
+    box-shadow: 0px 0px 3px 1px var(--border-colour-3);
 
     z-index: 9;
 }
@@ -1781,8 +1783,8 @@ body {
 }
 
 .hero-talent-icon {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
 
     border: 1px solid var(--border-colour-3);
 
@@ -1790,8 +1792,8 @@ body {
 }
 
 .hero-talent-option {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
 
     z-index: 6;
 }
@@ -1799,22 +1801,22 @@ body {
 .hero-talent-icon-divider {
     content: "";
     position: absolute;
-    top: 49px;
+    top: 44px;
     left: 0;
     width: 138%;
     height: 0;
-    border-top: 2px solid var(--dark-font-colour);
+    border-top: 2px solid var(--panel-colour);
     transform: rotate(-45deg);
     transform-origin: 0 0; 
 
-    z-index: 2;
+    z-index: 20;
 }
 
 .hero-talents-option-down::before {
     content: "";
     position: absolute;
     width: 2px;
-    height: 48px;
+    height: 35px;
     background-color: var(--border-colour-3);
     left: 50%;
     top: 99%; 
@@ -1827,9 +1829,9 @@ body {
     content: "";
     position: absolute;
     left: 50%;
-    top: calc(100% + 37px);
+    top: calc(100% + 29px);
     border: solid var(--border-colour-3);
-    border-width: 0 4px 4px 0;
+    border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
     transform: translateX(-50%) rotate(45deg);
@@ -1841,11 +1843,11 @@ body {
     content: "";
     position: absolute;
     width: 2px;
-    height: 82px;
+    height: 73px;
     background-color: var(--border-colour-3);
-    left: -66%;
+    left: -73%;
     top: 60%; 
-    transform: rotate(57deg);
+    transform: rotate(59deg);
     z-index: 0;
     box-shadow: 0px 0px 1px var(--holy-font);
 }
@@ -1853,10 +1855,10 @@ body {
 .hero-talents-option-left::after {
     content: "";
     position: absolute;
-    left: -130%;
-    top: calc(109% + 33px);
+    left: -135%;
+    top: calc(109% + 28px);
     border: solid var(--border-colour-3);
-    border-width: 0 4px 4px 0;
+    border-width: 0 3px 3px 0;
     padding: 3px;
     transform: translateX(-50%) rotate(100deg);
     z-index: 5;
@@ -1866,11 +1868,11 @@ body {
     content: "";
     position: absolute;
     width: 2px;
-    height: 84px;
+    height: 73px;
     background-color: var(--border-colour-3);
     left: 171%;
     top: 60%; 
-    transform: rotate(-57deg);
+    transform: rotate(-59deg);
     z-index: 0;
     box-shadow: 0px 0px 1px var(--holy-font);
 }
@@ -1879,11 +1881,11 @@ body {
     content: "";
     position: absolute;
     left: 235%;
-    top: calc(109% + 33px);
+    top: calc(109% + 27px);
     border: solid var(--border-colour-3);
-    border-width: 0 4px 4px 0;
+    border-width: 0 3px 3px 0;
     padding: 3px;
-    transform: translateX(-50%) rotate(-5deg);
+    transform: translateX(-50%) rotate(-7deg);
     z-index: 5;
 }
 
@@ -1903,7 +1905,7 @@ body {
 
 .hero-talent-option-highlighted::after {
     border: solid var(--gold-font);
-    border-width: 0 4px 4px 0;
+    border-width: 0 3px 3px 0;
 }
 
 /* EQUIPMENT */
@@ -1956,7 +1958,7 @@ body {
 
     border: 1px solid var(--border-colour-3);
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 }
 
 #equipped-items-item-level-text, #equipped-items-item-level-value {
@@ -1979,7 +1981,7 @@ body {
 
     border: 1px solid var(--border-colour-3);
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 }
 
 .item-slot-tier {
@@ -2015,7 +2017,7 @@ body {
     width: 226px;
     height: 90px;
 
-    background-color: var(--panel-colour-7);
+    background-color: var(--panel-colour-table-2);
     opacity: 1;
 
     border: 1px solid var(--border-colour-3);
@@ -2260,6 +2262,7 @@ body {
     flex-direction: column;
 
     width: 90%;
+    background-color: var(--panel-colour-table-4);
 }
 
 #current-equipped-item-info-container, #new-equipped-item-info-container {
@@ -4459,7 +4462,7 @@ tr {
     border-radius: 3px;
     border-top-left-radius: 0px;
 
-    background-color: var(--panel-colour-table-3);
+    background-color: var(--panel-colour);
 }
 
 [id^="buffs-line-graph-navbar-"] {
@@ -5059,7 +5062,7 @@ tr {
     border: 1px solid var(--border-colour-3);
     border-radius: 3px;
 
-    background-color: var(--panel-colour-table-3);
+    background-color: var(--panel-colour-table-4);
 }
 
 .cooldowns-breakdown-cooldown-container {
@@ -5097,7 +5100,7 @@ tr {
 .cooldowns-breakdown-cooldown-instance-container {
     display: flex;
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
     border: 1px solid var(--border-colour-3);
     border-radius: 3px;
     padding-top: 10px;
