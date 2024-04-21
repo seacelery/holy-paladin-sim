@@ -2,6 +2,7 @@ import pprint
 import json
 import uuid
 import logging
+import sys
 
 from flask import Blueprint, request, jsonify, send_from_directory, current_app
 from flask_cors import cross_origin
@@ -128,8 +129,10 @@ def update_character_route():
     modifiable_data = json.loads(session_data)
     user_input = request.json
     
-    pp.pprint(user_input)
-    pp.pprint(user_input.items())
+    print(user_input)
+    sys.stdout.flush()
+    print(user_input.items())
+    sys.stdout.flush()
             
     for key, value in user_input.items():
         if key in modifiable_data:
