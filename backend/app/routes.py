@@ -134,7 +134,10 @@ def update_character_route():
             
     for key, value in user_input.items():
         if key in modifiable_data:
-            modifiable_data[key].update(value)
+            if isinstance(modifiable_data[key], dict):
+                modifiable_data[key].update(value)
+            else:
+                modifiable_data[key] = value
 
     current_app.redis.setex(session_token, 1200, json.dumps(modifiable_data))
     current_app.logger.debug(f"Modifiable data after update: {modifiable_data}")
