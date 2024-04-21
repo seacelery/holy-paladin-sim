@@ -50,6 +50,8 @@ class Talents:
 class Paladin:
     
     def __init__(self, name, character_data=None, stats_data=None, talent_data=None, equipment_data=None, buffs=None, consumables=None, potential_healing_targets=None, test=False):
+        self.ptr = False
+        
         self.character_data = character_data if character_data else None
         self.race = self.character_data["race"]["name"] if self.character_data else None
         self.name = name[0].upper() + name[1:]
@@ -257,7 +259,7 @@ class Paladin:
         self.__dict__.update(current_state.__dict__)
         
     # update properties methods used in routes.py
-    def update_character(self, race=None, class_talents=None, spec_talents=None, consumables=None):
+    def update_character(self, race=None, class_talents=None, spec_talents=None, consumables=None, ptr=None):
         if consumables:
             self.update_consumables(consumables)
         if race:
@@ -268,6 +270,8 @@ class Paladin:
         if spec_talents:
             # pp.pprint(spec_talents)
             self.update_spec_talents(spec_talents)
+        if ptr is not None:
+            self.ptr = ptr
         
         self.update_abilities()
         self.initial_state = copy.deepcopy(self)

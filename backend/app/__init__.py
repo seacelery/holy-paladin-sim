@@ -52,7 +52,8 @@ def register_socketio_events(socketio):
             race=modifiable_data.get("race"),
             class_talents=modifiable_data.get("class_talents"),
             spec_talents=modifiable_data.get("spec_talents"),
-            consumables=modifiable_data.get("consumables")
+            consumables=modifiable_data.get("consumables"),
+            ptr=modifiable_data.get("ptr")
         )
 
         paladin_pickled = pickle.dumps(paladin)

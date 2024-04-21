@@ -42,7 +42,7 @@ def import_character_route():
     paladin, healing_targets = import_character(character_name, realm, region)
     
     session_token = str(uuid.uuid4())
-    modifiable_data = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}, "equipment": {}, "character_name": character_name, "realm": realm, "region": region}
+    modifiable_data = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}, "equipment": {}, "character_name": character_name, "realm": realm, "region": region, "ptr": paladin.ptr}
     
     current_app.redis.setex(session_token, 1200, json.dumps(modifiable_data))
 
@@ -60,6 +60,7 @@ def import_character_route():
                   "intellect": round(paladin.spell_power), "health": round(paladin.max_health), "leech": round(paladin.leech_rating), "mana": round(paladin.max_mana),
                   "haste_percent": round(paladin.haste, 2), "crit_percent": round(paladin.crit, 2), "mastery_percent": round(paladin.mastery, 2), 
                   "versatility_percent": round(paladin.versatility, 2), "leech_percent": round(paladin.leech, 2)},
+        "ptr": paladin.ptr,
         "session_token": session_token
     })
     response.set_cookie('session_token', session_token, samesite='None', secure=True, httponly=False)
@@ -90,7 +91,8 @@ def fetch_updated_stats_route():
         race=modifiable_data.get("race"),
         class_talents=modifiable_data.get("class_talents"),
         spec_talents=modifiable_data.get("spec_talents"),
-        consumables=modifiable_data.get("consumables")
+        consumables=modifiable_data.get("consumables"),
+        ptr=modifiable_data.get("ptr")
     )
     paladin.update_equipment(custom_equipment)
     
@@ -109,7 +111,8 @@ def fetch_updated_stats_route():
             "intellect": round(paladin.spell_power), "health": round(paladin.max_health), "leech": round(paladin.leech_rating), "mana": round(paladin.max_mana),
             "haste_percent": round(paladin.haste, 2), "crit_percent": round(paladin.crit, 2), "mastery_percent": round(paladin.mastery, 2), 
             "versatility_percent": round(paladin.versatility, 2), "leech_percent": round(paladin.leech, 2)
-        }
+        },
+        "ptr": paladin.ptr
     })
 
 @main.route("/update_character", methods=["POST"])

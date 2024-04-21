@@ -65,6 +65,9 @@ class HolyShock(Spell):
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
             self.spell_healing_modifier *= 1.15
             
+        if caster.ptr:
+            self.spell_healing_modifier *= 1000
+            
         # reclamation
         if caster.is_talent_active("Reclamation"):
             self.spell_healing_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
