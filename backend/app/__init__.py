@@ -55,6 +55,9 @@ def register_socketio_events(socketio):
             consumables=modifiable_data.get("consumables"),
             ptr=modifiable_data.get("ptr")
         )
+        
+        print(modifiable_data.get("ptr"))
+        sys.stdout.flush()
 
         paladin_pickled = pickle.dumps(paladin)
         healing_targets_pickled = pickle.dumps(healing_targets)
