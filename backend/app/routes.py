@@ -127,6 +127,9 @@ def update_character_route():
 
     modifiable_data = json.loads(session_data)
     user_input = request.json
+    
+    pp.pprint(user_input)
+    pp.pprint(user_input.items())
             
     for key, value in user_input.items():
         if key in modifiable_data:
