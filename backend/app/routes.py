@@ -39,11 +39,12 @@ def import_character_route():
     character_name = request.args.get("character_name")
     realm = request.args.get("realm")
     region = request.args.get("region")
+    version = request.args.get("version")
 
-    paladin, healing_targets = import_character(character_name, realm, region)
+    paladin, healing_targets = import_character(character_name, realm, region, version)
     
     session_token = str(uuid.uuid4())
-    modifiable_data = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}, "equipment": {}, "character_name": character_name, "realm": realm, "region": region, "ptr": paladin.ptr}
+    modifiable_data = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}, "equipment": {}, "character_name": character_name, "realm": realm, "region": region, "ptr": paladin.ptr, "version": version}
     
     current_app.redis.setex(session_token, 1200, json.dumps(modifiable_data))
 
@@ -71,12 +72,13 @@ def import_character_route():
 @cross_origin(origins=["https://seacelery.github.io", "http://localhost:5000"], supports_credentials=True)
 def fetch_updated_stats_route():
     data = request.json
-    character_name = data['character_name']
-    realm = data['realm']
-    region = data['region']
-    custom_equipment = data['custom_equipment']
+    character_name = data["character_name"]
+    realm = data["realm"]
+    region = data["region"]
+    custom_equipment = data["custom_equipment"]
+    version = data["version"]
 
-    paladin, healing_targets = import_character(character_name, realm, region)
+    paladin, healing_targets = import_character(character_name, realm, region, version)
 
     session_token = request.cookies.get('session_token')
     if not session_token:

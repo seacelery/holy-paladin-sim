@@ -12,7 +12,7 @@ from flask_socketio import emit
 from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
-from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data, update_mana_gained
 from .priority_list_dsl import parse_condition, condition_to_lambda
 from .simulation_state import check_cancellation, reset_simulation
@@ -53,6 +53,9 @@ class Simulation:
         
         self.iced_phial_active = False
         self.iced_phial_timer = 0
+        self.light_of_the_martyr_uptime = 0.8
+        self.light_of_the_martyr_timer = 0
+        self.bestow_light_timer = 0
         self.retribution_aura_timer = 40
         self.source_of_magic_timer = 0
         self.symbol_of_hope_timer = 150 if encounter_length > 210 else 30
@@ -385,6 +388,33 @@ class Simulation:
             if self.iced_phial_timer >= 15:
                 self.iced_phial_timer = 0
                 self.paladin.apply_buff_to_self(CorruptingRage(), self.elapsed_time)
+                
+        if self.paladin.ptr and self.paladin.is_talent_active("Light of the Martyr"):   
+            uptime_duration = self.encounter_length * self.light_of_the_martyr_uptime
+            downtime_duration = self.encounter_length - uptime_duration
+            light_of_the_martyr_intervals = 5
+            
+            if self.elapsed_time <= 0.1:
+                if "Light of the Martyr" not in self.paladin.active_auras:
+                    self.paladin.apply_buff_to_self(LightOfTheMartyrBuff(self.paladin, uptime_duration / light_of_the_martyr_intervals), self.elapsed_time)
+                 
+            if "Light of the Martyr" in self.paladin.active_auras:
+                if self.paladin.is_talent_active("Bestow Light"):
+                    if "Bestow Light" not in self.paladin.active_auras:
+                        self.bestow_light_timer += self.tick_rate                 
+                        if self.bestow_light_timer >= 5:
+                            self.paladin.apply_buff_to_self(BestowLight(self.paladin, uptime_duration / light_of_the_martyr_intervals), self.elapsed_time)     
+                            if "Bestow Light" in self.time_since_last_buff_interval:
+                                self.time_since_last_buff_interval["Bestow Light"] = 0       
+                            self.bestow_light_timer = 0  
+                
+            if "Light of the Martyr" not in self.paladin.active_auras:
+                self.light_of_the_martyr_timer += self.tick_rate
+                
+                if self.light_of_the_martyr_timer >= downtime_duration / light_of_the_martyr_intervals:
+                    self.light_of_the_martyr_timer = 0
+                    self.paladin.apply_buff_to_self(LightOfTheMartyrBuff(self.paladin, uptime_duration / light_of_the_martyr_intervals), self.elapsed_time)
+                    self.bestow_light_timer = 0
                 
         if "Retribution Aura " in self.paladin.active_auras:
             self.retribution_aura_timer += self.tick_rate

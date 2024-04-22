@@ -1226,6 +1226,7 @@ body {
 
     border: 1px solid var(--border-colour-4);
     border-radius: 2px;
+    cursor: pointer;
 }
 
 .race-image:hover, .flask-image:hover, .augment-rune-image:hover, .food-image:hover, .weapon-imbue-image:hover, .raid-buff-image:hover, .external-buff-image:hover, .potion-image:hover {

@@ -45,7 +45,8 @@ def register_socketio_events(socketio):
         paladin, healing_targets = import_character(
             modifiable_data['character_name'],
             modifiable_data['realm'],
-            modifiable_data['region']
+            modifiable_data['region'],
+            modifiable_data["version"]
         )
 
         paladin.update_character(

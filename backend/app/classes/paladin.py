@@ -19,7 +19,7 @@ from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavor
 from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence
 from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
-from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents
+from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents, base_active_class_talents_ptr, base_active_spec_talents_ptr
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
 from .api_client import APIClient
 
@@ -49,35 +49,19 @@ class Talents:
 
 class Paladin:
     
-    def __init__(self, name, character_data=None, stats_data=None, talent_data=None, equipment_data=None, buffs=None, consumables=None, potential_healing_targets=None, test=False):
+    def __init__(self, name, character_data=None, stats_data=None, talent_data=None, equipment_data=None, buffs=None, consumables=None, potential_healing_targets=None, test=False, version=None):
         self.ptr = False
+        if version == "ptr":
+            self.ptr = True
         
         self.character_data = character_data if character_data else None
         self.race = self.character_data["race"]["name"] if self.character_data else None
         self.name = name[0].upper() + name[1:]
         self.test = test
-        # self.stats = self.parse_stats(stats_data)
-        # self.class_talents = self.parse_talents(talent_data)[0]
-        # self.spec_talents = self.parse_talents(talent_data)[1]
         
         self.talents = self.parse_talents(talent_data)
         self.class_talents = copy.deepcopy(self.talents.class_talents)
         self.spec_talents = copy.deepcopy(self.talents.spec_talents)
-        
-        # self.class_talents = self.parse_talents(talent_data)
-        # self.spec_talents = self.parse_talents(talent_data)
-        
-        # self.talents = self.parse_talents(talent_data)
-        # self.class_talents = copy.deepcopy(test_active_class_talents)
-        # self.spec_talents = copy.deepcopy(test_active_spec_talents)
-        
-        # self.class_talents = copy.deepcopy(base_active_class_talents)
-        # self.spec_talents = copy.deepcopy(base_active_spec_talents)
-        
-        # self.class_talents["row10"]["Divine Resonance"]["ranks"]["current rank"] = 1
-        
-        # self.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] = 0
-        # print(self.class_talents["row3"]["Greater Judgment"])
         
         self.base_mana = 250000
         self.mana = self.base_mana
@@ -999,8 +983,12 @@ class Paladin:
     def parse_talents(self, talent_data):
         class_talents = {}
         spec_talents = {}
-        active_class_talents = base_active_class_talents
-        active_spec_talents = base_active_spec_talents
+        if self.ptr:
+            active_class_talents = base_active_class_talents_ptr
+            active_spec_talents = base_active_spec_talents_ptr
+        else:
+            active_class_talents = base_active_class_talents
+            active_spec_talents = base_active_spec_talents
 
         class_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_class_talents"]
         for talent in class_talent_data:

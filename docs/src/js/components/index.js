@@ -270,7 +270,9 @@ const importCharacter = async () => {
         importContainerMain.style.display = "none";
     };
 
-    return fetch(`${CONFIG.backendUrl}/import_character?character_name=${characterName}&realm=${characterRealm}&region=${characterRegion}`, {
+    const version = document.documentElement.getAttribute("data-version") === "The War Within" ? "ptr" : "live";
+
+    return fetch(`${CONFIG.backendUrl}/import_character?character_name=${characterName}&realm=${characterRealm}&region=${characterRegion}&version=${version}`, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
@@ -324,6 +326,7 @@ const updateStats = async () => {
     let characterName = document.getElementById("character-name-input").value.toLowerCase();
     let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
     let characterRegion = document.getElementById("character-region-input").value.toLowerCase();
+    const version = document.documentElement.getAttribute("data-version") === "The War Within" ? "ptr" : "live";
 
     // const customEquipment = encodeURIComponent(JSON.stringify(generateFullItemData()["equipment"]));
     const customEquipment = generateFullItemData()["equipment"];
@@ -337,7 +340,8 @@ const updateStats = async () => {
             character_name: characterName,
             realm: characterRealm,
             region: characterRegion,
-            custom_equipment: customEquipment
+            custom_equipment: customEquipment,
+            version: version
         }),
         credentials: 'include'
     })

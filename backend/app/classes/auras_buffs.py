@@ -2350,3 +2350,39 @@ class BronzedGripWrappings(Buff):
         
     def remove_effect(self, caster, current_time=None):
         pass
+    
+
+# PTR
+class LightOfTheMartyrBuff(Buff):
+    
+    def __init__(self, caster, duration_to_apply):
+        super().__init__("Light of the Martyr", duration_to_apply, base_duration=duration_to_apply)
+        # caster.time_based_stacking_buffs[self] = duration_to_apply
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        if "Bestow Light" in caster.active_auras:
+            del caster.active_auras["Bestow Light"]
+            update_self_buff_data(caster.self_buff_breakdown, "Bestow Light", current_time, "expired") 
+            print(caster.time_based_stacking_buffs)
+            
+            for buff in caster.time_based_stacking_buffs:
+                if buff.name == "Bestow Light":
+                    del caster.time_based_stacking_buffs[buff]
+                    return
+    
+
+class BestowLight(Buff):
+    
+    def __init__(self, caster, duration_to_apply):
+        super().__init__("Bestow Light", 10000, base_duration=10000, current_stacks=1, max_stacks=3)
+        self.stacks_to_apply = 1
+        caster.time_based_stacking_buffs[self] = 5
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
