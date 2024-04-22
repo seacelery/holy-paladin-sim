@@ -469,6 +469,7 @@ const monitorSimulation = (taskId) => {
                 if (data.state && data.state !== 'SUCCESS') {
                     console.log(`Task state: ${data.state}`);
                 } else if (data) {
+                    console.log(data)
                     clearInterval(iterationInterval);
                     clearInterval(resultInterval);
                     simulationProgressBarText.textContent = "";
