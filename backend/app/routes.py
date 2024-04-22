@@ -94,8 +94,7 @@ def fetch_updated_stats_route():
         race=modifiable_data.get("race"),
         class_talents=modifiable_data.get("class_talents"),
         spec_talents=modifiable_data.get("spec_talents"),
-        consumables=modifiable_data.get("consumables"),
-        ptr=modifiable_data.get("ptr")
+        consumables=modifiable_data.get("consumables")
     )
     paladin.update_equipment(custom_equipment)
     

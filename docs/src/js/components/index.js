@@ -288,10 +288,6 @@ const importCharacter = async () => {
         updateUIAfterImport(data, isFirstImport);
         initialiseEquipment();
         isFirstImport = false;
-
-        updateCharacter({
-            ptr: document.documentElement.getAttribute("data-version") === "The War Within" ? true : false
-        });
     })
     .catch(error => { console.error("Error:", error);
                     if (isFirstImport) {

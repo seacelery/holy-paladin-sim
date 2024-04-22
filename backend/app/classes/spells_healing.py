@@ -69,10 +69,23 @@ class HolyShock(Spell):
         # reclamation
         if caster.is_talent_active("Reclamation"):
             self.spell_healing_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
+            
+        # light of the martyr & bestow light    
+        if caster.ptr:
+            if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+                cumulative_healing_mod = 1.2
+                if caster.is_talent_active("Bestow Light") and "Bestow Light" in caster.active_auras:
+                    cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
+                self.spell_healing_modifier *= cumulative_healing_mod
         
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         barrier_of_faith_absorb = 0
         if cast_success:
+            # reset light of the martyr & bestow light
+            if caster.ptr:
+                if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+                    self.spell_healing_modifier /= cumulative_healing_mod
+            
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
@@ -339,10 +352,22 @@ class RisingSunlightHolyShock(Spell):
         # reclamation
         if caster.is_talent_active("Reclamation"):
             self.spell_healing_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
+            
+        # light of the martyr & bestow light    
+        if caster.ptr:
+            if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+                cumulative_healing_mod = 1.2
+                if caster.is_talent_active("Bestow Light") and "Bestow Light" in caster.active_auras:
+                    cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
+                self.spell_healing_modifier *= cumulative_healing_mod
         
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         barrier_of_faith_absorb = 0
-        if cast_success:
+        if cast_success:        
+            # reset light of the martyr & bestow light
+            if caster.ptr:
+                if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+                    self.spell_healing_modifier /= cumulative_healing_mod
             
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
@@ -544,10 +569,23 @@ class DivineTollHolyShock(Spell):
         if caster.is_talent_active("Reclamation"):
             self.spell_healing_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
             
+        # light of the martyr & bestow light    
+        if caster.ptr:
+            if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+                cumulative_healing_mod = 1.2
+                if caster.is_talent_active("Bestow Light") and "Bestow Light" in caster.active_auras:
+                    cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
+                self.spell_healing_modifier *= cumulative_healing_mod
+            
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         total_glimmer_healing = 0
         barrier_of_faith_absorb = 0
         if cast_success:
+            # reset light of the martyr & bestow light
+            if caster.ptr:
+                if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+                    self.spell_healing_modifier /= cumulative_healing_mod
+            
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
@@ -715,9 +753,21 @@ class DivineResonanceHolyShock(Spell):
         if caster.is_talent_active("Reclamation"):
             self.spell_healing_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
             
+        # light of the martyr & bestow light    
+        if caster.ptr:
+            if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+                cumulative_healing_mod = 1.2
+                if caster.is_talent_active("Bestow Light") and "Bestow Light" in caster.active_auras:
+                    cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
+                self.spell_healing_modifier *= cumulative_healing_mod
+            
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         barrier_of_faith_absorb = 0
         if cast_success:
+            # reset light of the martyr & bestow light
+            if caster.ptr:
+                if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+                    self.spell_healing_modifier /= cumulative_healing_mod
             
             # reclamation
             if caster.is_talent_active("Reclamation"):
