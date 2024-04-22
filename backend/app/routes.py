@@ -44,7 +44,7 @@ def import_character_route():
     paladin, healing_targets = import_character(character_name, realm, region, version)
     
     session_token = str(uuid.uuid4())
-    modifiable_data = {"class_talents": {}, "spec_talents": {}, "race": "", "consumables": {}, "equipment": {}, "character_name": character_name, "realm": realm, "region": region, "ptr": paladin.ptr, "version": version}
+    modifiable_data = {"class_talents": {}, "spec_talents": {}, "lightsmith_talents": {}, "herald_of_the_sun_talents": {}, "race": "", "consumables": {}, "equipment": {}, "character_name": character_name, "realm": realm, "region": region, "ptr": paladin.ptr, "version": version}
     
     current_app.redis.setex(session_token, 1200, json.dumps(modifiable_data))
 
@@ -94,6 +94,8 @@ def fetch_updated_stats_route():
         race=modifiable_data.get("race"),
         class_talents=modifiable_data.get("class_talents"),
         spec_talents=modifiable_data.get("spec_talents"),
+        lightsmith_talents=modifiable_data.get("lightsmith_talents"),
+        herald_of_the_sun_talents=modifiable_data.get("herald_of_the_sun_talents"),
         consumables=modifiable_data.get("consumables")
     )
     paladin.update_equipment(custom_equipment)

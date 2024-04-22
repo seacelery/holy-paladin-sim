@@ -297,3 +297,58 @@ base_active_spec_talents_ptr = {
         "Boundless Salvation": {"ranks": {"current rank": 0, "max rank": 1}}
     }
 }     
+
+base_active_lightsmith_talents = {
+    "row1": {
+        "Holy Bulwark": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+    "row2": {
+        "Rite of Sanctification": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Rite of Adjuration": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Solidarity": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Guidance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blessed Assurance": {"ranks": {"current rank": 0, "max rank": 1}}
+    },
+    "row3": {
+        "Laying Down Arms": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Inspiration": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Forewarning": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Fear No Evil": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Excoriation": {"ranks": {"current rank": 0, "max rank": 1}}
+    },
+    "row4": {
+        "Shared Resolve": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Valiance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Hammer and Anvil": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+    "row5": {
+        "Blessing of the Forge": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+}
+
+base_herald_of_the_sun_talents = {
+    "row1": {
+        "Dawnlight": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+    "row2": {
+        "Morning Star": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Gleaming Rays": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Eternal Flame": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Luminosity": {"ranks": {"current rank": 0, "max rank": 1}},      
+    },
+    "row3": {
+        "Illumine": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Will of the Dawn": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blessing of An'she": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Lingering Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sun Sear": {"ranks": {"current rank": 0, "max rank": 1}}
+    },
+    "row4": {
+        "Aurora": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Solar Grace": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Second Sunrise": {"ranks": {"current rank": 0, "max rank": 1}}
+    },
+    "row5": {
+        "Sun's Avatar": {"ranks": {"current rank": 0, "max rank": 1}}
+    },
+}

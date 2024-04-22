@@ -53,11 +53,10 @@ def register_socketio_events(socketio):
             race=modifiable_data.get("race"),
             class_talents=modifiable_data.get("class_talents"),
             spec_talents=modifiable_data.get("spec_talents"),
+            lightsmith_talents=modifiable_data.get("lightsmith_talents"),
+            herald_of_the_sun_talents=modifiable_data.get("herald_of_the_sun_talents"),
             consumables=modifiable_data.get("consumables")
         )
-        
-        print(modifiable_data.get("ptr"))
-        sys.stdout.flush()
 
         paladin_pickled = pickle.dumps(paladin)
         healing_targets_pickled = pickle.dumps(healing_targets)
