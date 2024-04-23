@@ -179,6 +179,8 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
             const buffNameText = document.createElement("div");
             if (buffName.includes("Tyr's Deliverance")) {
                 buffNameText.textContent = "Tyr's Deliverance";
+            } else if (buffName.includes("Eternal Flame")) {
+                buffNameText.textContent = "Eternal Flame";
             } else {
                 buffNameText.textContent = buffName;
             };

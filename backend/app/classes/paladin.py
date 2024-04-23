@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
 from ..utils.buff_class_map import buff_class_map
-from ..utils.beacon_transfer_rates import beacon_transfer_rates_single_beacon, beacon_transfer_rates_double_beacon
+from ..utils.beacon_transfer_rates import beacon_transfer
 from ..utils.stat_values import diminishing_returns_values, stat_conversions, calculate_stat_percent_with_dr, calculate_leech_percent_with_dr, update_stat_with_multiplicative_percentage
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell, LayOnHands, HolyPrism, LightOfTheMartyr
@@ -732,7 +732,7 @@ class Paladin:
         self.self_healing += amount
         
     def handle_beacon_healing(self, spell_name, target, initial_heal, current_time, spell_display_name=None):      
-        if spell_name not in beacon_transfer_rates_single_beacon or spell_name not in beacon_transfer_rates_double_beacon:
+        if spell_name not in beacon_transfer:
             return
         
         if spell_name == "Light of the Martyr" and "Maraad's Dying Breath" not in self.active_auras:

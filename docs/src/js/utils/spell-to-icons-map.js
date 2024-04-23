@@ -1,6 +1,7 @@
 const spellToIconsMap = {
     // paladin abilities
-    "Afterimage": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_aspiration.jpg",
+    "Afterimage (Eternal Flame)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_aspiration.jpg",
+    "Afterimage (Word of Glory)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_aspiration.jpg",
     "Arcane Torrent": "https://render.worldofwarcraft.com/eu/icons/56/spell_shadow_teleport.jpg",
     "Aura Mastery": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_auramastery.jpg",
     "Avenging Wrath": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_avenginewrath.jpg",
@@ -29,6 +30,8 @@ const spellToIconsMap = {
     "Divine Revelations (Judgment)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_infusionoflight.jpg",
     "Divine Toll": "https://render.worldofwarcraft.com/eu/icons/56/ability_bastion_paladin.jpg",
     "Embrace of Akunda": "https://render.worldofwarcraft.com/eu/icons/56/ability_racial_embraceoftheloa_akuna.jpg",
+    "Eternal Flame": "https://render.worldofwarcraft.com/eu/icons/56/inv_torch_thrown.jpg",
+    "Eternal Flame (HoT)": "https://render.worldofwarcraft.com/eu/icons/56/inv_torch_thrown.jpg",
     "Fireblood": "https://render.worldofwarcraft.com/eu/icons/56/ability_racial_fireblood.jpg",
     "Flash of Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_flashheal.jpg",
     "Gift of the Naaru": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holyprotection.jpg",

@@ -3153,6 +3153,7 @@ body {
     list-style: none;
 
     background-color: var(--panel-colour-table-2);
+    z-index: 100;
 }
 
 .ability-autocomplete-suggestion {

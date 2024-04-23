@@ -129,7 +129,16 @@ class Dawnlight(HoT):
             update_spell_data_heals(caster.ability_breakdown, "Dawnlight (AoE)", target, radiation_healing, spell_crit)
             
             caster.handle_beacon_healing("Dawnlight (AoE)", target, radiation_healing, current_time)
- 
+
+
+class EternalFlameBuff(HoT):
+    
+    SPELL_POWER_COEFFICIENT = 1
+    
+    def __init__(self, caster):
+        super().__init__("Eternal Flame (HoT)", 20, base_duration=20, base_tick_interval=3, initial_haste_multiplier=caster.haste_multiplier) 
+        self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
+
     
 # self buffs   
 class AuraMasteryBuff(Buff):

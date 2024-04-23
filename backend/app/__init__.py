@@ -174,12 +174,14 @@ def run_simulation_task(self, simulation_parameters):
             "Glimmer of Light (Rising Sunlight)": "Holy Shock (Rising Sunlight)",
             "Glimmer of Light (Glistening Radiance (Light of Dawn))": "Light of Dawn",
             "Glimmer of Light (Glistening Radiance (Word of Glory))": "Word of Glory",
+            "Glimmer of Light (Glistening Radiance (Eternal Flame))": "Eternal Flame",
             "Glimmer of Light (Divine Toll)": "Holy Shock (Divine Toll)",
             "Resplendent Light": "Holy Light",
             "Crusader's Reprieve": "Crusader Strike",
             "Greater Judgment": "Judgment",
             "Judgment of Light": "Judgment",
-            "Afterimage": "Word of Glory",
+            "Afterimage (Word of Glory)": "Word of Glory",
+            "Afterimage (Eternal Flame)": "Eternal Flame",
             "Barrier of Faith (Holy Shock)": "Barrier of Faith",
             "Barrier of Faith (Flash of Light)": "Barrier of Faith",
             "Barrier of Faith (Holy Light)": "Barrier of Faith",
@@ -196,7 +198,8 @@ def run_simulation_task(self, simulation_parameters):
             "Avenging Crusader (Judgment)": "Avenging Crusader",
             "Avenging Crusader (Crusader Strike)": "Avenging Crusader",
             "Dawnlight (HoT)": "Dawnlight",
-            "Dawnlight (AoE)": "Dawnlight"
+            "Dawnlight (AoE)": "Dawnlight",
+            "Eternal Flame (HoT)": "Eternal Flame"
         }
     
     # complete all simulation iterations and process the data of each
@@ -381,7 +384,8 @@ def run_simulation_task(self, simulation_parameters):
             "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil Large HoT", 
             "Blossom of Amirdrassil Small HoT", "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", "Barrier of Faith (Holy Light)", 
             "Veneration", "Golden Path", "Seal of Mercy", "Avenging Crusader (Judgment)", "Avenging Crusader (Crusader Strike)",
-            "Dawnlight (HoT)", "Dawnlight (AoE)"
+            "Dawnlight (HoT)", "Dawnlight (AoE)", "Glimmer of Light (Glistening Radiance (Eternal Flame))", "Afterimage (Eternal Flame)",
+            "Eternal Flame (HoT)"
             ]:
             if spell in ability_breakdown:
                 del ability_breakdown[spell]
