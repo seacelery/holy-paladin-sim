@@ -181,6 +181,8 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
                 buffNameText.textContent = "Tyr's Deliverance";
             } else if (buffName.includes("Eternal Flame")) {
                 buffNameText.textContent = "Eternal Flame";
+            } else if (buffName.includes("Dawnlight")) {
+                buffNameText.textContent = "Dawnlight";
             } else {
                 buffNameText.textContent = buffName;
             };

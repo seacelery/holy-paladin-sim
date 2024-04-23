@@ -32,9 +32,11 @@ const abilityAutocomplete = (element, abilityNames, icon) => {
         autocompleteContainer.style.border = "1px solid var(--border-colour-3)";
         autocompleteContainer.style.borderTop = "none";
     
-        const rect = element.getBoundingClientRect();
-        autocompleteContainer.style.left = `${rect.left - 63}px`;
-        autocompleteContainer.style.top = `${rect.bottom - 156}px`;
+        const elementRect = element.getBoundingClientRect();
+        const parentRect = element.parentNode.getBoundingClientRect();
+
+        autocompleteContainer.style.left = `${elementRect.left - parentRect.left - 1}px`;
+        autocompleteContainer.style.top = `${elementRect.bottom - parentRect.top - 1}px`;
     
         matchedAbilities.forEach(abilityName => {
             const autocompleteSuggestion = createElement("li", "ability-autocomplete-suggestion", null);
