@@ -3930,7 +3930,7 @@ tr {
 
 .table-cell-left {
     padding-left: 5px;
-    padding-top: 1px;
+    padding-top: 0px;
 
     min-width: 350px;
     height: 35px;
@@ -4143,7 +4143,7 @@ tr {
 
 .table-arrows {
     padding-left: 9px;
-    margin-top: -6px;
+    margin-top: -6.5px;
 
     font-size: 14px;
 
@@ -4381,7 +4381,7 @@ tr {
 
 .buff-table-cell-left {
     padding-left: 5px;
-    padding-top: 1px;
+    padding-top: 0px;
 
     height: 35px;
 

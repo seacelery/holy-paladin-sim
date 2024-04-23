@@ -131,6 +131,9 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         "Divine Toll", "Smoldering Seedling", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Lay on Hands", "Leech", "Veneration",
         "Light of the Martyr ", "Saved by the Light"
     ];
+    const excludedSpellsAverage = [
+        "Dawnlight"
+    ];
 
     const tableContainer = document.getElementById(`ability-breakdown-table-container-${containerCount}`);
     tableContainer.innerHTML = "";
@@ -465,7 +468,9 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         const avgCastsCell = row.insertCell();
         avgCastsCell.className = "table-cell-right average-healing-cell";
 
-        if (excludedSpellsCasts.includes(spellName) || excludedSpellsCastsAverageHits.includes(spellName)) {
+        if (excludedSpellsAverage.includes(spellName)) {
+            avgCastsCell.textContent = "";
+        } else if (excludedSpellsCasts.includes(spellName) || excludedSpellsCastsAverageHits.includes(spellName)) {
             avgCastsCell.textContent = formatNumbers(spellData.total_healing / spellData.hits);
             if (spellData.total_healing < 0) {
                 avgCastsCell.style.color = "var(--red-font-hover)";
