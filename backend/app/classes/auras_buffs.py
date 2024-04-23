@@ -113,7 +113,7 @@ class Dawnlight(HoT):
     SPELL_POWER_COEFFICIENT = 6
     
     def __init__(self, caster):
-        super().__init__("Dawnlight", 8, base_duration=8, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
+        super().__init__("Dawnlight (HoT)", 8, base_duration=8, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
         
     def radiate_healing(self, caster, current_time):
