@@ -521,6 +521,7 @@ class Simulation:
                         # handle regular heal over time effects       
                         elif target.target_active_buffs[buff_name][0].time_until_next_tick <= 0:
                             buff.process_tick(self.paladin, target, self.elapsed_time, buff_instances)
+                            buff.previous_tick_time = self.elapsed_time
                             
                             if buff_name == "Holy Reverberation":
                                 for instance in target.target_active_buffs["Holy Reverberation"]:
