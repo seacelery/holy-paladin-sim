@@ -51,11 +51,17 @@ class HolyShock(Spell):
             self.current_charges = self.max_charges
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
+        bonus_crit = 0
+        
         # divine glimpse
         if caster.is_talent_active("Divine Glimpse"):
-            self.bonus_crit = HolyShock.BONUS_CRIT + 0.08
-        else:
-            self.bonus_crit = HolyShock.BONUS_CRIT
+            bonus_crit += 0.08      
+             
+        # luminosity    
+        if caster.ptr and caster.is_talent_active("Luminosity"):
+            bonus_crit += 0.1
+        
+        self.bonus_crit = HolyShock.BONUS_CRIT + bonus_crit
         
         # awestruck   
         self.bonus_crit_healing = 0   
@@ -340,11 +346,17 @@ class RisingSunlightHolyShock(Spell):
         super().__init__("Holy Shock (Rising Sunlight)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=RisingSunlightHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
+        bonus_crit = 0
+        
         # divine glimpse
         if caster.is_talent_active("Divine Glimpse"):
-            self.bonus_crit = HolyShock.BONUS_CRIT + 0.08
-        else:
-            self.bonus_crit = HolyShock.BONUS_CRIT
+            bonus_crit += 0.08      
+             
+        # luminosity    
+        if caster.ptr and caster.is_talent_active("Luminosity"):
+            bonus_crit += 0.1
+        
+        self.bonus_crit = HolyShock.BONUS_CRIT + bonus_crit
         
         # awestruck   
         self.bonus_crit_healing = 0   
@@ -562,11 +574,17 @@ class DivineTollHolyShock(Spell):
         super().__init__("Holy Shock (Divine Toll)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, base_mana_cost=HolyShock.BASE_MANA_COST, is_heal=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
+        bonus_crit = 0
+        
         # divine glimpse
         if caster.is_talent_active("Divine Glimpse"):
-            self.bonus_crit = HolyShock.BONUS_CRIT + 0.08
-        else:
-            self.bonus_crit = HolyShock.BONUS_CRIT
+            bonus_crit += 0.08      
+             
+        # luminosity    
+        if caster.ptr and caster.is_talent_active("Luminosity"):
+            bonus_crit += 0.1
+        
+        self.bonus_crit = HolyShock.BONUS_CRIT + bonus_crit
         
         # awestruck   
         self.bonus_crit_healing = 0   
@@ -752,11 +770,17 @@ class DivineResonanceHolyShock(Spell):
         super().__init__("Holy Shock (Divine Resonance)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
+        bonus_crit = 0
+        
         # divine glimpse
         if caster.is_talent_active("Divine Glimpse"):
-            self.bonus_crit = HolyShock.BONUS_CRIT + 0.08
-        else:
-            self.bonus_crit = HolyShock.BONUS_CRIT
+            bonus_crit += 0.08      
+             
+        # luminosity    
+        if caster.ptr and caster.is_talent_active("Luminosity"):
+            bonus_crit += 0.1
+        
+        self.bonus_crit = HolyShock.BONUS_CRIT + bonus_crit
         
         # awestruck   
         self.bonus_crit_healing = 0   
@@ -1657,6 +1681,14 @@ class LightOfDawn(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         if caster.ptr:
             self.SPELL_POWER_COEFFICIENT = 0.8
+            
+        bonus_crit = 0
+
+        # luminosity    
+        if caster.ptr and caster.is_talent_active("Luminosity"):
+            bonus_crit += 0.1
+        
+        self.bonus_crit = bonus_crit
         
         # divine purpose
         if caster.is_talent_active("Divine Purpose"): 
