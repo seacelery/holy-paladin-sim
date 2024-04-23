@@ -26,14 +26,15 @@ const abilityAutocomplete = (element, abilityNames, icon) => {
     element.addEventListener("input", () => {
         const input = element.value;
         const matchedAbilities = abilityNames.filter(abilityName => abilityName.toLowerCase().includes(input.toLowerCase()));
-
+    
         autocompleteContainer.innerHTML = "";
         autocompleteContainer.style.border = "1px solid var(--border-colour-3)";
         autocompleteContainer.style.borderTop = "none";
-
-        autocompleteContainer.style.left = `${element.offsetLeft}px`;
-        autocompleteContainer.style.top = `${element.offsetTop + element.offsetHeight}px`;
-
+    
+        const rect = element.getBoundingClientRect();
+        autocompleteContainer.style.left = `${rect.left - 63}px`;
+        autocompleteContainer.style.top = `${rect.bottom - 156}px`;
+    
         matchedAbilities.forEach(abilityName => {
             const autocompleteSuggestion = createElement("li", "ability-autocomplete-suggestion", null);
             
@@ -41,11 +42,11 @@ const abilityAutocomplete = (element, abilityNames, icon) => {
             if (autocompleteSuggestion.textContent.length > 21 || autocompleteSuggestion.textContent === "Aerated Mana Potion") {
                 autocompleteSuggestion.style.paddingTop = "5px";
             };
-
+    
             autocompleteSuggestion.addEventListener("click", () => {
                 element.value = abilityName;
                 autocompleteContainer.style.border = "none";
-
+    
                 if (spellToIconsMap.hasOwnProperty(abilityName)) {
                     icon.src = spellToIconsMap[abilityName];
                     element.value = abilityName;

@@ -3152,7 +3152,7 @@ body {
 
     list-style: none;
 
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 }
 
 .ability-autocomplete-suggestion {
@@ -3182,12 +3182,12 @@ body {
 }
 
 .ability-autocomplete-container::-webkit-scrollbar-thumb {
-    border-left: 2px solid var(--panel-colour-2);
-    border-right: 2px solid var(--panel-colour-2);
+    border-left: 2px solid var(--panel-colour-table-2);
+    border-right: 2px solid var(--panel-colour-table-2);
 }
 
 .ability-autocomplete-container::-webkit-scrollbar-track {
-    background-color: var(--panel-colour-2);
+    background-color: var(--panel-colour-table-2);
 }
 
 input:-webkit-autofill,
