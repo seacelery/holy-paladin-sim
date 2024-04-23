@@ -21,6 +21,8 @@ const spellToIconsMap = {
     "Crusader Strike": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusaderstrike.jpg",
     "Crusader's Reprieve": "https://render.worldofwarcraft.com/eu/icons/56/inv_sword_07.jpg",
     "Dawnlight": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_flashoflight.jpg",
+    "Dawnlight (HoT)": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_flashoflight.jpg",
+    "Dawnlight (AoE)": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_flashoflight.jpg",
     "Daybreak": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_aspiration.jpg",
     "Divine Favor": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_heal.jpg",
     "Divine Revelations (Holy Light)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_infusionoflight.jpg",

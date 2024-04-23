@@ -120,7 +120,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", 
         "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion", "Veneration", "Merciful Auras", "Light of the Martyr ", "Saved by the Light",
         "Chirping Rune", "Larodar's Fiery Reverie", "Rashok's Molten Heart", "Magazine of Healing Darts", "Bronzed Grip Wrappings",
-        "Dawnlight"
+        "Dawnlight", "Dawnlight (HoT)", "Dawnlight (AoE)"
     ];
     // displays casts with average as healing divided by hits
     const excludedSpellsCastsAverageHits = [

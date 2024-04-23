@@ -34,8 +34,7 @@ class HoT(Buff):
         if is_partial_tick:
             total_heal_value *= (current_time - self.previous_tick_time) / (self.base_tick_interval / caster.haste_multiplier)
             
-        target.receive_heal(total_heal_value, caster)
-        
+        target.receive_heal(total_heal_value, caster)   
         caster.handle_beacon_healing(self.name, target, total_heal_value, current_time)
         
         if is_crit and self.name == "Holy Reverberation":
@@ -46,6 +45,9 @@ class HoT(Buff):
         self.total_ticks += 1 if not is_partial_tick else self.time_until_next_tick / self.base_tick_interval
         
         update_spell_data_heals(caster.ability_breakdown, self.name, target, total_heal_value, is_crit)
+        
+        if self.name == "Dawnlight (HoT)":
+            self.radiate_healing(caster, current_time)
              
     def calculate_tick_healing(self, caster):
         spell_power = caster.stats.ratings["intellect"]
@@ -113,6 +115,20 @@ class Dawnlight(HoT):
     def __init__(self, caster):
         super().__init__("Dawnlight", 8, base_duration=8, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
+        
+    def radiate_healing(self, caster, current_time):
+        target_count = 5
+        
+        targets = random.sample(caster.potential_healing_targets, target_count)
+        for target in targets:            
+            tick_healing, spell_crit = self.calculate_tick_healing(caster)
+        
+            radiation_healing = tick_healing * 0.1
+
+            target.receive_heal(radiation_healing, caster)
+            update_spell_data_heals(caster.ability_breakdown, "Dawnlight (AoE)", target, radiation_healing, spell_crit)
+            
+            caster.handle_beacon_healing("Dawnlight (AoE)", target, radiation_healing, current_time)
  
     
 # self buffs   
