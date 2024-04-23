@@ -1,7 +1,7 @@
 import random
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff
+from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable
 from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts, update_spell_data_initialise_spell
 
 
@@ -21,6 +21,9 @@ class BarrierOfFaithSpell(Spell):
             target = targets[0]
             
             target.apply_buff_to_target(BarrierOfFaithBuff(caster), current_time, caster=caster)
+            
+            if caster.ptr and caster.is_talent_active("Dawnlight"):
+                caster.apply_buff_to_self(DawnlightAvailable(caster), current_time, stacks_to_apply=2, max_stacks=2)
             
         return cast_success, spell_crit, heal_amount
     

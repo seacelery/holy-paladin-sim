@@ -76,14 +76,6 @@ class HoT(Buff):
         return healing_per_tick, is_crit
 
 
-# class GiftOfTheNaaruBuff(HoT):
-    
-#     SPELL_POWER_COEFFICIENT = 0
-    
-#     def __init__(self, caster):
-#         super().__init__("Gift of the Naaru", 5, base_duration=5, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier)
-#         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
-
 class GiftOfTheNaaruBuff(HoT):
     
     def __init__(self, caster):
@@ -113,6 +105,15 @@ class HolyReverberation(HoT):
         super().__init__("Holy Reverberation", 8, base_duration=8, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier, current_stacks=1, max_stacks=6) 
         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
     
+ 
+class Dawnlight(HoT):
+    
+    SPELL_POWER_COEFFICIENT = 6
+    
+    def __init__(self, caster):
+        super().__init__("Dawnlight", 8, base_duration=8, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
+        self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
+ 
     
 # self buffs   
 class AuraMasteryBuff(Buff):
@@ -2353,11 +2354,21 @@ class BronzedGripWrappings(Buff):
     
 
 # PTR
+class DawnlightAvailable(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Dawnlight", 30, base_duration=30, current_stacks=2, max_stacks=2)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+
 class LightOfTheMartyrBuff(Buff):
     
     def __init__(self, caster, duration_to_apply):
         super().__init__("Light of the Martyr", duration_to_apply, base_duration=duration_to_apply)
-        # caster.time_based_stacking_buffs[self] = duration_to_apply
         
     def apply_effect(self, caster, current_time=None):
         pass
@@ -2366,7 +2377,6 @@ class LightOfTheMartyrBuff(Buff):
         if "Bestow Light" in caster.active_auras:
             del caster.active_auras["Bestow Light"]
             update_self_buff_data(caster.self_buff_breakdown, "Bestow Light", current_time, "expired") 
-            print(caster.time_based_stacking_buffs)
             
             for buff in caster.time_based_stacking_buffs:
                 if buff.name == "Bestow Light":

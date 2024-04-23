@@ -611,6 +611,15 @@ class Paladin:
         for row, talents in self.spec_talents.items():
             if talent_name in talents and talents[talent_name]["ranks"]["current rank"] > 0:
                 return True, talents[talent_name]["ranks"]["current rank"]
+            
+        if self.ptr:    
+            for row, talents in self.lightsmith_talents.items():
+                if talent_name in talents and talents[talent_name]["ranks"]["current rank"] > 0:
+                    return True, talents[talent_name]["ranks"]["current rank"]
+                
+            for row, talents in self.herald_of_the_sun_talents.items():
+                if talent_name in talents and talents[talent_name]["ranks"]["current rank"] > 0:
+                    return True, talents[talent_name]["ranks"]["current rank"]
 
         return False
     

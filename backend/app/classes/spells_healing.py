@@ -2,7 +2,7 @@ import random
 import copy
 
 from .spells import Spell
-from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath
+from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath, Dawnlight, DawnlightAvailable
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
 from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, update_spell_data_casts, update_spell_data_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
@@ -85,6 +85,12 @@ class HolyShock(Spell):
             if caster.ptr:
                 if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
                     self.spell_healing_modifier /= cumulative_healing_mod
+                    
+                    light_of_the_martyr_negative_healing = heal_amount * 0.3 * -1
+                    target = targets[0]
+                    target.receive_heal(light_of_the_martyr_negative_healing, caster)
+                    
+                    update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
             
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
@@ -368,6 +374,12 @@ class RisingSunlightHolyShock(Spell):
             if caster.ptr:
                 if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
                     self.spell_healing_modifier /= cumulative_healing_mod
+                    
+                    light_of_the_martyr_negative_healing = heal_amount * 0.3 * -1
+                    target = targets[0]
+                    target.receive_heal(light_of_the_martyr_negative_healing, caster)
+                    
+                    update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
             
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
@@ -585,6 +597,12 @@ class DivineTollHolyShock(Spell):
             if caster.ptr:
                 if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
                     self.spell_healing_modifier /= cumulative_healing_mod
+                    
+                    light_of_the_martyr_negative_healing = heal_amount * 0.3 * -1
+                    target = targets[0]
+                    target.receive_heal(light_of_the_martyr_negative_healing, caster)
+                    
+                    update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
             
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
@@ -768,6 +786,12 @@ class DivineResonanceHolyShock(Spell):
             if caster.ptr:
                 if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
                     self.spell_healing_modifier /= cumulative_healing_mod
+                    
+                    light_of_the_martyr_negative_healing = heal_amount * 0.3 * -1
+                    target = targets[0]
+                    target.receive_heal(light_of_the_martyr_negative_healing, caster)
+                    
+                    update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
             
             # reclamation
             if caster.is_talent_active("Reclamation"):
@@ -1367,6 +1391,17 @@ class WordOfGlory(Spell):
                 else:
                     caster.apply_buff_to_self(RelentlessInquisitor(), current_time, stacks_to_apply=1, max_stacks=5)
                     
+            # ptr
+            # dawnlight
+            if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
+                targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                if caster.active_auras["Dawnlight"].current_stacks > 1:
+                    caster.active_auras["Dawnlight"].current_stacks -= 1
+                    update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "stacks_decremented", caster.active_auras['Dawnlight'].duration, caster.active_auras["Dawnlight"].current_stacks)
+                else:
+                    del caster.active_auras["Dawnlight"]
+                    update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "expired")
+                    
         return cast_success, spell_crit, heal_amount, total_glimmer_healing, afterimage_heal, empyrean_legacy_light_of_dawn_healing
            
             
@@ -1553,6 +1588,17 @@ class LightOfDawn(Spell):
                 else:
                     caster.apply_buff_to_self(MaraadsDyingBreath(len(targets)), current_time, stacks_to_apply=len(targets), max_stacks=5)
                     
+            # ptr
+            # dawnlight        
+            if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
+                targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                if caster.active_auras["Dawnlight"].current_stacks > 1:
+                    caster.active_auras["Dawnlight"].current_stacks -= 1
+                    update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "stacks_decremented", caster.active_auras['Dawnlight'].duration, caster.active_auras["Dawnlight"].current_stacks)
+                else:
+                    del caster.active_auras["Dawnlight"]
+                    update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "expired")
+                    
         return cast_success, spell_crit, heal_amount, total_glimmer_healing
 
 
@@ -1565,6 +1611,9 @@ class HolyPrism(Spell):
     
     def __init__(self, caster):
         super().__init__("Holy Prism", mana_cost=HolyPrism.MANA_COST, cooldown=HolyPrism.BASE_COOLDOWN, healing_target_count=HolyPrism.TARGET_COUNT, is_heal=True)
+        if caster.ptr:
+            self.cooldown = 30
+        
         if caster.set_bonuses["season_2"] >= 4:
             self.spell_healing_modifier *= 1.4
             self.holy_power_gain = 1
@@ -1574,6 +1623,9 @@ class HolyPrism(Spell):
         if cast_success:
             increment_holy_power(self, caster, current_time)
             update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
+            
+            if caster.ptr and caster.is_talent_active("Dawnlight"):
+                caster.apply_buff_to_self(DawnlightAvailable(caster), current_time, stacks_to_apply=2, max_stacks=2)
 
 
 class LightsHammerSpell(Spell):
