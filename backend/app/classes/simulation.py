@@ -947,7 +947,7 @@ class Simulation:
                             sub_sub_spells[sub_spell]["holy_power_wasted"] = sub_spells[sub_spell]["holy_power_wasted"]
             
             # remove spells that aren't actually spells but have subspells               
-            for spell in ["Blossom of Amirdrassil", "Hammer of Wrath", "Consecration", "Avenging Crusader", "Dawnlight"]:
+            for spell in ["Blossom of Amirdrassil", "Hammer of Wrath", "Consecration", "Avenging Crusader"]:
                 if spell in ability_breakdown:
                     if spell in ability_breakdown[spell]["sub_spells"]:
                         del ability_breakdown[spell]["sub_spells"][spell]
