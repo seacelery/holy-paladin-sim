@@ -22,7 +22,6 @@ const buffsToIconsMap = {
     "Blessing of Winter": "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_winter.jpg",
     "Dawnlight": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_flashoflight.jpg",
     "Dawnlight (HoT)": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_flashoflight.jpg",
-    "Dawnlight (AoE)": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_flashoflight.jpg",
     "Divine Favor": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_heal.jpg",
     "Divine Purpose": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_divinepurpose.jpg",
     "Divine Resonance": "https://render.worldofwarcraft.com/eu/icons/56/ability_mount_goatmountwhite.jpg",
