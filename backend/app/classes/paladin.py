@@ -12,7 +12,7 @@ from ..utils.buff_class_map import buff_class_map
 from ..utils.beacon_transfer_rates import beacon_transfer
 from ..utils.stat_values import diminishing_returns_values, stat_conversions, calculate_stat_percent_with_dr, calculate_leech_percent_with_dr, update_stat_with_multiplicative_percentage
 from .spells import Wait
-from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell, LayOnHands, HolyPrism, LightOfTheMartyr
+from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell, LayOnHands, HolyPrism, LightOfTheMartyr, EternalFlame
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion, AuraMastery
 from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
 from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell
@@ -513,13 +513,17 @@ class Paladin:
                             "Holy Light": HolyLight(self),
                             "Crusader Strike": CrusaderStrike(self),
                             "Judgment": Judgment(self),
-                            "Word of Glory": WordOfGlory(self),
                             "Consecration": Consecration(self),
                             "Lay on Hands": LayOnHands(self),
                             "Aerated Mana Potion": AeratedManaPotion(self),
                             "Elemental Potion of Ultimate Power": ElementalPotionOfUltimatePowerPotion(self),
                             "Potion": Potion(self)
         }     
+        
+        if self.ptr and self.is_talent_active("Eternal Flame"):
+            self.abilities["Eternal Flame"] = EternalFlame(self)
+        else:
+            self.abilities["Word of Glory"] = WordOfGlory(self)
         
         if self.is_talent_active("Holy Shock"):
             self.abilities["Holy Shock"] = HolyShock(self)
