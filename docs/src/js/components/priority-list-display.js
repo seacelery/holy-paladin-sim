@@ -653,6 +653,7 @@ beaconOfFaithPreset.addEventListener("click", () => {
         Holy Shock
         Blessing of the Seasons
         Tyr's Deliverance
+        Holy Prism
         Light's Hammer
         Light of Dawn | Holy Power >= 3
         Holy Light | Divine Favor active | and | Infusion of Light active
@@ -688,6 +689,7 @@ beaconOfVirtuePreset.addEventListener("click", () => {
         Light of Dawn | Holy Power = 5
         Tyr's Deliverance
         Light's Hammer
+        Holy Prism
         Light of Dawn | Holy Power >= 3
         Holy Light | Divine Favor active | and | Infusion of Light active
         Flash of Light | Infusion of Light active`,
