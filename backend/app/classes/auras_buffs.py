@@ -125,7 +125,7 @@ class BroodkeepersPromiseHoT(HoT):
     def __init__(self, caster):
         super().__init__("Broodkeeper's Promise", 10000, base_duration=10000, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier, hasted=False)
         trinket_effect = caster.trinkets[self.name]["effect"]
-        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*?(\d+,?\d+)", trinket_effect)]
         
         # vers
         self.trinket_first_value = trinket_values[0]

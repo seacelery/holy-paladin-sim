@@ -80,7 +80,7 @@ def test_lights_hammer_hits():
     update_talents(paladin, {}, {"Light of Dawn": 1, "Light's Hammer": 1})
     
     priority_list = ["Light's Hammer"]
-    simulation = initialise_simulation(paladin, targets, 20, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=0.95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
+    simulation = initialise_simulation(paladin, targets, 20, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
     simulation_results = simulation.display_results()
     
     lights_hammer_hits = simulation_results["results"]["ability_breakdown"]["Light's Hammer"]["hits"]
@@ -98,15 +98,14 @@ def test_lights_hammer_healing():
     paladin.crit = -100
     
     priority_list = ["Light's Hammer"]
-    simulation = initialise_simulation(paladin, targets, 20, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=0.95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
+    simulation = initialise_simulation(paladin, targets, 20, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
     simulation.paladin.crit = -100
     
     simulation_results = simulation.display_results()
-    
     lights_hammer_healing = simulation_results["results"]["ability_breakdown"]["Light's Hammer"]["total_healing"] / 48
-    expected_lights_hammer_healing = 4650
+    expected_lights_hammer_healing = 5600
     
-    assert expected_lights_hammer_healing - 400 <= lights_hammer_healing <= expected_lights_hammer_healing + 400, "Light's Hammer healing is outside the expected range"
+    assert expected_lights_hammer_healing - 200 <= lights_hammer_healing <= expected_lights_hammer_healing + 200, "Light's Hammer healing is outside the expected range"
     
 def test_tyrs_deliverance_hits_no_extension():
     paladin = initialise_paladin()
@@ -116,7 +115,7 @@ def test_tyrs_deliverance_hits_no_extension():
     update_talents(paladin, {}, {"Light of Dawn": 1, "Tyr's Deliverance": 1})
     
     priority_list = ["Tyr's Deliverance"]
-    simulation = initialise_simulation(paladin, targets, 70, 1, 300, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=0.95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
+    simulation = initialise_simulation(paladin, targets, 70, 1, 300, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
     simulation_results = simulation.display_results()
     
     tyrs_deliverance_hits = simulation_results["results"]["ability_breakdown"]["Tyr's Deliverance"]["hits"]
@@ -134,7 +133,7 @@ def test_tyrs_deliverance_hits_no_extension_hasted():
     update_talents(paladin, {}, {"Light of Dawn": 1, "Tyr's Deliverance": 1})
     
     priority_list = ["Tyr's Deliverance"]
-    simulation = initialise_simulation(paladin, targets, 70, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=0.95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
+    simulation = initialise_simulation(paladin, targets, 70, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
     simulation_results = simulation.display_results()
     
     tyrs_deliverance_hits = simulation_results["results"]["ability_breakdown"]["Tyr's Deliverance"]["hits"]
@@ -155,7 +154,7 @@ def test_tyrs_deliverance_hits_with_extension():
     update_talents(paladin, {}, {"Light of Dawn": 1, "Tyr's Deliverance": 1, "Boundless Salvation": 1})
     
     priority_list = ["Tyr's Deliverance", "Holy Light"]
-    simulation = initialise_simulation(paladin, targets, 70, 1, 300, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=0.95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
+    simulation = initialise_simulation(paladin, targets, 70, 1, 300, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
     simulation_results = simulation.display_results()
     
     tyrs_deliverance_hits = simulation_results["results"]["ability_breakdown"]["Tyr's Deliverance"]["hits"]
@@ -173,7 +172,7 @@ def test_beacon_of_faith_healing():
     update_talents(paladin, {"Afterimage": 1}, {"Light of Dawn": 1, "Beacon of Faith": 1, "Commanding Light": 1, "Resplendent Light": 1, "Glimmer of Light": 1, "Light's Hammer": 1, "Tyr's Deliverance": 1})
     
     priority_list = ["Holy Shock", "Light's Hammer", "Tyr's Deliverance", "Light of Dawn | Holy Power = 5", "Word of Glory | Holy Power = 4", "Daybreak", "Judgment", "Holy Light | Infusion of Light active", "Flash of Light"]
-    simulation = initialise_simulation(paladin, targets, 300, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=0.95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
+    simulation = initialise_simulation(paladin, targets, 300, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
     simulation_results = simulation.display_results()
     
     ability_breakdown = simulation_results["results"]["ability_breakdown"]
@@ -209,10 +208,10 @@ def test_beacon_of_virtue_healing():
     targets, glimmer_targets = set_up_paladin(paladin)
     
     reset_talents(paladin)
-    update_talents(paladin, {"Afterimage": 1}, {"Light of Dawn": 1, "Beacon of Virtue": 1, "Resplendent Light": 1, "Glimmer of Light": 1, "Light's Hammer": 1, "Tyr's Deliverance": 1})
+    update_talents(paladin, {"Afterimage": 1}, {"Light of Dawn": 1, "Commanding Light": 1, "Beacon of Virtue": 1, "Resplendent Light": 1, "Glimmer of Light": 1, "Light's Hammer": 1, "Tyr's Deliverance": 1})
     
     priority_list = ["Beacon of Virtue", "Holy Shock", "Light's Hammer", "Tyr's Deliverance", "Light of Dawn | Holy Power = 5", "Word of Glory | Holy Power = 4", "Daybreak", "Judgment", "Holy Light | Infusion of Light active", "Flash of Light"]
-    simulation = initialise_simulation(paladin, targets, 20, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=0.95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
+    simulation = initialise_simulation(paladin, targets, 8, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
     simulation_results = simulation.display_results()
     
     ability_breakdown = simulation_results["results"]["ability_breakdown"]
@@ -250,9 +249,9 @@ def test_beacon_of_virtue_flash_of_light():
     targets, glimmer_targets = set_up_paladin(paladin)
     
     reset_talents(paladin)
-    update_talents(paladin, {"Afterimage": 1}, {"Light of Dawn": 1, "Beacon of Virtue": 1, "Resplendent Light": 1, "Glimmer of Light": 1, "Light's Hammer": 1, "Tyr's Deliverance": 1})
+    update_talents(paladin, {"Afterimage": 1}, {"Light of Dawn": 1, "Commanding Light": 1, "Beacon of Virtue": 1, "Resplendent Light": 1, "Glimmer of Light": 1, "Light's Hammer": 1, "Tyr's Deliverance": 1})
     priority_list = ["Beacon of Virtue", "Flash of Light"]
-    simulation = initialise_simulation(paladin, targets, 20, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=0.95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
+    simulation = initialise_simulation(paladin, targets, 15, 1, 300, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
     simulation.paladin.crit = -100
     simulation_results = simulation.display_results()
     
@@ -291,9 +290,9 @@ def test_beacon_of_virtue_flash_of_light_multiple_virtue_casts():
     targets, glimmer_targets = set_up_paladin(paladin)
     
     reset_talents(paladin)
-    update_talents(paladin, {"Afterimage": 1}, {"Light of Dawn": 1, "Beacon of Virtue": 1, "Resplendent Light": 1, "Glimmer of Light": 1, "Light's Hammer": 1, "Tyr's Deliverance": 1})
+    update_talents(paladin, {"Afterimage": 1}, {"Light of Dawn": 1, "Commanding Light": 1, "Beacon of Virtue": 1, "Resplendent Light": 1, "Glimmer of Light": 1, "Light's Hammer": 1, "Tyr's Deliverance": 1})
     priority_list = ["Beacon of Virtue", "Flash of Light"]
-    simulation = initialise_simulation(paladin, targets, 20, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=0.95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
+    simulation = initialise_simulation(paladin, targets, 45, 1, 300, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
     simulation.paladin.crit = -100
     simulation_results = simulation.display_results()
     
@@ -335,7 +334,7 @@ def test_beacon_of_virtue_lights_hammer():
     reset_talents(paladin)
     update_talents(paladin, {"Afterimage": 1}, {"Light of Dawn": 1, "Beacon of Virtue": 1, "Resplendent Light": 1, "Glimmer of Light": 1, "Light's Hammer": 1, "Tyr's Deliverance": 1})
     priority_list = ["Beacon of Virtue", "Light's Hammer"]
-    simulation = initialise_simulation(paladin, targets, 20, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=0.95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
+    simulation = initialise_simulation(paladin, targets, 20, 1, 0, priority_list, updated_equipment_data, tick_rate=0.05, raid_health=0.7, mastery_effectiveness=95, light_of_dawn_targets=5, lights_hammer_targets=6, resplendent_light_targets=5, test=True)
     simulation.paladin.crit = -100
     simulation_results = simulation.display_results()
     

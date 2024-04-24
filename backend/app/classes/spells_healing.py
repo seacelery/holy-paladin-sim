@@ -1914,7 +1914,7 @@ class LightsHammerSpell(Spell):
                 
 class LightsHammerHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.4 * 0.8
+    SPELL_POWER_COEFFICIENT = 0.48 * 0.8
     TARGET_COUNT = 6
     
     def __init__(self, caster):
