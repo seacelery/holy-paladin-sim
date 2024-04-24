@@ -17,7 +17,7 @@ from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPoti
 from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
 from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell
 from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, BroodkeepersPromiseHoT, IncarnatesMarkOfFire
-from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus
+from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus, MiniatureSingingStone
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents, base_active_class_talents_ptr, base_active_spec_talents_ptr, base_active_lightsmith_talents, base_herald_of_the_sun_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
@@ -85,6 +85,7 @@ class Paladin:
         self.flat_crit = 5
         self.flat_mastery = 12
         self.flat_versatility = 0
+        self.flat_leech = 0
         
         self.active_auras = {}
         self.gem_counts = {}
@@ -433,6 +434,9 @@ class Paladin:
                 self.versatility_rating += stat_rating
             self.versatility = calculate_stat_percent_with_dr(self, "versatility", self.versatility_rating, self.flat_versatility)
             self.versatility_multiplier = (self.versatility / 100) + 1
+        if stat == "leech":
+            self.leech_rating += stat_rating
+            self.leech = calculate_leech_percent_with_dr(self, "leech", self.leech_rating, self.flat_leech)
             
         if stat == "haste" and "Time Warp" in self.active_auras:
             update_stat_with_multiplicative_percentage(self, "haste", 30, True)
@@ -581,6 +585,9 @@ class Paladin:
                 self.abilities["Light of the Martyr"] = LightOfTheMartyr(self)
             
         # trinkets
+        if self.is_trinket_equipped("Miniature Singing Stone"):
+            self.abilities["Miniature Singing Stone"] = MiniatureSingingStone(self)
+        
         if self.is_trinket_equipped("Mirror of Fractured Tomorrows"):
             self.abilities["Mirror of Fractured Tomorrows"] = MirrorOfFracturedTomorrows(self)
             
@@ -1006,7 +1013,7 @@ class Paladin:
             
         versatility_percent = calculate_stat_percent_with_dr(self, "versatility", versatility_rating, self.flat_versatility)
         
-        leech_percent = calculate_leech_percent_with_dr(self, "leech", leech_rating, 0)
+        leech_percent = calculate_leech_percent_with_dr(self, "leech", leech_rating, self.flat_leech)
         
         return haste_percent, crit_percent, mastery_percent, versatility_percent, leech_percent
     

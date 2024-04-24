@@ -1497,7 +1497,6 @@ class OminousChromaticEssence(Buff):
 
 class ScreamingBlackDragonscale(Buff):
     
-    # TODO update stat leech
     BASE_PPM = 3
     
     def __init__(self, caster):
@@ -1512,9 +1511,11 @@ class ScreamingBlackDragonscale(Buff):
         
     def apply_effect(self, caster, current_time=None):        
         caster.update_stat("crit", self.trinket_first_value)
+        caster.update_stat("leech", self.trinket_second_value)
         
     def remove_effect(self, caster, current_time=None):
         caster.update_stat("crit", -self.trinket_first_value)
+        caster.update_stat("leech", -self.trinket_second_value)
         
 
 class RashoksMoltenHeart(Buff):

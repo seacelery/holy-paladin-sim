@@ -120,7 +120,8 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", 
         "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion", "Veneration", "Merciful Auras", "Light of the Martyr ", "Saved by the Light",
         "Chirping Rune", "Larodar's Fiery Reverie", "Rashok's Molten Heart", "Magazine of Healing Darts", "Bronzed Grip Wrappings",
-        "Dawnlight", "Dawnlight (HoT)", "Dawnlight (AoE)", "Afterimage (Word of Glory)", "Afterimage (Eternal Flame)", "Eternal Flame (HoT)"
+        "Dawnlight", "Dawnlight (HoT)", "Dawnlight (AoE)", "Afterimage (Word of Glory)", "Afterimage (Eternal Flame)", "Eternal Flame (HoT)", 
+        "Broodkeeper's Promise"
     ];
     // displays casts with average as healing divided by hits
     const excludedSpellsCastsAverageHits = [
@@ -129,7 +130,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     const excludedSpellsCrit = [
         "Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Crusader Strike", "Judgment", "Daybreak", 
         "Divine Toll", "Smoldering Seedling", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Lay on Hands", "Leech", "Veneration",
-        "Light of the Martyr ", "Saved by the Light"
+        "Light of the Martyr ", "Saved by the Light", "Dawnlight", "Broodkeeper's Promise"
     ];
     const excludedSpellsAverage = [
         "Dawnlight"

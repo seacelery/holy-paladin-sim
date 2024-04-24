@@ -1,14 +1,45 @@
 import re
+import random
 
 from .spells import Spell
 from .auras_buffs import MirrorOfFracturedTomorrowsBuff, SmolderingSeedlingActive, NymuesUnravelingSpindleBuff
-from ..utils.misc_functions import update_mana_gained
+from ..utils.misc_functions import update_mana_gained, update_spell_data_casts, update_spell_data_heals
 
 
 class Trinket(Spell):
     
     def __init__(self, name, cooldown=0, off_gcd=True, base_cast_time=0):
         super().__init__(name, cooldown=cooldown, off_gcd=off_gcd, base_cast_time=base_cast_time)
+        
+
+class MiniatureSingingStone(Trinket):
+    
+    BASE_COOLDOWN = 120
+    
+    def __init__(self, caster):
+        super().__init__("Miniature Singing Stone", cooldown=MiniatureSingingStone.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            update_spell_data_casts(caster.ability_breakdown, self.name, 0, 0, 0)
+            
+            trinket_effect = caster.trinkets[self.name]["effect"]
+            trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+            
+            # absorb
+            self.trinket_first_value = trinket_values[0]
+            
+            target_count = 5
+            
+            targets = random.sample(caster.potential_healing_targets, target_count)
+            for target in targets:            
+                miniature_singing_stone_absorb = self.trinket_first_value * caster.versatility_multiplier
+
+                target.receive_heal(miniature_singing_stone_absorb, caster)
+                update_spell_data_heals(caster.ability_breakdown, "Miniature Singing Stone", target, miniature_singing_stone_absorb, False)
+                
+                caster.handle_beacon_healing("Miniature Singing Stone", target, miniature_singing_stone_absorb, current_time)
     
     
 class MirrorOfFracturedTomorrows(Trinket):

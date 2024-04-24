@@ -742,6 +742,30 @@ const itemDataEffects = [
         "enchantments": [],
         "gems": []
     },
+    {
+        "id": 193678,
+        "name": "Miniature Singing Stone",
+        "item_slot": "Trinket",
+        "icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_centaur_trinket_1_color1.jpg",
+        "base_item_level": 250,
+        "quality": "Rare",
+        "effects": [
+            {
+                "name": "Miniature Singing Stone",
+                "id": 388881,
+                "description": "Use: Unleash the voice of Ohn'ahra to wrap an ally in wind, shielding them for *13,095 damage for 10 sec. When this effect ends the winds disperse and shield up to 4 nearby allies. (2 Min Cooldown)",
+                "effect_values": [
+                    {"base_value": 13488, "effect_type": "scalar", "effect_coefficient": 101.9246, "allocation_type": "flat_healing"}
+                ]
+            }
+        ],
+        "stats": {
+            "Intellect": 96
+        },
+        "limit": null,
+        "enchantments": [],
+        "gems": []
+    },
 ];
 
 export default itemDataEffects;
