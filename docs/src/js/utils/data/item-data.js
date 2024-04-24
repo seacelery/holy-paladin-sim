@@ -43179,10 +43179,10 @@ const itemData = [
             {
                 "name": "Conjured Chillglobe",
                 "id": 396391,
-                "description": "Use: If your mana is above 65%, toss the Chillglobe at your target, inflicting *51,981 Frost damage.\r\n\r\nIf your mana is below 65%, instead drink from the Chillglobe to restore *3,521 mana instantly. (1 Min Cooldown)",
+                "description": "Use: If your mana is above 65%, toss the Chillglobe at your target, inflicting *51,981 Frost damage.\r\n\r\nIf your mana is below 65%, instead drink from the Chillglobe to restore *4,590 mana instantly. (1 Min Cooldown)",
                 "effect_values": [
                     {"base_value": 51981, "effect_type": "scalar", "effect_coefficient": 133.4993, "allocation_type": "flat_healing"},
-                    {"base_value": 3521, "effect_type": "scalar", "effect_coefficient": 9.0419, "allocation_type": "flat_healing"},
+                    {"base_value": 4590, "effect_type": "scalar", "effect_coefficient": 4.92373, "allocation_type": "rating_multiplier"},
                 ]
             }
         ],
@@ -43206,8 +43206,8 @@ const itemData = [
                 "id": 377452,
                 "description": "Equip: Succumb to the Icon's whispers and become Infused with Fire, increasing your Haste by *445. \r\n\r\nFighting alongside allies who are Infused with Earth or Frost has a chance to grant you *241 of their Infusion's stat for 12 sec.\r\n\r\nInfusion based on your current specialization.",
                 "effect_values": [
-                    {"base_value": 445, "effect_type": "scalar", "effect_coefficient": 0.599658, "allocation_type": "no_multiplier"},
-                    {"base_value": 241, "effect_type": "scalar", "effect_coefficient": 0.137528, "allocation_type": "rating_multiplier"}
+                    {"base_value": 483, "effect_type": "scalar", "effect_coefficient": 0.500103, "allocation_type": "rating_multiplier"},
+                    {"base_value": 133, "effect_type": "scalar", "effect_coefficient": 0.137528, "allocation_type": "rating_multiplier"}
                 ]
             }
         ],
@@ -43326,10 +43326,10 @@ const itemData = [
             {
                 "name": "Broodkeeper's Promise",
                 "id": 377462,
-                "description": "Use: Designate another player to bond with, becoming their Guardian for 1 hour.\r\n\r\nWhile bonded, you and your ally gain *82 Versatility and restore *1,509 health per second. If you are within 15 yards of one another, these bonuses are increased. \r\n\r\nValid only for healer specializations.\r\n (5 Sec Cooldown)",
+                "description": "Use: Designate another player to bond with, becoming their Guardian for 1 hour.\r\n\r\nWhile bonded, you and your ally gain *82 Versatility and restore *655 health per second. If you are within 15 yards of one another, these bonuses are increased. \r\n\r\nValid only for healer specializations.\r\n (5 Sec Cooldown)",
                 "effect_values": [
-                    {"base_value": 82, "effect_type": "scalar", "effect_coefficient": 0.096854, "allocation_type": "rating_multiplier"},
-                    {"base_value": 1509, "effect_type": "scalar", "effect_coefficient": 1.29544, "allocation_type": "flat_healing"}
+                    {"base_value": 82, "effect_type": "scalar", "effect_coefficient": 0.096854 * 0.8, "allocation_type": "rating_multiplier"},
+                    {"base_value": 655, "effect_type": "scalar", "effect_coefficient": 1.983667, "allocation_type": "rating_multiplier"}
                 ]
             }
         ],
@@ -73027,9 +73027,9 @@ const itemData = [
                 "id": 401183,
                 "description": "Equip: Your healing spells have a chance to awaken the Heart, restoring *1,494 mana over 10 sec and causing your healing spells to restore *13,591 additional health over 10 sec.\r\n\r\nOverhealing from this effect invigorates your target, granting them up to *421 Versatility for 12 sec.",
                 "effect_values": [
-                    {"base_value": 1494, "effect_type": "scalar", "effect_coefficient": 0.244196 * 10, "allocation_type": "flat_healing"},
+                    {"base_value": 1494, "effect_type": "scalar", "effect_coefficient": 0.133174 * 10, "allocation_type": "rating_multiplier"},
                     {"base_value": 13591, "effect_type": "scalar", "effect_coefficient": 2.221365 * 10, "allocation_type": "flat_healing"},
-                    {"base_value": 421, "effect_type": "scalar", "effect_coefficient": 0.386485, "allocation_type": "rating_multiplier"},
+                    {"base_value": 421, "effect_type": "scalar", "effect_coefficient": 0.347837, "allocation_type": "rating_multiplier"},
                 ]
             }
         ],
@@ -74493,7 +74493,7 @@ const itemData = [
                 "id": 403366,
                 "description": "Equip: Your area effect spells and abilities have a chance to grant you *2,109 Intellect and increase damage you receive by 5% for 18 sec.",
                 "effect_values": [
-                    {"base_value": 2109, "effect_type": "scalar", "effect_coefficient": 2.029274, "allocation_type": "no_multiplier"},
+                    {"base_value": 2109, "effect_type": "scalar", "effect_coefficient": 1.900139, "allocation_type": "no_multiplier"},
                 ]
             }
         ],
@@ -91438,9 +91438,9 @@ const itemData = [
                 "id": 423418,
                 "description": "Equip: Healing an ally below 80% health grants them Blossom of Amirdrassil, healing for *210,597 over 6 sec. This effect may occur once per minute.<br><br>If the target is above 95% health when this effect expires, the Blossom spreads to 3 injured allies to heal for *105,294 over 6 sec. If the target is not fully healed, the Blossom blooms to absorb *315,890 damage instead.",
                 "effect_values": [
-                    {"base_value": 210597, "effect_type": "scalar", "effect_coefficient": 40.9063 * 6, "allocation_type": "flat_healing"},
-                    {"base_value": 105294, "effect_type": "scalar", "effect_coefficient": 20.45229 * 6, "allocation_type": "flat_healing"},
-                    {"base_value": 315890, "effect_type": "scalar", "effect_coefficient": 368.1498, "allocation_type": "flat_healing"}
+                    {"base_value": 210597, "effect_type": "scalar", "effect_coefficient": 44.99676 * 6, "allocation_type": "flat_healing"},
+                    {"base_value": 105294, "effect_type": "scalar", "effect_coefficient": 22.49753 * 6, "allocation_type": "flat_healing"},
+                    {"base_value": 315890, "effect_type": "scalar", "effect_coefficient": 404.9657, "allocation_type": "flat_healing"}
                 ]
             }
         ],

@@ -111,11 +111,12 @@ const buffsToIconsMap = {
     "Ominous Chromatic Essence": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_orb_blue.jpg",
     "Emerald Coach's Whistle": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_head_dragon_green.jpg",
     "Spoils of Neltharus": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_dragon_trinket_4_bronze.jpg",
+    "Broodkeeper's Promise": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_primalist_trinket_3_omni.jpg",
 
     "Time-Breaching Talon ": "https://render.worldofwarcraft.com/eu/icons/56/spell_chargepositive.jpg",
     "Time-Breaching Talon  ": "https://render.worldofwarcraft.com/eu/icons/56/spell_chargenegative.jpg",
 
-    "Whispering Incarnate Icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_primalist_necklace_1_omni.jpg",
+    "Incarnate's Mark of Fire": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_primalist_necklace_1_omni.jpg",
     "Inspired by Frost and Earth": "https://render.worldofwarcraft.com/eu/icons/56/spell_shaman_spiritlink.jpg",
 
     "Pip's Emerald Friendship Badge": "https://render.worldofwarcraft.com/eu/icons/56/10_2_raidability_green.jpg",

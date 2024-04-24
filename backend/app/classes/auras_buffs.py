@@ -26,6 +26,7 @@ class HoT(Buff):
             return
         
         total_heal_value, is_crit = self.calculate_tick_healing(caster) 
+        
         total_heal_value *= len(buff_instances)
         
         if is_crit:
@@ -33,8 +34,8 @@ class HoT(Buff):
         
         if is_partial_tick:
             total_heal_value *= (current_time - self.previous_tick_time) / (self.base_tick_interval / caster.haste_multiplier)
-            
-        target.receive_heal(total_heal_value, caster)   
+
+        target.receive_heal(total_heal_value, caster)
         caster.handle_beacon_healing(self.name, target, total_heal_value, current_time)
         
         if is_crit and self.name == "Holy Reverberation":
@@ -78,6 +79,14 @@ class HoT(Buff):
         return healing_per_tick, is_crit
 
 
+# class GiftOfTheNaaruBuff(HoT):
+    
+#     SPELL_POWER_COEFFICIENT = 0
+    
+#     def __init__(self, caster):
+#         super().__init__("Gift of the Naaru", 5, base_duration=5, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier)
+#         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
+
 class GiftOfTheNaaruBuff(HoT):
     
     def __init__(self, caster):
@@ -106,8 +115,39 @@ class HolyReverberation(HoT):
     def __init__(self, caster):
         super().__init__("Holy Reverberation", 8, base_duration=8, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier, current_stacks=1, max_stacks=6) 
         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
+        
+
+# trinket hots
+class BroodkeepersPromiseHoT(HoT):
     
- 
+    # TODO everything
+    
+    def __init__(self, caster):
+        super().__init__("Broodkeeper's Promise", 10000, base_duration=10000, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier, hasted=False)
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # vers
+        self.trinket_first_value = trinket_values[0]
+        # healing
+        self.trinket_second_value = trinket_values[1]
+        
+        # within 15 yards
+        # vers
+        self.trinket_first_value_bonus = trinket_values[0] * 1.5
+        # healing
+        self.trinket_second_value_bonus = trinket_values[1] * 2.34
+    
+    def calculate_tick_healing(self, caster):      
+        versatility_multiplier = caster.versatility_multiplier
+        healing_per_tick = ((self.trinket_second_value_bonus * 0.7) + (self.trinket_second_value * 0.3)) * versatility_multiplier
+            
+        healing_per_tick = add_talent_healing_multipliers(healing_per_tick, caster)
+
+        return healing_per_tick, False
+        
+
+# ptr
 class Dawnlight(HoT):
     
     SPELL_POWER_COEFFICIENT = 6
@@ -129,8 +169,8 @@ class Dawnlight(HoT):
             update_spell_data_heals(caster.ability_breakdown, "Dawnlight (AoE)", target, radiation_healing, spell_crit)
             
             caster.handle_beacon_healing("Dawnlight (AoE)", target, radiation_healing, current_time)
-
-
+ 
+ 
 class EternalFlameBuff(HoT):
     
     SPELL_POWER_COEFFICIENT = 1
@@ -138,7 +178,7 @@ class EternalFlameBuff(HoT):
     def __init__(self, caster):
         super().__init__("Eternal Flame (HoT)", 20, base_duration=20, base_tick_interval=3, initial_haste_multiplier=caster.haste_multiplier) 
         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
-
+    
     
 # self buffs   
 class AuraMasteryBuff(Buff):
@@ -484,7 +524,7 @@ class FirstLight(Buff):
 class AwakeningStacks(Buff):
     
     def __init__(self):
-        super().__init__("Awakening", 60, base_duration=60, current_stacks=1, max_stacks=12, base_duration=60)
+        super().__init__("Awakening", 60, base_duration=60, current_stacks=1, max_stacks=12)
        
         
 class AwakeningTrigger(Buff):
@@ -1267,6 +1307,23 @@ class NeltharionsCallToChaos(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value)
+  
+  
+class IncarnatesMarkOfFire(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Incarnate's Mark of Fire", 10000, base_duration=10000)
+        trinket_effect = caster.trinkets["Whispering Incarnate Icon"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # passive haste
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):        
+        caster.update_stat("haste", self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("haste", -self.trinket_first_value)
         
 
 class InspiredByFrostAndEarth(Buff):
@@ -1436,27 +1493,6 @@ class OminousChromaticEssence(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.update_stat("mastery", -(self.trinket_first_value + self.trinket_second_value))
-
-
-class BroodKeepersPromise(Buff):
-    
-    # TODO everything
-    
-    def __init__(self, caster):
-        super().__init__("Broodkeeper's Promise", 10000, base_duration=10000)
-        trinket_effect = caster.trinkets[self.name]["effect"]
-        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
-        
-        # crit
-        self.trinket_first_value = trinket_values[0]
-        # leech 
-        self.trinket_second_value = trinket_values[1]
-        
-    def apply_effect(self, caster, current_time=None):        
-        caster.update_stat("crit", self.trinket_first_value)
-        
-    def remove_effect(self, caster, current_time=None):
-        caster.update_stat("crit", -self.trinket_first_value)
 
 
 class ScreamingBlackDragonscale(Buff):
@@ -2376,8 +2412,8 @@ class BronzedGripWrappings(Buff):
         
     def remove_effect(self, caster, current_time=None):
         pass
+   
     
-
 # PTR
 class DawnlightAvailable(Buff):
     
@@ -2390,10 +2426,12 @@ class DawnlightAvailable(Buff):
     def remove_effect(self, caster, current_time=None):
         pass
 
+
 class LightOfTheMartyrBuff(Buff):
     
     def __init__(self, caster, duration_to_apply):
         super().__init__("Light of the Martyr", duration_to_apply, base_duration=duration_to_apply)
+        # caster.time_based_stacking_buffs[self] = duration_to_apply
         
     def apply_effect(self, caster, current_time=None):
         pass
@@ -2402,6 +2440,7 @@ class LightOfTheMartyrBuff(Buff):
         if "Bestow Light" in caster.active_auras:
             del caster.active_auras["Bestow Light"]
             update_self_buff_data(caster.self_buff_breakdown, "Bestow Light", current_time, "expired") 
+            print(caster.time_based_stacking_buffs)
             
             for buff in caster.time_based_stacking_buffs:
                 if buff.name == "Bestow Light":

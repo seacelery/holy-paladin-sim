@@ -86,6 +86,7 @@ const spellToIconsMap = {
     "Rashok's Molten Heart": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_trinket6oih_orb4.jpg",
     "Time-Breaching Talon": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_explorer_trinket_3_color3.jpg",
     "Spoils of Neltharus": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_dragon_trinket_4_bronze.jpg",
+    "Broodkeeper's Promise": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_primalist_trinket_3_omni.jpg",
 
     // enchants
     "Dreaming Devotion": "https://render.worldofwarcraft.com/eu/icons/56/item_herbd.jpg",
