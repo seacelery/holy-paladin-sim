@@ -234,6 +234,11 @@ const updateEquipmentFromImportedData = (data) => {
     const itemLevelInfo = document.getElementById("equipped-items-info");
     itemLevelContainer.style.display = "block";
     itemLevelInfo.style.display = "block";
+
+    const unsupportedTrinketTooltip = createElement("div", "trinket-unsupported-tooltip", "trinket-unsupported-tooltip");
+    unsupportedTrinketTooltip.style.display = "none";
+    unsupportedTrinketTooltip.style.position = "absolute";
+    document.body.appendChild(unsupportedTrinketTooltip);
 };
 
 const generateFullItemData = () => {
@@ -276,6 +281,9 @@ const clearNewItem = () => {
     newItemInfo.style.borderLeft = `1px solid var(--border-colour-3)`;
     replaceItemButton.style.borderTop = `1px solid var(--border-colour-3)`;
     replaceItemButton.style.borderRight = `1px solid var(--border-colour-3)`;
+
+    document.getElementById("new-equipped-item-container").style.backgroundColor = `var(--panel-colour-table-3)`;
+    document.getElementById("new-equipped-item-search").style.backgroundColor = "var(--panel-colour-2)";
 };
 
 const initialiseEquipment = () => {
@@ -285,6 +293,8 @@ const initialiseEquipment = () => {
         currentItemLevel.contentEditable = true;
         currentItemLevel.style.outline = "none";
         const currentItemTitle = document.getElementById("current-equipped-item-title");
+        const currentItemSlot = itemSlotsMap[itemSlot.getAttribute("data-item-slot").toLowerCase()];
+        
         const currentItemInfoContainer = document.getElementById("current-equipped-item-info-container");
         const currentItemInfo = document.getElementById("current-equipped-item-info");
 
@@ -726,7 +736,7 @@ const initialiseEquipment = () => {
 
         itemSlots.forEach(itemSlot => {
             itemSlot.querySelector(".item-slot-hover").classList.remove("item-slot-selected");
-            itemSlot.querySelector(".item-slot-hover").style.backgroundColor = "var(--panel-colour-7)";
+            itemSlot.querySelector(".item-slot-hover").style.backgroundColor = "var(--panel-colour-table-2)";
         })
         itemSlot.querySelector(".item-slot-hover").classList.add("item-slot-selected");
         itemSlot.querySelector(".item-slot-hover").style.backgroundColor = "var(--panel-colour-5)";
@@ -735,7 +745,7 @@ const initialiseEquipment = () => {
         const itemLevel = itemSlotData.item_level;
         const itemIcon = itemSlotData.item_icon;
         const rarityColour = `var(--rarity-${itemSlotData.quality.toLowerCase()})`;
-
+    
         currentEquippedIcon.src = itemIcon;
         currentEquippedIcon.style.filter = "grayscale(0)";
         currentEquippedIcon.style.opacity = "1";
@@ -748,7 +758,39 @@ const initialiseEquipment = () => {
 
         currentItemTitle.style.border = `1px solid ${rarityColour}`;
         currentItemTitle.style.borderBottom = "none";
-        currentItemTitle.innerHTML = `<span>Currently equipped: </span><span style="color: ${rarityColour}">${itemName}</span>`;
+        currentItemTitle.innerHTML = `<span>Currently equipped: </span><span style="color: ${rarityColour}">${itemName}</span><div id="trinket-unsupported-icon-container">
+        <i class="fa-solid fa-triangle-exclamation" id="trinket-unsupported-icon"></i></div>`;
+
+        const trinketUnsupported = document.getElementById("trinket-unsupported-icon-container");
+        const supportedTrinkets = [
+            "Ominous Chromatic Essence", "Rashok's Molten Heart", "Broodkeeper's Promise", "Whispering Incarnate Icon",
+            "Screaming Black Dragonscale", "Smoldering Seedling", "Pip's Emerald Friendship Badge", "Neltharion's Call to Chaos",
+            "Spoils of Neltharus", "Blossom of Amir'drassil", "Miniature Singing Stone", "Conjured Chillglobe",
+            "Idol of the Spell-Weaver", "Idol of the Life-Binder", "Idol of the Earth-Warder", "Idol of the Dreamer",
+            "Time-Breaching Talon", "Nymue's Unraveling Spindle", "Mirror of Fractured Tomorrows"
+        ];
+        if ((currentItemSlot === "trinket_1" || currentItemSlot === "trinket_2") && !supportedTrinkets.includes(itemName)) {
+            trinketUnsupported.style.display = "block";
+        } else {
+            trinketUnsupported.style.display = "none";
+        };
+        const trinketUnsupportedTooltip = document.querySelector(".trinket-unsupported-tooltip");
+        trinketUnsupported.addEventListener("mousemove", (e) => {
+            const xOffset = 15;
+            const yOffset = 15;
+        
+            trinketUnsupportedTooltip.style.left = e.pageX + xOffset + "px";
+            trinketUnsupportedTooltip.style.top = e.pageY + yOffset + "px";
+        
+            trinketUnsupportedTooltip.style.display = "block";
+        
+            trinketUnsupportedTooltip.innerHTML = "";
+            trinketUnsupportedTooltip.textContent = "This trinket's effect is not supported!";
+        });
+
+        trinketUnsupported.addEventListener("mouseleave", () => {
+            trinketUnsupportedTooltip.style.display = "none";
+        });
 
         currentItemInfoContainer.style.border = `1px solid ${rarityColour}`;
         
@@ -786,24 +828,37 @@ const initialiseEquipment = () => {
             createItemBonusesDisplay();
         };
 
-        currentItemInfo.querySelectorAll(".current-equipped-item-field-left").forEach(item => {
-            item.style.borderBottom = `1px solid ${rarityColour}`;
-        });
-        currentItemInfo.querySelectorAll(".current-equipped-item-field-right").forEach(item => {
-            item.style.borderBottom = `1px solid ${rarityColour}`;
-        });
-        currentItemInfo.querySelectorAll(".current-equipped-item-enchant-options").forEach(item => {
-            item.style.border = `1px solid ${rarityColour}`;
-        });
-        currentItemInfo.querySelectorAll(".current-equipped-item-embellishment-options").forEach(item => {
-            item.style.border = `1px solid ${rarityColour}`;
-        });     
-        currentItemInfo.querySelector(".current-equipped-item-info-left").style.borderRight = `1px solid ${rarityColour}`;
-        if (currentItemInfo.querySelector(".current-equipped-item-default-enchant-option")) {
-            currentItemInfo.querySelector(".current-equipped-item-default-enchant-option").style.borderBottom = `1px solid ${rarityColour}`;
-        };
+        document.getElementById("current-equipped-item-container").style.backgroundColor = `var(--rarity-${itemSlotData.quality.toLowerCase()}-dark)`;
+        document.getElementById("current-equipped-item-title").style.backgroundColor = `var(--rarity-${itemSlotData.quality.toLowerCase()}-dark)`;
+        // currentItemInfo.querySelectorAll(".current-equipped-item-field-left").forEach(item => {
+        //     item.style.borderBottom = `1px solid ${rarityColour}`;
+        // });
+        // currentItemInfo.querySelectorAll(".current-equipped-item-field-right").forEach(item => {
+        //     item.style.borderBottom = `1px solid ${rarityColour}`;
+        // });
+        // currentItemInfo.querySelectorAll(".current-equipped-item-enchant-options").forEach(item => {
+        //     item.style.border = `1px solid ${rarityColour}`;
+        // });
+        // currentItemInfo.querySelectorAll(".current-equipped-item-embellishment-options").forEach(item => {
+        //     item.style.border = `1px solid ${rarityColour}`;
+        // });     
+        // currentItemInfo.querySelector(".current-equipped-item-info-left").style.borderRight = `1px solid ${rarityColour}`;
+        // if (currentItemInfo.querySelector(".current-equipped-item-default-enchant-option")) {
+        //     currentItemInfo.querySelector(".current-equipped-item-default-enchant-option").style.borderBottom = `1px solid ${rarityColour}`;
+        // };
         if (currentItemInfo.querySelector(".current-equipped-item-default-embellishment-option")) {
-            currentItemInfo.querySelector(".current-equipped-item-default-embellishment-option").style.borderBottom = `1px solid ${rarityColour}`;
+            // currentItemInfo.querySelector(".current-equipped-item-default-embellishment-option").style.borderBottom = `1px solid ${rarityColour}`;
+            currentItemInfo.querySelector(".current-equipped-item-default-embellishment-option").style.borderBottom = `none`;
+        };
+        if (currentItemInfo.querySelector(".current-equipped-item-field-right-double")) {
+            // currentItemInfo.querySelector(".current-equipped-item-default-embellishment-option").style.borderBottom = `1px solid ${rarityColour}`;
+            currentItemInfo.querySelector(".current-equipped-item-field-right-double").style.borderBottom = `none`;
+        };
+        if (document.querySelector(".current-equipped-item-enchant-options")) {
+            document.querySelector(".current-equipped-item-enchant-options").style.borderRight = `1px solid ${rarityColour}`;
+        };
+        if (document.querySelector(".current-equipped-item-enchant-options")) {
+            document.querySelector(".current-equipped-item-enchant-options").style.borderBottom = `1px solid ${rarityColour}`;
         };
     };
 
@@ -851,9 +906,13 @@ const initialiseEquipment = () => {
             const newItemInfo = document.getElementById("new-equipped-item-info");
 
             const rarityColour = `var(--rarity-${item.quality.toLowerCase()})`;
+            newItemInfoContainer.style.border = `1px solid ${rarityColour}`;
             newItemIcon.src = item.icon;
             newItemIcon.style.opacity = 1;
             newItemIcon.style.filter = "grayscale(0)";
+
+            document.getElementById("new-equipped-item-container").style.backgroundColor = `var(--rarity-${item.quality.toLowerCase()}-dark)`;
+            document.getElementById("new-equipped-item-search").style.backgroundColor = `var(--rarity-${item.quality.toLowerCase()}-dark)`;
 
             newItemLevel.textContent = item.base_item_level;
             newItemLevel.style.color = rarityColour;
@@ -1215,26 +1274,32 @@ const initialiseEquipment = () => {
 
                 const newItemInfo = document.getElementById("new-equipped-item-info");
 
-                newItemInfo.querySelectorAll(".new-equipped-item-field-left").forEach(item => {
-                    item.style.borderBottom = `1px solid ${rarityColour}`;
-                });
-                newItemInfo.querySelectorAll(".new-equipped-item-field-right").forEach(item => {
-                    item.style.borderBottom = `1px solid ${rarityColour}`;
-                });
-                newItemInfo.querySelectorAll(".new-equipped-item-enchant-options").forEach(item => {
-                    item.style.border = `1px solid ${rarityColour}`;
-                });
-                newItemInfo.querySelectorAll(".new-equipped-item-embellishment-options").forEach(item => {
-                    item.style.border = `1px solid ${rarityColour}`;
-                });   
+                // newItemInfo.querySelectorAll(".new-equipped-item-field-left").forEach(item => {
+                //     item.style.borderBottom = `1px solid ${rarityColour}`;
+                // });
+                // newItemInfo.querySelectorAll(".new-equipped-item-field-right").forEach(item => {
+                //     item.style.borderBottom = `1px solid ${rarityColour}`;
+                // });
+                // newItemInfo.querySelectorAll(".new-equipped-item-enchant-options").forEach(item => {
+                //     item.style.border = `1px solid ${rarityColour}`;
+                // });
+                // newItemInfo.querySelectorAll(".new-equipped-item-embellishment-options").forEach(item => {
+                //     item.style.border = `1px solid ${rarityColour}`;
+                // });   
 
-                newItemInfo.querySelector(".new-equipped-item-info-left").style.borderRight = `1px solid ${rarityColour}`;
-                if (newItemInfo.querySelector(".new-equipped-item-default-enchant-option")) {
-                    newItemInfo.querySelector(".new-equipped-item-default-enchant-option").style.borderBottom = `1px solid ${rarityColour}`;
+                // newItemInfo.querySelector(".new-equipped-item-info-left").style.borderRight = `1px solid ${rarityColour}`;
+                // if (newItemInfo.querySelector(".new-equipped-item-default-enchant-option")) {
+                //     newItemInfo.querySelector(".new-equipped-item-default-enchant-option").style.borderBottom = `1px solid ${rarityColour}`;
+                // };
+                // if (newItemInfo.querySelector(".new-equipped-item-default-embellishment-option")) {
+                //     newItemInfo.querySelector(".new-equipped-item-default-embellishment-option").style.borderBottom = `1px solid ${rarityColour}`;
+                // };
+                if (newItemInfo.querySelector(".new-equipped-item-field-right-double")) {
+                    // currentItemInfo.querySelector(".current-equipped-item-default-embellishment-option").style.borderBottom = `1px solid ${rarityColour}`;
+                    newItemInfo.querySelector(".new-equipped-item-field-right-double").style.borderBottom = `none`;
                 };
-                if (newItemInfo.querySelector(".new-equipped-item-default-embellishment-option")) {
-                    newItemInfo.querySelector(".new-equipped-item-default-embellishment-option").style.borderBottom = `1px solid ${rarityColour}`;
-                };
+                document.querySelector(".new-equipped-item-enchant-options").style.borderRight = `1px solid ${rarityColour}`;
+                document.querySelector(".new-equipped-item-enchant-options").style.borderBottom = `1px solid ${rarityColour}`;
             };
     
             const createNewItemTrinketBonusesDisplay = () => {
@@ -1253,9 +1318,9 @@ const initialiseEquipment = () => {
 
                 const newItemInfo = document.getElementById("new-equipped-item-info");
 
-                newItemInfo.querySelectorAll(".new-equipped-item-field-left").forEach(item => {
-                    item.style.borderBottom = `1px solid ${rarityColour}`;
-                });
+                // newItemInfo.querySelectorAll(".new-equipped-item-field-left").forEach(item => {
+                //     item.style.borderBottom = `1px solid ${rarityColour}`;
+                // });
 
                 newItemInfo.querySelector(".new-equipped-item-info-left").style.borderRight = `1px solid ${rarityColour}`;
             };

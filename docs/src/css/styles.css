@@ -19,6 +19,7 @@
     --transparent-border-colour-2: #1b1a1fd7;
     --border-colour-3: #4e3546;
     --border-colour-4: rgb(133, 10, 94);
+    --border-colour-5: #1b1a1f;
     --tooltip-colour: rgba(36, 36, 36, 0.034);
     --tooltip-colour-hover: rgba(184, 131, 175, 0.13);
     --tooltip-opaque-colour: rgb(20, 20, 20);
@@ -63,6 +64,12 @@
     --rarity-uncommon: #1eff00;
     --rarity-common: #fff;
     --rarity-poor: var(--border-colour-3);
+
+    --rarity-epic-dark: #08030c;
+    --rarity-rare-dark: #020507;
+    --rarity-uncommon-dark: #020803;
+    --rarity-common-dark: #0c0c0c0e;
+    --rarity-poor-dark: #0c0c0c0e;
 }
 
 [data-theme="plain"] {
@@ -1925,6 +1932,7 @@ body {
 
 #equipment-left-half {
     margin-top: 8px;
+    margin-left: -10px;
     
     width: 54%;
     height: 100%;
@@ -2153,7 +2161,7 @@ body {
 #equipment-right-half {
     margin-top: 8px;
 
-    width: 44%;
+    width: 45%;
     height: 100%;
 }
 
@@ -2276,11 +2284,17 @@ body {
     background-color: var(--tooltip-colour-2);
 }
 
+#current-equipped-item-icon-container, #new-equipped-item-icon-container {
+    overflow: hidden;
+}
+
 #current-equipped-item-icon, #new-equipped-item-icon {
     width: 110px;
-    height: calc(110px - 1px);
+    height: calc(110px - 3px);
 
     opacity: 0.2;
+    transform: scale(1.03);
+    border-bottom: 1px solid var(--border-colour-3);
 }
 
 #equipped-item-item-level, #new-item-item-level {
@@ -2288,7 +2302,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    height: 34px;
+    height: 36px;
 
     border-top: 1px solid var(--border-colour-3);
     padding-top: 3px;
@@ -2302,6 +2316,7 @@ body {
 }
 
 #current-equipped-item-title, #new-equipped-item-search {
+    position: relative;
     padding-left: 5px;
     padding-top: 2px;
 
@@ -2314,6 +2329,36 @@ body {
     border-bottom: none;
     
     font-size: 15px;
+}
+
+#trinket-unsupported-icon-container {
+    display: none;
+    position: absolute;
+    top: -2px;
+    left: 533px;
+
+    font-size: 20px;
+}
+
+#trinket-unsupported-icon {
+    color: var(--red-font-cancelled)
+}
+
+.trinket-unsupported-tooltip {
+    display: none;
+
+    white-space: nowrap;
+    background-color: var(--panel-colour-2);
+
+    color: var(--light-font-colour);
+    font-size: 12px;
+
+    user-select: none;
+    padding: 5px;
+
+    height: 30px;
+
+    border: 1px solid var(--border-colour-3);
 }
 
 #new-equipped-item-search {
@@ -2369,7 +2414,7 @@ body {
     background-color: transparent;
 }
 
-.current-equipped-item-field-left:last-child, .current-equipped-item-field-right:last-child {
+.current-equipped-item-field-left:last-child, .current-equipped-item-field-right:last-child, .new-equipped-item-field-left:last-child {
     border-bottom: none;
 }
 
@@ -2401,7 +2446,8 @@ body {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: calc(100% + 1px);
+    top: calc(100%);
+    padding-top: 1px;
     left: 0;
     right: 0;
     margin-left: -1px;
@@ -2411,7 +2457,7 @@ body {
 
     overflow: auto;
     border: 1px solid var(--border-colour-3);
-    background-color: var(--panel-colour-table-3);
+    background-color: var(--panel-colour);
 }
 
 .current-equipped-item-embellishment-options::-webkit-scrollbar, .new-equipped-item-embellishment-options::-webkit-scrollbar {
@@ -2476,7 +2522,7 @@ body {
 }
 
 .current-equipped-item-default-embellishment-option, .new-equipped-item-default-embellishment-option {
-    height: 71px;
+    height: 68px;
 }
 
 .new-equipped-item-default-embellishment-option {
@@ -2699,19 +2745,19 @@ body {
     
     border-top: none;
 
-    background-color: var(--panel-colour-6);
+    background-color: var(--panel-colour);
 }
 
 #item-search-suggestions {
     display: none;
     position: absolute;
-    top: 26px;
+    top: 25px;
 
-    width: 519px;
-    max-height: 133px;
+    width: 560px;
+    max-height: 143px;
     overflow: auto;
 
-    border: 1px solid var(--border-colour-3);
+    border: 1px solid var(--border-colour-5);
     border-top: none;
     border-right: none;
     
@@ -2731,17 +2777,17 @@ body {
     padding-left: 5px;
     padding-top: 2px;
 
-    height: 27px;
+    height: 29px;
     width: 100%;
 
-    border-right: 1px solid var(--border-colour-3);
+    border-right: 1px solid var(--border-colour-5);
     color: var(--light-font-colour);
 }
 
 .item-search-suggestion:hover {
     cursor: pointer;
     user-select: none;
-    background-color: var(--panel-colour-3);
+    background-color: var(--border-colour-5);
 }
 
 .item-search-icon {
