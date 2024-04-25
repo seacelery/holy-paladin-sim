@@ -20,3 +20,9 @@ def cached_get_equipment_data(access_token, equipment_url):
 @cache
 def cached_get_spell_icon_data(access_token, spell_id):
     return battlenet_api.get_spell_icon_data(access_token, spell_id)
+
+def clear_all_caches():
+    cached_get_character_data.cache_clear()
+    cached_get_talent_data.cache_clear()
+    cached_get_stats_data.cache_clear()
+    cached_get_equipment_data.cache_clear()

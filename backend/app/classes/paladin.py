@@ -1026,14 +1026,14 @@ class Paladin:
             herald_of_the_sun_talents = {}
 
         if self.ptr:
-            active_class_talents = base_active_class_talents_ptr
-            active_spec_talents = base_active_spec_talents_ptr
+            active_class_talents = copy.deepcopy(base_active_class_talents_ptr)
+            active_spec_talents = copy.deepcopy(base_active_spec_talents_ptr)
             
-            active_lightsmith_talents = base_active_lightsmith_talents
-            active_herald_of_the_sun_talents = base_herald_of_the_sun_talents
+            active_lightsmith_talents = copy.deepcopy(base_active_lightsmith_talents)
+            active_herald_of_the_sun_talents = copy.deepcopy(base_herald_of_the_sun_talents)
         else:
-            active_class_talents = base_active_class_talents
-            active_spec_talents = base_active_spec_talents
+            active_class_talents = copy.deepcopy(base_active_class_talents)
+            active_spec_talents = copy.deepcopy(base_active_spec_talents)
 
         class_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_class_talents"]
         for talent in class_talent_data:

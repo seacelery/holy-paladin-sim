@@ -4984,7 +4984,6 @@ tr {
     justify-content: flex-start;
 
     width: 100%;
-    height: 100%;
 }
 
 [class*="priority-grid-player-auras-icon-container"], [class*="priority-grid-cooldown-icon-container"], .priority-grid-cooldown-icon-container, [class*="priority-grid-cooldown-modal-icon-container"], [class*="priority-grid-player-auras-modal-icon-container"] {
@@ -4994,6 +4993,7 @@ tr {
 
 [class*="priority-grid-player-auras-icon-container"], [class*="priority-grid-cooldown-icon-container"], [class*="priority-grid-cooldown-modal-icon-container"], [class*="priority-grid-player-auras-modal-icon-container"] {
     margin: 2.5px;
+    margin-bottom: 12.5px;
     z-index: 0;
 
     width: 30px;

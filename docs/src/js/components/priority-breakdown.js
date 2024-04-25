@@ -382,6 +382,11 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
                     };
 
                     const cooldown = cooldowns[cooldownName];
+
+                    if ("Divine Favor" in timestampData.player_active_auras) {
+                        cooldown.remaining_cooldown = 0;
+                    };
+
                     const formattedCooldownName = cooldownName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
                     const cooldownIconContainer = createElement("div", `priority-grid-cooldown-icon-container-${formattedCooldownName}`, `priority-grid-cooldown-icon-container-${formattedCooldownName}`);
                     const iconOverlayContainer = createElement("div", "cooldown-icon-overlay-container", null);
