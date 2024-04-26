@@ -437,8 +437,8 @@ const handleSimulationCancel = (event) => {
 
     socket.emit('cancel_simulation', { task_id: taskId });
     console.log("Cancellation response for task:", taskId);
-    // clearInterval(iterationInterval);
-    // clearInterval(resultInterval);
+    clearInterval(iterationInterval);
+    clearInterval(resultInterval);
     console.log("updated")
     simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
     simulationProgressBarContainer.addEventListener("click", startSimulation);
