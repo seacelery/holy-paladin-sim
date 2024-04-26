@@ -229,7 +229,7 @@ def run_simulation_task(self, simulation_parameters):
         for i in range(simulation.iterations):
             if check_cancellation(self.request.id):
                 reset_simulation()
-                break
+                return
             
             # reset simulation states
             print(i)
