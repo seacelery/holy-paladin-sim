@@ -6,7 +6,8 @@ import redis
 import pickle
 import logging
 
-from flask import Flask, current_app, jsonify
+
+from flask import Flask, current_app, jsonify, request
 from celery.result import AsyncResult
 from app.routes import main as main_blueprint
 from app.main import import_character
@@ -127,6 +128,19 @@ def create_socketio(app):
     socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet", logger=True, engineio_logger=True)
     register_socketio_events(socketio)
     return socketio
+
+@app.route('/cancel_simulation', methods=['POST'])
+def cancel_simulation():
+    task_id = request.json.get('task_id')
+    if not task_id:
+        return jsonify({'error': 'Missing task_id'}), 400
+
+    result = revoke_task(task_id)
+
+    return jsonify({'status': 'Cancellation attempted', 'task_id': task_id}), 200
+
+def revoke_task(task_id):
+    app.control.revoke(task_id, terminate=True)
 
 @celery.task
 def process_paladin(paladin_data):

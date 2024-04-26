@@ -29,10 +29,10 @@ def serve_index():
 def test_route():
     return "Backend is running!"
     
-@main.route("/cancel_simulation", methods=["POST"])
-def cancel_simulation_route():
-    cancel_simulation()
-    return jsonify({"message": "Simulation cancellation requested."})
+# @main.route("/cancel_simulation", methods=["POST"])
+# def cancel_simulation_route():
+#     cancel_simulation()
+#     return jsonify({"message": "Simulation cancellation requested."})
 
 @main.route("/import_character", methods=["GET"])
 def import_character_route():

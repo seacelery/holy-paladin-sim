@@ -425,9 +425,7 @@ const playCancelledAnimation = () => {
 };
 
 const handleSimulationCancel = () => {
-    if (abortController) {
-        abortController.abort();
-
+    if (taskId) {
         document.querySelector(".simulation-progress-bar-checkmark").style.display = "none";
         const cancelSVG = document.querySelector(".simulation-progress-bar-cancel");
         cancelSVG.style.display = "block";
@@ -435,14 +433,21 @@ const handleSimulationCancel = () => {
 
         fetch(`${CONFIG.backendUrl}/cancel_simulation`, {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
-        }).then(res => res.json())
-        .then(data => console.log(data))
-        .catch(err => console.error(err));
-    };
+            body: JSON.stringify({ task_id: taskId })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("Cancellation response:", data);
+            clearInterval(iterationInterval);
+            clearInterval(resultInterval);
+        })
+        .catch(err => {
+            console.error("Error cancelling simulation:", err);
+        });
+    }
 };
 
 const monitorSimulation = (taskId) => {
@@ -501,6 +506,7 @@ const startSimulation = () => {
     isSimulationRunning = true;
     simulateButton.style.boxShadow = "";  
     simulationProgressBarText.textContent = "0%";
+    simulationProgressBarContainer.addEventListener("click", handleSimulationCancel);
 
     const sessionToken = sessionStorage.getItem('sessionToken')
     console.log(sessionToken)
