@@ -85,6 +85,7 @@ def register_socketio_events(socketio):
     @socketio.on('cancel_simulation')
     def handle_cancel_simulation(data):
         task_id = data.get('task_id')
+        print("cancel req received")
         if not task_id:
             emit('error', {"error": "No task_id provided"})
             return
