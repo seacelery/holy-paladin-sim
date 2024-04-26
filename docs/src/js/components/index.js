@@ -427,7 +427,7 @@ const playCancelledAnimation = () => {
 let iterationInterval, resultInterval;
 
 const handleSimulationCancel = (event) => {
-    const element = event.target.closest('[data-task-id]');
+    const element = event.target.closest("[data-task-id]");
     const taskId = element.dataset.taskId;
 
     document.querySelector(".simulation-progress-bar-checkmark").style.display = "none";
@@ -436,11 +436,9 @@ const handleSimulationCancel = (event) => {
     simulationProgressBarText.textContent = "";
     playCancelledAnimation();
 
-    socket.emit('cancel_simulation', { task_id: taskId });
-    console.log("Cancellation response for task:", taskId);
+    socket.emit("cancel_simulation", { task_id: taskId });
     clearInterval(iterationInterval);
     clearInterval(resultInterval);
-    console.log("updated")
     simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
     simulationProgressBarContainer.addEventListener("click", startSimulation);
 };
@@ -455,7 +453,7 @@ const monitorSimulation = (taskId) => {
                     const progressPercentage = Math.round((data.iteration / iterations) * 100);
                     simulationProgressBar.style.width = progressPercentage + "%";
                     simulationProgressBarText.textContent = progressPercentage + "%";
-                }
+                };
             })
             .catch(error => {
                 console.error("Error fetching iteration data:", error);
@@ -466,7 +464,7 @@ const monitorSimulation = (taskId) => {
         fetch(`${CONFIG.backendUrl}/results/${taskId}`)
             .then(response => response.json())
             .then(data => {
-                if (data.state && data.state !== 'SUCCESS') {
+                if (data.state && data.state !== "SUCCESS") {
                     console.log(`Task state: ${data.state}`);
                 } else if (data) {
                     console.log(data)
@@ -503,8 +501,7 @@ const startSimulation = () => {
     simulateButton.style.boxShadow = "";  
     simulationProgressBarText.textContent = "0%";
 
-    const sessionToken = sessionStorage.getItem('sessionToken')
-    console.log(sessionToken)
+    const sessionToken = sessionStorage.getItem("sessionToken")
     if (!sessionToken) {
         console.log("Session token not found");
         return;
@@ -525,13 +522,10 @@ const startSimulation = () => {
         custom_equipment: generateFullItemData()["equipment"]
     };
 
-    console.log('Attempting to remove startSimulation listener');
     simulationProgressBarContainer.removeEventListener("click", startSimulation);
-    console.log('Attempting to add handleSimulationCancel listener');
     simulationProgressBarContainer.addEventListener("click", handleSimulationCancel);
 
-    console.log("Sending simulation data:", simulationData);
-    socket.emit('start_simulation', simulationData);
+    socket.emit("start_simulation", simulationData);
 };
 
 // main function to bring the components together
@@ -848,8 +842,6 @@ const handleOptionImages = (images, attribute, optionType, toggle = false, multi
 const updateTimerValues = (name, consumableType) => {
     if (!currentConsumables[consumableType].hasOwnProperty(name)) return;
 
-    console.log(name, consumableType)
-
     let values = [];
     if (!["Source of Magic"].includes(name)) {
         const formattedName = name.replaceAll(" ", "-").toLowerCase();
@@ -1068,7 +1060,6 @@ window.addEventListener("click", (e) => {
 });
 
 socket.on("simulation_started", function(data) {
-    console.log("Simulation started:", data);
     monitorSimulation(data.task_id);
     simulationProgressBarContainer.dataset.taskId = data.task_id;
 });
