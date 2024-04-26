@@ -518,8 +518,8 @@ const startSimulation = () => {
 
     console.log("Sending simulation data:", simulationData);
     socket.emit('start_simulation', simulationData);
-    simulationProgressBarContainer.removeEventListener("click", startSimulation);
-    simulationProgressBarContainer.addEventListener("click", handleSimulationCancel);
+    simulationProgressBarContainer.addEventListener("click", startSimulation.bind(this));
+    simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel.bind(this));
 };
 
 // main function to bring the components together
