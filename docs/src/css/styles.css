@@ -2361,6 +2361,30 @@ body {
     border: 1px solid var(--border-colour-3);
 }
 
+#trinket-option-dropdown {
+    display: none;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
+    padding-left: 1px;
+
+    height: 25px;
+
+    font-size: 14px;
+    color: var(--light-font-colour);
+    border: none;
+    border-left: 1px solid var(--rarity-epic);
+    outline: none;
+
+    background-color: transparent;
+}
+
+.trinket-option-option {
+    background-color: var(--panel-colour);
+    outline: none;
+}
+
 #new-equipped-item-search {
     padding-bottom: 3px;
     margin-top: -2px;

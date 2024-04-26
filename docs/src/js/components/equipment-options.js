@@ -759,7 +759,7 @@ const initialiseEquipment = () => {
         currentItemTitle.style.border = `1px solid ${rarityColour}`;
         currentItemTitle.style.borderBottom = "none";
         currentItemTitle.innerHTML = `<span>Currently equipped: </span><span style="color: ${rarityColour}">${itemName}</span><div id="trinket-unsupported-icon-container">
-        <i class="fa-solid fa-triangle-exclamation" id="trinket-unsupported-icon"></i></div>`;
+        <i class="fa-solid fa-triangle-exclamation" id="trinket-unsupported-icon"></i></div><select id="trinket-option-dropdown"></select>`;
 
         const trinketUnsupported = document.getElementById("trinket-unsupported-icon-container");
         const supportedTrinkets = [
@@ -792,6 +792,31 @@ const initialiseEquipment = () => {
             trinketUnsupportedTooltip.style.display = "none";
         });
 
+        const trinketsWithOptions = {
+            "Ominous Chromatic Essence": ["Mastery", "Haste", "Crit", "Versatility"]
+        };
+        const trinketOptionDropdown = document.getElementById("trinket-option-dropdown");
+        if (itemName in trinketsWithOptions) {
+            trinketOptionDropdown.style.display = "block";
+            trinketOptionDropdown.innerHTML = "";
+            trinketsWithOptions[itemName].forEach(optionName => {
+                const option = createElement("option", "trinket-option-option", null);
+                option.textContent = optionName;
+                option.classList.add("trinket-option-option");
+                option.style.border = `1px solid ${rarityColour}`;
+                trinketOptionDropdown.appendChild(option);
+            });
+
+            let trinketItemData = JSON.parse(itemSlot.getAttribute("data-item-data"));
+            trinketOptionDropdown.value = trinketItemData["effects"][0].trinket_options ?? "Mastery";
+
+            trinketOptionDropdown.addEventListener("input", () => {
+                let trinketItemData = JSON.parse(itemSlot.getAttribute("data-item-data"));
+                trinketItemData["effects"][0].trinket_options = trinketOptionDropdown.value;
+                itemSlot.setAttribute("data-item-data", JSON.stringify(trinketItemData));
+            });
+        };
+    
         currentItemInfoContainer.style.border = `1px solid ${rarityColour}`;
         
         currentItemInfo.style.borderLeft = `1px solid ${rarityColour}`;

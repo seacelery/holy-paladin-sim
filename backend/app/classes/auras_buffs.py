@@ -1341,7 +1341,7 @@ class InspiredByFrostAndEarth(Buff):
         
     def apply_effect(self, caster, current_time=None):        
         caster.update_stat("crit", self.trinket_second_value)
-        caster.update_stat("versatility", -self.trinket_second_value)
+        caster.update_stat("versatility", self.trinket_second_value)
         
     def remove_effect(self, caster, current_time=None):
         caster.update_stat("crit", -self.trinket_second_value)
@@ -1488,11 +1488,25 @@ class OminousChromaticEssence(Buff):
         # bonus
         self.trinket_second_value = trinket_values[1]
         
+        self.available_stats = ["haste", "crit", "mastery", "versatility"]
+        
+        option_value = caster.trinkets.get(self.name, {}).get("option")
+        if not option_value:
+            self.chosen_stat = "mastery"
+        else:
+            self.chosen_stat = option_value.lower()
+            
+        self.available_stats.remove(self.chosen_stat)
+        
     def apply_effect(self, caster, current_time=None):        
-        caster.update_stat("mastery", self.trinket_first_value + self.trinket_second_value)
+        caster.update_stat(self.chosen_stat, self.trinket_first_value)
+        for stat in self.available_stats:
+            caster.update_stat(stat, self.trinket_second_value)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", -(self.trinket_first_value + self.trinket_second_value))
+        caster.update_stat(self.chosen_stat, -self.trinket_first_value)
+        for stat in self.available_stats:
+            caster.update_stat(stat, -self.trinket_second_value)
 
 
 class ScreamingBlackDragonscale(Buff):

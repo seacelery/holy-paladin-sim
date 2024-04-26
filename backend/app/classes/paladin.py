@@ -342,7 +342,7 @@ class Paladin:
         for item in self.equipment:
             if item in ["trinket_1", "trinket_2"]:
                 trinket_data = self.equipment[item]
-                self.trinkets[trinket_data["name"]] = {"item_level": trinket_data["item_level"], "effect": trinket_data["effects"][0]["description"]}
+                self.trinkets[trinket_data["name"]] = {"item_level": trinket_data["item_level"], "effect": trinket_data["effects"][0]["description"], "option": trinket_data["effects"][0].get("trinket_options", None)}
                 
     def update_embellishments(self):
         self.embellishments = {}
