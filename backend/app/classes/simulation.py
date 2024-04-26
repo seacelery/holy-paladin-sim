@@ -210,11 +210,9 @@ class Simulation:
         
         ability = self.abilities.get(self.paladin.currently_casting)
         
-        print(f"ability {ability.name}")
         sys.stdout.flush()
         for target in non_beacon_targets:
             if "Tyr's Deliverance (target)" in target.target_active_buffs:
-                print(f"tyrs on {target.name}")
                 sys.stdout.flush()
        
         if ability:
