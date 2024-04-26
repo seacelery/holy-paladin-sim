@@ -439,6 +439,9 @@ const handleSimulationCancel = (event) => {
     console.log("Cancellation response for task:", taskId);
     clearInterval(iterationInterval);
     clearInterval(resultInterval);
+    console.log("updated")
+    simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
+    simulationProgressBarContainer.addEventListener("click", startSimulation);
 };
 
 const monitorSimulation = (taskId) => {
@@ -454,7 +457,7 @@ const monitorSimulation = (taskId) => {
                 }
             })
             .catch(error => {
-                console.error('Error fetching iteration data:', error);
+                console.error("Error fetching iteration data:", error);
             });
     }, 1000);
 
@@ -474,10 +477,10 @@ const monitorSimulation = (taskId) => {
                     isSimulationRunning = false;
                     simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
                     simulationProgressBarContainer.addEventListener("click", startSimulation);
-                }
+                };
             })
             .catch(error => {
-                console.error('Error fetching results:', error);
+                console.error("Error fetching results:", error);
             });
     }, 2000);
 };
