@@ -92,7 +92,7 @@ def register_socketio_events(socketio):
             return
 
         try:
-            task = celery.tasks.AsyncResult(task_id)
+            task = celery.AsyncResult(task_id)
             task.revoke(terminate=True)  # This will terminate the task if it's currently running
             emit('simulation_cancelled', {'message': "Cancellation requested for task " + task_id})
         except Exception as e:
