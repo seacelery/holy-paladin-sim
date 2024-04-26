@@ -433,6 +433,7 @@ const handleSimulationCancel = (event) => {
     document.querySelector(".simulation-progress-bar-checkmark").style.display = "none";
     const cancelSVG = document.querySelector(".simulation-progress-bar-cancel");
     cancelSVG.style.display = "block";
+    simulationProgressBarText.textContent = "";
     playCancelledAnimation();
 
     socket.emit('cancel_simulation', { task_id: taskId });
