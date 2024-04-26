@@ -516,13 +516,15 @@ const startSimulation = () => {
         custom_equipment: generateFullItemData()["equipment"]
     };
 
-    console.log("Sending simulation data:", simulationData);
-    socket.emit('start_simulation', simulationData);
-
     console.log('Attempting to remove startSimulation listener');
     simulationProgressBarContainer.removeEventListener("click", startSimulation);
     console.log('Attempting to add handleSimulationCancel listener');
     simulationProgressBarContainer.addEventListener("click", handleSimulationCancel);
+
+    console.log("Sending simulation data:", simulationData);
+    socket.emit('start_simulation', simulationData);
+
+    
 };
 
 // main function to bring the components together
