@@ -6,7 +6,7 @@ from ..classes.auras_buffs import (
                                    CloseToHeart, RetributionAura, SourceOfMagic, PowerInfusion, Innervate, PotionAbsorptionInhibitor,
                                    AlliedChestplateOfGenerosity, AlliedWristguardOfCompanionship, VerdantConduit, VerdantTether, ElementalLariat,
                                    DreamtendersCharm, IcedPhialOfCorruptingRage, ManaSpringTotem, SymbolOfHope, MagazineOfHealingDarts,
-                                   BronzedGripWrappings
+                                   BronzedGripWrappings, ManaTideTotem
                                   )
 
 buff_class_map = {
@@ -44,6 +44,7 @@ buff_class_map = {
     "Retribution Aura": RetributionAura,
     "Symbol of Hope": SymbolOfHope,
     "Mana Spring Totem": ManaSpringTotem,
+    "Mana Tide Totem": ManaTideTotem,
     
     # external buffs
     "Source of Magic": SourceOfMagic,

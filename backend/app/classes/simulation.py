@@ -60,6 +60,7 @@ class Simulation:
         self.source_of_magic_timer = 0
         self.symbol_of_hope_timer = 150 if encounter_length > 210 else 30
         self.mana_spring_totem_timer = 0
+        self.mana_tide_totem_timer = 150 if encounter_length > 210 else 30
         
         self.times_direct_healed = {}
         self.previous_ability = None
@@ -435,6 +436,14 @@ class Simulation:
                 mana_spring_totem_mana_gain = 150
                 self.paladin.mana += mana_spring_totem_mana_gain
                 update_mana_gained(self.paladin.ability_breakdown, "Mana Spring Totem", mana_spring_totem_mana_gain)
+                
+        if "Mana Tide Totem" in self.paladin.active_auras:
+            self.mana_tide_totem_timer += self.tick_rate
+            if self.mana_tide_totem_timer >= 180:
+                self.mana_tide_totem_timer = 0
+                mana_tide_totem_mana_gain = 12800
+                self.paladin.mana += mana_tide_totem_mana_gain
+                update_mana_gained(self.paladin.ability_breakdown, "Mana Tide Totem", mana_tide_totem_mana_gain)
                 
         if "Symbol of Hope" in self.paladin.active_auras:
             self.symbol_of_hope_timer += self.tick_rate

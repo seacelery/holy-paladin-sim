@@ -104,7 +104,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     // "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", 
     const excludedSpells = [
         "Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", 
-        "Aerated Mana Potion", "Tirion's Devotion", "Source of Magic", "Mana Spring Totem", "Symbol of Hope"
+        "Aerated Mana Potion", "Tirion's Devotion", "Source of Magic", "Mana Spring Totem", "Symbol of Hope", "Mana Tide Totem"
     ];
     // displays only casts and resource gains
     const excludedSpellsOnlyResourcesAndCasts = [

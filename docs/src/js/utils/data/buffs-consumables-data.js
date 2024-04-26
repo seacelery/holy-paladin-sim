@@ -38,7 +38,8 @@ const raidBuffs = {
     "Close to Heart": {effect: "Your allies within 10 yards take 8% increased healing.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_offhand_1h_pvppandarias2_c_01.jpg"},
     "Retribution Aura": {effect: "When any party or raid member within 40 yds takes more than 30% of their health in damage in a single hit, each member gains 5% increased damage and healing, decaying over 30 seconds.", image: "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusade.jpg"},
     "Symbol of Hope": {effect: "Bolster the morale of raid members within 40 yds. They each recover 30 sec of cooldown of a major defensive ability, and regain 10% of their missing mana, over 4 seconds.", image: "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_symbolofhope.jpg"},
-    "Mana Spring Totem": {effect: "Lava Burst and Riptide casts restore 150 mana to you and 4 allies nearest to you within 40 yards.", image: "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_manaregentotem.jpg"}
+    "Mana Spring Totem": {effect: "Lava Burst and Riptide casts restore 150 mana to you and 4 allies nearest to you within 40 yards.", image: "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_manaregentotem.jpg"},
+    "Mana Tide Totem": {effect: "Your mana regeneration is increased by 80% for 8 seconds.", image: "https://render.worldofwarcraft.com/eu/icons/56/ability_shaman_manatidetotem.jpg"}
 };
 
 const externalBuffs = {

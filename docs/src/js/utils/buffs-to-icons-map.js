@@ -90,6 +90,7 @@ const buffsToIconsMap = {
     "Retribution Aura ": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusade.jpg",
     "Retribution Aura": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusade.jpg",
     "Mana Spring Totem": "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_manaregentotem.jpg",
+    "Mana Tide Totem": "https://render.worldofwarcraft.com/eu/icons/56/ability_shaman_manatidetotem.jpg",
     "Symbol of Hope": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_symbolofhope.jpg",
 
     // external buffs

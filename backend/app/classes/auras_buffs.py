@@ -1238,6 +1238,18 @@ class ManaSpringTotem(Buff):
         pass
     
 
+class ManaTideTotem(Buff):
+    
+    def __init__(self):
+        super().__init__("Mana Tide Totem", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
 class SymbolOfHope(Buff):
     
     def __init__(self):
