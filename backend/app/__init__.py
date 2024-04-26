@@ -85,18 +85,9 @@ def register_socketio_events(socketio):
     @socketio.on('cancel_simulation')
     def handle_cancel_simulation(data):
         task_id = data.get('task_id')
-        print("cancel req received")
-        sys.stdout.flush()
-        if not task_id:
-            emit('error', {"error": "No task_id provided"})
-            return
-
-        try:
-            task = celery.AsyncResult(task_id)
-            task.revoke(terminate=True, signal='SIGKILL')
+        if task_id:
+            current_app.redis.set(f'cancel_task_{task_id}', '1')
             emit('simulation_cancelled', {'message': "Cancellation requested for task " + task_id})
-        except Exception as e:
-            emit('error', {'error': str(e)})
 
 app = Flask(__name__, static_url_path="", static_folder="../../docs")
 init_socketio(app)
@@ -227,7 +218,8 @@ def run_simulation_task(self, simulation_parameters):
         
         # complete all simulation iterations and process the data of each
         for i in range(simulation.iterations):
-            if check_cancellation(self.request.id):
+            if redis.get(f'cancel_task_{task_id}'):
+                print("Cancellation requested")
                 reset_simulation()
                 return
             
