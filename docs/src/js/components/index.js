@@ -424,14 +424,17 @@ const playCancelledAnimation = () => {
     }, 4000);
 };
 
-const handleSimulationCancel = () => {
+const handleSimulationCancel = (event) => {
+    const element = event.target.closest('[data-task-id]');
+    const taskId = element.dataset.taskId;
+
     document.querySelector(".simulation-progress-bar-checkmark").style.display = "none";
     const cancelSVG = document.querySelector(".simulation-progress-bar-cancel");
     cancelSVG.style.display = "block";
     playCancelledAnimation();
 
     socket.emit('cancel_simulation', { task_id: taskId });
-    console.log("Cancellation response:", data);
+    console.log("Cancellation response for task:", taskId);
     clearInterval(iterationInterval);
     clearInterval(resultInterval);
 };
@@ -523,8 +526,6 @@ const startSimulation = () => {
 
     console.log("Sending simulation data:", simulationData);
     socket.emit('start_simulation', simulationData);
-
-    
 };
 
 // main function to bring the components together
@@ -1063,6 +1064,7 @@ window.addEventListener("click", (e) => {
 socket.on("simulation_started", function(data) {
     console.log("Simulation started:", data);
     monitorSimulation(data.task_id);
+    simulationProgressBarContainer.dataset.taskId = data.task_id;
 });
 
 simulationProgressBarContainer.addEventListener("click", startSimulation);
