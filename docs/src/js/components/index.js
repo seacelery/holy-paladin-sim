@@ -424,6 +424,8 @@ const playCancelledAnimation = () => {
     }, 4000);
 };
 
+let iterationInterval, resultInterval;
+
 const handleSimulationCancel = (event) => {
     const element = event.target.closest('[data-task-id]');
     const taskId = element.dataset.taskId;
@@ -440,7 +442,7 @@ const handleSimulationCancel = (event) => {
 };
 
 const monitorSimulation = (taskId) => {
-    let iterationInterval = setInterval(() => {
+    iterationInterval = setInterval(() => {
         fetch(`${CONFIG.backendUrl}/iteration/${taskId}`)
             .then(response => response.json())
             .then(data => {
@@ -456,7 +458,7 @@ const monitorSimulation = (taskId) => {
             });
     }, 1000);
 
-    let resultInterval = setInterval(() => {
+    resultInterval = setInterval(() => {
         fetch(`${CONFIG.backendUrl}/results/${taskId}`)
             .then(response => response.json())
             .then(data => {
