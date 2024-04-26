@@ -468,6 +468,7 @@ const monitorSimulation = (taskId) => {
                     playCheckmarkAnimation();
                     isSimulationRunning = false;
                     simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
+                    simulationProgressBarContainer.addEventListener("click", startSimulation);
                 }
             })
             .catch(error => {
@@ -492,7 +493,6 @@ const startSimulation = () => {
     isSimulationRunning = true;
     simulateButton.style.boxShadow = "";  
     simulationProgressBarText.textContent = "0%";
-    simulationProgressBarContainer.addEventListener("click", handleSimulationCancel);
 
     const sessionToken = sessionStorage.getItem('sessionToken')
     console.log(sessionToken)
@@ -518,6 +518,8 @@ const startSimulation = () => {
 
     console.log("Sending simulation data:", simulationData);
     socket.emit('start_simulation', simulationData);
+    simulationProgressBarContainer.removeEventListener("click", startSimulation);
+    simulationProgressBarContainer.addEventListener("click", handleSimulationCancel);
 };
 
 // main function to bring the components together
