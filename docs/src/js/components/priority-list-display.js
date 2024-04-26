@@ -683,11 +683,11 @@ beaconOfVirtuePreset.addEventListener("click", () => {
         Flash of Light | Beacon of Virtue active | and | Infusion of Light active
         Word of Glory | Beacon of Virtue active | and | Holy Power >= 3 
         Aerated Mana Potion | Timers = [30]+
-        Avenging Wrath | Timers = [20, 131]
+        Avenging Wrath | Timers = [20, 131, 251]
         Lay on Hands | Blessing of Autumn active
         Divine Favor
         Nymue's Unraveling Spindle | Timers = [17]+
-        Beacon of Virtue | Timers = [22, 45, 64, 79, 106, 130, 161, 177]
+        Beacon of Virtue | Timers = [22, 45, 64, 79, 106, 130, 161, 177, 192, 210, 230, 253, 280]
         Holy Shock
         Blessing of the Seasons
         Light of Dawn | Holy Power = 5
