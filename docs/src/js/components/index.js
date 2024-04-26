@@ -425,29 +425,15 @@ const playCancelledAnimation = () => {
 };
 
 const handleSimulationCancel = () => {
-    if (taskId) {
-        document.querySelector(".simulation-progress-bar-checkmark").style.display = "none";
-        const cancelSVG = document.querySelector(".simulation-progress-bar-cancel");
-        cancelSVG.style.display = "block";
-        playCancelledAnimation();
+    document.querySelector(".simulation-progress-bar-checkmark").style.display = "none";
+    const cancelSVG = document.querySelector(".simulation-progress-bar-cancel");
+    cancelSVG.style.display = "block";
+    playCancelledAnimation();
 
-        fetch(`${CONFIG.backendUrl}/cancel_simulation`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ task_id: taskId })
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log("Cancellation response:", data);
-            clearInterval(iterationInterval);
-            clearInterval(resultInterval);
-        })
-        .catch(err => {
-            console.error("Error cancelling simulation:", err);
-        });
-    }
+    socket.emit('cancel_simulation', { task_id: taskId });
+    console.log("Cancellation response:", data);
+    clearInterval(iterationInterval);
+    clearInterval(resultInterval);
 };
 
 const monitorSimulation = (taskId) => {
