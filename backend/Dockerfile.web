@@ -22,8 +22,10 @@ FROM pypy:3.10-slim
 
 WORKDIR /app
 
+# Ensure packages are available and install build essentials explicitly
 RUN apt-get update && \
-    apt-get install -y git gcc libc-dev pypy3-dev && \
+    apt-get install -y git gcc libc-dev pypy3-dev make && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /app/
@@ -39,3 +41,4 @@ RUN adduser --disabled-password --gecos '' myuser
 USER myuser
 
 CMD ["sh", "-c", "pypy run.py run --host=0.0.0.0 --port=$PORT"]
+
