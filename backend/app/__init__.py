@@ -6,6 +6,7 @@ import redis
 import pickle
 import logging
 import resource
+import objgraph
 
 from flask import Flask, current_app, jsonify, request
 from celery.result import AsyncResult
@@ -747,6 +748,9 @@ def run_simulation_task(self, simulation_parameters):
         
         memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
         print(f"Memory Usage: {memory_usage} KB END")
+        sys.stdout.flush()
+        
+        objgraph.show_most_common_types()
         sys.stdout.flush()
 
         return {"results": full_results, "simulation_details": simulation_details}

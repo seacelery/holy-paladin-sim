@@ -37,3 +37,4 @@ redis
 celery
 certifi
 resource
+objgraph
