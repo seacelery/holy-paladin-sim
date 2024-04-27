@@ -3,7 +3,7 @@
     --panel-colour: #070506;
     --panel-colour-2: rgb(20, 9, 16);
     --panel-colour-3: rgb(46, 24, 39);
-    --panel-colour-4: rgb(134, 82, 113);
+    --panel-colour-4: #79475d;
     --panel-colour-5: rgb(51, 29, 42);
     --panel-colour-6: rgb(19, 9, 15);
     --panel-colour-7: rgb(12, 6, 10);
@@ -75,7 +75,7 @@
 [data-theme="plain"] {
     --background-colour: #060606;
     --panel-colour: #0B0B0B;
-    --panel-colour-2: #121212;
+    --panel-colour-2: #181818;
     --panel-colour-3: #272727;
     --panel-colour-4: #6e6e6e;
     --panel-colour-5: #272727;
@@ -85,7 +85,7 @@
     --panel-colour-table: #1f1f1f;
     --panel-colour-table-2: #0E0E0E;
     --panel-colour-table-3: #0D0D0D;
-    --panel-colour-table-4: rgba(0, 0, 0, 0.233);
+    --panel-colour-table-4: rgba(0, 0, 0, 0);
     --panel-colour-table-5: #202020;
     --panel-colour-table-6: #0e0e0e;
     --border-colour: #3c3241;
@@ -4053,7 +4053,7 @@ tr {
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour-table-3);
+    background-color: var(--panel-colour-table-4);
 }
 
 .table-sub-cell-left::before {
@@ -4081,7 +4081,7 @@ tr {
     font-size: 17px;
     text-align: right;
 
-    background-color: var(--panel-colour-table-3);
+    background-color: var(--panel-colour-table-4);
 }
 
 .table-sub-sub-cell-left {
@@ -4502,7 +4502,7 @@ tr {
     font-size: 17px;
     border: none !important;
 
-    background-color: var(--panel-colour-table-3);
+    background-color: var(--panel-colour-table-4);
 }
 
 .buff-table-sub-cell-right {
@@ -4518,7 +4518,7 @@ tr {
     font-size: 17px;
     text-align: right;
 
-    background-color: var(--panel-colour-table-3);
+    background-color: var(--panel-colour-table-4);
 }
 
 .buff-table-sub-cell-left::before {
@@ -4622,13 +4622,13 @@ tr {
     padding-top: 1px;
     margin-left: 0.5px;
 
-    min-width: 300px;
+    min-width: 330px;
     height: 35px;
 
     font-weight: 300;
     font-size: 17px;
 
-    background-color: var(--panel-colour-table-3);
+    background-color: var(--panel-colour-table-4);
 }
 
 .resources-table-sub-cell-left::before {

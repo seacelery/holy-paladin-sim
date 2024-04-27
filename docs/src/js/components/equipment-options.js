@@ -765,7 +765,7 @@ const initialiseEquipment = () => {
         const supportedTrinkets = [
             "Ominous Chromatic Essence", "Rashok's Molten Heart", "Broodkeeper's Promise", "Whispering Incarnate Icon",
             "Screaming Black Dragonscale", "Smoldering Seedling", "Pip's Emerald Friendship Badge", "Neltharion's Call to Chaos",
-            "Spoils of Neltharus", "Blossom of Amir'drassil", "Miniature Singing Stone", "Conjured Chillglobe",
+            "Spoils of Neltharus", "Blossom of Amirdrassil", "Miniature Singing Stone", "Conjured Chillglobe",
             "Idol of the Spell-Weaver", "Idol of the Life-Binder", "Idol of the Earth-Warder", "Idol of the Dreamer",
             "Time-Breaching Talon", "Nymue's Unraveling Spindle", "Mirror of Fractured Tomorrows", "Echoing Tyrstone"
         ];

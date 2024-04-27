@@ -113,6 +113,7 @@ const buffsToIconsMap = {
     "Emerald Coach's Whistle": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_head_dragon_green.jpg",
     "Spoils of Neltharus": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_dragon_trinket_4_bronze.jpg",
     "Broodkeeper's Promise": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_primalist_trinket_3_omni.jpg",
+    "Echoing Tyrstone": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_lightofthemartyr.jpg",
 
     "Time-Breaching Talon ": "https://render.worldofwarcraft.com/eu/icons/56/spell_chargepositive.jpg",
     "Time-Breaching Talon  ": "https://render.worldofwarcraft.com/eu/icons/56/spell_chargenegative.jpg",

@@ -766,6 +766,31 @@ const itemDataEffects = [
         "enchantments": [],
         "gems": []
     },
+    {
+        "id": 207552,
+        "name": "Echoing Tyrstone",
+        "item_slot": "Trinket",
+        "icon": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_lightofthemartyr.jpg",
+        "base_item_level": 421,
+        "quality": "Epic",
+        "effects": [
+            {
+                "name": "Echoing Tyrstone",
+                "id": 417939,
+                "description": "Use: Activate the Tyrstone, recording 30% of your healing done over the next 10 sec, up to *181,431 healing done. (2 Min Cooldown)<br><br>Equip: Whenever you or one of your allies falls below 35% health, the Tyrstone will summon an echo of your past self, healing them for the stored amount split among nearby allies and granting *209 Haste for 15 sec before the record is lost. Deals increased healing when healing multiple allies.",
+                "effect_values": [
+                    {"base_value": 181431, "effect_type": "scalar", "effect_coefficient": 283.4695, "allocation_type": "flat_healing"},
+                    {"base_value": 209, "effect_type": "scalar", "effect_coefficient": 0.189052, "allocation_type": "no_multiplier"}
+                ]
+            }
+        ],
+        "stats": {
+            "Intellect": 473
+        },
+        "limit": null,
+        "enchantments": [],
+        "gems": []
+    },
 ];
 
 export default itemDataEffects;
