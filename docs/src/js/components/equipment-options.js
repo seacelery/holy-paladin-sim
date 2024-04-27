@@ -819,7 +819,7 @@ const initialiseEquipment = () => {
     
         currentItemInfoContainer.style.border = `1px solid ${rarityColour}`;
         
-        currentItemInfo.style.borderLeft = `1px solid ${rarityColour}`;
+        // currentItemInfo.style.borderLeft = `1px solid ${rarityColour}`;
 
         const jewelleryItemSlots = ["Necklace", "Ring 1", "Ring 2"];
         const miscItemSlots = ["Trinket 1", "Trinket 2"];
@@ -971,7 +971,7 @@ const initialiseEquipment = () => {
 
             newItemInfoContainer.style.border = `1px solid ${rarityColour}`;
         
-            newItemInfo.style.borderLeft = `1px solid ${rarityColour}`;
+            // newItemInfo.style.borderLeft = `1px solid ${rarityColour}`;
             replaceItemButton.style.borderTop = `1px solid ${rarityColour}`;
             replaceItemButton.style.borderRight = `1px solid ${rarityColour}`;
 

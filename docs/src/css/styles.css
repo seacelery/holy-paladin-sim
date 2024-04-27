@@ -2291,16 +2291,12 @@ body {
     background-color: var(--tooltip-colour-2);
 }
 
-#current-equipped-item-icon-container, #new-equipped-item-icon-container {
-    overflow: hidden;
-}
-
 #current-equipped-item-icon, #new-equipped-item-icon {
     width: 110px;
     height: calc(110px - 3px);
 
     opacity: 0.2;
-    transform: scale(1.03);
+    transform: scale(1.00);
     border-bottom: 1px solid var(--border-colour-3);
 }
 
@@ -2532,6 +2528,10 @@ body {
 .current-equipped-item-trinket-effect, .new-equipped-item-trinket-effect {
     padding-bottom: 3px;
     overflow: auto;
+}
+
+.current-equipped-item-default-embellishment-option, .new-equipped-item-default-embellishment-option {
+    padding-top: 0px;
 }
 
 .current-equipped-item-trinket-effect::-webkit-scrollbar-thumb, .new-equipped-item-trinket-effect::-webkit-scrollbar-thumb {
