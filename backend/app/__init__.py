@@ -7,7 +7,6 @@ import pickle
 import logging
 import resource
 import objgraph
-import gc
 
 from flask import Flask, current_app, jsonify, request
 from celery.result import AsyncResult
@@ -647,10 +646,6 @@ def run_simulation_task(self, simulation_parameters):
             full_healing_timeline_results.update({f"iteration {i}": healing_timeline})
             full_mana_timeline_results.update({f"iteration {i}": mana_timeline})
             full_holy_power_timeline_results.update({f"iteration {i}": holy_power_timeline})
-            
-        gc.collect()
-        print(gc.garbage)
-        sys.stdout.flush()
         
         # COMBINE AND AVERAGE ALL KEYS OVER ITERATIONS       
         def combine_results(*dicts):
