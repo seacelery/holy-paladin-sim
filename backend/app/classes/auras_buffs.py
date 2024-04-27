@@ -1359,9 +1359,6 @@ class InspiredByFrostAndEarth(Buff):
         caster.update_stat("crit", -self.trinket_second_value)
         caster.update_stat("versatility", -self.trinket_second_value)
         
-# TODO 
-# broodkeeper's promise
-# miniature singing stone
 
 class VoiceFromBeyond(Buff):
     

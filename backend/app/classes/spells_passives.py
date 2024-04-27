@@ -143,8 +143,6 @@ class RashoksMoltenHeartHeal(Spell):
 # Echoing Tyrstone conditional proc
 class EchoingTyrstoneProc(Spell):
     
-    # TODO exact healing scaling
-    
     SPELL_POWER_COEFFICIENT = 0
     AVERAGE_TIME_TO_PROC = 20
     
@@ -178,8 +176,6 @@ class EchoingTyrstoneProc(Spell):
         
 # Blossom of Amirdrassil conditional proc
 class BlossomOfAmirdrassilProc(Spell):
-    
-    # TODO exact healing scaling
     
     SPELL_POWER_COEFFICIENT = 0
     AVERAGE_TIME_TO_PROC = 5
