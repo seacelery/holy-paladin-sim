@@ -3,7 +3,7 @@
     --panel-colour: #070506;
     --panel-colour-2: rgb(20, 9, 16);
     --panel-colour-3: rgb(46, 24, 39);
-    --panel-colour-4: rgb(134, 94, 118);
+    --panel-colour-4: rgb(134, 82, 113);
     --panel-colour-5: rgb(51, 29, 42);
     --panel-colour-6: rgb(19, 9, 15);
     --panel-colour-7: rgb(12, 6, 10);
@@ -73,31 +73,32 @@
 }
 
 [data-theme="plain"] {
-    --background-colour: rgb(8, 8, 10);
-    --panel-colour: rgb(12, 12, 15);
-    --panel-colour-2: #17171a;
-    --panel-colour-3: #39383d;
-    --panel-colour-4: #6a6770;
-    --panel-colour-5: #2c2b30;
-    --panel-colour-6: rgb(16, 16, 20);
-    --panel-colour-7: rgb(12, 12, 15);
-    --panel-colour-background: rgb(16, 16, 20);
-    --panel-colour-table: #323138;
-    --panel-colour-table-2: #17171a;
-    --panel-colour-table-3: rgb(15, 15, 19);
+    --background-colour: #060606;
+    --panel-colour: #0B0B0B;
+    --panel-colour-2: #121212;
+    --panel-colour-3: #272727;
+    --panel-colour-4: #6e6e6e;
+    --panel-colour-5: #272727;
+    --panel-colour-6: #121212;
+    --panel-colour-7: #2E2E2E;
+    --panel-colour-background: #0B0B0B;
+    --panel-colour-table: #1f1f1f;
+    --panel-colour-table-2: #0E0E0E;
+    --panel-colour-table-3: #0D0D0D;
     --panel-colour-table-4: rgba(0, 0, 0, 0.233);
-    --panel-colour-table-3: #17171a;
+    --panel-colour-table-5: #202020;
+    --panel-colour-table-6: #0e0e0e;
     --border-colour: #3c3241;
     --border-colour-2: #1b1a1f;
     --transparent-border-colour-2: #1b1a1fd7;
     --border-colour-3: #56545a;
     --border-colour-4: #56545a;
     --tooltip-colour: rgba(0, 0, 0, 0.233);
-    --tooltip-colour-hover: rgba(63, 63, 63, 0.096);
+    --tooltip-colour-hover: rgba(255, 255, 255, 0.096);
     --tooltip-opaque-colour: rgb(20, 20, 20);
     --tooltip-colour-2: rgba(0, 0, 0, 0.233);
-    --hover-colour-dark: rgb(18, 18, 21);
-    --hover-colour-light: #434149;
+    --hover-colour-dark: rgb(255, 255, 255);
+    --hover-colour-light: #4b4b4b;
     --subrow-arrow-colour: #cca1ddef;
     --subrow-arrow-colour-hover: #c8add3c9;
     --subrow-arrow-colour-active: #c790ddc9;
@@ -106,6 +107,12 @@
     --dark-font-colour: rgb(0, 0, 0);
     --info-circle-colour: #9c9597;
     --info-circle-colour-2: rgb(18, 18, 21);
+
+    --rarity-epic-dark: #0f0616;
+    --rarity-rare-dark: #050b0f;
+    --rarity-uncommon-dark: #041106;
+    --rarity-common-dark: #0c0c0c0e;
+    --rarity-poor-dark: #0c0c0c0e;
 }
 
 * {
@@ -2482,6 +2489,10 @@ body {
     overflow: auto;
     border: 1px solid var(--border-colour-3);
     background-color: var(--panel-colour);
+}
+
+.current-equipped-item-enchant-options, .new-equipped-item-enchant-options {
+    top: calc(100% + 1px);
 }
 
 .current-equipped-item-embellishment-options::-webkit-scrollbar, .new-equipped-item-embellishment-options::-webkit-scrollbar {
