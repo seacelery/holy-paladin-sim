@@ -22,15 +22,10 @@ FROM pypy:3.10-slim
 
 WORKDIR /app
 
-# Install gcc and essential build tools
-RUN apt-get update && \
-    apt-get install -y git gcc libc-dev pypy3-dev make && \
-    gcc --version && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /app/
-# Install dependencies with a verbose output to diagnose issues
-RUN pip install --verbose --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app
 
@@ -42,4 +37,3 @@ RUN adduser --disabled-password --gecos '' myuser
 USER myuser
 
 CMD ["sh", "-c", "pypy run.py run --host=0.0.0.0 --port=$PORT"]
-

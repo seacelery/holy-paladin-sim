@@ -5,7 +5,6 @@ import json
 import redis
 import pickle
 import logging
-import psutil
 
 from flask import Flask, current_app, jsonify, request
 from celery.result import AsyncResult
@@ -146,14 +145,8 @@ def check_cancellation(task_id):
     task = celery.AsyncResult(task_id)
     return task.status == 'REVOKED'
 
-def log_memory_usage(description):
-    process = psutil.Process(os.getpid())
-    sys.stdout.flush()
-    print(f'{description} - Memory Usage: {process.memory_info().rss / 1024 ** 2:.2f} MB')
-
 @celery.task(bind=True)
 def run_simulation_task(self, simulation_parameters): 
-    log_memory_usage("Before simulation start")
     try:
         redis = current_app.redis
         task_id = self.request.id
@@ -224,7 +217,6 @@ def run_simulation_task(self, simulation_parameters):
         
         # complete all simulation iterations and process the data of each
         for i in range(simulation.iterations):
-            log_memory_usage(f"Iteration {i}")
             if redis.get(f'cancel_task_{task_id}'):
                 print("Cancellation requested")
                 reset_simulation()
@@ -744,7 +736,7 @@ def run_simulation_task(self, simulation_parameters):
             "talents": {"class_talents": simulation.paladin.class_talents, "spec_talents": simulation.paladin.spec_talents},
             "priority_list": simulation.priority_list_text
         }
-        log_memory_usage("After simulation end")
+
         return {"results": full_results, "simulation_details": simulation_details}
     except TaskRevokedError:
         print("Task was cancelled")
