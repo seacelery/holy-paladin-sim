@@ -21,7 +21,7 @@
     --border-colour-4: rgb(133, 10, 94);
     --border-colour-5: #1b1a1f;
     --tooltip-colour: rgba(36, 36, 36, 0.034);
-    --tooltip-colour-hover: rgba(184, 131, 175, 0.13);
+    --tooltip-colour-hover: rgba(51, 29, 42, 0.651);
     --tooltip-opaque-colour: rgb(20, 20, 20);
     --tooltip-colour-2: rgba(54, 36, 50, 0.075);
     --hover-colour-dark: rgb(18, 18, 21);
@@ -73,7 +73,7 @@
 }
 
 [data-theme="plain"] {
-    --background-colour: #060606;
+    --background-colour: #070707;
     --panel-colour: #0B0B0B;
     --panel-colour-2: #181818;
     --panel-colour-3: #111111;
@@ -562,7 +562,7 @@ body {
     flex-direction: column;
     align-items: center;
     position: relative;
-    transform: translateY(10px);
+    transform: translate(3px, 10px);
 
     text-align: center;
 
@@ -682,6 +682,7 @@ body {
     font-size: 16px;
 
     padding-left: 5px;
+    outline: none;
 }
 
 #character-realm-input-main, #character-region-input-main {
@@ -714,6 +715,7 @@ body {
     left: -1px;
 
     text-align: left;
+    padding-top: 2px;
 
     height: 240px;
     width: 275px;
@@ -946,7 +948,7 @@ body {
     margin-left: -1px;
     margin-bottom: 30px;
 
-    width: 92%;
+    width: 93%;
 
     background-color: var(--border-colour-3);
 }
@@ -1630,7 +1632,7 @@ body {
 }
 
 .talent-option:hover {
-    box-shadow: 0px 0px 4px 1px var(--holy-font) !important;
+    box-shadow: 0px 0px 3px 1px var(--holy-font) !important;
     transition: box-shadow 0.01s ease-in-out;
 }
 
@@ -2244,7 +2246,7 @@ body {
 }
 
 #equipped-items-edit-choose-slot-dropdown {
-    padding-left: 3px;
+    padding-left: 4px;
     padding-bottom: 1px;
 
     width: 100%;
@@ -2920,6 +2922,25 @@ body {
     transition: color 0.1s ease-in-out;
 }
 
+#priority-list-copy-notification {
+    opacity: 0;
+    position: fixed;
+    top: 35px;
+    left: calc(50% - 90px);
+    padding: 5px 3px;
+    border-radius: 4px;
+
+    width: 180px;
+
+    border: 1px solid var(--border-colour-3);
+    text-align: center;
+    color: var(--light-font-colour);
+    background-color: var(--panel-colour-2);
+    
+    z-index: 1000;
+    transition: 0.1s all ease-out;
+}
+
 #priority-list-presets-modal {
     z-index: 2;
     display: none;
@@ -3420,8 +3441,8 @@ input:-webkit-autofill{
 
 .priority-list-button-disabled {
     cursor: not-allowed !important;
-    filter: grayscale(1);
     pointer-events: none;
+    color: grey !important;
 }
 
 .priority-list-buttons-container {
@@ -3534,7 +3555,7 @@ input:focus {
     top: 0px;
 
     margin-right: 10px;
-    padding-left: 6px;
+    padding-left: 8px;
 
     height: 38px;
     width: 250px;

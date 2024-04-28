@@ -621,11 +621,16 @@ const updatePriorityList = () => {
 };
 
 const priorityListCopyButton = document.getElementById("priority-list-copy-icon");
+const priorityListCopyNotification = document.getElementById("priority-list-copy-notification");
 priorityListCopyButton.addEventListener("click", () => {
     const priorityListString = priorityList.join("\n"); 
 
     navigator.clipboard.writeText(priorityListString).then(() => {
         console.log("Priority list copied to clipboard");
+        priorityListCopyNotification.style.opacity = "1";
+        setTimeout(() => {
+            priorityListCopyNotification.style.opacity = "0";
+        }, 2000);
     }).catch(err => {
         console.error("Failed to copy priority list to clipboard: ", err);
     });

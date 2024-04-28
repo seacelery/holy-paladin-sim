@@ -1073,7 +1073,26 @@ generateRealmOptions();
 generateRegionOptions();
 
 importButtonMain.addEventListener("click", importCharacter);
-importButton.addEventListener("click", importCharacter);
+importButton.addEventListener("click", () => {
+    importCharacter();
+
+    const imageTypes = ["flask", "food", "weapon-imbue", "augment-rune", "potion", "raid-buff", "external-buff"];
+    imageTypes.forEach(type => {
+        const images = document.querySelectorAll(`.${type}-selected`);
+        images.forEach(image => {
+            image.classList.toggle(`${type}-selected`);
+            image.classList.toggle(`${type}-unselected`);
+
+            if (type === "potion" || type === "external-buff") {
+                image.parentElement.querySelectorAll('[class$="-timer"]').forEach(timer => {
+                    timer.style.display = "none";
+                });
+                image.parentElement.querySelector(".option-image-double-buttons").querySelector('[id$="-repeat-button"]').style.display = "none";
+                image.parentElement.querySelector(".option-image-double-buttons").querySelector('[id$="-add-timer-button"]').style.display = "none";
+            };
+        });
+    });
+});
 
 simulationProgressBarCheck.addEventListener("mouseenter", () => {
     simulateButton.style.boxShadow = "0px 0px 3px 2px var(--info-circle-colour)";
