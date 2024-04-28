@@ -1049,7 +1049,7 @@ body {
 }
   
 .option-checkbox-container:hover input ~ .options-checkbox-checkmark {
-    background-color: var(--background-colour);
+    background-color: var(--panel-colour-3);
 }
   
   .option-checkbox-container input:checked ~ .options-checkbox-checkmark {
