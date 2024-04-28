@@ -145,13 +145,13 @@ def process_paladin(paladin_data):
 
 def check_cancellation(task_id):
     task = celery.AsyncResult(task_id)
-    return task.status == 'REVOKED'
+    return task.status == "REVOKED"
 
 @celery.task(bind=True)
 def run_simulation_task(self, simulation_parameters): 
-    memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    print(f"Memory Usage: {memory_usage} KB")
-    sys.stdout.flush()
+    # memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    # print(f"Memory Usage: {memory_usage} KB")
+    # sys.stdout.flush()
     
     try:
         redis = current_app.redis
@@ -223,9 +223,9 @@ def run_simulation_task(self, simulation_parameters):
         
         # complete all simulation iterations and process the data of each
         for i in range(simulation.iterations):
-            memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-            print(f"Memory Usage: {memory_usage} KB on iteration {i}")
-            sys.stdout.flush()
+            # memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+            # print(f"Memory Usage: {memory_usage} KB on iteration {i}")
+            # sys.stdout.flush()
             if redis.get(f'cancel_task_{task_id}'):
                 print("Cancellation requested")
                 reset_simulation()
@@ -791,12 +791,12 @@ def run_simulation_task(self, simulation_parameters):
             "priority_list": simulation.priority_list_text
         }
         
-        memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        print(f"Memory Usage: {memory_usage} KB END")
-        sys.stdout.flush()
+        # memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        # print(f"Memory Usage: {memory_usage} KB END")
+        # sys.stdout.flush()
         
-        objgraph.show_most_common_types()
-        sys.stdout.flush()
+        # objgraph.show_most_common_types()
+        # sys.stdout.flush()
 
         return {"results": full_results, "simulation_details": simulation_details}
     except TaskRevokedError:
