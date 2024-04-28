@@ -628,24 +628,56 @@ def run_simulation_task(self, simulation_parameters):
                 return buff_summary
             
             # COLLECT RESULTS FOR ALL ITERATIONS
-            full_ability_breakdown_results.update({f"iteration {i}": ability_breakdown})
+            # full_ability_breakdown_results.update({f"iteration {i}": ability_breakdown})
             
+            # self_buff_summary = process_buff_data(self_buff_breakdown)
+            # full_self_buff_breakdown_results.update({f"iteration {i}": self_buff_summary})
+            
+            # target_buff_summary = process_target_buff_data(target_buff_breakdown)
+            # full_target_buff_breakdown_results.update({f"iteration {i}": target_buff_summary})
+            
+            # aggregated_target_buff_summary = process_aggregated_target_buff_data(target_buff_breakdown)
+            # full_aggregated_target_buff_breakdown_results.update({f"iteration {i}": aggregated_target_buff_summary})
+            
+            # full_glimmer_count_results.update({f"iteration {i}": glimmer_counts})
+            # full_tyrs_count_results.update({f"iteration {i}": tyrs_counts})
+            # full_awakening_count_results.update({f"iteration {i}": awakening_counts})
+            
+            # full_healing_timeline_results.update({f"iteration {i}": healing_timeline})
+            # full_mana_timeline_results.update({f"iteration {i}": mana_timeline})
+            # full_holy_power_timeline_results.update({f"iteration {i}": holy_power_timeline})
+            
+            def update_aggregate(aggregate, new_data):
+                """ Update the running aggregate with new data from an iteration, correctly handling non-dictionary types. """
+                for key, value in new_data.items():
+                    if key not in aggregate:
+                        if isinstance(value, dict):
+                            aggregate[key] = {}
+                            update_aggregate(aggregate[key], value)
+                        else:
+                            # Directly initialize sum and count for numeric types
+                            aggregate[key] = {'sum': value, 'count': 1}
+                    else:
+                        if isinstance(value, dict):
+                            update_aggregate(aggregate[key], value)
+                        else:
+                            # Update sum and count for numeric types
+                            aggregate[key]['sum'] += value
+                            aggregate[key]['count'] += 1
+                            
+            update_aggregate(full_ability_breakdown_results, ability_breakdown)
             self_buff_summary = process_buff_data(self_buff_breakdown)
-            full_self_buff_breakdown_results.update({f"iteration {i}": self_buff_summary})
-            
+            update_aggregate(full_self_buff_breakdown_results, self_buff_summary)
             target_buff_summary = process_target_buff_data(target_buff_breakdown)
-            full_target_buff_breakdown_results.update({f"iteration {i}": target_buff_summary})
-            
+            update_aggregate(full_target_buff_breakdown_results, target_buff_summary)
             aggregated_target_buff_summary = process_aggregated_target_buff_data(target_buff_breakdown)
-            full_aggregated_target_buff_breakdown_results.update({f"iteration {i}": aggregated_target_buff_summary})
-            
-            full_glimmer_count_results.update({f"iteration {i}": glimmer_counts})
-            full_tyrs_count_results.update({f"iteration {i}": tyrs_counts})
-            full_awakening_count_results.update({f"iteration {i}": awakening_counts})
-            
-            full_healing_timeline_results.update({f"iteration {i}": healing_timeline})
-            full_mana_timeline_results.update({f"iteration {i}": mana_timeline})
-            full_holy_power_timeline_results.update({f"iteration {i}": holy_power_timeline})
+            update_aggregate(full_aggregated_target_buff_breakdown_results, aggregated_target_buff_summary)
+            update_aggregate(full_glimmer_count_results, glimmer_counts)
+            update_aggregate(full_tyrs_count_results, tyrs_counts)
+            update_aggregate(full_awakening_count_results, awakening_counts)
+            update_aggregate(full_healing_timeline_results, healing_timeline)
+            update_aggregate(full_mana_timeline_results, mana_timeline)
+            update_aggregate(full_holy_power_timeline_results, holy_power_timeline)
         
         # COMBINE AND AVERAGE ALL KEYS OVER ITERATIONS       
         def combine_results(*dicts):
@@ -682,16 +714,42 @@ def run_simulation_task(self, simulation_parameters):
             combined_results = combine_results(*all_iteration_results)
             return average_out_simulation_results(combined_results, simulation.iterations)
             
-        average_ability_breakdown = return_complete_combined_results(full_ability_breakdown_results)
-        average_self_buff_breakdown = return_complete_combined_results(full_self_buff_breakdown_results)
-        average_target_buff_breakdown = return_complete_combined_results(full_target_buff_breakdown_results)
-        average_aggregated_target_buff_breakdown = return_complete_combined_results(full_aggregated_target_buff_breakdown_results)
-        average_glimmer_counts = return_complete_combined_results(full_glimmer_count_results)
-        average_tyrs_counts = return_complete_combined_results(full_tyrs_count_results)
-        average_awakening_counts = return_complete_combined_results(full_awakening_count_results)
-        average_healing_timeline = return_complete_combined_results(full_healing_timeline_results)
-        average_mana_timeline = return_complete_combined_results(full_mana_timeline_results)
-        average_holy_power_timeline = return_complete_combined_results(full_holy_power_timeline_results)
+        # average_ability_breakdown = return_complete_combined_results(full_ability_breakdown_results)
+        # average_self_buff_breakdown = return_complete_combined_results(full_self_buff_breakdown_results)
+        # average_target_buff_breakdown = return_complete_combined_results(full_target_buff_breakdown_results)
+        # average_aggregated_target_buff_breakdown = return_complete_combined_results(full_aggregated_target_buff_breakdown_results)
+        # average_glimmer_counts = return_complete_combined_results(full_glimmer_count_results)
+        # average_tyrs_counts = return_complete_combined_results(full_tyrs_count_results)
+        # average_awakening_counts = return_complete_combined_results(full_awakening_count_results)
+        # average_healing_timeline = return_complete_combined_results(full_healing_timeline_results)
+        # average_mana_timeline = return_complete_combined_results(full_mana_timeline_results)
+        # average_holy_power_timeline = return_complete_combined_results(full_holy_power_timeline_results)
+        
+        def finalize_averages(aggregate):
+            """ Finalize averages based on aggregate data. """
+            averages = {}
+            for key, value in aggregate.items():
+                if isinstance(value, dict):
+                    if 'sum' in value:
+                        # Calculate average for numeric types
+                        averages[key] = value['sum'] / value['count']
+                    else:
+                        # Recursive finalize for dictionary types
+                        averages[key] = finalize_averages(value)
+                else:
+                    averages[key] = value
+            return averages
+        
+        average_ability_breakdown = finalize_averages(full_ability_breakdown_results)
+        average_self_buff_breakdown = finalize_averages(full_self_buff_breakdown_results)
+        average_target_buff_breakdown = finalize_averages(full_target_buff_breakdown_results)
+        average_aggregated_target_buff_breakdown = finalize_averages(full_aggregated_target_buff_breakdown_results)
+        average_glimmer_counts = finalize_averages(full_glimmer_count_results)
+        average_tyrs_counts = finalize_averages(full_tyrs_count_results)
+        average_awakening_counts = finalize_averages(full_awakening_count_results)
+        average_healing_timeline = finalize_averages(full_healing_timeline_results)
+        average_mana_timeline = finalize_averages(full_mana_timeline_results)
+        average_holy_power_timeline = finalize_averages(full_holy_power_timeline_results)
         
         # calculate average hps
         total_healing = 0
