@@ -2,37 +2,24 @@ import pprint
 import json
 import uuid
 import logging
-import sys
 
 from flask import Blueprint, request, jsonify, send_from_directory, current_app
 from flask_cors import cross_origin
 from app.main import import_character
-from app.classes.simulation_state import cancel_simulation
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 main = Blueprint("main", __name__)
 pp = pprint.PrettyPrinter(width=200)
-
-default_priority_list = [
-    ("Holy Shock | Holy Shock charges = 2"),
-    ("Arcane Torrent | Race = Blood Elf"),
-    ("Judgment | Infusion of Light duration < 5"),
-]
     
 @main.route('/')
 def serve_index():
-    return send_from_directory(current_app.static_folder, 'index.html')
+    return send_from_directory(current_app.static_folder, "index.html")
     
 @main.route("/test")
 def test_route():
     return "Backend is running!"
-    
-# @main.route("/cancel_simulation", methods=["POST"])
-# def cancel_simulation_route():
-#     cancel_simulation()
-#     return jsonify({"message": "Simulation cancellation requested."})
 
 @main.route("/import_character", methods=["GET"])
 def import_character_route():
@@ -65,7 +52,7 @@ def import_character_route():
         "ptr": paladin.ptr,
         "session_token": session_token
     })
-    response.set_cookie('session_token', session_token, samesite='None', secure=True, httponly=False)
+    response.set_cookie("session_token", session_token, samesite="None", secure=True, httponly=False)
     return response
     
 @main.route("/fetch_updated_data", methods=["POST"])
