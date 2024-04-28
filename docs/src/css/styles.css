@@ -231,7 +231,7 @@ body {
 #version-suggestions {
     display: none;
     position: absolute;
-    top: 32px;
+    top: 31px;
     left: -1px;
 
     text-align: left;
