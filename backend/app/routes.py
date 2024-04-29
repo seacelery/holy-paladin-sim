@@ -129,7 +129,7 @@ def update_character_route():
             else:
                 modifiable_data[key] = value
 
-    current_app.redis.setex(session_token, 3600, json.dumps(modifiable_data))
+    current_app.redis.setex(session_token, 1200, json.dumps(modifiable_data))
     current_app.logger.debug(f"Modifiable data after update: {modifiable_data}")
 
     return jsonify({"message": "Character updated successfully"})
