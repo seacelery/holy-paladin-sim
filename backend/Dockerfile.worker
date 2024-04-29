@@ -2,20 +2,14 @@ FROM pypy:3.10-slim
 
 WORKDIR /app
 
-# Install necessary packages including supervisord
-RUN apt-get update && apt-get install -y git supervisor && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application source code and supervisord configuration to the Docker image
 COPY . /app
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Add a non-root user and switch to it
 RUN adduser --disabled-password --gecos '' myuser
 USER myuser
 
-# Set CMD to start supervisord
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["celery", "-A", "app.celery", "worker", "-P", "solo", "--loglevel=info"]
