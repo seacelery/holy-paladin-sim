@@ -2,17 +2,24 @@ FROM pypy:3.10-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+# Install necessary packages including eventlet or gevent
+RUN apt-get update && apt-get install -y git && \
+    pip install --no-cache-dir eventlet && \
+    rm -rf /var/lib/apt/lists/*
 
+# Install Python dependencies
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy the application source code to the Docker image
 COPY . /app
 
+# Add a non-root user and switch to it
 RUN adduser --disabled-password --gecos '' myuser
 USER myuser
 
+# Set the default concurrency level via an environment variable
 ENV CELERY_CONCURRENCY 4
 
-# Start the Celery worker with the prefork pool and configurable concurrency
-CMD ["celery", "-A", "app.celery", "worker", "-P", "prefork", "--concurrency=${CELERY_CONCURRENCY}", "--loglevel=info"]
+# Start the Celery worker with the eventlet pool and configurable concurrency
+CMD ["celery", "-A", "app.celery", "worker", "-P", "eventlet", "--concurrency=${CELERY_CONCURRENCY}", "--loglevel=info"]
