@@ -33,7 +33,7 @@ def import_character_route():
     session_token = str(uuid.uuid4())
     modifiable_data = {"class_talents": {}, "spec_talents": {}, "lightsmith_talents": {}, "herald_of_the_sun_talents": {}, "race": "", "consumables": {}, "equipment": {}, "character_name": character_name, "realm": realm, "region": region, "ptr": paladin.ptr, "version": version}
     
-    current_app.redis.setex(session_token, 1200, json.dumps(modifiable_data))
+    current_app.redis.setex(session_token, 3600, json.dumps(modifiable_data))
 
     response = jsonify({
         "message": f"Character imported successfully, {character_name}, {realm}, {region}",
@@ -129,7 +129,7 @@ def update_character_route():
             else:
                 modifiable_data[key] = value
 
-    current_app.redis.setex(session_token, 1200, json.dumps(modifiable_data))
+    current_app.redis.setex(session_token, 3600, json.dumps(modifiable_data))
     current_app.logger.debug(f"Modifiable data after update: {modifiable_data}")
 
     return jsonify({"message": "Character updated successfully"})
