@@ -12,4 +12,7 @@ COPY . /app
 RUN adduser --disabled-password --gecos '' myuser
 USER myuser
 
-CMD ["celery", "-A", "app.celery", "worker", "-P", "solo", "--loglevel=info"]
+ENV CELERY_CONCURRENCY 4
+
+# Start the Celery worker with the prefork pool and configurable concurrency
+CMD ["celery", "-A", "app.celery", "worker", "-P", "prefork", "--concurrency=${CELERY_CONCURRENCY}", "--loglevel=info"]
