@@ -290,7 +290,7 @@ const createPriorityListDisplay = () => {
 
     const abilityText = document.getElementById("priority-list-item-ability-text");
     const abilityAutocompleteSuggestions = abilityAutocomplete(abilityText, abilityNames, firstPriorityListItemIcon);
-    priorityListItemsContainer.appendChild(abilityAutocompleteSuggestions);
+    document.querySelector(".priority-list-item-ability").appendChild(abilityAutocompleteSuggestions);
 
     const firstPriorityListItemConditionText = document.getElementById("priority-list-item-condition-text");
     firstPriorityListItemConditionText.addEventListener("input", (e) => {
