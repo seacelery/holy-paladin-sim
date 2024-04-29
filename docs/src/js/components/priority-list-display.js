@@ -34,7 +34,7 @@ const abilityAutocomplete = (element, abilityNames, icon) => {
     
         const elementRect = element.getBoundingClientRect();
         const parentRect = element.parentNode.getBoundingClientRect();
-
+        
         autocompleteContainer.style.left = `${elementRect.left - parentRect.left - 1}px`;
         autocompleteContainer.style.top = `${elementRect.bottom - parentRect.top - 1}px`;
     
@@ -111,7 +111,7 @@ const createPriorityListItem = (index) => {
 
     priorityListItemAbility.appendChild(priorityListItemAbilityText);
     priorityListItemContainer.appendChild(priorityListItemAbility);
-    priorityListItemContainer.appendChild(abilityAutocompleteSuggestions);
+    priorityListItemAbility.appendChild(abilityAutocompleteSuggestions);
 
     const priorityListItemCondition = createElement("div", "priority-list-item-condition", null);
     const priorityListItemConditionText = createElement("textarea", "priority-list-item-condition-text", null);
@@ -289,10 +289,12 @@ const createPriorityListDisplay = () => {
     });
 
     const abilityText = document.getElementById("priority-list-item-ability-text");
+    abilityText.spellcheck = false;
     const abilityAutocompleteSuggestions = abilityAutocomplete(abilityText, abilityNames, firstPriorityListItemIcon);
     document.querySelector(".priority-list-item-ability").appendChild(abilityAutocompleteSuggestions);
 
     const firstPriorityListItemConditionText = document.getElementById("priority-list-item-condition-text");
+    firstPriorityListItemConditionText.spellcheck = false;
     firstPriorityListItemConditionText.addEventListener("input", (e) => {
         updatePriorityList();
     });
@@ -400,6 +402,7 @@ const createPriorityListDisplay = () => {
             });
 
             const newAbilityTextField = newListItem.querySelectorAll(".priority-list-item-ability-text");
+            newAbilityTextField.spellcheck = false;
             newAbilityTextField.forEach(field => {
                 const originalLineHeight = parseInt(window.getComputedStyle(field).lineHeight);
                 field.addEventListener("input", () => {
@@ -410,6 +413,7 @@ const createPriorityListDisplay = () => {
             });
 
             const newConditionTextField = newListItem.querySelectorAll(".priority-list-item-condition-text");
+            newConditionTextField.spellcheck = false;
             newConditionTextField.forEach(field => {
                 const originalLineHeight = parseInt(window.getComputedStyle(field).lineHeight);
                 field.addEventListener("input", () => {
@@ -492,6 +496,7 @@ const convertPasteToPriorityList = (pastedCode) => {
             const pieceData = pieces[piece].trim();
             if (pieceData == pieces[0].trim()) {
                 const abilityText = newItem.querySelector(".priority-list-item-ability-text");
+                abilityText.spellcheck = false;
                 const abilityIcon = newItem.querySelector(".priority-list-item-icon");
                 abilityText.textContent = pieceData;
 
@@ -512,6 +517,7 @@ const convertPasteToPriorityList = (pastedCode) => {
 
             } else if (pieceData == pieces[1].trim()) {
                 const conditionText = newItem.querySelector(".priority-list-item-condition-text");
+                conditionText.spellcheck = false;
                 
                 conditionText.textContent = pieceData;
                 conditionText.addEventListener("input", () => {
@@ -697,8 +703,8 @@ beaconOfVirtuePreset.addEventListener("click", () => {
         Blessing of the Seasons
         Light of Dawn | Holy Power = 5
         Tyr's Deliverance
-        Light's Hammer
         Holy Prism
+        Light's Hammer
         Light of Dawn | Holy Power >= 3
         Holy Light | Divine Favor active | and | Infusion of Light active
         Flash of Light | Infusion of Light active`,
