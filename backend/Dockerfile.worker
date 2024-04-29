@@ -18,8 +18,5 @@ COPY . /app
 RUN adduser --disabled-password --gecos '' myuser
 USER myuser
 
-# Set the default concurrency level via an environment variable
-ENV CELERY_CONCURRENCY 4
-
 # Start the Celery worker with the eventlet pool and configurable concurrency
-CMD ["celery", "-A", "app.celery", "worker", "-P", "eventlet", "--concurrency=${CELERY_CONCURRENCY}", "--loglevel=info"]
+CMD ["celery", "-A", "app.celery", "worker", "-P", "eventlet", "--concurrency=2", "--loglevel=info"]
