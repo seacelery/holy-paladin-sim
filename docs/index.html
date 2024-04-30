@@ -23,12 +23,18 @@
         <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
         <script>
             (function() {
-              const savedTheme = localStorage.getItem("theme");
-              document.documentElement.setAttribute("data-theme", savedTheme);
-
-              const savedVersion = localStorage.getItem("version");
-              document.documentElement.setAttribute("data-version", savedVersion);
-            })();
+                const savedTheme = localStorage.getItem("theme");
+                if (savedTheme) {
+                  document.documentElement.setAttribute("data-theme", savedTheme);
+                };
+                
+                const savedVersion = localStorage.getItem("version");
+                if (savedVersion) {
+                  document.documentElement.setAttribute("data-version", savedVersion);
+                } else {
+                  document.documentElement.setAttribute("data-version", "Patch 10.2.6");
+                };
+              })();
           </script>
     </head>
     <body>
