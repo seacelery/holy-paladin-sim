@@ -3483,6 +3483,12 @@ input:-webkit-autofill{
     user-select: none;
 }
 
+#stat-scaling-container {
+    padding: 35px 0 0 35px;
+
+    font-size: 15px;
+}
+
 #options-status-bar {
     display: flex;
     align-items: center;
@@ -3889,9 +3895,10 @@ input:focus {
     justify-content: center;
     margin-right: 10px;
     margin-left: auto;
+    margin-top: -2px;
 
-    width: 31px;
-    height: 100%;
+    width: 35px;
+    height: calc(100% + 5px);
 
     font-size: 26px;
     color: var(--red-font);
