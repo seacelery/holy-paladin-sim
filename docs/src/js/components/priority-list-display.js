@@ -781,6 +781,47 @@ document.getElementById("save-paste-modal-button").addEventListener("click", (e)
     updatePriorityList();
 });
 
+const makeDraggable = (modal, header) => {
+    let startX = 0, startY = 0;
+    let initialX = 0, initialY = 0;
+    let dragging = false;
+
+    header.addEventListener("mousedown", (e) => {
+        dragging = true;
+        startX = e.clientX;
+        startY = e.clientY; 
+        
+        const transform = window.getComputedStyle(modal).transform;
+        if (transform !== 'none') {
+            const translate = transform.match(/matrix.*\((.+)\)/)[1].split(', ');
+            initialX = parseInt(translate[4], 10);
+            initialY = parseInt(translate[5], 10);
+        } else {
+            initialX = 0;
+            initialY = 0;
+        };
+
+        document.onmousemove = onMouseMove;
+        document.onmouseup = onStopDrag;
+    });
+
+    const onMouseMove = (e) => {
+        if (!dragging) return;
+        const moveX = initialX + e.clientX - startX;
+        const moveY = initialY + e.clientY - startY;
+        modal.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    };
+
+    const onStopDrag = () => {
+        dragging = false;
+        document.onmousemove = null;
+        document.onmouseup = null;
+    };
+};
+
+const priorityListPasteModalHeader = document.getElementById("priority-list-paste-modal-header");
+makeDraggable(priorityListPasteModal, priorityListPasteModalHeader);
+
 const priorityListInfoButton = document.getElementById("priority-list-info-icon");
 const priorityListInfoModal = document.getElementById("priority-list-info-modal");
 priorityListInfoModal.style.display = "none";

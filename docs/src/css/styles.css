@@ -3063,6 +3063,8 @@ body {
 
     width: 60%;
     height: 525px;
+    user-select: none;
+    cursor: grab;
 }
 
 #priority-list-paste-modal-header {
@@ -3080,6 +3082,7 @@ body {
     background-color: var(--panel-colour-2);
     color: var(--light-font-colour);
     font-size: 18px;
+    transition: none;
 }
 
 #priority-list-paste-modal-textarea {
