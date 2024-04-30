@@ -287,7 +287,8 @@ class Simulation:
                             else:
                                 ability.cast_healing_spell(self.paladin, targets, self.elapsed_time, ability.is_heal)
                 
-                            self.previous_ability = ability.name
+                            if not ability.off_gcd:
+                                self.previous_ability = ability.name
                             # print(f"new previous ability: {ability.name}")
                     
                             break
