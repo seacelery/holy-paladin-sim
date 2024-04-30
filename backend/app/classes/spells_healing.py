@@ -254,7 +254,7 @@ class HolyShock(Spell):
             
 class Daybreak(Spell):
     
-    BASE_COOLDOWN = 45
+    BASE_COOLDOWN = 60
     
     def __init__(self, caster):
         super().__init__("Daybreak", cooldown=Daybreak.BASE_COOLDOWN)  
@@ -278,6 +278,7 @@ class Daybreak(Spell):
             # tier season 3 4pc  
             if caster.set_bonuses["season_3"] >= 4:
                 caster.apply_buff_to_self(FirstLight(), current_time)
+                self.BASE_COOLDOWN = 45
             
             # adjust for daybreak 200% glimmer healing
             for glimmer_target in glimmer_targets:
