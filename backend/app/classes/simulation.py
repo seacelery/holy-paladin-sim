@@ -12,7 +12,7 @@ from flask_socketio import emit
 from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
-from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight, EternalFlameBuff
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data, update_mana_gained
 from .priority_list_dsl import parse_condition, condition_to_lambda
 from .simulation_state import check_cancellation, reset_simulation
@@ -561,6 +561,9 @@ class Simulation:
                         
                         if buff_name == "Beacon of Light":
                             self.paladin.beacon_targets.remove(target)
+                            
+                        if self.paladin.ptr and self.paladin.is_talent_active("Lingering Radiance") and buff_name == "Dawnlight (HoT)":
+                            target.apply_buff_to_target(EternalFlameBuff(self.paladin, 12), self.elapsed_time, caster=self.paladin)
                         
                         update_target_buff_data(self.paladin.target_buff_breakdown, buff_name, self.elapsed_time, "expired", target.name)
             

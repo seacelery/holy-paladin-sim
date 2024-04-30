@@ -1543,7 +1543,7 @@ class EternalFlame(Spell):
             caster.holy_power -= self.holy_power_cost
             
             # eternal flame hot
-            targets[0].apply_buff_to_target(EternalFlameBuff(caster), current_time, caster=caster)
+            targets[0].apply_buff_to_target(EternalFlameBuff(caster, 20), current_time, caster=caster)
             
             # tirion's devotion
             if caster.is_talent_active("Tirion's Devotion"):

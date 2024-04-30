@@ -18,7 +18,9 @@ class Target:
         self.beacon_healing_received += amount
         
     def apply_buff_to_target(self, buff, current_time, stacks_to_apply=1, max_stacks=1, caster=None):
-        if buff.name in self.target_active_buffs:
+        if buff.name in ["Eternal Flame (HoT)"] and buff.name in self.target_active_buffs:
+            self.target_active_buffs[buff.name][0].duration = min(self.target_active_buffs[buff.name][0].duration + buff.base_duration, self.target_active_buffs[buff.name][0].base_duration + self.target_active_buffs[buff.name][0].base_duration * 0.3)
+        elif buff.name in self.target_active_buffs:
             self.target_active_buffs[buff.name].append(buff)
         else:
             self.target_active_buffs[buff.name] = [buff]
