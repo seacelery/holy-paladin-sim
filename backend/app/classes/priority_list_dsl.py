@@ -252,7 +252,8 @@ def condition_to_lambda(sim_instance, all_conditions):
                 elif condition["keyword"].lower() == "timers+":
                     result = False
                     for timer in condition["time_values"]:
-                        if sim_instance.elapsed_time > timer + 10:
+                        if sim_instance.elapsed_time > timer + 3:
+                            condition["time_values"].remove(timer)
                             result = True
                         else:
                             result = compare_value_plus_two_gcds(timer, sim_instance.elapsed_time, sim_instance.paladin.hasted_global_cooldown)
