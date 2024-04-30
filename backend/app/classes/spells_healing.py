@@ -1217,6 +1217,10 @@ class WordOfGlory(Spell):
                 self.spell_healing_modifier *= 1.15
                 self.holy_power_cost = 0
                 self.mana_cost = 0
+                
+        # gleaming rays
+        if caster.ptr and caster.is_talent_active("Gleaming Rays"):
+            self.spell_healing_modifier *= 1.1
             
         # apply blessing of dawn healing (20% per stack without seal of order or fading light)
         if caster.is_talent_active("Of Dusk and Dawn"):
@@ -1258,6 +1262,10 @@ class WordOfGlory(Spell):
                     handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * 3)
                 else:
                     handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * self.holy_power_cost)
+                    
+            # gleaming rays
+            if caster.ptr and caster.is_talent_active("Gleaming Rays"):
+                self.spell_healing_modifier /= 1.1
             
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -1455,6 +1463,10 @@ class EternalFlame(Spell):
                 self.spell_healing_modifier *= 1.15
                 self.holy_power_cost = 0
                 self.mana_cost = 0
+                
+        # gleaming rays
+        if caster.ptr and caster.is_talent_active("Gleaming Rays"):
+            self.spell_healing_modifier *= 1.1
             
         # apply blessing of dawn healing (20% per stack without seal of order or fading light)
         if caster.is_talent_active("Of Dusk and Dawn"):
@@ -1499,6 +1511,10 @@ class EternalFlame(Spell):
                     handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * 3)
                 else:
                     handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * self.holy_power_cost)
+                    
+            # gleaming rays
+            if caster.ptr and caster.is_talent_active("Gleaming Rays"):
+                self.spell_healing_modifier /= 1.1
             
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -1706,6 +1722,10 @@ class LightOfDawn(Spell):
                 self.holy_power_cost = 0
                 self.mana_cost = 0
                 
+        # gleaming rays
+        if caster.ptr and caster.is_talent_active("Gleaming Rays"):
+            self.spell_healing_modifier *= 1.1
+                
         # apply blessing of dawn healing (20% per stack without seal of order or fading light)
         if caster.is_talent_active("Of Dusk and Dawn"):
             if "Blessing of Dawn" in caster.active_auras:
@@ -1737,6 +1757,10 @@ class LightOfDawn(Spell):
                     handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * 3)
                 else:
                     handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * self.holy_power_cost)
+                    
+            # gleaming rays
+            if caster.ptr and caster.is_talent_active("Gleaming Rays"):
+                self.spell_healing_modifier /= 1.1
                     
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
             if caster.is_talent_active("Of Dusk and Dawn"):

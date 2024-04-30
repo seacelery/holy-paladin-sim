@@ -79,14 +79,6 @@ class HoT(Buff):
         return healing_per_tick, is_crit
 
 
-# class GiftOfTheNaaruBuff(HoT):
-    
-#     SPELL_POWER_COEFFICIENT = 0
-    
-#     def __init__(self, caster):
-#         super().__init__("Gift of the Naaru", 5, base_duration=5, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier)
-#         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
-
 class GiftOfTheNaaruBuff(HoT):
     
     def __init__(self, caster):
@@ -2495,6 +2487,18 @@ class MorningStar(Buff):
         super().__init__("Morning Star", 10000, base_duration=10000, current_stacks=10, max_stacks=10)
         self.stacks_to_apply = 1
         caster.time_based_stacking_buffs[self] = 5
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class GleamingRays(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Gleaming Rays", 8, base_duration=8)
         
     def apply_effect(self, caster, current_time=None):
         pass
