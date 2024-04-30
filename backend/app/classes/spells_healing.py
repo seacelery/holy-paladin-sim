@@ -258,6 +258,9 @@ class Daybreak(Spell):
     
     def __init__(self, caster):
         super().__init__("Daybreak", cooldown=Daybreak.BASE_COOLDOWN)  
+        # tier season 3 4pc  
+        if caster.set_bonuses["season_3"] >= 4: 
+            self.BASE_COOLDOWN = 45
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
@@ -278,7 +281,6 @@ class Daybreak(Spell):
             # tier season 3 4pc  
             if caster.set_bonuses["season_3"] >= 4:
                 caster.apply_buff_to_self(FirstLight(), current_time)
-                self.BASE_COOLDOWN = 45
             
             # adjust for daybreak 200% glimmer healing
             for glimmer_target in glimmer_targets:

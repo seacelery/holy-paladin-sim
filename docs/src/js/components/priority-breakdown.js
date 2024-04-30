@@ -335,7 +335,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
 
             // select the order for each row
             const generatorRowOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath", "Consecration"];
-            const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Tyr's Deliverance", 
+            const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Beacon of Virtue", "Tyr's Deliverance",
                                            "Light's Hammer", "Blessing of the Seasons", "Divine Favor", "Lay on Hands", "Arcane Torrent",
                                            "Fireblood", "Gift of the Naaru", "Aerated Mana Potion", "Elemental Potion of Ultimate Power"];
 
@@ -383,7 +383,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
 
                     const cooldown = cooldowns[cooldownName];
 
-                    if ("Divine Favor" in timestampData.player_active_auras) {
+                    if ("Divine Favor" in timestampData.player_active_auras && cooldownName === "Divine Favor") {
                         cooldown.remaining_cooldown = 0;
                     };
 

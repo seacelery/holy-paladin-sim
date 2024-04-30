@@ -245,7 +245,7 @@ def condition_to_lambda(sim_instance, all_conditions):
                 if condition["keyword"].lower() == "timers":
                     result = False
                     for timer in condition["time_values"]:
-                        result = compare_value_plus_two_gcds(timer, sim_instance.elapsed_time, sim_instance.paladin.hasted_global_cooldown)
+                        result = compare_value_plus_gcds(timer, sim_instance.elapsed_time, sim_instance.paladin.hasted_global_cooldown)
                         if result:
                             break
                         
@@ -253,10 +253,9 @@ def condition_to_lambda(sim_instance, all_conditions):
                     result = False
                     for timer in condition["time_values"]:
                         if sim_instance.elapsed_time > timer + 3:
-                            condition["time_values"].remove(timer)
                             result = True
                         else:
-                            result = compare_value_plus_two_gcds(timer, sim_instance.elapsed_time, sim_instance.paladin.hasted_global_cooldown)
+                            result = compare_value_plus_gcds(timer, sim_instance.elapsed_time, sim_instance.paladin.hasted_global_cooldown)
                         if result:
                             break
                 
@@ -381,8 +380,8 @@ def condition_to_lambda(sim_instance, all_conditions):
 
     return lambda_func
 
-def compare_value_plus_two_gcds(value, current_time, gcd_value):
-    return value <= current_time <= value + gcd_value * 2
+def compare_value_plus_gcds(value, current_time, gcd_value):
+    return value <= current_time <= value + gcd_value * 10
     
 def evaluate_gcd(gcd_value, operator_value, operator):
     if operator == "*":
