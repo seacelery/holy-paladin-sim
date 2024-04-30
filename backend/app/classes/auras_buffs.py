@@ -2505,3 +2505,17 @@ class GleamingRays(Buff):
         
     def remove_effect(self, caster, current_time=None):
         pass
+    
+
+class BlessingOfAnshe(Buff):
+    
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Blessing of An'she", 20, base_duration=20)   
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass

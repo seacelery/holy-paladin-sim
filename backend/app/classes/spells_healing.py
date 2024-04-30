@@ -53,6 +53,10 @@ class HolyShock(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
         
+        # blessing of an'she
+        if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+            self.spell_healing_modifier *= 3
+        
         # divine glimpse
         if caster.is_talent_active("Divine Glimpse"):
             bonus_crit += 0.08      
@@ -87,6 +91,12 @@ class HolyShock(Spell):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         barrier_of_faith_absorb = 0
         if cast_success:
+            # blessing of an'she
+            if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+                self.spell_healing_modifier /= 3
+                del caster.active_auras["Blessing of An'she"]
+                update_self_buff_data(caster.self_buff_breakdown, "Blessing of An'she", current_time, "expired")
+            
             # reset light of the martyr & bestow light
             if caster.ptr:
                 if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
@@ -351,6 +361,10 @@ class RisingSunlightHolyShock(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
         
+        # blessing of an'she
+        if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+            self.spell_healing_modifier *= 3
+        
         # divine glimpse
         if caster.is_talent_active("Divine Glimpse"):
             bonus_crit += 0.08      
@@ -384,7 +398,13 @@ class RisingSunlightHolyShock(Spell):
         
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         barrier_of_faith_absorb = 0
-        if cast_success:        
+        if cast_success:      
+            # blessing of an'she
+            if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+                self.spell_healing_modifier /= 3
+                del caster.active_auras["Blessing of An'she"]
+                update_self_buff_data(caster.self_buff_breakdown, "Blessing of An'she", current_time, "expired")
+              
             # reset light of the martyr & bestow light
             if caster.ptr:
                 if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
@@ -579,6 +599,10 @@ class DivineTollHolyShock(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
         
+        # blessing of an'she
+        if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+            self.spell_healing_modifier *= 3
+        
         # divine glimpse
         if caster.is_talent_active("Divine Glimpse"):
             bonus_crit += 0.08      
@@ -614,6 +638,12 @@ class DivineTollHolyShock(Spell):
         total_glimmer_healing = 0
         barrier_of_faith_absorb = 0
         if cast_success:
+            # blessing of an'she
+            if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+                self.spell_healing_modifier /= 3
+                del caster.active_auras["Blessing of An'she"]
+                update_self_buff_data(caster.self_buff_breakdown, "Blessing of An'she", current_time, "expired")
+            
             # reset light of the martyr & bestow light
             if caster.ptr:
                 if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
@@ -775,6 +805,10 @@ class DivineResonanceHolyShock(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
         
+        # blessing of an'she
+        if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+            self.spell_healing_modifier *= 3
+        
         # divine glimpse
         if caster.is_talent_active("Divine Glimpse"):
             bonus_crit += 0.08      
@@ -809,6 +843,12 @@ class DivineResonanceHolyShock(Spell):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         barrier_of_faith_absorb = 0
         if cast_success:
+            # blessing of an'she
+            if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+                self.spell_healing_modifier /= 3
+                del caster.active_auras["Blessing of An'she"]
+                update_self_buff_data(caster.self_buff_breakdown, "Blessing of An'she", current_time, "expired")
+            
             # reset light of the martyr & bestow light
             if caster.ptr:
                 if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:

@@ -13,6 +13,7 @@ const buffsToIconsMap = {
     "Beacon of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_beaconoflight.jpg",
     "Beacon of Virtue": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_beaconofinsight.jpg",
     "Bestow Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_sheathoflight.jpg",
+    "Blessing of An'she": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holynova.jpg",
     "Blessing of Autumn": "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_autumn.jpg",
     "Blessing of Dawn": "https://render.worldofwarcraft.com/eu/icons/56/achievement_zone_valeofeternalblossoms.jpg",
     "Blessing of Dusk": "https://render.worldofwarcraft.com/eu/icons/56/achievement_zone_newshadowmoonvalley.jpg",

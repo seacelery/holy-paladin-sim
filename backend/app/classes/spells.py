@@ -374,7 +374,7 @@ class Spell:
             IdolOfTheDreamerStacks, IdolOfTheEarthWarderStacks, IdolOfTheLifeBinderStacks,
             AlliedChestplateOfGenerosity, ElementalLariat, VerdantTether, VerdantConduit,
             PowerOfTheSilverHand, NeltharionsCallToChaos, InspiredByFrostAndEarth, ScreamingBlackDragonscale,
-            RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond
+            RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond, BlessingOfAnshe
         )
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False):
@@ -418,6 +418,7 @@ class Spell:
             
             return proc_occurred
         
+        # talents
         if caster.is_talent_active("Touch of Light"):        
             touch_of_light = TouchOfLight(caster)        
             try_proc_rppm_effect(touch_of_light, is_heal=True, exclude_mastery=True)
@@ -426,6 +427,11 @@ class Spell:
             power_of_the_silver_hand = PowerOfTheSilverHand()
             try_proc_rppm_effect(power_of_the_silver_hand, is_hasted=False, is_self_buff=True)
             
+        if caster.ptr and caster.is_talent_active("Blessing of An'she") and (self.name in ["Eternal Flame", "Dawnlight", "Sun Sear"]):
+            blessing_of_anshe = BlessingOfAnshe(caster)
+            try_proc_rppm_effect(blessing_of_anshe, is_hasted=False, is_self_buff=True)
+        
+        # enchants     
         if "Sophic Devotion" in caster.bonus_enchants:
             sophic_devotion = SophicDevotion()
             try_proc_rppm_effect(sophic_devotion, is_hasted=False, is_self_buff=True)
