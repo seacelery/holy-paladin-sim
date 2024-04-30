@@ -156,6 +156,9 @@ class Dawnlight(HoT):
         super().__init__("Dawnlight (HoT)", 8, base_duration=8, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
         
+        if "Morning Star" in caster.active_auras:
+            self.SPELL_POWER_COEFFICIENT *= 1 + (0.05 * caster.active_auras["Morning Star"].current_stacks)
+        
     def radiate_healing(self, caster, current_time):
         target_count = 5
         
@@ -2476,6 +2479,20 @@ class BestowLight(Buff):
     
     def __init__(self, caster, duration_to_apply):
         super().__init__("Bestow Light", 10000, base_duration=10000, current_stacks=1, max_stacks=3)
+        self.stacks_to_apply = 1
+        caster.time_based_stacking_buffs[self] = 5
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class MorningStar(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Morning Star", 10000, base_duration=10000, current_stacks=10, max_stacks=10)
         self.stacks_to_apply = 1
         caster.time_based_stacking_buffs[self] = 5
         

@@ -40,6 +40,7 @@ const buffsToIconsMap = {
     "Light of the Martyr": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_lightofthemartyr.jpg",
     "Maraad's Dying Breath": "https://render.worldofwarcraft.com/eu/icons/56/paladin_icon_speedoflight.jpg",
     "Merciful Auras": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_blessedlife.jpg",
+    "Morning Star": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_persecution.jpg",
     "Overflowing Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holyguidance.jpg",
     "Power of the Silver Hand": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_blessedhands.jpg",
     "Power of the Silver Hand Stored Healing": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_blessedhands.jpg",

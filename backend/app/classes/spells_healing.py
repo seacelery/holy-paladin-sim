@@ -1422,6 +1422,9 @@ class WordOfGlory(Spell):
             # dawnlight
             if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
                 targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                if "Morning Star" in caster.active_auras:
+                    caster.active_auras["Morning Star"].current_stacks = 0
+                
                 if caster.active_auras["Dawnlight"].current_stacks > 1:
                     caster.active_auras["Dawnlight"].current_stacks -= 1
                     update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "stacks_decremented", caster.active_auras['Dawnlight'].duration, caster.active_auras["Dawnlight"].current_stacks)
@@ -1660,6 +1663,9 @@ class EternalFlame(Spell):
             # dawnlight
             if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
                 targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                if "Morning Star" in caster.active_auras:
+                    caster.active_auras["Morning Star"].current_stacks = 0
+                
                 if caster.active_auras["Dawnlight"].current_stacks > 1:
                     caster.active_auras["Dawnlight"].current_stacks -= 1
                     update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "stacks_decremented", caster.active_auras['Dawnlight'].duration, caster.active_auras["Dawnlight"].current_stacks)
@@ -1865,6 +1871,9 @@ class LightOfDawn(Spell):
             # dawnlight        
             if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
                 targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                if "Morning Star" in caster.active_auras:
+                    caster.active_auras["Morning Star"].current_stacks = 0
+                
                 if caster.active_auras["Dawnlight"].current_stacks > 1:
                     caster.active_auras["Dawnlight"].current_stacks -= 1
                     update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "stacks_decremented", caster.active_auras['Dawnlight'].duration, caster.active_auras["Dawnlight"].current_stacks)

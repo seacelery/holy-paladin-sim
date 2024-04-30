@@ -16,7 +16,7 @@ from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, H
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion, AuraMastery
 from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
 from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell
-from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, BroodkeepersPromiseHoT, IncarnatesMarkOfFire
+from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, BroodkeepersPromiseHoT, IncarnatesMarkOfFire, MorningStar
 from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus, MiniatureSingingStone
 from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents, base_active_class_talents_ptr, base_active_spec_talents_ptr, base_active_lightsmith_talents, base_herald_of_the_sun_talents
@@ -662,6 +662,9 @@ class Paladin:
             
         if self.is_talent_active("Saved by the Light"):
             self.apply_buff_to_self(SavedByTheLight(), 0)
+            
+        if self.ptr and self.is_talent_active("Morning Star"):
+            self.apply_buff_to_self(MorningStar(self), 0)
     
     # misc simulation functions 
     def print_stats(self, current_time):

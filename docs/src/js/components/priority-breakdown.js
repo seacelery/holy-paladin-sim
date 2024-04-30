@@ -252,6 +252,11 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
                 if (!currentSimulationPlayerAuras.includes(aura)) {
                     continue
                 };  
+
+                if (playerAuras[aura].stacks === 0) {
+                    continue;
+                };
+
                 const formattedAuraName = aura.toLowerCase().replaceAll(" (self)", "").replaceAll(" ", "-").replaceAll("'", "");
                 // create an icon for each aura and show duration & stacks
                 const auraIconContainer = createElement("div", `priority-grid-player-auras-icon-container-${formattedAuraName}`, null);
