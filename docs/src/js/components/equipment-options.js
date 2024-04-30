@@ -855,6 +855,15 @@ const initialiseEquipment = () => {
 
         document.getElementById("current-equipped-item-container").style.backgroundColor = `var(--rarity-${itemSlotData.quality.toLowerCase()}-dark)`;
         document.getElementById("current-equipped-item-title").style.backgroundColor = `var(--rarity-${itemSlotData.quality.toLowerCase()}-dark)`;
+        const enchantOptions = document.querySelector(".current-equipped-item-enchant-options");
+        const embellishmentOptions = document.querySelector(".current-equipped-item-embellishment-options");
+        if (enchantOptions) {
+            enchantOptions.style.backgroundColor = `var(--rarity-${itemSlotData.quality.toLowerCase()}-dark)`;
+        };
+        if (embellishmentOptions) {
+            embellishmentOptions.style.backgroundColor = `var(--rarity-${itemSlotData.quality.toLowerCase()}-dark)`;
+        };
+
         // currentItemInfo.querySelectorAll(".current-equipped-item-field-left").forEach(item => {
         //     item.style.borderBottom = `1px solid ${rarityColour}`;
         // });
@@ -1323,8 +1332,15 @@ const initialiseEquipment = () => {
                     // currentItemInfo.querySelector(".current-equipped-item-default-embellishment-option").style.borderBottom = `1px solid ${rarityColour}`;
                     newItemInfo.querySelector(".new-equipped-item-field-right-double").style.borderBottom = `none`;
                 };
-                document.querySelector(".new-equipped-item-enchant-options").style.borderRight = `1px solid ${rarityColour}`;
-                document.querySelector(".new-equipped-item-enchant-options").style.borderBottom = `1px solid ${rarityColour}`;
+
+                if (enchantOptions) {
+                    enchantOptions.style.backgroundColor = `var(--rarity-${item.quality.toLowerCase()}-dark)`;
+                };
+                if (embellishmentOptions) {
+                    embellishmentOptions.style.backgroundColor = `var(--rarity-${item.quality.toLowerCase()}-dark)`;
+                };
+                enchantOptions.style.borderRight = `1px solid ${rarityColour}`;
+                enchantOptions.style.borderBottom = `1px solid ${rarityColour}`;
             };
     
             const createNewItemTrinketBonusesDisplay = () => {

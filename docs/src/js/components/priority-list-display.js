@@ -769,6 +769,18 @@ document.addEventListener("mousedown", (e) => {
     };
 });
 
+document.getElementById("save-paste-modal-button").addEventListener("click", (e) => {
+    priorityListPasteModal.style.display = "none";
+    convertPasteToPriorityList(priorityListPastedCode);
+    document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
+        adjustTextareaHeight(itemText, 40);
+    });
+    document.querySelectorAll(".priority-list-item-condition-text").forEach(itemText => {
+        adjustTextareaHeight(itemText, 40);
+    });
+    updatePriorityList();
+});
+
 const priorityListInfoButton = document.getElementById("priority-list-info-icon");
 const priorityListInfoModal = document.getElementById("priority-list-info-modal");
 priorityListInfoModal.style.display = "none";
