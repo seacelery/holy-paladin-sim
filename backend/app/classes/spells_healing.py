@@ -2,7 +2,7 @@ import random
 import copy
 
 from .spells import Spell
-from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath, Dawnlight, DawnlightAvailable, EternalFlameBuff
+from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath, Dawnlight, DawnlightAvailable, EternalFlameBuff, GleamingRays
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
 from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, update_spell_data_casts, update_spell_data_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
@@ -1470,6 +1470,9 @@ class WordOfGlory(Spell):
             # dawnlight
             if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
                 targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                if caster.is_talent_active("Gleaming Rays"):
+                    caster.apply_buff_to_self(GleamingRays(caster), current_time, reapply=True)
+                
                 if "Morning Star" in caster.active_auras:
                     caster.active_auras["Morning Star"].current_stacks = 0
                 
@@ -1719,6 +1722,9 @@ class EternalFlame(Spell):
             # dawnlight
             if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
                 targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                if caster.is_talent_active("Gleaming Rays"):
+                    caster.apply_buff_to_self(GleamingRays(caster), current_time, reapply=True)
+                
                 if "Morning Star" in caster.active_auras:
                     caster.active_auras["Morning Star"].current_stacks = 0
                 
@@ -1935,6 +1941,9 @@ class LightOfDawn(Spell):
             # dawnlight        
             if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
                 targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                if caster.is_talent_active("Gleaming Rays"):
+                    caster.apply_buff_to_self(GleamingRays(caster), current_time, reapply=True)
+                
                 if "Morning Star" in caster.active_auras:
                     caster.active_auras["Morning Star"].current_stacks = 0
                 
