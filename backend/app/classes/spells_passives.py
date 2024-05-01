@@ -100,7 +100,7 @@ class LarodarsFieryReverie(Spell):
         
     def apply_flat_healing(self, caster, target, current_time, is_heal):     
         larodars_fiery_reverie_heal, larodars_fiery_reverie_crit = LarodarsFieryReverie(caster).calculate_heal(caster)
-        scaled_larodars_fiery_reverie_heal = (314488 / pow(1.014, 528)) * pow(1.014, caster.equipment["head"]["item_level"])
+        scaled_larodars_fiery_reverie_heal = (314488 / pow(1.014, 528)) * pow(1.014, int(caster.equipment["head"]["item_level"]))
         
         larodars_fiery_reverie_heal = scaled_larodars_fiery_reverie_heal * caster.versatility_multiplier
         
