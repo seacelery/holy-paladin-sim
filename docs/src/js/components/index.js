@@ -1087,8 +1087,10 @@ importButton.addEventListener("click", () => {
                 image.parentElement.querySelectorAll('[class$="-timer"]').forEach(timer => {
                     timer.style.display = "none";
                 });
-                image.parentElement.querySelector(".option-image-double-buttons").querySelector('[id$="-repeat-button"]').style.display = "none";
-                image.parentElement.querySelector(".option-image-double-buttons").querySelector('[id$="-add-timer-button"]').style.display = "none";
+                if (image.parentElement.querySelector(".option-image-double-buttons")) {
+                    image.parentElement.querySelector(".option-image-double-buttons").querySelector('[id$="-repeat-button"]').style.display = "none";
+                    image.parentElement.querySelector(".option-image-double-buttons").querySelector('[id$="-add-timer-button"]').style.display = "none";
+                };
             };
         });
     });
