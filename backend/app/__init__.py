@@ -95,9 +95,6 @@ app = Flask(__name__, static_url_path="", static_folder="../../docs")
 init_socketio(app)
 register_socketio_events(socketio)
 
-# if "DYNO" in os.environ:
-
-
 app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
 app.redis = redis.Redis.from_url(
     app.config["REDIS_TLS_URL"],
@@ -108,16 +105,6 @@ app.config.update(
     CELERY_BROKER_URL=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
     CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
 )   
-# else:
-#     app.config["REDIS_LOCAL_URL"] = os.getenv("REDIS_LOCAL_URL")
-#     app.redis = redis.Redis.from_url(
-#         app.config["REDIS_LOCAL_URL"]
-#     )
-
-#     app.config.update(
-#         CELERY_BROKER_URL=app.config["REDIS_LOCAL_URL"],
-#         CELERY_RESULT_BACKEND=app.config["REDIS_LOCAL_URL"],
-#     )
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
 
