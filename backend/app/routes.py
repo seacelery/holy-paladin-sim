@@ -52,7 +52,7 @@ def import_character_route():
         "ptr": paladin.ptr,
         "session_token": session_token
     })
-    response.set_cookie("session_token", session_token, samesite="None", secure=True, httponly=True)
+    response.set_cookie("session_token", session_token, samesite="Lax", secure=True, httponly=True)
     return response
     
 @main.route("/fetch_updated_data", methods=["POST"])
