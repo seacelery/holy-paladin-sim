@@ -1169,8 +1169,6 @@ presetBuffsButton.addEventListener("click", () => {
     });
 });
 
-simulationProgressBarContainer.addEventListener("click", runSimulation);
-
 simulationProgressBarCheck.addEventListener("mousedown", () => {
     simulateButton.style.backgroundColor = "var(--hover-colour-light)"
     simulateButton.style.transition = "box-shadow 0.1s ease-in-out";
