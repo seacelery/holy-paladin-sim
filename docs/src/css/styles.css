@@ -928,6 +928,8 @@ body {
 
 .options-half-right {
     position: relative;
+
+    height: 100%;
 }
 
 .option-container {
@@ -1216,6 +1218,7 @@ body {
 
 #buffs-container {
     display: flex;
+    height: 603px;
 
     padding: 15px 0 0 15px;
 
@@ -1316,7 +1319,7 @@ body {
 #preset-buffs-button {
     position: absolute;
     right: 15px;
-    bottom: -70px;
+    bottom: 15px;
 
     display: flex;
     justify-content: center;
