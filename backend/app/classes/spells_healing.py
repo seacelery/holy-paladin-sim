@@ -299,10 +299,7 @@ class Daybreak(Spell):
             # adjust for daybreak 200% glimmer healing
             for glimmer_target in glimmer_targets:
                 glimmer_heal, glimmer_crit = GlimmerOfLightSpell(caster).calculate_heal(caster)
-                if len(glimmer_targets) > 1:
-                    glimmer_heal_value = 2 * glimmer_heal * (1 + (0.04 * len(glimmer_targets))) / number_of_glimmers_removed
-                else:
-                    glimmer_heal_value = 2 * glimmer_heal
+                glimmer_heal_value = 2 * glimmer_heal
                 
                 # glorious dawn
                 if caster.is_talent_active("Glorious Dawn"):
