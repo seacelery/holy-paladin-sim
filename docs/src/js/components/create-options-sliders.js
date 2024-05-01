@@ -1,7 +1,9 @@
 import { makeFieldEditable } from "../utils/misc-functions.js";
 
 const roundIterations = (number) => {
-    if (number < 100) {
+    if (number >= 95 && number < 100) {
+        return 100
+    } else if (number < 100) {
         return number
     } else {
         return Math.round(number / 10) * 10;
