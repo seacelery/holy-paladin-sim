@@ -3,7 +3,7 @@
     --panel-colour: #070506;
     --panel-colour-2: rgb(20, 9, 16);
     --panel-colour-3: rgb(46, 24, 39);
-    --panel-colour-4: #79475d;
+    --panel-colour-4: #79485d;
     --panel-colour-5: rgb(51, 29, 42);
     --panel-colour-6: rgb(19, 9, 15);
     --panel-colour-7: rgb(12, 6, 10);
@@ -14,6 +14,7 @@
     --panel-colour-table-4: rgb(6, 2, 4);
     --panel-colour-table-5: rgb(15, 7, 12);
     --panel-colour-table-6: rgb(11, 6, 10);
+    --button-colour: #64394c;
     --border-colour: #3c3241;
     --border-colour-2: rgb(17, 8, 14);
     --transparent-border-colour-2: #1b1a1fd7;
@@ -77,7 +78,7 @@
     --panel-colour: #0B0B0B;
     --panel-colour-2: #141414;
     --panel-colour-3: #111111;
-    --panel-colour-4: #6e6e6e;
+    --panel-colour-4: #5c5c5c;
     --panel-colour-5: #272727;
     --panel-colour-6: #121212;
     --panel-colour-7: #2E2E2E;
@@ -88,6 +89,7 @@
     --panel-colour-table-4: rgba(0, 0, 0, 0);
     --panel-colour-table-5: #202020;
     --panel-colour-table-6: #0e0e0e;
+    --button-colour: #5c5c5c;
     --border-colour: #3c3241;
     --border-colour-2: #1b1a1f;
     --transparent-border-colour-2: #1b1a1fd7;
@@ -924,6 +926,10 @@ body {
     width: 33.3%;
 }
 
+.options-half-right {
+    position: relative;
+}
+
 .option-container {
     position: relative;
     display: flex;
@@ -1287,6 +1293,39 @@ body {
 .external-buff-repeating, .potion-repeating {
     border: 1px solid var(--paladin-font);
     color: var(--paladin-font)
+}
+
+#preset-buffs-button {
+    position: absolute;
+    right: 15px;
+    bottom: -70px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 120px;
+    height: 50px;
+
+    color: var(--light-font-colour);
+    font-size: 17px;
+
+    background-color: var(--button-colour);
+
+    border: 1px solid var(--border-colour-2);
+    border-radius: 4px;
+    user-select: none;
+    cursor: pointer;
+}
+
+#preset-buffs-button:hover {
+    background-color: var(--panel-colour-4);
+    border: var(--border-colour-5);
+}
+
+#preset-buffs-button:active {
+    background-color: var(--hover-colour-light);
+    border: var(--border-colour-5);
 }
 
 #talents-content {
@@ -2957,20 +2996,20 @@ body {
     color: var(--light-font-colour);
 
     border: 1px solid var(--border-colour-2);
-    border-radius: 3px;
+    border-radius: 4px;
 
-    background-color: var(--panel-colour-4);
+    background-color: var(--button-colour);
     user-select: none;
     cursor: pointer;
 }
 
 .save-paste-modal-button:hover {
-    background-color: var(--hover-colour-light);
+    background-color: var(--panel-colour-4);
     border: var(--border-colour-5);
 }
 
 .save-paste-modal-button:active {
-    background-color: var(--panel-colour-4);
+    background-color: var(--hover-colour-light);
     border: var(--border-colour-5);
 }
 
@@ -3630,6 +3669,23 @@ input:focus {
 
 #simulate-button {
     transition: opacity 0.4s ease-in;
+
+    background-color: var(--button-colour);
+
+    border: 1px solid var(--border-colour-2);
+    border-radius: 3px;
+    user-select: none;
+    cursor: pointer;
+}
+
+#simulate-button:hover, #simulation-progress-bar-check-container:hover {
+    background-color: var(--hover-colour-light);
+    border: var(--border-colour-5);
+}
+
+#simulate-button:active, #simulation-progress-bar-check-container:active {
+    background-color: var(--panel-colour-4);
+    border: var(--border-colour-5);
 }
 
 #simulate-button-error-modal {

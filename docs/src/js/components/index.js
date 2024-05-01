@@ -1092,15 +1092,102 @@ importButton.addEventListener("click", () => {
             };
         });
     });
+
+    currentConsumables = {
+        flask: [],
+        food: [],
+        weapon_imbue: [],
+        augment_rune: [],
+        raid_buff: [],
+        external_buff: {},
+        potion: {}
+    };
+
+    updateCharacter({
+        consumables: currentConsumables
+    });
 });
 
-simulationProgressBarCheck.addEventListener("mouseenter", () => {
-    simulateButton.style.boxShadow = "0px 0px 3px 2px var(--info-circle-colour)";
+const presetBuffsButton = document.getElementById("preset-buffs-button");
+presetBuffsButton.addEventListener("click", () => {
+    currentConsumables = {
+        flask: [],
+        food: [],
+        weapon_imbue: [],
+        augment_rune: [],
+        raid_buff: [],
+        external_buff: {},
+        potion: {}
+    };
+
+    updateCharacter({
+        consumables: currentConsumables
+    });
+
+    const imageTypes = ["flask", "food", "weapon-imbue", "augment-rune", "potion", "raid-buff", "external-buff"];
+    imageTypes.forEach(type => {
+        const images = document.querySelectorAll(`.${type}-selected`);
+        images.forEach(image => {
+            image.classList.toggle(`${type}-selected`);
+            image.classList.toggle(`${type}-unselected`);
+
+            if (type === "potion" || type === "external-buff") {
+                image.parentElement.querySelectorAll('[class$="-timer"]').forEach(timer => {
+                    timer.style.display = "none";
+                });
+                if (image.parentElement.querySelector(".option-image-double-buttons")) {
+                    image.parentElement.querySelector(".option-image-double-buttons").querySelector('[id$="-repeat-button"]').style.display = "none";
+                    image.parentElement.querySelector(".option-image-double-buttons").querySelector('[id$="-add-timer-button"]').style.display = "none";
+                };
+            };
+        });
+
+        const unselectedImages = document.querySelectorAll(`.${type}-image`);
+        unselectedImages.forEach(image => {
+            const imageData = image.getAttribute(`data-${type}`);
+            if (["Iced Phial of Corrupting Rage", "Grand Banquet of the Kalu'ak", "Hissing Rune",
+                "Draconic Augment Rune", "Arcane Intellect", "Mark of the Wild", "Symbol of Hope",
+                "Retribution Aura", "Source of Magic"].includes(imageData)) {
+                    image.classList.toggle(`${type}-selected`); 
+                    image.classList.toggle(`${type}-unselected`);
+            };
+        })
+    });
+
+    currentConsumables = {
+        flask: ["Iced Phial of Corrupting Rage"],
+        food: ["Grand Banquet of the Kalu'ak"],
+        weapon_imbue: ["Hissing Rune"],
+        augment_rune: ["Draconic Augment Rune"],
+        raid_buff: ["Arcane Intellect", "Mark of the Wild", "Symbol of Hope", "Retribution Aura"],
+        external_buff: {"Source of Magic": ["0"]},
+        potion: {}
+    };
+
+    updateCharacter({
+        consumables: currentConsumables
+    });
+});
+
+simulationProgressBarContainer.addEventListener("click", runSimulation);
+
+simulationProgressBarCheck.addEventListener("mousedown", () => {
+    simulateButton.style.backgroundColor = "var(--hover-colour-light)"
     simulateButton.style.transition = "box-shadow 0.1s ease-in-out";
 });
-  
-simulationProgressBarCheck.addEventListener("mouseleave", () => {
-    simulateButton.style.boxShadow = "";
+
+simulationProgressBarCheck.addEventListener("mouseup", () => {
+    simulateButton.style.backgroundColor = "var(--button-colour)"
+});
+
+simulationProgressBarCheck.addEventListener("mouseover", () => {
+    simulateButton.style.border = "none";
+    simulateButton.style.backgroundColor = "var(--panel-colour-4)"
+});
+
+simulationProgressBarCheck.addEventListener("mouseout", () => {
+    simulateButton.style.border = "1px solid var(--border-colour-5)";
+    simulateButton.style.backgroundColor = "var(--button-colour)"
 });
 
 const tickRateInfoCircle = document.getElementById("tick-rate-info-circle");
