@@ -685,28 +685,29 @@ beaconOfFaithPreset.addEventListener("click", () => {
 
 const beaconOfVirtuePreset = document.getElementById("standard-beacon-of-virtue-preset");
 beaconOfVirtuePreset.addEventListener("click", () => {
-    priorityListPastedCode = `Aerated Mana Potion | Timers = [30]+
-    Blessing of the Seasons
+    priorityListPastedCode = `Aerated Mana Potion | Timers = [30]
     Tyr's Deliverance | Timers = [0, 90, 180, 270]
-    Holy Shock | Holy Shock charges = 2
     Avenging Wrath | Timers = [15, 135, 271]
     Light's Hammer | Avenging Wrath active | or | Avenging Wrath cooldown >= 40 | and | previous ability = Beacon of Virtue
     Daybreak | Timers = [15, 75, 135, 195, 271]
     Beacon of Virtue | Timers = [16, 76, 136, 196, 272] | and | Daybreak cooldown >= 20 | or | Avenging Wrath active | or | Daybreak cooldown >= 20
-    Divine Toll | Avenging Wrath active | and | Holy Power <= 3 | or | previous ability = Beacon of Virtue
-    Word of Glory | Beacon of Virtue active | and | Divine Toll cooldown = 0 | and | Holy Power >= 3
-    Word of Glory | Beacon of Virtue active | and | Unending Light stacks = 9
-    Word of Glory | Beacon of Virtue active | and | Blessing of Dawn stacks = 2
-    Holy Shock | Beacon of Virtue active
+    Divine Toll | Beacon of Virtue active | and | previous ability = Word of Glory
+    Word of Glory | Beacon of Virtue active | and | Divine Toll cooldown <= 0 | and | Holy Power >= 3
+    Divine Toll | Beacon of Virtue active | and | previous ability = Beacon of Virtue
+    Holy Shock | Beacon of Virtue active | and | Holy Shock charges = 2
     Divine Favor | Beacon of Virtue active
     Holy Light | Beacon of Virtue active | and | Infusion of Light active | and | Divine Favor active
+    Word of Glory | Beacon of Virtue active | and | Unending Light stacks = 9
     Flash of Light | Beacon of Virtue active | and | Infusion of Light active
-    Word of Glory | Beacon of Virtue active | and | Blessing of Dawn stacks = 1
-    Word of Glory | Beacon of Virtue active | and | Holy Power >= 3
+    Word of Glory | Beacon of Virtue active | and | Blessing of Dawn stacks = 2
+    Holy Shock | Beacon of Virtue active
+    Holy Shock | Holy Shock charges = 2
+    Blessing of the Seasons
     Word of Glory | Unending Light stacks = 9 | and | Holy Power >= 5
+    Light of Dawn | Holy Power >= 5
     Holy Light | Divine Favor active | and | Infusion of Light active | and | Holy Power >= 2
     Flash of Light | Infusion of Light stacks = 2
-    Light of Dawn | Holy Power >= 5
+    Light of Dawn | Holy Power >= 3
     Holy Shock
     Hammer of Wrath | Avenging Wrath active
     Crusader Strike
