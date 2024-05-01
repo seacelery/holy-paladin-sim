@@ -12,6 +12,7 @@ from flask_socketio import emit
 from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
+from .trinkets import Trinket
 from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight, EternalFlameBuff
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data, update_mana_gained
 from .priority_list_dsl import parse_condition, condition_to_lambda
@@ -303,7 +304,7 @@ class Simulation:
                 # seal of order 10% cdr for holy power generators, blessing of autumn 30% cdr on all abilities, avenging crusader 30% cdr for judgment and crusader strike                   
                 if "Blessing of Dusk" in self.paladin.active_auras and ability_name in ["Divine Toll", "Holy Shock", "Crusader Strike", "Judgment", "Hammer of Wrath"] and self.paladin.is_talent_active("Seal of Order"):
                     ability_instance.remaining_cooldown -= self.tick_rate * 0.1
-                if "Blessing of Autumn" in self.paladin.active_auras:
+                if "Blessing of Autumn" in self.paladin.active_auras and not isinstance(ability_instance, Trinket):
                     ability_instance.remaining_cooldown -= self.tick_rate * 0.3
                 if ("Avenging Crusader" in self.paladin.active_auras or "Avenging Crusader (Awakening)" in self.paladin.active_auras) and ability_name in ["Judgment", "Crusader Strike"]:
                     ability_instance.remaining_cooldown -= self.tick_rate * 0.3
