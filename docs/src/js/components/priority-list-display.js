@@ -685,7 +685,7 @@ beaconOfFaithPreset.addEventListener("click", () => {
 
 const beaconOfVirtuePreset = document.getElementById("standard-beacon-of-virtue-preset");
 beaconOfVirtuePreset.addEventListener("click", () => {
-    priorityListPastedCode = `Aerated Mana Potion | Timers = [30]
+    priorityListPastedCode = `Aerated Mana Potion | Timers = [30]+
     Tyr's Deliverance | Timers = [0, 90, 180, 270]
     Avenging Wrath | Timers = [15, 135, 271]
     Light's Hammer | Avenging Wrath active | or | Avenging Wrath cooldown >= 40 | and | previous ability = Beacon of Virtue
@@ -706,7 +706,7 @@ beaconOfVirtuePreset.addEventListener("click", () => {
     Word of Glory | Unending Light stacks = 9 | and | Holy Power >= 5
     Light of Dawn | Holy Power >= 5
     Holy Light | Divine Favor active | and | Infusion of Light active | and | Holy Power >= 2
-    Flash of Light | Infusion of Light stacks = 2
+    Flash of Light | Infusion of Light active
     Light of Dawn | Holy Power >= 3
     Holy Shock
     Hammer of Wrath | Avenging Wrath active
