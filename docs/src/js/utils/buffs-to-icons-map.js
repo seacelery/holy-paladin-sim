@@ -51,6 +51,7 @@ const buffsToIconsMap = {
     "Saved by the Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_savedbythelight.jpg",
     "Sophic Devotion": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_elementalcombinedfoozles_titan.jpg",
     "Strength of Conviction": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_eyeforaneye.jpg",
+    "Sun Sear": "https://render.worldofwarcraft.com/eu/icons/56/spell_priest_burningwill.jpg",
     "Time Warp": "https://render.worldofwarcraft.com/eu/icons/56/ability_mage_timewarp.jpg",
     "Tyr's Deliverance": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_2h_artifactsilverhand_d_01.jpg",
     "Tyr's Deliverance (self)": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_2h_artifactsilverhand_d_01.jpg",

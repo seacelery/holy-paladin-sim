@@ -1,5 +1,6 @@
 import random
 
+from .auras_buffs import SunSear
 from ..utils.beacon_transfer_rates import beacon_transfer_rates_double_beacon
 from ..utils.leech_abilities import leech_abilities
 from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts, update_spell_data_beacon_heals, update_self_buff_data, update_target_buff_data, update_priority_breakdown
@@ -181,6 +182,10 @@ class Spell:
                             update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, 0, self.holy_power_cost, exclude_casts=True)
                         else:
                             update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, 0, self.holy_power_cost)
+                            
+                    # sun sear
+                    if is_crit and caster.ptr and caster.is_talent_active("Sun Sear") and self.name == "Light of Dawn":
+                        target.apply_buff_to_target(SunSear(caster), current_time, caster=caster)
                         
                     self.aoe_cast_counter -= 1
                 else: 

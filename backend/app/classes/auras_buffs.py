@@ -173,6 +173,15 @@ class EternalFlameBuff(HoT):
     def __init__(self, caster, duration_to_apply):
         super().__init__("Eternal Flame (HoT)", duration_to_apply, base_duration=duration_to_apply, base_tick_interval=3, initial_haste_multiplier=caster.haste_multiplier) 
         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
+        
+
+class SunSear(HoT):
+    
+    SPELL_POWER_COEFFICIENT = 0.6
+    
+    def __init__(self, caster):
+        super().__init__("Sun Sear", 4, base_duration=4, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier) 
+        self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
     
     
 # self buffs   

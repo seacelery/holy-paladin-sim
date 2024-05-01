@@ -2,7 +2,7 @@ import random
 import copy
 
 from .spells import Spell
-from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath, Dawnlight, DawnlightAvailable, EternalFlameBuff, GleamingRays
+from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath, Dawnlight, DawnlightAvailable, EternalFlameBuff, GleamingRays, SunSear
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
 from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, update_spell_data_casts, update_spell_data_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
@@ -96,6 +96,10 @@ class HolyShock(Spell):
                 self.spell_healing_modifier /= 3
                 del caster.active_auras["Blessing of An'she"]
                 update_self_buff_data(caster.self_buff_breakdown, "Blessing of An'she", current_time, "expired")
+                
+            # sun sear
+            if spell_crit and caster.ptr and caster.is_talent_active("Sun Sear"):
+                targets[0].apply_buff_to_target(SunSear(caster), current_time, caster=caster)
             
             # reset light of the martyr & bestow light
             if caster.ptr:
@@ -404,6 +408,10 @@ class RisingSunlightHolyShock(Spell):
                 self.spell_healing_modifier /= 3
                 del caster.active_auras["Blessing of An'she"]
                 update_self_buff_data(caster.self_buff_breakdown, "Blessing of An'she", current_time, "expired")
+                
+            # sun sear
+            if spell_crit and caster.ptr and caster.is_talent_active("Sun Sear"):
+                targets[0].apply_buff_to_target(SunSear(caster), current_time, caster=caster)
               
             # reset light of the martyr & bestow light
             if caster.ptr:
@@ -643,6 +651,10 @@ class DivineTollHolyShock(Spell):
                 self.spell_healing_modifier /= 3
                 del caster.active_auras["Blessing of An'she"]
                 update_self_buff_data(caster.self_buff_breakdown, "Blessing of An'she", current_time, "expired")
+                
+            # sun sear
+            if spell_crit and caster.ptr and caster.is_talent_active("Sun Sear"):
+                targets[0].apply_buff_to_target(SunSear(caster), current_time, caster=caster)
             
             # reset light of the martyr & bestow light
             if caster.ptr:
@@ -848,6 +860,10 @@ class DivineResonanceHolyShock(Spell):
                 self.spell_healing_modifier /= 3
                 del caster.active_auras["Blessing of An'she"]
                 update_self_buff_data(caster.self_buff_breakdown, "Blessing of An'she", current_time, "expired")
+                
+            # sun sear
+            if spell_crit and caster.ptr and caster.is_talent_active("Sun Sear"):
+                targets[0].apply_buff_to_target(SunSear(caster), current_time, caster=caster)
             
             # reset light of the martyr & bestow light
             if caster.ptr:

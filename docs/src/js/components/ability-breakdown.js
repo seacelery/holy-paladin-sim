@@ -121,7 +121,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion", "Veneration", "Merciful Auras", "Light of the Martyr ", "Saved by the Light",
         "Chirping Rune", "Larodar's Fiery Reverie", "Rashok's Molten Heart", "Magazine of Healing Darts", "Bronzed Grip Wrappings",
         "Dawnlight", "Dawnlight (HoT)", "Dawnlight (AoE)", "Afterimage (Word of Glory)", "Afterimage (Eternal Flame)", "Eternal Flame (HoT)", 
-        "Broodkeeper's Promise"
+        "Broodkeeper's Promise", "Sun Sear"
     ];
     // displays casts with average as healing divided by hits
     const excludedSpellsCastsAverageHits = [
