@@ -148,10 +148,6 @@ class Paladin:
         # initialise stats with racials
         self.update_stats_with_racials()
         
-        self.mastery_effectiveness = 0.95
-        self.average_raid_health_percentage = 0.7
-        self.is_enemy_below_20_percent = False
-        
         self.base_global_cooldown = 1.5
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
         self.global_cooldown = 0
@@ -184,7 +180,11 @@ class Paladin:
         self.glimmer_application_counter = 0
         self.glimmer_removal_counter = 0
         
+        self.mastery_effectiveness = 0.95
+        self.average_raid_health_percentage = 0.7
         self.variable_target_counts = {"Light of Dawn": 5, "Light's Hammer": 6, "Resplendent Light": 5}
+        self.seasons = {"summer": True, "autumn": True, "winter": True, "spring": True}
+        self.is_enemy_below_20_percent = False
         
         self.time_based_stacking_buffs = {}
         self.active_summons = {}

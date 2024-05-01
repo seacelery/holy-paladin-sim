@@ -496,6 +496,20 @@ const startSimulation = () => {
         iterations = document.getElementById("iterations-option").value;
     };
 
+    let seasons = {
+        "Blessing of Summer": true,
+        "Blessing of Autumn": true,
+        "Blessing of Winter": true,
+        "Blessing of Spring": true,
+    };
+    const seasonIcons = document.querySelectorAll(".blessing-of-the-seasons-image");
+    seasonIcons.forEach(icon => {
+        const season = icon.getAttribute("data-season");
+        if (icon.classList.contains("blessing-of-the-seasons-unselected")) {
+            seasons[season] = false;
+        };
+    });
+
     simulationProgressBarContainer.style.opacity = "100";
     isSimulationRunning = true;
     simulateButton.style.boxShadow = "";  
@@ -519,7 +533,8 @@ const startSimulation = () => {
         lights_hammer_targets: document.getElementById("lights-hammer-option").value,
         resplendent_light_targets: document.getElementById("resplendent-light-option").value,
         priority_list: priorityList,
-        custom_equipment: generateFullItemData()["equipment"]
+        custom_equipment: generateFullItemData()["equipment"],
+        seasons: seasons
     };
 
     simulationProgressBarContainer.removeEventListener("click", startSimulation);

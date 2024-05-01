@@ -78,6 +78,7 @@ def register_socketio_events(socketio):
             "light_of_dawn_targets": int(data['light_of_dawn_targets']),
             "lights_hammer_targets": int(data['lights_hammer_targets']),
             "resplendent_light_targets": int(data['resplendent_light_targets']),
+            "seasons": data["seasons"]
         }
 
         result = run_simulation_task.delay(simulation_parameters=simulation_params)
@@ -223,6 +224,8 @@ def run_simulation_task(self, simulation_parameters):
         
         # complete all simulation iterations and process the data of each
         for i in range(simulation.iterations):
+            print(simulation.paladin.seasons)
+            sys.stdout.flush()
             # memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
             # print(f"Memory Usage: {memory_usage} KB on iteration {i}")
             # sys.stdout.flush()

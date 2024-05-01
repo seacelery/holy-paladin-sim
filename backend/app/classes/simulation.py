@@ -23,7 +23,7 @@ pp = pprint.PrettyPrinter(width=200)
 
 class Simulation:
     
-    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets, access_token, test=False):
+    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets, seasons, access_token, test=False):
 
         self.access_token = access_token
 
@@ -84,6 +84,7 @@ class Simulation:
         self.paladin.abilities["Light of Dawn"].healing_target_count = self.paladin.variable_target_counts["Light of Dawn"]
         self.paladin.variable_target_counts["Light's Hammer"] = int(lights_hammer_targets)
         self.paladin.variable_target_counts["Resplendent Light"] = int(resplendent_light_targets)
+        self.paladin.seasons = seasons
         
         # testing
         self.test_time_since_last = 0

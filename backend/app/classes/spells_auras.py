@@ -183,19 +183,23 @@ class BlessingOfTheSeasons(Spell):
             
             caster.events.append(f"{format_time(current_time)}: {self.name} cast on {caster.name}")
             if self.name == "Blessing of Summer":
-                caster.apply_buff_to_self(BlessingOfSummer(), current_time)
+                if caster.seasons[self.name]:
+                    caster.apply_buff_to_self(BlessingOfSummer(), current_time)
                 self.name = "Blessing of Autumn"
                 
             elif self.name == "Blessing of Autumn":
-                caster.apply_buff_to_self(BlessingOfAutumn(), current_time)
+                if caster.seasons[self.name]:
+                    caster.apply_buff_to_self(BlessingOfAutumn(), current_time)
                 self.name = "Blessing of Winter"
                 
             elif self.name == "Blessing of Winter":
-                caster.apply_buff_to_self(BlessingOfWinter(), current_time)
+                if caster.seasons[self.name]:
+                    caster.apply_buff_to_self(BlessingOfWinter(), current_time)
                 self.name = "Blessing of Spring"
                 
             elif self.name == "Blessing of Spring":
-                caster.apply_buff_to_self(BlessingOfSpring(), current_time)
+                if caster.seasons[self.name]:
+                    caster.apply_buff_to_self(BlessingOfSpring(), current_time)
                 self.name = "Blessing of Summer"
                 self.initial_cast = True
             

@@ -185,6 +185,15 @@ const createOptionsSliders = () => {
     });
     resplendentLightValue.textContent = resplendentLightSlider.value;
     makeFieldEditable(resplendentLightValue, 1, resplendentLightSlider);
+
+    // blessing of the seasons
+    const seasonsIcons = document.querySelectorAll(".blessing-of-the-seasons-image");
+    seasonsIcons.forEach(icon => {
+        icon.addEventListener("click", () => {
+            icon.classList.toggle("blessing-of-the-seasons-selected");
+            icon.classList.toggle("blessing-of-the-seasons-unselected");
+        });
+    });
 };
 
 export { createOptionsSliders, roundIterations };
