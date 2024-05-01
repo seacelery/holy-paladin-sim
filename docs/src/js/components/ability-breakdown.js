@@ -316,8 +316,6 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     let overallHolyPower = 0;
     let overallCPM = 0;
 
-    console.log(sortedAbilityBreakdownData)
-
     // overall required for some cells in the main table
     for (const spellName in sortedAbilityBreakdownData) {
         const spellData = sortedAbilityBreakdownData[spellName];

@@ -125,8 +125,6 @@ const createBuffsLineGraph = (data, graphId, title, colour, awakening = false, a
         const encounterLength = Number(document.getElementById("encounter-length-option").value);
     
         while (previousPeak <= encounterLength) {
-            // console.log(`Checking between ${previousPeak} and ${interval}`);
-    
             let filteredEntries = Object.entries(data)
                 .filter(([key, _]) => Number(key) <= interval && Number(key) > previousPeak + cooldownPeriod);
     
@@ -144,19 +142,12 @@ const createBuffsLineGraph = (data, graphId, title, colour, awakening = false, a
     
             let keyWithHighestValue = Number(highestValueEntry[0]);
 
-            // console.log(highestValueEntry[1])
-            // console.log(iterations * 0.03)
-
             if (highestValueEntry[1] >= iterations * 0.01) {
                 peaks.push({ key: keyWithHighestValue });
             };
-            
-            // console.log("Highest key", keyWithHighestValue);
     
             previousPeak = keyWithHighestValue;
             interval = keyWithHighestValue + Math.max(65, keyWithHighestValue - previousPeak);
-    
-            // console.log("New interval", interval);
         };
         return peaks;
     };

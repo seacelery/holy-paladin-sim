@@ -28,6 +28,7 @@ const toggleTalentOptions = (talentName, talentData) => {
             document.getElementById("cooldown-tracking-rising-sunlight-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";  
             break;
         case talentName === "Blessing of Summer":
+            document.getElementById("blessing-of-the-seasons-option-container").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
             document.getElementById("cooldown-tracking-blessing-of-spring-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
             break;
     };
@@ -357,16 +358,16 @@ const handleTalentChange = (talentName, talentData, multipleTalentChanges = fals
             const isHeraldOfTheSunTalent = heroTalentsHeraldOfTheSun.some(t => t.includes(currentTalentName));
 
             if (isClassTalent) {
-                console.log("Updating class talent");
+                // console.log("Updating class talent");
                 talentUpdate.class_talents[currentTalentName] = talentValue;
             } else if (isSpecTalent) {
-                console.log("Updating spec talent");
+                // console.log("Updating spec talent");
                 talentUpdate.spec_talents[currentTalentName] = talentValue;
             } else if (isLightsmithTalent) {
-                console.log("Updating lightsmith talent");
+                // console.log("Updating lightsmith talent");
                 talentUpdate.lightsmith_talents[currentTalentName] = talentValue;
             } else if (isHeraldOfTheSunTalent) {
-                console.log("Updating herald of the sun talent");
+                // console.log("Updating herald of the sun talent");
                 talentUpdate.herald_of_the_sun_talents[currentTalentName] = talentValue;
             };
         }
@@ -387,16 +388,16 @@ const handleTalentChange = (talentName, talentData, multipleTalentChanges = fals
         const isHeraldOfTheSunTalent = heroTalentsHeraldOfTheSun.some(t => t.includes(talentName));
 
         if (isClassTalent) {
-            console.log("Updating class talent");
+            // console.log("Updating class talent");
             talentUpdate.class_talents[talentName] = talentValue;
         } else if (isSpecTalent) {
-            console.log("Updating spec talent");
+            // console.log("Updating spec talent");
             talentUpdate.spec_talents[talentName] = talentValue;
         } else if (isLightsmithTalent) {
-            console.log("Updating lightsmith talent");
+            // console.log("Updating lightsmith talent");
             talentUpdate.lightsmith_talents[talentName] = talentValue;
         } else if (isHeraldOfTheSunTalent) {
-            console.log("Updating herald of the sun talent");
+            // console.log("Updating herald of the sun talent");
             talentUpdate.herald_of_the_sun_talents[talentName] = talentValue;
         };
     }

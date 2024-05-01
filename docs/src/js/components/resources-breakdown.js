@@ -251,7 +251,6 @@ const createResourcesBreakdown = (simulationData, containerCount) => {
     
                     arrowContainer.addEventListener("click", () => {
                         const subRows = document.querySelectorAll(`.${formattedSpellName}-sub-row-${containerCount}`);
-                        console.log(subRows)
                         const arrow = document.getElementById(`table-arrow-icon-${formattedSpellName}-${containerCount}`)
                         
                         subRows.forEach(subRow => {
