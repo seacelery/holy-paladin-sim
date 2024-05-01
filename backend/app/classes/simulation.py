@@ -31,7 +31,7 @@ class Simulation:
         self.enemy_targets_list = [EnemyTarget("enemyTarget1")]
         self.encounter_length = encounter_length
         self.elapsed_time = 0
-        self.iterations = iterations
+        self.iterations = 100 if iterations == 101 else iterations
         self.priority_list_text = priority_list
         self.priority_list = []
         self.custom_equipment = custom_equipment
