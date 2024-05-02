@@ -688,12 +688,12 @@ beaconOfVirtuePreset.addEventListener("click", () => {
     priorityListPastedCode = `Aerated Mana Potion | Timers = [30]+
     Tyr's Deliverance | Timers = [0, 90, 180, 270]
     Avenging Wrath | Timers = [15, 135, 271]
-    Light's Hammer | Avenging Wrath active | or | Avenging Wrath cooldown >= 40 | and | previous ability = Beacon of Virtue
-    Daybreak | Timers = [15, 75, 135, 195, 271]
-    Beacon of Virtue | Timers = [16, 76, 136, 196, 272] | and | Daybreak cooldown >= 20 | or | Avenging Wrath active | or | Daybreak cooldown >= 20
+    Light's Hammer
+    Beacon of Virtue | Timers = [15, 76, 135, 196, 271] | or | Avenging Wrath active | or | Daybreak cooldown >= 20
+    Daybreak | Beacon of Virtue active
     Divine Toll | Beacon of Virtue active | and | previous ability = Word of Glory
-    Word of Glory | Beacon of Virtue active | and | Divine Toll cooldown <= 0 | and | Holy Power >= 3
-    Divine Toll | Beacon of Virtue active | and | previous ability = Beacon of Virtue
+    Word of Glory | Beacon of Virtue active | and | Divine Toll cooldown <= 0 | and | Unending Light stacks = 9
+    Divine Toll | Beacon of Virtue active | or | previous ability = Daybreak
     Holy Shock | Beacon of Virtue active | and | Holy Shock charges = 2
     Divine Favor | Beacon of Virtue active
     Holy Light | Beacon of Virtue active | and | Infusion of Light active | and | Divine Favor active
@@ -703,16 +703,16 @@ beaconOfVirtuePreset.addEventListener("click", () => {
     Holy Shock | Beacon of Virtue active
     Holy Shock | Holy Shock charges = 2
     Blessing of the Seasons
-    Word of Glory | Unending Light stacks = 9 | and | Holy Power >= 5
+    Word of Glory | Unending Light stacks = 9
+    Light of Dawn | Blessing of Dawn stacks = 2
     Light of Dawn | Holy Power >= 5
-    Holy Light | Divine Favor active | and | Infusion of Light active | and | Holy Power >= 2
     Flash of Light | Infusion of Light active
-    Light of Dawn | Holy Power >= 3
     Holy Shock
+    Light of Dawn | Holy Power >= 3
+    Judgment | Mana >= 60%
     Hammer of Wrath | Avenging Wrath active
     Crusader Strike
-    Consecration
-    Judgment | Holy Power <= 2 | and | Mana >= 60%`,
+    Consecration`,
     convertPasteToPriorityList(priorityListPastedCode);
     document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
         adjustTextareaHeight(itemText, 40);
