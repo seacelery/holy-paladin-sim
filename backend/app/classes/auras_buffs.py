@@ -2540,9 +2540,24 @@ class SolarGrace(Buff):
         if SolarGrace.count == 6:
             SolarGrace.count = 0
         super().__init__(f"Solar Grace {self.count}", 12, base_duration=12)  
+        self.active_solar_graces = 0
         
     def apply_effect(self, caster, current_time=None):
-        pass
+        caster.flat_haste -= 4 * self.active_solar_graces
+        self.active_solar_graces += 1
+        caster.flat_haste += 4 * self.active_solar_graces
+        caster.update_stat("haste", 0)
+        caster.update_hasted_cooldowns_with_haste_changes()
+        
+        # TODO verify if multiplicative
+        # update_stat_with_multiplicative_percentage(caster, "haste", 4 * self.active_solar_graces, False)
+        # self.active_solar_graces += 1
+        # update_stat_with_multiplicative_percentage(caster, "haste", 4 * self.active_solar_graces, True)
         
     def remove_effect(self, caster, current_time=None):
-        pass
+        caster.flat_haste -= 4
+        caster.update_stat("haste", 0)
+        caster.update_hasted_cooldowns_with_haste_changes()
+        
+        # update_stat_with_multiplicative_percentage(caster, "haste", 4, False)
+        # self.active_solar_graces -= 1

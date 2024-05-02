@@ -75,6 +75,7 @@ beacon_transfer = {
     "Merciful Auras": "single_target",
     "Avenging Crusader (Judgment)": "single_target",
     "Avenging Crusader (Crusader Strike)": "single_target",
+    "Sun Sear": "single_target",
     "Light of Dawn": "aoe",
     "Glimmer of Light": "aoe",
     "Light's Hammer": "aoe",
