@@ -3967,6 +3967,7 @@ input:focus {
     word-wrap: break-word;
     padding: 1px 5px 0 5px;
 
+    min-height: 28px;
     min-width: 150px;
     height: 60%;
 }
