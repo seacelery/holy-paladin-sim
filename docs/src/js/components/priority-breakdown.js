@@ -242,7 +242,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const resourcesCell = createElement("div", "priority-grid-resources-cell priority-grid-cell", null);
 
             const holyPowerDisplay = createElement("img", "priority-grid-holy-power-display");
-            holyPowerDisplay.src = `holy-power/holy-power-${timestampData.resources.holy_power}.png`;
+            holyPowerDisplay.src = `public/holy-power/holy-power-${timestampData.resources.holy_power}.png`;
             resourcesCell.appendChild(holyPowerDisplay);
 
             const manaBarContainer = createElement("div", "priority-grid-mana-bar-container", null);
