@@ -148,11 +148,30 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
 
         const tableBody = table.createTBody();
 
+        if (isTargetBuffs) {
+            let solarGraceUptime = 0;
+            let solarGraceAverageDuration = 0;
+            let solarGraceTotalDuration = 0;
+            let solarGraceCount = 0;
+            for (let buffName in buffsData) {
+                if (buffName.includes("Solar Grace")) {
+                    const solarGraceData = buffsData[buffName];
+                    solarGraceUptime += solarGraceData.uptime;
+                    solarGraceAverageDuration = solarGraceData.average_duration;
+                    solarGraceTotalDuration += solarGraceData.total_duration;
+                    solarGraceCount += solarGraceData.count;
+    
+                    delete buffsData[buffName];
+                };
+            };
+            buffsData["Solar Grace"] = {"average_duration": solarGraceAverageDuration, "total_duration": solarGraceTotalDuration, "count": solarGraceCount, "uptime": solarGraceUptime};
+        };
+
         let buffsBreakdownArray = Object.entries(buffsData);
         buffsBreakdownArray.sort((a, b) => b[1].uptime - a[1].uptime);
         let sortedBuffsBreakdownData = Object.fromEntries(buffsBreakdownArray);
-
-        for (const buffName in sortedBuffsBreakdownData) {
+        
+        for (let buffName in sortedBuffsBreakdownData) {
             const buffData = sortedBuffsBreakdownData[buffName];
             const row = tableBody.insertRow();
             row.id = `${buffName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}-row-${containerCount}`;

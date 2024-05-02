@@ -74,6 +74,21 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
 
     for (const timestamp in priorityData) {
         const playerAurasData = priorityData[timestamp].player_active_auras;
+
+        // overlapping buff case, generalise if needed
+        let solarGraceCount = 0;
+        let solarGraceHighestDuration = 0;
+        for (let aura in playerAurasData) {
+            if (aura.includes("Solar Grace ")) { 
+                solarGraceCount += 1;
+                if (playerAurasData[aura].duration > solarGraceHighestDuration) {
+                    solarGraceHighestDuration = playerAurasData[aura].duration;
+                };
+                delete playerAurasData[aura];
+            };
+        };
+        playerAurasData["Solar Grace"] = {"applied_duration": 12, "duration": solarGraceHighestDuration, "stacks": solarGraceCount};
+
         for (const auraName in playerAurasData) {
             if (excludedAuras.includes(auraName)) {
                 continue;
@@ -227,7 +242,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const resourcesCell = createElement("div", "priority-grid-resources-cell priority-grid-cell", null);
 
             const holyPowerDisplay = createElement("img", "priority-grid-holy-power-display");
-            holyPowerDisplay.src = `public/holy-power/holy-power-${timestampData.resources.holy_power}.png`;
+            holyPowerDisplay.src = `holy-power/holy-power-${timestampData.resources.holy_power}.png`;
             resourcesCell.appendChild(holyPowerDisplay);
 
             const manaBarContainer = createElement("div", "priority-grid-mana-bar-container", null);
@@ -248,15 +263,16 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const playerAurasCell = createElement("div", "priority-grid-player-auras-cell priority-grid-cell", null);
             const playerAurasContainer = createElement("div", "priority-grid-player-auras-container", null);
             const playerAuras = timestampData.player_active_auras;
-            for (const aura in playerAuras) {   
+
+            for (let aura in playerAuras) {  
                 if (!currentSimulationPlayerAuras.includes(aura)) {
-                    continue
+                    continue;
                 };  
 
                 if (playerAuras[aura].stacks === 0) {
                     continue;
                 };
-
+   
                 const formattedAuraName = aura.toLowerCase().replaceAll(" (self)", "").replaceAll(" ", "-").replaceAll("'", "");
                 // create an icon for each aura and show duration & stacks
                 const auraIconContainer = createElement("div", `priority-grid-player-auras-icon-container-${formattedAuraName}`, null);
@@ -341,8 +357,9 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             // select the order for each row
             const generatorRowOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath", "Consecration"];
             const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Beacon of Virtue", "Tyr's Deliverance",
-                                           "Light's Hammer", "Blessing of the Seasons", "Divine Favor", "Lay on Hands", "Arcane Torrent",
-                                           "Fireblood", "Gift of the Naaru", "Aerated Mana Potion", "Elemental Potion of Ultimate Power"];
+                                           "Light's Hammer", "Holy Prism", "Barrier of Faith", "Blessing of the Seasons", 
+                                           "Divine Favor", "Lay on Hands", "Arcane Torrent", "Fireblood", "Gift of the Naaru", 
+                                           "Aerated Mana Potion", "Elemental Potion of Ultimate Power"];
 
             // only append if the cooldown is actually present in the current simulation
             generatorRowOrder.forEach(cooldownName => {
@@ -387,11 +404,10 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
                     };
 
                     const cooldown = cooldowns[cooldownName];
-
                     if ("Divine Favor" in timestampData.player_active_auras && cooldownName === "Divine Favor") {
                         cooldown.remaining_cooldown = 0;
                     };
-
+                    
                     const formattedCooldownName = cooldownName.toLowerCase().replaceAll(" ", "-").replaceAll("'", "");
                     const cooldownIconContainer = createElement("div", `priority-grid-cooldown-icon-container-${formattedCooldownName}`, `priority-grid-cooldown-icon-container-${formattedCooldownName}`);
                     const iconOverlayContainer = createElement("div", "cooldown-icon-overlay-container", null);
@@ -504,12 +520,6 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
         
             let startIndex = Math.max(0, Math.floor(scrollTop / rowHeight) - buffer);
             const endIndex = Math.min(totalRows - 1, startIndex + visibleRowCount + buffer);
-        
-            // while (currentStartIndex < startIndex) {
-            //     gridContainer.removeChild(gridContainer.firstChild);
-            //     currentStartIndex++;
-            //     currentEndIndex = Math.max(currentEndIndex - 1, visibleRowCount + buffer - 1);
-            // };
 
             if (scrollTop === 0) {
                 gridContainer.innerHTML = "";

@@ -2528,3 +2528,21 @@ class BlessingOfAnshe(Buff):
         
     def remove_effect(self, caster, current_time=None):
         pass
+    
+
+class SolarGrace(Buff):
+    count = 0
+
+    def __init__(self, caster):
+        SolarGrace.count += 1
+        self.count = SolarGrace.count
+        
+        if SolarGrace.count == 6:
+            SolarGrace.count = 0
+        super().__init__(f"Solar Grace {self.count}", 12, base_duration=12)  
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
