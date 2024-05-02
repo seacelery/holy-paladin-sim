@@ -358,6 +358,8 @@ class RisingSunlightHolyShock(Spell):
     
     def __init__(self, caster):
         super().__init__("Holy Shock (Rising Sunlight)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=RisingSunlightHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
+        if caster.ptr:
+            self.SPELL_POWER_COEFFICIENT = 1.4736
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
@@ -600,6 +602,8 @@ class DivineTollHolyShock(Spell):
     
     def __init__(self, caster):
         super().__init__("Holy Shock (Divine Toll)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, base_mana_cost=HolyShock.BASE_MANA_COST, is_heal=True)
+        if caster.ptr:
+            self.SPELL_POWER_COEFFICIENT = 1.4736
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
@@ -810,6 +814,8 @@ class DivineResonanceHolyShock(Spell):
     
     def __init__(self, caster):
         super().__init__("Holy Shock (Divine Resonance)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
+        if caster.ptr:
+            self.SPELL_POWER_COEFFICIENT = 1.4736
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
@@ -1259,11 +1265,10 @@ class WordOfGlory(Spell):
     
     def __init__(self, caster):
         super().__init__("Word of Glory", mana_cost=WordOfGlory.MANA_COST, holy_power_cost=WordOfGlory.HOLY_POWER_COST, max_charges=0, is_heal=True)
-        
-    def cast_healing_spell(self, caster, targets, current_time, is_heal):
         if caster.ptr:
             self.SPELL_POWER_COEFFICIENT = 3.15 * 1.11
         
+    def cast_healing_spell(self, caster, targets, current_time, is_heal): 
         # divine purpose
         if caster.is_talent_active("Divine Purpose"): 
             if "Divine Purpose" in caster.active_auras:
@@ -1508,11 +1513,10 @@ class EternalFlame(Spell):
     
     def __init__(self, caster):
         super().__init__("Eternal Flame", mana_cost=EternalFlame.MANA_COST, holy_power_cost=EternalFlame.HOLY_POWER_COST, max_charges=0, is_heal=True)
-        
-    def cast_healing_spell(self, caster, targets, current_time, is_heal):
         if caster.ptr:
             self.SPELL_POWER_COEFFICIENT = 3.15 * 1.11
         
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):   
         # divine purpose
         if caster.is_talent_active("Divine Purpose"): 
             if "Divine Purpose" in caster.active_auras:
@@ -1761,11 +1765,10 @@ class LightOfDawn(Spell):
     
     def __init__(self, caster):
         super().__init__("Light of Dawn", mana_cost=LightOfDawn.MANA_COST, holy_power_cost=LightOfDawn.HOLY_POWER_COST, healing_target_count=LightOfDawn.TARGET_COUNT, is_heal=True)
-        
-    def cast_healing_spell(self, caster, targets, current_time, is_heal):
         if caster.ptr:
             self.SPELL_POWER_COEFFICIENT = 0.8
-            
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):          
         bonus_crit = 0
 
         # luminosity    

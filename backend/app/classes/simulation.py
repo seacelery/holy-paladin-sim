@@ -210,7 +210,6 @@ class Simulation:
     def complete_cast(self, caster, current_time):
         non_beacon_targets = [target for target in self.paladin.potential_healing_targets if "Beacon of Light" not in target.target_active_buffs]
         
-        
         ability = self.abilities.get(self.paladin.currently_casting)
         
         sys.stdout.flush()
@@ -231,6 +230,21 @@ class Simulation:
                 targets = [smoldering_seedling_target]
             else:
                 targets = [random.choice(non_beacon_targets)]
+            
+            # precast holy light -> beacon of virtue bug
+            if ability.name == "Holy Light" and caster.is_talent_active("Beacon of Virtue"):
+                beacon_of_virtue = self.paladin.abilities["Beacon of Virtue"]
+                if beacon_of_virtue.remaining_cooldown <= 0 and caster.mana >= beacon_of_virtue.get_mana_cost(self.paladin):
+                    for ability_name, condition in self.priority_list:    
+                        if ability_name in self.abilities and condition():
+                            if ability_name == "Beacon of Virtue":
+                                # apply virtue beacons early
+                                chosen_target = random.choice(caster.potential_healing_targets)
+                                secondary_targets = random.sample([target for target in caster.potential_healing_targets if target != chosen_target], 4)                               
+                                caster.beacon_targets = [chosen_target] + secondary_targets                              
+                                for target in caster.beacon_targets:
+                                    target.apply_buff_to_target(BeaconOfLightBuff(caster), current_time, caster=caster)    
+                
             ability.cast_healing_spell(self.paladin, targets, current_time, ability.is_heal)
             
             if ability.calculate_cast_time(caster) * 0.7 < caster.hasted_global_cooldown and divine_favor_active:

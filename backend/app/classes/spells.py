@@ -57,8 +57,7 @@ class Spell:
         
     def can_cast(self, caster, current_time=0):
         if self.name in ["Hammer of Wrath"] and "Avenging Wrath" not in caster.active_auras and "Veneration" not in caster.active_auras and not caster.is_enemy_below_20_percent:
-            return False
-        
+            return False       
         if not self.off_gcd and caster.global_cooldown > 0:
             return False
         if self.max_charges > 0:

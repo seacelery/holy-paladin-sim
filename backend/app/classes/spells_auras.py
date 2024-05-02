@@ -30,8 +30,11 @@ class BarrierOfFaithSpell(Spell):
 
 class BeaconOfFaithSpell(Spell):
     
+    BASE_COOLDOWN = 0
+    MANA_COST = 0.005
+    
     def __init__(self, caster):
-        super().__init__("Beacon of Virtue", cooldown=BeaconOfVirtueSpell.BASE_COOLDOWN, mana_cost=BeaconOfVirtueSpell.MANA_COST, off_gcd=True)
+        super().__init__("Beacon of Faith", cooldown=BeaconOfFaithSpell.BASE_COOLDOWN, mana_cost=BeaconOfFaithSpell.MANA_COST, off_gcd=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
@@ -54,13 +57,14 @@ class BeaconOfVirtueSpell(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
-            chosen_target = targets[0]
-            secondary_targets = random.sample([target for target in caster.potential_healing_targets if target != chosen_target], 4)
-            
-            caster.beacon_targets = [chosen_target] + secondary_targets
-            
-            for target in caster.beacon_targets:
-                target.apply_buff_to_target(BeaconOfLightBuff(caster), current_time, caster=caster)
+            if not caster.beacon_targets:
+                chosen_target = targets[0]
+                secondary_targets = random.sample([target for target in caster.potential_healing_targets if target != chosen_target], 4)
+                
+                caster.beacon_targets = [chosen_target] + secondary_targets
+                
+                for target in caster.beacon_targets:
+                    target.apply_buff_to_target(BeaconOfLightBuff(caster), current_time, caster=caster)
                 
         return cast_success, spell_crit, heal_amount
         
