@@ -67,7 +67,7 @@ class BeaconOfVirtueSpell(Spell):
 
 class TyrsDeliveranceSpell(Spell):
     
-    BASE_COOLDOWN = 120
+    BASE_COOLDOWN = 90
     BASE_CAST_TIME = 2
     MANA_COST = 0.024
     
