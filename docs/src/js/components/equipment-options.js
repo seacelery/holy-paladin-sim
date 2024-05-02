@@ -767,7 +767,9 @@ const initialiseEquipment = () => {
             "Screaming Black Dragonscale", "Smoldering Seedling", "Pip's Emerald Friendship Badge", "Neltharion's Call to Chaos",
             "Spoils of Neltharus", "Blossom of Amirdrassil", "Miniature Singing Stone", "Conjured Chillglobe",
             "Idol of the Spell-Weaver", "Idol of the Life-Binder", "Idol of the Earth-Warder", "Idol of the Dreamer",
-            "Time-Breaching Talon", "Nymue's Unraveling Spindle", "Mirror of Fractured Tomorrows", "Echoing Tyrstone"
+            "Time-Breaching Talon", "Nymue's Unraveling Spindle", "Mirror of Fractured Tomorrows", "Echoing Tyrstone",
+            "Sea Star", "Coagulated Genesaur Blood", "Sustaining Alchemist Stone", "Alactritous Alchemist Stone",
+            "Eye of the Broodmother", "Emerald Coach's Whistle", ""
         ];
         if ((currentItemSlot === "trinket_1" || currentItemSlot === "trinket_2") && !supportedTrinkets.includes(itemName)) {
             trinketUnsupported.style.display = "block";
