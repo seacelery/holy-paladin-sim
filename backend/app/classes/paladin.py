@@ -922,7 +922,7 @@ class Paladin:
                 equipment[item_slot]["enchantments"] = item_enchantments
 
             sockets = item.get("sockets", [])
-            item_gems = [socket["item"]["name"]["en_GB"] for socket in sockets]
+            item_gems = [socket["item"]["name"]["en_GB"] for socket in sockets if socket.get("item")]
             if item_gems:
                 equipment[item_slot]["gems"] = item_gems
                 
