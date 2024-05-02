@@ -1997,6 +1997,9 @@ class HolyPrism(Spell):
             
             if caster.ptr and caster.is_talent_active("Dawnlight"):
                 caster.apply_buff_to_self(DawnlightAvailable(caster), current_time, stacks_to_apply=2, max_stacks=2)
+                
+            if caster.ptr and caster.is_talent_active("Aurora"):
+                caster.apply_buff_to_self(DivinePurpose(), current_time, reapply=True)
 
 
 class LightsHammerSpell(Spell):
