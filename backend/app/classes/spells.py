@@ -11,7 +11,7 @@ class Spell:
     def __init__(self, name, mana_cost=0, base_mana_cost=0, holy_power_gain=0, holy_power_cost=0, cooldown=0, max_charges=1,
                  hasted_cooldown=False, healing_target_count=1, damage_target_count=1, is_heal=False, is_damage_spell=False,
                  is_absorb=False, off_gcd=False, base_cast_time=0, applies_buff_to_target=False, bonus_crit=0, bonus_crit_healing=0,
-                 bonus_versatility=0, bonus_mastery=0):
+                 bonus_versatility=0, bonus_mastery=0, hasted_cast_time=True):
         self.name = name
         self.mana_cost = mana_cost
         self.base_mana_cost = base_mana_cost
@@ -29,6 +29,7 @@ class Spell:
         self.max_charges = max_charges
         self.current_charges = self.max_charges
         self.base_cast_time = base_cast_time
+        self.hasted_cast_time = hasted_cast_time
         self.applies_buff_to_target = applies_buff_to_target
         
         self.spell_healing_modifier = 1.0
@@ -48,7 +49,7 @@ class Spell:
     
     def start_cast_time(self, caster, ability, current_time):
         caster.currently_casting = ability.name
-        caster.remaining_cast_time = self.calculate_cast_time(caster)
+        caster.remaining_cast_time = self.calculate_cast_time(caster, ability.hasted_cast_time)
         append_spell_started_casting_event(caster.events, caster, ability, current_time)
         
         self_auras, _, total_target_aura_counts, spell_cooldowns, current_stats = self.collect_priority_breakdown_data(caster, exclude_target_auras=True)
@@ -241,8 +242,11 @@ class Spell:
 
         return True, spell_crit, ability_healing
     
-    def calculate_cast_time(self, caster):
-        return (self.base_cast_time / caster.haste_multiplier) * self.cast_time_modifier
+    def calculate_cast_time(self, caster, hasted=True):
+        if hasted:
+            return (self.base_cast_time / caster.haste_multiplier) * self.cast_time_modifier
+        else:
+            return self.base_cast_time * self.cast_time_modifier
     
     def calculate_heal(self, caster, bonus_crit=0, bonus_crit_healing=0, bonus_versatility=0, bonus_mastery=0, exclude_mastery=False, ignore_spell_multiplier=False):
         spell_power = caster.spell_power
