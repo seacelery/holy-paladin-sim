@@ -1,7 +1,7 @@
 import random
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable, DivinePurpose
+from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable, DivinePurpose, Dawnlight, EternalFlameBuff, SolarGrace, MorningStar, GleamingRays
 from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts, update_spell_data_initialise_spell
 
 
@@ -124,6 +124,39 @@ class AvengingWrathSpell(Spell):
         if cast_success:
             caster.apply_buff_to_self(AvengingWrathBuff(caster), current_time)
             
+            # sun's avatar
+            if caster.ptr and caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
+                max_dawnlights = 4
+                
+                dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]        
+                non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
+                dawnlights_to_apply = max_dawnlights - len(dawnlight_targets)
+                chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
+                for target in chosen_targets:
+                    target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    
+                    if caster.is_talent_active("Solar Grace"):
+                        caster.apply_buff_to_self(SolarGrace(caster), current_time)
+                
+                    if caster.is_talent_active("Gleaming Rays"):
+                        caster.apply_buff_to_self(GleamingRays(caster), current_time, reapply=True)
+                    
+                    if "Morning Star" in caster.active_auras:
+                        caster.active_auras["Morning Star"].current_stacks = 0
+                    
+                for target in dawnlight_targets:
+                    target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    target.apply_buff_to_target(EternalFlameBuff(caster, 12), current_time, caster=caster)
+                    
+                    if caster.is_talent_active("Solar Grace"):
+                        caster.apply_buff_to_self(SolarGrace(caster), current_time)
+                
+                    if caster.is_talent_active("Gleaming Rays"):
+                        caster.apply_buff_to_self(GleamingRays(caster), current_time, reapply=True)
+                    
+                    if "Morning Star" in caster.active_auras:
+                        caster.active_auras["Morning Star"].current_stacks = 0
+            
             
 class AvengingCrusaderSpell(Spell):
     
@@ -139,6 +172,39 @@ class AvengingCrusaderSpell(Spell):
         if cast_success:
             caster.holy_power -= self.holy_power_cost
             caster.apply_buff_to_self(AvengingCrusaderBuff(caster), current_time)
+            
+            # sun's avatar
+            if caster.ptr and caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
+                max_dawnlights = 4
+                
+                dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]        
+                non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
+                dawnlights_to_apply = max_dawnlights - len(dawnlight_targets)
+                chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
+                for target in chosen_targets:
+                    target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    
+                    if caster.is_talent_active("Solar Grace"):
+                        caster.apply_buff_to_self(SolarGrace(caster), current_time)
+                
+                    if caster.is_talent_active("Gleaming Rays"):
+                        caster.apply_buff_to_self(GleamingRays(caster), current_time, reapply=True)
+                    
+                    if "Morning Star" in caster.active_auras:
+                        caster.active_auras["Morning Star"].current_stacks = 0
+                    
+                for target in dawnlight_targets:
+                    target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    target.apply_buff_to_target(EternalFlameBuff(caster, 12), current_time, caster=caster)
+                    
+                    if caster.is_talent_active("Solar Grace"):
+                        caster.apply_buff_to_self(SolarGrace(caster), current_time)
+                
+                    if caster.is_talent_active("Gleaming Rays"):
+                        caster.apply_buff_to_self(GleamingRays(caster), current_time, reapply=True)
+                    
+                    if "Morning Star" in caster.active_auras:
+                        caster.active_auras["Morning Star"].current_stacks = 0
    
             
 class DivineFavorSpell(Spell):

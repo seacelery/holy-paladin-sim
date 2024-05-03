@@ -1487,7 +1487,15 @@ class WordOfGlory(Spell):
             # ptr
             # dawnlight
             if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
-                targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                if "Dawnlight (HoT)" in targets[0].target_active_buffs:
+                    targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    targets[0].apply_buff_to_target(EternalFlameBuff(caster, 12), current_time, caster=caster)
+                else:
+                    dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]  
+                    if len(dawnlight_targets) == 4:
+                        oldest_dawnlight = min(dawnlight_targets, key=lambda dawnlight_target: dawnlight_target.target_active_buffs["Dawnlight (HoT)"][0].duration)
+                        del oldest_dawnlight.target_active_buffs["Dawnlight (HoT)"]
+                    targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                 
                 if caster.is_talent_active("Solar Grace"):
                     caster.apply_buff_to_self(SolarGrace(caster), current_time)
@@ -1742,7 +1750,15 @@ class EternalFlame(Spell):
             # ptr
             # dawnlight
             if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
-                targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                if "Dawnlight (HoT)" in targets[0].target_active_buffs:
+                    targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    targets[0].apply_buff_to_target(EternalFlameBuff(caster, 12), current_time, caster=caster)
+                else:
+                    dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]  
+                    if len(dawnlight_targets) == 4:
+                        oldest_dawnlight = min(dawnlight_targets, key=lambda dawnlight_target: dawnlight_target.target_active_buffs["Dawnlight (HoT)"][0].duration)
+                        del oldest_dawnlight.target_active_buffs["Dawnlight (HoT)"]
+                    targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                 
                 if caster.is_talent_active("Solar Grace"):
                     caster.apply_buff_to_self(SolarGrace(caster), current_time)
@@ -1962,9 +1978,18 @@ class LightOfDawn(Spell):
                     caster.apply_buff_to_self(MaraadsDyingBreath(len(targets)), current_time, stacks_to_apply=len(targets), max_stacks=5)
                     
             # ptr
-            # dawnlight        
+            # dawnlight
             if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
-                targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                # TODO verify if it prefers a new target each time
+                if "Dawnlight (HoT)" in targets[0].target_active_buffs:
+                    targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    targets[0].apply_buff_to_target(EternalFlameBuff(caster, 12), current_time, caster=caster)
+                else:
+                    dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]  
+                    if len(dawnlight_targets) == 4:
+                        oldest_dawnlight = min(dawnlight_targets, key=lambda dawnlight_target: dawnlight_target.target_active_buffs["Dawnlight (HoT)"][0].duration)
+                        del oldest_dawnlight.target_active_buffs["Dawnlight (HoT)"]
+                    targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                 
                 if caster.is_talent_active("Solar Grace"):
                     caster.apply_buff_to_self(SolarGrace(caster), current_time)
