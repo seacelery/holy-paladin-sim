@@ -89,7 +89,7 @@ class NymuesUnravelingSpindle(Trinket):
     BASE_COOLDOWN = 120
     
     def __init__(self, caster):
-        super().__init__("Nymue's Unraveling Spindle", cooldown=NymuesUnravelingSpindle.BASE_COOLDOWN, off_gcd=True, base_cast_time=3, hasted_cast_time=False)
+        super().__init__("Nymue's Unraveling Spindle", cooldown=NymuesUnravelingSpindle.BASE_COOLDOWN, base_cast_time=3, hasted_cast_time=False)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
