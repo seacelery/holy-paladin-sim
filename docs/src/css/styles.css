@@ -78,7 +78,7 @@
     --panel-colour: #0B0B0B;
     --panel-colour-2: #141414;
     --panel-colour-3: #111111;
-    --panel-colour-4: #5c5c5c;
+    --panel-colour-4: #646464;
     --panel-colour-5: #272727;
     --panel-colour-6: #121212;
     --panel-colour-7: #2E2E2E;
@@ -2359,7 +2359,7 @@ body {
 
     opacity: 0.2;
     transform: scale(1.00);
-    border-bottom: 1px solid var(--border-colour-3);
+    /* border-bottom: 1px solid var(--border-colour-3); */
 }
 
 #equipped-item-item-level, #new-item-item-level {
@@ -2910,16 +2910,22 @@ body {
 
     font-size: 14px;
 
-    border: 1px solid var(--border-colour-3);
+    background-color: var(--button-colour);
+
+    border: 1px solid var(--panel-colour-4);
+    border-top-right-radius: 2px;
     border-left: none;
-    border-bottom: none;
-    background-color: var(--panel-colour-2);
+    /* border-bottom: none; */
 }
 
 #replace-item-button:hover {
     cursor: pointer;
     user-select: none;
 
+    background-color: var(--panel-colour-4);
+}
+
+#replace-item-button:active {
     background-color: var(--hover-colour-light);
 }
 

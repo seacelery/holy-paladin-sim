@@ -279,8 +279,8 @@ const clearNewItem = () => {
     newItemInfoContainer.style.border = `1px solid var(--border-colour-3)`;
 
     newItemInfo.style.borderLeft = `1px solid var(--border-colour-3)`;
-    replaceItemButton.style.borderTop = `1px solid var(--border-colour-3)`;
-    replaceItemButton.style.borderRight = `1px solid var(--border-colour-3)`;
+    // replaceItemButton.style.borderTop = `1px solid var(--border-colour-3)`;
+    // replaceItemButton.style.borderRight = `1px solid var(--border-colour-3)`;
 
     document.getElementById("new-equipped-item-container").style.backgroundColor = `var(--panel-colour-table-3)`;
     document.getElementById("new-equipped-item-search").style.backgroundColor = "var(--panel-colour-2)";
@@ -754,7 +754,7 @@ const initialiseEquipment = () => {
 
         currentItemLevel.textContent = itemLevel;
         currentItemLevel.style.color = rarityColour;
-        currentItemLevel.style.borderTop = `1px solid ${rarityColour}`;
+        // currentItemLevel.style.borderTop = `1px solid ${rarityColour}`;
 
         currentItemTitle.style.border = `1px solid ${rarityColour}`;
         currentItemTitle.style.borderBottom = "none";
@@ -952,7 +952,7 @@ const initialiseEquipment = () => {
 
             newItemLevel.textContent = item.base_item_level;
             newItemLevel.style.color = rarityColour;
-            newItemLevel.style.borderTop = `1px solid ${rarityColour}`;
+            // newItemLevel.style.borderTop = `1px solid ${rarityColour}`;
             newItemLevel.contentEditable = true;
             newItemLevel.style.outline = "none";
 
@@ -983,8 +983,8 @@ const initialiseEquipment = () => {
             newItemInfoContainer.style.border = `1px solid ${rarityColour}`;
         
             // newItemInfo.style.borderLeft = `1px solid ${rarityColour}`;
-            replaceItemButton.style.borderTop = `1px solid ${rarityColour}`;
-            replaceItemButton.style.borderRight = `1px solid ${rarityColour}`;
+            // replaceItemButton.style.borderTop = `1px solid `;
+            // replaceItemButton.style.borderRight = `1px solid ${rarityColour}`;
 
             newItemInfo.innerHTML = "";
             const newItemLeftContainer = createElement("div", "new-equipped-item-info-left", null);      
@@ -1343,6 +1343,7 @@ const initialiseEquipment = () => {
                 };
                 enchantOptions.style.borderRight = `1px solid ${rarityColour}`;
                 enchantOptions.style.borderBottom = `1px solid ${rarityColour}`;
+                
             };
     
             const createNewItemTrinketBonusesDisplay = () => {

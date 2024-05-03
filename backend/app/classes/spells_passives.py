@@ -164,7 +164,7 @@ class EchoingTyrstoneProc(Spell):
             target = random.choice(caster.potential_healing_targets)
             
             echoing_tyrstone_heal, echoing_tyrstone_crit = EchoingTyrstoneProc(caster).calculate_heal(caster)
-            echoing_tyrstone_heal = self.trinket_first_value / target_count
+            echoing_tyrstone_heal = (self.trinket_first_value / target_count) * 1.5
             if echoing_tyrstone_crit:
                 echoing_tyrstone_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
             
