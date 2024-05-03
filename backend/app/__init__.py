@@ -206,7 +206,9 @@ def run_simulation_task(self, simulation_parameters):
                 "Avenging Crusader (Crusader Strike)": "Avenging Crusader",
                 "Dawnlight (HoT)": "Dawnlight",
                 "Dawnlight (AoE)": "Dawnlight",
-                "Eternal Flame (HoT)": "Eternal Flame"
+                "Eternal Flame (HoT)": "Eternal Flame",
+                "Sacred Weapon 1": "Sacred Weapon",
+                "Sacred Weapon 2": "Sacred Weapon"
             }
         
         # complete all simulation iterations and process the data of each
@@ -322,7 +324,8 @@ def run_simulation_task(self, simulation_parameters):
                         "sub_spells": {},
                         "source_spells": {}
                     } 
-                
+                    
+            add_spell_if_sub_spell_but_no_casts("Sacred Weapon", "Sacred Weapon 1")          
             add_spell_if_sub_spell_but_no_casts("Consecration", "Golden Path")
             add_spell_if_sub_spell_but_no_casts("Dawnlight", "Dawnlight (HoT)")
             add_spell_if_sub_spell_but_no_casts("Avenging Crusader", "Avenging Crusader (Judgment)")
@@ -398,7 +401,7 @@ def run_simulation_task(self, simulation_parameters):
                 "Blossom of Amirdrassil Small HoT", "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", "Barrier of Faith (Holy Light)", 
                 "Veneration", "Golden Path", "Seal of Mercy", "Avenging Crusader (Judgment)", "Avenging Crusader (Crusader Strike)",
                 "Dawnlight (HoT)", "Dawnlight (AoE)", "Glimmer of Light (Glistening Radiance (Eternal Flame))", "Afterimage (Eternal Flame)",
-                "Eternal Flame (HoT)"
+                "Eternal Flame (HoT)", "Sacred Weapon 1", "Sacred Weapon 2"
                 ]:
                 if spell in ability_breakdown:
                     del ability_breakdown[spell]
@@ -484,7 +487,7 @@ def run_simulation_task(self, simulation_parameters):
                             sub_sub_spells[sub_spell]["holy_power_wasted"] = sub_spells[sub_spell]["holy_power_wasted"]
             
             # remove spells that aren't actually spells but have subspells               
-            for spell in ["Blossom of Amirdrassil", "Hammer of Wrath", "Consecration", "Avenging Crusader", "Dawnlight"]:
+            for spell in ["Blossom of Amirdrassil", "Hammer of Wrath", "Consecration", "Avenging Crusader", "Dawnlight", "Sacred Weapon"]:
                 if spell in ability_breakdown:
                     if spell in ability_breakdown[spell]["sub_spells"]:
                         del ability_breakdown[spell]["sub_spells"][spell]

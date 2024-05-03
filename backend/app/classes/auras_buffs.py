@@ -182,6 +182,18 @@ class SunSear(HoT):
     def __init__(self, caster):
         super().__init__("Sun Sear", 4, base_duration=4, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier) 
         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
+        
+        
+class HolyBulwark(HoT):
+    
+    def __init__(self, caster):
+        super().__init__("Holy Bulwark", 20, base_duration=20, base_tick_interval=2, initial_haste_multiplier=caster.haste_multiplier, hasted=False)
+        self.time_until_next_tick = self.base_tick_interval
+        
+    def calculate_tick_healing(self, caster):      
+        healing_per_tick = caster.max_health * 0.05
+
+        return healing_per_tick, False
     
     
 # self buffs   
@@ -2561,3 +2573,15 @@ class SolarGrace(Buff):
         
         # update_stat_with_multiplicative_percentage(caster, "haste", 4, False)
         # self.active_solar_graces -= 1
+        
+
+class SacredWeapon(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Sacred Weapon", 20, base_duration=20)   
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass

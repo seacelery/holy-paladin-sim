@@ -41,6 +41,15 @@ class TouchOfLight(Spell):
     def __init__(self, caster):
         super().__init__("Touch of Light")
         
+        
+class SacredWeapon(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 1 * 1.04
+    BASE_PPM = 10
+    
+    def __init__(self, caster, count):
+        super().__init__(f"Sacred Weapon {count}")
+        
 
 class ChirpingRune(Spell):
     

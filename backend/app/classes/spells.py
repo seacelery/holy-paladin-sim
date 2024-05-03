@@ -372,7 +372,7 @@ class Spell:
     def try_trigger_rppm_effects(self, caster, targets, current_time):
         from .spells_passives import (
             TouchOfLight, EmbraceOfAkunda, DreamingDevotion, ChirpingRune, LarodarsFieryReverie,
-            MagazineOfHealingDarts, BronzedGripWrappings
+            MagazineOfHealingDarts, BronzedGripWrappings, SacredWeapon
         )
         
         from .auras_buffs import (
@@ -438,6 +438,18 @@ class Spell:
         if caster.ptr and caster.is_talent_active("Blessing of An'she") and (self.name in ["Eternal Flame", "Dawnlight", "Sun Sear"]):
             blessing_of_anshe = BlessingOfAnshe(caster)
             try_proc_rppm_effect(blessing_of_anshe, is_hasted=False, is_self_buff=True)
+            
+        if caster.ptr and caster.is_talent_active("Holy Bulwark"):
+            sacred_weapon_targets = [target for target in caster.potential_healing_targets if "Sacred Weapon" in target.target_active_buffs]
+            if len(sacred_weapon_targets) == 2:
+                sacred_weapon_1 = SacredWeapon(caster, 1)
+                try_proc_rppm_effect(sacred_weapon_1, is_heal=True, is_hasted=False)
+                
+                sacred_weapon_2 = SacredWeapon(caster, 2)
+                try_proc_rppm_effect(sacred_weapon_2, is_heal=True, is_hasted=False)
+            elif len(sacred_weapon_targets) == 1:
+                sacred_weapon_1 = SacredWeapon(caster, 1)
+                try_proc_rppm_effect(sacred_weapon_1, is_heal=True, is_hasted=False)
         
         # enchants     
         if "Sophic Devotion" in caster.bonus_enchants:

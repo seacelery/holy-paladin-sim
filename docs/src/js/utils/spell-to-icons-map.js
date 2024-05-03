@@ -40,6 +40,7 @@ const spellToIconsMap = {
     "Greater Judgment": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_righteousfury.jpg",
     "Hammer of Wrath": "https://render.worldofwarcraft.com/eu/icons/56/spell_paladin_hammerofwrath.jpg",
     "Hand of Divinity": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_vindication.jpg",
+    "Holy Bulwark": "https://render.worldofwarcraft.com/eu/icons/56/inv_shield_1h_artifactnorgannon_d_06.jpg",
     "Holy Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_surgeoflight.jpg",
     "Holy Prism": "https://render.worldofwarcraft.com/eu/icons/56/spell_paladin_holyprism.jpg",
     "Holy Reverberation": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_holybolts01.jpg",
@@ -59,6 +60,9 @@ const spellToIconsMap = {
     "Reclamation (Crusader Strike)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_longarmofthelaw.jpg",
     "Reclamation (Holy Shock)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_longarmofthelaw.jpg",
     "Resplendent Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_voidshift.jpg",
+    "Sacred Weapon": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_1h_artifactnorgannon_d_06.jpg",
+    "Sacred Weapon 1": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_1h_artifactnorgannon_d_06.jpg",
+    "Sacred Weapon 2": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_1h_artifactnorgannon_d_06.jpg",
     "Saved by the Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_savedbythelight.jpg",
     "Seal of Mercy": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_greaterblessingofsalvation.jpg",
     "Sun Sear": "https://render.worldofwarcraft.com/eu/icons/56/spell_priest_burningwill.jpg",
@@ -104,8 +108,8 @@ const spellToIconsMap = {
     "Leech": "https://render.worldofwarcraft.com/eu/icons/56/spell_shadow_lifedrain02.jpg",
     "Source of Magic": "https://render.worldofwarcraft.com/eu/icons/56/ability_evoker_blue_01.jpg",
     "Mana Spring Totem": "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_manaregentotem.jpg",
+    "Symbol of Hope": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_symbolofhope.jpg",
     "Mana Tide Totem": "https://render.worldofwarcraft.com/eu/icons/56/ability_shaman_manatidetotem.jpg",
-    "Symbol of Hope": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_symbolofhope.jpg"
 };
 
 export { spellToIconsMap };
