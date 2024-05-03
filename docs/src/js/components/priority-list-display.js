@@ -703,7 +703,7 @@ beaconOfVirtuePreset.addEventListener("click", () => {
     Holy Shock | Beacon of Virtue active
     Holy Shock | Holy Shock charges = 2
     Blessing of the Seasons
-    Word of Glory | Unending Light stacks = 9
+    Word of Glory | Unending Light stacks = 9 | and | Beacon of Virtue cooldown <= 13
     Light of Dawn | Blessing of Dawn stacks = 2
     Light of Dawn | Holy Power >= 5
     Flash of Light | Infusion of Light active
