@@ -516,9 +516,9 @@ class Simulation:
                 if buff_name == "Holy Bulwark" or buff_name == "Sacred Weapon":
                     handle_flat_cdr(self.paladin.abilities["Lay on Hands"], 15)
                     if self.paladin.is_talent_active("Inflorescence of the Sunwell"):
-                        self.paladin.apply_buff_to_self(InfusionOfLight(self.paladin), self.elapsed_time, stacks_to_apply=1, max_stacks=2)
+                        self.paladin.apply_buff_to_self(InfusionOfLight(self.paladin), self.elapsed_time, stacks_to_apply=1, max_stacks=2, reapply=True)
                     else:
-                        self.paladin.apply_buff_to_self(InfusionOfLight(self.paladin), self.elapsed_time)
+                        self.paladin.apply_buff_to_self(InfusionOfLight(self.paladin), self.elapsed_time, reapply=True)
 
             self.paladin.active_auras[buff_name].remove_effect(self.paladin, self.elapsed_time)
             
