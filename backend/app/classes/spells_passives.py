@@ -41,6 +41,31 @@ class TouchOfLight(Spell):
     def __init__(self, caster):
         super().__init__("Touch of Light")
         
+
+class AuthorityOfFieryResolve(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    BASE_PPM = 3
+    TARGET_COUNT = 5
+    
+    def __init__(self, caster):
+        super().__init__("Authority of Fiery Resolve")
+        
+    def apply_flat_healing(self, caster, target, current_time, is_heal):    
+        targets = random.sample(caster.potential_healing_targets, 5)
+        
+        for chosen_target in targets:
+            authority_of_fiery_resolve_heal, authority_of_fiery_resolve_crit = AuthorityOfFieryResolve(caster).calculate_heal(caster)
+            authority_of_fiery_resolve_heal = 170473 * caster.versatility_multiplier
+            
+            if authority_of_fiery_resolve_crit:
+                authority_of_fiery_resolve_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+                
+            authority_of_fiery_resolve_heal = add_talent_healing_multipliers(authority_of_fiery_resolve_heal, caster)
+            
+            chosen_target.receive_heal(authority_of_fiery_resolve_heal, caster)
+            update_spell_data_heals(caster.ability_breakdown, self.name, chosen_target, authority_of_fiery_resolve_heal, authority_of_fiery_resolve_crit)
+        
         
 class SacredWeapon(Spell):
     

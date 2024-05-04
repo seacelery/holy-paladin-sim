@@ -372,7 +372,7 @@ class Spell:
     def try_trigger_rppm_effects(self, caster, targets, current_time):
         from .spells_passives import (
             TouchOfLight, EmbraceOfAkunda, DreamingDevotion, ChirpingRune, LarodarsFieryReverie,
-            MagazineOfHealingDarts, BronzedGripWrappings, SacredWeapon
+            MagazineOfHealingDarts, BronzedGripWrappings, SacredWeapon, AuthorityOfFieryResolve
         )
         
         from .auras_buffs import (
@@ -450,8 +450,11 @@ class Spell:
             elif len(sacred_weapon_targets) == 1:
                 sacred_weapon_1 = SacredWeapon(caster, 1)
                 try_proc_rppm_effect(sacred_weapon_1, is_heal=True, is_hasted=False)
+                
+        if caster.ptr and caster.is_talent_active("Rite of Adjuration"):
+            pass
         
-        # enchants     
+        # enchants    
         if "Sophic Devotion" in caster.bonus_enchants:
             sophic_devotion = SophicDevotion()
             try_proc_rppm_effect(sophic_devotion, is_hasted=False, is_self_buff=True)
@@ -459,6 +462,10 @@ class Spell:
         if "Dreaming Devotion" in caster.bonus_enchants:
             dreaming_devotion = DreamingDevotion(caster)
             try_proc_rppm_effect(dreaming_devotion, is_flat_healing=True)
+            
+        if caster.ptr and "Authority of Fiery Resolve" in caster.bonus_enchants:
+            authority_of_fiery_resolve = AuthorityOfFieryResolve(caster)
+            try_proc_rppm_effect(authority_of_fiery_resolve, is_flat_healing=True, is_hasted=False)
             
         if "Incandescent Essence" in caster.bonus_enchants:
             incandescent_essence = LarodarsFieryReverie(caster)

@@ -2609,3 +2609,27 @@ class SacredWeaponSelf(Buff):
         
     def remove_effect(self, caster, current_time=None):
         pass
+    
+
+class RiteOfSanctification(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Rite of Sanctification", 10000, base_duration=10000)   
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power *= 1.01
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power /= 1.01
+        
+
+class RiteOfAdjuration(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Rite of Adjuration", 10000, base_duration=10000)   
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
