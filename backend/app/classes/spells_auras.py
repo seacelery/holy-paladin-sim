@@ -312,7 +312,7 @@ class HolyBulwarkSacredWeapon(Spell):
     def __init__(self, caster):
         super().__init__("Holy Bulwark", cooldown=HolyBulwarkSacredWeapon.BASE_COOLDOWN, max_charges=HolyBulwarkSacredWeapon.CHARGES)
         if caster.is_talent_active("Forewarning"):
-            self.BASE_COOLDOWN = 48
+            self.cooldown = 48
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
