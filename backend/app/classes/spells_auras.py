@@ -1,7 +1,7 @@
 import random
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable, DivinePurpose, Dawnlight, EternalFlameBuff, SolarGrace, MorningStar, GleamingRays, HolyBulwark, SacredWeapon, HolyBulwarkSelf, SacredWeaponSelf
+from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable, DivinePurpose, Dawnlight, EternalFlameBuff, SolarGrace, MorningStar, GleamingRays, HolyBulwarkBuff, SacredWeaponBuff, HolyBulwarkSelf, SacredWeaponSelf
 from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts, update_spell_data_initialise_spell
 
 
@@ -323,9 +323,9 @@ class HolyBulwarkSacredWeapon(Spell):
                     
                     holy_bulwark_targets = random.sample(caster.potential_healing_targets, 2)
                     for target in holy_bulwark_targets:
-                        target.apply_buff_to_target(HolyBulwark(caster), current_time, caster=caster)
+                        target.apply_buff_to_target(HolyBulwarkBuff(caster), current_time, caster=caster)
                 else:
-                    targets[0].apply_buff_to_target(HolyBulwark(caster), current_time, caster=caster)
+                    targets[0].apply_buff_to_target(HolyBulwarkBuff(caster), current_time, caster=caster)
                 
                 self.name = "Sacred Weapon"
                 
@@ -337,8 +337,8 @@ class HolyBulwarkSacredWeapon(Spell):
                                        
                     sacred_weapon_targets = random.sample(caster.potential_healing_targets, 2)
                     for target in sacred_weapon_targets:
-                        target.apply_buff_to_target(SacredWeapon(caster), current_time, caster=caster)
+                        target.apply_buff_to_target(SacredWeaponBuff(caster), current_time, caster=caster)
                 else:
-                    targets[0].apply_buff_to_target(SacredWeapon(caster), current_time, caster=caster)
+                    targets[0].apply_buff_to_target(SacredWeaponBuff(caster), current_time, caster=caster)
                 
                 self.name = "Holy Bulwark"

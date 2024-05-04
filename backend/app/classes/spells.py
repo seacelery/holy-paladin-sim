@@ -372,7 +372,8 @@ class Spell:
     def try_trigger_rppm_effects(self, caster, targets, current_time):
         from .spells_passives import (
             TouchOfLight, EmbraceOfAkunda, DreamingDevotion, ChirpingRune, LarodarsFieryReverie,
-            MagazineOfHealingDarts, BronzedGripWrappings, SacredWeapon, AuthorityOfFieryResolve
+            MagazineOfHealingDarts, BronzedGripWrappings, SacredWeapon, AuthorityOfFieryResolve,
+            DivineInspiration
         )
         
         from .auras_buffs import (
@@ -385,7 +386,7 @@ class Spell:
             RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond, BlessingOfAnshe
         )
         
-        def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False):
+        def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False, is_other_effect=False):
             # time since last attempt makes it so the number of events happening has very little impact on the number of procs that occur
             proc_occurred = False
             
@@ -409,6 +410,9 @@ class Spell:
                     
                     update_spell_data_heals(caster.ability_breakdown, effect.name, target, effect_heal, is_crit)
                     append_spell_heal_event(caster.events, effect.name, caster, target, effect_heal, current_time, is_crit)
+                elif is_other_effect:
+                    effect.apply_effect(caster, target, current_time)
+                    
                 elif is_flat_healing:
                     effect.apply_flat_healing(caster, target, current_time, True)
                  
@@ -453,6 +457,10 @@ class Spell:
                 
         if caster.ptr and caster.is_talent_active("Rite of Adjuration"):
             pass
+        
+        if caster.ptr and caster.is_talent_active("Divine Inspiration"):
+            divine_inspiration = DivineInspiration(caster)
+            try_proc_rppm_effect(divine_inspiration, is_hasted=False, is_other_effect=True)
         
         # enchants    
         if "Sophic Devotion" in caster.bonus_enchants:

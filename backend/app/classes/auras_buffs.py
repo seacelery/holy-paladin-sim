@@ -184,7 +184,7 @@ class SunSear(HoT):
         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
         
         
-class HolyBulwark(HoT):
+class HolyBulwarkBuff(HoT):
     
     def __init__(self, caster):
         super().__init__("Holy Bulwark", 20, base_duration=20, base_tick_interval=2, initial_haste_multiplier=caster.haste_multiplier, hasted=False)
@@ -2575,7 +2575,7 @@ class SolarGrace(Buff):
         # self.active_solar_graces -= 1
         
 
-class SacredWeapon(Buff):
+class SacredWeaponBuff(Buff):
     
     def __init__(self, caster):
         super().__init__("Sacred Weapon", 20, base_duration=20)   

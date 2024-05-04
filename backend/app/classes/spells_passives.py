@@ -3,7 +3,7 @@ import re
 
 from .spells import Spell
 from ..utils.misc_functions import update_spell_data_heals, add_talent_healing_multipliers
-
+from ..classes.auras_buffs import HolyBulwarkBuff, SacredWeaponBuff
 
 # PASSIVE SPELLS
 class GlimmerOfLightSpell(Spell):
@@ -65,6 +65,25 @@ class AuthorityOfFieryResolve(Spell):
             
             chosen_target.receive_heal(authority_of_fiery_resolve_heal, caster)
             update_spell_data_heals(caster.ability_breakdown, self.name, chosen_target, authority_of_fiery_resolve_heal, authority_of_fiery_resolve_crit)
+            
+
+class DivineInspiration(Spell):
+    
+    BASE_PPM = 1
+    
+    def __init__(self, caster):
+        super().__init__("Divine Inspiration")
+        
+    def apply_effect(self, caster, target, current_time):
+        sacred_weapon = SacredWeaponBuff(caster)
+        holy_bulwark = HolyBulwarkBuff(caster)
+        
+        chosen_weapon = random.choice([sacred_weapon, holy_bulwark])
+        
+        non_weapon_targets = [target for target in caster.potential_healing_targets if chosen_weapon.name not in target.target_active_buffs]
+        
+        chosen_target = random.choice(non_weapon_targets)
+        chosen_target.apply_buff_to_target(chosen_weapon, current_time, caster=caster)
         
         
 class SacredWeapon(Spell):
