@@ -2585,3 +2585,27 @@ class SacredWeapon(Buff):
         
     def remove_effect(self, caster, current_time=None):
         pass
+    
+
+class HolyBulwarkSelf(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Holy Bulwark", 20, base_duration=20)   
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class SacredWeaponSelf(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Sacred Weapon", 20, base_duration=20)   
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass

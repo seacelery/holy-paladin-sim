@@ -1,7 +1,7 @@
 import random
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable, DivinePurpose, Dawnlight, EternalFlameBuff, SolarGrace, MorningStar, GleamingRays, HolyBulwark, SacredWeapon
+from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable, DivinePurpose, Dawnlight, EternalFlameBuff, SolarGrace, MorningStar, GleamingRays, HolyBulwark, SacredWeapon, HolyBulwarkSelf, SacredWeaponSelf
 from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts, update_spell_data_initialise_spell
 
 
@@ -316,7 +316,11 @@ class HolyBulwarkSacredWeapon(Spell):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             if self.name == "Holy Bulwark":
+                update_spell_data_casts(caster.ability_breakdown, "Holy Bulwark", 0, 0, 0)
+                
                 if caster.is_talent_active("Solidarity"):
+                    caster.apply_buff_to_self(HolyBulwarkSelf(caster), current_time)
+                    
                     holy_bulwark_targets = random.sample(caster.potential_healing_targets, 2)
                     for target in holy_bulwark_targets:
                         target.apply_buff_to_target(HolyBulwark(caster), current_time, caster=caster)
@@ -326,7 +330,11 @@ class HolyBulwarkSacredWeapon(Spell):
                 self.name = "Sacred Weapon"
                 
             elif self.name == "Sacred Weapon":
+                update_spell_data_casts(caster.ability_breakdown, "Sacred Weapon", 0, 0, 0)
+                
                 if caster.is_talent_active("Solidarity"):
+                    caster.apply_buff_to_self(SacredWeaponSelf(caster), current_time)
+                                       
                     sacred_weapon_targets = random.sample(caster.potential_healing_targets, 2)
                     for target in sacred_weapon_targets:
                         target.apply_buff_to_target(SacredWeapon(caster), current_time, caster=caster)

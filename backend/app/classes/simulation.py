@@ -13,8 +13,8 @@ from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
 from .trinkets import Trinket
-from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight, EternalFlameBuff
-from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data, update_mana_gained
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight, EternalFlameBuff, InfusionOfLight
+from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
 from .priority_list_dsl import parse_condition, condition_to_lambda
 from .simulation_state import check_cancellation, reset_simulation
 
@@ -511,6 +511,14 @@ class Simulation:
             if buff_name == "Avenging Crusader" and self.paladin.awakening_queued:
                 self.paladin.apply_buff_to_self(AvengingCrusaderAwakening(), self.elapsed_time)
                 self.paladin.awakening_queued = False
+                
+            if self.paladin.ptr and self.paladin.is_talent_active("Laying Down Arms"):    
+                if buff_name == "Holy Bulwark" or buff_name == "Sacred Weapon":
+                    handle_flat_cdr(self.paladin.abilities["Lay on Hands"], 15)
+                    if self.paladin.is_talent_active("Inflorescence of the Sunwell"):
+                        self.paladin.apply_buff_to_self(InfusionOfLight(self.paladin), self.elapsed_time, stacks_to_apply=1, max_stacks=2)
+                    else:
+                        self.paladin.apply_buff_to_self(InfusionOfLight(self.paladin), self.elapsed_time)
 
             self.paladin.active_auras[buff_name].remove_effect(self.paladin, self.elapsed_time)
             

@@ -121,7 +121,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion", "Veneration", "Merciful Auras", "Light of the Martyr ", "Saved by the Light",
         "Chirping Rune", "Larodar's Fiery Reverie", "Rashok's Molten Heart", "Magazine of Healing Darts", "Bronzed Grip Wrappings",
         "Dawnlight", "Dawnlight (HoT)", "Dawnlight (AoE)", "Afterimage (Word of Glory)", "Afterimage (Eternal Flame)", "Eternal Flame (HoT)",
-        "Broodkeeper's Promise", "Sun Sear", "Sacred Weapon", "Sacred Weapon 1", "Sacred Weapon 2", "Holy Bulwark"
+        "Broodkeeper's Promise", "Sun Sear", "Sacred Weapon 1", "Sacred Weapon 2"
     ];
     // displays casts with average as healing divided by hits
     const excludedSpellsCastsAverageHits = [
@@ -133,7 +133,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         "Light of the Martyr ", "Saved by the Light", "Dawnlight", "Broodkeeper's Promise", "Sacred Weapon", "Holy Bulwark"
     ];
     const excludedSpellsAverage = [
-        "Dawnlight", "Sacred Weapon"
+        "Dawnlight"
     ];
 
     const tableContainer = document.getElementById(`ability-breakdown-table-container-${containerCount}`);
