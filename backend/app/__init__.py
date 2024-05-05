@@ -147,6 +147,9 @@ def run_simulation_task(self, simulation_parameters):
         
         paladin = pickle.loads(simulation_parameters.pop('paladin'))
         healing_targets = pickle.loads(simulation_parameters.pop('healing_targets_list'))
+        
+        print(simulation_parameters)
+        sys.stdout.flush()
 
         simulation_parameters['paladin'] = paladin
         simulation_parameters['healing_targets'] = healing_targets
@@ -682,7 +685,7 @@ def run_simulation_task(self, simulation_parameters):
         total_healing = 0
         for ability in average_ability_breakdown:
             total_healing += average_ability_breakdown[ability]["total_healing"]
-        average_hps = total_healing / simulation.encounter_length
+        average_hps = total_healing / simulation_parameters.encounter_length
         
         # adjust cooldowns breakdown for number of iterations
         for aura, instances in full_cooldowns_breakdown_results.items():
