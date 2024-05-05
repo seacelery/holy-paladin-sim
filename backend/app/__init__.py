@@ -164,8 +164,8 @@ def run_simulation_task(self, simulation_parameters):
         full_mana_timeline_results = {}
         full_holy_power_timeline_results = {}
         full_cooldowns_breakdown_results = {}
-        
         full_awakening_trigger_times_results = {}
+        full_distribution = {}
 
         # first spell belongs to the second
         sub_spell_map = {
@@ -620,20 +620,6 @@ def run_simulation_task(self, simulation_parameters):
                 
                 return buff_summary
             
-            # full_ability_breakdown_results.update({f"iteration {i}": ability_breakdown})          
-            # self_buff_summary = process_buff_data(self_buff_breakdown)
-            # full_self_buff_breakdown_results.update({f"iteration {i}": self_buff_summary})          
-            # target_buff_summary = process_target_buff_data(target_buff_breakdown)
-            # full_target_buff_breakdown_results.update({f"iteration {i}": target_buff_summary})           
-            # aggregated_target_buff_summary = process_aggregated_target_buff_data(target_buff_breakdown)
-            # full_aggregated_target_buff_breakdown_results.update({f"iteration {i}": aggregated_target_buff_summary})          
-            # full_glimmer_count_results.update({f"iteration {i}": glimmer_counts})
-            # full_tyrs_count_results.update({f"iteration {i}": tyrs_counts})
-            # full_awakening_count_results.update({f"iteration {i}": awakening_counts})           
-            # full_healing_timeline_results.update({f"iteration {i}": healing_timeline})
-            # full_mana_timeline_results.update({f"iteration {i}": mana_timeline})
-            # full_holy_power_timeline_results.update({f"iteration {i}": holy_power_timeline})
-            
             def aggregate_results(aggregate, new_data):
                 for key, value in new_data.items():
                     if key not in aggregate:
@@ -662,51 +648,12 @@ def run_simulation_task(self, simulation_parameters):
             aggregate_results(full_healing_timeline_results, healing_timeline)
             aggregate_results(full_mana_timeline_results, mana_timeline)
             aggregate_results(full_holy_power_timeline_results, holy_power_timeline)
-        
-        # def combine_results(*dicts):
-        #     def add_dicts(d1, d2):
-        #         for key in d2:
-        #             if key in d1:
-        #                 if isinstance(d1[key], dict) and isinstance(d2[key], dict):
-        #                     add_dicts(d1[key], d2[key])
-        #                 elif isinstance(d1[key], (int, float)) and isinstance(d2[key], (int, float)):
-        #                     d1[key] += d2[key]
-        #             else:
-        #                 d1[key] = d2[key]
-
-        #     combined_results = {}
-        #     for d in dicts:
-        #         add_dicts(combined_results, d)
-        #     return combined_results
-        
-        # def get_all_iterations_results(full_ability_breakdown_results):
-        #     iteration_results = [value for key, value in full_ability_breakdown_results.items() if key.startswith("iteration")]
-        #     return iteration_results
-
-        # def average_out_simulation_results(simulation_results, iterations):
-        #     for key in simulation_results:
-        #         if isinstance(simulation_results[key], dict):
-        #             average_out_simulation_results(simulation_results[key], iterations)
-        #         elif isinstance(simulation_results[key], (int, float)):
-        #             simulation_results[key] /= iterations
-                    
-        #     return simulation_results
-        
-        # def return_complete_combined_results(full_results):
-        #     all_iteration_results = get_all_iterations_results(full_results)
-        #     combined_results = combine_results(*all_iteration_results)
-        #     return average_out_simulation_results(combined_results, simulation.iterations)
             
-        # average_ability_breakdown = return_complete_combined_results(full_ability_breakdown_results)
-        # average_self_buff_breakdown = return_complete_combined_results(full_self_buff_breakdown_results)
-        # average_target_buff_breakdown = return_complete_combined_results(full_target_buff_breakdown_results)
-        # average_aggregated_target_buff_breakdown = return_complete_combined_results(full_aggregated_target_buff_breakdown_results)
-        # average_glimmer_counts = return_complete_combined_results(full_glimmer_count_results)
-        # average_tyrs_counts = return_complete_combined_results(full_tyrs_count_results)
-        # average_awakening_counts = return_complete_combined_results(full_awakening_count_results)
-        # average_healing_timeline = return_complete_combined_results(full_healing_timeline_results)
-        # average_mana_timeline = return_complete_combined_results(full_mana_timeline_results)
-        # average_holy_power_timeline = return_complete_combined_results(full_holy_power_timeline_results)
+            total_healing = 0
+            for ability in ability_breakdown:
+                total_healing += ability_breakdown[ability]["total_healing"]
+            hps = total_healing / self.encounter_length
+            full_distribution[i] = hps
         
         def average_results(aggregate):
             averages = {}
@@ -765,7 +712,8 @@ def run_simulation_task(self, simulation_parameters):
             "awakening_counts": average_awakening_counts,
             "awakening_triggers": full_awakening_trigger_times_results,
             "priority_breakdown": simulation.paladin.priority_breakdown,
-            "cooldowns_breakdown": full_cooldowns_breakdown_results
+            "cooldowns_breakdown": full_cooldowns_breakdown_results,
+            "healing_distribution": full_distribution
         }
         
         simulation_details = {
