@@ -791,6 +791,29 @@ const itemDataEffects = [
         "enchantments": [],
         "gems": []
     },
+    {
+        "id": 195526,
+        "name": "Seal of Filial Duty",
+        "item_slot": "Finger",
+        "icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_primalist_ring_3_fire.jpg",
+        "base_item_level": 405,
+        "quality": "Epic",
+        "effects": [
+            {
+                "name": "Broodkeeper's Barrier",
+                "id": 394455,
+                "description": "Equip: Dealing Fire damage has a chance to invigorate you, absorbing 43,270 damage for 6 seconds.\r\n"
+            }
+        ],
+        "stats": {
+            "Stamina": 800,
+            "Haste": 267,
+            "Mastery": 806
+        },
+        "limit": null,
+        "enchantments": [],
+        "gems": []
+    },
 ];
 
 export default itemDataEffects;
