@@ -9,6 +9,7 @@ import { createBuffsBreakdown } from "./buffs-breakdown.js";
 import { createResourcesBreakdown } from "./resources-breakdown.js";
 import { createPriorityBreakdown } from "./priority-breakdown.js";
 import { createCooldownsBreakdown } from "./cooldowns-breakdown.js";
+import { createDistributionBreakdown } from "./distribution-breakdown.js";
 import { createPriorityListDisplay, priorityList, addPotionToPriorityList, updatePriorityList, removePotionFromPriorityList } from "./priority-list-display.js";
 import { createLoadoutBreakdown } from "./loadout-breakdown.js";
 import { handleTabs } from "./simulation-options-tabs.js";
@@ -634,6 +635,8 @@ const createSimulationResults = (simulationData) => {
     priorityTab.textContent = "Priority";
     const cooldownsTab = createElement("div", `results-tab-${containerCount} inactive`, "cooldowns-tab");
     cooldownsTab.textContent = "Cooldowns";
+    const distributionTab = createElement("div", `results-tab-${containerCount} inactive`, "distribution-tab");
+    distributionTab.textContent = "Distribution";
     const loadoutTab = createElement("div", `results-tab-${containerCount} inactive`, "loadout-tab");
     loadoutTab.textContent = "Loadout";
 
@@ -642,6 +645,7 @@ const createSimulationResults = (simulationData) => {
     resultsNavbar.appendChild(resourcesTab);
     resultsNavbar.appendChild(priorityTab);
     resultsNavbar.appendChild(cooldownsTab);
+    resultsNavbar.appendChild(distributionTab);
     resultsNavbar.appendChild(loadoutTab);
     resultContainer.appendChild(resultsNavbar);
 
@@ -682,6 +686,13 @@ const createSimulationResults = (simulationData) => {
     cooldownsContent.appendChild(cooldownsBreakdown);
     resultContainer.appendChild(cooldownsContent);
 
+    // healing distribution breakdown
+    const distributionContent = createElement("div", `results-tab-content-${containerCount}`, "distribution-content");
+    const distributionBreakdown =  createElement("div", null, "distribution-breakdown-table-container");
+
+    distributionContent.appendChild(distributionBreakdown);
+    resultContainer.appendChild(distributionContent);
+
     // player info breakdown
     const loadoutContent = createElement("div", `results-tab-content-${containerCount}`, "loadout-content");
     const loadoutBreakdown = createElement("div", null, "loadout-breakdown-table-container");
@@ -703,6 +714,7 @@ const createSimulationResults = (simulationData) => {
     createResourcesBreakdown(simulationData, containerCount);
     createPriorityBreakdown(simulationData, containerCount);
     createCooldownsBreakdown(simulationData, containerCount);
+    createDistributionBreakdown(simulationData, containerCount);
     createLoadoutBreakdown(simulationData, containerCount);
 
     // initialise tabs within the results

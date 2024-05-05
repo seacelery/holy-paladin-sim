@@ -60,12 +60,14 @@
     --stat-mastery: #c1a1fd;
     --stat-versatility: #A3EDFF;
 
+    --rarity-legendary: #ff8000;
     --rarity-epic: #a335ee;
     --rarity-rare: #0070dd;
     --rarity-uncommon: #1eff00;
     --rarity-common: #fff;
     --rarity-poor: var(--border-colour-3);
 
+    --rarity-legendary-dark: #0f0800;
     --rarity-epic-dark: #08030c;
     --rarity-rare-dark: #020507;
     --rarity-uncommon-dark: #020803;
@@ -5609,6 +5611,33 @@ tr {
     overflow: auto;
 
     font-size: 13px;
+}
+
+/* DISTRIBUTION CONTENT */
+[id*="distribution-tab"] {
+    border-bottom: none;
+}
+
+[id*="distribution-content"] {
+    display: none;
+}
+
+[id^="distribution-breakdown-table-container-"] {
+    justify-content: space-between;
+    margin: 0 auto 0px auto;
+    padding-top: 20px;
+
+    width: 100%;
+    overflow: hidden;
+
+    color: var(--light-font-colour);
+}
+
+.distribution-container {
+    display: flex;
+    justify-content: space-between;
+
+    height: 100%;
 }
 
 .footer {
