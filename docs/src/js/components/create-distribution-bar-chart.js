@@ -111,6 +111,20 @@ const createBellCurveBarChart = (data, graphId, title, colour) => {
         .style("text-anchor", "middle")
         .text("HPS");
 
+    xAxisGroup.append("text")
+        .attr("class", "axis-label")
+        .attr("x", -17)
+        .attr("y", 35)
+        .style("text-anchor", "start")
+        .text(`${formatNumbers(minValue)}`);
+    
+    xAxisGroup.append("text")
+        .attr("class", "axis-label")
+        .attr("x", width + 17)
+        .attr("y", 35)
+        .style("text-anchor", "end")
+        .text(`${formatNumbers(maxValue)}`);
+
     xAxisGroup.selectAll("text").style("fill", "white");
 
     const maxTicks = 15;
