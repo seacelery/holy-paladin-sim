@@ -979,6 +979,8 @@ class Paladin:
             if stats:
                 for stat in stats:
                     stat_values_from_equipment[stat] = stat_values_from_equipment.get(stat, 0) + stats[stat]
+                if "leech" not in stat_values_from_equipment:
+                    stat_values_from_equipment["leech"] = 0
             
             enchants = item_data.get("enchantments", {})
             if enchants:
