@@ -1093,6 +1093,25 @@ class HolyLight(Spell):
                     append_aura_removed_event(caster.events, "Infusion of Light", caster, caster, current_time)
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "expired")
+                    
+                if caster.ptr and caster.is_talent_active("Valiance"):
+                    holy_bulwark_targets = [target for target in caster.potential_healing_targets if "Holy Bulwark" in target.target_active_buffs]
+                    sacred_weapon_targets = [target for target in caster.potential_healing_targets if "Sacred Weapon" in target.target_active_buffs]
+                    
+                    if len(holy_bulwark_targets) > 0:
+                        for target in holy_bulwark_targets:
+                            target.target_active_buffs["Holy Bulwark"][0].duration += 3
+                        caster.active_auras["Holy Bulwark"].duration += 3
+                    if len(sacred_weapon_targets) > 0:
+                        for target in sacred_weapon_targets:
+                            target.target_active_buffs["Sacred Weapon"][0].duration += 3
+                        caster.active_auras["Sacred Weapon"].duration += 3
+                    if len(holy_bulwark_targets) == 0 and len(sacred_weapon_targets) == 0:
+                        if "Holy Bulwark" in caster.abilities:
+                            caster.abilities["Holy Bulwark"].remaining_cooldown -= 3
+                        if "Sacred Weapon" in caster.abilities:
+                            caster.abilities["Sacred Weapon"].remaining_cooldown -= 3
+                
             else:
                 increment_holy_power(self, caster, current_time)
                 update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
@@ -1230,6 +1249,24 @@ class FlashOfLight(Spell):
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "expired")
                     append_aura_removed_event(caster.events, "Infusion of Light", caster, caster, current_time)
+                    
+                if caster.ptr and caster.is_talent_active("Valiance"):
+                    holy_bulwark_targets = [target for target in caster.potential_healing_targets if "Holy Bulwark" in target.target_active_buffs]
+                    sacred_weapon_targets = [target for target in caster.potential_healing_targets if "Sacred Weapon" in target.target_active_buffs]
+                    
+                    if len(holy_bulwark_targets) > 0:
+                        for target in holy_bulwark_targets:
+                            target.target_active_buffs["Holy Bulwark"][0].duration += 3
+                        caster.active_auras["Holy Bulwark"].duration += 3
+                    if len(sacred_weapon_targets) > 0:
+                        for target in sacred_weapon_targets:
+                            target.target_active_buffs["Sacred Weapon"][0].duration += 3
+                        caster.active_auras["Sacred Weapon"].duration += 3
+                    if len(holy_bulwark_targets) == 0 and len(sacred_weapon_targets) == 0:
+                        if "Holy Bulwark" in caster.abilities:
+                            caster.abilities["Holy Bulwark"].remaining_cooldown -= 3
+                        if "Sacred Weapon" in caster.abilities:
+                            caster.abilities["Sacred Weapon"].remaining_cooldown -= 3
                 
             # remove divine favor, start divine favor spell cd
             if "Divine Favor" in caster.active_auras:

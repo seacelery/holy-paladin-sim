@@ -33,7 +33,7 @@ def import_character_route():
     session_token = str(uuid.uuid4())
     modifiable_data = {"class_talents": {}, "spec_talents": {}, "lightsmith_talents": {}, "herald_of_the_sun_talents": {}, "race": "", "consumables": {}, "equipment": {}, "character_name": character_name, "realm": realm, "region": region, "ptr": paladin.ptr, "version": version}
     
-    current_app.redis.setex(session_token, 18000, json.dumps(modifiable_data))
+    current_app.redis.setex(session_token, 3600, json.dumps(modifiable_data))
 
     response = jsonify({
         "message": f"Character imported successfully, {character_name}, {realm}, {region}",
