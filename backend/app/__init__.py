@@ -655,7 +655,7 @@ def run_simulation_task(self, simulation_parameters):
             total_healing = 0
             for ability in ability_breakdown:
                 total_healing += ability_breakdown[ability]["total_healing"]
-            hps = total_healing / self.encounter_length
+            hps = total_healing / simulation.encounter_length
             full_distribution[i] = hps
         
         def average_results(aggregate):
@@ -685,7 +685,7 @@ def run_simulation_task(self, simulation_parameters):
         total_healing = 0
         for ability in average_ability_breakdown:
             total_healing += average_ability_breakdown[ability]["total_healing"]
-        average_hps = total_healing / simulation_parameters.encounter_length
+        average_hps = total_healing / simulation.encounter_length
         
         # adjust cooldowns breakdown for number of iterations
         for aura, instances in full_cooldowns_breakdown_results.items():
