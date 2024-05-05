@@ -109,7 +109,7 @@ const createBellCurveBarChart = (data, graphId, title, colour) => {
         .attr("x", (width / 2) - 10)
         .attr("y", 45)
         .style("text-anchor", "middle")
-        .text("Intervals");
+        .text("HPS");
 
     xAxisGroup.selectAll("text").style("fill", "white");
 
