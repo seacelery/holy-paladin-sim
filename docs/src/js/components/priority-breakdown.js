@@ -570,10 +570,12 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
         
         if (!playerAurasTargetClasses.some(className => e.target.classList.contains(className))) {
             playerAurasFilterModal.style.opacity = "0";
+            playerAurasFilterModal.classList.toggle("modal-active");
         };
 
         if (!cooldownsTargetClasses.some(className => e.target.classList.contains(className))) {
             cooldownFilterModal.style.opacity = "0";
+            cooldownFilterModal.classList.toggle("modal-active");
         };
     });
 
