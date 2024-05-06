@@ -6,7 +6,7 @@ const roundIterations = (number) => {
     } else if (number < 100) {
         return number
     } else {
-        return Math.round(number / 10) * 10;
+        return Math.round(number / 50) * 50;
     };
 };
 
