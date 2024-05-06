@@ -1100,8 +1100,8 @@ generateRealmOptions();
 generateRegionOptions();
 
 importButtonMain.addEventListener("click", importCharacter);
-importButton.addEventListener("click", () => {
-    importCharacter();
+importButton.addEventListener("click", async () => {
+    await importCharacter();
 
     const imageTypes = ["flask", "food", "weapon-imbue", "augment-rune", "potion", "raid-buff", "external-buff"];
     imageTypes.forEach(type => {
