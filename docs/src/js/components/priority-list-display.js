@@ -685,11 +685,12 @@ beaconOfFaithPreset.addEventListener("click", () => {
 
 const beaconOfVirtuePreset = document.getElementById("standard-beacon-of-virtue-preset");
 beaconOfVirtuePreset.addEventListener("click", () => {
-    priorityListPastedCode = `Aerated Mana Potion | Timers = [30]+
-    Tyr's Deliverance | Timers = [0, 90, 180, 270]
-    Avenging Wrath | Timers = [15, 135, 271]
+    priorityListPastedCode = `Aerated Mana Potion | Timers = [30]
+    Tyr's Deliverance
+    Nymue's Unraveling Spindle | Timers = [12, 132, 268]
+    Avenging Wrath | Timers = [15, 135, 271] | and | previous ability = Nymue's Unraveling Spindle
     Light's Hammer
-    Beacon of Virtue | Timers = [15, 76, 135, 196, 271] | or | Avenging Wrath active | or | Daybreak cooldown >= 20
+    Beacon of Virtue | Timers = [15, 77, 135, 196, 271] | or | Avenging Wrath active | or | Daybreak cooldown >= 15
     Daybreak | Beacon of Virtue active
     Divine Toll | Beacon of Virtue active | and | previous ability = Word of Glory
     Word of Glory | Beacon of Virtue active | and | Divine Toll cooldown <= 0 | and | Unending Light stacks = 9
