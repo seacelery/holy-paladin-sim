@@ -355,8 +355,8 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const majorCooldownRow = createElement("div", "priority-grid-cooldown-row", null);
 
             // select the order for each row
-            const generatorRowOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath", "Consecration"];
-            const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Beacon of Virtue", "Tyr's Deliverance",
+            const generatorRowOrder = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath", "Consecration", "Beacon of Virtue"];
+            const majorCooldownRowOrder = ["Avenging Wrath", "Daybreak", "Divine Toll", "Tyr's Deliverance",
                                            "Light's Hammer", "Holy Prism", "Barrier of Faith", "Blessing of the Seasons", 
                                            "Divine Favor", "Lay on Hands", "Arcane Torrent", "Fireblood", "Gift of the Naaru", 
                                            "Aerated Mana Potion", "Elemental Potion of Ultimate Power"];

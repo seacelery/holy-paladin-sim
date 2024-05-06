@@ -148,7 +148,13 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
 
         const tableBody = table.createTBody();
 
-        if (isTargetBuffs) {
+        let solarGraceActive = false;
+        for (let buffName in buffsData) {
+            if (buffName.includes("Solar Grace")) {
+                solarGraceActive = true;
+            };
+        };
+        if (isTargetBuffs && solarGraceActive) {
             let solarGraceUptime = 0;
             let solarGraceAverageDuration = 0;
             let solarGraceTotalDuration = 0;
