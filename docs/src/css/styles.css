@@ -4993,7 +4993,7 @@ tr {
 
 .priority-grid-header-row {
     display: grid;
-    grid-template-columns: 0.3fr 0.2fr 0.35fr 0.63fr 0.35fr 1fr 0.35fr 0.5fr;
+    grid-template-columns: 0.25fr 0.2fr 0.35fr 0.62fr 0.35fr 1fr 0.33fr 0.5fr;
 }
 
 .priority-grid-header-cell:last-child {
