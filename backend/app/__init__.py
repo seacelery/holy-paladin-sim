@@ -229,8 +229,8 @@ def run_simulation_task(self, simulation_parameters):
             # reset simulation states
             print(i)
             if not simulation.test:
-                socketio.emit("iteration_update", {"iteration": i + 1}, namespace="/")
-                redis.set(f'iteration_{task_id}', i + 1)
+                socketio.emit("iteration_update", {"iteration": i}, namespace="/")
+                redis.set(f'iteration_{task_id}', i)
                 redis.expire(f'iteration_{task_id}', 120)
                 simulation.paladin.reset_state()
                 simulation.reset_simulation()
