@@ -528,7 +528,7 @@ const startSimulation = () => {
     const simulationData = {
         session_token: sessionToken,
         encounter_length: document.getElementById("encounter-length-option").value,
-        iterations: document.getElementById("iterations-option").value,
+        iterations: iterations,
         time_warp_time: document.getElementById("time-warp-option").value,
         tick_rate: document.getElementById("tick-rate-option").value,
         raid_health: document.getElementById("raid-health-option").value,
