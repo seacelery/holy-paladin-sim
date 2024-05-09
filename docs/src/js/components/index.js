@@ -492,12 +492,9 @@ const startSimulation = () => {
     };
 
     if (window.lastSliderChange === "Slider") {
-        console.log(`previous change: ${window.lastSliderChange}`)
         iterations = roundIterations(document.getElementById("iterations-option").value);
-        console.log(iterations)
     } else {
         iterations = document.getElementById("iterations-option").value;
-        console.log(`regular value: ${iterations}`)
     };
 
     let seasons = {

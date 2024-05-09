@@ -287,7 +287,7 @@ class Spell:
             heal_amount *= 1.8
         
         if "Close to Heart" in caster.active_auras:
-            heal_amount *= 1.08
+            heal_amount *= 1.04
             
         if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
             heal_amount *= 1.1

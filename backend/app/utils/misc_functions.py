@@ -46,7 +46,7 @@ def add_to_holy_power_by_ability(dict, ability, caster):
     
 def add_talent_healing_multipliers(heal_amount, caster):
     if "Close to Heart" in caster.active_auras:
-        heal_amount *= 1.08
+        heal_amount *= 1.04
                 
     if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
         heal_amount *= 1.1

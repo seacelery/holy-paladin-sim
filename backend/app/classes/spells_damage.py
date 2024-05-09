@@ -322,7 +322,7 @@ class HammerOfWrath(Spell):
                 
                 for target in targets:                   
                     if "Close to Heart" in caster.active_auras:
-                        veneration_healing_per_target *= 1.08
+                        veneration_healing_per_target *= 1.04
                         
                     if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
                         veneration_healing_per_target *= 1.1

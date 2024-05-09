@@ -2151,7 +2151,7 @@ class BlossomOfAmirdrassilLargeHoT(HoT):
             total_healing *= 1.15
             
         if "Close to Heart" in caster.active_auras:
-            total_healing *= 1.08
+            total_healing *= 1.04
             
         if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
             total_healing *= 1.1
@@ -2186,7 +2186,7 @@ class BlossomOfAmirdrassilSmallHoT(HoT):
             total_healing *= 1.15
             
         if "Close to Heart" in caster.active_auras:
-            total_healing *= 1.08
+            total_healing *= 1.04
             
         if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
             total_healing *= 1.1
