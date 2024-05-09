@@ -2246,15 +2246,15 @@ class ElementalLariat(Buff):
         
         self.embellishment_first_value = embellishment_values[0]
         
-        self.ysemerald_count = caster.gem_counts["Ysemerald"]
-        self.alexstraszite_count = caster.gem_counts["Alexstraszite"]
-        self.neltharite_count = caster.gem_counts["Neltharite"]
-        self.malygite_count = caster.gem_counts["Malygite"]
+        self.air_gems_count = caster.gem_types["Air"]
+        self.fire_gems_count = caster.gem_types["Fire"]
+        self.earth_gems_count = caster.gem_types["Earth"]
+        self.frost_gems_count = caster.gem_types["Frost"]
         
         self.chosen_stat = ""
         
     def apply_effect(self, caster, current_time=None):
-        choices = self.ysemerald_count * ["haste"] + self.alexstraszite_count * ["crit"] + self.neltharite_count * ["mastery"] + self.malygite_count * ["versatility"]
+        choices = self.air_gems_count * ["haste"] + self.fire_gems_count * ["crit"] + self.earth_gems_count * ["mastery"] + self.frost_gems_count * ["versatility"]
         self.chosen_stat = random.choice(choices)
         
         if self.chosen_stat == "haste":

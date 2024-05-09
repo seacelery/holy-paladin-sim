@@ -5180,11 +5180,11 @@ tr {
 
 [class*="priority-grid-player-auras-icon-container"], [class*="priority-grid-cooldown-icon-container"], [class*="priority-grid-cooldown-modal-icon-container"], [class*="priority-grid-player-auras-modal-icon-container"] {
     margin: 2.5px;
-    margin-bottom: 12.5px;
+    margin-bottom: 5px;
     z-index: 0;
 
     width: 30px;
-    height: 35px;
+    height: 45px;
 }
 
 .aura-icon-overlay-container, .cooldown-icon-overlay-container {

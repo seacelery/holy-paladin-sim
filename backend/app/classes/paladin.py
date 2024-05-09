@@ -89,6 +89,7 @@ class Paladin:
         
         self.active_auras = {}
         self.gem_counts = {}
+        self.gem_types = {}
         self.total_elemental_gems = 0
         
         if equipment_data:

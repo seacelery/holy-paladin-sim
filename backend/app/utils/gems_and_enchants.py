@@ -77,6 +77,13 @@ def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):
         "Malygite": 0
     }
     
+    player.gem_types = {
+        "Fire": 0,
+        "Frost": 0,
+        "Air": 0,
+        "Earth": 0
+    }
+    
     player.total_elemental_gems = 0
     
     for gem in gems_from_equipment:
@@ -97,80 +104,96 @@ def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):
             stat_values_from_equipment["haste"] += 70
             stat_values_from_equipment["crit"] += 33
             player.gem_counts["Ysemerald"] += 1
+            player.gem_types["Fire"] += 1
             player.total_elemental_gems += 1
         elif gem == "Energized Ysemerald":
             stat_values_from_equipment["haste"] += 70
             stat_values_from_equipment["versatility"] += 33
             player.gem_counts["Ysemerald"] += 1
+            player.gem_types["Frost"] += 1
             player.total_elemental_gems += 1
         elif gem == "Keen Ysemerald":
             stat_values_from_equipment["haste"] += 70
             stat_values_from_equipment["mastery"] += 33
             player.gem_counts["Ysemerald"] += 1
+            player.gem_types["Earth"] += 1
             player.total_elemental_gems += 1
         elif gem == "Quick Ysemerald":
             stat_values_from_equipment["haste"] += 88
             player.gem_counts["Ysemerald"] += 1
+            player.gem_types["Air"] += 1
             player.total_elemental_gems += 1
             
         elif gem == "Keen Neltharite":
             stat_values_from_equipment["mastery"] += 70
             stat_values_from_equipment["haste"] += 33
             player.gem_counts["Neltharite"] += 1
+            player.gem_types["Air"] += 1
             player.total_elemental_gems += 1
         elif gem == "Sensei's Neltharite":
             stat_values_from_equipment["mastery"] += 70
             stat_values_from_equipment["crit"] += 33
             player.gem_counts["Neltharite"] += 1
+            player.gem_types["Fire"] += 1
             player.total_elemental_gems += 1
         elif gem == "Zen Neltharite":
             stat_values_from_equipment["mastery"] += 70
             stat_values_from_equipment["versatility"] += 33
             player.gem_counts["Neltharite"] += 1
+            player.gem_types["Frost"] += 1
             player.total_elemental_gems += 1
         elif gem == "Fractured Neltharite":
             stat_values_from_equipment["mastery"] += 88
             player.gem_counts["Neltharite"] += 1
+            player.gem_types["Earth"] += 1
             player.total_elemental_gems += 1
             
         elif gem == "Crafty Alexstraszite":
             stat_values_from_equipment["crit"] += 70
             stat_values_from_equipment["haste"] += 33
             player.gem_counts["Alexstraszite"] += 1
+            player.gem_types["Air"] += 1
             player.total_elemental_gems += 1
         elif gem == "Radiant Alexstraszite":
             stat_values_from_equipment["crit"] += 70
             stat_values_from_equipment["versatility"] += 33
             player.gem_counts["Alexstraszite"] += 1
+            player.gem_types["Frost"] += 1
             player.total_elemental_gems += 1
         elif gem == "Sensei's Alexstraszite":
             stat_values_from_equipment["crit"] += 70
             stat_values_from_equipment["mastery"] += 33
             player.gem_counts["Alexstraszite"] += 1
+            player.gem_types["Earth"] += 1
             player.total_elemental_gems += 1
         elif gem == "Deadly Alexstraszite":
             stat_values_from_equipment["crit"] += 88
             player.gem_counts["Alexstraszite"] += 1
+            player.gem_types["Fire"] += 1
             player.total_elemental_gems += 1
             
         elif gem == "Energized Malygite":
             stat_values_from_equipment["versatility"] += 70
             stat_values_from_equipment["haste"] += 33
             player.gem_counts["Malygite"] += 1
+            player.gem_types["Air"] += 1
             player.total_elemental_gems += 1
         elif gem == "Radiant Malygite":
             stat_values_from_equipment["versatility"] += 70
             stat_values_from_equipment["crit"] += 33
             player.gem_counts["Malygite"] += 1
+            player.gem_types["Fire"] += 1
             player.total_elemental_gems += 1
         elif gem == "Zen Malygite":
             stat_values_from_equipment["versatility"] += 70
             stat_values_from_equipment["mastery"] += 33
             player.gem_counts["Malygite"] += 1
+            player.gem_types["Earth"] += 1
             player.total_elemental_gems += 1
         elif gem == "Stormy Malygite":
             stat_values_from_equipment["versatility"] += 88
             player.gem_counts["Malygite"] += 1
+            player.gem_types["Frost"] += 1
             player.total_elemental_gems += 1
     # print(stat_values_from_equipment)
     # print(player.gem_counts)

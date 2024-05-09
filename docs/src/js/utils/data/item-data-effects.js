@@ -407,7 +407,7 @@ const itemDataEffects = [
                 "description": "Your spells and abilities have a chance to empower one of your socketed elemental gems, granting *407 of their associated stat. Lasts 5 sec and an additional 1 sec per elemental gem.", 
                 "id": 375323,
                 "type": "embellishment",
-                "effect_values": [{"allocation_type": "rating_multiplier_jewellery", "base_item_level": 382, "base_value": 407, "effect_coefficient": 0.458195, "effect_type": "scalar"}]
+                "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 382, "base_value": 407, "effect_coefficient": 0.458195, "effect_type": "scalar"}]
             }
         ],
         "stats": {
