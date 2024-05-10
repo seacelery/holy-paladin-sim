@@ -1373,7 +1373,7 @@ class WordOfGlory(Spell):
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Blessing of Dawn", current_time, "expired")
                     append_aura_removed_event(caster.buff_events, "Blessing of Dawn", caster, caster, current_time)
-                    caster.apply_buff_to_self(BlessingOfDusk(), current_time)
+                    caster.apply_buff_to_self(BlessingOfDusk(), current_time, reapply=True)
                     
             # strength of conviction
             if caster.is_talent_active("Strength of Conviction"):
@@ -1636,7 +1636,7 @@ class EternalFlame(Spell):
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Blessing of Dawn", current_time, "expired")
                     append_aura_removed_event(caster.buff_events, "Blessing of Dawn", caster, caster, current_time)
-                    caster.apply_buff_to_self(BlessingOfDusk(), current_time)
+                    caster.apply_buff_to_self(BlessingOfDusk(), current_time, reapply=True)
                     
             # strength of conviction
             if caster.is_talent_active("Strength of Conviction"):
@@ -1896,7 +1896,7 @@ class LightOfDawn(Spell):
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Blessing of Dawn", current_time, "expired")
                     append_aura_removed_event(caster.buff_events, "Blessing of Dawn", caster, caster, current_time)
-                    caster.apply_buff_to_self(BlessingOfDusk(), current_time)
+                    caster.apply_buff_to_self(BlessingOfDusk(), current_time, reapply=True)
             
             # glistening radiance
             if caster.is_talent_active("Glistening Radiance") and caster.is_talent_active("Glimmer of Light"):
