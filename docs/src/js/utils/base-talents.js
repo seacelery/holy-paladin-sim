@@ -359,6 +359,7 @@ const classTalentsArrowsLive = {
     ],
     "downLong": [
         "Lay on Hands", "Hammer of Wrath", "Improved Cleanse", "Turn Evil", "Fist of Justice", "Greater Judgment", "Repentance/Blinding Light",
+        "Lightforged Blessing"
     ],
     "left": [
         "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Auras of Swift Vengeance", "Turn Evil", "Fist of Justice", 
@@ -383,6 +384,7 @@ const classTalentsArrowsPTR = {
     ],
     "downLong": [
         "Lay on Hands", "Hammer of Wrath", "Improved Cleanse", "Turn Evil", "Fist of Justice", "Greater Judgment", "Repentance/Blinding Light",
+        "Lightforged Blessing"
     ],
     "left": [
         "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Auras of Swift Vengeance", "Turn Evil", "Fist of Justice", 
