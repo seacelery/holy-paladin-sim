@@ -450,8 +450,8 @@ const monitorSimulation = (taskId) => {
             .then(response => response.json())
             .then(data => {
                 if (data.iteration) {
-                    console.log(`Current Iteration: ${data.iteration} of ${iterations}`);
-                    const progressPercentage = Math.round((data.iteration / iterations) * 100);
+                    console.log(`Current Iteration: ${data.iteration + 1} of ${iterations}`);
+                    const progressPercentage = Math.round(((data.iteration + 1) / iterations) * 100);
                     simulationProgressBar.style.width = progressPercentage + "%";
                     simulationProgressBarText.textContent = progressPercentage + "%";
                 };

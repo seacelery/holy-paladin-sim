@@ -1202,34 +1202,6 @@ class Simulation:
             rounded_time = int(timestamp)
             adjusted_average_healing_timeline[rounded_time] = adjusted_average_healing_timeline.get(rounded_time, 0) + healing
         
-        # healing_and_buff_events = sorted(self.paladin.events + self.paladin.buff_events, key=get_timestamp)
-        # healing_and_beacon_events = sorted(self.paladin.events + self.paladin.beacon_events, key=get_timestamp)
-        
-        # print(f"Mana remaining: {self.paladin.mana}")
-
-        # pp.pprint(healing_and_buff_events)
-        # pp.pprint(healing_and_beacon_events)
-
-        # pp.pprint(self.paladin.ability_cast_events)
-        
-        # this works for a 30s window
-        # pp.pprint(self.paladin.holy_power_by_ability)
-        # print(f"Glimmers applied: {self.paladin.glimmer_application_counter}")
-        # print(f"Glimmers removed: {self.paladin.glimmer_removal_counter}")
-        
-        
-        # pp.pprint(self.paladin.target_buff_breakdown)
-        # pp.pprint(average_target_buff_breakdown)
-        # pp.pprint(average_aggregated_target_buff_breakdown)
-        
-        # pp.pprint(average_awakening_counts)
-        # pp.pprint(average_ability_breakdown)
-        # pp.pprint(self.paladin.events)
-        # pp.pprint(self.paladin.buff_events)
-        # pp.pprint(self.paladin.priority_breakdown)
-        # pp.pprint(average_ability_breakdown)
-        # pp.pprint(self.paladin.self_buff_breakdown)
-        
         full_results = {
             "healing_timeline": adjusted_average_healing_timeline,
             "mana_timeline": average_mana_timeline,
@@ -1261,20 +1233,11 @@ class Simulation:
             "talents": {"class_talents": self.paladin.class_talents, "spec_talents": self.paladin.spec_talents},
             "priority_list": self.priority_list_text
         }
-        
-        # pp.pprint(average_ability_breakdown)
-        # pp.pprint(self.paladin.events)
-        print(self.paladin.total_glimmer_healing)
-        print(self.paladin.glimmer_hits)
     
         end_time = time.time()
         simulation_time = end_time - start_time
         print(f"Simulation time: {simulation_time} seconds")
-        print(self.paladin.holy_shock_resets)
 
-        # average_ability_breakdown, self.elapsed_time, None, average_self_buff_breakdown, average_target_buff_breakdown, 
-        # average_aggregated_target_buff_breakdown, self.paladin.name, average_glimmer_counts, 
-        # average_tyrs_counts, average_awakening_counts, average_healing_timeline, average_mana_timeline, full_awakening_trigger_times_results, average_holy_power_timeline
         if not self.test:
             emit("simulation_complete", {"results": full_results, "simulation_details": simulation_details}, broadcast=True, namespace="/")
         return {"results": full_results, "simulation_details": simulation_details}
