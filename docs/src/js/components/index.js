@@ -454,6 +454,10 @@ const monitorSimulation = (taskId) => {
                     const progressPercentage = Math.round(((data.iteration + 1) / iterations) * 100);
                     simulationProgressBar.style.width = progressPercentage + "%";
                     simulationProgressBarText.textContent = progressPercentage + "%";
+                } else {
+                    const progressPercentage = 100;
+                    simulationProgressBar.style.width = progressPercentage + "%";
+                    simulationProgressBarText.textContent = progressPercentage + "%";
                 };
             })
             .catch(error => {
