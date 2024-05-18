@@ -636,7 +636,7 @@ const createSimulationResults = (simulationData) => {
     const resourcesTab = createElement("div", `results-tab-${containerCount} inactive`, "resources-tab");
     resourcesTab.textContent = "Resources";
     const priorityTab = createElement("div", `results-tab-${containerCount} inactive`, "priority-tab");
-    priorityTab.textContent = "Priority";
+    priorityTab.textContent = "Timeline";
     const cooldownsTab = createElement("div", `results-tab-${containerCount} inactive`, "cooldowns-tab");
     cooldownsTab.textContent = "Cooldowns";
     const distributionTab = createElement("div", `results-tab-${containerCount} inactive`, "distribution-tab");
