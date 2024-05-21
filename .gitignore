@@ -1,4 +1,4 @@
 __pycache__
 config.py
 .env
-pypy-venv
+pypy-venv/
