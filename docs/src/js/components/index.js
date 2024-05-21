@@ -1033,7 +1033,9 @@ initialiseVersion();
 
 let savedDataTimeout;
 let containerCount = 0;
+let encounterLength = 30;
 let iterations = 1;
+let isSimulationRunning = false;
 let isFirstImport = true;
 let currentConsumables = {
     flask: [],
