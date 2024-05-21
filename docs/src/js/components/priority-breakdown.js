@@ -38,7 +38,6 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     const priorityBreakdownContainer = document.getElementById(`priority-breakdown-table-container-${containerCount}`);
 
     // create filter options
-
     // player auras filter
     const playerAurasFilter = createElement("div", "priority-grid-player-auras-filter", null);
     const playerAurasFilterModal = createElement("div", "priority-grid-player-auras-filter-modal", null);
@@ -75,7 +74,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     for (const timestamp in priorityData) {
         const playerAurasData = priorityData[timestamp].player_active_auras;
 
-        // overlapping buff case, generalise if needed
+        // overlapping buff case
         let solarGraceCount = 0;
         let solarGraceHighestDuration = 0;
         for (let aura in playerAurasData) {
@@ -620,7 +619,6 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             };
         };
     };
-    // window.addEventListener("resize", syncColumnWidths);
 };
 
 export { createPriorityBreakdown };

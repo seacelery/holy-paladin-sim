@@ -117,7 +117,7 @@ const createBuffsLineGraph = (data, graphId, title, colour, awakening = false, a
     });
     
     // disastrous attempt at plotting most common points for awakening to reach 12 stacks
-    function findPeakIntervals(data, cooldownPeriod, iterations) {
+    const findPeakIntervals = (data, cooldownPeriod, iterations) => {
         let interval = 65;
         let previousPeak = 0;
         let peaks = [];

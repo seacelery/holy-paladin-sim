@@ -70,34 +70,9 @@ const createHealingLineGraph = (healingData, manaData, graphId, title, colour) =
     xAxisGroup.selectAll("path").style("stroke", "white");
     xAxisGroup.selectAll("text").style("fill", "white");
 
-    // left y-axis
-    // const yAxisGroup = svg.append("g")
-    //     .call(d3.axisLeft(y));
-
-    // yAxisGroup.append("text")
-    //     .attr("class", "axis-label")
-    //     .attr("transform", "rotate(-90)")
-    //     .attr("x", -height / 2)
-    //     .attr("y", -70)
-    //     .style("text-anchor", "middle")
-    //     .text("Healing");
-
-    // yAxisGroup.selectAll("line").style("stroke", "white");
-    // yAxisGroup.selectAll("path").style("stroke", "white");
-    // yAxisGroup.selectAll("text").style("fill", "white");
-
     const yRight = d3.scaleLinear()
         .domain([0, d3.max(manaDataArray, d => d.value)])
         .range([height, 0]);
-
-    // right y-axis
-    // const yAxisRight = d3.axisRight(yRight);
-
-    // svg.append("g")
-    //     .attr("transform", `translate(${width}, 0)`)
-    //     .call(yAxisRight)
-    //     .selectAll("text")
-    //     .style("fill", "white");
 
     const manaLine = d3.line()
         .x(d => x(d.key))

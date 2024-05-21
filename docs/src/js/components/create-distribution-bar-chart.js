@@ -162,7 +162,6 @@ const createBellCurveBarChart = (data, graphId, title, colour) => {
         if (adjustedMouseX >= 0 && adjustedMouseX <= width && adjustedMouseY >= 0 && adjustedMouseY <= height) {
             const index = Math.floor((adjustedMouseX / width) * intervals.length);
             const interval = intervals[index].interval;
-            const count = intervals[index].count;
 
             tooltip.html(`<span class="tooltip-time">${interval}</span><br/>`)
                 .style("left", (event.pageX + 10) + "px")
@@ -259,7 +258,6 @@ const createLowestToHighestBarChart = (data, graphId, title, colour) => {
 
         if (adjustedMouseX >= 0 && adjustedMouseX <= width && adjustedMouseY >= 0 && adjustedMouseY <= height) {
             const index = Math.floor((adjustedMouseX / width) * dataArray.length);
-            const iteration = dataArray[index].key;
             const hps = dataArray[index].value;
 
             tooltip.html(`<span id="tooltip-${title.toLowerCase().replaceAll(" ", "-")}">${title === "HPS" ? formatNumbers(hps) : Math.round(hps * 10) / 10}</span>`)

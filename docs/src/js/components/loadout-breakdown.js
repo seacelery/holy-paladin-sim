@@ -125,10 +125,6 @@ const createLoadoutBreakdown = (simulationData, containerCount) => {
     });
 
     // stats
-    // const statsHeader = createElement("div", "loadout-header", null);
-    // statsHeader.textContent = "Stats";
-    // equipmentContainer.appendChild(statsHeader);
-
     const equipmentTooltip = createElement("div", "loadout-equipment-tooltip", "loadout-equipment-tooltip");
     equipmentTooltip.style.display = "none";
     equipmentTooltip.style.position = "absolute";
@@ -278,7 +274,7 @@ const createLoadoutBreakdown = (simulationData, containerCount) => {
         priorityCondition.textContent = conditionText;
         priorityContainer.append(priorityIcon, priorityAbility, priorityCondition);
         priorityList.appendChild(priorityContainer);
-    }
+    };
     priorityListContainer.appendChild(priorityList);
 };
 

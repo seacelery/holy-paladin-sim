@@ -72,6 +72,17 @@ const updateTalentsFromImportedData = (importedTalents) => {
                         specTalentsCount += talentData.ranks["current rank"];
                     };
 
+                    // const talentTypes = ["class", "spec", "hero"];
+                    // const talentDirections = ["down", "down-long", "left", "right"];
+                    // talentTypes.forEach(type => {
+                    //     talentDirections.forEach(direction => {
+                    //         if (talentIcon.parentElement.querySelector(`.${type}-talents-option-${direction}`) && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
+                    //             talentIcon.parentElement.querySelector(`.${type}-talents-option-${direction}`).classList.add("talent-option-highlighted");
+                    //         };
+                    //     });
+                    // });
+                    
+
                     // class talents
                     if (talentIcon.parentElement.querySelector(".class-talents-option-down") && talentData.ranks["current rank"] === talentData.ranks["max rank"]) {
                         talentIcon.parentElement.querySelector(".class-talents-option-down").classList.add("talent-option-highlighted");

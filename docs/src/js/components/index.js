@@ -283,8 +283,7 @@ const importCharacter = async () => {
     })
     .then(response => response.json())
     .then(data => {
-        sessionStorage.setItem('sessionToken', data.session_token);
-        console.log(data)
+        sessionStorage.setItem("sessionToken", data.session_token);
         updateEquipmentWithEffectValues(data);
         updateUIAfterImport(data, isFirstImport);
         initialiseEquipment();
@@ -329,9 +328,9 @@ const updateStats = async () => {
     const customEquipment = generateFullItemData()["equipment"];
 
     return fetch(`${CONFIG.backendUrl}/fetch_updated_data`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
             character_name: characterName,
@@ -340,7 +339,7 @@ const updateStats = async () => {
             custom_equipment: customEquipment,
             version: version
         }),
-        credentials: 'include'
+        credentials: "include"
     })
     .then(response => response.json())
     .then(data => {
@@ -359,7 +358,6 @@ const updateStats = async () => {
 
 const updateCharacter = async (data) => {
     const savedData = document.getElementById("saved-data-status");
-    console.log(data)
     
     const handleSavedDataStatus = () => {
         savedData.style.opacity = 1
@@ -382,14 +380,13 @@ const updateCharacter = async (data) => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         handleSavedDataStatus();
         updateStats();
     })
     .catch(error => console.error("Error:", error));
 };
 
-// used on progress bar
+// used on simulation progress bar
 const playCheckmarkAnimation = () => {
     document.querySelector(".simulation-progress-bar-checkmark-circle").classList.add("animate-circle");
     document.querySelector(".simulation-progress-bar-checkmark-check").classList.add("animate-check");
@@ -450,7 +447,7 @@ const monitorSimulation = (taskId) => {
             .then(response => response.json())
             .then(data => {
                 if (data.iteration) {
-                    console.log(`Current Iteration: ${data.iteration + 1} of ${iterations}`);
+                    // console.log(`Current Iteration: ${data.iteration + 1} of ${iterations}`);
                     const progressPercentage = Math.round(((data.iteration + 1) / iterations) * 100);
                     simulationProgressBar.style.width = progressPercentage + "%";
                     simulationProgressBarText.textContent = progressPercentage + "%";
@@ -470,9 +467,8 @@ const monitorSimulation = (taskId) => {
             .then(response => response.json())
             .then(data => {
                 if (data.state && data.state !== "SUCCESS") {
-                    console.log(`Task state: ${data.state}`);
+                    // console.log(`Task state: ${data.state}`);
                 } else if (data) {
-                    console.log(data)
                     clearInterval(iterationInterval);
                     clearInterval(resultInterval);
                     simulationProgressBarText.textContent = "";
@@ -612,7 +608,6 @@ const createSimulationResults = (simulationData) => {
     resultIterations.innerHTML = `<span>Iterations: </span><span style="color: var(--mana)">${simulationData.simulation_details.iterations}</span>`
     
     resultDetailsContainer.appendChild(resultIterations);
-
     rightSideContainer.appendChild(resultDetailsContainer);
 
     // add a delete option
@@ -654,7 +649,6 @@ const createSimulationResults = (simulationData) => {
     resultContainer.appendChild(resultsNavbar);
 
     // create content windows
-
     // ability breakdown
     const healingContent = createElement("div", `results-tab-content-${containerCount}`, "healing-content");
     const abilityBreakdown = createElement("div", null, "ability-breakdown-table-container");
@@ -1006,15 +1000,8 @@ const createPotionTimers = (potionName, potionCooldown) => {
         });
 
         if (repeatButton.classList.contains("potion-repeating")) {
-            const maxValue = 600;
             const firstTimerInputValue = parseFloat(firstTimerInput.value);
             currentConsumables["potion"][potionName] = [firstTimerInputValue];
-
-            // let nextTimerValue = parseFloat(firstTimerInputValue) + potionCooldown;
-            // while (nextTimerValue <= maxValue) {
-            //     currentConsumables["potion"][potionName].push(nextTimerValue);
-            //     nextTimerValue += potionCooldown;
-            // };
 
             updateCharacter({
                 consumables: currentConsumables
@@ -1046,10 +1033,7 @@ initialiseVersion();
 
 let savedDataTimeout;
 let containerCount = 0;
-let encounterLength = 30;
 let iterations = 1;
-let isSimulationRunning = false;
-let abortController;
 let isFirstImport = true;
 let currentConsumables = {
     flask: [],

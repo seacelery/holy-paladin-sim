@@ -1309,29 +1309,7 @@ const initialiseEquipment = () => {
                 newItemRightContainer.appendChild(newItemEmbellishmentSelect);
 
                 const newItemInfo = document.getElementById("new-equipped-item-info");
-
-                // newItemInfo.querySelectorAll(".new-equipped-item-field-left").forEach(item => {
-                //     item.style.borderBottom = `1px solid ${rarityColour}`;
-                // });
-                // newItemInfo.querySelectorAll(".new-equipped-item-field-right").forEach(item => {
-                //     item.style.borderBottom = `1px solid ${rarityColour}`;
-                // });
-                // newItemInfo.querySelectorAll(".new-equipped-item-enchant-options").forEach(item => {
-                //     item.style.border = `1px solid ${rarityColour}`;
-                // });
-                // newItemInfo.querySelectorAll(".new-equipped-item-embellishment-options").forEach(item => {
-                //     item.style.border = `1px solid ${rarityColour}`;
-                // });   
-
-                // newItemInfo.querySelector(".new-equipped-item-info-left").style.borderRight = `1px solid ${rarityColour}`;
-                // if (newItemInfo.querySelector(".new-equipped-item-default-enchant-option")) {
-                //     newItemInfo.querySelector(".new-equipped-item-default-enchant-option").style.borderBottom = `1px solid ${rarityColour}`;
-                // };
-                // if (newItemInfo.querySelector(".new-equipped-item-default-embellishment-option")) {
-                //     newItemInfo.querySelector(".new-equipped-item-default-embellishment-option").style.borderBottom = `1px solid ${rarityColour}`;
-                // };
                 if (newItemInfo.querySelector(".new-equipped-item-field-right-double")) {
-                    // currentItemInfo.querySelector(".current-equipped-item-default-embellishment-option").style.borderBottom = `1px solid ${rarityColour}`;
                     newItemInfo.querySelector(".new-equipped-item-field-right-double").style.borderBottom = `none`;
                 };
 
@@ -1361,11 +1339,6 @@ const initialiseEquipment = () => {
                 newItemRightContainer.appendChild(newTrinketEffectField);
 
                 const newItemInfo = document.getElementById("new-equipped-item-info");
-
-                // newItemInfo.querySelectorAll(".new-equipped-item-field-left").forEach(item => {
-                //     item.style.borderBottom = `1px solid ${rarityColour}`;
-                // });
-
                 newItemInfo.querySelector(".new-equipped-item-info-left").style.borderRight = `1px solid ${rarityColour}`;
             };
 

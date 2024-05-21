@@ -2,8 +2,6 @@ import { ratingMultiplierByItemLevel, ratingMultiplierByItemLevelRingsNeck, rati
 import { itemSlotAllocations } from "./item-slot-allocations.js";
 
 const calculateStatAllocations = (stats, itemSlot) => {
-    // console.log(itemSlot)
-    // console.log(stats)
     let intellectAllocated = 5259;
     let staminaAllocated = 7889;
     let totalSecondariesAllocated = 7000;
