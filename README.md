@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="frontend/public/readme-images/paladin-pink-favicon.png" alt="Logo" width="80" height="80">
+    <img src="docs/public/readme-images/paladin-pink-favicon.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Holy Paladin Sim</h3>
@@ -37,7 +37,7 @@ For the technologies, I kept it simple with a Python backend and plain Javascrip
 
 Importantly, I will be keeping this maintained for the next expansion, The World Within, with many of the changes already implemented!
 
-<img src="frontend/public/readme-images/simulation_page.png" alt="Image 5" style="width: 100%; height: auto; margin-bottom: 10px; border: 1px solid #3c3241">
+<img src="docs/public/readme-images/simulation_page.png" alt="Image 5" style="width: 100%; height: auto; margin-bottom: 10px; border: 1px solid #3c3241">
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
@@ -55,11 +55,11 @@ Importantly, I will be keeping this maintained for the next expansion, The World
 ## Usage
 
 ### Import your character
-<img src="frontend/public/readme-images/import_page.png" alt="Import image">
+<img src="docs/public/readme-images/import_page.png" alt="Import image">
 
 ### Options
 <div>
-    <img src="frontend/public/readme-images/options_page.png" alt="Options image">
+    <img src="docs/public/readme-images/options_page.png" alt="Options image">
 </div>
 <div style="margin-bottom: 5px;">
     For accuracy, always simulate with at least 100 iterations. Single iteration sims can be helpful if you just want to confirm the simulation is doing what you expect it to based on the priority list via the timeline tab.
@@ -67,7 +67,7 @@ Importantly, I will be keeping this maintained for the next expansion, The World
 
 ### Talents
 <div>
-    <img src="frontend/public/readme-images/talents_page.png" alt="Talents image">
+    <img src="docs/public/readme-images/talents_page.png" alt="Talents image">
 </div>
 <div style="margin-bottom: 5px;">
     Left click an icon to add a talent point, right click to remove them.
@@ -75,7 +75,7 @@ Importantly, I will be keeping this maintained for the next expansion, The World
 
 ### Equipment
 <div>
-    <img src="frontend/public/readme-images/equipment_page.png" alt="Equipment image">
+    <img src="docs/public/readme-images/equipment_page.png" alt="Equipment image">
 </div>
 <div style="margin-bottom: 5px;">
     Clicking on the item level in either the currently equipped or replace item boxes will allow you to change it, updating the stats to the proper values. You can add leech by clicking on an empty stat field and typing any amount you want.
@@ -83,7 +83,7 @@ Importantly, I will be keeping this maintained for the next expansion, The World
 
 ### Buffs & Consumables
 <div>
-    <img src="frontend/public/readme-images/buffs_page.png" alt="Buffs and Consumables image">
+    <img src="docs/public/readme-images/buffs_page.png" alt="Buffs and Consumables image">
 </div>
 <div style="margin-bottom: 5px;">
     Some buffs like Innervate and Power Infusion have timer options where you can set each specific timer or press the repeat button to use it on cooldown after the first specified time.
@@ -91,7 +91,7 @@ Importantly, I will be keeping this maintained for the next expansion, The World
 
 ### Priority List
 <div>
-    <img src="frontend/public/readme-images/priolist_page.png" alt="Priority List image">
+    <img src="docs/public/readme-images/priolist_page.png" alt="Priority List image">
 </div>
 <div style="margin-bottom: 5px;">
     There are some helpful buttons in the top right to aid you in creating priority lists:
