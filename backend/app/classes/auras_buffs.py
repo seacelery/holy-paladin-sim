@@ -191,7 +191,7 @@ class HolyBulwarkBuff(HoT):
         self.time_until_next_tick = self.base_tick_interval
         
     def calculate_tick_healing(self, caster):      
-        healing_per_tick = caster.max_health * 0.05
+        healing_per_tick = caster.max_health * 0.02
 
         return healing_per_tick, False
     
