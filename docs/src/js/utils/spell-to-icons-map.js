@@ -7,6 +7,8 @@ const spellToIconsMap = {
     "Authority of Fiery Resolve": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_healingaura.jpg",
     "Avenging Wrath": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_avenginewrath.jpg",
     "Avenging Crusader": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_veneration.jpg",
+    "Avenging Crusader (Crusader Strike)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusaderstrike.jpg",
+    "Avenging Crusader (Judgment)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_righteousfury.jpg",
     "Barrier of Faith": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_barrieroffaith.jpg",
     "Barrier of Faith (Holy Shock)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_barrieroffaith.jpg",
     "Barrier of Faith (Flash of Light)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_barrieroffaith.jpg",

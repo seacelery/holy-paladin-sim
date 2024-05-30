@@ -263,17 +263,6 @@ class CrusaderStrike(Spell):
                 
                 update_spell_data_heals(caster.ability_breakdown, "Crusader's Reprieve", caster, crusaders_reprieve_heal, False)
                 append_spell_heal_event(caster.events, "Crusader's Reprieve", caster, caster, crusaders_reprieve_heal, current_time, is_crit=False)
-                
-            # avenging crusader        
-            if caster.is_talent_active("Avenging Crusader"):
-                avenging_crusader_healing = spell_damage * 3.6 / 5
-                for target in random.sample(caster.potential_healing_targets, 5):
-                    target.receive_heal(avenging_crusader_healing, caster)
-                    
-                    update_spell_data_heals(caster.ability_breakdown, "Avenging Crusader (Judgment)", target, avenging_crusader_healing, spell_crit)
-                    caster.handle_beacon_healing("Avenging Crusader (Judgment)", target, avenging_crusader_healing, current_time)
-                
-                self.spell_damage_modifier /= 1.3
                
             # crusader's might 
             if caster.is_talent_active("Crusader's Might"):
