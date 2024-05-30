@@ -166,6 +166,8 @@ class AvengingCrusaderSpell(Spell):
     
     def __init__(self, caster):
         super().__init__("Avenging Crusader", cooldown=AvengingCrusaderSpell.BASE_COOLDOWN, mana_cost=AvengingCrusaderSpell.MANA_COST, holy_power_cost=AvengingCrusaderSpell.HOLY_POWER_COST, off_gcd=True)
+        if caster.ptr:
+            self.holy_power_cost = 0
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)

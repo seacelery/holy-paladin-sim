@@ -986,6 +986,9 @@ class HolyLight(Spell):
         # tower of radiance
         if caster.is_talent_active("Tower of Radiance"):
             self.holy_power_gain = 1
+            
+        if caster.ptr:
+            self.base_cast_time = 2
     
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # tyr's deliverance
@@ -996,6 +999,13 @@ class HolyLight(Spell):
         self.bonus_crit_healing = 0   
         if caster.is_talent_active("Awestruck"):
             self.bonus_crit_healing += 20
+            
+        # infusion of light & inflorescence of the sunwell
+        if "Infusion of Light" in caster.active_auras:  
+            if caster.ptr and caster.is_talent_active("Inflorescence of the Sunwell"):
+                self.spell_healing_modifier *= 2.4
+            elif caster.ptr:
+                self.spell_healing_modifier *= 1.9
         
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         resplendent_light_healing = 0
@@ -1071,13 +1081,18 @@ class HolyLight(Spell):
                             caster.abilities["Holy Shock"].current_charges += 1
                 
                 # handle inflorescence of the sunwell
-                caster.infused_holy_light_count += 1
-
-                if caster.infused_holy_light_count == 3:
-                    self.holy_power_gain = 4
-                    caster.infused_holy_light_count = 0
+                if caster.ptr and caster.is_talent_active("Inflorescence of the Sunwell"):
+                    self.spell_healing_modifier /= 2.4
+                elif caster.ptr:
+                    self.spell_healing_modifier /= 1.9
                 else:
-                    self.holy_power_gain = 3
+                    caster.infused_holy_light_count += 1
+
+                    if caster.infused_holy_light_count == 3 and caster.is_talent_active("Inflorescence of the Sunwell"):
+                        self.holy_power_gain = 4
+                        caster.infused_holy_light_count = 0
+                    else:
+                        self.holy_power_gain = 3
                     
                 increment_holy_power(self, caster, current_time)
                 update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)

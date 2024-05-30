@@ -212,6 +212,14 @@ class CrusaderStrike(Spell):
         # avenging crusader        
         if caster.is_talent_active("Avenging Crusader"):
             self.spell_damage_modifier *= 1.3
+            
+        if caster.ptr and "Avenging Crusader" in caster.active_auras:
+            if self.max_charges == 1:
+                self.max_charges = 2
+                if self.current_charges < self.max_charges:
+                    self.current_charges += 1
+        else:
+            self.max_charges = 1
         
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
         
@@ -268,6 +276,7 @@ class CrusaderStrike(Spell):
             # crusader's might 
             if caster.is_talent_active("Crusader's Might"):
                 caster.abilities["Holy Shock"].remaining_cooldown -= 1.5
+                caster.abilities["Judgment"].remaining_cooldown -= 1.5
                     
                 if caster.abilities["Holy Shock"].remaining_cooldown <= 0 and caster.is_talent_active("Light's Conviction"):
                     caster.holy_shock_cooldown_overflow = abs(caster.abilities["Holy Shock"].remaining_cooldown)

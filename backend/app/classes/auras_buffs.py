@@ -336,7 +336,13 @@ class AvengingCrusaderBuff(Buff):
     
     def __init__(self, caster):
         super().__init__("Avenging Crusader", 12, base_duration=12)
-        if caster.is_talent_active("Sanctified Wrath"):
+        if caster.is_talent_active("Sanctified Wrath") and not caster.ptr:
+            self.duration = 15
+            self.base_duration = 15     
+        elif caster.is_talent_active("Sanctified Wrath") and caster.ptr:
+            self.duration = 18
+            self.base_duration = 18
+        elif caster.ptr:
             self.duration = 15
             self.base_duration = 15
         
