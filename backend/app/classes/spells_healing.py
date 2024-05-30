@@ -1315,7 +1315,7 @@ class FlashOfLight(Spell):
 class WordOfGlory(Spell):
     
     SPELL_POWER_COEFFICIENT = 3.15 * 0.88
-    MANA_COST = 0.008
+    MANA_COST = 0.012
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
     
@@ -1323,6 +1323,8 @@ class WordOfGlory(Spell):
         super().__init__("Word of Glory", mana_cost=WordOfGlory.MANA_COST, holy_power_cost=WordOfGlory.HOLY_POWER_COST, max_charges=0, is_heal=True)
         if caster.ptr:
             self.SPELL_POWER_COEFFICIENT = 3.15 * 1.11
+            self.MANA_COST = 0.008
+            self.mana_cost = 0.008
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal): 
         # divine purpose
@@ -1575,7 +1577,7 @@ class WordOfGlory(Spell):
 class EternalFlame(Spell):
     
     SPELL_POWER_COEFFICIENT = 3.15 * 0.88
-    MANA_COST = 0.008
+    MANA_COST = 0.012
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
     
@@ -1583,6 +1585,8 @@ class EternalFlame(Spell):
         super().__init__("Eternal Flame", mana_cost=EternalFlame.MANA_COST, holy_power_cost=EternalFlame.HOLY_POWER_COST, max_charges=0, is_heal=True)
         if caster.ptr:
             self.SPELL_POWER_COEFFICIENT = 3.15 * 1.11
+            self.MANA_COST = 0.008
+            self.mana_cost = 0.008
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):   
         # divine purpose
@@ -1838,7 +1842,7 @@ class EternalFlame(Spell):
 class LightOfDawn(Spell):
     
     SPELL_POWER_COEFFICIENT = 0.8334 * 0.8
-    MANA_COST = 0.008
+    MANA_COST = 0.012
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
     TARGET_COUNT = 5
@@ -1847,6 +1851,8 @@ class LightOfDawn(Spell):
         super().__init__("Light of Dawn", mana_cost=LightOfDawn.MANA_COST, holy_power_cost=LightOfDawn.HOLY_POWER_COST, healing_target_count=LightOfDawn.TARGET_COUNT, is_heal=True)
         if caster.ptr:
             self.SPELL_POWER_COEFFICIENT = 0.8
+            self.MANA_COST = 0.008
+            self.mana_cost = 0.008
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):          
         bonus_crit = 0
