@@ -1291,6 +1291,10 @@ body {
     filter: grayscale(0.7) !important;
 }
 
+#earthen-dwarf-image {
+    display: none;
+}
+
 .external-buff-timer-input, .potion-timer-input {
     flex-grow: 0 !important;
     width: 100%;
