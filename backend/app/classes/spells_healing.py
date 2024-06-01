@@ -1314,7 +1314,7 @@ class FlashOfLight(Spell):
 # spenders
 class WordOfGlory(Spell):
     
-    SPELL_POWER_COEFFICIENT = 3.15 * 0.88
+    SPELL_POWER_COEFFICIENT = 3.15 * 0.88 * 1.15
     MANA_COST = 0.012
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
@@ -1841,7 +1841,7 @@ class EternalFlame(Spell):
             
 class LightOfDawn(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.8334 * 0.8
+    SPELL_POWER_COEFFICIENT = 0.8334 * 0.8 * 1.2
     MANA_COST = 0.012
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
