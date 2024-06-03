@@ -626,10 +626,15 @@ const updatePriorityList = () => {
     priorityListPastedCode = priorityList
 };
 
+const priorityListPresetsButton = document.getElementById("priority-list-presets-icon");
 const priorityListCopyButton = document.getElementById("priority-list-copy-icon");
+const priorityListPasteButton = document.getElementById("priority-list-paste-icon");
+const priorityListInfoButton = document.getElementById("priority-list-info-icon");
+
 const priorityListCopyNotification = document.getElementById("priority-list-copy-notification");
 priorityListCopyButton.addEventListener("click", () => {
     const priorityListString = priorityList.join("\n"); 
+    priorityListPasteButton.classList.remove("priority-list-icon-active");
 
     navigator.clipboard.writeText(priorityListString).then(() => {
         console.log("Priority list copied to clipboard");
@@ -642,11 +647,13 @@ priorityListCopyButton.addEventListener("click", () => {
     });
 });
 
-const priorityListPresetsButton = document.getElementById("priority-list-presets-icon");
 const priorityListPresetsModal = document.getElementById("priority-list-presets-modal");
 priorityListPresetsModal.style.display = "none";
 priorityListPresetsButton.addEventListener("mousedown", () => {
     priorityListPresetsModal.style.display = priorityListPresetsModal.style.display === "none" ? "flex" : "none";
+    priorityListPresetsButton.classList.toggle("priority-list-icon-active");
+    priorityListPasteButton.classList.remove("priority-list-icon-active");
+    priorityListInfoButton.classList.remove("priority-list-icon-active");
     if (priorityListPasteModal.style.display !== "none") {
         priorityListPasteModal.style.display = "none";
     };
@@ -737,12 +744,15 @@ clearPreset.addEventListener("click", () => {
     updatePriorityList();
 });
 
-const priorityListPasteButton = document.getElementById("priority-list-paste-icon");
 const priorityListPasteModal = document.getElementById("priority-list-paste-modal");
 const priorityListPasteModalTextarea = document.getElementById("priority-list-paste-modal-textarea");
 priorityListPasteModal.style.display = "none";
 priorityListPasteButton.addEventListener("mousedown", () => {
     priorityListPasteModal.style.display = priorityListPasteModal.style.display === "none" ? "flex" : "none";
+    priorityListPasteButton.classList.toggle("priority-list-icon-active");
+    priorityListPresetsButton.classList.remove("priority-list-icon-active");
+    priorityListInfoButton.classList.remove("priority-list-icon-active");
+
     const priorityListString = priorityList.join("\n"); 
     priorityListPasteModalTextarea.value = priorityListString;
     if (priorityListPresetsModal.style.display !== "none") {
@@ -760,6 +770,8 @@ priorityListPasteModalTextarea.addEventListener("input", (e) => {
 document.addEventListener("mousedown", (e) => {
     if (!priorityListPasteModal.contains(e.target) && e.target !== priorityListPasteButton && priorityListPasteModal.style.display !== "none") {
         priorityListPasteModal.style.display = "none";
+        priorityListPasteButton.classList.remove("priority-list-icon-active");
+        
         convertPasteToPriorityList(priorityListPastedCode);
         document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
             adjustTextareaHeight(itemText, 40);
@@ -773,6 +785,7 @@ document.addEventListener("mousedown", (e) => {
 
 document.getElementById("save-paste-modal-button").addEventListener("click", (e) => {
     priorityListPasteModal.style.display = "none";
+    priorityListPasteButton.classList.remove("priority-list-icon-active");
     convertPasteToPriorityList(priorityListPastedCode);
     document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
         adjustTextareaHeight(itemText, 40);
@@ -823,12 +836,16 @@ const makeDraggable = (modal, header) => {
 
 const priorityListPasteModalHeader = document.getElementById("priority-list-paste-modal-header");
 makeDraggable(priorityListPasteModal, priorityListPasteModalHeader);
+// const priorityListPresetsModalHeader = document.getElementById("priority-list-presets-modal-header");
+// makeDraggable(priorityListPresetsModal, priorityListPresetsModalHeader);
 
-const priorityListInfoButton = document.getElementById("priority-list-info-icon");
 const priorityListInfoModal = document.getElementById("priority-list-info-modal");
 priorityListInfoModal.style.display = "none";
 priorityListInfoButton.addEventListener("mousedown", () => {
     priorityListInfoModal.style.display = priorityListInfoModal.style.display === "none" ? "flex" : "none";
+    priorityListInfoButton.classList.toggle("priority-list-icon-active");
+    priorityListPresetsButton.classList.remove("priority-list-icon-active");
+    priorityListPasteButton.classList.remove("priority-list-icon-active");
     if (priorityListPresetsModal.style.display !== "none") {
         priorityListPresetsModal.style.display = "none";
     };
