@@ -81,7 +81,8 @@ const craftedItems = {
     "Signet of Titanic Insight": embellishmentsData,
     "Primal Molten Sabatons": embellishmentsData,
     "Primal Molten Breastplate": embellishmentsData,
-    "Torc of Passed Time": embellishmentsData
+    "Torc of Passed Time": embellishmentsData,
+    "Elemental Lariat": ""
 };
 
 const embellishmentItems = {
