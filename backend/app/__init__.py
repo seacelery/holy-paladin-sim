@@ -246,6 +246,7 @@ def run_simulation_task(self, simulation_parameters):
             simulation.update_final_cooldowns_breakdown_times()
             
             ability_breakdown = simulation.paladin.ability_breakdown
+            include_overhealing(ability_breakdown)
             self_buff_breakdown = simulation.paladin.self_buff_breakdown
             target_buff_breakdown = simulation.paladin.target_buff_breakdown
             glimmer_counts = simulation.paladin.glimmer_counts
