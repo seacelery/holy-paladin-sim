@@ -23,7 +23,7 @@ pp = pprint.PrettyPrinter(width=200)
 
 class Simulation:
     
-    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets, seasons, access_token, test=False):
+    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets, seasons, overhealing, access_token, test=False):
 
         self.access_token = access_token
 
@@ -43,6 +43,8 @@ class Simulation:
             action_name, parsed_conditions = parse_condition(item)
             condition_lambda = condition_to_lambda(self, parsed_conditions)
             self.priority_list.append((action_name, condition_lambda))
+            
+        self.overhealing = overhealing
         
         # make tick rate smaller for better hot accuracy
         self.tick_rate = float(tick_rate)

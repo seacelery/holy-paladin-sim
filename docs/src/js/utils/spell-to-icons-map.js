@@ -1,5 +1,6 @@
 const spellToIconsMap = {
     // paladin abilities
+    "Afterimage": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_aspiration.jpg",
     "Afterimage (Eternal Flame)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_aspiration.jpg",
     "Afterimage (Word of Glory)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_aspiration.jpg",
     "Arcane Torrent": "https://render.worldofwarcraft.com/eu/icons/56/spell_shadow_teleport.jpg",
@@ -10,9 +11,9 @@ const spellToIconsMap = {
     "Avenging Crusader (Crusader Strike)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusaderstrike.jpg",
     "Avenging Crusader (Judgment)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_righteousfury.jpg",
     "Barrier of Faith": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_barrieroffaith.jpg",
-    "Barrier of Faith (Holy Shock)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_barrieroffaith.jpg",
-    "Barrier of Faith (Flash of Light)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_barrieroffaith.jpg",
-    "Barrier of Faith (Holy Light)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_barrieroffaith.jpg",
+    "Barrier of Faith (Holy Shock)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_searinglight.jpg",
+    "Barrier of Faith (Flash of Light)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_flashheal.jpg",
+    "Barrier of Faith (Holy Light)": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_surgeoflight.jpg",
     "Beacon of Faith": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_beaconsoflight.jpg",
     "Beacon of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_beaconoflight.jpg",
     "Beacon of Virtue": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_beaconofinsight.jpg",
@@ -39,6 +40,7 @@ const spellToIconsMap = {
     "Flash of Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_flashheal.jpg",
     "Gift of the Naaru": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holyprotection.jpg",
     "Glimmer of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_toweroflight.jpg",
+    "Glimmer of Light (Daybreak)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_toweroflight.jpg",
     "Golden Path": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_cascade.jpg",
     "Greater Judgment": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_righteousfury.jpg",
     "Hammer of Wrath": "https://render.worldofwarcraft.com/eu/icons/56/spell_paladin_hammerofwrath.jpg",

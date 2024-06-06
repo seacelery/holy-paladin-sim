@@ -13,7 +13,7 @@ import { createDistributionBreakdown } from "./distribution-breakdown.js";
 import { createPriorityListDisplay, priorityList, addPotionToPriorityList, updatePriorityList, removePotionFromPriorityList } from "./priority-list-display.js";
 import { createLoadoutBreakdown } from "./loadout-breakdown.js";
 import { handleTabs } from "./simulation-options-tabs.js";
-import { setSimulationOptionsFromImportedData, generateBuffsConsumablesImages } from "./simulation-options.js";
+import { handleOverhealingAbilitiesModal, getOverhealingPercentages, setSimulationOptionsFromImportedData, generateBuffsConsumablesImages } from "./simulation-options.js";
 import { createTalentGrid, updateTalentsFromImportedData } from "./talent-grid.js";
 import { updateEquipmentFromImportedData, initialiseEquipment, generateFullItemData } from "./equipment-options.js";
 import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, makeFieldEditable, updateEquipmentWithEffectValues, createTooltip, addTooltipFunctionality } from "../utils/misc-functions.js";
@@ -535,7 +535,8 @@ const startSimulation = () => {
         resplendent_light_targets: document.getElementById("resplendent-light-option").value,
         priority_list: priorityList,
         custom_equipment: generateFullItemData()["equipment"],
-        seasons: seasons
+        seasons: seasons,
+        overhealing: getOverhealingPercentages()
     };
 
     simulationProgressBarContainer.removeEventListener("click", startSimulation);
@@ -1126,6 +1127,8 @@ importButton.addEventListener("click", async () => {
         consumables: currentConsumables
     });
 });
+
+handleOverhealingAbilitiesModal();
 
 const presetBuffsButton = document.getElementById("preset-buffs-button");
 presetBuffsButton.addEventListener("click", () => {

@@ -915,6 +915,7 @@ body {
 
 #options-container {
     display: flex;
+    position: relative;
 
     padding: 13px 0 0 35px;
 
@@ -1000,8 +1001,8 @@ body {
     left: 84px;
 }
 
-#cooldown-tracking-header {
-    margin-top: 65px;
+#miscellaneous-header, #cooldown-tracking-header {
+    margin-top: 45px;
 }
 
 .options-option {
@@ -1020,7 +1021,7 @@ body {
 }
 
 .option-checkbox-container {
-    display: block;
+    display: flex;
     position: relative;
     padding-left: 37px;
     padding-top: 1px;
@@ -1178,6 +1179,246 @@ body {
 .slider-value-minutes {
     min-width: 18px;
     text-align: right;
+}
+
+.checkbox-button-container {
+    display: flex;
+    width: 93%;
+}
+
+.overhealing-abilities-button {
+    margin-left: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 35px;
+    color: var(--light-font-colour);
+    font-size: 14px;
+    background-color: var(--button-colour);
+    box-shadow: 3px 5px 6px 0 rgba(36, 14, 25, 0.25);
+    border: 1px solid var(--border-colour-2);
+    border-radius: 4px;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.05s;
+}
+
+.overhealing-abilities-button:hover {
+    background-color: var(--panel-colour-4);
+    border: var(--border-colour-5);
+}
+
+.overhealing-abilities-button:active {
+    background-color: var(--hover-colour-light);
+    border: var(--border-colour-5);
+}
+
+#overhealing-abilities-modal {
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 120px;
+    right: 40px;
+    bottom: 0;
+    margin: auto;
+    width: 28.7%;
+    height: 440px;
+    user-select: none;
+    padding: 3px;
+    outline: none;
+    border: 1px solid var(--border-colour-3);
+    border-radius: 3px;
+    background-color: var(--panel-colour-table-3);
+    color: var(--light-font-colour);
+    font-size: 16px;
+    overflow: auto;
+}
+
+#overhealing-abilities-modal::-webkit-scrollbar-thumb {
+    border-left: 4px solid var(--panel-colour-table-3);
+}
+
+#overhealing-abilities-modal::-webkit-scrollbar-track {
+    background-color: var(--panel-colour-table-3);
+}
+
+#overhealing-abilities-modal-content {
+    width: 100%;
+    padding: 15px;
+}
+
+.overhealing-header {
+    display: flex;
+    margin-bottom: 10px;
+
+    font-size: 16px;
+    color: var(--light-font-colour);
+}
+
+#overhealing-notification {
+    font-size: 14px;
+    width: 250px;
+}
+
+#overhealing-modal-save-button {
+    position: absolute;
+    left: 15px;
+    top: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+
+    width: 60px;
+    height: 30px;
+
+    font-size: 17px;
+    color: var(--light-font-colour);
+
+    border: 1px solid var(--border-colour-2);
+    outline: none;
+    border-radius: 4px;
+
+    background-color: var(--button-colour);
+    box-shadow: 3px 5px 6px 0 rgba(36, 14, 25, 0.15);
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.05s;
+}
+
+#overhealing-modal-save-button:hover {
+    background-color: var(--panel-colour-4);
+    border: var(--border-colour-5);
+}
+
+#overhealing-modal-save-button:active {
+    background-color: var(--hover-colour-light);
+    border: var(--border-colour-5);
+}
+
+.overhealing-header-icons-container {
+    margin-left: auto;
+}
+
+#overhealing-percentages-modal {
+    display: none;
+    justify-content: center;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+
+    width: 100%;
+    height: 2200px; 
+}
+
+#overhealing-percentages-modal-content {
+    width: 90%;
+    /* height: 100%; */
+
+    background-color: var(--panel-colour-table-3);
+    /* border: 1px solid var(--border-colour-3); */
+    border: none;
+    outline: none;
+    color: var(--light-font-colour);
+    font-size: 14px;
+    resize: none;
+    line-height: 1.7;
+}
+
+#overhealing-header-paste-icon, #overhealing-header-copy-icon {
+    margin-right: 7px;
+    font-size: 20px;
+}
+
+.overhealing-header-icon-active {
+    color: var(--paladin-font);
+}
+
+#overhealing-header-paste-icon:hover, #overhealing-header-copy-icon:hover {
+    cursor: pointer;
+    user-select: none;
+
+    color: var(--paladin-font);
+    transition: color 0.1s ease-in-out;
+}
+
+#overhealing-header-copy-icon:active {
+    color: var(--dark-paladin-font);
+    transition: color 0.1s ease-in-out;
+}
+
+#overhealing-header-copy-notification {
+    opacity: 0;
+    position: fixed;
+    top: 35px;
+    left: calc(50% - 90px);
+    padding: 5px 3px;
+    border-radius: 4px;
+
+    width: 180px;
+
+    border: 1px solid var(--border-colour-3);
+    text-align: center;
+    color: var(--light-font-colour);
+    background-color: var(--panel-colour-2);
+    
+    z-index: 1000;
+    transition: 0.1s all ease-out;
+}
+
+.overhealing-modal-divider {
+    height: 1px;
+    margin-left: -1px;
+    margin-bottom: 15px;
+
+    background-color: var(--border-colour-3);
+}
+
+#overhealing-abilities-list, #overhealing-trinkets-list, #overhealing-miscellaneous-list {
+    margin-bottom: 20px;
+}
+
+.overhealing-item-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.overhealing-item-image {
+    height: 25px;
+    width: 25px;
+
+    border: 1px solid var(--border-colour-3);
+    border-radius: 2px;
+}
+
+.overhealing-item-text {
+    margin-left: 6px;
+    font-size: 14px;
+}
+
+.overhealing-item-input-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    font-size: 15px;
+}
+
+.overhealing-item-input {
+    text-align: right;
+    margin-left: auto;
+    max-width: 20px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--light-font-colour);
+    margin-right: 2px;
 }
 
 #blessing-of-the-seasons-checkboxes-container {
@@ -1339,6 +1580,7 @@ body {
 
     background-color: var(--button-colour);
     box-shadow: 3px 5px 6px 0 rgba(36, 14, 25, 0.15);
+    transition: all 0.05s;
 
     border: 1px solid var(--border-colour-2);
     border-radius: 4px;
@@ -2910,6 +3152,7 @@ body {
     align-items: center;
     justify-content: center;
     margin-top: -2px;
+    padding-top: 2px;
     padding-bottom: 2px;
 
     width: 18%;
@@ -2918,6 +3161,7 @@ body {
     font-size: 14px;
 
     background-color: var(--button-colour);
+    transition: all 0.05s;
 
     border: 1px solid var(--panel-colour-4);
     border-top-right-radius: 2px;
@@ -3004,7 +3248,7 @@ body {
     transition: color 0.1s ease-in-out;
 }
 
-#priority-list-copy-notification {
+#priority-list-copy-notification, .notification {
     opacity: 0;
     position: fixed;
     top: 35px;
@@ -3045,6 +3289,7 @@ body {
     box-shadow: 3px 5px 6px 0 rgba(36, 14, 25, 0.15);
     user-select: none;
     cursor: pointer;
+    transition: all 0.05s;
 }
 
 .save-paste-modal-button:hover {

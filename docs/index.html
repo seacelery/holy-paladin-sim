@@ -133,9 +133,39 @@
                         </div>
                     </div>
                     
+                    <div id="overhealing-notification" class="notification">Overhealing percentages copied!</div>
                     <div id="options-window">
                         <div id="options-content" class="options-tab-content">
                             <div id="options-container">
+                                <div id="overhealing-abilities-modal">
+                                    <div id="overhealing-abilities-modal-content">
+                                        <div id="overhealing-abilities-list">
+                                            <div class="overhealing-header">
+                                                <span id="overhealing-modal-header">Abilities</span>
+                                                <button id="overhealing-modal-save-button">Save</button>
+                                                <div class="overhealing-header-icons-container">
+                                                    <i class="fa-solid fa-copy" id="overhealing-header-copy-icon"></i>                                           
+                                                    <i class="fa-solid fa-paste" id="overhealing-header-paste-icon"></i>
+                                                </div>
+                                                <div id="overhealing-percentages-modal">
+                                                    <textarea id="overhealing-percentages-modal-content"></textarea>
+                                                </div>
+                                            </div>                                           
+                                            <div class="overhealing-modal-divider"></div>
+                                        </div>
+                                        
+                                        <div id="overhealing-trinkets-list">
+                                            <div class="overhealing-header">Trinkets</div>
+                                            <div class="overhealing-modal-divider"></div>
+                                        </div>
+
+                                        <div id="overhealing-miscellaneous-list">
+                                            <div class="overhealing-header">Miscellaneous</div>
+                                            <div class="overhealing-modal-divider"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="options-half options-half-left">
                                     <div class="options-header">Encounter</div>
                                     <div class="options-divider"></div>
@@ -268,18 +298,16 @@
                                 </div>
                                 
                                 <div class="options-half options-half-right">
-                                    <div class="options-header">Miscellaneous</div>
+                                    <div class="options-header" id="overhealing-header">Overhealing</div>
                                     <div class="options-divider"></div>
 
-                                    <label class="option-checkbox-container">Show Healing Graph
-                                        <input type="checkbox" id="hide-healing-graph-option" class="option-checkbox" checked="checked">                                                        
-                                        <span class="options-checkbox-checkmark"></span>                                      
-                                    </label>
-
-                                    <label class="option-checkbox-container">Show Resource Graphs
-                                        <input type="checkbox" id="hide-resource-graph-option" class="option-checkbox" checked="checked">                                                        
-                                        <span class="options-checkbox-checkmark"></span>                                      
-                                    </label>
+                                    <div class="checkbox-button-container">
+                                        <label class="option-checkbox-container">Enable Overhealing
+                                            <input type="checkbox" id="enable-overhealing-option" class="option-checkbox" checked="checked">                                                        
+                                            <span class="options-checkbox-checkmark"></span>                                                                   
+                                        </label>
+                                        <div class="overhealing-abilities-button">Abilities</div>                              
+                                    </div>
 
                                     <div class="options-header" id="cooldown-tracking-header">Cooldown Tracking</div>
                                     <div class="options-divider"></div>
@@ -301,6 +329,19 @@
 
                                     <label class="option-checkbox-container cooldown-tracking-option" id="cooldown-tracking-blessing-of-spring-option">Blessing of Spring
                                         <input type="checkbox" class="option-checkbox cooldown-tracking-checkbox" id="cooldown-tracking-blessing-of-spring-checkbox" checked="checked">                                                        
+                                        <span class="options-checkbox-checkmark"></span>                                      
+                                    </label>
+
+                                    <div class="options-header" id="miscellaneous-header">Miscellaneous</div>
+                                    <div class="options-divider"></div>
+
+                                    <label class="option-checkbox-container">Show Healing Graph
+                                        <input type="checkbox" id="hide-healing-graph-option" class="option-checkbox" checked="checked">                                                        
+                                        <span class="options-checkbox-checkmark"></span>                                      
+                                    </label>
+
+                                    <label class="option-checkbox-container">Show Resource Graphs
+                                        <input type="checkbox" id="hide-resource-graph-option" class="option-checkbox" checked="checked">                                                        
                                         <span class="options-checkbox-checkmark"></span>                                      
                                     </label>
                                 </div>

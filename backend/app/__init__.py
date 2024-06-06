@@ -78,7 +78,8 @@ def register_socketio_events(socketio):
             "light_of_dawn_targets": int(data['light_of_dawn_targets']),
             "lights_hammer_targets": int(data['lights_hammer_targets']),
             "resplendent_light_targets": int(data['resplendent_light_targets']),
-            "seasons": data["seasons"]
+            "seasons": data["seasons"],
+            "overhealing": data["overhealing"]
         }
 
         result = run_simulation_task.delay(simulation_parameters=simulation_params)
@@ -137,10 +138,6 @@ def check_cancellation(task_id):
 
 @celery.task(bind=True)
 def run_simulation_task(self, simulation_parameters): 
-    # memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    # print(f"Memory Usage: {memory_usage} KB")
-    # sys.stdout.flush()
-    
     try:
         redis = current_app.redis
         task_id = self.request.id
@@ -279,6 +276,32 @@ def run_simulation_task(self, simulation_parameters):
             # accumulate awakening trigger results
             for key, value in simulation.paladin.awakening_trigger_times.items():
                 full_awakening_trigger_times_results[key] = full_awakening_trigger_times_results.get(key, 0) + value
+                
+            # INCLUDE OVERHEALING
+            def include_overhealing(ability_breakdown):        
+                if not simulation.overhealing:
+                    return
+                
+                for spell in ability_breakdown:
+                    if ability_breakdown[spell]["sub_spells"]:
+                        for sub_spell in ability_breakdown[spell]["sub_spells"]:
+                            if ability_breakdown[spell]["sub_spells"][sub_spell]["sub_spells"]:
+                                for nested_sub_spell in ability_breakdown[spell]["sub_spells"][sub_spell]["sub_spells"]:
+                                    if nested_sub_spell in simulation.overhealing:
+                                        ability_breakdown[spell]["sub_spells"][sub_spell]["sub_spells"][nested_sub_spell]["total_healing"] *= 1 - simulation.overhealing[nested_sub_spell]  
+                            elif sub_spell in simulation.overhealing:
+                                ability_breakdown[spell]["sub_spells"][sub_spell]["total_healing"] *= 1 - simulation.overhealing[sub_spell]
+                    elif spell in simulation.overhealing:
+                        ability_breakdown[spell]["total_healing"] *= 1 - simulation.overhealing[spell]
+                            
+                for sub_spell in simulation.overhealing:
+                    if sub_spell not in ability_breakdown:
+                        for main_spell in ability_breakdown:
+                            if sub_spell in ability_breakdown[main_spell]["sub_spells"]:
+                                ability_breakdown[main_spell]["sub_spells"][sub_spell]["total_healing"] *= 1 - simulation.overhealing[sub_spell]
+                            for nested_sub_spell in ability_breakdown[main_spell]["sub_spells"]:
+                                if sub_spell in ability_breakdown[main_spell]["sub_spells"][nested_sub_spell]["sub_spells"]:
+                                    ability_breakdown[main_spell]["sub_spells"][nested_sub_spell]["sub_spells"][sub_spell]["total_healing"] *= 1 - simulation.overhealing[sub_spell]
             
             # PROCESS ABILITY HEALING
             def add_sub_spell_healing(primary_spell_data):
@@ -302,7 +325,7 @@ def run_simulation_task(self, simulation_parameters):
 
                 for spell, data in beacon_sources.items():
                     if spell.startswith(prefix):
-                        combined_source["healing"] += data["healing"]
+                        combined_source["healing"] += data["healing"] * simulation.overhealing["Beacon of Light"]
                         combined_source["hits"] += data["hits"]
                         keys_to_delete.append(spell)
 
