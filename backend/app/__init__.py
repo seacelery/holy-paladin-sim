@@ -209,15 +209,37 @@ def run_simulation_task(self, simulation_parameters):
                 "Eternal Flame (HoT)": "Eternal Flame",
                 "Sacred Weapon 1": "Sacred Weapon",
                 "Sacred Weapon 2": "Sacred Weapon"
-            }
+        }
+        
+        def include_overhealing(ability_breakdown):        
+            if not simulation.overhealing:
+                return
+            
+            for spell in ability_breakdown:
+                if ability_breakdown[spell]["sub_spells"]:
+                    for sub_spell in ability_breakdown[spell]["sub_spells"]:
+                        if ability_breakdown[spell]["sub_spells"][sub_spell]["sub_spells"]:
+                            for nested_sub_spell in ability_breakdown[spell]["sub_spells"][sub_spell]["sub_spells"]:
+                                if nested_sub_spell in simulation.overhealing:
+                                    ability_breakdown[spell]["sub_spells"][sub_spell]["sub_spells"][nested_sub_spell]["total_healing"] *= 1 - simulation.overhealing[nested_sub_spell]  
+                        elif sub_spell in simulation.overhealing:
+                            ability_breakdown[spell]["sub_spells"][sub_spell]["total_healing"] *= 1 - simulation.overhealing[sub_spell]
+                elif spell in simulation.overhealing:
+                    ability_breakdown[spell]["total_healing"] *= 1 - simulation.overhealing[spell]
+                        
+            for sub_spell in simulation.overhealing:
+                if sub_spell not in ability_breakdown:
+                    for main_spell in ability_breakdown:
+                        if sub_spell in ability_breakdown[main_spell]["sub_spells"]:
+                            ability_breakdown[main_spell]["sub_spells"][sub_spell]["total_healing"] *= 1 - simulation.overhealing[sub_spell]
+                        for nested_sub_spell in ability_breakdown[main_spell]["sub_spells"]:
+                            if sub_spell in ability_breakdown[main_spell]["sub_spells"][nested_sub_spell]["sub_spells"]:
+                                ability_breakdown[main_spell]["sub_spells"][nested_sub_spell]["sub_spells"][sub_spell]["total_healing"] *= 1 - simulation.overhealing[sub_spell]
         
         # complete all simulation iterations and process the data of each
         for i in range(simulation.iterations):
-            print(simulation.paladin.seasons)
             sys.stdout.flush()
-            # memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-            # print(f"Memory Usage: {memory_usage} KB on iteration {i}")
-            # sys.stdout.flush()
+
             if redis.get(f'cancel_task_{task_id}'):
                 print("Cancellation requested")
                 reset_simulation()
@@ -277,32 +299,6 @@ def run_simulation_task(self, simulation_parameters):
             # accumulate awakening trigger results
             for key, value in simulation.paladin.awakening_trigger_times.items():
                 full_awakening_trigger_times_results[key] = full_awakening_trigger_times_results.get(key, 0) + value
-                
-            # INCLUDE OVERHEALING
-            def include_overhealing(ability_breakdown):        
-                if not simulation.overhealing:
-                    return
-                
-                for spell in ability_breakdown:
-                    if ability_breakdown[spell]["sub_spells"]:
-                        for sub_spell in ability_breakdown[spell]["sub_spells"]:
-                            if ability_breakdown[spell]["sub_spells"][sub_spell]["sub_spells"]:
-                                for nested_sub_spell in ability_breakdown[spell]["sub_spells"][sub_spell]["sub_spells"]:
-                                    if nested_sub_spell in simulation.overhealing:
-                                        ability_breakdown[spell]["sub_spells"][sub_spell]["sub_spells"][nested_sub_spell]["total_healing"] *= 1 - simulation.overhealing[nested_sub_spell]  
-                            elif sub_spell in simulation.overhealing:
-                                ability_breakdown[spell]["sub_spells"][sub_spell]["total_healing"] *= 1 - simulation.overhealing[sub_spell]
-                    elif spell in simulation.overhealing:
-                        ability_breakdown[spell]["total_healing"] *= 1 - simulation.overhealing[spell]
-                            
-                for sub_spell in simulation.overhealing:
-                    if sub_spell not in ability_breakdown:
-                        for main_spell in ability_breakdown:
-                            if sub_spell in ability_breakdown[main_spell]["sub_spells"]:
-                                ability_breakdown[main_spell]["sub_spells"][sub_spell]["total_healing"] *= 1 - simulation.overhealing[sub_spell]
-                            for nested_sub_spell in ability_breakdown[main_spell]["sub_spells"]:
-                                if sub_spell in ability_breakdown[main_spell]["sub_spells"][nested_sub_spell]["sub_spells"]:
-                                    ability_breakdown[main_spell]["sub_spells"][nested_sub_spell]["sub_spells"][sub_spell]["total_healing"] *= 1 - simulation.overhealing[sub_spell]
             
             # PROCESS ABILITY HEALING
             def add_sub_spell_healing(primary_spell_data):
