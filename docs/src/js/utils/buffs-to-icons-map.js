@@ -5,7 +5,7 @@ const buffsToIconsMap = {
     "Avenging Crusader": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_veneration.jpg",
     "Avenging Crusader (Awakening)": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_veneration.jpg",
     "Avenging Wrath": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_avenginewrath.jpg",
-    "Avenging Wrath (Awakening)": "custom-icons/avenging-wrath-awakening.png",
+    "Avenging Wrath (Awakening)": "docs/public/custom-icons/avenging-wrath-awakening.png",
     "Awakening": "https://render.worldofwarcraft.com/eu/icons/56/inv_helm_plate_raidpaladin_n_01.jpg",
     "Awakening Ready": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_judgementofthepure.jpg",
     "Barrier of Faith": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_barrieroffaith.jpg",
