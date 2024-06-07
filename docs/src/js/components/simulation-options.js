@@ -252,6 +252,11 @@ const handleOverhealingAbilitiesModal = () => {
 };
 
 const getOverhealingPercentages = () => {
+    const overhealingCheckbox = document.getElementById("enable-overhealing-option");
+    if (!overhealingCheckbox.checked) {
+        return {};
+    };
+
     const percentages = {};
 
     const overhealingItems = document.querySelectorAll(".overhealing-item-container");
@@ -260,25 +265,27 @@ const getOverhealingPercentages = () => {
         const percentage = Number(item.querySelector(".overhealing-item-input").value) / 100;
         percentages[name] = percentage;
 
-        if (name.includes("Glimmer of Light")) {
+
+        if (name === "Glimmer of Light") {
             percentages["Glimmer of Light (Divine Toll)"] = percentage;
             percentages["Glimmer of Light (Rising Sunlight)"] = percentage;
             percentages["Glimmer of Light (Glistening Radiance (Light of Dawn))"] = percentage;
             percentages["Glimmer of Light (Glistening Radiance (Word of Glory))"] = percentage;
         };
 
-        if (name.includes("Sacred Weapon")) {
+        if (name === "Sacred Weapon") {
             percentages["Sacred Weapon 1"] = percentage;
             percentages["Sacred Weapon 2"] = percentage;
         };
 
-        if (name.includes("Afterimage")) {
+        if (name === "Afterimage") {
             percentages["Afterimage (Word of Glory)"] = percentage;
             percentages["Afterimage (Eternal Flame)"] = percentage;
             percentages["Afterimage"] = 0;
         };
     });
 
+    console.log(percentages)
     return percentages;
 };
 
