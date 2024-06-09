@@ -1007,9 +1007,9 @@ class HolyLight(Spell):
         # infusion of light & inflorescence of the sunwell
         if "Infusion of Light" in caster.active_auras:  
             if caster.ptr and caster.is_talent_active("Inflorescence of the Sunwell"):
-                self.spell_healing_modifier *= 2.4
+                self.spell_healing_modifier *= 2.5
             elif caster.ptr:
-                self.spell_healing_modifier *= 1.9
+                self.spell_healing_modifier *= 2
         
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         resplendent_light_healing = 0
@@ -1086,9 +1086,9 @@ class HolyLight(Spell):
                 
                 # handle inflorescence of the sunwell
                 if caster.ptr and caster.is_talent_active("Inflorescence of the Sunwell"):
-                    self.spell_healing_modifier /= 2.4
+                    self.spell_healing_modifier /= 2.5
                 elif caster.ptr:
-                    self.spell_healing_modifier /= 1.9
+                    self.spell_healing_modifier /= 2
                 else:
                     caster.infused_holy_light_count += 1
 
