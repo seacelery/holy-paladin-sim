@@ -168,7 +168,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     const header = table.createTHead();
     header.id = `table-headers-${containerCount}`;
     const headerRow = header.insertRow(0);
-    const headers = ["Spell Name", "%", "Healing", "HPS", "Casts", "Average", "Hits", "Crit %", "Mana Spent", "Holy Power", "CPM"];
+    const headers = ["Spell Name", "%", "Healing", "HPS", "Casts", "Average", "Hits", "Crit %", "Mana Spent", "Holy Power", "CPM", "OH %"];
     headers.forEach((text, index) => {
         const cell = headerRow.insertCell(index);
         cell.textContent = text;
@@ -318,6 +318,8 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     let overallHolyPower = 0;
     let overallCPM = 0;
 
+    console.log(sortedAbilityBreakdownData)
+
     // overall required for some cells in the main table
     for (const spellName in sortedAbilityBreakdownData) {
         const spellData = sortedAbilityBreakdownData[spellName];
@@ -436,7 +438,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         
         const healingCell = row.insertCell();
         healingCell.className = "table-cell-right healing-cell";
-        if (excludedSpellsOnlyResourcesAndCasts.includes(spellName)) {
+        if (excludedSpellsOnlyResourcesAndCasts.includes(spellName) ) {
             healingCell.textContent = "";
         } else {
             healingCell.textContent = formatNumbers(spellData.total_healing);
@@ -499,7 +501,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         } else {
             critPercentCell.textContent = (spellData.crit_percent).toFixed(1) + "%";
         };
-
+        
         const manaSpentCell = row.insertCell();
         manaSpentCell.className = "table-cell-right mana-spent-cell";
         manaSpentCell.textContent = formatNumbers(spellData.mana_spent);
@@ -529,6 +531,12 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         CPMCell.className = "table-cell-right CPM-cell";
         if (spellData.casts > 0) {
             CPMCell.textContent = (spellData.casts / (encounterLength / 60)).toFixed(1);
+        };
+
+        const overhealingPercentCell = row.insertCell();
+        overhealingPercentCell.className = "table-cell-right";
+        if (spellData.overhealing) {
+            overhealingPercentCell.textContent = (spellData.overhealing * 100).toFixed(1) + "%";
         };
         
         // BEACON SOURCES
@@ -609,10 +617,12 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
 
             const CPMCell = sourceSpellRow.insertCell();
             CPMCell.className = "table-sub-cell-right CPM-cell";
+
+            const overhealingPercentCell = sourceSpellRow.insertCell();
+            overhealingPercentCell.className = "table-cell-right";
             };
         };
         
-
         // SUB SPELLS
         for (const subSpellName in spellData["sub_spells"]) {
             if (excludedSpells.includes(subSpellName)) {
@@ -779,6 +789,12 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
                 CPMCell.textContent = (subSpellData.casts / (encounterLength / 60)).toFixed(1);
             };
 
+            const overhealingPercentCell = subRow.insertCell();
+            overhealingPercentCell.className = "table-sub-cell-right overhealing-cell";
+            if (subSpellData.overhealing) {
+                overhealingPercentCell.textContent = (subSpellData.overhealing * 100).toFixed(1)  + "%";
+            };
+
             // SUB SUB SPELLS
             for (const subSubSpellName in spellData["sub_spells"][subSpellName]["sub_spells"]) {
                 const subSubSpellData = spellData["sub_spells"][subSpellName]["sub_spells"][subSubSpellName];
@@ -882,6 +898,12 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
                 if (subSubSpellData.casts > 0) {
                     CPMCell.textContent = (subSubSpellData.casts / (encounterLength / 60)).toFixed(1);
                 };
+
+                const overhealingPercentCell = subRow.insertCell();
+                overhealingPercentCell.className = "table-sub-sub-cell-right overhealing-cell";
+                if (subSubSpellData.overhealing) {
+                    overhealingPercentCell.textContent = (subSubSpellData.overhealing * 100).toFixed(1)  + "%";
+                };
             };
         };
     };
@@ -940,6 +962,10 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     overallCPMCell.className = "table-cell-bottom-right";
     overallCPMCell.textContent = overallCPM.toFixed(1);
     overallCPMCell.style.fontWeight = 500;
+
+    const overallOverhealingCell = row.insertCell(11);
+    overallOverhealingCell.id = `overall-overhealing-cell-${containerCount}`;
+    overallOverhealingCell.className = "table-cell-bottom-right";
 
     // append
     const tableWrapper = createElement("div", "table-wrapper", `ability-table-wrapper-${containerCount}`);

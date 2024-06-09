@@ -4388,7 +4388,7 @@ tr {
     position: relative;
     padding: 5px 5px 5px 5px;
 
-    min-width: 75px;
+    min-width: 65px;
     height: 60px;
     border-left: 1px solid var(--border-colour-3);
 
@@ -4437,6 +4437,7 @@ tr {
 }
 
 .table-cell-right {
+    padding-left: 6px;
     padding-right: 6px;
     padding-top: 1px;
 
@@ -4578,6 +4579,8 @@ tr {
     max-width: 75px;
 }
 
+
+
 .mana-spent-cell, .mana-gained-cell {
     color: var(--mana);
 }
@@ -4705,7 +4708,7 @@ tr {
     background-color: var(--panel-colour-table-5);
 }
 
-[id^="overall-healing-percent-cell-"], [id^="overall-mana-gained-cell-"], [id^="overall-holy-power-gained-cell-"], [id^="overall-holy-power-spent-cell-"], [id^="overall-holy-power-wasted-cell-"], [id^="overall-CPM-cell"] {
+[id^="overall-healing-percent-cell-"], [id^="overall-mana-gained-cell-"], [id^="overall-holy-power-gained-cell-"], [id^="overall-holy-power-spent-cell-"], [id^="overall-holy-power-wasted-cell-"], [id^="overall-CPM-cell"], [id^="overall-overhealing-cell"] {
     border-left: 1px solid var(--border-colour-3);
 }
 
