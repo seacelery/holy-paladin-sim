@@ -989,6 +989,10 @@ class HolyLight(Spell):
             
         if caster.ptr:
             self.base_cast_time = 2
+            
+        if caster.ptr:
+            self.MANA_COST = 0.048
+            self.mana_cost = 0.048
     
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # tyr's deliverance
@@ -2148,6 +2152,8 @@ class MercifulAurasHeal(Spell):
     
     def __init__(self, caster):
         super().__init__("Merciful Auras", off_gcd=True)
+        if caster.ptr:
+            self.SPELL_POWER_COEFFICIENT = 0.1724 * 0.8
         
     
 class SavedByTheLightHeal(Spell):
