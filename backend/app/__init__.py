@@ -240,6 +240,41 @@ def run_simulation_task(self, simulation_parameters):
                             if sub_spell in ability_breakdown[main_spell]["sub_spells"][nested_sub_spell]["sub_spells"]:
                                 ability_breakdown[main_spell]["sub_spells"][nested_sub_spell]["sub_spells"][sub_spell]["total_healing"] *= 1 - simulation.overhealing[sub_spell]
                                 ability_breakdown[main_spell]["sub_spells"][nested_sub_spell]["sub_spells"][sub_spell]["overhealing"] = simulation.overhealing[sub_spell]
+                                
+        def adjust_overhealing(ability_breakdown):
+            if not simulation.overhealing:
+                return
+            
+            for spell in ability_breakdown:
+                if ability_breakdown[spell]["sub_spells"]:
+                    for sub_spell in ability_breakdown[spell]["sub_spells"]:
+                        if spell == sub_spell:
+                            ability_breakdown[spell]["overhealing"] = 0
+                            ability_breakdown[spell]["sub_spells"][sub_spell]["overhealing"] = simulation.overhealing[spell]
+                        # if ability_breakdown[spell]["sub_spells"][sub_spell]["sub_spells"]:
+                        #     for nested_sub_spell in ability_breakdown[spell]["sub_spells"][sub_spell]["sub_spells"]:
+                        #         if sub_spell == nested_sub_spell:
+                        #             ability_breakdown[spell]["sub_spells"][sub_spell]["overhealing"] = 0
+                        #             ability_breakdown[spell]["sub_spells"][sub_spell]["sub_spells"][nested_sub_spell]["overhealing"] = simulation.overhealing[sub_spell]
+                        
+            for spell in ability_breakdown:
+                if ability_breakdown[spell]["sub_spells"]:
+                    total_overhealing = 0
+                    total_overheal_percent = 0
+                    for sub_spell in ability_breakdown[spell]["sub_spells"]:
+                        if sub_spell in simulation.overhealing:
+                            overhealing = ability_breakdown[spell]["sub_spells"][sub_spell]["total_healing"] / (1 - simulation.overhealing[sub_spell]) - ability_breakdown[spell]["sub_spells"][sub_spell]["total_healing"]
+                            total_overhealing += overhealing
+                    
+                    for sub_spell in ability_breakdown[spell]["sub_spells"]:
+                        if sub_spell in simulation.overhealing:                   
+                            overhealing = ability_breakdown[spell]["sub_spells"][sub_spell]["total_healing"] / (1 - simulation.overhealing[sub_spell]) - ability_breakdown[spell]["sub_spells"][sub_spell]["total_healing"]
+                            total_overheal_percent += overhealing / (ability_breakdown[spell]["total_healing"] + total_overhealing)
+                        
+                    ability_breakdown[spell]["overhealing"] = total_overheal_percent 
+            
+            for source_spell in ability_breakdown["Beacon of Light"]["source_spells"]:
+                ability_breakdown["Beacon of Light"]["source_spells"][source_spell]["healing"] *= 1 - simulation.overhealing.get("Beacon of Light", 0)
         
         # complete all simulation iterations and process the data of each
         for i in range(simulation.iterations):
@@ -520,13 +555,7 @@ def run_simulation_task(self, simulation_parameters):
                     if spell in ability_breakdown[spell]["sub_spells"]:
                         del ability_breakdown[spell]["sub_spells"][spell]
                         
-            # fix overhealing for spells that are spells and sub spells
-            for spell in ability_breakdown:
-                if ability_breakdown[spell]["sub_spells"]:
-                    for sub_spell in ability_breakdown[spell]["sub_spells"]:
-                        if spell == sub_spell:
-                            ability_breakdown[spell]["overhealing"] = 0
-                            ability_breakdown[spell]["sub_spells"][sub_spell]["overhealing"] = simulation.overhealing[spell]
+            adjust_overhealing(ability_breakdown)
             
             # PROCESS BUFFS                
             def process_buff_data(events):
