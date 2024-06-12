@@ -98,7 +98,7 @@ class TyrsDeliveranceHeal(Spell):
     def __init__(self, caster):
         super().__init__("Tyr's Deliverance", is_heal=True, off_gcd=True)
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 0.57461
+            self.SPELL_POWER_COEFFICIENT = 0.35
             
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)

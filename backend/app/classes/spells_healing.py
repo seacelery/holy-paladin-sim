@@ -45,6 +45,10 @@ class HolyShock(Spell):
         if caster.ptr:
             self.SPELL_POWER_COEFFICIENT = 1.4736
             
+        if caster.ptr:
+            self.BASE_COOLDOWN = 9.5
+            self.cooldown = 9.5
+            
         # light's conviction
         if caster.is_talent_active("Light's Conviction"):
             self.max_charges = 2
@@ -74,7 +78,10 @@ class HolyShock(Spell):
         
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            self.spell_healing_modifier *= 1.15
+            if caster.ptr:
+                self.spell_healing_modifier *= 1.1
+            else:
+                self.spell_healing_modifier *= 1.15
             
         # reclamation
         if caster.is_talent_active("Reclamation"):
@@ -135,7 +142,11 @@ class HolyShock(Spell):
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                self.spell_healing_modifier /= 1.15
+                if caster.ptr:
+                    self.spell_healing_modifier /= 1.1
+                else:
+                    self.spell_healing_modifier /= 1.15
+                    
                 if caster.is_talent_active("Boundless Salvation"):
                     if "Tyr's Deliverance (self)" in caster.active_auras:
                         if caster.tyrs_deliverance_extended_by <= 38:
@@ -385,7 +396,10 @@ class RisingSunlightHolyShock(Spell):
         
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            self.spell_healing_modifier *= 1.15
+            if caster.ptr:
+                self.spell_healing_modifier *= 1.1
+            else:
+                self.spell_healing_modifier *= 1.15
             
         # reclamation
         if caster.is_talent_active("Reclamation"):
@@ -446,7 +460,11 @@ class RisingSunlightHolyShock(Spell):
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                self.spell_healing_modifier /= 1.15
+                if caster.ptr:
+                    self.spell_healing_modifier /= 1.1
+                else:
+                    self.spell_healing_modifier /= 1.15
+                    
                 if caster.is_talent_active("Boundless Salvation"):
                     if "Tyr's Deliverance (self)" in caster.active_auras:
                         if caster.tyrs_deliverance_extended_by <= 38:
@@ -629,7 +647,10 @@ class DivineTollHolyShock(Spell):
 
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            self.spell_healing_modifier *= 1.15
+            if caster.ptr:
+                self.spell_healing_modifier *= 1.1
+            else:
+                self.spell_healing_modifier *= 1.15
             
         # reclamation
         if caster.is_talent_active("Reclamation"):
@@ -691,7 +712,11 @@ class DivineTollHolyShock(Spell):
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                self.spell_healing_modifier /= 1.15
+                if caster.ptr:
+                    self.spell_healing_modifier /= 1.1
+                else:
+                    self.spell_healing_modifier /= 1.15
+                    
                 if caster.is_talent_active("Boundless Salvation"):
                     if "Tyr's Deliverance (self)" in caster.active_auras:
                         if caster.tyrs_deliverance_extended_by <= 38:
@@ -841,7 +866,10 @@ class DivineResonanceHolyShock(Spell):
         
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            self.spell_healing_modifier *= 1.15
+            if caster.ptr:
+                self.spell_healing_modifier *= 1.1
+            else:
+                self.spell_healing_modifier *= 1.15
             
         # reclamation
         if caster.is_talent_active("Reclamation"):
@@ -902,7 +930,11 @@ class DivineResonanceHolyShock(Spell):
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                self.spell_healing_modifier /= 1.15
+                if caster.ptr:
+                    self.spell_healing_modifier /= 1.1
+                else:
+                    self.spell_healing_modifier /= 1.15
+                    
                 if caster.is_talent_active("Boundless Salvation"):
                     if "Tyr's Deliverance (self)" in caster.active_auras:
                         if caster.tyrs_deliverance_extended_by <= 38:
@@ -1000,7 +1032,10 @@ class HolyLight(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            self.spell_healing_modifier *= 1.15
+            if caster.ptr:
+                self.spell_healing_modifier *= 1.1
+            else:
+                self.spell_healing_modifier *= 1.15
         
         # awestruck   
         self.bonus_crit_healing = 0   
@@ -1062,7 +1097,10 @@ class HolyLight(Spell):
                 # add beacon healing here
             
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                self.spell_healing_modifier /= 1.15
+                if caster.ptr:
+                    self.spell_healing_modifier /= 1.1
+                else:
+                    self.spell_healing_modifier /= 1.15
                 
                 # boundless salvation
                 if caster.is_talent_active("Boundless Salvation"):
@@ -1190,7 +1228,10 @@ class FlashOfLight(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            self.spell_healing_modifier *= 1.15
+            if caster.ptr:
+                self.spell_healing_modifier *= 1.1
+            else:
+                self.spell_healing_modifier *= 1.15
             
         # moment of compassion
         if caster.is_talent_active("Moment of Compassion"):
@@ -1230,7 +1271,10 @@ class FlashOfLight(Spell):
                     caster.blessing_of_dawn_counter = 0
             
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                self.spell_healing_modifier /= 1.15
+                if caster.ptr:
+                    self.spell_healing_modifier /= 1.1
+                else:
+                    self.spell_healing_modifier /= 1.15
                 
                 # boundless salvation
                 if caster.is_talent_active("Boundless Salvation"):
@@ -1332,7 +1376,7 @@ class WordOfGlory(Spell):
     def __init__(self, caster):
         super().__init__("Word of Glory", mana_cost=WordOfGlory.MANA_COST, holy_power_cost=WordOfGlory.HOLY_POWER_COST, max_charges=0, is_heal=True)
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 3.15 * 1.02 * 1.15
+            self.SPELL_POWER_COEFFICIENT = 3.15 * 1.45
             self.MANA_COST = 0.008
             self.mana_cost = 0.008
         
@@ -1594,7 +1638,7 @@ class EternalFlame(Spell):
     def __init__(self, caster):
         super().__init__("Eternal Flame", mana_cost=EternalFlame.MANA_COST, holy_power_cost=EternalFlame.HOLY_POWER_COST, max_charges=0, is_heal=True)
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 3.15 * 1.11
+            self.SPELL_POWER_COEFFICIENT = 3.15 * 1.45
             self.MANA_COST = 0.008
             self.mana_cost = 0.008
         
@@ -1860,7 +1904,7 @@ class LightOfDawn(Spell):
     def __init__(self, caster):
         super().__init__("Light of Dawn", mana_cost=LightOfDawn.MANA_COST, holy_power_cost=LightOfDawn.HOLY_POWER_COST, healing_target_count=LightOfDawn.TARGET_COUNT, is_heal=True)
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 0.8
+            self.SPELL_POWER_COEFFICIENT = 0.98
             self.MANA_COST = 0.008
             self.mana_cost = 0.008
         
@@ -2099,7 +2143,7 @@ class HolyPrism(Spell):
             self.holy_power_gain = 1
             
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 2.0384
+            self.SPELL_POWER_COEFFICIENT = 2.4
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
