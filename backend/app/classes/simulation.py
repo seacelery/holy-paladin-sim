@@ -378,6 +378,19 @@ class Simulation:
                 if saved_by_the_light.timer >= 70:
                     saved_by_the_light.trigger_passive_heal(self.paladin, self.elapsed_time)
                     saved_by_the_light.timer = 0
+                    
+        if self.paladin.ptr and self.paladin.is_talent_active("Sun's Avatar"):
+            if "Avenging Wrath" in self.paladin.active_auras or "Avenging Crusader" in self.paladin.active_auras or "Avenging Wrath (Awakening)" in self.paladin.active_auras or "Avenging Crusader (Awakening)" in self.paladin.active_auras:
+                suns_avatar_count = len([target for target in self.paladin.potential_healing_targets if "Sun's Avatar" in target.target_active_buffs])
+                target_count = 5 * suns_avatar_count
+                
+                if suns_avatar_count > 0:
+                    suns_avatar = self.paladin.active_auras["Sun's Avatar Active"]
+                    suns_avatar.timer += self.tick_rate
+                    
+                    if suns_avatar.timer >= 0.5:
+                        suns_avatar.trigger_passive_heal(self.paladin, self.elapsed_time, target_count)
+                        suns_avatar.timer = 0
             
         
     def increment_effects_with_additional_triggers(self):

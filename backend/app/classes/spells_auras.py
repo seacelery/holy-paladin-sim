@@ -1,7 +1,7 @@
 import random
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, BlessingOfFreedomBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable, DivinePurpose, Dawnlight, EternalFlameBuff, SolarGrace, MorningStar, GleamingRays, HolyBulwarkBuff, SacredWeaponBuff, HolyBulwarkSelf, SacredWeaponSelf
+from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable, DivinePurpose, Dawnlight, SolarGrace, GleamingRays, EternalFlameBuff, HolyBulwarkBuff, SacredWeaponBuff, HolyBulwarkSelf, SacredWeaponSelf, SunsAvatar, SunsAvatarActive
 from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts, update_spell_data_initialise_spell, update_spell_data_heals
 
 
@@ -125,14 +125,16 @@ class AvengingWrathSpell(Spell):
             
             # sun's avatar
             if caster.ptr and caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
-                max_dawnlights = 4
+                # max_dawnlights = 4
                 
                 dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]        
                 non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
-                dawnlights_to_apply = max_dawnlights - len(dawnlight_targets)
+                # dawnlights_to_apply = max_dawnlights - len(dawnlight_targets)
+                dawnlights_to_apply = 4
                 chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
                 for target in chosen_targets:
                     target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    target.apply_buff_to_target(SunsAvatar(caster), current_time, caster=caster)
                     
                     if caster.is_talent_active("Solar Grace"):
                         caster.apply_buff_to_self(SolarGrace(caster), current_time)
@@ -155,8 +157,8 @@ class AvengingWrathSpell(Spell):
                     
                     if "Morning Star" in caster.active_auras:
                         caster.active_auras["Morning Star"].current_stacks = 0
-            
-            
+                    
+                
 class AvengingCrusaderSpell(Spell):
     
     BASE_COOLDOWN = 60
@@ -176,14 +178,16 @@ class AvengingCrusaderSpell(Spell):
             
             # sun's avatar
             if caster.ptr and caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
-                max_dawnlights = 4
+                # max_dawnlights = 4
                 
                 dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]        
                 non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
-                dawnlights_to_apply = max_dawnlights - len(dawnlight_targets)
+                # dawnlights_to_apply = max_dawnlights - len(dawnlight_targets)
+                dawnlights_to_apply = 4
                 chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
                 for target in chosen_targets:
                     target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    target.apply_buff_to_target(SunsAvatar(caster), current_time, caster=caster)
                     
                     if caster.is_talent_active("Solar Grace"):
                         caster.apply_buff_to_self(SolarGrace(caster), current_time)
