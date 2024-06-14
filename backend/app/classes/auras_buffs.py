@@ -292,9 +292,6 @@ class AvengingWrathBuff(Buff):
             self.base_duration = 25
         
     def apply_effect(self, caster, current_time=None):
-        if caster.ptr and caster.is_talent_active("Sun's Avatar"):
-            caster.apply_buff_to_self(SunsAvatarActive(caster), current_time)
-        
         if "Avenging Wrath (Awakening)" in caster.active_auras:
             caster.active_auras["Avenging Wrath (Awakening)"].remove_effect(caster, current_time)
             del caster.active_auras["Avenging Wrath (Awakening)"]   
@@ -309,6 +306,9 @@ class AvengingWrathBuff(Buff):
         if caster.is_talent_active("Sanctified Wrath"):
             caster.abilities["Holy Shock"].cooldown *= 0.8
             caster.abilities["Holy Shock"].remaining_cooldown *= 0.8
+            
+        if caster.ptr and caster.is_talent_active("Sun's Avatar"):
+            caster.apply_buff_to_self(SunsAvatarActive(caster), current_time)
         
     def remove_effect(self, caster, current_time=None):
         if caster.is_talent_active("Avenging Wrath: Might"):
@@ -409,9 +409,6 @@ class AvengingCrusaderBuff(Buff):
             self.base_duration = 15
         
     def apply_effect(self, caster, current_time=None):
-        if caster.ptr and caster.is_talent_active("Sun's Avatar"):
-            caster.apply_buff_to_self(SunsAvatarActive(caster), current_time)
-        
         if "Avenging Crusader (Awakening)" in caster.active_auras:
             caster.active_auras["Avenging Crusader (Awakening)"].remove_effect(caster, current_time)
             del caster.active_auras["Avenging Crusader (Awakening)"]   
@@ -420,6 +417,9 @@ class AvengingCrusaderBuff(Buff):
         if caster.is_talent_active("Sanctified Wrath"):
             caster.abilities["Holy Shock"].cooldown *= 0.8
             caster.abilities["Holy Shock"].remaining_cooldown *= 0.8
+            
+        if caster.ptr and caster.is_talent_active("Sun's Avatar"):
+            caster.apply_buff_to_self(SunsAvatarActive(caster), current_time)
         
     def remove_effect(self, caster, current_time=None):
         if caster.is_talent_active("Sanctified Wrath"):

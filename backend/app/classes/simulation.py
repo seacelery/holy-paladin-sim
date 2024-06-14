@@ -13,7 +13,7 @@ from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
 from .trinkets import Trinket
-from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight, EternalFlameBuff, InfusionOfLight
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight, EternalFlameBuff, InfusionOfLight, SunsAvatarActive
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
 from .priority_list_dsl import parse_condition, condition_to_lambda
 from .simulation_state import check_cancellation, reset_simulation
@@ -382,11 +382,9 @@ class Simulation:
         if self.paladin.ptr and self.paladin.is_talent_active("Sun's Avatar"):
             if "Avenging Wrath" in self.paladin.active_auras or "Avenging Crusader" in self.paladin.active_auras or "Avenging Wrath (Awakening)" in self.paladin.active_auras or "Avenging Crusader (Awakening)" in self.paladin.active_auras:
                 suns_avatar_count = len([target for target in self.paladin.potential_healing_targets if "Sun's Avatar" in target.target_active_buffs])
-                print(self.elapsed_time, suns_avatar_count)
                 target_count = 5 * suns_avatar_count
                 
                 if suns_avatar_count > 0:
-                    print(self.paladin.active_auras)
                     suns_avatar = self.paladin.active_auras["Sun's Avatar Active"]
                     suns_avatar.timer += self.tick_rate
                     
@@ -537,6 +535,12 @@ class Simulation:
                         self.paladin.apply_buff_to_self(InfusionOfLight(self.paladin), self.elapsed_time, reapply=True)
 
             self.paladin.active_auras[buff_name].remove_effect(self.paladin, self.elapsed_time)
+            
+            if buff_name == "Avenging Wrath" and "Avenging Wrath (Awakening)" in self.paladin.active_auras:
+                self.paladin.apply_buff_to_self(SunsAvatarActive(self.paladin), self.elapsed_time)
+                
+            if buff_name == "Avenging Crusader" and "Avenging Crusader (Awakening)" in self.paladin.active_auras:
+                self.paladin.apply_buff_to_self(SunsAvatarActive(self.paladin), self.elapsed_time)
             
             # if the remove effect method refreshes the buff duration, then don't remove it
             if self.paladin.active_auras[buff_name].duration <= 0:
