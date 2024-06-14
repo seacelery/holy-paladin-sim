@@ -174,6 +174,13 @@ def parse_condition(condition_str):
                 condition["operator"] = part_split[1]
                 condition["value"] = " ".join(part_split[2:])
                 
+            elif "Overhealing " in part or "overhealing " in part:
+                part_split = part.rsplit(" ", 3)
+                condition["name"] = part_split[0]
+                condition["keyword"] = part_split[1]
+                condition["operator"] = part_split[2]
+                condition["value"] = part_split[3]
+                
             elif "Time " in part or "time " in part:
                 if re.search(r"gcd", part) and any(op in part for op in ["*", "+"]):
                     pattern = r"[tT]ime\s*([><=!]+)\s*(\d+(?:\.\d+)?\s*[*+]\s*[gG][cC][dD]|[gG][cC][dD])"
@@ -331,6 +338,11 @@ def condition_to_lambda(sim_instance, all_conditions):
                         charges = sim_instance.paladin.abilities[condition["name"]].current_charges
                         value = int(condition["value"])
                         result = compare_single_value(charges, condition["operator"], value)
+                        
+                elif condition["keyword"].lower() == "overhealing":
+                    overhealing = sim_instance.overhealing[condition["name"]] * 100
+                    value = float(condition["value"].replace("%", ""))
+                    result = compare_single_value(overhealing, condition["operator"], value)
                     
                 elif condition["keyword"].lower() == "cooldown":
                     cooldown = sim_instance.paladin.abilities[condition["name"]].remaining_cooldown

@@ -115,6 +115,9 @@ const createPriorityListItem = (index) => {
 
     const priorityListItemCondition = createElement("div", "priority-list-item-condition", null);
     const priorityListItemConditionText = createElement("textarea", "priority-list-item-condition-text", null);
+    priorityListItemConditionText.addEventListener("input", () => {
+        adjustTextareaHeight(priorityListItemConditionText, 40);
+    });
     priorityListItemCondition.appendChild(priorityListItemConditionText);
     priorityListItemContainer.appendChild(priorityListItemCondition);
 
@@ -868,6 +871,7 @@ priorityListInfoModalContainer.innerHTML = `
     Buff name duration<br>
     Buff name stacks<br>
     Previous Ability<br>
+    Overhealing<br>
     <br>
     Operations<div id="info-modal-divider"></div>
     Condition = or <span class="aligned">!=</span> Value<br>
@@ -885,7 +889,8 @@ priorityListInfoModalContainer.innerHTML = `
     Beacon of Virtue cooldown <= 3 * GCD<br>
     Timers = [0, 150, 300]<br>
     Timers = [30]+<br>
-    Previous Ability = Daybreak
+    Previous Ability = Daybreak<br>
+    Light of Dawn overhealing > 70%
 `;
 
 const addPotionToPriorityList = (potionName, potionTimers, repeat = false) => {
