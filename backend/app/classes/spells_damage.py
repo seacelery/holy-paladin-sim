@@ -1,15 +1,13 @@
 import random
 
 from .spells import Spell
-from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals, update_self_buff_data, update_mana_gained
+from .spells_healing import HammerAndAnvilHeal
+from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals, update_self_buff_data, update_mana_gained, add_talent_healing_multipliers
 from .auras_debuffs import JudgmentOfLightDebuff, GreaterJudgmentDebuff
 from .auras_buffs import BlessingOfDawn, AvengingWrathAwakening, AvengingCrusaderAwakening, EmpyreanLegacy, Veneration
-from .spells_auras import AvengingWrathBuff
-from .target import Player
 from .summons import ConsecrationSummon, RighteousJudgmentSummon
 
 
-# DAMAGE SPELLS
 class Judgment(Spell):
     
     SPELL_POWER_COEFFICIENT = 1.125 / 1.04
@@ -107,10 +105,10 @@ class Judgment(Spell):
                     
             # avenging crusader        
             if caster.is_talent_active("Avenging Crusader") and "Avenging Crusader" in caster.active_auras:
-                avenging_crusader_healing = spell_damage * 3.6 / 5
-                print(self.spell_damage_modifier)
-                print(spell_damage, spell_crit)
-                print(avenging_crusader_healing)
+                if caster.ptr:
+                    avenging_crusader_healing = spell_damage * 4.2 / 5
+                else:
+                    avenging_crusader_healing = spell_damage * 3.6 / 5
                 for avenging_crusader_target in random.sample(caster.potential_healing_targets, 5):
                     avenging_crusader_target.receive_heal(avenging_crusader_healing, caster)
                     
@@ -186,6 +184,22 @@ class Judgment(Spell):
                         caster.abilities["Holy Bulwark"].remaining_cooldown -= 3
                     if "Sacred Weapon" in caster.abilities:
                         caster.abilities["Sacred Weapon"].remaining_cooldown -= 3
+            
+            # hammer and anvil               
+            if caster.ptr and caster.is_talent_active("Hammer and Anvil") and spell_crit:         
+                hammer_and_anvil_heal, hammer_and_anvil_crit = HammerAndAnvilHeal(caster).calculate_heal(caster)
+                hammer_and_anvil_heal = caster.spell_power * caster.versatility_multiplier + caster.spell_power * 1.04
+                
+                if hammer_and_anvil_crit:
+                    hammer_and_anvil_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+                    
+                hammer_and_anvil_target_count = 5
+                hammer_and_anvil_heal = add_talent_healing_multipliers(hammer_and_anvil_heal, caster)
+                
+                chosen_targets = random.sample(caster.potential_healing_targets, hammer_and_anvil_target_count)
+                for target in chosen_targets:
+                    target.receive_heal(hammer_and_anvil_heal, caster)
+                    update_spell_data_heals(caster.ability_breakdown, "Hammer and Anvil", target, hammer_and_anvil_heal, hammer_and_anvil_crit)
                 
         return cast_success, spell_crit, spell_damage, judgment_of_light_healing, greater_judgment_healing, avenging_crusader_healing
            
@@ -222,6 +236,10 @@ class CrusaderStrike(Spell):
                     self.current_charges += 1
         else:
             self.max_charges = 1
+            
+        # blessed assurance
+        if caster.ptr and caster.is_talent_active("Blessed Assurance") and "Blessed Assurance" in caster.active_auras:
+            self.spell_damage_modifier *= 2
         
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
         
@@ -238,7 +256,10 @@ class CrusaderStrike(Spell):
                 
             # avenging crusader        
             if caster.is_talent_active("Avenging Crusader"):
-                avenging_crusader_healing = spell_damage * 3.6 / 5
+                if caster.ptr:
+                    avenging_crusader_healing = spell_damage * 4.2 / 5
+                else:
+                    avenging_crusader_healing = spell_damage * 3.6 / 5
                 for avenging_crusader_target in random.sample(caster.potential_healing_targets, 5):
                     avenging_crusader_target.receive_heal(avenging_crusader_healing, caster)
                     
@@ -274,6 +295,12 @@ class CrusaderStrike(Spell):
                     caster.abilities["Holy Shock"].remaining_cooldown = max(caster.abilities["Holy Shock"].calculate_cooldown(caster) - caster.holy_shock_cooldown_overflow, 0)
                     if caster.abilities["Holy Shock"].current_charges < caster.abilities["Holy Shock"].max_charges:
                         caster.abilities["Holy Shock"].current_charges += 1
+                        
+            # blessed assurance
+            if caster.ptr and caster.is_talent_active("Blessed Assurance") and "Blessed Assurance" in caster.active_auras:
+                self.spell_damage_modifier /= 2
+                del caster.active_auras["Blessed Assurance"]                 
+                update_self_buff_data(caster.self_buff_breakdown, "Blessed Assurance", current_time, "expired")
                 
         return cast_success, spell_crit, spell_damage, crusaders_reprieve_heal, avenging_crusader_healing
     
@@ -352,3 +379,8 @@ class Consecration(Spell):
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
         if cast_success:
             caster.apply_summon(ConsecrationSummon(), current_time)
+            
+            if caster.ptr and "Divine Guidance" in caster.active_auras:
+                caster.active_auras["Divine Guidance"].remove_effect(caster)
+                del caster.active_auras["Divine Guidance"]
+                update_self_buff_data(caster.self_buff_breakdown, "Divine Guidance", current_time, "expired")

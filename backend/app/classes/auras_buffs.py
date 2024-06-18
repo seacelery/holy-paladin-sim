@@ -2789,4 +2789,41 @@ class SunsAvatarActive(Buff):
             target.receive_heal(suns_avatar_heal, caster)
             update_spell_data_heals(caster.ability_breakdown, "Sun's Avatar", target, suns_avatar_heal, suns_avatar_crit)
         
+    
+class BlessedAssurance(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Blessed Assurance", 10000, base_duration=10000)   
+            
+    def apply_effect(self, caster, current_time=None):
+        pass
         
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class DivineGuidance(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Divine Guidance", 10000, base_duration=10000, current_stacks=1, max_stacks=10)   
+            
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        from .spells_healing import DivineGuidanceHeal
+        
+        divine_guidance_stacks = caster.active_auras["Divine Guidance"].current_stacks
+        divine_guidance_heal, divine_guidance_crit = DivineGuidanceHeal(caster).calculate_heal(caster)
+        divine_guidance_heal *= divine_guidance_stacks
+        
+        if divine_guidance_crit:
+            divine_guidance_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+            
+        divine_guidance_heal = add_talent_healing_multipliers(divine_guidance_heal, caster)
+        divine_guidance_heal /= 5
+        
+        chosen_targets = random.sample(caster.potential_healing_targets, 5)
+        for target in chosen_targets:
+            target.receive_heal(divine_guidance_heal, caster)
+            update_spell_data_heals(caster.ability_breakdown, "Divine Guidance", target, divine_guidance_heal, divine_guidance_crit)

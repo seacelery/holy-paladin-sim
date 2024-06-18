@@ -2,7 +2,7 @@ import random
 import copy
 
 from .spells import Spell
-from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath, DawnlightAvailable, Dawnlight, EternalFlameBuff, GleamingRays, SunSear, SolarGrace, SunsAvatar
+from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath, DawnlightAvailable, Dawnlight, EternalFlameBuff, GleamingRays, SunSear, SolarGrace, SunsAvatar, BlessedAssurance, DivineGuidance
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
 from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, update_spell_data_casts, update_spell_data_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
@@ -54,7 +54,7 @@ class HolyShock(Spell):
             self.max_charges = 2
             self.current_charges = self.max_charges
         
-    def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
+    def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets, initial_cast=True):
         bonus_crit = 0
         
         # blessing of an'she
@@ -95,7 +95,7 @@ class HolyShock(Spell):
                     cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
                 self.spell_healing_modifier *= cumulative_healing_mod
         
-        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal, exclude_cast=not initial_cast)
         barrier_of_faith_absorb = 0
         if cast_success:
             # blessing of an'she
@@ -274,7 +274,27 @@ class HolyShock(Spell):
             if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" not in caster.active_auras and "Power of the Silver Hand Stored Healing" in caster.active_auras:
                 del caster.active_auras["Power of the Silver Hand Stored Healing"]     
                 update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
-                        
+                
+            # second sunrise
+            if caster.ptr and caster.is_talent_active("Second Sunrise") and initial_cast:
+                second_sunrise_chance = 0.15
+                if random.random() <= second_sunrise_chance:
+                    caster.global_cooldown = 0
+                    self.SPELL_POWER_COEFFICIENT *= 0.3
+                    original_mana_cost = self.MANA_COST
+                    self.MANA_COST = 0
+                    self.mana_cost = 0
+                    self.current_charges += 1
+                    
+                    self.cast_healing_spell(caster, targets, current_time, is_heal, glimmer_targets, initial_cast=False)
+                    
+                    self.SPELL_POWER_COEFFICIENT /= 0.3                  
+                    self.MANA_COST = original_mana_cost
+                    self.mana_cost = original_mana_cost
+                    caster.global_cooldown = caster.base_global_cooldown / caster.haste_multiplier
+                    
+                    return
+                            
             return cast_success, spell_crit, heal_amount, total_glimmer_healing, barrier_of_faith_absorb
             
             
@@ -572,6 +592,28 @@ class RisingSunlightHolyShock(Spell):
             if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" not in caster.active_auras and "Power of the Silver Hand Stored Healing" in caster.active_auras:
                 del caster.active_auras["Power of the Silver Hand Stored Healing"]     
                 update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
+                
+            # second sunrise
+            if caster.ptr and caster.is_talent_active("Second Sunrise"):
+                second_sunrise_chance = 0.15
+                if random.random() <= second_sunrise_chance:
+                    holy_shock = caster.abilities["Holy Shock"]
+                    
+                    caster.global_cooldown = 0
+                    holy_shock.SPELL_POWER_COEFFICIENT *= 0.3
+                    original_mana_cost = holy_shock.MANA_COST
+                    holy_shock.MANA_COST = 0
+                    holy_shock.mana_cost = 0
+                    holy_shock.current_charges += 1
+                    
+                    holy_shock.cast_healing_spell(caster, targets, current_time, is_heal, glimmer_targets, initial_cast=False)
+                    
+                    holy_shock.SPELL_POWER_COEFFICIENT /= 0.3                  
+                    holy_shock.MANA_COST = original_mana_cost
+                    holy_shock.mana_cost = original_mana_cost
+                    caster.global_cooldown = caster.base_global_cooldown / caster.haste_multiplier
+                    
+                    return
                         
         return cast_success, spell_crit, heal_amount, total_glimmer_healing, barrier_of_faith_absorb
             
@@ -827,6 +869,28 @@ class DivineTollHolyShock(Spell):
             if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" not in caster.active_auras and "Power of the Silver Hand Stored Healing" in caster.active_auras:
                 del caster.active_auras["Power of the Silver Hand Stored Healing"]     
                 update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
+                
+            # second sunrise
+            if caster.ptr and caster.is_talent_active("Second Sunrise"):
+                second_sunrise_chance = 0.15
+                if random.random() <= second_sunrise_chance:
+                    holy_shock = caster.abilities["Holy Shock"]
+                    
+                    caster.global_cooldown = 0
+                    holy_shock.SPELL_POWER_COEFFICIENT *= 0.3
+                    original_mana_cost = holy_shock.MANA_COST
+                    holy_shock.MANA_COST = 0
+                    holy_shock.mana_cost = 0
+                    holy_shock.current_charges += 1
+                    
+                    holy_shock.cast_healing_spell(caster, targets, current_time, is_heal, glimmer_targets, initial_cast=False)
+                    
+                    holy_shock.SPELL_POWER_COEFFICIENT /= 0.3                  
+                    holy_shock.MANA_COST = original_mana_cost
+                    holy_shock.mana_cost = original_mana_cost
+                    caster.global_cooldown = caster.base_global_cooldown / caster.haste_multiplier
+                    
+                    return
                     
         return cast_success, spell_crit, heal_amount, total_glimmer_healing, barrier_of_faith_absorb
             
@@ -1002,6 +1066,28 @@ class DivineResonanceHolyShock(Spell):
             if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" not in caster.active_auras and "Power of the Silver Hand Stored Healing" in caster.active_auras:
                 del caster.active_auras["Power of the Silver Hand Stored Healing"]     
                 update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
+                
+            # second sunrise
+            if caster.ptr and caster.is_talent_active("Second Sunrise"):
+                second_sunrise_chance = 0.15
+                if random.random() <= second_sunrise_chance:
+                    holy_shock = caster.abilities["Holy Shock"]
+                    
+                    caster.global_cooldown = 0
+                    holy_shock.SPELL_POWER_COEFFICIENT *= 0.3
+                    original_mana_cost = holy_shock.MANA_COST
+                    holy_shock.MANA_COST = 0
+                    holy_shock.mana_cost = 0
+                    holy_shock.current_charges += 1
+                    
+                    holy_shock.cast_healing_spell(caster, targets, current_time, is_heal, glimmer_targets, initial_cast=False)
+                    
+                    holy_shock.SPELL_POWER_COEFFICIENT /= 0.3                  
+                    holy_shock.MANA_COST = original_mana_cost
+                    holy_shock.mana_cost = original_mana_cost
+                    caster.global_cooldown = caster.base_global_cooldown / caster.haste_multiplier
+                    
+                    return
                         
         return cast_success, spell_crit, heal_amount, 0, barrier_of_faith_absorb
 
@@ -1629,6 +1715,23 @@ class WordOfGlory(Spell):
                     del caster.active_auras["Dawnlight"]
                     update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "expired")
                     
+            # blessed assurance    
+            if caster.ptr and caster.is_talent_active("Blessed Assurance"):
+                caster.apply_buff_to_self(BlessedAssurance(caster), current_time)
+                
+            # divine guidance
+            if caster.ptr and caster.is_talent_active("Divine Guidance"):            
+                if "Divine Guidance" in caster.active_auras:
+                    divine_guidance = caster.active_auras["Divine Guidance"]
+                    
+                    if divine_guidance.current_stacks < divine_guidance.max_stacks:
+                        divine_guidance.current_stacks += 1
+                    
+                    divine_guidance.duration = divine_guidance.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Divine Guidance", current_time, "applied", divine_guidance.duration, divine_guidance.current_stacks)               
+                else:
+                    caster.apply_buff_to_self(DivineGuidance(caster), current_time, stacks_to_apply=1, max_stacks=10)
+                    
         return cast_success, spell_crit, heal_amount, total_glimmer_healing, afterimage_heal, empyrean_legacy_light_of_dawn_healing
  
 
@@ -1899,6 +2002,23 @@ class EternalFlame(Spell):
                 else:
                     del caster.active_auras["Dawnlight"]
                     update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "expired")
+              
+            # blessed assurance    
+            if caster.ptr and caster.is_talent_active("Blessed Assurance"):
+                caster.apply_buff_to_self(BlessedAssurance(caster), current_time)
+                
+            # divine guidance
+            if caster.ptr and caster.is_talent_active("Divine Guidance"):            
+                if "Divine Guidance" in caster.active_auras:
+                    divine_guidance = caster.active_auras["Divine Guidance"]
+                    
+                    if divine_guidance.current_stacks < divine_guidance.max_stacks:
+                        divine_guidance.current_stacks += 1
+                    
+                    divine_guidance.duration = divine_guidance.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Divine Guidance", current_time, "applied", divine_guidance.duration, divine_guidance.current_stacks)               
+                else:
+                    caster.apply_buff_to_self(DivineGuidance(caster), current_time, stacks_to_apply=1, max_stacks=10)
                     
         return cast_success, spell_crit, heal_amount, total_glimmer_healing, afterimage_heal, empyrean_legacy_light_of_dawn_healing
           
@@ -1918,7 +2038,7 @@ class LightOfDawn(Spell):
             self.MANA_COST = 0.008
             self.mana_cost = 0.008
         
-    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+    def cast_healing_spell(self, caster, targets, current_time, is_heal, initial_cast=True):
         bonus_crit = 0
 
         # luminosity    
@@ -1946,7 +2066,7 @@ class LightOfDawn(Spell):
                 elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
                     self.spell_healing_modifier *= 1.6
         
-        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal, exclude_cast=not initial_cast)
         total_glimmer_healing = 0
         if cast_success:
             caster.holy_power -= self.holy_power_cost
@@ -2139,14 +2259,40 @@ class LightOfDawn(Spell):
                     update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "expired")
             
             # second sunrise        
-            # if caster.ptr and caster.is_talent_active("Second Sunrise"):
-            #     second_sunrise_chance = 0.15
-            #     if random.random() <= second_sunrise_chance:
-            #         caster.global_cooldown = 0
-            #         self.holy_power_cost = 0
-            #         self.cast_healing_spell(caster, targets, current_time, is_heal)
+            if caster.ptr and caster.is_talent_active("Second Sunrise") and initial_cast:
+                second_sunrise_chance = 0.15
+                if random.random() <= second_sunrise_chance:
+                    caster.global_cooldown = 0
+                    self.SPELL_POWER_COEFFICIENT *= 0.3
+                    self.MANA_COST = 0
+                    self.mana_cost = 0
+                    self.holy_power_cost = 0
                     
-            #         self.holy_power_cost = 3
+                    self.cast_healing_spell(caster, targets, current_time, is_heal, initial_cast=False)
+                    
+                    self.SPELL_POWER_COEFFICIENT /= 0.3                  
+                    self.MANA_COST = 0.008
+                    self.mana_cost = 0.008
+                    self.holy_power_cost = 3
+                    
+                    return
+                
+            # blessed assurance    
+            if caster.ptr and caster.is_talent_active("Blessed Assurance"):
+                caster.apply_buff_to_self(BlessedAssurance(caster), current_time)
+                
+            # divine guidance
+            if caster.ptr and caster.is_talent_active("Divine Guidance"):            
+                if "Divine Guidance" in caster.active_auras:
+                    divine_guidance = caster.active_auras["Divine Guidance"]
+                    
+                    if divine_guidance.current_stacks < divine_guidance.max_stacks:
+                        divine_guidance.current_stacks += 1
+                    
+                    divine_guidance.duration = divine_guidance.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Divine Guidance", current_time, "applied", divine_guidance.duration, divine_guidance.current_stacks)               
+                else:
+                    caster.apply_buff_to_self(DivineGuidance(caster), current_time, stacks_to_apply=1, max_stacks=10)
                     
         return cast_success, spell_crit, heal_amount, total_glimmer_healing
 
@@ -2329,3 +2475,19 @@ class LightOfTheMartyr(Spell):
                 update_self_buff_data(caster.self_buff_breakdown, "Maraad's Dying Breath", current_time, "expired")
                 
         return cast_success, spell_crit, heal_amount
+    
+
+class DivineGuidanceHeal(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 1.04
+    
+    def __init__(self, caster):
+        super().__init__("Divine Guidance", off_gcd=True)
+        
+
+class HammerAndAnvilHeal(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    
+    def __init__(self, caster):
+        super().__init__("Hammer and Anvil", off_gcd=True)

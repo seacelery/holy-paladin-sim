@@ -1,9 +1,8 @@
 import random
 
 from .auras_buffs import SunSear
-from ..utils.beacon_transfer_rates import beacon_transfer_rates_double_beacon
 from ..utils.leech_abilities import leech_abilities
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_beacon_event, calculate_beacon_healing, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts, update_spell_data_beacon_heals, update_self_buff_data, update_target_buff_data, update_priority_breakdown
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts, update_target_buff_data, update_priority_breakdown
 from collections import defaultdict
 
 class Spell:
@@ -122,7 +121,7 @@ class Spell:
 
         return True, spell_crit, damage_value
         
-    def cast_healing_spell(self, caster, targets, current_time, is_heal, exclude_mastery=False, ignore_spell_multiplier=False):
+    def cast_healing_spell(self, caster, targets, current_time, is_heal, exclude_mastery=False, ignore_spell_multiplier=False, exclude_cast=False):
         if not self.can_cast(caster):         
             return False, False, 0
     
@@ -178,7 +177,7 @@ class Spell:
                     if self.aoe_cast_counter == target_count:
                         caster.mana -= mana_cost
                         # add spell, mana cost, holy power attributes, and increment casts
-                        if self.name in ["Light's Hammer"]:
+                        if self.name in ["Light's Hammer"] or exclude_cast:
                             update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, 0, self.holy_power_cost, exclude_casts=True)
                         else:
                             update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, 0, self.holy_power_cost)
@@ -192,7 +191,7 @@ class Spell:
                     caster.mana -= mana_cost
                     
                     # exclude casts for certain spells
-                    if self.name in ["Tyr's Deliverance"]:
+                    if self.name in ["Tyr's Deliverance"] or exclude_cast:
                         update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, 0, self.holy_power_cost, exclude_casts=True)
                     else:
                         update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, 0, self.holy_power_cost)
@@ -299,8 +298,12 @@ class Spell:
         if self.name in leech_abilities:   
             leech_multiplier = 0.7
             update_spell_data_heals(caster.ability_breakdown, "Leech", caster, heal_amount * (caster.leech / 100) * leech_multiplier, False)
+        
+        # if self.name == "Glimmer of Light":  
             
-        # print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
+        # if "Holy Shock" in self.name:
+        #     print(f"Heal amount for {self.name}, {heal_amount}")
+        #     print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
         return heal_amount, is_crit
     
     def calculate_damage(self, caster, bonus_crit=0, bonus_versatility=0):
@@ -486,8 +489,8 @@ class Spell:
         if caster.race == "Zandalari Troll":
             embrace_of_paku = EmbraceOfPaku()
             try_proc_rppm_effect(embrace_of_paku, is_self_buff=True)
-            embrace_of_akunda = EmbraceOfAkunda(caster)
-            try_proc_rppm_effect(embrace_of_akunda, is_heal=True)
+            # embrace_of_akunda = EmbraceOfAkunda(caster)
+            # try_proc_rppm_effect(embrace_of_akunda, is_heal=True)
             
         if "Voice of the Silent Star" in caster.equipment["back"]["name"]:
             voice_from_beyond = VoiceFromBeyond(caster)
