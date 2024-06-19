@@ -1087,7 +1087,238 @@ class ElementalChaosEarth(Buff):
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
         caster.apply_buff_to_self(new_buff, current_time, reapply=True)
+        
+
+# ptr
+def apply_alchemical_chaos_aura(caster, current_time):
+        alchemical_chaos_auras = [
+            AlchemicalChaosAir,
+            AlchemicalChaosEarth, 
+            AlchemicalChaosFire,
+            AlchemicalChaosFrost
+        ]
+        
+        existing_buff = None
+        for aura in caster.active_auras.values():
+            if isinstance(aura, tuple(alchemical_chaos_auras)):
+                existing_buff = aura
+                break
+            
+        chosen_aura_class = random.choice(alchemical_chaos_auras)
+
+        if existing_buff and isinstance(existing_buff, chosen_aura_class):
+            existing_buff.reapply_self(caster, current_time)          
+        else:
+            chosen_aura = chosen_aura_class()
+            caster.apply_buff_to_self(chosen_aura, current_time)
+        
+              
+class FlaskOfAlchemicalChaos(Buff):
     
+    def __init__(self):
+        super().__init__("Flask of Alchemical Chaos", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        apply_alchemical_chaos_aura(caster, 0)
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+        
+        
+class AlchemicalChaosAir(Buff):
+    
+    def __init__(self):
+        super().__init__("Alchemical Chaos: Air", 30, base_duration=30)
+        self.chosen_stats = []
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("haste", 6002)
+        self.chosen_stats = random.sample("crit", "versatility", "mastery", 2)
+        for stat in self.chosen_stats:
+            caster.update_stat(stat, -405)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("haste", -6002)
+        apply_alchemical_chaos_aura(caster, current_time)
+        for stat in self.chosen_stats:
+            caster.update_stat(stat, 405)
+        
+    def reapply_self(self, caster, current_time):
+        new_buff = self.__class__()
+        caster.apply_buff_to_self(new_buff, current_time, reapply=True)
+        
+        
+class AlchemicalChaosFire(Buff):
+    
+    def __init__(self):
+        super().__init__("Alchemical Chaos: Fire", 30, base_duration=30)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("crit", 6002)
+        self.chosen_stats = random.sample("haste", "versatility", "mastery", 2)
+        for stat in self.chosen_stats:
+            caster.update_stat(stat, -405)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("crit", -6002)
+        apply_alchemical_chaos_aura(caster, current_time)
+        for stat in self.chosen_stats:
+            caster.update_stat(stat, 405)
+        
+    def reapply_self(self, caster, current_time):
+        new_buff = self.__class__()
+        caster.apply_buff_to_self(new_buff, current_time, reapply=True)
+
+
+class AlchemicalChaosFrost(Buff):
+    
+    def __init__(self):
+        super().__init__("Alchemical Chaos: Frost", 30, base_duration=30)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", 6002)
+        self.chosen_stats = random.sample("crit", "haste", "mastery", 2)
+        for stat in self.chosen_stats:
+            caster.update_stat(stat, -405)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("versatility", -6002)
+        apply_alchemical_chaos_aura(caster, current_time)
+        for stat in self.chosen_stats:
+            caster.update_stat(stat, 405)
+        
+    def reapply_self(self, caster, current_time):
+        new_buff = self.__class__()
+        caster.apply_buff_to_self(new_buff, current_time, reapply=True)
+        
+
+class AlchemicalChaosEarth(Buff):
+    
+    def __init__(self):
+        super().__init__("Alchemical Chaos: Earth", 30, base_duration=30)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", 6002)
+        self.chosen_stats = random.sample("crit", "versatility", "haste", 2)
+        for stat in self.chosen_stats:
+            caster.update_stat(stat, -405)
+        
+    def remove_effect(self, caster, current_time):
+        caster.update_stat("mastery", -6002)
+        apply_alchemical_chaos_aura(caster, current_time)
+        for stat in self.chosen_stats:
+            caster.update_stat(stat, 405)
+        
+    def reapply_self(self, caster, current_time):
+        new_buff = self.__class__()
+        caster.apply_buff_to_self(new_buff, current_time, reapply=True)
+
+
+class FlaskOfTemperedSwiftness(Buff):
+    
+    def __init__(self):
+        super().__init__("Flask of Tempered Swiftness", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("haste", 2168)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("haste", -2168)
+            
+
+class FlaskOfTemperedAggression(Buff):
+    
+    def __init__(self):
+        super().__init__("Flask of Tempered Aggression", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("crit", 2168)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("crit", -2168)
+            
+
+class FlaskOfTemperedMastery(Buff):
+    
+    def __init__(self):
+        super().__init__("Flask of Tempered Mastery", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", 2168)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", -2168)
+            
+    
+class FlaskOfTemperedVersatility(Buff):
+    
+    def __init__(self):
+        super().__init__("Flask of Tempered Versatility", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", 2168)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", -2168)
+
+
+class FlaskOfSavingGraces(Buff):
+    
+    def __init__(self):
+        super().__init__("Flask of Saving Graces", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class SavingGrace(Buff):
+    
+    def __init__(self):
+        super().__init__("Saving Grace", 10, base_duration=10)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.healing_multiplier *= 1.15
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.healing_multiplier /= 1.15
+
+
+class TemperedPotionBuff(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Tempered Potion", 30, base_duration=30)
+        if "Potion Absorption Inhibitor" in caster.active_auras:
+            self.duration *= 1 + (0.5 * caster.active_auras["Potion Absorption Inhibitor"].current_stacks)
+            self.base_duration *= 1 + (0.5 * caster.active_auras["Potion Absorption Inhibitor"].current_stacks)
+            
+        self.tempered_buffs = ["Flask of Tempered Swiftness", "Flask of Tempered Aggression", "Flask of Tempered Mastery", "Flask of Tempered Versatility"]
+        for buff in caster.active_auras:
+            if buff.name in self.tempered_buffs:
+                self.tempered_buffs.remove(buff.name)
+        
+    def apply_effect(self, caster, current_time=None):
+        if "Flask of Tempered Swiftness" in self.tempered_buffs:
+            caster.update_stat("haste", 2168)
+        if "Flask of Tempered Aggression" in self.tempered_buffs:
+            caster.update_stat("crit", 2168)
+        if "Flask of Tempered Mastery" in self.tempered_buffs:
+            caster.update_stat("mastery", 2168)
+        if "Flask of Tempered Versatility" in self.tempered_buffs:
+            caster.update_stat("versatility", 2168)
+        
+    def remove_effect(self, caster, current_time=None):
+        if "Flask of Tempered Swiftness" in self.tempered_buffs:
+            caster.update_stat("haste", -2168)
+        if "Flask of Tempered Aggression" in self.tempered_buffs:
+            caster.update_stat("crit", -2168)
+        if "Flask of Tempered Mastery" in self.tempered_buffs:
+            caster.update_stat("mastery", -2168)
+        if "Flask of Tempered Versatility" in self.tempered_buffs:
+            caster.update_stat("versatility", -2168)
+
 
 # food
 class GrandBanquetOfTheKaluakFood(Buff):
@@ -1113,7 +1344,6 @@ class TimelyDemiseFood(Buff):
     def remove_effect(self, caster, current_time=None):
         caster.update_stat("haste", -105)
 
-        
         
 class FiletOfFangsFood(Buff):
     

@@ -1,6 +1,6 @@
 from .spells import Spell
-from .auras_buffs import ElementalPotionOfUltimatePowerBuff, AuraMasteryBuff
-from ..utils.misc_functions import increment_holy_power, update_spell_holy_power_gain, update_mana_gained
+from .auras_buffs import ElementalPotionOfUltimatePowerBuff, AuraMasteryBuff, TemperedPotionBuff
+from ..utils.misc_functions import increment_holy_power, update_mana_gained
 
 
 class AuraMastery(Spell):
@@ -73,3 +73,47 @@ class ElementalPotionOfUltimatePowerPotion(Potion):
             
             Potion.shared_cooldown_end_time = current_time + self.cooldown
             
+
+# ptr
+class AlgariManaPotion(Potion):
+    
+    def __init__(self, caster):
+        super().__init__("Algari Mana Potion")
+        Potion.shared_cooldown_end_time = 0
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            algari_mana_potion_mana_gain = 150000
+            caster.mana += algari_mana_potion_mana_gain
+            update_mana_gained(caster.ability_breakdown, self.name, algari_mana_potion_mana_gain)
+            
+            Potion.shared_cooldown_end_time = current_time + self.cooldown
+            
+            
+class SlumberingSoulSerum(Potion):
+    
+    def __init__(self, caster):
+        super().__init__("Slumbering Soul Serum")
+        Potion.shared_cooldown_end_time = 0
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            # caster.apply_buff_to_self(ElementalPotionOfUltimatePowerBuff(caster), current_time)
+            
+            Potion.shared_cooldown_end_time = current_time + self.cooldown
+            
+
+class TemperedPotion(Potion):
+    
+    def __init__(self, caster):
+        super().__init__("Tempered Potion")
+        Potion.shared_cooldown_end_time = 0
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            caster.apply_buff_to_self(TemperedPotionBuff(caster), current_time)
+            
+            Potion.shared_cooldown_end_time = current_time + self.cooldown

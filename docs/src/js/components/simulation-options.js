@@ -1,8 +1,8 @@
-import { flasks, foodItems, weaponImbues, augmentRunes, raidBuffs, externalBuffs, potions } from "../utils/data/buffs-consumables-data.js";
+import { flasks, ptrFlasks, foodItems, weaponImbues, ptrWeaponImbues, augmentRunes, ptrAugmentRunes, raidBuffs, ptrRaidBuffs, externalBuffs, potions, ptrPotions } from "../utils/data/buffs-consumables-data.js";
 import { createTooltip, addTooltipFunctionality } from "../utils/misc-functions.js";
 import { createElement } from "./index.js";
-
 import { spellToIconsMap } from "../utils/spell-to-icons-map.js";
+import { futurePatchSelected } from "./config/version-config.js";
 
 const handleOverhealingPercentagesModal = () => {
     const button = document.getElementById("overhealing-header-paste-icon");
@@ -331,17 +331,23 @@ const colourStatWords = (text) => {
 };
 
 const generateBuffsConsumablesImages = () => {
+    const flasksVersion = futurePatchSelected ? ptrFlasks : flasks;
+    const weaponImbuesVersion = futurePatchSelected ? ptrWeaponImbues : weaponImbues;
+    const augmentRunesVersion = futurePatchSelected ? ptrAugmentRunes : augmentRunes;
+    const raidBuffsVersion = futurePatchSelected ? ptrRaidBuffs : raidBuffs;
+    const potionsVersion = futurePatchSelected ? ptrPotions : potions;
+
     const flaskFilterContainer = document.getElementById("flask-filter-container");
     const flaskTooltip = createTooltip("flask-tooltip", "option-image-tooltip");
 
-    for (const flask in flasks) {
+    for (const flask in flasksVersion) {
         const flaskImage = createElement("img", "flask-image", null);
-        flaskImage.src = flasks[flask].image;
+        flaskImage.src = flasksVersion[flask].image;
         flaskImage.draggable = false;
         flaskImage.setAttribute("data-flask", flask);
         flaskFilterContainer.appendChild(flaskImage);
 
-        const flaskInnerHTML = `${flask}<br><br>` + colourStatWords(flasks[flask].effect);
+        const flaskInnerHTML = `${flask}<br><br>` + colourStatWords(flasksVersion[flask].effect);
         addTooltipFunctionality(flaskImage, flaskTooltip, null, flaskInnerHTML);
     };
 
@@ -360,60 +366,95 @@ const generateBuffsConsumablesImages = () => {
 
     const weaponImbueFilterContainer = document.getElementById("weapon-imbue-filter-container");
     const weaponImbueTooltip = createTooltip("weapon-imbue-tooltip", "option-image-tooltip");
-    for (const weaponImbue in weaponImbues) {
+    for (const weaponImbue in weaponImbuesVersion) {
         const weaponImbueImage = createElement("img", "weapon-imbue-image", null);
-        weaponImbueImage.src = weaponImbues[weaponImbue].image;
+        weaponImbueImage.src = weaponImbuesVersion[weaponImbue].image;
         weaponImbueImage.draggable = false;
         weaponImbueImage.setAttribute("data-weapon-imbue", weaponImbue);
         weaponImbueFilterContainer.appendChild(weaponImbueImage);
 
-        const weaponImbueInnerHTML = `${weaponImbue}<br><br>` + colourStatWords(weaponImbues[weaponImbue].effect);
+        const weaponImbueInnerHTML = `${weaponImbue}<br><br>` + colourStatWords(weaponImbuesVersion[weaponImbue].effect);
         addTooltipFunctionality(weaponImbueImage, weaponImbueTooltip, null, weaponImbueInnerHTML);
     };
 
     const augmentRuneFilterContainer = document.getElementById("augment-rune-filter-container");
     const augmentRuneTooltip = createTooltip("augment-rune-tooltip", "option-image-tooltip");
-    for (const augmentRune in augmentRunes) {
+    for (const augmentRune in augmentRunesVersion) {
         const augmentRuneImage = createElement("img", "augment-rune-image", null);
-        augmentRuneImage.src = augmentRunes[augmentRune].image;
+        augmentRuneImage.src = augmentRunesVersion[augmentRune].image;
         augmentRuneImage.draggable = false;
         augmentRuneImage.setAttribute("data-augment-rune", augmentRune);
         augmentRuneFilterContainer.appendChild(augmentRuneImage);
 
-        const augmentRuneInnerHTML = `${augmentRune}<br><br>` + colourStatWords(augmentRunes[augmentRune].effect);
+        const augmentRuneInnerHTML = `${augmentRune}<br><br>` + colourStatWords(augmentRunesVersion[augmentRune].effect);
         addTooltipFunctionality(augmentRuneImage, augmentRuneTooltip, null, augmentRuneInnerHTML);
     };
 
-    const manaPotionContainer = document.getElementById("aerated-mana-potion-container");
-    const manaPotionTooltip = createTooltip("mana-potion-tooltip", "option-image-tooltip");
-    const manaPotionImage = manaPotionContainer.querySelector(".potion-image");
-    manaPotionImage.src = potions["Aerated Mana Potion"].image;
-    manaPotionImage.draggable = false;
-    manaPotionImage.setAttribute("data-potion", "Aerated Mana Potion");
+    const algariManaPotionContainer = document.getElementById("algari-mana-potion-container");
+    const slumberingSoulSerumPotionContainer = document.getElementById("slumbering-soul-serum-container");
+    const temperedPotionContainer = document.getElementById("tempered-potion-container");
+    const aeratedManaPotionContainer = document.getElementById("aerated-mana-potion-container");
+    const elementalPowerPotionContainer = document.getElementById("elemental-potion-of-ultimate-power-container");
 
-    const manaPotionInnerHTML = `Aerated Mana Potion<br><br>` + colourStatWords(potions["Aerated Mana Potion"].effect);
-    addTooltipFunctionality(manaPotionImage, manaPotionTooltip, null, manaPotionInnerHTML);
+    if (futurePatchSelected) {
+        const algariManaPotionTooltip = createTooltip("mana-potion-tooltip", "option-image-tooltip");
+        const algariManaPotionImage = algariManaPotionContainer.querySelector(".potion-image");
+        algariManaPotionImage.src = potionsVersion["Algari Mana Potion"].image;
+        algariManaPotionImage.draggable = false;
+        algariManaPotionImage.setAttribute("data-potion", "Algari Mana Potion");
+        const algariManaPotionInnerHTML = `Algari Mana Potion<br><br>` + colourStatWords(potionsVersion["Algari Mana Potion"].effect);
+        addTooltipFunctionality(algariManaPotionImage, algariManaPotionTooltip, null, algariManaPotionInnerHTML);
+        
+        const slumberingSoulSerumPotionTooltip = createTooltip("intellect-potion-tooltip", "option-image-tooltip");
+        const slumberingSoulSerumPotionImage = slumberingSoulSerumPotionContainer.querySelector(".potion-image");
+        slumberingSoulSerumPotionImage.src = potionsVersion["Slumbering Soul Serum"].image;
+        slumberingSoulSerumPotionImage.draggable = false;
+        slumberingSoulSerumPotionImage.setAttribute("data-potion", "Slumbering Soul Serum");
+        const slumberingSoulSerumPotionInnerHTML = `Slumbering Soul Serum<br><br>` + colourStatWords(potionsVersion["Slumbering Soul Serum"].effect);
+        addTooltipFunctionality(slumberingSoulSerumPotionImage, slumberingSoulSerumPotionTooltip, null, slumberingSoulSerumPotionInnerHTML);    
 
-    const intellectPotionContainer = document.getElementById("elemental-potion-of-ultimate-power-container");
-    const intellectPotionTooltip = createTooltip("intellect-potion-tooltip", "option-image-tooltip");
-    const intellectPotionImage = intellectPotionContainer.querySelector(".potion-image");
-    intellectPotionImage.src = potions["Elemental Potion of Ultimate Power"].image;
-    intellectPotionImage.draggable = false;
-    intellectPotionImage.setAttribute("data-potion", "Elemental Potion of Ultimate Power");
+        const temperedPotionTooltip = createTooltip("intellect-potion-tooltip", "option-image-tooltip");
+        const temperedPotionImage = temperedPotionContainer.querySelector(".potion-image");
+        temperedPotionImage.src = potionsVersion["Tempered Potion"].image;
+        temperedPotionImage.draggable = false;
+        temperedPotionImage.setAttribute("data-potion", "Tempered Potion");
+        const temperedPotionInnerHTML = `Tempered Potion<br><br>` + colourStatWords(potionsVersion["Tempered Potion"].effect);
+        addTooltipFunctionality(temperedPotionImage, temperedPotionTooltip, null, temperedPotionInnerHTML);   
 
-    const intellectPotionInnerHTML = `Elemental Potion of Ultimate Power<br><br>` + colourStatWords(potions["Elemental Potion of Ultimate Power"].effect);
-    addTooltipFunctionality(intellectPotionImage, intellectPotionTooltip, null, intellectPotionInnerHTML);
+        aeratedManaPotionContainer.style.display = "none";
+        elementalPowerPotionContainer.style.display = "none";
+    } else {
+        const aeratedManaPotionTooltip = createTooltip("mana-potion-tooltip", "option-image-tooltip");
+        const aeratedManaPotionImage = aeratedManaPotionContainer.querySelector(".potion-image");
+        aeratedManaPotionImage.src = potionsVersion["Aerated Mana Potion"].image;
+        aeratedManaPotionImage.draggable = false;
+        aeratedManaPotionImage.setAttribute("data-potion", "Aerated Mana Potion");
+        const aeratedManaPotionInnerHTML = `Aerated Mana Potion<br><br>` + colourStatWords(potionsVersion["Aerated Mana Potion"].effect);
+        addTooltipFunctionality(aeratedManaPotionImage, aeratedManaPotionTooltip, null, aeratedManaPotionInnerHTML);
+    
+        const elementalPowerPotionTooltip = createTooltip("intellect-potion-tooltip", "option-image-tooltip");
+        const elementalPowerPotionImage = elementalPowerPotionContainer.querySelector(".potion-image");
+        elementalPowerPotionImage.src = potionsVersion["Elemental Potion of Ultimate Power"].image;
+        elementalPowerPotionImage.draggable = false;
+        elementalPowerPotionImage.setAttribute("data-potion", "Elemental Potion of Ultimate Power");
+        const elementalPowerPotionInnerHTML = `Elemental Potion of Ultimate Power<br><br>` + colourStatWords(potionsVersion["Elemental Potion of Ultimate Power"].effect);
+        addTooltipFunctionality(elementalPowerPotionImage, elementalPowerPotionTooltip, null, elementalPowerPotionInnerHTML);    
 
+        algariManaPotionContainer.style.display = "none";
+        slumberingSoulSerumPotionContainer.style.display = "none";
+        temperedPotionContainer.style.display = "none";
+    };
+    
     const raidBuffsFilterContainer = document.getElementById("raid-buffs-filter-container");
     const raidBuffTooltip = createTooltip("raid-buff-tooltip", "option-image-tooltip");
-    for (const raidBuff in raidBuffs) {
+    for (const raidBuff in raidBuffsVersion) {
         const raidBuffImage = createElement("img", "raid-buff-image", null);
-        raidBuffImage.src = raidBuffs[raidBuff].image;
+        raidBuffImage.src = raidBuffsVersion[raidBuff].image;
         raidBuffImage.draggable = false;
         raidBuffImage.setAttribute("data-raid-buff", raidBuff);
         raidBuffsFilterContainer.appendChild(raidBuffImage);
 
-        const raidBuffsInnerHTML = `${raidBuff}<br><br>` + colourStatWords(raidBuffs[raidBuff].effect);
+        const raidBuffsInnerHTML = `${raidBuff}<br><br>` + colourStatWords(raidBuffsVersion[raidBuff].effect);
         addTooltipFunctionality(raidBuffImage, raidBuffTooltip, null, raidBuffsInnerHTML);
     };
 
