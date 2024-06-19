@@ -1112,8 +1112,8 @@ class HolyLight(Spell):
             self.base_cast_time = 2
             
         if caster.ptr:
-            self.MANA_COST = 0.048
-            self.mana_cost = 0.048
+            self.MANA_COST = 0.064
+            self.mana_cost = 0.064
             
         if caster.ptr:
             self.SPELL_POWER_COEFFICIENT = 5.096
