@@ -2,7 +2,7 @@ import random
 import copy
 
 from .spells import Spell
-from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath, DawnlightAvailable, Dawnlight, EternalFlameBuff, GleamingRays, SunSear, SolarGrace, SunsAvatar, BlessedAssurance, DivineGuidance
+from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath, DawnlightAvailable, Dawnlight, EternalFlameBuff, GleamingRays, SunSear, SolarGrace, SunsAvatar, BlessedAssurance, DivineGuidance, DivineFavorBuff
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
 from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, update_spell_data_casts, update_spell_data_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
@@ -43,7 +43,7 @@ class HolyShock(Spell):
     def __init__(self, caster):
         super().__init__("Holy Shock", mana_cost=HolyShock.MANA_COST, base_mana_cost=HolyShock.BASE_MANA_COST, cooldown=HolyShock.BASE_COOLDOWN, holy_power_gain=HolyShock.HOLY_POWER_GAIN, max_charges=HolyShock.CHARGES, hasted_cooldown=True, is_heal=True)
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 1.4736
+            self.SPELL_POWER_COEFFICIENT = 1.9
             
         if caster.ptr:
             self.BASE_COOLDOWN = 9.5
@@ -315,7 +315,10 @@ class Daybreak(Spell):
             
             number_of_glimmers_removed = len(glimmer_targets)
             caster.glimmer_removal_counter += number_of_glimmers_removed
-            daybreak_mana_gain = 2000 * number_of_glimmers_removed
+            if caster.ptr:
+                daybreak_mana_gain = 35000 * number_of_glimmers_removed
+            else:
+                daybreak_mana_gain = 2000 * number_of_glimmers_removed
             caster.mana += daybreak_mana_gain
             update_mana_gained(caster.ability_breakdown, "Daybreak", daybreak_mana_gain)
             
@@ -390,7 +393,7 @@ class RisingSunlightHolyShock(Spell):
     def __init__(self, caster):
         super().__init__("Holy Shock (Rising Sunlight)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=RisingSunlightHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 1.4736
+            self.SPELL_POWER_COEFFICIENT = 1.9
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
@@ -663,7 +666,7 @@ class DivineTollHolyShock(Spell):
     def __init__(self, caster):
         super().__init__("Holy Shock (Divine Toll)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, is_heal=True)
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 1.4736
+            self.SPELL_POWER_COEFFICIENT = 1.9
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
@@ -904,7 +907,7 @@ class DivineResonanceHolyShock(Spell):
     def __init__(self, caster):
         super().__init__("Holy Shock (Divine Resonance)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 1.4736
+            self.SPELL_POWER_COEFFICIENT = 1.9
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
@@ -1268,7 +1271,8 @@ class HolyLight(Spell):
             
                 caster.active_auras["Divine Favor"].remove_effect(caster)
                 del caster.active_auras["Divine Favor"]
-                caster.abilities["Divine Favor"].remaining_cooldown = 30
+                if not caster.ptr:
+                    caster.abilities["Divine Favor"].remaining_cooldown = 30
                 
                 update_self_buff_data(caster.self_buff_breakdown, "Divine Favor", current_time, "expired")
             
@@ -1431,7 +1435,8 @@ class FlashOfLight(Spell):
 
                 caster.active_auras["Divine Favor"].remove_effect(caster)
                 del caster.active_auras["Divine Favor"]
-                caster.abilities["Divine Favor"].remaining_cooldown = 30
+                if not caster.ptr:
+                    caster.abilities["Divine Favor"].remaining_cooldown = 30
                 
                 update_self_buff_data(caster.self_buff_breakdown, "Divine Favor", current_time, "expired")
                 
@@ -2165,7 +2170,7 @@ class LightOfDawn(Spell):
                 caster.events.append(f"{format_time(current_time)}: Afterimage ({caster.afterimage_counter})")
             
             # divine purpose
-            if caster.is_talent_active("Divine Purpose"): 
+            if caster.is_talent_active("Divine Purpose") and initial_cast: 
                 if "Divine Purpose" in caster.active_auras:
                     del caster.active_auras["Divine Purpose"]
                     
@@ -2180,7 +2185,7 @@ class LightOfDawn(Spell):
                     caster.apply_buff_to_self(DivinePurpose(), current_time)
             
             # awakening
-            if caster.is_talent_active("Awakening"):
+            if caster.is_talent_active("Awakening") and initial_cast:
                 if "Awakening" in caster.active_auras:
                     caster.apply_buff_to_self(caster.active_auras["Awakening"], current_time, stacks_to_apply=1, max_stacks=12)
                     if caster.active_auras["Awakening"].current_stacks >= 12:
@@ -2328,6 +2333,9 @@ class HolyPrism(Spell):
             if caster.ptr and caster.is_talent_active("Aurora"):
                 caster.apply_buff_to_self(DivinePurpose(), current_time, reapply=True)
                 
+            if caster.ptr and caster.is_talent_active("Divine Favor"):
+                caster.apply_buff_to_self(DivineFavorBuff(), current_time)
+                
             return cast_success, spell_crit, heal_amount
 
 
@@ -2405,6 +2413,8 @@ class LayOnHands(Spell):
     
     def __init__(self, caster):
         super().__init__("Lay on Hands", cooldown=LayOnHands.BASE_COOLDOWN, off_gcd=True)
+        if caster.is_talent_active("Unbreakable Spirit"):
+            self.cooldown = 420
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)

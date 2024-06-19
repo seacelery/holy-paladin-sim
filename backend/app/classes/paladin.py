@@ -70,10 +70,10 @@ class Paladin:
             self.lightsmith_talents = copy.deepcopy(self.talents.lightsmith_talents)
             self.herald_of_the_sun_talents = copy.deepcopy(self.talents.herald_of_the_sun_talents)
         
-        self.base_mana = 250000
+        self.base_mana = 250000 if not self.ptr else 2500000
         self.mana = self.base_mana
         self.max_mana = self.base_mana
-        self.mana_regen_per_second = 2000
+        self.mana_regen_per_second = 2000 if not self.ptr else 20000
         self.innervate_active = False
         
         self.base_flat_haste = 0

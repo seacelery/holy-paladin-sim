@@ -142,7 +142,7 @@ class BroodkeepersPromiseHoT(HoT):
 class Dawnlight(HoT):
     
     # TODO verify 22.5% higher
-    SPELL_POWER_COEFFICIENT = 6
+    SPELL_POWER_COEFFICIENT = 4.8
     
     def __init__(self, caster):
         super().__init__("Dawnlight (HoT)", 8, base_duration=8, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
@@ -158,8 +158,7 @@ class Dawnlight(HoT):
         for target in targets:            
             tick_healing, spell_crit = self.calculate_tick_healing(caster)
         
-            # double dipping is a bug
-            radiation_healing = tick_healing * 0.1 * caster.mastery_multiplier * caster.versatility_multiplier
+            radiation_healing = tick_healing * 0.1
 
             target.receive_heal(radiation_healing, caster)
             update_spell_data_heals(caster.ability_breakdown, "Dawnlight (AoE)", target, radiation_healing, spell_crit)
@@ -349,7 +348,7 @@ class AvengingWrathAwakening(Buff):
             
             dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]        
             non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
-            dawnlights_to_apply = 4
+            dawnlights_to_apply = 1
             chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
             for target in chosen_targets:
                 target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
@@ -448,7 +447,7 @@ class AvengingCrusaderAwakening(Buff):
             
             dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]        
             non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
-            dawnlights_to_apply = 4
+            dawnlights_to_apply = 1
             chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
             for target in chosen_targets:
                 target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
@@ -506,24 +505,35 @@ class DivineFavorBuff(Buff):
         
     def apply_effect(self, caster, current_time=None):
         if "Holy Light" in caster.abilities:
-            caster.abilities["Holy Light"].spell_healing_modifier *= 1.6
+            if caster.ptr:
+                caster.abilities["Holy Light"].spell_healing_modifier *= 1.4
+            else:
+                caster.abilities["Holy Light"].spell_healing_modifier *= 1.6
             caster.abilities["Holy Light"].cast_time_modifier *= 0.7
             caster.abilities["Holy Light"].mana_cost_modifier *= 0.5
         if "Flash of Light" in caster.abilities:
-            caster.abilities["Flash of Light"].spell_healing_modifier *= 1.6
+            if caster.ptr:
+                caster.abilities["Flash of Light"].spell_healing_modifier *= 1.4
+            else:
+                caster.abilities["Flash of Light"].spell_healing_modifier *= 1.6
             caster.abilities["Flash of Light"].cast_time_modifier *= 0.7
-            # mana interaction bugged
-            caster.abilities["Flash of Light"].mana_cost_modifier *= 1
+            caster.abilities["Flash of Light"].mana_cost_modifier *= 0.5
             
     def remove_effect(self, caster, current_time=None):
         if "Holy Light" in caster.abilities:
-            caster.abilities["Holy Light"].spell_healing_modifier /= 1.6
+            if caster.ptr:
+                caster.abilities["Holy Light"].spell_healing_modifier /= 1.4
+            else:
+                caster.abilities["Holy Light"].spell_healing_modifier /= 1.6
             caster.abilities["Holy Light"].cast_time_modifier /= 0.7
             caster.abilities["Holy Light"].mana_cost_modifier /= 0.5
         if "Flash of Light" in caster.abilities:
-            caster.abilities["Flash of Light"].spell_healing_modifier /= 1.6
+            if caster.ptr:
+                caster.abilities["Flash of Light"].spell_healing_modifier /= 1.4
+            else:
+                caster.abilities["Flash of Light"].spell_healing_modifier /= 1.6
             caster.abilities["Flash of Light"].cast_time_modifier /= 0.7
-            caster.abilities["Flash of Light"].mana_cost_modifier /= 1
+            caster.abilities["Flash of Light"].mana_cost_modifier /= 0.5
  
 
 class HandOfDivinityBuff(Buff):
@@ -533,7 +543,10 @@ class HandOfDivinityBuff(Buff):
         
     def apply_effect(self, caster, current_time=None):
         if "Holy Light" in caster.abilities:
-            caster.abilities["Holy Light"].spell_healing_modifier *= 1.4
+            if caster.ptr:
+                caster.abilities["Holy Light"].spell_healing_modifier *= 1.3
+            else:
+                caster.abilities["Holy Light"].spell_healing_modifier *= 1.4
             caster.abilities["Holy Light"].base_cast_time = 0
             caster.abilities["Holy Light"].mana_cost_modifier *= 0.5
             
@@ -541,7 +554,10 @@ class HandOfDivinityBuff(Buff):
         from ..classes.spells_healing import HolyLight
         
         if "Holy Light" in caster.abilities:
-            caster.abilities["Holy Light"].spell_healing_modifier /= 1.4
+            if caster.ptr:
+                caster.abilities["Holy Light"].spell_healing_modifier /= 1.3
+            else:
+                caster.abilities["Holy Light"].spell_healing_modifier /= 1.4
             caster.abilities["Holy Light"].base_cast_time = HolyLight.BASE_CAST_TIME
             caster.abilities["Holy Light"].mana_cost_modifier /= 0.5
        
@@ -2973,7 +2989,7 @@ class RiteOfSanctification(Buff):
         caster.spell_power /= 1.01
         
 
-class RiteOfAdjuration(Buff):
+class RiteOfAdjurationBuff(Buff):
     
     def __init__(self, caster):
         super().__init__("Rite of Adjuration", 10000, base_duration=10000)   

@@ -44,13 +44,47 @@ class TouchOfLight(Spell):
         super().__init__("Touch of Light")
         
 
+class RiteOfAdjurationSpell(Spell):
+        
+        SPELL_POWER_COEFFICIENT = 2.04
+        BASE_PPM = 5
+        TARGET_COUNT = 5
+        
+        def __init__(self, caster):
+            super().__init__("Rite of Adjuration")
+            
+        def apply_effect(self, caster, target, current_time):    
+            targets = random.sample(caster.potential_healing_targets, 5)
+            
+            for chosen_target in targets:
+                rite_of_adjuration_heal, rite_of_adjuration_crit = RiteOfAdjurationSpell(caster).calculate_heal(caster, exclude_mastery=True)
+                    
+                rite_of_adjuration_heal = add_talent_healing_multipliers(rite_of_adjuration_heal, caster)
+                
+                chosen_target.receive_heal(rite_of_adjuration_heal, caster)
+                update_spell_data_heals(caster.ability_breakdown, self.name, chosen_target, rite_of_adjuration_heal, rite_of_adjuration_crit)
+        
+
 class SacredWeapon(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1 * 1.04
+    # higher in game than expected
+    SPELL_POWER_COEFFICIENT = 1 * 1.04 * 1.66
     BASE_PPM = 10
+    TARGET_COUNT = 5
     
     def __init__(self, caster, count):
         super().__init__(f"Sacred Weapon {count}")
+        
+    def apply_effect(self, caster, target, current_time):    
+        targets = random.sample(caster.potential_healing_targets, 5)
+        
+        for chosen_target in targets:
+            sacred_weapon_heal, sacred_weapon_crit = SacredWeapon(caster, 1).calculate_heal(caster, exclude_mastery=True)
+                
+            sacred_weapon_heal = add_talent_healing_multipliers(sacred_weapon_heal, caster)
+            
+            chosen_target.receive_heal(sacred_weapon_heal, caster)
+            update_spell_data_heals(caster.ability_breakdown, self.name, chosen_target, sacred_weapon_heal, sacred_weapon_crit)
         
 
 class AuthorityOfFieryResolve(Spell):

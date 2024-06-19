@@ -376,7 +376,7 @@ class Spell:
         from .spells_passives import (
             TouchOfLight, EmbraceOfAkunda, DreamingDevotion, ChirpingRune, LarodarsFieryReverie,
             MagazineOfHealingDarts, BronzedGripWrappings, SacredWeapon, AuthorityOfFieryResolve,
-            DivineInspiration
+            DivineInspiration, RiteOfAdjurationSpell
         )
         
         from .auras_buffs import (
@@ -450,20 +450,21 @@ class Spell:
             sacred_weapon_targets = [target for target in caster.potential_healing_targets if "Sacred Weapon" in target.target_active_buffs]
             if len(sacred_weapon_targets) == 2:
                 sacred_weapon_1 = SacredWeapon(caster, 1)
-                try_proc_rppm_effect(sacred_weapon_1, is_heal=True, is_hasted=False)
+                try_proc_rppm_effect(sacred_weapon_1, is_other_effect=True, is_hasted=False)
                 
                 sacred_weapon_2 = SacredWeapon(caster, 2)
-                try_proc_rppm_effect(sacred_weapon_2, is_heal=True, is_hasted=False)
+                try_proc_rppm_effect(sacred_weapon_2, is_other_effect=True, is_hasted=False)
             elif len(sacred_weapon_targets) == 1:
                 sacred_weapon_1 = SacredWeapon(caster, 1)
-                try_proc_rppm_effect(sacred_weapon_1, is_heal=True, is_hasted=False)
-                
-        if caster.ptr and caster.is_talent_active("Rite of Adjuration"):
-            pass
+                try_proc_rppm_effect(sacred_weapon_1, is_other_effect=True, is_hasted=False)
         
         if caster.ptr and caster.is_talent_active("Divine Inspiration"):
             divine_inspiration = DivineInspiration(caster)
             try_proc_rppm_effect(divine_inspiration, is_hasted=False, is_other_effect=True)
+            
+        if caster.ptr and caster.is_talent_active("Rite of Adjuration") and (self.name == "Light of Dawn" or self.name == "Word of Glory"):
+            rite_of_adjuration = RiteOfAdjurationSpell(caster)
+            try_proc_rppm_effect(rite_of_adjuration, is_hasted=False, is_other_effect=True)
         
         # enchants    
         if "Sophic Devotion" in caster.bonus_enchants:

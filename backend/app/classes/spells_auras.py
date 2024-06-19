@@ -27,6 +27,9 @@ class BarrierOfFaithSpell(Spell):
                 
             if caster.ptr and caster.is_talent_active("Aurora"):
                 caster.apply_buff_to_self(DivinePurpose(), current_time, reapply=True)
+                
+            if caster.ptr and caster.is_talent_active("Divine Favor"):
+                caster.apply_buff_to_self(DivineFavorBuff(), current_time)
             
         return cast_success, spell_crit, heal_amount
     
@@ -98,7 +101,7 @@ class TyrsDeliveranceHeal(Spell):
     def __init__(self, caster):
         super().__init__("Tyr's Deliverance", is_heal=True, off_gcd=True)
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 0.35
+            self.SPELL_POWER_COEFFICIENT = 0.3
             
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)

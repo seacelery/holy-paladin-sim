@@ -42,13 +42,15 @@ const specTalentsPTR = [
     "", "", "", "Glimmer of Light", "", "Light of Dawn", "", "", "", 
     "", "", "Light's Conviction", "", "Aura Mastery", "", "Beacon of the Lightbringer", "", "", 
     "", "Moment of Compassion/Resplendent Light", "", "Tirion's Devotion", "", "Unending Light", "", "Awestruck/Holy Infusion", "", 
-    "Divine Favor/Hand of Divinity", "", "Glistening Radiance", "", "Unwavering Spirit/Protection of Tyr", "", "Imbued Infusions", "", "Light of the Martyr", 
+    "Divine Revelations", "", "Glistening Radiance", "", "Unwavering Spirit/Protection of Tyr", "", "Imbued Infusions", "", "Light of the Martyr", 
     "", "Illumination/Blessed Focus", "Saved by the Light", "Holy Prism/Barrier of Faith", "Power of the Silver Hand", "Light's Protection", "Overflowing Light", "Shining Righteousness", "", 
-    "Divine Revelations", "", "Commanding Light", "Righteous Judgment", "Breaking Dawn", "Tower of Radiance", "Divine Glimpse", "", "Bestow Light", 
+    "Righteous Judgment", "", "Commanding Light", "Divine Favor/Hand of Divinity", "Breaking Dawn", "Tower of Radiance", "Divine Glimpse", "", "Bestow Light", 
     "", "Beacon of Faith/Beacon of Virtue", "", "Veneration", "", "Avenging Wrath: Might/Avenging Crusader", "", "Tyr's Deliverance", "", 
     "", "Daybreak", "Crusader's Might", "", "Merciful Auras/Blessing of Summer", "", "Relentless Inquisitor", "", "Reclamation", 
     "", "Rising Sunlight", "", "Glorious Dawn", "Sanctified Wrath/Awakening", "Inflorescence of the Sunwell/Empyrean Legacy", "", "Boundless Salvation", "", 
 ];
+
+
 
 let baseClassTalentsLive = {
     "row1": {
@@ -359,7 +361,7 @@ const classTalentsArrowsLive = {
     ],
     "downLong": [
         "Lay on Hands", "Hammer of Wrath", "Improved Cleanse", "Turn Evil", "Fist of Justice", "Greater Judgment", "Repentance/Blinding Light",
-        "Lightforged Blessing"
+        "Lightforged Blessing",
     ],
     "left": [
         "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Auras of Swift Vengeance", "Turn Evil", "Fist of Justice", 
@@ -384,7 +386,7 @@ const classTalentsArrowsPTR = {
     ],
     "downLong": [
         "Lay on Hands", "Hammer of Wrath", "Improved Cleanse", "Turn Evil", "Fist of Justice", "Greater Judgment", "Repentance/Blinding Light",
-        "Lightforged Blessing"
+        "Lightforged Blessing",
     ],
     "left": [
         "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Auras of Swift Vengeance", "Turn Evil", "Fist of Justice", 
@@ -428,12 +430,12 @@ const specTalentsArrowsLive = {
 const specTalentsArrowsPTR = {
     "down": [
         "Glistening Radiance", "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Saved by the Light", "Holy Prism/Barrier of Faith",
-        "Power of the Silver Hand", "Light's Protection", "Overflowing Light", "Righteous Judgment", "Tower of Radiance",
+        "Power of the Silver Hand", "Light's Protection", "Overflowing Light", "Divine Favor/Hand of Divinity", "Tower of Radiance",
         "Beacon of Faith/Beacon of Virtue", "Reclamation/Barrier of Faith", "Daybreak", "Merciful Auras/Blessing of Summer",
     ],
     "downLong": [
         "Light's Conviction", "Aura Mastery", "Beacon of the Lightbringer", "Moment of Compassion/Resplendent Light", "Tirion's Devotion",
-        "Unending Light", "Awestruck/Holy Infusion", "Divine Favor/Hand of Divinity", "Light of the Martyr", "Shining Righteousness",
+        "Unending Light", "Awestruck/Holy Infusion", "Divine Revelations", "Light of the Martyr", "Shining Righteousness",
         "Tyr's Deliverance"
     ],
     "left": [
@@ -446,7 +448,7 @@ const specTalentsArrowsPTR = {
     "right": [
         "Holy Shock", "Glimmer of Light", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Awestruck/Holy Infusion",
         "Glistening Radiance", "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Illumination/Blessed Focus", "Light's Hammer/Holy Prism",
-        "Light's Protection", "Divine Revelations", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Beacon of Faith/Beacon of Virtue",
+        "Light's Protection", "Righteous Judgment", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Beacon of Faith/Beacon of Virtue",
         "Veneration", "Avenging Wrath: Might/Avenging Crusader", "Crusader's Might", "Merciful Auras/Blessing of Summer", "Tyr's Deliverance",
     ]
 };

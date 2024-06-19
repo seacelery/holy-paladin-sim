@@ -111748,6 +111748,24978 @@ const itemData = [
         "enchantments": [],
         "gems": []
     },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Chestguard",
+        "item_slot": "Chest",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218688,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Haste": 445,
+            "Versatility": 1075
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Helmet",
+        "item_slot": "Head",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218657,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Critical Strike": 434,
+            "Versatility": 1086
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Warboots",
+        "item_slot": "Feet",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218671,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Haste": 326,
+            "Versatility": 814
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Helmet",
+        "item_slot": "Head",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218676,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Critical Strike": 434,
+            "Versatility": 1086
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Tasses",
+        "item_slot": "Legs",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218678,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_pant.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Versatility": 955,
+            "Mastery": 565
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Wargreaves",
+        "item_slot": "Legs",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218659,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pants_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Versatility": 955,
+            "Mastery": 565
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Shoulders",
+        "item_slot": "Shoulder",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218679,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Critical Strike": 423,
+            "Versatility": 717
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Greatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218701,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Haste": 391,
+            "Versatility": 749
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Chestguard",
+        "item_slot": "Chest",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218650,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Haste": 445,
+            "Versatility": 1075
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218658,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pants_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Haste": 478,
+            "Versatility": 1042
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218662,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_buckle_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Versatility": 798,
+            "Mastery": 342
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Greatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218682,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Haste": 391,
+            "Versatility": 749
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Wargreaves",
+        "item_slot": "Legs",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218697,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Versatility": 955,
+            "Mastery": 565
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218677,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_pant.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Haste": 478,
+            "Versatility": 1042
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Handguards",
+        "item_slot": "Hands",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218693,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Versatility": 765,
+            "Mastery": 375
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218696,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Haste": 478,
+            "Versatility": 1042
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Shoulders",
+        "item_slot": "Shoulder",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218698,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Critical Strike": 423,
+            "Versatility": 717
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Chestplate",
+        "item_slot": "Chest",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218651,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Versatility": 988,
+            "Mastery": 532
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Stompers",
+        "item_slot": "Feet",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218653,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Critical Strike": 350,
+            "Versatility": 790
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Helm",
+        "item_slot": "Head",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218656,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Versatility": 1053,
+            "Mastery": 467
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Shoulders",
+        "item_slot": "Shoulder",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218660,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Critical Strike": 423,
+            "Versatility": 717
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Helm",
+        "item_slot": "Head",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218675,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Versatility": 1053,
+            "Mastery": 467
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218680,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Haste": 383,
+            "Versatility": 757
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Warboots",
+        "item_slot": "Feet",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218690,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Haste": 326,
+            "Versatility": 814
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Helm",
+        "item_slot": "Head",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218694,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Versatility": 1053,
+            "Mastery": 467
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Chestplate",
+        "item_slot": "Chest",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218670,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_chest.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Versatility": 988,
+            "Mastery": 532
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Chestplate",
+        "item_slot": "Chest",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218689,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Versatility": 988,
+            "Mastery": 532
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Stompers",
+        "item_slot": "Feet",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218691,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Critical Strike": 350,
+            "Versatility": 790
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218692,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Critical Strike": 391,
+            "Versatility": 749
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218700,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Versatility": 798,
+            "Mastery": 342
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218661,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Haste": 383,
+            "Versatility": 757
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Chestguard",
+        "item_slot": "Chest",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218669,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_chest.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Haste": 445,
+            "Versatility": 1075
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Stompers",
+        "item_slot": "Feet",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218672,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Critical Strike": 350,
+            "Versatility": 790
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218673,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_glove.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Critical Strike": 391,
+            "Versatility": 749
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Vambraces",
+        "item_slot": "Wrist",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218684,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_bracer.jpg",
+        "stats": {
+            "Intellect": 1279,
+            "Haste": 299,
+            "Versatility": 556
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Helmet",
+        "item_slot": "Head",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218695,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2273,
+            "Critical Strike": 434,
+            "Versatility": 1086
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218699,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Haste": 383,
+            "Versatility": 757
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Wristguards",
+        "item_slot": "Wrist",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218702,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1279,
+            "Versatility": 574,
+            "Mastery": 281
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Handguards",
+        "item_slot": "Hands",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218655,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Versatility": 765,
+            "Mastery": 375
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Vambraces",
+        "item_slot": "Wrist",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218665,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1279,
+            "Haste": 299,
+            "Versatility": 556
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218681,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Versatility": 798,
+            "Mastery": 342
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Wristguards",
+        "item_slot": "Wrist",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218664,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1279,
+            "Versatility": 574,
+            "Mastery": 281
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Vambraces",
+        "item_slot": "Wrist",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218703,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1279,
+            "Haste": 299,
+            "Versatility": 556
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Warboots",
+        "item_slot": "Feet",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218652,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Haste": 326,
+            "Versatility": 814
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218654,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Critical Strike": 391,
+            "Versatility": 749
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Greatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218663,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_buckle_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Haste": 391,
+            "Versatility": 749
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Handguards",
+        "item_slot": "Hands",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218674,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_glove.jpg",
+        "stats": {
+            "Intellect": 1705,
+            "Versatility": 765,
+            "Mastery": 375
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Plate Wristguards",
+        "item_slot": "Wrist",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218683,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_bracer.jpg",
+        "stats": {
+            "Intellect": 1279,
+            "Versatility": 574,
+            "Mastery": 281
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+546 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+546 Random Stat 2 (546.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222436,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 1597
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Taking damage has a chance to imbue you with Sanctified Swiftness, granting 27 Speed stacking up to 10 times.\n\nAfter receiving 10 stacks, your next ability will release the stored energy dealing 45053 Holy damage split between all enemies within 10 yards."
+            }
+        ],
+        "name": "Sanctified Steps",
+        "item_slot": "Feet",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222458,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 1597,
+            "Versatility": 546,
+            "Mastery": 546
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Helm",
+        "item_slot": "Head",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222433,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 2129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+409 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+409 Random Stat 2 (409.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Vambraces",
+        "item_slot": "Wrist",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222435,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_bracer.jpg",
+        "stats": {
+            "Intellect": 1198
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+1,456 Random Stat 1 (0.00% @ L70)"
+            }
+        ],
+        "name": "Dangerous Distraction Inhibitor",
+        "item_slot": "Head",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 221804,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_armor_gnomish_c_01_red.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+546 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+546 Random Stat 2 (546.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222429,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 1597
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222430,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_robe.jpg",
+        "stats": {
+            "Intellect": 2129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Plate Greaves",
+        "item_slot": "Legs",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 217147,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 2129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+546 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+546 Random Stat 2 (546.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222437,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_glove.jpg",
+        "stats": {
+            "Intellect": 1597
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+409 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+409 Random Stat 2 (409.00% @ L70)"
+            },
+            {
+                "description": "Equip: Every 10 in combat take 1% of your maximum Health as Nature damage and gain a stack of Symbiosis, granting 531 Versatility for 20 sec  stacking up to 5 times."
+            }
+        ],
+        "name": "Burning Binding",
+        "item_slot": "Wrist",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 225661,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_bracer.jpg",
+        "stats": {
+            "Intellect": 1198
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+819 Random Stat 1 (0.00% @ L70)"
+            }
+        ],
+        "name": "Clanking Cuffs",
+        "item_slot": "Wrist",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 221808,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_dragonquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Plate Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 217143,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 2129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Legplates",
+        "item_slot": "Legs",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222434,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_pant.jpg",
+        "stats": {
+            "Intellect": 2129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Plate Helm",
+        "item_slot": "Head",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 217146,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 2129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+546 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+546 Random Stat 2 (546.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Plate Waistguard",
+        "item_slot": "Waist",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 217149,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1597
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+1,456 Random Stat 1 (0.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Plate Goggles",
+        "item_slot": "Head",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 217154,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_armor_gnomish_c_01_red.jpg",
+        "stats": {
+            "Intellect": 2129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+819 Random Stat 1 (0.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Plate Bracers",
+        "item_slot": "Wrist",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 217158,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1198
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+546 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+546 Random Stat 2 (546.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Greatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222431,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 1597
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+546 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+546 Random Stat 2 (546.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Plate Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 217144,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1597
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+546 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+546 Random Stat 2 (546.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Plate Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 217145,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1597
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+546 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+546 Random Stat 2 (546.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Plate Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 217148,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1597
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+409 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+409 Random Stat 2 (409.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Plate Armguards",
+        "item_slot": "Wrist",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 217150,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1198
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Exhumed Centurion's Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212003,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Critical Strike": 328,
+            "Mastery": 722
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Visor of the Evolved Captain",
+        "item_slot": "Head",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212427,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Haste": 935,
+            "Versatility": 466
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Queenguards's Carapace",
+        "item_slot": "Chest",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212420,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Critical Strike": 979,
+            "Haste": 421
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Seasoned Earthen Boulderplates",
+        "item_slot": "Shoulder",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212424,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Critical Strike": 685,
+            "Versatility": 365
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Entombed Seraph's Casque",
+        "item_slot": "Head",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211993,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Critical Strike": 463,
+            "Mastery": 938
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Shattershell Greaves",
+        "item_slot": "Feet",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212443,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Critical Strike": 353,
+            "Versatility": 697
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Warsculptor's Fur Plate",
+        "item_slot": "Chest",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211987,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Critical Strike": 981,
+            "Haste": 419
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Greatbelt of the Hungerer",
+        "item_slot": "Waist",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212442,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_buckle_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Haste": 331,
+            "Versatility": 720
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Entombed Seraph's Chained Plumes",
+        "item_slot": "Shoulder",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211991,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Versatility": 718,
+            "Mastery": 333
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Entombed Seraph's Casket",
+        "item_slot": "Chest",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211996,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_chest.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Haste": 976,
+            "Versatility": 424
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Black Blood Injectors",
+        "item_slot": "Hands",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212418,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Haste": 361,
+            "Mastery": 690
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Bloodbound Horror's Legplates",
+        "item_slot": "Legs",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212422,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_pant.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Critical Strike": 439,
+            "Versatility": 962
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Devoted Offering's Irons",
+        "item_slot": "Wrist",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225587,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_bracer.jpg",
+        "stats": {
+            "Intellect": 1133,
+            "Critical Strike": 275,
+            "Mastery": 513
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Nether Bounty's Greatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225589,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Critical Strike": 358,
+            "Haste": 692
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Boots of the Black Bulwark",
+        "item_slot": "Feet",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225590,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Haste": 737,
+            "Mastery": 314
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Warsculptor's Tusks",
+        "item_slot": "Head",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211984,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Haste": 997,
+            "Versatility": 404
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Plate - Waist",
+        "item_slot": "Waist",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225726,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_revendrethraid_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Haste": 690,
+            "Mastery": 360
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ravaged Lamplighter's Manacles",
+        "item_slot": "Wrist",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212437,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1133,
+            "Critical Strike": 513,
+            "Haste": 275
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Warsculptor's Cuisses",
+        "item_slot": "Legs",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211983,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Haste": 957,
+            "Mastery": 444
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Warsculptor's Crushers",
+        "item_slot": "Hands",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211985,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Critical Strike": 353,
+            "Versatility": 697
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Entombed Seraph's Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211995,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Versatility": 330,
+            "Mastery": 720
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Exhumed Centurion's Spikes",
+        "item_slot": "Shoulder",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212000,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Critical Strike": 739,
+            "Mastery": 312
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Warsculptor's Horned Spaulders",
+        "item_slot": "Shoulder",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211982,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Critical Strike": 355,
+            "Mastery": 695
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Entombed Seraph's Castigation",
+        "item_slot": "Hands",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211994,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_glove.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Critical Strike": 314,
+            "Haste": 737
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Exhumed Centurion's Chausses",
+        "item_slot": "Legs",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212001,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pants_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Haste": 437,
+            "Mastery": 964
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Warsculptor's Armguards",
+        "item_slot": "Wrist",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211980,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1133,
+            "Haste": 242,
+            "Versatility": 546
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Exhumed Centurion's Galea",
+        "item_slot": "Head",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212002,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Haste": 946,
+            "Versatility": 455
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Plate - Head",
+        "item_slot": "Head",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225736,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_revendrethraid_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Haste": 420,
+            "Mastery": 981
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Warsculptor's Buckle",
+        "item_slot": "Waist",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211981,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Haste": 695,
+            "Mastery": 356
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Warsculptor's Carved Boots",
+        "item_slot": "Feet",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211986,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Critical Strike": 734,
+            "Haste": 317
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Entombed Seraph's Waistguard",
+        "item_slot": "Waist",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211990,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Critical Strike": 702,
+            "Haste": 349
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Entombed Seraph's Greaves",
+        "item_slot": "Legs",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211992,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_pant.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Critical Strike": 980,
+            "Haste": 420
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Exhumed Centurion's Manacles",
+        "item_slot": "Wrist",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211998,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1133,
+            "Haste": 537,
+            "Mastery": 251
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Plate - Head",
+        "item_slot": "Head",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225727,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Haste": 420,
+            "Mastery": 981
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Exhumed Centurion's Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212005,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Critical Strike": 915,
+            "Haste": 486
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Entombed Seraph's Shackles",
+        "item_slot": "Wrist",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211989,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_bracer.jpg",
+        "stats": {
+            "Intellect": 1133,
+            "Haste": 232,
+            "Versatility": 556
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Plate - Feet",
+        "item_slot": "Feet",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225737,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_revendrethraid_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Haste": 694,
+            "Mastery": 356
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Exhumed Centurion's Baltea",
+        "item_slot": "Waist",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211999,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_buckle_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Haste": 325,
+            "Mastery": 726
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Exhumed Centurion's Sollerets",
+        "item_slot": "Feet",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212004,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Critical Strike": 717,
+            "Versatility": 333
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Crystal Star Cuisses",
+        "item_slot": "Legs",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225745,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pants_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 2014,
+            "Haste": 997,
+            "Mastery": 404
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Girdle of the Gleaming Dawn",
+        "item_slot": "Waist",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225746,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Versatility": 744,
+            "Mastery": 307
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Plate - Feet",
+        "item_slot": "Feet",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225744,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Intellect": 1510,
+            "Haste": 694,
+            "Mastery": 356
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Warden's Helm",
+        "item_slot": "Head",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223461,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 1580,
+            "Critical Strike": 677,
+            "Haste": 621
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Stalward Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224622,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1185
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Stalwart Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224617,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sabatons of the Ringing Deeps",
+        "item_slot": "Feet",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223463,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 1185,
+            "Critical Strike": 528,
+            "Versatility": 445
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Stalwart Faulds",
+        "item_slot": "Legs",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224620,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Shoulders",
+        "item_slot": "Shoulder",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218378,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 1185,
+            "Critical Strike": 459,
+            "Versatility": 515
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218381,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 1185,
+            "Versatility": 591,
+            "Mastery": 382
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Cuffs",
+        "item_slot": "Wrist",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218386,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_bracer.jpg",
+        "stats": {
+            "Intellect": 889,
+            "Versatility": 433,
+            "Mastery": 297
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Wargreaves",
+        "item_slot": "Legs",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218405,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_pant.jpg",
+        "stats": {
+            "Intellect": 1580,
+            "Versatility": 686,
+            "Mastery": 612
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lightning-Scarred Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223465,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_pant.jpg",
+        "stats": {
+            "Intellect": 1580,
+            "Critical Strike": 705,
+            "Haste": 593
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Helm",
+        "item_slot": "Head",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218357,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 1580,
+            "Versatility": 779,
+            "Mastery": 519
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Stalwart Handguards",
+        "item_slot": "Hands",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224619,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1185
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218410,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 1185,
+            "Haste": 424,
+            "Versatility": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Stalwart Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224618,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1185
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Stalwart Cuffs",
+        "item_slot": "Wrist",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224623,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 889
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218373,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_pant.jpg",
+        "stats": {
+            "Intellect": 1580,
+            "Haste": 566,
+            "Versatility": 732
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "[PH] 11.0 - Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223462,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_robe.jpg",
+        "stats": {
+            "Intellect": 1580,
+            "Critical Strike": 677,
+            "Versatility": 621
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Mantle of the Weaver",
+        "item_slot": "Shoulder",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223466,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 1185,
+            "Critical Strike": 549,
+            "Mastery": 424
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Warboots",
+        "item_slot": "Feet",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218362,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 1185,
+            "Haste": 389,
+            "Versatility": 584
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Headguard",
+        "item_slot": "Head",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218389,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 1580,
+            "Critical Strike": 519,
+            "Versatility": 779
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Stalwart Greathelm",
+        "item_slot": "Head",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224616,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218367,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_glove.jpg",
+        "stats": {
+            "Intellect": 1185,
+            "Critical Strike": 431,
+            "Versatility": 542
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Armor",
+        "item_slot": "Chest",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218391,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_robe.jpg",
+        "stats": {
+            "Intellect": 1580,
+            "Versatility": 705,
+            "Mastery": 593
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Chestplate",
+        "item_slot": "Chest",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218359,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_robe.jpg",
+        "stats": {
+            "Intellect": 1580,
+            "Haste": 566,
+            "Versatility": 732
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Greatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218413,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 1185,
+            "Haste": 424,
+            "Versatility": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "[PH] 11.0 - Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223464,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_glove.jpg",
+        "stats": {
+            "Intellect": 1185,
+            "Critical Strike": 549,
+            "Versatility": 424
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Stalwart Shoulder Scales",
+        "item_slot": "Shoulder",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224621,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1185
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Saboteur's Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223467,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 1185,
+            "Critical Strike": 508,
+            "Haste": 466
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Stompers",
+        "item_slot": "Feet",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218394,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 1185,
+            "Critical Strike": 396,
+            "Versatility": 577
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Handguards",
+        "item_slot": "Hands",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218399,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_glove.jpg",
+        "stats": {
+            "Intellect": 1185,
+            "Versatility": 556,
+            "Mastery": 417
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Plate Armguards",
+        "item_slot": "Wrist",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218418,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_bracer.jpg",
+        "stats": {
+            "Intellect": 889,
+            "Haste": 323,
+            "Versatility": 407
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Stormrider's Armplates",
+        "item_slot": "Wrist",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223468,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_bracer.jpg",
+        "stats": {
+            "Intellect": 889,
+            "Critical Strike": 396,
+            "Mastery": 334
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Breastplate of the Reckoning's Vengeance",
+        "item_slot": "Chest",
+        "base_item_level": 519,
+        "quality": "Uncommon",
+        "id": 220132,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1240,
+            "Haste": 716,
+            "Mastery": 477
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lamplighter's Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 512,
+        "quality": "Uncommon",
+        "id": 220127,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 872,
+            "Haste": 436,
+            "Mastery": 436
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Love's Last Grasp",
+        "item_slot": "Hands",
+        "base_item_level": 506,
+        "quality": "Uncommon",
+        "id": 226176,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 824,
+            "Haste": 384,
+            "Versatility": 469
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+417 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+417 Random Stat 2 (417.00% @ L70)"
+            }
+        ],
+        "name": "Pressurized Alloy Greatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217856,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 779
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+556 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+556 Random Stat 2 (556.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Chest",
+        "item_slot": "Head",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217854,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 1039
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+417 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+417 Random Stat 2 (417.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Waist",
+        "item_slot": "Shoulder",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217849,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 779
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+556 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+556 Random Stat 2 (556.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Hands",
+        "item_slot": "Legs",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217847,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 1039
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+556 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+556 Random Stat 2 (556.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Legs",
+        "item_slot": "Two-Hand",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217850,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+278 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+278 Random Stat 2 (278.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Shoulders",
+        "item_slot": "N/A",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217852,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+556 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+556 Random Stat 2 (556.00% @ L70)"
+            }
+        ],
+        "name": "Pressurized Alloy Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217859,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 1039
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+278 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+278 Random Stat 2 (278.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Wrists",
+        "item_slot": "One-Hand",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217848,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+278 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+278 Random Stat 2 (278.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Helm",
+        "item_slot": "One-Hand",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217855,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 520
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+417 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+417 Random Stat 2 (417.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Feet",
+        "item_slot": "Feet",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217851,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 779
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+313 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+313 Random Stat 2 (313.00% @ L70)"
+            }
+        ],
+        "name": "Pressurized Alloy Vambraces",
+        "item_slot": "Wrist",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217860,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 585
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+417 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+417 Random Stat 2 (417.00% @ L70)"
+            }
+        ],
+        "name": "Pressurized Alloy Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217862,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 779
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Tower-Keeper's Waistguard",
+        "item_slot": "Waist",
+        "base_item_level": 499,
+        "quality": "Uncommon",
+        "id": 220114,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 772,
+            "Haste": 332,
+            "Versatility": 499
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Greaves of Sina's Stalwarts",
+        "item_slot": "Legs",
+        "base_item_level": 496,
+        "quality": "Uncommon",
+        "id": 220110,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1001,
+            "Versatility": 548,
+            "Mastery": 548
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arathi Officer's Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 486,
+        "quality": "Rare",
+        "id": 226139,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 684,
+            "Haste": 327,
+            "Mastery": 463
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+250 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+250 Random Stat 2 (250.00% @ L70)"
+            }
+        ],
+        "name": "Dredger's Plate Vambraces",
+        "item_slot": "Wrist",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222477,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 357
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dredger's Goggles",
+        "item_slot": "Head",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 225645,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_armor_engineering_b_02_goblin.jpg",
+        "stats": {
+            "Intellect": 634
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+333 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+333 Random Stat 2 (333.00% @ L70)"
+            }
+        ],
+        "name": "Dredger's Developed Greatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222473,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 476
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+444 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+444 Random Stat 2 (444.00% @ L70)"
+            }
+        ],
+        "name": "Dredger's Developed Helm",
+        "item_slot": "Head",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222475,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 634
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+444 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+444 Random Stat 2 (444.00% @ L70)"
+            }
+        ],
+        "name": "Dredger's Developed Legplates",
+        "item_slot": "Legs",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222476,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 634
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+333 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+333 Random Stat 2 (333.00% @ L70)"
+            }
+        ],
+        "name": "Dredger's Developed Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222478,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 476
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+444 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+444 Random Stat 2 (444.00% @ L70)"
+            }
+        ],
+        "name": "Dredger's Plate Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222472,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 634
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+333 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+333 Random Stat 2 (333.00% @ L70)"
+            }
+        ],
+        "name": "Dredger's Developed Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222479,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 476
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+333 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+333 Random Stat 2 (333.00% @ L70)"
+            }
+        ],
+        "name": "Dredger's Plate Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222471,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 476
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+222 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+222 Random Stat 2 (222.00% @ L70)"
+            }
+        ],
+        "name": "Dredger's Developed Defender",
+        "item_slot": "N/A",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222474,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_undergroundquest_b_02.jpg",
+        "stats": {
+            "Intellect": 317
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Flameforged Armguard",
+        "item_slot": "Wrist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221118,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 325,
+            "Critical Strike": 299,
+            "Haste": 177
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Legplates of Broken Trust",
+        "item_slot": "Legs",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221092,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Critical Strike": 296,
+            "Mastery": 550
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Legplates of Dark Hunger",
+        "item_slot": "Legs",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223389,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Haste": 399,
+            "Versatility": 447
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Viper's Stone Handguards",
+        "item_slot": "Hands",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223346,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Versatility": 372,
+            "Mastery": 263
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Monstrosity's Gaze",
+        "item_slot": "Head",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221047,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Haste": 332,
+            "Versatility": 514
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Devoted Plate Walkers",
+        "item_slot": "Feet",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221123,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Versatility": 399,
+            "Mastery": 236
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Vociferous Subjugator's Bracers",
+        "item_slot": "Wrist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221167,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 325,
+            "Haste": 279,
+            "Versatility": 197
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Hops Laden Greatboots",
+        "item_slot": "Feet",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221061,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 249,
+            "Mastery": 385
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Crystal-Fissure Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221079,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 372,
+            "Mastery": 263
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Machinist's Searing Handguards",
+        "item_slot": "Hands",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221086,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 249,
+            "Haste": 385
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Soaring Behemoth's Greathelm",
+        "item_slot": "Head",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221146,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Critical Strike": 314,
+            "Versatility": 532
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Experimental Goresilk Chestguard",
+        "item_slot": "Chest",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221161,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Haste": 332,
+            "Versatility": 514
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ichor-Stained Sollerets",
+        "item_slot": "Feet",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221178,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Haste": 236,
+            "Versatility": 399
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Flesh Connector's Epaulets",
+        "item_slot": "Shoulder",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221185,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 412,
+            "Haste": 222
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Reanimator's Pyreforged Shoulders",
+        "item_slot": "Shoulder",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221203,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 412,
+            "Versatility": 222
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Waxsteel Greathelm",
+        "item_slot": "Head",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221100,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Haste": 514,
+            "Versatility": 332
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Bruin Strength Legplates",
+        "item_slot": "Legs",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221216,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Haste": 375,
+            "Mastery": 471
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Footguards of Shallow Waters",
+        "item_slot": "Feet",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223340,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Haste": 335,
+            "Mastery": 299
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Waterskipper's Legplates",
+        "item_slot": "Legs",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223352,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Critical Strike": 399,
+            "Haste": 447
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Gilded Cryptlord's Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223923,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 281,
+            "Versatility": 354
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Fuzzy Cindercuffs",
+        "item_slot": "Wrist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221064,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 325,
+            "Critical Strike": 299,
+            "Haste": 177
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Caliginous Claspers",
+        "item_slot": "Hands",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221112,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Haste": 222,
+            "Versatility": 412
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Spaulders of the Steamsurger",
+        "item_slot": "Shoulder",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223357,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 354,
+            "Mastery": 281
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Stubborn Wolf's Greathelm",
+        "item_slot": "Head",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223948,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Critical Strike": 350,
+            "Mastery": 496
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "City Guard's Greaves",
+        "item_slot": "Legs",
+        "base_item_level": 437,
+        "quality": "Uncommon",
+        "id": 224456,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_legiondungeon_c_03.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Critical Strike": 459,
+            "Haste": 387
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Swarm Monarch's Spaulders",
+        "item_slot": "Shoulder",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221155,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Versatility": 372,
+            "Mastery": 263
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Legplates of Duality",
+        "item_slot": "Legs",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221173,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Haste": 332,
+            "Mastery": 514
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forgeborn Helm",
+        "item_slot": "Head",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221242,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Haste": 496,
+            "Versatility": 350
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Murkshade Handguards",
+        "item_slot": "Hands",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223383,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 263,
+            "Mastery": 372
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Makrura's Foreboding Legplates",
+        "item_slot": "Legs",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223934,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Versatility": 471,
+            "Mastery": 375
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Devourer's Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221151,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Haste": 372,
+            "Versatility": 263
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Warphorn's Resilient Chestplate",
+        "item_slot": "Chest",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223342,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Haste": 496,
+            "Versatility": 350
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Wolf Packleader's Visor",
+        "item_slot": "Head",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223370,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Critical Strike": 471,
+            "Mastery": 375
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Corrupted Earthen Wristguards",
+        "item_slot": "Wrist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223402,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 325,
+            "Critical Strike": 197,
+            "Versatility": 279
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Thunder-Clad Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221034,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Haste": 496,
+            "Versatility": 350
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Slashproof Business Plate",
+        "item_slot": "Chest",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221069,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Critical Strike": 314,
+            "Haste": 532
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dark Priest's Carapace",
+        "item_slot": "Chest",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221139,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Critical Strike": 532,
+            "Versatility": 314
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Venomous Lurker's Greathelm",
+        "item_slot": "Shoulder",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221221,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Haste": 372,
+            "Versatility": 263
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Bouldershell Waistguard",
+        "item_slot": "Waist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221224,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 354,
+            "Mastery": 281
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Abyssal Hunter's Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223397,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Versatility": 299,
+            "Mastery": 335
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Plate - Feet",
+        "item_slot": "Feet",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211620,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_oribosquesting_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Haste": 344,
+            "Mastery": 290
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Plate - Chest",
+        "item_slot": "Chest",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211622,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_oribosquesting_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Haste": 441,
+            "Versatility": 405
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Plate - Hand",
+        "item_slot": "Hands",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211626,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_oribosquesting_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Versatility": 331,
+            "Mastery": 304
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Plate - Legs",
+        "item_slot": "Legs",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211632,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_oribosquesting_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Critical Strike": 387,
+            "Haste": 459
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Plate - Shoulder",
+        "item_slot": "Shoulder",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211637,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_oribosquesting_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 358,
+            "Mastery": 276
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Plate - Waist",
+        "item_slot": "Waist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211640,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_oribosquesting_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Haste": 290,
+            "Versatility": 344
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Plate - Wrist",
+        "item_slot": "Wrist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211645,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_oribosquesting_b_01.jpg",
+        "stats": {
+            "Intellect": 325,
+            "Haste": 248,
+            "Mastery": 228
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Plate - Head",
+        "item_slot": "Head",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211663,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_oribosquesting_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Critical Strike": 477,
+            "Mastery": 369
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lightning-Conductor's Bands",
+        "item_slot": "Waist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221040,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Haste": 249,
+            "Mastery": 385
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Foam-Ridden Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221052,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Versatility": 385,
+            "Mastery": 249
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Girdle of Somber Ploys",
+        "item_slot": "Waist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221133,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Haste": 249,
+            "Mastery": 385
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Spore Giant's Stompers",
+        "item_slot": "Feet",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221204,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Versatility": 281,
+            "Mastery": 354
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Footguards of the Nerubian Twins",
+        "item_slot": "Feet",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223378,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 299,
+            "Versatility": 335
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Nerubian Weaver's Chestplate",
+        "item_slot": "Chest",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223379,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Versatility": 496,
+            "Mastery": 350
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Deepfiend Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223394,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 281,
+            "Haste": 354
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Vilewing Visor",
+        "item_slot": "Head",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223405,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Critical Strike": 375,
+            "Haste": 471
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Nerubian Cultivator's Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223941,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Haste": 354,
+            "Versatility": 281
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Reinforced Chitin Chestpiece",
+        "item_slot": "Chest",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221206,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Critical Strike": 399,
+            "Mastery": 447
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Grips of the Earth",
+        "item_slot": "Hands",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221210,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 335,
+            "Versatility": 299
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Perchfather's Cuffs",
+        "item_slot": "Wrist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221229,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 325,
+            "Versatility": 224,
+            "Mastery": 252
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Flying Kobold's Seatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223360,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Haste": 299,
+            "Versatility": 335
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Wristguards of the Titancap",
+        "item_slot": "Wrist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223365,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 325,
+            "Haste": 279,
+            "Mastery": 197
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Blood Hungerer's Chestplate",
+        "item_slot": "Chest",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223925,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 578,
+            "Haste": 399,
+            "Versatility": 447
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "[PH] Perchfather's Cuffs",
+        "item_slot": "Wrist",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223945,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 325,
+            "Versatility": 224,
+            "Mastery": 252
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Crop Cutter's Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223928,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 433,
+            "Critical Strike": 299,
+            "Haste": 335
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Battleplate of Dimming Fluorescence",
+        "item_slot": "Chest",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 223296,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_robe.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Versatility": 315,
+            "Mastery": 374
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sedimentary Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224690,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 409
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Poor Item Template - Plate Faceguard",
+        "item_slot": "Head",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 211901,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helmet_03.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Charred Nerubian Warplate",
+        "item_slot": "Chest",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219748,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 360,
+            "Versatility": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sedimentary Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224696,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 307
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sedimentary Helm",
+        "item_slot": "Head",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224693,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 409
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sedimentary Armplates",
+        "item_slot": "Wrist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224697,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 230
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sedimentary Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224694,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 409
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212120,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_chest.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 360,
+            "Versatility": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Armplates",
+        "item_slot": "Wrist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219376,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 230,
+            "Critical Strike": 211,
+            "Mastery": 177
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sedimentary Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224691,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 307
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Chiseled Boulder Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 223290,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 236,
+            "Versatility": 281
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sedimentary Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224692,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 307
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sporefused Greaves",
+        "item_slot": "Legs",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219768,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 374,
+            "Haste": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 220333,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sedimentary Mantle",
+        "item_slot": "Shoulder",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224695,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 307
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 220331,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Chiseled Boulder Crushers",
+        "item_slot": "Feet",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 223301,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 270,
+            "Haste": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Armplates",
+        "item_slot": "Wrist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212126,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_bracer.jpg",
+        "stats": {
+            "Intellect": 230,
+            "Critical Strike": 211,
+            "Mastery": 177
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Helm",
+        "item_slot": "Head",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219372,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Mead-Speckled Full Helm",
+        "item_slot": "Head",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219757,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Slag Accruing Mask",
+        "item_slot": "Head",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 223295,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Haste": 360,
+            "Mastery": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Smuggled Nerubian Cuffs",
+        "item_slot": "Wrist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225537,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 230,
+            "Critical Strike": 211,
+            "Mastery": 177
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Poor Item Template - Plate Shoulderguards",
+        "item_slot": "Shoulder",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 211899,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_13.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Helm",
+        "item_slot": "Head",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212119,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_helm.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Mantle",
+        "item_slot": "Shoulder",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212124,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 292,
+            "Mastery": 225
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212125,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_buckle.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 270,
+            "Haste": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218157,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_pants.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 374,
+            "Haste": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218213,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_glove.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 292,
+            "Versatility": 225
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Mantle",
+        "item_slot": "Shoulder",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218215,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 292,
+            "Mastery": 225
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 220335,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Poor Item Template - Plate Vambraces",
+        "item_slot": "Wrist",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 211897,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_07.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Poor Item Template - Plate Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 211900,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pants_03.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Poor Item Template - Plate Gloves",
+        "item_slot": "Hands",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 211902,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_gauntlets_28.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Poor Item Template - Plate Chestpiece",
+        "item_slot": "Chest",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 211903,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate11.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Poor Item Template - Plate Greatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 211904,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_06.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212121,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_boots.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 281,
+            "Versatility": 236
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212122,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_glove.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 292,
+            "Versatility": 225
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212123,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_pants.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 374,
+            "Haste": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Helm",
+        "item_slot": "Head",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218153,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_helm.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218154,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_chest.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 360,
+            "Versatility": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218155,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_boots.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 281,
+            "Versatility": 236
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218156,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_glove.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 292,
+            "Versatility": 225
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Mantle",
+        "item_slot": "Shoulder",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218158,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 292,
+            "Mastery": 225
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218159,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_buckle.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 270,
+            "Haste": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Armplates",
+        "item_slot": "Wrist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218160,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_bracer.jpg",
+        "stats": {
+            "Intellect": 230,
+            "Critical Strike": 211,
+            "Mastery": 177
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Helm",
+        "item_slot": "Head",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218210,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_helm.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218211,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_chest.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 360,
+            "Versatility": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218212,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_boots.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 281,
+            "Versatility": 236
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218214,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_pants.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 374,
+            "Haste": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218216,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_buckle.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 270,
+            "Haste": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Armplates",
+        "item_slot": "Wrist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218217,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_bracer.jpg",
+        "stats": {
+            "Intellect": 230,
+            "Critical Strike": 211,
+            "Mastery": 177
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219373,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 360,
+            "Versatility": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 220332,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Spaulders",
+        "item_slot": "Shoulder",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 220336,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Greatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 220337,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Vambraces",
+        "item_slot": "Wrist",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 220338,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Slag Accruing Waistguard",
+        "item_slot": "Waist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 223304,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 292,
+            "Mastery": 225
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "[PH] Armor Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225531,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_chest.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 360,
+            "Versatility": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "[PH] Armor Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225532,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_boots.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 281,
+            "Versatility": 236
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "[PH] Armor Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225534,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_pants.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Critical Strike": 374,
+            "Haste": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "General's Pungent Mantle",
+        "item_slot": "Shoulder",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225535,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 225,
+            "Versatility": 292
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "[PH] Armor Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225536,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_oribosdungeon_c_01_buckle.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 270,
+            "Haste": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Poor Item Template - Plate Warboots",
+        "item_slot": "Feet",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 211898,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boots_plate_08.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219374,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 292,
+            "Versatility": 225
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Mantle",
+        "item_slot": "Shoulder",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219375,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 292,
+            "Mastery": 225
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Congealed Cinderbrew Battleboots",
+        "item_slot": "Feet",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219752,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 281,
+            "Versatility": 236
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Rubble-Salvaged Waistguard",
+        "item_slot": "Waist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219762,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 270,
+            "Haste": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Greathelm",
+        "item_slot": "Head",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 220334,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Rescued Aeroknight's Helmet",
+        "item_slot": "Head",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225530,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 409,
+            "Versatility": 360,
+            "Mastery": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Armguards of Dimming Fluorescence",
+        "item_slot": "Wrist",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 223311,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_bracer.jpg",
+        "stats": {
+            "Intellect": 230,
+            "Haste": 169,
+            "Versatility": 219
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Webweave Grips",
+        "item_slot": "Hands",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225533,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 307,
+            "Critical Strike": 225,
+            "Haste": 292
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 218064,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_legiondungeon_c_03.jpg",
+        "stats": {
+            "Intellect": 257,
+            "Critical Strike": 229,
+            "Mastery": 249
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Spaulders",
+        "item_slot": "Shoulder",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 218067,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_legiondungeon_c_03.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Versatility": 202,
+            "Mastery": 156
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Helm",
+        "item_slot": "Head",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 218063,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_legiondungeon_c_03.jpg",
+        "stats": {
+            "Intellect": 257,
+            "Critical Strike": 249,
+            "Haste": 229
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Cuirass",
+        "item_slot": "Chest",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223824,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_robe.jpg",
+        "stats": {
+            "Intellect": 257,
+            "Critical Strike": 229,
+            "Versatility": 249
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+239 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+239 Random Stat 2 (239.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 221997,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_dragonpvp_d_01.jpg",
+        "stats": {
+            "Intellect": 257
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+179 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+179 Random Stat 2 (179.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222003,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_dragonpvp_d_01.jpg",
+        "stats": {
+            "Intellect": 193
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Clasp",
+        "item_slot": "Waist",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223829,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Haste": 172,
+            "Versatility": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Secret-Dredger's Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211031,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Haste": 202,
+            "Mastery": 156
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 218066,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_legiondungeon_c_03.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Critical Strike": 156,
+            "Versatility": 202
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Secret-Dredger's Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211033,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 257,
+            "Haste": 229,
+            "Mastery": 249
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+179 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+179 Random Stat 2 (179.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Greatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 221998,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_dragonpvp_d_01.jpg",
+        "stats": {
+            "Intellect": 193
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Spaulders",
+        "item_slot": "Shoulder",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223828,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Versatility": 202,
+            "Mastery": 156
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Pauldrons of Hidden Stars",
+        "item_slot": "Shoulder",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219153,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_shoulder.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Critical Strike": 233,
+            "Versatility": 126
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Legplates of Hidden Stars",
+        "item_slot": "Legs",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219154,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_pant.jpg",
+        "stats": {
+            "Intellect": 257,
+            "Haste": 290,
+            "Versatility": 188
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Raiment of Hidden Stars",
+        "item_slot": "Chest",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219158,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_robe.jpg",
+        "stats": {
+            "Intellect": 257,
+            "Haste": 311,
+            "Mastery": 167
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Faceplate",
+        "item_slot": "Head",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223823,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 257,
+            "Haste": 229,
+            "Versatility": 249
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223827,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_pant.jpg",
+        "stats": {
+            "Intellect": 257,
+            "Haste": 219,
+            "Versatility": 260
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Secret-Dredger's Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211030,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 257,
+            "Critical Strike": 219,
+            "Haste": 260
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Secret-Dredger's Mantle",
+        "item_slot": "Shoulder",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211034,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Critical Strike": 195,
+            "Mastery": 164
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Secret-Dredger's Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211035,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Versatility": 156,
+            "Mastery": 202
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Secret-Dredger's Armplates",
+        "item_slot": "Wrist",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211036,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 144,
+            "Critical Strike": 140,
+            "Haste": 129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Fists of Hidden Stars",
+        "item_slot": "Hands",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219156,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_glove.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Critical Strike": 141,
+            "Versatility": 218
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Secret-Dredger's Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211032,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Haste": 195,
+            "Versatility": 164
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Bracers",
+        "item_slot": "Wrist",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 218069,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_legiondungeon_c_03.jpg",
+        "stats": {
+            "Intellect": 144,
+            "Haste": 146,
+            "Mastery": 123
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Visage of Hidden Stars",
+        "item_slot": "Head",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219155,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 257,
+            "Versatility": 178,
+            "Mastery": 301
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223825,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Critical Strike": 164,
+            "Versatility": 195
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Bracers",
+        "item_slot": "Wrist",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223830,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_bracer.jpg",
+        "stats": {
+            "Intellect": 144,
+            "Versatility": 146,
+            "Mastery": 123
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Boots",
+        "item_slot": "Feet",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 218065,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_legiondungeon_c_03.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Critical Strike": 195,
+            "Versatility": 164
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Clasp",
+        "item_slot": "Waist",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 218068,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_legiondungeon_c_03.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Haste": 172,
+            "Mastery": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223826,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_glove.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Critical Strike": 156,
+            "Versatility": 202
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Secret-Dredger's Helm",
+        "item_slot": "Head",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211029,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 257,
+            "Critical Strike": 229,
+            "Versatility": 249
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+239 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+239 Random Stat 2 (239.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Legplates",
+        "item_slot": "Legs",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222001,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_dragonpvp_d_01.jpg",
+        "stats": {
+            "Intellect": 257
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Charmbelt of Hidden Stars",
+        "item_slot": "Waist",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219152,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Critical Strike": 225,
+            "Haste": 133
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+179 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+179 Random Stat 2 (179.00% @ L70)"
+            }
+        ],
+        "name": "Lightwatcher's Visor",
+        "item_slot": "Hands",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 220956,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_dragonpvp_d_01.jpg",
+        "stats": {
+            "Intellect": 193
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lightwatcher's Visor",
+        "item_slot": "Head",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222022,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_challengewarrior_d_01.jpg",
+        "stats": {
+            "Intellect": 257,
+            "Critical Strike": 184,
+            "Versatility": 294
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Handguards of Hidden Stars",
+        "item_slot": "Wrist",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219151,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_bracer.jpg",
+        "stats": {
+            "Intellect": 144,
+            "Haste": 111,
+            "Versatility": 158
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sollerets of Hidden Stars",
+        "item_slot": "Feet",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219157,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 193,
+            "Critical Strike": 149,
+            "Mastery": 210
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+179 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+179 Random Stat 2 (179.00% @ L70)"
+            }
+        ],
+        "name": "Crystal Gazer's Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 220955,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_dragonpvp_d_01.jpg",
+        "stats": {
+            "Intellect": 193
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+239 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+239 Random Stat 2 (239.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Helm",
+        "item_slot": "Head",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222000,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_dragonpvp_d_01.jpg",
+        "stats": {
+            "Intellect": 257
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+179 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+179 Random Stat 2 (179.00% @ L70)"
+            }
+        ],
+        "name": "Crystal Gazer's Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222021,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_dragonpvp_d_01.jpg",
+        "stats": {
+            "Intellect": 193
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+179 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+179 Random Stat 2 (179.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 221996,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_dragonpvp_d_01.jpg",
+        "stats": {
+            "Intellect": 193
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+134 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+134 Random Stat 2 (134.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Vambraces",
+        "item_slot": "Wrist",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222002,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_dragonpvp_d_01.jpg",
+        "stats": {
+            "Intellect": 144
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+179 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+179 Random Stat 2 (179.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222004,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_dragonpvp_d_01.jpg",
+        "stats": {
+            "Intellect": 193
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+204 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+204 Random Stat 2 (204.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 330,
+        "quality": "Common",
+        "id": 222035,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 216
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+153 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+153 Random Stat 2 (153.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 330,
+        "quality": "Common",
+        "id": 222041,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 162
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+204 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+204 Random Stat 2 (204.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Helm",
+        "item_slot": "Head",
+        "base_item_level": 330,
+        "quality": "Common",
+        "id": 222038,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 216
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+153 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+153 Random Stat 2 (153.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 330,
+        "quality": "Common",
+        "id": 222034,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 162
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+153 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+153 Random Stat 2 (153.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Greatbelt",
+        "item_slot": "Waist",
+        "base_item_level": 330,
+        "quality": "Common",
+        "id": 222036,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 162
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+153 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+153 Random Stat 2 (153.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 330,
+        "quality": "Common",
+        "id": 222042,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 162
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+153 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+153 Random Stat 2 (153.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Defender",
+        "item_slot": "Hands",
+        "base_item_level": 330,
+        "quality": "Common",
+        "id": 222037,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 162
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+204 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+204 Random Stat 2 (204.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Legplates",
+        "item_slot": "Legs",
+        "base_item_level": 330,
+        "quality": "Common",
+        "id": 222039,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 216
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+115 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+115 Random Stat 2 (115.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Vambraces",
+        "item_slot": "Wrist",
+        "base_item_level": 330,
+        "quality": "Common",
+        "id": 222040,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 121
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+73 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+73 Random Stat 2 (73.00% @ L70)"
+            }
+        ],
+        "name": "Coreway Excavator's Clasp",
+        "item_slot": "Waist",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217912,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 73
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+97 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+97 Random Stat 2 (97.00% @ L70)"
+            }
+        ],
+        "name": "Coreway Excavator's Helm",
+        "item_slot": "Head",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217922,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 97
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+73 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+73 Random Stat 2 (73.00% @ L70)"
+            }
+        ],
+        "name": "Coreway Excavator's Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217921,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 73
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+73 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+73 Random Stat 2 (73.00% @ L70)"
+            }
+        ],
+        "name": "Coreway Excavator's Spaulders",
+        "item_slot": "Shoulder",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217917,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 73
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+97 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+97 Random Stat 2 (97.00% @ L70)"
+            }
+        ],
+        "name": "Coreway Excavator's Chestguard",
+        "item_slot": "Chest",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217919,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 97
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+73 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+73 Random Stat 2 (73.00% @ L70)"
+            }
+        ],
+        "name": "Coreway Excavator's Boots",
+        "item_slot": "Feet",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217923,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 73
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+55 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+55 Random Stat 2 (55.00% @ L70)"
+            }
+        ],
+        "name": "Coreway Excavator's Bracers",
+        "item_slot": "Wrist",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217920,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 55
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+97 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+97 Random Stat 2 (97.00% @ L70)"
+            }
+        ],
+        "name": "Coreway Excavator's Greaves",
+        "item_slot": "Legs",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217911,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 97
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Greaves",
+        "item_slot": "Legs",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218006,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_legiondungeon_c_03.jpg",
+        "stats": {
+            "Intellect": 69,
+            "Haste": 84,
+            "Mastery": 54
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218029,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulders_plate_warfrontsalliance_b_01.jpg",
+        "stats": {
+            "Intellect": 52,
+            "Haste": 65,
+            "Versatility": 39
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Stompers",
+        "item_slot": "Feet",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218035,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_boot_warfrontshorde_b_01.jpg",
+        "stats": {
+            "Intellect": 52,
+            "Critical Strike": 43,
+            "Haste": 61
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218038,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_shoulder_warfrontshorde_b_01.jpg",
+        "stats": {
+            "Intellect": 52,
+            "Haste": 65,
+            "Versatility": 39
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Greaves",
+        "item_slot": "Legs",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 217991,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_pants_warfrontshorde_b_01.jpg",
+        "stats": {
+            "Intellect": 69,
+            "Versatility": 84,
+            "Mastery": 54
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Chestplate",
+        "item_slot": "Chest",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218025,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_warfrontsalliance_b_01.jpg",
+        "stats": {
+            "Intellect": 69,
+            "Haste": 57,
+            "Versatility": 81
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Stompers",
+        "item_slot": "Feet",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218026,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boots_plate_warfrontsalliance_b_01.jpg",
+        "stats": {
+            "Intellect": 52,
+            "Critical Strike": 43,
+            "Haste": 61
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Crushers",
+        "item_slot": "Hands",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218036,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_glove_warfrontshorde_b_01.jpg",
+        "stats": {
+            "Intellect": 52,
+            "Critical Strike": 68,
+            "Mastery": 36
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218039,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_belt_warfrontshorde_b_01.jpg",
+        "stats": {
+            "Intellect": 52,
+            "Critical Strike": 36,
+            "Mastery": 68
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Vambraces",
+        "item_slot": "Wrist",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218040,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_bracer_warfrontshorde_d_01.jpg",
+        "stats": {
+            "Intellect": 39,
+            "Versatility": 29,
+            "Mastery": 49
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Greaves",
+        "item_slot": "Legs",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218024,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pants_plate_warfrontsalliance_b_01.jpg",
+        "stats": {
+            "Intellect": 69,
+            "Versatility": 84,
+            "Mastery": 54
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Crushers",
+        "item_slot": "Hands",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218027,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_warfrontsalliance_b_01.jpg",
+        "stats": {
+            "Intellect": 52,
+            "Critical Strike": 68,
+            "Mastery": 36
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Greathelm",
+        "item_slot": "Head",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218028,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_warfrontsalliance_b_01.jpg",
+        "stats": {
+            "Intellect": 69,
+            "Critical Strike": 87,
+            "Haste": 52
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218030,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_warfrontsalliance_b_01.jpg",
+        "stats": {
+            "Intellect": 52,
+            "Critical Strike": 36,
+            "Mastery": 68
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Vambraces",
+        "item_slot": "Wrist",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218031,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_warfrontsalliance_b_01.jpg",
+        "stats": {
+            "Intellect": 39,
+            "Versatility": 29,
+            "Mastery": 49
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Greathelm",
+        "item_slot": "Head",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218037,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_helmet_warfrontshorde_b_01.jpg",
+        "stats": {
+            "Intellect": 69,
+            "Critical Strike": 87,
+            "Haste": 52
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Chestplate",
+        "item_slot": "Chest",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218034,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_chest_warfrontshorde_b_01.jpg",
+        "stats": {
+            "Intellect": 69,
+            "Haste": 57,
+            "Versatility": 81
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Test Warbound until equipped (DNT)",
+        "item_slot": "Head",
+        "base_item_level": 200,
+        "quality": "Uncommon",
+        "id": 213099,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 29
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Romuul's Controllable Shoulderplate",
+        "item_slot": "Shoulder",
+        "base_item_level": 44,
+        "quality": "Epic",
+        "id": 219904,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_raidpaladin_o_01.jpg",
+        "stats": {
+            "Intellect": 3,
+            "Haste": 3,
+            "Mastery": 3
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 13,
+        "quality": "Uncommon",
+        "id": 219417,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_armor_earthencivilian_d_02_chest.jpg",
+        "stats": {
+            "Intellect": 3,
+            "Critical Strike": 3,
+            "Versatility": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 13,
+        "quality": "Uncommon",
+        "id": 219422,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_armor_earthenmilitary_d_01_belt.jpg",
+        "stats": {
+            "Intellect": 2,
+            "Critical Strike": 2,
+            "Haste": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Helm",
+        "item_slot": "Head",
+        "base_item_level": 13,
+        "quality": "Uncommon",
+        "id": 219416,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_armor_earthenmilitary_d_01_helm.jpg",
+        "stats": {
+            "Intellect": 3,
+            "Critical Strike": 3,
+            "Haste": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 13,
+        "quality": "Uncommon",
+        "id": 219418,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_armor_earthenmilitary_d_01_boot.jpg",
+        "stats": {
+            "Intellect": 2,
+            "Critical Strike": 2,
+            "Versatility": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 13,
+        "quality": "Uncommon",
+        "id": 219420,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_armor_earthenmilitary_d_01_pant.jpg",
+        "stats": {
+            "Intellect": 3,
+            "Critical Strike": 3,
+            "Haste": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Mantle",
+        "item_slot": "Shoulder",
+        "base_item_level": 13,
+        "quality": "Uncommon",
+        "id": 219421,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_armor_earthenmilitary_d_01_copper.jpg",
+        "stats": {
+            "Intellect": 2,
+            "Critical Strike": 2,
+            "Mastery": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 13,
+        "quality": "Uncommon",
+        "id": 219419,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_armor_earthenmilitary_d_01_glove.jpg",
+        "stats": {
+            "Intellect": 2,
+            "Critical Strike": 2,
+            "Versatility": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Tusks of Mannoroth",
+        "item_slot": "Shoulder",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 224459,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_garrosh_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Secret-Dredger's Legguards",
+        "item_slot": "Legs",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225407,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Secret-Dredger's Breastplate",
+        "item_slot": "Chest",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225403,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Machine-Warden's Pauldrons",
+        "item_slot": "Shoulder",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 226221,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_armor_earthenisle_c_01_shoulder.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Secret-Dredger's Helm",
+        "item_slot": "Head",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225406,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Secret-Dredger's Girdle",
+        "item_slot": "Waist",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225409,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Secret-Dredger's Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225404,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Secret-Dredger's Gauntlets",
+        "item_slot": "Hands",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225405,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Secret-Dredger's Mantle",
+        "item_slot": "Shoulder",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225408,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Secret-Dredger's Armplates",
+        "item_slot": "Wrist",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225410,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shield",
+        "item_slot": "Shield",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218726,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_nerubianraid_d_02.jpg",
+        "stats": {
+            "Intellect": 3486,
+            "Haste": 250,
+            "Versatility": 510
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218476,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_raidmagenerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218514,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_raidwarlocknerubian_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218552,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_raiddemonhunternerubian_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218553,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_raiddemonhunternerubian_d_01_cape.jpg",
+        "stats": {
+            "Haste": 275,
+            "Versatility": 580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218630,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mail_raidhunternerubian_d_01_cape.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218477,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_raidmagenerubian_d_01.jpg",
+        "stats": {
+            "Haste": 281,
+            "Versatility": 574
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218516,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_raidwarlocknerubian_d_01_cape.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218573,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_raidmonknerubian_d_01.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218629,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mail_raidhunternerubian_d_01_cape.jpg",
+        "stats": {
+            "Haste": 275,
+            "Versatility": 580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218666,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Focus",
+        "item_slot": "N/A",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218725,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Intellect": 3486,
+            "Versatility": 494,
+            "Mastery": 266
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Bulwark",
+        "item_slot": "Shield",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218732,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Intellect": 3486,
+            "Versatility": 478,
+            "Mastery": 282
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218478,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_raidmagenerubian_d_01.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218495,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_raidpriestnerubian_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218496,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_raidpriestnerubian_d_01_cape.jpg",
+        "stats": {
+            "Haste": 281,
+            "Versatility": 574
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218497,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_raidpriestnerubian_d_01_cape.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218515,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_raidwarlocknerubian_d_01_cape.jpg",
+        "stats": {
+            "Haste": 281,
+            "Versatility": 574
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218535,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_raiddruidnerubian_d_01.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218590,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_raidroguenerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218591,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_raidroguenerubian_d_01.jpg",
+        "stats": {
+            "Haste": 275,
+            "Versatility": 580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218611,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_raidevokernerubian_d_01.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218649,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_raidshamannerubian_d_01.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218668,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218685,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218687,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_cape.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218705,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Haste": 275,
+            "Versatility": 580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218706,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218533,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_raiddruidnerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218534,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_raiddruidnerubian_d_01.jpg",
+        "stats": {
+            "Haste": 275,
+            "Versatility": 580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218554,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_raiddemonhunternerubian_d_01_cape.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218572,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_raidmonknerubian_d_01.jpg",
+        "stats": {
+            "Haste": 275,
+            "Versatility": 580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218628,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mail_raidhunternerubian_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218647,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_raidshamannerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218686,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_cape.jpg",
+        "stats": {
+            "Haste": 275,
+            "Versatility": 580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218704,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218571,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_raidmonknerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218592,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_raidroguenerubian_d_01.jpg",
+        "stats": {
+            "Versatility": 544,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218609,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_raidevokernerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 256,
+            "Versatility": 598
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218610,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_raidevokernerubian_d_01.jpg",
+        "stats": {
+            "Haste": 275,
+            "Versatility": 580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218648,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_raidshamannerubian_d_01.jpg",
+        "stats": {
+            "Haste": 275,
+            "Versatility": 580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Drape",
+        "item_slot": "Back",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218667,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Haste": 275,
+            "Versatility": 580
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Taking damage has the chance to grant Beledar's Blessing granting 567557 Versatility for 15 sec seconds.\n\nMoving within 3 yards of a friendly party member grants them a portion of Beledar's Blessing, sharing the effect for the remaining duration."
+            }
+        ],
+        "name": "Beledar's Bulwark",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222459,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 1065,
+            "Critical Strike": 281,
+            "Versatility": 447
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Defender",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222432,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_arathoroutdoor_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Shield",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 225373,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_emeralddreamraid_d_02.jpg",
+        "stats": {
+            "Intellect": 3266
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+409 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+409 Random Stat 2 (409.00% @ L70)"
+            }
+        ],
+        "name": "Consecrated Cloak",
+        "item_slot": "Back",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 221667,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_dragonpvp_d_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+409 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+409 Random Stat 2 (409.00% @ L70)"
+            }
+        ],
+        "name": "Consecrated Cloak",
+        "item_slot": "Back",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222817,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_outdoorarathor_d_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Endgame Offhand",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 219610,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription2_book3_color2.jpg",
+        "stats": {
+            "Intellect": 3266
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Lexicon of Mysteries",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222571,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 3266
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+409 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+409 Random Stat 2 (409.00% @ L70)"
+            }
+        ],
+        "name": "Adaptive Delver's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222813,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_outdoorarathor_d_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+409 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+409 Random Stat 2 (409.00% @ L70)"
+            }
+        ],
+        "name": "Adaptive Delver's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 221663,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_dragonpvp_d_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Censer",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 225372,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_emeralddreamraid_d_01.jpg",
+        "stats": {
+            "Intellect": 3266
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+409 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+409 Random Stat 2 (409.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Cloth Cloak",
+        "item_slot": "Back",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 217125,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Vagabond's Torch",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222566,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 3266
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Taking damage greater than 25% of your health grants you 1802 Avoidance and increases healing taken by 10% for 10 sec. This effect may only occur every 90 sec.\n\nFalling damage reduced. (1.5m cooldown)"
+            }
+        ],
+        "name": "Wings of Shattered Sorrow",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225574,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_raiddemonhunternerubian_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 563,
+            "Haste": 225
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Crest of the Caustic Despot",
+        "item_slot": "N/A",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225579,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Intellect": 3088,
+            "Critical Strike": 490,
+            "Haste": 211
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Exhumed Centurion's Drape",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211997,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_raiddeathknightnerubian_d_01.jpg",
+        "stats": {
+            "Versatility": 515,
+            "Mastery": 273
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lightless Scavenger's Hide",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212015,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mail_raidhunternerubian_d_01_cape.jpg",
+        "stats": {
+            "Haste": 273,
+            "Mastery": 515
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Living Luster's Glow",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212078,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_raidpriestnerubian_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 267,
+            "Haste": 521
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Warsculptor's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211979,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_raidwarriornerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 541,
+            "Mastery": 247
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Broodtwister's Grim Catalyst",
+        "item_slot": "N/A",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212387,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Intellect": 3088,
+            "Critical Strike": 320,
+            "Versatility": 380
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Royal Emblem of Nerub-ar",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212446,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_special_nerubian_d_02.jpg",
+        "stats": {
+            "Critical Strike": 248,
+            "Mastery": 540
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cloak of the Greatlynx",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212051,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_raiddruidnerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 536,
+            "Versatility": 252
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Hexflame Coven's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212069,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_raidwarlocknerubian_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 547,
+            "Mastery": 241
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Husk of Swallowing Darkness",
+        "item_slot": "N/A",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212386,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_nerubianraid_d_02.jpg",
+        "stats": {
+            "Intellect": 3088,
+            "Versatility": 497,
+            "Mastery": 203
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Entombed Seraph's Greatcloak",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 211988,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 546,
+            "Mastery": 242
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ward of Violet Rebirth",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212087,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_raidmagenerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 238,
+            "Haste": 550
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Mist of the Forgotten Reservoir",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212006,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_raidshamannerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 241,
+            "Haste": 547
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cape of the Destroyer",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212024,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_raidevokernerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 243,
+            "Versatility": 545
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "K'areshi Phantom's Breeze",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212033,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_raidroguenerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 537,
+            "Versatility": 251
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Gatecrasher's Mantle",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212042,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_raidmonknerubian_d_01.jpg",
+        "stats": {
+            "Critical Strike": 252,
+            "Versatility": 536
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Drape of the Hypogeal Nemesis",
+        "item_slot": "Back",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212060,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_raiddemonhunternerubian_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 233,
+            "Versatility": 555
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Unhinged Vault-Hatch",
+        "item_slot": "N/A",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211040,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 2975,
+            "Versatility": 376,
+            "Mastery": 316
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Secret-Dredger's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211006,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 373,
+            "Versatility": 406
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Torchbearer's Greatcloak",
+        "item_slot": "Back",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211007,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_undergroundquest_b_01.jpg",
+        "stats": {
+            "Versatility": 373,
+            "Mastery": 406
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Treasure-Seeker's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211062,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 406,
+            "Mastery": 373
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cave Topographer's Drape",
+        "item_slot": "Back",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211005,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 373,
+            "Haste": 406
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Brilliant Beacon",
+        "item_slot": "N/A",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211041,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 2975,
+            "Haste": 361,
+            "Versatility": 331
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+365 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+365 Random Stat 2 (365.00% @ L70)"
+            }
+        ],
+        "name": "Vicious Combatant's Weavercloth Cloak",
+        "item_slot": "Back",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 222826,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_dragonquest_b_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+365 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+365 Random Stat 2 (365.00% @ L70)"
+            }
+        ],
+        "name": "Vicious Combatant's Weavercloth Cloak",
+        "item_slot": "Back",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 221676,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_dragonquest_b_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Spinner's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224624,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Expeditionary Bulwark",
+        "item_slot": "N/A",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224635,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 2424
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Greatcloak",
+        "item_slot": "Back",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218435,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Versatility": 443,
+            "Mastery": 287
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Drape of the Lamplighter",
+        "item_slot": "Back",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223472,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 412,
+            "Versatility": 318
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Deep-Dweller's Orb",
+        "item_slot": "N/A",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224637,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 2424
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Drape",
+        "item_slot": "Back",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218432,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 349,
+            "Versatility": 381
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Cape",
+        "item_slot": "Back",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218434,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mail_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Versatility": 381,
+            "Mastery": 349
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Shield",
+        "item_slot": "N/A",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223873,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 2424,
+            "Critical Strike": 338,
+            "Haste": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Censer",
+        "item_slot": "N/A",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223875,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 2424,
+            "Critical Strike": 366,
+            "Haste": 283
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218433,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Haste": 349,
+            "Versatility": 381
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Censer",
+        "item_slot": "N/A",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218442,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 2424,
+            "Critical Strike": 311,
+            "Versatility": 338
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Shield",
+        "item_slot": "N/A",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218445,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 2424,
+            "Haste": 283,
+            "Versatility": 366
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Prestigious Cloak",
+        "item_slot": "Back",
+        "base_item_level": 545,
+        "quality": "Epic",
+        "id": 223617,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_pvp_11season1_d_01.jpg",
+        "stats": {
+            "Haste": 365,
+            "Mastery": 365
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "",
+        "item_slot": "N/A",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217853,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_dragonraid_d_02.jpg",
+        "stats": {
+            "Critical Strike": 310,
+            "Mastery": 246
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "",
+        "item_slot": "N/A",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217863,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/creatureportrait_blackrockv2_shieldgong.jpg",
+        "stats": {
+            "Critical Strike": 310,
+            "Mastery": 246
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+250 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+250 Random Stat 2 (250.00% @ L70)"
+            }
+        ],
+        "name": "Weavercloth Cloak",
+        "item_slot": "Back",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 221685,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_dragonquest_b_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+222 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+222 Random Stat 2 (222.00% @ L70)"
+            }
+        ],
+        "name": "Inquisitor's Codex",
+        "item_slot": "N/A",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 219609,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription2_book1_color1.jpg",
+        "stats": {
+            "Intellect": 973
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+250 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+250 Random Stat 2 (250.00% @ L70)"
+            }
+        ],
+        "name": "Pioneer's Perfected Cloak",
+        "item_slot": "Back",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222835,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+222 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+222 Random Stat 2 (222.00% @ L70)"
+            }
+        ],
+        "name": "Inquisitor's Torch",
+        "item_slot": "N/A",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222565,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_undergroundquest_b_02.jpg",
+        "stats": {
+            "Intellect": 973
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Stormbreaker's Shield",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221236,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Critical Strike": 224,
+            "Haste": 199
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Galebreaker Bulwark",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221045,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Critical Strike": 175,
+            "Versatility": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Vessel of the Beverage",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221056,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Critical Strike": 157,
+            "Versatility": 266
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arachnid's Web-Sown Guise",
+        "item_slot": "Back",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221506,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 279,
+            "Versatility": 197
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Nullification Aegis",
+        "item_slot": "Shield",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221073,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Critical Strike": 157,
+            "Versatility": 266
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Shield - Shield",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211652,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Critical Strike": 202,
+            "Versatility": 221
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Candlebearer's Shroud",
+        "item_slot": "Back",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221109,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_earthendungeon_c_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 167,
+            "Versatility": 309
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Generic - Holdable",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211653,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Critical Strike": 193,
+            "Versatility": 230
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lamentable Vagrant's Lantern",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221237,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Critical Strike": 236,
+            "Haste": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earth Golem's Wrap",
+        "item_slot": "Back",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221507,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 211,
+            "Mastery": 265
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Webspeaker's Spiritual Cloak",
+        "item_slot": "Back",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223369,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 224,
+            "Versatility": 252
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Old-Blood Hielaman",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221177,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Critical Strike": 148,
+            "Versatility": 275
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Nerubian Covert's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223917,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 279,
+            "Haste": 197
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Slime Deflecting Stopper",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223920,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Versatility": 199,
+            "Mastery": 224
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cinder Pollen Cloak",
+        "item_slot": "Back",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223922,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 197,
+            "Haste": 279
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Guardian's Arcanotool",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 226117,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_dalaran_d_01.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Haste": 236,
+            "Mastery": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Anvilhide Cape",
+        "item_slot": "Back",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221088,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_earthendungeon_c_01.jpg",
+        "stats": {
+            "Haste": 177,
+            "Mastery": 299
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arcane Scuttle",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221097,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Critical Strike": 175,
+            "Versatility": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Swarmcaller's Shroud",
+        "item_slot": "Back",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221154,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_earthendungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 177,
+            "Versatility": 299
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Chef Chewie's Towel",
+        "item_slot": "Back",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221054,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_earthendungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 309,
+            "Mastery": 167
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Overflowing Umbral Pail",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221132,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Critical Strike": 148,
+            "Versatility": 275
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Pail of Preserved Obscurity",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221172,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Haste": 166,
+            "Mastery": 257
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sanctified Priory Wall",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221117,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg",
+        "stats": {
+            "Intellect": 886,
+            "Critical Strike": 166,
+            "Versatility": 257
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Pelt of Beledar's Strength",
+        "item_slot": "Back",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221508,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 252,
+            "Mastery": 224
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Generic - Cloak",
+        "item_slot": "Back",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211651,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_oribosquesting_b_01.jpg",
+        "stats": {
+            "Versatility": 218,
+            "Mastery": 258
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dark Agent's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221235,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 211,
+            "Versatility": 265
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Shield",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224712,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 628
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Offhand",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212131,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 628,
+            "Critical Strike": 195,
+            "Haste": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Shroud of the Whisperer",
+        "item_slot": "Back",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225552,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 177,
+            "Mastery": 211
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Gem-Woven Shawl",
+        "item_slot": "Back",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224663,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_earthendungeon_c_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Gem-Woven Cloak",
+        "item_slot": "Back",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224664,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cloak of the Tactician",
+        "item_slot": "Back",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225550,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 272,
+            "Versatility": 116
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219380,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 169,
+            "Mastery": 219
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kaheti Confiscated Buckler",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225358,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 628,
+            "Haste": 180,
+            "Mastery": 165
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cape of the Favored",
+        "item_slot": "Back",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225549,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 253,
+            "Haste": 134
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Offhand",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218165,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 628,
+            "Critical Strike": 195,
+            "Haste": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Scepter",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219456,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 628,
+            "Versatility": 138,
+            "Mastery": 207
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cured Terracotta Shield",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219798,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 628,
+            "Critical Strike": 180,
+            "Haste": 165
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kaheti Confiscated Lantern",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225357,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 628,
+            "Haste": 195,
+            "Versatility": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Drape of the Heritage Lord",
+        "item_slot": "Back",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225551,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 124,
+            "Versatility": 264
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Generic - Holdable",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218222,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 628,
+            "Critical Strike": 195,
+            "Haste": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219383,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 219,
+            "Versatility": 169
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Shield",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218164,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 628,
+            "Critical Strike": 180,
+            "Haste": 165
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cured Terracotta Lantern",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219796,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 628,
+            "Critical Strike": 195,
+            "Haste": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Shawl",
+        "item_slot": "Back",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212151,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_oribosdungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 219,
+            "Versatility": 169
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Shield - Shield",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218221,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 628,
+            "Critical Strike": 180,
+            "Haste": 165
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Shield",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219455,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 628,
+            "Versatility": 155,
+            "Mastery": 190
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Shield",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212130,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 628,
+            "Critical Strike": 180,
+            "Haste": 165
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Curio",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224711,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 628
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Shawl",
+        "item_slot": "Back",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218185,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_oribosdungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 219,
+            "Versatility": 169
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Shawl",
+        "item_slot": "Back",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218242,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_oribosdungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 219,
+            "Versatility": 169
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Perform a weaving ritual, spinning the webs of fate and fashioning them into a Fateweaved Weapon."
+            }
+        ],
+        "name": "Fate Weaver",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219381,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Intellect": 394,
+            "Haste": 125,
+            "Versatility": 114
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+464 Bonus Armor (0.00% @ L70)"
+            },
+            {
+                "description": "Equip: Taking magic damage has a chance for the webbing to react and adapt, spinning Warding Threads around you for 30 sec. While active, Warding Threads absorb all damage you would take from that source's spell school, up to 12789. (2 min Cooldown) (2m cooldown)"
+            }
+        ],
+        "name": "Reactive Webbed Escutcheon",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 218125,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_nerubianraid_d_02.jpg",
+        "stats": {
+            "Intellect": 394
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Aegis",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219244,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_60.jpg",
+        "stats": {
+            "Intellect": 394,
+            "Haste": 114,
+            "Versatility": 125
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Unkindled Waxweave Mozzetta",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219190,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 100,
+            "Haste": 169
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Conduit",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219236,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_dalaran_d_01.jpg",
+        "stats": {
+            "Intellect": 394,
+            "Critical Strike": 135,
+            "Haste": 104
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 218079,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_legiondungeon_c_03.jpg",
+        "stats": {
+            "Critical Strike": 115,
+            "Versatility": 154
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Lexicon of Mysteries",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222134,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 394
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Unscathed Rampart",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219200,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 394,
+            "Critical Strike": 99,
+            "Haste": 140
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Defender",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 221999,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_dragonpvp_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Amice of Hidden Stars",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219183,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Haste": 100,
+            "Versatility": 169
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Aegis",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223859,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 394,
+            "Haste": 114,
+            "Versatility": 125
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 218080,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_legiondungeon_c_03.jpg",
+        "stats": {
+            "Critical Strike": 173,
+            "Haste": 96
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Vessel of Sacred Flame",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219201,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 394,
+            "Critical Strike": 140,
+            "Mastery": 99
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Cape",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223839,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mail_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Versatility": 96,
+            "Mastery": 173
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223840,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 115,
+            "Versatility": 154
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Drape",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 218081,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_legiondungeon_c_03.jpg",
+        "stats": {
+            "Versatility": 192,
+            "Mastery": 77
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Myconic Wrap",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219186,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 169,
+            "Mastery": 100
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Drape",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223842,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Versatility": 192,
+            "Mastery": 77
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Serape of the Stygian Sea",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219185,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mail_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Versatility": 100,
+            "Mastery": 169
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+134 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+134 Random Stat 2 (134.00% @ L70)"
+            }
+        ],
+        "name": "Consecrated Cloak",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 221579,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_dragonpvp_d_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+134 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+134 Random Stat 2 (134.00% @ L70)"
+            }
+        ],
+        "name": "Adaptive Delver's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 221575,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_dragonpvp_d_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Vagabond's Codex",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222129,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 394
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Cape",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 218078,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_legiondungeon_c_03.jpg",
+        "stats": {
+            "Haste": 173,
+            "Versatility": 96
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223841,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_outdoorarathor_d_01_cape.jpg",
+        "stats": {
+            "Haste": 96,
+            "Versatility": 173
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Branch",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223851,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 394,
+            "Haste": 104,
+            "Versatility": 135
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+115 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+115 Random Stat 2 (115.00% @ L70)"
+            }
+        ],
+        "name": "Weavercloth Cloak",
+        "item_slot": "Back",
+        "base_item_level": 330,
+        "quality": "Uncommon",
+        "id": 221597,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_dragonquest_b_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+115 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+115 Random Stat 2 (115.00% @ L70)"
+            }
+        ],
+        "name": "Vicious Combatant's Weavercloth Cloak",
+        "item_slot": "Back",
+        "base_item_level": 330,
+        "quality": "Uncommon",
+        "id": 221588,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_dragonquest_b_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Inquisitor's Codex",
+        "item_slot": "N/A",
+        "base_item_level": 270,
+        "quality": "Common",
+        "id": 222128,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription2_book2_color3.jpg",
+        "stats": {
+            "Intellect": 149
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Pressurized Alloy Defender",
+        "item_slot": "N/A",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217910,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Shield",
+        "item_slot": "N/A",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218329,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_garrison_a_02.jpg",
+        "stats": {
+            "Intellect": 107,
+            "Critical Strike": 41,
+            "Versatility": 29
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Wrap",
+        "item_slot": "Back",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218297,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_icons_cloth_warfrontsalliance_b_01.jpg",
+        "stats": {
+            "Haste": 29,
+            "Versatility": 49
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Cape",
+        "item_slot": "Back",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218041,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_warfrontshorde_d_01.jpg",
+        "stats": {
+            "Haste": 51,
+            "Versatility": 27
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Drape",
+        "item_slot": "Back",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218267,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_warfrontshorde_b_01.jpg",
+        "stats": {
+            "Critical Strike": 32,
+            "Mastery": 46
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Cloak",
+        "item_slot": "Back",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218279,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_leather_warfrontsalliance_01_cape.jpg",
+        "stats": {
+            "Critical Strike": 51,
+            "Mastery": 27
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Wrap",
+        "item_slot": "Back",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218306,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ivn_cape_cloth_warfrontshorde_b_01.jpg",
+        "stats": {
+            "Haste": 29,
+            "Versatility": 49
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Tome",
+        "item_slot": "N/A",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218326,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_book_07.jpg",
+        "stats": {
+            "Intellect": 107,
+            "Critical Strike": 27,
+            "Versatility": 42
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Drape",
+        "item_slot": "Back",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218258,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_warfrontsalliance_b_01.jpg",
+        "stats": {
+            "Critical Strike": 32,
+            "Mastery": 46
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Shield",
+        "item_slot": "N/A",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218317,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_garrison_a_01.jpg",
+        "stats": {
+            "Intellect": 107,
+            "Critical Strike": 41,
+            "Versatility": 29
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Cape",
+        "item_slot": "Back",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218032,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_warfrontsalliance_b_01.jpg",
+        "stats": {
+            "Haste": 51,
+            "Versatility": 27
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Cloak",
+        "item_slot": "Back",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218288,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_warfrontshorde_d_01.jpg",
+        "stats": {
+            "Critical Strike": 51,
+            "Mastery": 27
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Tome",
+        "item_slot": "N/A",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218314,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_book_07.jpg",
+        "stats": {
+            "Intellect": 107,
+            "Critical Strike": 27,
+            "Versatility": 42
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Bulwark",
+        "item_slot": "N/A",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 222995,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_64.jpg",
+        "stats": {
+            "Intellect": 4,
+            "Critical Strike": 2,
+            "Versatility": 1
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Earthen Bulwark",
+        "item_slot": "N/A",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 224245,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_64.jpg",
+        "stats": {
+            "Intellect": 4,
+            "Critical Strike": 2,
+            "Versatility": 1
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Cogwheel",
+        "item_slot": "Back",
+        "base_item_level": 13,
+        "quality": "Uncommon",
+        "id": 219435,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_armor_earthencivilian_d_02_copper.jpg",
+        "stats": {
+            "Critical Strike": 2,
+            "Versatility": 1
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Backpack",
+        "item_slot": "Back",
+        "base_item_level": 13,
+        "quality": "Uncommon",
+        "id": 226800,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_special_earthen_b_01.jpg",
+        "stats": {
+            "Critical Strike": 2,
+            "Versatility": 1
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Voidtouched Apparatus",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 217712,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_voidelf_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Voidtouched Shield",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 217713,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_voidelf_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Skovald's Resolve",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 227287,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_44.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Dornogal Defender",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225752,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Secret-Dredger's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225411,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_plate_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Torchbearer's Greatcloak",
+        "item_slot": "Back",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225412,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_mail_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Treasure-Seeker's Shawl",
+        "item_slot": "Back",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225413,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_leather_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Airship Captain's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225945,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_armor_hallowfallarathi_c_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Brilliant Beacon",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225495,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Unhinged Vault-Hatch",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225508,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Unhinged Vault-Hatch",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225496,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Sturdy Arathi Censer",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225944,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_arathoroutdoor_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Dasher's Violet Rucksack",
+        "item_slot": "Back",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 226376,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/reliquarybag_icon.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Mereldar Artisan's Shoulderbag",
+        "item_slot": "Back",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 226378,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_special_explorer_b_03.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Cave Topographer's Drape",
+        "item_slot": "Back",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225414,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_cloth_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Focus",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225866,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Shield",
+        "item_slot": "Shield",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225867,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_nerubianraid_d_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Gentle Glow of the Naaru",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 226386,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_outlandraid_03blue.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Alchemist's Bandolier",
+        "item_slot": "Back",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225975,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_special_knifebandolier_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Brilliant Beacon",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225507,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Fallen Dalaran Defender",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225763,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_60.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Coreway Engineer's Forceps",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225759,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_earthensmithingtool_b_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Bulwark",
+        "item_slot": "Shield",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225868,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Garlic Knots",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225885,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_garlic_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Darkened Arathi Cape",
+        "item_slot": "Back",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 226018,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_armor_hallowfallarathi_c_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Machine-Warden's Cloak",
+        "item_slot": "Back",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 226218,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_armor_earthenisle_c_01_cape.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    
+    {
+        "effects": [
+            {
+                "description": "Use: Get your bearings and meet up with Brann, who heroically swoops in to deliver a  for 1769479 Physical damage then granting you 19525 <Primary Stat> for 10 sec before exiting.\n\nIf already by your side Brann will proudly direct you towards adventure! Immediately repositioning, granting himself 50% additional damage for 10 sec, and performing a .\n\n: (2 Min Cooldown)"
+            }
+        ],
+        "name": "Bronzebeard Family Compass",
+        "item_slot": "Trinket",
+        "base_item_level": 597,
+        "quality": "Legendary",
+        "id": 219916,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_explorer_trinket_1compass_color5.jpg",
+        "stats": {
+            "Mastery": 1171
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Band",
+        "item_slot": "Finger",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218708,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_dragon_ring_2coiledserpent_blue.jpg",
+        "stats": {
+            "Critical Strike": 1193,
+            "Versatility": 2604
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Signet",
+        "item_slot": "Finger",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218709,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_dragon_ring_1signet_red.jpg",
+        "stats": {
+            "Versatility": 2604,
+            "Mastery": 1193
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Ring",
+        "item_slot": "Finger",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218707,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_explorer_ring_2_color2.jpg",
+        "stats": {
+            "Haste": 1193,
+            "Versatility": 2604
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Necklace",
+        "item_slot": "Neck",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218710,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_dragon_necklace_2_bronze.jpg",
+        "stats": {
+            "Haste": 868,
+            "Versatility": 2929
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Increases maximum health by 1030674 for 15 sec. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Forged Gladiator's Emblem",
+        "item_slot": "Trinket",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218715,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_endlessrage.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Removes all movement impairing effects and all effects which cause loss of control of your character."
+            }
+        ],
+        "name": "Forged Gladiator's Medallion",
+        "item_slot": "Trinket",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218716,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_pvp_gladiatormedallion.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Increases primary stat by 5716 for 15 sec. (1 Min Cooldown)"
+            }
+        ],
+        "name": "Forged Gladiator's Badge of Ferocity",
+        "item_slot": "Trinket",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218713,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_championsbond.jpg",
+        "stats": {
+            "Critical Strike": 1086
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Removes any loss of control effect with a duration of 5 seconds or more. This effect can only occur once every 1 min."
+            }
+        ],
+        "name": "Forged Gladiator's Sigil of Adaptation",
+        "item_slot": "Trinket",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218717,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/sha_ability_rogue_sturdyrecuperate.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Amulet",
+        "item_slot": "Neck",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218712,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primitive_necklace_1gnollharpy_color1.jpg",
+        "stats": {
+            "Versatility": 2929,
+            "Mastery": 868
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells and abilities have a chance to grant 4824 primary stat for 20 sec."
+            }
+        ],
+        "name": "Forged Gladiator's Insignia of Alacrity",
+        "item_slot": "Trinket",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218714,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_token_argentdawn3.jpg",
+        "stats": {
+            "Haste": 1086
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Pendant",
+        "item_slot": "Neck",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218711,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_dragon_necklace_1_green.jpg",
+        "stats": {
+            "Critical Strike": 868,
+            "Versatility": 2929
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+1,750 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+1,750 Random Stat 2 (1.00% @ L70)"
+            },
+            {
+                "description": "Use: Sever your bond at the cost of 1 Blasphemite. (2 Min Cooldown)"
+            },
+            {
+                "description": "Equip: Your spells and abilities have a chance to empower each unique gem color of an ally's socketed gems. This boon grants 44.75 to each empowered secondary stat for 15 sec. This effect will always target your bonded ally, if able."
+            }
+        ],
+        "name": "Binding of Binding",
+        "item_slot": "Finger",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 215133,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ringwod_d3_4.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your damaging spells and abilities have the chance to ignite your target with Radiant Focus for  15 sec.\n\nAfter dealing up to 40000  damage to the target the focused energies ignite you with Radiance, granting between 401.5 to 803 of your highest Secondary stat based on damage dealt for 15 sec."
+            }
+        ],
+        "name": "Darkmoon Deck: Radiance",
+        "item_slot": "Trinket",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 219672,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_spore_blank.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Gain Evolution every 8 seconds spent in combat.\n\nEvolution  grants 0 of a random secondary stat for 15 sec, stacking up to 10 times."
+            }
+        ],
+        "name": "Darkmoon Deck: Evolve",
+        "item_slot": "Trinket",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222680,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_air_blank.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+1,750 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+1,750 Random Stat 2 (1.00% @ L70)"
+            },
+            {
+                "description": "Equip: When you enter combat, gain 1 Dormant Gemstone per socketed gem.\n\nWhenever you heal an ally, bestow upon them 1 Empowered Gemstone to increase the potency of one of their socketed gems by 17 for 20 sec. When their gemstone becomes dormant, it is returned to you."
+            }
+        ],
+        "name": "Fractured Gemstone Locket",
+        "item_slot": "Neck",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 215134,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_70_maxlvlneck_purple.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+1,750 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+1,750 Random Stat 2 (1.00% @ L70)"
+            }
+        ],
+        "name": "Ring of Earthen Craftsmanship",
+        "item_slot": "Finger",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 215135,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/item_icecrownringb.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+1,750 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+1,750 Random Stat 2 (1.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Signet",
+        "item_slot": "Finger",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 215137,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_91.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+1,750 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+1,750 Random Stat 2 (1.00% @ L70)"
+            }
+        ],
+        "name": "Amulet of Earthen Craftsmanship",
+        "item_slot": "Neck",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 215136,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_7_0raid_necklace_02a.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+1,750 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+1,750 Random Stat 2 (1.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Amulet",
+        "item_slot": "Neck",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 215144,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_necklace3_red.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your damaging spells and abilities have the chance to grant Vivaciousness, increasing secondary stats by 803 and Speed or Avoidance by 71 based on the school it was activated from."
+            }
+        ],
+        "name": "Darkmoon Deck: Vivacity",
+        "item_slot": "Trinket",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222671,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_frost_blank.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+1,750 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+1,750 Random Stat 2 (1.00% @ L70)"
+            }
+        ],
+        "name": "Marvelous Mood Ring",
+        "item_slot": "Finger",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 215132,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_70_dungeon_ring3b.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Removes all movement impairing effects and all effects which cause loss of control of your character."
+            }
+        ],
+        "name": "Algari Competitor's Medallion",
+        "item_slot": "Trinket",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 219931,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_pvp_gladiatormedallion.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Increases maximum health by 1030674 for 15 sec. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Algari Competitor's Emblem",
+        "item_slot": "Trinket",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 219933,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_endlessrage.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Every 10 in combat take 1% of your maximum Health as Nature damage and gain a stack of Symbiosis, granting 531 Versatility for 20 sec  stacking up to 5 times."
+            }
+        ],
+        "name": "Darkmoon Deck: Symbiosis",
+        "item_slot": "Trinket",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222653,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_spore_blank.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells and abilities have a chance to grant 4519 primary stat for 20 sec."
+            }
+        ],
+        "name": "Algari Competitor's Insignia of Alacrity",
+        "item_slot": "Trinket",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 219932,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_token_argentdawn3.jpg",
+        "stats": {
+            "Haste": 1040
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your abilities have a high chance to summon a phantom ethereal, dealing 107779 Shadow damage to your target and 9700.11 Shadow damage to all other enemies caught in its path.\n\nIf the target is below 35% health, this effect summons two additional phantoms at 25% effectiveness. (1s cooldown)"
+            }
+        ],
+        "name": "Void Reaper's Contract",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212456,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription2_repcontracts_trade_archaeology_apexisscroll_uprez_color4.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Receiving healing from allies has a high chance to restore 6250 mana to your ally and grant you both 279 Versatility for 10 sec."
+            }
+        ],
+        "name": "Sureki Zealot's Insignia",
+        "item_slot": "Neck",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225577,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_113.jpg",
+        "stats": {
+            "Haste": 2735,
+            "Mastery": 510
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Accumulate dark power from the Spellforge every 15 sec to empower your next [specialization spell] to deal 47546 additional Shadow damage."
+            },
+            {
+                "description": "Use: Recklessly intensify the power of the Spellforge, multiplying its current damage by 125% until shortly after leaving combat, up to 5 times. At full power, gain 790 Haste for 6 sec when empowering your [specialization spell].\n\nBeware glimpses of The Unseeming. (1 Min Cooldown)"
+            }
+        ],
+        "name": "Aberrant Spellforge",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212451,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_83_voidfocus.jpg",
+        "stats": {
+            "Intellect": 1914
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Dealing damage has a high chance to grant you a dose of Venomous Potential. At 5 doses, inject them into your target to deal 177549 Nature damage over 3 sec.\n\nDealing Nature damage has a chance to grant you an additional dose."
+            }
+        ],
+        "name": "Seal of the Poisoned Pact",
+        "item_slot": "Finger",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225578,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_70_quest_ring7c.jpg",
+        "stats": {
+            "Critical Strike": 2782,
+            "Mastery": 464
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells and abilities have a very high chance to power the Transmitter and receive a snippet of cryptic instructions from somewhere in the Twisting Nether...\n\nCollecting 10 snippets deciphers them to reveal your next task. It's probably nothing, so complete it to gain 8271 <Primary Stat> for 15 sec."
+            }
+        ],
+        "name": "Treacherous Transmitter",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 221023,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_weathermachine_01.jpg",
+        "stats": {
+            "Haste": 1001
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Take what is rightfully yours, gorging on your target's essence to deal 1440324 Shadow damage and healing you for 212624 over 2 sec. Damage and healing increased based on the target's missing health.\n\nCooldown reduced by 60 sec if this effect kills the target. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Mad Queen's Mandate",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212454,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_creature_poison_01_purple.jpg",
+        "stats": {
+            "Critical Strike": 1001
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Carefully balance the Egg's incubation. While stationary, gain 95 <Primary Stat> every 1 sec, up to 30 times. Diminishes while moving. While moving, gain 108 of your highest secondary stat every 1 sec, up to 30 times. Diminishes while stationary.\n\nAdditional stacks above 20 grant 60% reduced benefit."
+            },
+            {
+                "description": "Use: Suspend the Egg's incubation state for 20 sec. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Ovinax's Mercurial Egg",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 220305,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/creatureportrait_twilightshammer_dragonegg_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your damaging spells dispatch a spider to spy on your foes, increasing your Intellect by 56 per report received. Stacks up to 40 times. This effect may only occur every 6 sec. (6s cooldown)"
+            },
+            {
+                "description": "Use: Use your accumulated knowledge to strike when the time is right, granting 541 Intellect per report for 20 sec and consuming their passive effect. (20 Sec Cooldown)"
+            }
+        ],
+        "name": "Spymaster's Web",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 220202,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_nightelfspyglass.jpg",
+        "stats": {
+            "Mastery": 1001
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Assume a martial stance based on the last weapon drawn."
+            },
+            {
+                "description": "Use: Surekian Flourish\nConjure dual swords from the Arsenal to rend your target, dealing 1922 Shadow damage over 3 sec. Gain 21 Parry and 14 Avoidance until the next weapon is drawn. (1 Min Cooldown)"
+            }
+        ],
+        "name": "Sikran's Endless Arsenal",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212449,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/achievement_arena_3v3_4.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your healing spells have a high chance to cause you to inject yourself with a charge of Volatile Serum. Multiple charges may overlap.\n\nIf an ally drops below 70% health, expel a charge to heal them for 159634. If unconsumed after 15 sec, charges catalyze to grant you 2894 Intellect for 10 sec instead."
+            }
+        ],
+        "name": "Gruesome Syringe",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212452,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_gizmo_runichealthinjector.jpg",
+        "stats": {
+            "Critical Strike": 1001
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Spray your target with Volatile Acid, dealing 5355  Nature damage every 1 sec for 20 sec.\n\nYour abilities intensify the acid's damage by an additional 5355 per sec for the remaining duration and splash up to 5 nearby enemies for 535 Nature damage per stack. (1s cooldown) (2 Min Cooldown)"
+            }
+        ],
+        "name": "Skyterror's Corrosive Organ",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212453,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_creature_poison_04.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Inject an enemy with digestive venom, dealing 418727 Nature damage over 20 sec. While active, your attacks and abilities against the target restore 21809 health. Cannot occur more than every 1 sec.\n\nOverhealing from this effect permanently increases your maximum health by the same amount, becoming an absorb shield upon leaving combat. (1 Min, 30 Sec Cooldown)"
+            }
+        ],
+        "name": "Foul Behemoth's Chelicera",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 219915,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_monsterfang_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your attacks and abilities have a high chance to summon a scarab that retrieves a fortifying chunk of flesh from your target. Scarabs deal 8669 Physical damage and reduce your damage taken by 50% until 35105 damage has been prevented."
+            },
+            {
+                "description": "Use: Send your swarm into a frenzy, summoning 12 scarabs over 3 sec to ravage your foes. The number of scarabs is increased by your Haste. (1 Min Cooldown)"
+            }
+        ],
+        "name": "Swarmlord's Authority",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212450,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_scarab_crystal.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Feed the Coagulum, redirecting 20% of all healing done until 766815.2 healing has been consumed. Once sated, the Coagulum bursts to heal 5 allies for 541371.531.\n\nLingering effluvia causes affected allies' next attacks to deal an additional (444271s2 / 5) Shadow damage, increased based on overhealing done by the Coagulum. (1 Min, 30 Sec Cooldown)"
+            }
+        ],
+        "name": "Creeping Coagulum",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 219917,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/warlock_-bloodstone.jpg",
+        "stats": {
+            "Intellect": 1914
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells and abilities have a chance to secrete 3 different pheromones around you. Touching these pheromones will increase your primary stat by 2051 for 20 sec. (20s cooldown)"
+            }
+        ],
+        "name": "Nerubian Pheromone Secreter",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Rare",
+        "id": 217894,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potione2.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Writhing Ringworm",
+        "item_slot": "Finger",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225576,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_qiraj_skinsandworm.jpg",
+        "stats": {
+            "Haste": 742,
+            "Mastery": 2504
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Key to the Unseeming",
+        "item_slot": "Finger",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212447,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_oribos_01_silver.jpg",
+        "stats": {
+            "Critical Strike": 2550,
+            "Versatility": 695
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Silken Advisor's Favor",
+        "item_slot": "Neck",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225575,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_7_0raid_necklace_03c.jpg",
+        "stats": {
+            "Versatility": 2689,
+            "Mastery": 556
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Locket of Broken Memories",
+        "item_slot": "Neck",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212448,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_7_0raid_necklace_03c.jpg",
+        "stats": {
+            "Critical Strike": 2596,
+            "Haste": 649
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Seal of the Void-Touched",
+        "item_slot": "Finger",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225749,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_oribos_01_silver.jpg",
+        "stats": {
+            "Haste": 2541,
+            "Mastery": 705
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Seal of the Abyssal Terror",
+        "item_slot": "Finger",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225750,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_oribos_01_silver.jpg",
+        "stats": {
+            "Critical Strike": 686,
+            "Mastery": 2559
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Seal of the Broken Mountain",
+        "item_slot": "Finger",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225751,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_oribos_01_silver.jpg",
+        "stats": {
+            "Critical Strike": 2550,
+            "Haste": 695
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Seal of the Silent Vigil",
+        "item_slot": "Finger",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225748,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_oribos_01_silver.jpg",
+        "stats": {
+            "Critical Strike": 668,
+            "Versatility": 2578
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cunning Advisor's Favor",
+        "item_slot": "Neck",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 226695,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_7_0raid_necklace_03c.jpg",
+        "stats": {
+            "Versatility": 2689,
+            "Mastery": 556
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Mighty Advisor's Favor",
+        "item_slot": "Neck",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 226696,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_7_0raid_necklace_03c.jpg",
+        "stats": {
+            "Versatility": 2689,
+            "Mastery": 556
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Olden Signet",
+        "item_slot": "Finger",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211052,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_tuskarr_ring_2_color5.jpg",
+        "stats": {
+            "Versatility": 1558,
+            "Mastery": 1650
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Loop of Vestigial Power",
+        "item_slot": "Finger",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211051,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_tuskarr_ring_1_color5.jpg",
+        "stats": {
+            "Haste": 1375,
+            "Mastery": 1833
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Unearthed Relic Band",
+        "item_slot": "Finger",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211061,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_centaur_ring_2_color5.jpg",
+        "stats": {
+            "Critical Strike": 1558,
+            "Haste": 1650
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Long Lost Choker",
+        "item_slot": "Neck",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211063,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_centaur_necklace_1_color2.jpg",
+        "stats": {
+            "Critical Strike": 1420,
+            "Versatility": 1787
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Increases maximum health by 1006007 for 15 sec. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Forged Aspirant's Emblem",
+        "item_slot": "Trinket",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218424,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_endlessrage.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Removes all movement impairing effects and all effects which cause loss of control of your character."
+            }
+        ],
+        "name": "Forged Aspirant's Medallion",
+        "item_slot": "Trinket",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218422,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_pvp_gladiatormedallion.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells and abilities have a chance to grant 3354 primary stat for 20 sec."
+            }
+        ],
+        "name": "Forged Aspirant's Insignia of Alacrity",
+        "item_slot": "Trinket",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218423,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_token_argentdawn3.jpg",
+        "stats": {
+            "Haste": 927
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Element-Attuned Pendant",
+        "item_slot": "Neck",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223435,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_neck_revendreth_01_copper.jpg",
+        "stats": {
+            "Critical Strike": 1675,
+            "Versatility": 1332
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your abilities have a chance to increase your Haste by 2489 for 12 sec."
+            }
+        ],
+        "name": "Stormrider Flight Badge",
+        "item_slot": "Trinket",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224161,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_icon_wing04e.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Increases primary stat by 3975 for 15 sec. (1 Min Cooldown)"
+            }
+        ],
+        "name": "Forged Aspirant's Badge of Ferocity",
+        "item_slot": "Trinket",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218421,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_championsbond.jpg",
+        "stats": {
+            "Haste": 927
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Removes any loss of control effect with a duration of 5 seconds or more. This effect can only occur once every 1 min."
+            }
+        ],
+        "name": "Forged Aspirant's Sigil of Adaptation",
+        "item_slot": "Trinket",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218425,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/sha_ability_rogue_sturdyrecuperate.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Pendant",
+        "item_slot": "Neck",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218431,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_dragon_necklace_1_green.jpg",
+        "stats": {
+            "Versatility": 1890,
+            "Mastery": 1117
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Spinner's Amulet",
+        "item_slot": "Neck",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224594,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_neck_revendreth_01_copper.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Necklace",
+        "item_slot": "Neck",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218429,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_titan_necklace_1_color1.jpg",
+        "stats": {
+            "Haste": 1117,
+            "Versatility": 1890
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Invoke an echo of Fearbreaker's might, splitting the ground beneath your current target and dealing 626905 Nature damage split between all enemies near them. (1 Min, 30 Sec Cooldown)"
+            }
+        ],
+        "name": "Fearbreaker's Echo",
+        "item_slot": "Trinket",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224449,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_fearbreaker_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Ring",
+        "item_slot": "Finger",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218426,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_dragon_ring_3_blue.jpg",
+        "stats": {
+            "Haste": 1117,
+            "Versatility": 1890
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Signet",
+        "item_slot": "Finger",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218428,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_dragon_ring_1signet_black.jpg",
+        "stats": {
+            "Versatility": 1890,
+            "Mastery": 1117
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Choker",
+        "item_slot": "Neck",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218430,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_dragon_necklace_2_red.jpg",
+        "stats": {
+            "Critical Strike": 1117,
+            "Versatility": 1890
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Commemorative Light's Gambit Championship Signet",
+        "item_slot": "Finger",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223432,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendrethraid_01_copper.jpg",
+        "stats": {
+            "Critical Strike": 1632,
+            "Mastery": 1375
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "The Fallen Queen's Band",
+        "item_slot": "Finger",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223431,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendreth_01_silver.jpg",
+        "stats": {
+            "Critical Strike": 1546,
+            "Versatility": 1460
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Spinner's Circlet",
+        "item_slot": "Finger",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224593,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendrethraid_01_copper.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Band",
+        "item_slot": "Finger",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218427,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_explorer_ring_1_color2.jpg",
+        "stats": {
+            "Critical Strike": 1117,
+            "Versatility": 1890
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Spinner's Hoop",
+        "item_slot": "Finger",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224592,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendreth_01_silver.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: When you heal or deal damage you have a chance to increase your Strength, Agility, or Intellect by 826 for 15 sec. Your highest stat is always chosen."
+            },
+            {
+                "description": "Equip: Increases the effect that healing and mana potions have on the wearer by 40%.  This effect does not stack."
+            }
+        ],
+        "name": "Algari Alchemist Stone",
+        "item_slot": "Trinket",
+        "base_item_level": 544,
+        "quality": "Rare",
+        "id": 210816,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_alchemystone_color4.jpg",
+        "stats": {
+            "Versatility": 924
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lightbearer's Pendant",
+        "item_slot": "Neck",
+        "base_item_level": 519,
+        "quality": "Rare",
+        "id": 224575,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_amulet_03.jpg",
+        "stats": {
+            "Versatility": 1560,
+            "Mastery": 1170
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Flameguard's Band",
+        "item_slot": "Finger",
+        "base_item_level": 515,
+        "quality": "Uncommon",
+        "id": 220133,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_70_quest_ring1d.jpg",
+        "stats": {
+            "Critical Strike": 1379,
+            "Versatility": 1303
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Deploy an explosive barrel to bring righteous flame to the enemies of Arathor, dealing 0 Fire damage split between all enemies caught in the blast. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Arathi Demolition Charge",
+        "item_slot": "Trinket",
+        "base_item_level": 506,
+        "quality": "Uncommon",
+        "id": 220118,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_vehicle_liquidpyrite.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Pheromones in the Square grant you 5201 Mastery Rating for 12 sec. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Message-Imprinted Silken Square",
+        "item_slot": "Trinket",
+        "base_item_level": 506,
+        "quality": "Uncommon",
+        "id": 226166,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_fabric_imperialsilk.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Unseemly Agate Choker",
+        "item_slot": "Neck",
+        "base_item_level": 506,
+        "quality": "Uncommon",
+        "id": 226165,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_zulgurub_01.jpg",
+        "stats": {
+            "Haste": 1457,
+            "Versatility": 1118
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your damaging spells and abilities have a chance to deal 322113 Fire damage."
+            }
+        ],
+        "name": "Lava-Forged Cogwheel",
+        "item_slot": "Finger",
+        "base_item_level": 490,
+        "quality": "Rare",
+        "id": 224644,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_engineering_manufacturedparts_gear_firey.jpg",
+        "stats": {
+            "Haste": 613,
+            "Mastery": 579
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Airship Captain's Lost Pendant",
+        "item_slot": "Neck",
+        "base_item_level": 486,
+        "quality": "Rare",
+        "id": 226141,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_necklace_firelands_1.jpg",
+        "stats": {
+            "Haste": 1209,
+            "Mastery": 1129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "The Flame's Remembrance",
+        "item_slot": "Neck",
+        "base_item_level": 486,
+        "quality": "Uncommon",
+        "id": 226140,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_necklace_firelands_1.jpg",
+        "stats": {
+            "Critical Strike": 1302,
+            "Versatility": 1035
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+937 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+937 Random Stat 2 (937.00% @ L70)"
+            }
+        ],
+        "name": "Malleable Band",
+        "item_slot": "Finger",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 215130,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_firelandsraid_01b.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+937 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+937 Random Stat 2 (937.00% @ L70)"
+            }
+        ],
+        "name": "Malleable Pendant",
+        "item_slot": "Neck",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 215131,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_70_lvlupneck_yellow.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells have a chance to inspire you to experiment on an ally, enhancing them in unforeseen ways for 20 sec."
+            }
+        ],
+        "name": "Cirral Concoctory",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219321,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_alchemy_endlessflask_01.jpg",
+        "stats": {
+            "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your excessive healing attracts nearby shadow energy to your party, storing up to 15470 healing and restoring the target's health when they receive damage."
+            },
+            {
+                "description": "Use: Channel the coaglam's power, concentrating all current shadow energy to shield to your target. (1 Min Cooldown)"
+            }
+        ],
+        "name": "Viscous Coaglam",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219320,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_priest_shadoworbs.jpg",
+        "stats": {
+            "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your taunt abilities activate the module's refracting energy, protecting you from 50% of damage taken, up to 375258. This may only occur once every 1 min.\n\nValid only for tank specializations. (1m cooldown)"
+            }
+        ],
+        "name": "Refracting Aggression Module",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219315,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_engineering2_tinkermodules_color1.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells and abilities have a chance to let loose a nascent empowerment from the crystal, increasing a random secondary stat by 1392 for 20 sec."
+            }
+        ],
+        "name": "Empowering Crystal of Anub'ikkaj",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219312,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/achievement_dungeon_ulduarraid_misc_04.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Grasp the shard tightly to enrich yourself with crystalline energy, increasing your Mastery by 2756 for 15 sec. (1 Min, 30 Sec Cooldown)"
+            },
+            {
+                "description": "Equip: The shard draws in remnant energy from defeated enemies, increasing your Mastery by 58 for 15 sec, up to 5 times."
+            }
+        ],
+        "name": "Skarmorak Shard",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219300,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_enchanting_80_umbrashard.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your attacks have a chance to call to the pact, exploding for 41256 Shadow damage split between nearby enemies and increasing your Haste by 377 for 10 sec.\n\nYour death breaks the pact, causing a violent explosion."
+            }
+        ],
+        "name": "Void Pactstone",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219311,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_alchemystone_color4.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your abilities have a chance to call the Darkness to you, increasing your <Primary Stat> by 247, up to 1235.\n\nUpon reaching full power, the Darkness is unleashed, inflicting 113380 Shadow damage split between nearby enemies over 15 sec before fading back into the remnant."
+            }
+        ],
+        "name": "Remnant of Darkness",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219307,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_demonhunter_darkness.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Raise your signet to the Light, increasing your highest secondary stat by 0 for 20 sec. Your act inspires nearby signetbearers within your party, granting them 0 of the same stat for. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Signet of the Priory",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219308,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/achievement_challengemode_scarlethalls_gold.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your abilities have a chance to stir the sac, releasing an egg which grants you 225 <Primary Stat>. Each egg hatches after 1 min, and the new brood attacks your next target, inflicting 10096 Nature damage over 8 sec. (100ms cooldown)"
+            }
+        ],
+        "name": "Ara-Kara Sacbrood",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219314,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ability_web_nova.jpg",
+        "stats": {
+            "Haste": 604
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your abilities have a chance to call an Earthen ally to your aid, supporting you in combat. (15s cooldown)"
+            }
+        ],
+        "name": "Sigil of Algari Concordance",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219295,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_earthenfury_giftofearth.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your attacks have a chance to stir the larynx, allowing its dark whispers to influence you. Each whisper flows through your mind for 30 sec, granting 200 Strength."
+            },
+            {
+                "description": "Use: Wave the larynx in the air to release a tormenting chorus, inflicting 249177 Shadow damage over 3 sec split between nearby enemies. Your whispers leave to join the chorus, increasing its damage before falling silent. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Oppressive Orator's Larynx",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219318,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_shadowmend.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Occasionally share a drink with allies who assist you in combat, granting them 674 of their primary stat for 15 sec and absorbing 17766 damage. You take a sip as well, granting 363 <Primary Stat> and absorbing 82910 damage.\n\nWhen you fall below 50% health, you take an emergency sip. This may only occur once every 1 min.\n\nValid only for tank specializations."
+            }
+        ],
+        "name": "Cinderbrew Stein",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219297,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/achievement_brewery_2.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: The gland releases pheromones that attract a Ceaseless Swarm of insects to surround you. Taking damage has a high chance to retaliate against attackers, inflicting 21948 Nature damage over 6 sec and reducing damage dealt to you by 11070."
+            }
+        ],
+        "name": "Ceaseless Swarmgland",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219316,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_organ_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Hold out the feather for 11 sec to strike with the power of the storm, crashing down on the target location and inflicting 268049 Nature damage split between nearby enemies. (1 Min, 30 Sec Cooldown)"
+            }
+        ],
+        "name": "Charged Stormrook Plume",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219294,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_achievement_dungeon_rookery.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Carve a wax copy of your target, which absorbs 50% of their damage taken. The absorption heats up the wax, causing it to melt after absorbing 434210 damage. (1 Min, 30 Sec Cooldown)"
+            }
+        ],
+        "name": "Burin of the Candle King",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219306,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_70_jeweledlockpick.jpg",
+        "stats": {
+            "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells and abilities have a chance to send an orb of volatile black blood drifting to your target, exploding for 62133 Shadow damage split between all nearby enemies on impact. Intercepting the orb allows you to siphon its power, instead increasing your Mastery by 1575 for 15 sec."
+            }
+        ],
+        "name": "Harvester's Edict",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219317,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/trade_archaeology_nerubian_obelisk.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Strapped Rescue-Keg",
+        "item_slot": "Neck",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221060,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_necklace_1_frost.jpg",
+        "stats": {
+            "Haste": 1228,
+            "Mastery": 526
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Devout Zealot's Ring",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221136,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_ring_1_frost.jpg",
+        "stats": {
+            "Critical Strike": 1203,
+            "Haste": 551
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Radiant Necromancer's Band",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221200,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_ring_1_frost.jpg",
+        "stats": {
+            "Versatility": 677,
+            "Mastery": 1078
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your attacks have a chance to direct a Kobold Cart towards your target, sending a careening troop that collides with enemies, inflicting 98229 Physical damage split between enemies impacted."
+            }
+        ],
+        "name": "Conductor's Wax Whistle",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219304,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_hunter_beastcall.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Open the pouch and draw Nx's shadow blade to quickly strike at enemies in front of you, inflictiing 342.5 Shadow damage to all enemies hit.\n\nYou may use the pouch up to two additional times within 20 sec before it seals itself to magically recharge its contents. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Twin Fang Instruments",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219319,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/achievement_alliedrace_voidelf.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your attacks or attacks made against you have a chance to increase your Critical Strike by 279 for 20 sec stacking up to 3 times."
+            }
+        ],
+        "name": "11.0 Dungeon Template - Generic - Trinket",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211649,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_rune_09.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your healing abilities have a chance to call the nearby metal to form a shield around an ally, absorbing 74256 damage.\n\nThe shield reacts explosively to fire, inflicting 4566 Fire damage to nearby enemies when struck."
+            }
+        ],
+        "name": "Scrapsinger's Symphony",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219302,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_blacksmithing_craftedoptional_engineering_color1.jpg",
+        "stats": {
+            "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Release a toll of Holy Light upon the target, inflicting 72373 Holy damage. The next 5 allies to attack the target will receive the Blessing of Mereldar, increasing their Versatility by 609 for 10 sec. (1 Min, 30 Sec Cooldown)"
+            }
+        ],
+        "name": "Mereldar's Toll",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219313,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_bell_01.jpg",
+        "stats": {
+            "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Launch the superheated gear-a-rang,  inflicting 41497 Flamestrike damage to enemies, losing heat as it cuts through them. (2 Min Cooldown)"
+            },
+            {
+                "description": "Equip: Your melee attacks have a chance to crank the launcher's gears, decreasing its cooldown by 5 sec and heating up your weapon which causes your next attack to inflict 25251 additional Fire damage."
+            }
+        ],
+        "name": "Overclocked Gear-A-Rang Launcher",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219301,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_engineering_c_01_blue.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells have a chance to imbue the wax, causing it to form into a blazing candle for 15 sec which increases your Versatility by 1291, further increased by 136 while you remain within its light."
+            }
+        ],
+        "name": "Carved Blazikon Wax",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219305,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_candlepet.jpg",
+        "stats": {
+            "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells have a chance to destabilize the void energy, releasing a corrupted fragment. Retrieving a fragment briefly infuses you with its power, increasing your Intellect by 1235 for 15 sec."
+            }
+        ],
+        "name": "Entropic Skardyn Core",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219296,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_priest_voidentropy.jpg",
+        "stats": {
+            "Critical Strike": 604
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Charge the crystal to summon a rift that draws power from nearby enemies, inflicting 307476 Shadow damage over 6 sec.\n\nWhen the rift collapses, its drawn energy returns to you to increase your Intellect by 112 for 20 sec, further increased for each enemy struck. (2 Min Cooldown)"
+            }
+        ],
+        "name": "High Speaker's Accretion",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219303,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cosmicvoid_nova.jpg",
+        "stats": {
+            "Mastery": 604
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Summon a Bursting Lightspawn which sacrifices its health to unleash Bursts of Light, inflicting 84540 Holy damage split between nearby enemies every 2 sec while it lives. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Bursting Lightshard",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219310,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_greaterblessingoflight.jpg",
+        "stats": {
+            "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells have a chance to evoke the feral insights of the charm, granting 1114 Critical Strike for 12 sec.\n\nFighting against or alongside a beast increases this effect by 20%."
+            }
+        ],
+        "name": "Charm of the Underground Beast",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221265,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/hunter_pvp_direbeastbasilisk.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Twisted Earthen Signet",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223368,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_oribos_02_silver.jpg",
+        "stats": {
+            "Haste": 902,
+            "Mastery": 852
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Call in a ravenous ally and ride off into the sunset (or $443387rad1 yds, whichever is closest), inflicting 201037 Fire damage split between all enemies you ride through. (1 Min, 30 Sec Cooldown)"
+            }
+        ],
+        "name": "Ravenous Honey Buzzer",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219298,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_engineering_device_gadget1_color1.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Advance to the 50 Verses of Inner Resilience, reading as you are attacked.\nInner Resilience increases your armor by 80 and grants your attacks a chance to invoke a ward which absorbs 2310 Magic damage. When finished, sift through the passages to another chapter. (750ms cooldown)"
+            },
+            {
+                "description": "Use: Sift through the passages in the tome with increased Radiance. (1 Min, 30 Sec Cooldown)"
+            }
+        ],
+        "name": "Tome of Light's Devotion",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219309,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_7xp_inscription_talenttome01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Hoop of the Blighted",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221197,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_ring_1_frost.jpg",
+        "stats": {
+            "Critical Strike": 1053,
+            "Mastery": 702
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Polished Goblin Bling",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221232,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_eng_metalblingronear.jpg",
+        "stats": {
+            "Versatility": 852,
+            "Mastery": 902
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells have a chance of releasing spores that grant 566 Mastery to 4 nearby allies for 10 sec. Any spores that can't find a host grant you 80% of the Mastery instead.\n\nActivating this effect by a Nature spell causes one additional spore to be released."
+            }
+        ],
+        "name": "Fungarian Mystic's Cluster",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221264,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_druid_wildmushroom_bloom.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells have a chance to charge the device and request a Backfill Barrel near your target's location. Damaging the barrel causes it to explode, inflicting 156955 Fire damage split between nearby enemies."
+            }
+        ],
+        "name": "Synergistic Brewterializer",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219299,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_enggizmos_20.jpg",
+        "stats": {
+            "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Generic - Neck",
+        "item_slot": "Neck",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211650,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_7_0raid_necklace_03a.jpg",
+        "stats": {
+            "Critical Strike": 952,
+            "Mastery": 802
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Wick's Golden Loop",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221099,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_ring_1_frost.jpg",
+        "stats": {
+            "Haste": 1128,
+            "Versatility": 627
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "High Nerubian Signet",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221141,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_ring_1_frost.jpg",
+        "stats": {
+            "Versatility": 1178,
+            "Mastery": 576
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your ranged attacks have a chance to inject a paralytic venom into the target, dealing 45070 Nature damage over 9 sec.\n\nEach second the target is moving while affected grants you 46.2 Haste for 10 sec stacking up to 5 times."
+            }
+        ],
+        "name": "Nerubian Venom-Tipped Dart",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221263,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_nullifypoison.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Signet of Dark Horizons",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223006,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendrethraid_01_silver.jpg",
+        "stats": {
+            "Critical Strike": 902,
+            "Haste": 852
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Band of the Relic Bearer",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223376,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_80_06d.jpg",
+        "stats": {
+            "Critical Strike": 902,
+            "Mastery": 852
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Flickering Glowtorc",
+        "item_slot": "Neck",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221103,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_necklace_1_frost.jpg",
+        "stats": {
+            "Critical Strike": 1178,
+            "Versatility": 576
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "85 Years Tenure Ring",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221198,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_ring_1_frost.jpg",
+        "stats": {
+            "Critical Strike": 602,
+            "Mastery": 1153
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Generic - Finger",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211648,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendrethraid_01_silver.jpg",
+        "stats": {
+            "Haste": 902,
+            "Mastery": 852
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Tidal Pendant",
+        "item_slot": "Neck",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221234,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_7_0raid_necklace_16d.jpg",
+        "stats": {
+            "Critical Strike": 952,
+            "Versatility": 802
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "String of Fungal Fruits",
+        "item_slot": "Neck",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223005,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_7_0raid_necklace_06b.jpg",
+        "stats": {
+            "Haste": 952,
+            "Mastery": 802
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "\"Emergency Stop\" Keychain",
+        "item_slot": "Neck",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221077,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_necklace_1_frost.jpg",
+        "stats": {
+            "Haste": 627,
+            "Mastery": 1128
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Elder's Hemolymphal Periapt",
+        "item_slot": "Neck",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221181,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_necklace_1_frost.jpg",
+        "stats": {
+            "Critical Strike": 677,
+            "Versatility": 1078
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Experiment 08752's Band",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221189,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_ring_1_frost.jpg",
+        "stats": {
+            "Haste": 727,
+            "Versatility": 1028
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Fungarian's Fingerwrap",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223377,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_70_raid_ring1b.jpg",
+        "stats": {
+            "Critical Strike": 852,
+            "Versatility": 902
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Template - Accessory - Finger",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221066,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_questionmark.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your melee attacks have a chance to latch a bloody hook onto the target. After 4 sec the hook retracts, raking them for 63708 Physical damage.\n\nWhile hooked, any critical Physical strike buries the hook further into the target, causing an additional 8919 Physical damage over 8 sec."
+            }
+        ],
+        "name": "Deephunter's Bloody Hook",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221233,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_grapplinghook.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Clattering Chitin Necklace",
+        "item_slot": "Neck",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223375,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_necklace_shell03.jpg",
+        "stats": {
+            "Versatility": 952,
+            "Mastery": 802
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ever-Oozing Signet",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223921,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_56.jpg",
+        "stats": {
+            "Critical Strike": 852,
+            "Haste": 902
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Deeply Corrupted Coil",
+        "item_slot": "Finger",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221093,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_ring_1_frost.jpg",
+        "stats": {
+            "Critical Strike": 652,
+            "Haste": 1103
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Pendant of the Mage City",
+        "item_slot": "Neck",
+        "base_item_level": 415,
+        "quality": "Uncommon",
+        "id": 223637,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_jewelcrafting_necklace_necklace2_color3.jpg",
+        "stats": {
+            "Haste": 832,
+            "Mastery": 661
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Signet of Wolf's Favor",
+        "item_slot": "Finger",
+        "base_item_level": 415,
+        "quality": "Uncommon",
+        "id": 223633,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_95.jpg",
+        "stats": {
+            "Versatility": 661,
+            "Mastery": 832
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Favor",
+        "item_slot": "Finger",
+        "base_item_level": 415,
+        "quality": "Uncommon",
+        "id": 223635,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_99.jpg",
+        "stats": {
+            "Haste": 661,
+            "Mastery": 832
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ring of Returning Memories",
+        "item_slot": "Finger",
+        "base_item_level": 415,
+        "quality": "Uncommon",
+        "id": 223634,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_jewelcrafting_rings_ring3_color2.jpg",
+        "stats": {
+            "Critical Strike": 853,
+            "Versatility": 640
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Remembrancer's Radiant Jewels",
+        "item_slot": "Neck",
+        "base_item_level": 415,
+        "quality": "Uncommon",
+        "id": 223636,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_36.jpg",
+        "stats": {
+            "Critical Strike": 810,
+            "Haste": 682
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Adventurer's Lucky Ring",
+        "item_slot": "Finger",
+        "base_item_level": 415,
+        "quality": "Uncommon",
+        "id": 223631,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_02.jpg",
+        "stats": {
+            "Critical Strike": 640,
+            "Haste": 853
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Signet of Lion's Favor",
+        "item_slot": "Finger",
+        "base_item_level": 415,
+        "quality": "Uncommon",
+        "id": 223632,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_97.jpg",
+        "stats": {
+            "Versatility": 661,
+            "Mastery": 832
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Scout's Dog Tags",
+        "item_slot": "Neck",
+        "base_item_level": 415,
+        "quality": "Uncommon",
+        "id": 223627,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_37.jpg",
+        "stats": {
+            "Haste": 832,
+            "Mastery": 661
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Marksman's Dog Tags",
+        "item_slot": "Neck",
+        "base_item_level": 415,
+        "quality": "Uncommon",
+        "id": 223628,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_37.jpg",
+        "stats": {
+            "Critical Strike": 810,
+            "Mastery": 682
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Marksman's War-Chain",
+        "item_slot": "Neck",
+        "base_item_level": 415,
+        "quality": "Uncommon",
+        "id": 223629,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_38.jpg",
+        "stats": {
+            "Critical Strike": 810,
+            "Mastery": 682
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Scout's War-Chain",
+        "item_slot": "Neck",
+        "base_item_level": 415,
+        "quality": "Uncommon",
+        "id": 223630,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_38.jpg",
+        "stats": {
+            "Haste": 832,
+            "Mastery": 661
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Shield an ally for 135728 while channeling a beam of molten flame dealing 15925  Fire damage over 2.5 sec to them. If they survive the channel, heal them for 339318. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Delve Ring",
+        "item_slot": "Trinket",
+        "base_item_level": 412,
+        "quality": "Rare",
+        "id": 207390,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_volatilefire.jpg",
+        "stats": {
+            "Intellect": 435
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Restores 219200 health."
+            }
+        ],
+        "name": "Onyx Annulet",
+        "item_slot": "Finger",
+        "base_item_level": 405,
+        "quality": "Epic",
+        "id": 206211,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_bottle_shape4_red.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your harmful attacks and abilities have a high chance to build momentum, granting 2% bonus movement speed per stack.\n\nAt 5 stacks you reach full momentum increasing your movement speed bonus to 20% for 10 sec. While at full momentum, your attacks hit the target at high velocity dealing an additional 2909 Nature damage scaling up with your current movement speed. (500ms cooldown)"
+            }
+        ],
+        "name": "Scroll of Momentum",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 226539,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription2_scroll3_color2.jpg",
+        "stats": {
+            "Intellect": 389
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: be nimble, be quick. invoke the power of the candlestick to increase movement speed by 20% and Haste by 2364 for 20 sec."
+            }
+        ],
+        "name": "Quickwick Candlestick",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225649,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/trade_archaeology_candlestub.jpg",
+        "stats": {
+            "Haste": 259
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lightbringer's Amulet",
+        "item_slot": "Neck",
+        "base_item_level": 400,
+        "quality": "Rare",
+        "id": 220157,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_tinderboxholy01.jpg",
+        "stats": {
+            "Critical Strike": 732,
+            "Versatility": 582
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lightbringer's Amulet",
+        "item_slot": "Neck",
+        "base_item_level": 400,
+        "quality": "Rare",
+        "id": 220158,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_tinderboxholy01.jpg",
+        "stats": {
+            "Critical Strike": 732,
+            "Versatility": 582
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Healing has a chance to fill the Vial, which you instinctively throw at your lowest health ally for 57400 healing. It would be a waste to not use it while alone, in which case you pour it on yourself."
+            }
+        ],
+        "name": "Vile Vial of Kaheti Bile",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225891,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiond2.jpg",
+        "stats": {
+            "Intellect": 389
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lightbringer's Amulet",
+        "item_slot": "Neck",
+        "base_item_level": 400,
+        "quality": "Rare",
+        "id": 219503,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_tinderboxholy01.jpg",
+        "stats": {
+            "Critical Strike": 732,
+            "Versatility": 582
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Rapidly evolve for 1.5 sec before taking on a new more powerful form increasing your <Primary Stat> by 156 and all other stats by 212 for 20 sec. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Rapid Evolution Serum",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225654,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_dpotion_a25.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: The Core's unstable energies will randomly buff one of your secondary stats for 409. This lasts between 10 and 30 sec before randomly changing to another stat."
+            }
+        ],
+        "name": "Unstable Power Suit Core",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225668,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_spiritshard_01.jpg",
+        "stats": {
+            "Intellect": 389
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sparkling Pearl Ring",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219765,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_pearlring1.jpg",
+        "stats": {
+            "Haste": 714,
+            "Versatility": 601
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your attacks have a chance to drain 23687 health from your target and heal you for 50% of the health drained."
+            }
+        ],
+        "name": "11.0 End Game Template Trinket",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212148,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_enggizmos_16.jpg",
+        "stats": {
+            "Critical Strike": 493
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Band",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212149,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendrethraid_02_silver.jpg",
+        "stats": {
+            "Critical Strike": 751,
+            "Haste": 563
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your damaging spells and abilities have a chance to place a Spelunker's Candle on your head, granting 875 Critical Strike for 15 sec.\n\nMoving within 3 yards of an ally places the Spelunker's Candle on both heads, sharing the effect for the remaining duration."
+            }
+        ],
+        "name": "Spelunker's Waning Candle",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225638,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_trinket_maldraxxus_01_purple.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Entering combat summons an orb of dark power to assist you."
+            }
+        ],
+        "name": "Shadowed Essence",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225693,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_orb_03.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Signet",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212141,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendrethraid_01_copper.jpg",
+        "stats": {
+            "Critical Strike": 714,
+            "Mastery": 601
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Brax's Brass Knuckle",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219379,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendrethraid_02_silver.jpg",
+        "stats": {
+            "Critical Strike": 751,
+            "Haste": 563
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Band",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212140,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendreth_01_silver.jpg",
+        "stats": {
+            "Critical Strike": 676,
+            "Versatility": 639
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Choker",
+        "item_slot": "Neck",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212152,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_neck_revendreth_01_copper.jpg",
+        "stats": {
+            "Critical Strike": 732,
+            "Versatility": 582
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Remembrance of the Fallen City",
+        "item_slot": "Neck",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219754,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_90_maxlvlneck_purple.jpg",
+        "stats": {
+            "Critical Strike": 732,
+            "Versatility": 582
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Gem-Studded Pendant",
+        "item_slot": "Neck",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224665,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_6_0raid_necklace_2b.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Blow the horn, emboldening you and your party members, increasing Mastery by 946 for 10 sec. (2 Min Cooldown)"
+            }
+        ],
+        "name": "Horn of Declaration",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 217041,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_horn_03.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Signet",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218175,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendrethraid_01_copper.jpg",
+        "stats": {
+            "Critical Strike": 714,
+            "Mastery": 601
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Luminescent Pearl Band",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219764,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_28.jpg",
+        "stats": {
+            "Critical Strike": 714,
+            "Mastery": 601
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Gem-Studded Ring",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224662,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_bastion_01_pinkgold.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Threadmaestro's Collar",
+        "item_slot": "Neck",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225563,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_7_0raid_necklace_02d.jpg",
+        "stats": {
+            "Versatility": 582,
+            "Mastery": 732
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Alter your appearance to something more sinister, causing up to 5 enemies within 8 yds to take84346 over 10 sec. (1 Min, 30 Sec Cooldown)"
+            }
+        ],
+        "name": "Nizrek's Holographic Manipulator",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225970,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_jewelcrafting_gem2standard_cut_black.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Band",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218240,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendrethraid_02_silver.jpg",
+        "stats": {
+            "Critical Strike": 751,
+            "Haste": 563
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Choker",
+        "item_slot": "Neck",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218243,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_neck_revendreth_01_copper.jpg",
+        "stats": {
+            "Critical Strike": 732,
+            "Versatility": 582
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Queensfang Choker",
+        "item_slot": "Neck",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225561,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_6_2raid_necklace_2d.jpg",
+        "stats": {
+            "Critical Strike": 977,
+            "Haste": 338
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: You are one of the devout. Your spells and abilities have a chance of burning a nearby enemy for 26745 Radiant damage and healing another devout ally for that amount."
+            }
+        ],
+        "name": "Shining Arathor Insignia",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225647,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_arathorhandtorch01.jpg",
+        "stats": {
+            "Critical Strike": 493
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells have a chance to bring the candle to life, summoning a waxen ally to light up your enemies."
+            }
+        ],
+        "name": "Candle Confidant",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225648,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_candlepet.jpg",
+        "stats": {
+            "Intellect": 389
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Taking harmful spells and abilities has a chance to brand your assailant dealing 8875 Holy Fire damage and healing you for 50% of damage dealt."
+            }
+        ],
+        "name": "Siphoning Lightbrand",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225653,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/70_inscription_vantus_rune_light.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: While performing harmful melee abilities have a chance to Gnash your target dealing 13865 Physical damage. Every third Gnash on the same target does 50% additional damage based on targets missing health. Count is reset if Gnash hits a different target."
+            }
+        ],
+        "name": "Detachable Fang",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225657,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_redsaberonfang.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Hollow Ring",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 226245,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_156.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Choker",
+        "item_slot": "Neck",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218186,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_neck_revendreth_01_copper.jpg",
+        "stats": {
+            "Critical Strike": 732,
+            "Versatility": 582
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Gem-Studded Band",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224660,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_90_lvlupring_blue.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Gem-Studded Signet",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224661,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_bastion_01_silver.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Swarm-Maven's Amulet",
+        "item_slot": "Neck",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225562,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_neck_revendreth_01_silver.jpg",
+        "stats": {
+            "Haste": 714,
+            "Mastery": 601
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: A dark ritual sometimes resonates with your harmful spells, storing magic within the emblem. Using the emblem will complete the ritual, unleashing a horrific blast that deals up to 94000 Shadow damage to your target. (1 Min Cooldown)"
+            }
+        ],
+        "name": "Kaheti Shadeweaver's Emblem",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225651,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_trinket_mawraid_04_purple.jpg",
+        "stats": {
+            "Intellect": 389
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Bask a single friendly target in the censer's glow, applying a shield that absorbs up to 132308 damage for 15 sec. (1 Min Cooldown)"
+            }
+        ],
+        "name": "Goldenglow Censer",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225656,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_incenseholder_color4.jpg",
+        "stats": {
+            "Intellect": 389
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Band",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218174,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendreth_01_silver.jpg",
+        "stats": {
+            "Critical Strike": 676,
+            "Versatility": 639
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your attacks have a chance to drain 23687 health from your target and heal you for 50% of the health drained."
+            }
+        ],
+        "name": "11.0 Zone Uncommon Template - Trinket",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218182,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_enggizmos_16.jpg",
+        "stats": {
+            "Critical Strike": 493
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Band",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218183,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendrethraid_02_silver.jpg",
+        "stats": {
+            "Critical Strike": 751,
+            "Haste": 563
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Band",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218231,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendreth_01_silver.jpg",
+        "stats": {
+            "Critical Strike": 676,
+            "Versatility": 639
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Signet",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218232,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_revendrethraid_01_copper.jpg",
+        "stats": {
+            "Critical Strike": 714,
+            "Mastery": 601
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your attacks have a chance to drain 23687 health from your target and heal you for 50% of the health drained."
+            }
+        ],
+        "name": "11.0 Leveling Quest Template - Trinket",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218239,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_enggizmos_16.jpg",
+        "stats": {
+            "Critical Strike": 493
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Hissing Blackblood Ring",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225545,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_70_quest_ring7c.jpg",
+        "stats": {
+            "Haste": 714,
+            "Mastery": 601
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Corrosive Blackblood Ring",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225546,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_70_quest_ring2a.jpg",
+        "stats": {
+            "Critical Strike": 751,
+            "Haste": 563
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Band of Elemental Chaos",
+        "item_slot": "Finger",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 226672,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_ring_4_earth.jpg",
+        "stats": {
+            "Versatility": 751,
+            "Mastery": 563
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Apply a thick coating of reinforced-Wax to your armor granting you 515 damage reduction."
+            }
+        ],
+        "name": "Reinforced-Wax Plating",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 226521,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_legion_goochocovanilla_pool.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Darkmoon Deck: Symbiosis",
+        "item_slot": "Trinket",
+        "base_item_level": 372,
+        "quality": "Epic",
+        "id": 220171,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_spore_blank.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Darkmoon Deck: Vivacity",
+        "item_slot": "Trinket",
+        "base_item_level": 372,
+        "quality": "Epic",
+        "id": 219675,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_spore_blank.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Darkmoon Deck: Symbiosis",
+        "item_slot": "Trinket",
+        "base_item_level": 372,
+        "quality": "Common",
+        "id": 222213,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_earth_blank.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your damaging spells and abilities have the chance to ignite your target with Radiant Focus for  15 sec.\n\nAfter dealing up to 40000  damage to the target the focused energies ignite you with Radiance, granting between 401.5 to 803 of your highest Secondary stat based on damage dealt for 15 sec."
+            },
+            {
+                "description": "Equip: Your damaging spells and abilities have the chance to grant Vivaciousness, increasing secondary stats by 803 and Speed or Avoidance by 71 based on the school it was activated from."
+            },
+            {
+                "description": "Equip: Your damaging spells and abilities have the chance to transform the imbued Darkmoon energies, granting the evolved effect of a Darkmoon Deck from the past."
+            },
+            {
+                "description": "Equip: Gain Evolution every 8 seconds spent in combat.\n\nEvolution  grants 0 of a random secondary stat for 15 sec, stacking up to 10 times."
+            }
+        ],
+        "name": "Darkmoon Deck: Shine",
+        "item_slot": "Trinket",
+        "base_item_level": 372,
+        "quality": "Common",
+        "id": 222662,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_inscription_darkmooncard_generic01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Darkmoon Deck: Evolve",
+        "item_slot": "Trinket",
+        "base_item_level": 372,
+        "quality": "Epic",
+        "id": 219674,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription3_darkmoondeckbox_black.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Darkmoon Deck: Vivacity",
+        "item_slot": "Trinket",
+        "base_item_level": 372,
+        "quality": "Common",
+        "id": 222231,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_frost_blank.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Darkmoon Deck: Shine",
+        "item_slot": "Trinket",
+        "base_item_level": 372,
+        "quality": "Common",
+        "id": 222222,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_fire_blank.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Darkmoon Deck: Evolve",
+        "item_slot": "Trinket",
+        "base_item_level": 372,
+        "quality": "Common",
+        "id": 222240,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_air_blank.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Darkmook Deck: Symbiosis",
+        "item_slot": "Trinket",
+        "base_item_level": 372,
+        "quality": "Epic",
+        "id": 219673,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_spore_blank.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Enkindled Locket",
+        "item_slot": "Neck",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219184,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_centaur_necklace_1_color2.jpg",
+        "stats": {
+            "Haste": 422,
+            "Mastery": 298
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+360 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+360 Random Stat 2 (360.00% @ L70)"
+            }
+        ],
+        "name": "Copy Copy Elemental Lariat",
+        "item_slot": "Neck",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 215143,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_jewelcrafting_necklace_necklace1_color3.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ceremonial Song Ring",
+        "item_slot": "Finger",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219221,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_explorer_ring_2_color5.jpg",
+        "stats": {
+            "Critical Strike": 494,
+            "Versatility": 226
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Gold-Thread Choker",
+        "item_slot": "Neck",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219217,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_centaur_necklace_1_color1.jpg",
+        "stats": {
+            "Critical Strike": 422,
+            "Versatility": 298
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+360 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+360 Random Stat 2 (360.00% @ L70)"
+            }
+        ],
+        "name": "Copy Copy Elemental Lariat",
+        "item_slot": "Neck",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 215139,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_jewelcrafting_necklace_necklace1_color3.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Bone-Carved Circlet",
+        "item_slot": "Finger",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219187,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_tuskarr_ring_1_color5.jpg",
+        "stats": {
+            "Critical Strike": 226,
+            "Mastery": 494
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dark Abyss Hoop",
+        "item_slot": "Finger",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219188,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_centaur_ring_2_color5.jpg",
+        "stats": {
+            "Haste": 237,
+            "Versatility": 483
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Fuzzy Molding Halo",
+        "item_slot": "Finger",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219189,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_tuskarr_ring_2_color5.jpg",
+        "stats": {
+            "Haste": 504,
+            "Mastery": 216
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Generic - Finger",
+        "item_slot": "Finger",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 225728,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_oribos_01_silver.jpg",
+        "stats": {
+            "Versatility": 242,
+            "Mastery": 90
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Physical DPS - Trinket",
+        "item_slot": "Trinket",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 212455,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/sha_spell_fire_bluehellfire_nightmare.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - INT - Trinket",
+        "item_slot": "Trinket",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 212457,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_artifact_tome01.jpg",
+        "stats": {
+            "Intellect": 112
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Drink from the vial and let the toxins course through your veins increasing all secondary stats by 115 for 30 sec.\n\nUse again to administer yourself the antidote to end the effect.\n\nIf the Antidote is not administered before the end of the effect you will be stunned for 5 sec. (2 Min, 30 Sec Cooldown)"
+            }
+        ],
+        "name": "Concoction: Kiss of Death",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 215174,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_engineersgrease_color1.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Engrave a ritual seal into your skin binding you to the shadows, granting yourself 76 <Primary Stat>.\n\nYour spells and abilities have a low chance to reduce one of your secondary stats by 103 for 10 sec during combat."
+            }
+        ],
+        "name": "Shadow-Binding Ritual Knife",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 215178,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_grimbatolraid_d_03.jpg",
+        "stats": {
+            "Mastery": 96
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your ranged attacks have a chance to send a vengeful flame towards your target, dealing 1910 Fire damage when it reaches them.\n\nThe spirit grows as it travels towards the target, dealing up to 100% additional Fire damage."
+            }
+        ],
+        "name": "Vengeful Fire Spirit",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 219014,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_fire_lavaspawn.jpg",
+        "stats": {
+            "Critical Strike": 96
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your harmful ranged spells and abilities have a high chance to rouse the lantern's flame, granting a stack of Lamp Light up to 15 times.\n\nAfter 30 sec of collecting stacks, Lamp Light is consumed to attract an equal amount of Fireflies to charge the next target you attack exploding for 104 Fire damage per Firefly."
+            }
+        ],
+        "name": "Everburning Lantern",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 215169,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_draenorcrafted_d_01_c_alliance.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Place an abyssal trap at your feet. When an enemy comes within 3 yards, a giant water bubble is created for 10 sec. All enemies within the bubble take 240 Frost damage every second.\n\nThe trap will exist for 1 min before being automatically disarmed. (1 Min Cooldown)"
+            }
+        ],
+        "name": "Abyssal Trap",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 215170,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_shawaterelemental_split.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Spells and abilities have a chance to unearth a Colourful Fungal Friend to heal allies for 5605, grant you 831 mana, or deal 3831 Nature damage over 3 sec to a nearby enemy. (1s cooldown)"
+            }
+        ],
+        "name": "Fungal Friend Flute",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 215171,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/8xp_vulperaflute.jpg",
+        "stats": {
+            "Intellect": 64
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Unfurl a myriad of grasping webs in front of you entangling your enemies, reducing damage they deal to you by 30% up to 4953 total damage and reducing their Attack Speed by 15% for 15 sec.\n\n[Attack Speed reduction is less effective against enemies above level 80.] (1 Min Cooldown)"
+            }
+        ],
+        "name": "Silken Chain Weaver",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 215172,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_tailoring_purchasedthread_color2.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your melee attacks have a chance to set the target ablaze, dealing 1012 Fire damage over 11 sec.\n\nTriggering this effect while the target is already burning refreshes the duration while also spreading to a nearby enemy."
+            }
+        ],
+        "name": "Wildfire Wick",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 218307,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_trinket_maldraxxus_01_red.jpg",
+        "stats": {
+            "Critical Strike": 96
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Test Item A",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Rare",
+        "id": 213569,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_engineering_manufacturedparts_gear_frost.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells and abilities have a chance to embolden those around you, granting 184 Versatility split between you and nearby allies.\n\nVersatility is increased for each ally affected, up to 5 allies."
+            }
+        ],
+        "name": "Esteemed Earthen Emblem",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Rare",
+        "id": 219018,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/70_inscription_vantus_rune_odyn.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+48 Dodge (0.24% @ L70)"
+            },
+            {
+                "description": "+48 Parry (0.24% @ L70)"
+            },
+            {
+                "description": "Equip: Systematically consume a small dosage of the serum when entering combat heightening your senses to their limit.\nIn this state parrying and dodging have a chance to cause you to reposte with a Counter dealing Y Physical damage to your assailant."
+            }
+        ],
+        "name": "Serum of Unconstrained Senses",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Rare",
+        "id": 215173,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_dpotion_a25.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Belt of Vials",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Rare",
+        "id": 215175,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_nature_web.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Brann's spell and abilities have a chance to create bursts of energy, warping the flow of time for all nearby units by 15% for 20 sec.\n\nCasting, movement, periodic effects, cooldowns, and attack speeds are affected while time warped."
+            }
+        ],
+        "name": "Time Lost Relic",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 225682,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_armor_waistoftime_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Grasping Necrotic Relic",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 225683,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_necro_necroticcore.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Test Item B",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Rare",
+        "id": 213570,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_engineering_manufacturedparts_gear_firey.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Increases your movement speed by 50%, but also damages you for 4% of your maximum health every 1 sec. Movement impairing effects may not reduce you below 100% of normal movement speed. Lasts until canceled."
+            }
+        ],
+        "name": "Test Item C",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Rare",
+        "id": 216657,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_engineering_manufacturedparts_gear_uprez.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Brute Force Idol",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 225669,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/ability_bossfelmagnaron_handempowered.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Randomly while in combat a bloodbeast will attach itself to Brann, periodically launching morsels of itself near players, granting Bloodstained Blessing upon walking through them.\n\nBloodstained Blessing\nIncreases damage and healing done by 3%, and reduces maximum health by 10% for 1 min."
+            }
+        ],
+        "name": "Relicblood of Zekvir",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 225684,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_elementalcombinedfoozles_blood.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Steel Traps now also deals Physical damage over time."
+            }
+        ],
+        "name": "Relic of Sentience",
+        "item_slot": "Trinket",
+        "base_item_level": 250,
+        "quality": "Uncommon",
+        "id": 225685,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_statue_10.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Band of Radiant Echoes",
+        "item_slot": "Finger",
+        "base_item_level": 227,
+        "quality": "Common",
+        "id": 219325,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_dungeonjewelry_primalist_ring_2_earth.jpg",
+        "stats": {
+            "Haste": 76,
+            "Mastery": 51
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Faded Ebony Scale",
+        "item_slot": "Trinket",
+        "base_item_level": 200,
+        "quality": "Rare",
+        "id": 223513,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_stone_15.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Pocket Watch",
+        "item_slot": "Trinket",
+        "base_item_level": 200,
+        "quality": "Rare",
+        "id": 223507,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_pocketwatch_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your damaging and healing abilities have a chance to grant you Call of the Alliance, increasing your highest secondary stat by 117 for 10 sec."
+            }
+        ],
+        "name": "Recruit's Trumpet",
+        "item_slot": "Trinket",
+        "base_item_level": 200,
+        "quality": "Rare",
+        "id": 223516,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_horn_03.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Whetstone",
+        "item_slot": "Trinket",
+        "base_item_level": 200,
+        "quality": "Rare",
+        "id": 223508,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_stone_sharpeningstone_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your damaging and healing abilities have a chance to grant you Call of the Horde, increasing your highest secondary stat by 117 for 10 sec."
+            }
+        ],
+        "name": "Recruit's Warhorn",
+        "item_slot": "Trinket",
+        "base_item_level": 200,
+        "quality": "Rare",
+        "id": 223517,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_horn_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Summons a Vanquished Tentacle to your aid for 30 sec. (3 Min Cooldown)"
+            }
+        ],
+        "name": "Shriveled Ancient Tentacle",
+        "item_slot": "Trinket",
+        "base_item_level": 30,
+        "quality": "Epic",
+        "id": 223509,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_ahnqirajtrinket_05.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your attacks have a chance to awaken the powers of the races of Northrend, temporarily transforming you and increasing your combat capabilities for 30 sec. (Proc chance: 35%, 1.75m cooldown)"
+            }
+        ],
+        "name": "Weathered Northrend Sigil",
+        "item_slot": "Trinket",
+        "base_item_level": 20,
+        "quality": "Rare",
+        "id": 220304,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_trinket_04.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Time-Worn Armor Charm",
+        "item_slot": "Trinket",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 217404,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_13.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Olden Armor Charm",
+        "item_slot": "Trinket",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 217402,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_13.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Weapon Charm",
+        "item_slot": "Trinket",
+        "base_item_level": 1,
+        "quality": "Legendary",
+        "id": 213533,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_archaeology_70_highborne_inertleystonecharm.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Olden Weapon Charm",
+        "item_slot": "Trinket",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 217403,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_archaeology_70_highborne_inertleystonecharm.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Armor Charm",
+        "item_slot": "Trinket",
+        "base_item_level": 1,
+        "quality": "Legendary",
+        "id": 213535,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_13.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Brilliant Greenstone Ring",
+        "item_slot": "Finger",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 212535,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_stonering1.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Bygone Weapon Charm",
+        "item_slot": "Trinket",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 213423,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_archaeology_70_highborne_inertleystonecharm.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Bygone Armor Charm",
+        "item_slot": "Trinket",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 213534,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_13.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Time-Worn Weapon Charm",
+        "item_slot": "Trinket",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 217405,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_archaeology_70_highborne_inertleystonecharm.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Dagger",
+        "item_slot": "One-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218719,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Critical Strike": 250,
+            "Versatility": 510
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Greataxe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218733,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Versatility": 1086,
+            "Mastery": 434
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Warglaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218720,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Versatility": 543,
+            "Mastery": 217
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Bow",
+        "item_slot": "N/A",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218723,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bow_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Haste": 532,
+            "Versatility": 988
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Spear",
+        "item_slot": "Two-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218721,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Haste": 467,
+            "Versatility": 1053
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Pulverizer",
+        "item_slot": "Two-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218734,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Critical Strike": 532,
+            "Versatility": 988
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Sword",
+        "item_slot": "One-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218735,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Haste": 250,
+            "Versatility": 510
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218722,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_nerubianraid_d_02.jpg",
+        "stats": {
+            "Intellect": 10105,
+            "Haste": 565,
+            "Versatility": 955
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Greatstaff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218731,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_nerubianraid_d_02.jpg",
+        "stats": {
+            "Intellect": 10105,
+            "Versatility": 1053,
+            "Mastery": 467
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Skewer",
+        "item_slot": "One-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218736,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Haste": 266,
+            "Versatility": 494
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Crossbow",
+        "item_slot": "N/A",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218730,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_crossbow_2h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Versatility": 955,
+            "Mastery": 565
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Pincer",
+        "item_slot": "One-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218728,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_02.jpg",
+        "stats": {
+            "Intellect": 6619,
+            "Critical Strike": 282,
+            "Versatility": 478
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Claws",
+        "item_slot": "One-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218729,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Versatility": 543,
+            "Mastery": 217
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Battlestaff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218737,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Versatility": 1021,
+            "Mastery": 499
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Scepter",
+        "item_slot": "One-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218724,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_nerubianraid_d_02.jpg",
+        "stats": {
+            "Intellect": 6619,
+            "Versatility": 543,
+            "Mastery": 217
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Splitter",
+        "item_slot": "One-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218718,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Critical Strike": 233,
+            "Versatility": 527
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Gladiator's Axe",
+        "item_slot": "One-Hand",
+        "base_item_level": 584,
+        "quality": "Epic",
+        "id": 218727,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Critical Strike": 233,
+            "Versatility": 527
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Charged Claymore",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222447,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Greataxe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222443,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your damaging spells and abilities have a chance to siphon 11838736 Health from yourself and cast it into the void for 3  seconds.\n\nUpon its return, deal 64617882 damage to a random enemy within 30 yards."
+            }
+        ],
+        "name": "Siphoning Stiletto",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222463,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_02.jpg",
+        "stats": {
+            "Critical Strike": 364,
+            "Mastery": 364
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Charged Halberd",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222448,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_arathoroutdoor_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Greatsword",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 225376,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_emeralddreamraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "P.0.W. x2",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 221969,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_arathoroutdoor_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Vagabond's Careful Crutch",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222567,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_inscription_c_01_green.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Charged Facesmasher",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222446,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "DNT Vagabond's Alacrity (Deprecated)",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222651,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bow_1h_dragondungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Warglaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222441,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_arathoroutdoor_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Vagabond's Alacrity",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 219617,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_bow_59.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Colors of the Wind",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 219618,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bow_1h_pvp400_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Dagger",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222439,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 1065
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Longsword",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222440,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_arathor_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Charged Hexsword",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222444,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_arathor_c_01.jpg",
+        "stats": {
+            "Intellect": 1065
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Charged Slicer",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222451,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_arathoroutdoor_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Echoing Truncheon",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222460,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Vagabond's Bounding Baton",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222568,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_inscription_c_01_blue.jpg",
+        "stats": {
+            "Intellect": 2129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Charged Runeaxe",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222445,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 1065
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "DNT Colors of the Wind (Deprecated)",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222652,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_bow_34.jpg",
+        "stats": {
+            "Critical Strike": 832,
+            "Haste": 624
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Scepter",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 225371,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_emeralddreamraid_d_01.jpg",
+        "stats": {
+            "Intellect": 6201
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Charged Crusher",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222449,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_earthendungeon_c_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Splitter",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 225366,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_emeralddreamraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Dagger",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 225367,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_emeralddreamraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Rifle",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 225370,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_emeralddreamraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Axe",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 225374,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_emeralddreamraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Entangling Cutlass",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222461,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_undergroundquest_b_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Scythe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 225368,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_emeralddreamraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Sickle",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 225375,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_emeralddreamraid_d_02.jpg",
+        "stats": {
+            "Intellect": 6201
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Stabber",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222438,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_arathoroutdoor_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lexicon of Mysteries",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 219613,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription2_book2_color3.jpg",
+        "stats": {
+            "Intellect": 9467
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Vagabond's Baton",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 219614,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_inscription_c_01_green.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Charged Invoker",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222450,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Intellect": 2129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Haunting Void",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222462,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 2129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 225369,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_emeralddreamraid_d_01.jpg",
+        "stats": {
+            "Intellect": 9467
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Algari Competitor's Sword",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Uncommon",
+        "id": 225377,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_emeralddreamraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+728 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+728 Random Stat 2 (728.00% @ L70)"
+            }
+        ],
+        "name": "Vagabond's Post",
+        "item_slot": "Two-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 219615,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_inscription_c_01_blue.jpg",
+        "stats": {
+            "Intellect": 2129
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222442,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+364 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+364 Random Stat 2 (364.00% @ L70)"
+            }
+        ],
+        "name": "Scepter of Radiant Magics",
+        "item_slot": "N/A",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 224405,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_wand_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 6201
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your attacks  have a high chance to apply Queensbane to your target, dealing 77040 Shadow damage over 10 sec."
+            }
+        ],
+        "name": "Void Reaper's Warp Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 219877,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_nerubianraid_d_02_blue.jpg",
+        "stats": {
+            "Critical Strike": 700
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Regicide",
+        "item_slot": "One-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 225636,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Haste": 473,
+            "Mastery": 228
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Duelist's Dancing Steel",
+        "item_slot": "One-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212392,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Critical Strike": 231,
+            "Haste": 469
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Anub'arash's Colossal Mandible",
+        "item_slot": "Two-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212407,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Critical Strike": 969,
+            "Mastery": 432
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Blood-Kissed Kukri",
+        "item_slot": "One-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212395,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_02.jpg",
+        "stats": {
+            "Critical Strike": 500,
+            "Versatility": 200
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Flawless Phase Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212405,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Intellect": 5864,
+            "Critical Strike": 464,
+            "Mastery": 237
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Splintershot Silkbow",
+        "item_slot": "N/A",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212399,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bow_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Critical Strike": 986,
+            "Mastery": 415
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Honored Executioner's Perforator",
+        "item_slot": "Two-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212413,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Critical Strike": 487,
+            "Haste": 914
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Predator's Feasthooks",
+        "item_slot": "One-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212391,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Critical Strike": 483,
+            "Mastery": 218
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Shade-Touched Silencer",
+        "item_slot": "N/A",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212400,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_crossbow_2h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Critical Strike": 482,
+            "Haste": 919
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Scepter of Manifested Miasma",
+        "item_slot": "One-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212404,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_nerubianraid_d_02.jpg",
+        "stats": {
+            "Intellect": 5864,
+            "Haste": 498,
+            "Versatility": 202
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ansurek's Final Judgment",
+        "item_slot": "One-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212401,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Critical Strike": 498,
+            "Mastery": 202
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ulgrax's Morsel-Masher",
+        "item_slot": "Two-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212388,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Haste": 980,
+            "Versatility": 421
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Takazj's Entropic Edict",
+        "item_slot": "Two-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212397,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_nerubianraid_d_02.jpg",
+        "stats": {
+            "Intellect": 8952,
+            "Haste": 413,
+            "Mastery": 987
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sovereign's Disdain",
+        "item_slot": "One-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212394,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_02.jpg",
+        "stats": {
+            "Intellect": 5864,
+            "Critical Strike": 213,
+            "Haste": 488
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Bludgeons of Blistering Wind",
+        "item_slot": "One-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212398,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Critical Strike": 237,
+            "Mastery": 463
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Spire of Transfused Horrors",
+        "item_slot": "Two-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212389,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Versatility": 923,
+            "Mastery": 478
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Venom-Etched Claw",
+        "item_slot": "One-Hand",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212409,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Haste": 226,
+            "Versatility": 474
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Pathfinder's Stonecarver",
+        "item_slot": "One-Hand",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211048,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 316,
+            "Mastery": 376
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Trailblazer's Hookshoot",
+        "item_slot": "N/A",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 219353,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_crossbow_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Versatility": 752,
+            "Mastery": 633
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lapidarius Gemcutter",
+        "item_slot": "One-Hand",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211047,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_02.jpg",
+        "stats": {
+            "Intellect": 5649,
+            "Critical Strike": 331,
+            "Versatility": 361
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Skypiercing Drillstaff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 219352,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 603,
+            "Versatility": 781
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Luminous Lampspire",
+        "item_slot": "Two-Hand",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211059,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_undergroundquest_b_02.jpg",
+        "stats": {
+            "Intellect": 8625,
+            "Critical Strike": 781,
+            "Mastery": 603
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Torchlit Pickaxe",
+        "item_slot": "One-Hand",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 219356,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_undergroundquest_b_02.jpg",
+        "stats": {
+            "Intellect": 5649,
+            "Critical Strike": 316,
+            "Mastery": 376
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Umbral Artist's Chisel",
+        "item_slot": "One-Hand",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 211046,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 361,
+            "Versatility": 331
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Mountain Shaper's Greataxe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 219354,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 752,
+            "Versatility": 633
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Mana-Lined Slab Slicer",
+        "item_slot": "Two-Hand",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 219351,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 8625,
+            "Critical Strike": 603,
+            "Mastery": 781
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Bedrock Breaker",
+        "item_slot": "One-Hand",
+        "base_item_level": 567,
+        "quality": "Uncommon",
+        "id": 219355,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 302,
+            "Haste": 391
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arathi Claymore",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224628,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Greatsword",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223549,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 677,
+            "Haste": 621
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Common",
+        "id": 227542,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Underscout's Glaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224638,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_arathoroutdoor_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Hatchet",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223877,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 366,
+            "Mastery": 283
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Dagger",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Common",
+        "id": 227546,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Deep-Dweller's Battleaxe",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224630,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 790
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arathi Greataxe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224633,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Greatsword",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218441,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 566,
+            "Versatility": 732
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Rifle",
+        "item_slot": "N/A",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223548,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 677,
+            "Haste": 621
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Heavy Axe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223871,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 677,
+            "Haste": 621
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Deep-Dweller's Cudgel",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224631,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Underscout's Kukri",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224632,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218440,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 7026,
+            "Haste": 593,
+            "Versatility": 705
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Chopper",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218451,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 283,
+            "Versatility": 366
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Deep-Dweller's Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224626,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 7026
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Hatchet",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Common",
+        "id": 227543,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Common",
+        "id": 227544,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Knife",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218449,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 4602,
+            "Critical Strike": 297,
+            "Versatility": 352
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223872,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 352,
+            "Haste": 297
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Warglaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223876,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 297,
+            "Versatility": 352
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Expeditionary Spear",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224625,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Expeditionary Chopper",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224639,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Battleaxe",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218436,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 269,
+            "Versatility": 380
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Short Axe",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223564,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 366,
+            "Mastery": 283
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Spellcleaver",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223569,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 790,
+            "Critical Strike": 366,
+            "Mastery": 283
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "[PH] Algari Bladefist",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223585,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Versatility": 297,
+            "Mastery": 352
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Rifle",
+        "item_slot": "N/A",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218446,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 510,
+            "Versatility": 788
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Wand",
+        "item_slot": "N/A",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218452,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_wand_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 4602,
+            "Haste": 255,
+            "Versatility": 394
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Heavy Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223547,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 7026,
+            "Critical Strike": 705,
+            "Mastery": 593
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Fighting Knife",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223588,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 366,
+            "Mastery": 283
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arathi Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224634,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Begrimed Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Common",
+        "id": 227545,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Dagger",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218437,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 269,
+            "Versatility": 380
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218438,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Versatility": 366,
+            "Mastery": 283
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arathi Arquebus",
+        "item_slot": "N/A",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224627,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Deep-Dweller's Dirk",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224636,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Halberd",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218447,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Versatility": 788,
+            "Mastery": 510
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Spear",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223546,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 677,
+            "Haste": 621
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Scepter",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223584,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 352,
+            "Haste": 297
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arathi Hatchet",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 224629,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Warglaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218443,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Versatility": 394,
+            "Mastery": 255
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Scepter",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218444,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_02.jpg",
+        "stats": {
+            "Intellect": 4602,
+            "Versatility": 352,
+            "Mastery": 297
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Algari Dagger",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 223874,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 366,
+            "Mastery": 283
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Polearm",
+        "item_slot": "Two-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218439,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 538,
+            "Versatility": 760
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Aspirant's Morningstar",
+        "item_slot": "One-Hand",
+        "base_item_level": 545,
+        "quality": "Uncommon",
+        "id": 218448,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Versatility": 352,
+            "Mastery": 297
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+278 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+278 Random Stat 2 (278.00% @ L70)"
+            }
+        ],
+        "name": "Charged Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217857,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+278 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+278 Random Stat 2 (278.00% @ L70)"
+            }
+        ],
+        "name": "Charged Shiv",
+        "item_slot": "One-Hand",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217858,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+278 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+278 Random Stat 2 (278.00% @ L70)"
+            }
+        ],
+        "name": "Charged Glaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 500,
+        "quality": "Epic",
+        "id": 217861,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your damaging spells have a chance to cast Chain Lightning between 3 enemies, dealing 31699 Nature damage to each of them."
+            }
+        ],
+        "name": "Storm Defender's Axe",
+        "item_slot": "One-Hand",
+        "base_item_level": 470,
+        "quality": "Rare",
+        "id": 224290,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forgotten Axe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 461,
+        "quality": "Rare",
+        "id": 224467,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Versatility": 947
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kobold Mastermind's \"Pivel\"",
+        "item_slot": "Two-Hand",
+        "base_item_level": 461,
+        "quality": "Rare",
+        "id": 223484,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_kobold_pickaxe_a_01.jpg",
+        "stats": {
+            "Versatility": 947
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+222 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+222 Random Stat 2 (222.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Stiletto",
+        "item_slot": "One-Hand",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222464,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_dragonquest_b_02.jpg",
+        "stats": {
+            "Intellect": 317
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+444 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+444 Random Stat 2 (444.00% @ L70)"
+            }
+        ],
+        "name": "4UT0-41M3R",
+        "item_slot": "N/A",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 225646,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_engineering_c_01_blue.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+444 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+444 Random Stat 2 (444.00% @ L70)"
+            }
+        ],
+        "name": "Inquisitor's Baton",
+        "item_slot": "Two-Hand",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222570,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 634
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+444 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+444 Random Stat 2 (444.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Great Axe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222470,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+444 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+444 Random Stat 2 (444.00% @ L70)"
+            }
+        ],
+        "name": "DNT Inquisitor's Greenwood Bow (Deprecated)",
+        "item_slot": "N/A",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222650,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_crossbow_2h_dragonquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+222 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+222 Random Stat 2 (222.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Sword",
+        "item_slot": "One-Hand",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222466,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_dragonquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+444 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+444 Random Stat 2 (444.00% @ L70)"
+            }
+        ],
+        "name": "Inquisitor's Greenwood Bow",
+        "item_slot": "Two-Hand",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 219616,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_bow_60.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+444 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+444 Random Stat 2 (444.00% @ L70)"
+            }
+        ],
+        "name": "Inquisitor's Crutch",
+        "item_slot": "Two-Hand",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222569,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_dragonquest_b_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+222 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+222 Random Stat 2 (222.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Dirk",
+        "item_slot": "One-Hand",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222465,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_dragonquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+222 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+222 Random Stat 2 (222.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Axe",
+        "item_slot": "One-Hand",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222469,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_undergroundquest_b_03.jpg",
+        "stats": {
+            "Intellect": 317
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+222 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+222 Random Stat 2 (222.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Knuckles",
+        "item_slot": "One-Hand",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222467,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+222 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+222 Random Stat 2 (222.00% @ L70)"
+            }
+        ],
+        "name": "Enchanted Spearwood Wand",
+        "item_slot": "N/A",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 224404,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_wand_1h_kultirasquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1847
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+444 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+444 Random Stat 2 (444.00% @ L70)"
+            }
+        ],
+        "name": "Leveling Agility Stave",
+        "item_slot": "Two-Hand",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 219611,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_dragonquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+444 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+444 Random Stat 2 (444.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Great Mace",
+        "item_slot": "Two-Hand",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 222468,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_dragondungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 634
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+444 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+444 Random Stat 2 (444.00% @ L70)"
+            }
+        ],
+        "name": "Inquisitor's Crutch",
+        "item_slot": "Two-Hand",
+        "base_item_level": 447,
+        "quality": "Rare",
+        "id": 219612,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_dragonquest_b_02.jpg",
+        "stats": {
+            "Intellect": 634
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your spells have a chance to call down a Voltaic Stormrook, inflicting 21818 Nature damage split between nearby enemies and granting 939 Haste, further increased for each enemy struck."
+            }
+        ],
+        "name": "Voltaic Stormcaller",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221032,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 2569,
+            "Critical Strike": 459
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Crashing Thunderhammer",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221038,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Critical Strike": 496,
+            "Mastery": 350
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Nerubian Slayer's Claymore",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221252,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 471,
+            "Versatility": 375
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your melee attacks have a chance to inject volatile black blood into your target, inflicting 8220 Shadow damage over 3 sec."
+            }
+        ],
+        "name": "Harvester's Interdiction",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221159,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Versatility": 496,
+            "Mastery": 350
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Emberbrand Zweihander",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221127,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Haste": 532,
+            "Versatility": 314
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Sword1H - Agi - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211662,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 184,
+            "Versatility": 239
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Specter Stalker's Shotgun",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223918,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 471,
+            "Mastery": 375
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Melodious Iron Songspire",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221085,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Intellect": 2569,
+            "Haste": 296,
+            "Mastery": 550
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arachnoid Soulcleaver",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221150,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Critical Strike": 148,
+            "Mastery": 275
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Priestly Agent's Knife",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221241,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 175,
+            "Mastery": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Nerubian Orator's Stiletto",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223915,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 236,
+            "Versatility": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Mace1H - Agi - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211668,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 202,
+            "Mastery": 221
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ireborne Stormbow",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221039,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bow_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Haste": 296,
+            "Mastery": 550
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Blight Hunter's Scalpelglaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221160,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Versatility": 148,
+            "Mastery": 275
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Abducted Lawman's Gavel",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223919,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Haste": 187,
+            "Versatility": 236
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Staff - Agi - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211655,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 387,
+            "Mastery": 459
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Mace1H - Int - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211674,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Critical Strike": 193,
+            "Mastery": 230
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Sword1H - Int - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211675,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Critical Strike": 193,
+            "Mastery": 230
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - FistWeapon - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211679,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_bastionquest_b_01.jpg",
+        "stats": {
+            "Versatility": 193,
+            "Mastery": 230
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Shipwrecker's Bludgeon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221145,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 175,
+            "Haste": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Splice 'n Dice",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221183,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 148,
+            "Haste": 275
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Bows - Ranged",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211669,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bow_1h_ardenwealdquest_b_01.jpg",
+        "stats": {
+            "Haste": 387,
+            "Mastery": 459
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Axe2H - Str - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211677,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_newplayer_a_01.jpg",
+        "stats": {
+            "Haste": 477,
+            "Versatility": 369
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Bestial Underground Cleaver",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221251,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 350,
+            "Mastery": 496
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Dagger - Int - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211660,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_revendrethquest_b_02.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Critical Strike": 193,
+            "Mastery": 230
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Fierce Beast Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221246,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 2569,
+            "Critical Strike": 447,
+            "Mastery": 399
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Creeping Lasher Machete",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221250,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Haste": 187,
+            "Versatility": 236
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Axe1H - Str - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211671,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Critical Strike": 184,
+            "Haste": 239
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Behemoth Kneebender",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221046,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Versatility": 148,
+            "Mastery": 275
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cutting-Edge Sermon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221091,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Versatility": 257,
+            "Mastery": 166
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Pillar of Constructs",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221238,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 471,
+            "Versatility": 375
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arcane Sharpshooter's Crossbow",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 226119,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_crossbow_31.jpg",
+        "stats": {
+            "Critical Strike": 471,
+            "Mastery": 375
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Dagger - Agi - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211661,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 184,
+            "Haste": 239
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Axe1H - Int - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211673,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Critical Strike": 193,
+            "Mastery": 230
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Sword2H - Str - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211678,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_bastionquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 387,
+            "Mastery": 459
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Hyperactive Stormclaw",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221033,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Haste": 175,
+            "Versatility": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Shadowskean of the Colossus",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221044,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Versatility": 248,
+            "Mastery": 175
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Black Shepherd's Guisarme",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221137,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Critical Strike": 332,
+            "Haste": 514
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Spider Blasting Blunderbuss",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221239,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Versatility": 399,
+            "Mastery": 447
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kereke's Flourishing Sabre",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 226113,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_arakkoa_c_01.jpg",
+        "stats": {
+            "Critical Strike": 199,
+            "Haste": 224
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Mace2H - Str - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211654,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 477,
+            "Versatility": 369
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Staff - Int - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211667,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 2569,
+            "Haste": 405,
+            "Mastery": 441
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Sword2H - Int - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211681,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_bastionquest_b_01.jpg",
+        "stats": {
+            "Intellect": 2569,
+            "Critical Strike": 477,
+            "Haste": 369
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Augmented Refractor Cannon",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221074,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 514,
+            "Versatility": 332
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Parson's Ornamented Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221138,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Critical Strike": 257,
+            "Versatility": 166
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Surgical Heartstopper",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221184,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_earthendungeon_c_03.jpg",
+        "stats": {
+            "Critical Strike": 314,
+            "Versatility": 532
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cavernous Critter Shooter",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221247,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_crossbow_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 471,
+            "Haste": 375
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cultivator's Plant Puncher",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221253,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 187,
+            "Versatility": 236
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Contaminating Cleaver",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 226115,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_120.jpg",
+        "stats": {
+            "Haste": 496,
+            "Mastery": 350
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Guns - RangedRight",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211656,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 441,
+            "Mastery": 405
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Crossbow - RangedRight",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211670,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_crossbow_2h_bastionquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 387,
+            "Versatility": 459
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Mace1H - Str - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211676,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 202,
+            "Mastery": 221
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Polearms - Agi - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211683,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polarm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 387,
+            "Mastery": 459
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Rail Rider's Bisector",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221096,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 175,
+            "Haste": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Zephyrous Sail Carver",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221144,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Critical Strike": 148,
+            "Versatility": 275
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Unceremonious Bloodletter",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221165,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Critical Strike": 157,
+            "Haste": 266
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Krix'vizk's Speech Rod",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221166,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 2569,
+            "Haste": 532,
+            "Versatility": 314
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kingslayer's Frostfang",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221171,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Versatility": 175,
+            "Mastery": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Deep Terror Carver",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221248,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 175,
+            "Mastery": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sharpened Scalepiercer",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221255,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 175,
+            "Mastery": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arakkoan Ritual Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 226111,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_arakkoa_c_02.jpg",
+        "stats": {
+            "Intellect": 2569,
+            "Critical Strike": 447,
+            "Mastery": 399
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Axe1H - Agi - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211672,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Critical Strike": 184,
+            "Haste": 239
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Crusher of the Unsettled",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221051,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Haste": 175,
+            "Mastery": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Hivebreaker's Dipper",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221063,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/misc_2h_honeydipper_b_01_icon.jpg",
+        "stats": {
+            "Haste": 332,
+            "Versatility": 514
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lance of Beledar's Pride",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223007,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Versatility": 471,
+            "Mastery": 375
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Nerubian Cutthroat's Reach",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 223916,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 375,
+            "Versatility": 471
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Polearms - Int - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211659,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polarm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 387,
+            "Mastery": 459
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Mace2H - Int - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211680,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 2569,
+            "Critical Strike": 477,
+            "Haste": 369
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Profit Divider",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221068,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 257,
+            "Versatility": 166
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Endoskeletal Polecrank",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221078,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_earthendungeon_c_03.jpg",
+        "stats": {
+            "Critical Strike": 550,
+            "Versatility": 296
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Skaradyn Mercybringer",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221084,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 275,
+            "Haste": 148
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Eirich's Fist of Deception",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221090,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 157,
+            "Haste": 266
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dark Zone Headtaker",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221105,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_kobold_pickaxe_a_01.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Critical Strike": 148,
+            "Mastery": 275
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Crepuscular Carver",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221110,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Haste": 157,
+            "Mastery": 266
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Poleaxe of Somber Fate",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221111,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Haste": 332,
+            "Mastery": 514
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Glorious Defender's Poleaxe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221116,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Haste": 332,
+            "Mastery": 514
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recurved Hull Impaler",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221143,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_crossbow_2h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Haste": 514,
+            "Mastery": 332
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthshatter Lance",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221254,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 375,
+            "Haste": 471
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Warglaives - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211657,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Versatility": 230,
+            "Mastery": 193
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Wand - RangedRight",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211682,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_wand_1h_maldraxxusquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Critical Strike": 184,
+            "Haste": 239
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sticky Stirring Stick",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221057,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 332,
+            "Haste": 514
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Scalding Queenmaker's Shiv",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221062,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Critical Strike": 257,
+            "Mastery": 166
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Wardbreaker of the Fractured",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221083,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Intellect": 2569,
+            "Critical Strike": 496,
+            "Haste": 350
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Hand of Beledar",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221122,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Critical Strike": 175,
+            "Mastery": 248
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Starforged Seraph's Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221128,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 275,
+            "Versatility": 148
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Nerubian Stagshell Gouger",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221240,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Versatility": 199,
+            "Mastery": 224
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kobold Rodent Squasher",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221249,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1682,
+            "Haste": 187,
+            "Versatility": 236
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Rotfist Flesh Carver",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 226112,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_61.jpg",
+        "stats": {
+            "Critical Strike": 236,
+            "Haste": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Windslicer's Lance",
+        "item_slot": "Two-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 226114,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_arakkoa_c_01.jpg",
+        "stats": {
+            "Haste": 375,
+            "Mastery": 471
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Dungeon Template - Sword1H - Str -Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 211658,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 221,
+            "Mastery": 202
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Silver-Tongued Boltcaster",
+        "item_slot": "N/A",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 221089,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_crossbow_2h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Critical Strike": 314,
+            "Versatility": 532
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arcane Prisoner's Puncher",
+        "item_slot": "One-Hand",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 226118,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_hand_18.jpg",
+        "stats": {
+            "Critical Strike": 236,
+            "Haste": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224702,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kaheti Confiscated Sword",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225363,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1192,
+            "Critical Strike": 187,
+            "Versatility": 158
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kaheti Confiscated Hatchet",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225360,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 195,
+            "Haste": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Warhammer",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224706,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_earthendungeon_c_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Polearm",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224708,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_earthendungeon_c_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kaheti Confiscated Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225361,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 300,
+            "Mastery": 389
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Crossbow",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219465,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_crossbow_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 315,
+            "Versatility": 374
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arachnophobic Spelunker's Battlestaff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219784,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Mace",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224705,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_earthendungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 1820
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Spear",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224707,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kaheti Confiscated Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225364,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Versatility": 158,
+            "Mastery": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Gavel",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219461,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 121,
+            "Haste": 224
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - FistWeapon - Agi",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219781,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_bastionquest_b_01.jpg",
+        "stats": {
+            "Versatility": 158,
+            "Mastery": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cured Terracotta Firearm",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219799,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212146,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1820,
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Gun",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218167,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Axe2H - Str",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Common",
+        "id": 219780,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_newplayer_a_01.jpg",
+        "stats": {
+            "Haste": 389,
+            "Versatility": 300
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Sword",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224703,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_earthendungeon_c_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224709,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kaheti Confiscated Dirk",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225354,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 150,
+            "Mastery": 195
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kaheti Confiscated Mallet",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225359,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 158,
+            "Versatility": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Staff - Int",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218237,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1820,
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Chopper",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219466,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 389,
+            "Versatility": 300
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arachnophobic Spelunker's Scepter",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219792,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1192,
+            "Critical Strike": 158,
+            "Mastery": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Axe 1H - Agi",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219793,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Critical Strike": 150,
+            "Haste": 195
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Glaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224713,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kaheti Confiscated Crossbow",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225356,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_crossbow_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Versatility": 360,
+            "Mastery": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Guns - Agi",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218224,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Sword1H - Str",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218228,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 195,
+            "Mastery": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Dagger",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219458,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 207,
+            "Versatility": 138
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Javelin",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219463,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 310,
+            "Haste": 379
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arachnophobic Spelunker's Knife",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219788,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 195,
+            "Mastery": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arachnophobic Spelunker's Spellsword",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219790,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1192,
+            "Critical Strike": 158,
+            "Mastery": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Dealing Fire damage has a chance to apply Seething Hate, causing 1929 Shadow damage split between them and other nearby enemies over 9 sec.\n\nDamage is increased for each enemy struck, up to 5 enemies."
+            }
+        ],
+        "name": "Blade of Hatred",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Rare",
+        "id": 219923,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_1h_haremmatron_d_01.jpg",
+        "stats": {
+            "Intellect": 1192,
+            "Critical Strike": 187,
+            "Versatility": 158
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Ritual Knife",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224699,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Intellect": 1192
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Slugthrower",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224704,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Gun",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212133,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Warglaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218181,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 158,
+            "Versatility": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arachnophobic Spelunker's Saber",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219786,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 195,
+            "Mastery": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cured Terracotta Axe",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219795,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 150,
+            "Haste": 195
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Spellstaff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224710,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_earthendungeon_c_02.jpg",
+        "stats": {
+            "Intellect": 1820
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kaheti Confiscated Borers",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225349,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1192,
+            "Critical Strike": 246,
+            "Haste": 99
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212138,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 187,
+            "Versatility": 158
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Great Mace",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212139,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 389,
+            "Haste": 300
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Mace",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218169,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1820,
+            "Critical Strike": 374,
+            "Mastery": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Dagger - Agi",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218227,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 195,
+            "Mastery": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Saber",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219457,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Versatility": 207,
+            "Mastery": 138
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arachnophobic Spelunker's Battleaxe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219785,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 389,
+            "Versatility": 300
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arachnophobic Spelunker's Striker",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219787,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Versatility": 158,
+            "Mastery": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cured Terracotta Pummeler [Update Appearance]",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219797,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 389,
+            "Haste": 300
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cured Terracotta Stabber",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219800,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 195,
+            "Mastery": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Dealing Fire damage has a chance to apply Seething Hate, causing 1929 Shadow damage split between them and other nearby enemies over 9 sec.\n\nDamage is increased for each enemy struck, up to 5 enemies."
+            }
+        ],
+        "name": "Blade of Hatred",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Rare",
+        "id": 219919,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_1h_haremmatron_d_01.jpg",
+        "stats": {
+            "Critical Strike": 187,
+            "Versatility": 158
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Polearm",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212132,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polarm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Kris",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212134,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_revendrethquest_b_02.jpg",
+        "stats": {
+            "Intellect": 1192,
+            "Critical Strike": 180,
+            "Mastery": 165
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Halberd",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212145,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polarm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 374,
+            "Versatility": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Claymore",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219462,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 414,
+            "Versatility": 276
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Sword1H - Int",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219782,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1192,
+            "Critical Strike": 158,
+            "Mastery": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Mace",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212135,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1820,
+            "Critical Strike": 374,
+            "Mastery": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Shank",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212136,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 195,
+            "Mastery": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Sword",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212137,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 195,
+            "Mastery": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Cudgel",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212142,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 180,
+            "Versatility": 165
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Cudgel",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212143,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 187,
+            "Haste": 158
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Warglaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212147,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 158,
+            "Versatility": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218180,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1820,
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Dagger - Int",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218225,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_revendrethquest_b_02.jpg",
+        "stats": {
+            "Intellect": 1192,
+            "Critical Strike": 180,
+            "Mastery": 165
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Sword1H - Agi",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218229,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 187,
+            "Versatility": 158
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Warglaive - Agi",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218238,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 158,
+            "Versatility": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219459,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1820,
+            "Critical Strike": 241,
+            "Haste": 448
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Handaxe",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219460,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 224,
+            "Haste": 121
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Boomstick",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219464,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 360,
+            "Mastery": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Traveler's Fist",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219467,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Versatility": 158,
+            "Mastery": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cured Terracotta Warglaive [Update Appearance]",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219802,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 158,
+            "Versatility": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Hammer",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224701,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_earthendungeon_c_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kaheti Confiscated Spade",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225353,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Haste": 374,
+            "Versatility": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Kaheti Confiscated Knife",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 225362,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_revendrethquest_b_02.jpg",
+        "stats": {
+            "Intellect": 1192,
+            "Haste": 180,
+            "Mastery": 165
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 End Game Template Stave",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 212144,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 389,
+            "Mastery": 300
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Polearm",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218166,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polarm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Kris",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218168,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_revendrethquest_b_02.jpg",
+        "stats": {
+            "Intellect": 1192,
+            "Critical Strike": 180,
+            "Mastery": 165
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Sword",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218171,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 195,
+            "Mastery": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218172,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 187,
+            "Versatility": 158
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Great Mace",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218173,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 389,
+            "Haste": 300
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Stave",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218178,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 389,
+            "Mastery": 300
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Mace2H - Int",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218226,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1820,
+            "Critical Strike": 374,
+            "Mastery": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Staff - Agi",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218235,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 389,
+            "Mastery": 300
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arachnophobic Spelunker's Bow",
+        "item_slot": "N/A",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219783,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bow_1h_ardenwealdquest_b_01.jpg",
+        "stats": {
+            "Haste": 315,
+            "Mastery": 374
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Mace1H - Int",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219791,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1192,
+            "Critical Strike": 158,
+            "Mastery": 187
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Cured Terracotta Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219794,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_undergroundquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 389,
+            "Mastery": 300
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Shank",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224698,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ancient Forged Cudgel",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 224700,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Shank",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218170,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 195,
+            "Mastery": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Cudgel",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218177,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 187,
+            "Haste": 158
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Halberd",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218179,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polarm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 374,
+            "Versatility": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Mace1H - Str",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218233,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 180,
+            "Versatility": 165
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Polearms - Str",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218236,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polarm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 374,
+            "Versatility": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arachnophobic Spelunker's Greatmace [Update Appearance]",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 219789,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 1820,
+            "Critical Strike": 374,
+            "Mastery": 315
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Polearms - Agi",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218223,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polarm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 360,
+            "Haste": 330
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Zone Uncommon Template - Cudgel",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218176,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 180,
+            "Versatility": 165
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Mace2H - Str",
+        "item_slot": "Two-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218230,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 389,
+            "Haste": 300
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Leveling Quest Template - Mace1H - Agi",
+        "item_slot": "One-Hand",
+        "base_item_level": 400,
+        "quality": "Uncommon",
+        "id": 218234,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 187,
+            "Haste": 158
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Sabre",
+        "item_slot": "One-Hand",
+        "base_item_level": 366,
+        "quality": "Rare",
+        "id": 219251,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_naga_c_01.jpg",
+        "stats": {
+            "Haste": 111,
+            "Mastery": 162
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your harmful and helpful spells have a chance to weave a Thread of Fate between your and you target for 5 sec. Tethered allies gain 282 bonus primary while the Thread holds and enemies take 2378 Cosmic Damage when the Thread breaks."
+            }
+        ],
+        "name": "Fateweaved Needle",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219382,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_02.jpg",
+        "stats": {
+            "Intellect": 748
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your melee attacks and abilities have a chance to befoul the blood of your enemy dealing 10350 damage over 10 sec. Additional injections overlap.\n\nIf a target dies while afflicted with your Befouled Blood, siphon the remaining poison back into the blade granting your next melee abilities 3725 additional nature damage."
+            }
+        ],
+        "name": "Befouler's Syringe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 218126,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Haste": 478
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Bolter",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219232,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_crossbow_31.jpg",
+        "stats": {
+            "Critical Strike": 260,
+            "Haste": 219
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Broadsword",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219240,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_129.jpg",
+        "stats": {
+            "Critical Strike": 219,
+            "Haste": 260
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Greatsword",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219239,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_129.jpg",
+        "stats": {
+            "Intellect": 1142,
+            "Haste": 208,
+            "Versatility": 270
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Battleaxe",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219229,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_91.jpg",
+        "stats": {
+            "Critical Strike": 104,
+            "Versatility": 135
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Impaler",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219245,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_104.jpg",
+        "stats": {
+            "Haste": 260,
+            "Mastery": 219
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Spire",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219237,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_draenorchallenge_d_01.jpg",
+        "stats": {
+            "Intellect": 1142,
+            "Haste": 229,
+            "Mastery": 249
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Battlestaff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219238,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_draenorchallenge_d_01.jpg",
+        "stats": {
+            "Versatility": 208,
+            "Mastery": 270
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Spear",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219246,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_104.jpg",
+        "stats": {
+            "Haste": 229,
+            "Versatility": 249
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219235,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_naga_c_01.jpg",
+        "stats": {
+            "Critical Strike": 135,
+            "Mastery": 104
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Spellblade",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219234,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_naga_c_01.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Versatility": 125,
+            "Mastery": 114
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Club",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219241,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_75.jpg",
+        "stats": {
+            "Intellect": 1142,
+            "Haste": 270,
+            "Mastery": 208
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Hammer",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219242,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_75.jpg",
+        "stats": {
+            "Versatility": 208,
+            "Mastery": 270
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Lamplighter's Mercy",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219202,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 311,
+            "Mastery": 167
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Carver",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219231,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_91.jpg",
+        "stats": {
+            "Critical Strike": 104,
+            "Mastery": 135
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Dagger",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219252,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_shortblade_88.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Haste": 114,
+            "Versatility": 125
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Hatchet",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219230,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_91.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Critical Strike": 130,
+            "Versatility": 109
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Wand",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219247,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_wand_24.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Critical Strike": 104,
+            "Haste": 135
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Scepter",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219250,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_111.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Critical Strike": 104,
+            "Haste": 135
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Equip: Your harmful and helpful spells have a chance to weave a Thread of Fate between your and you target for 5 sec. Tethered allies gain 282 bonus primary while the Thread holds and enemies take 2378 Cosmic Damage when the Thread breaks."
+            }
+        ],
+        "name": "Fateweaved Mallet",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219941,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Intellect": 748
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+239 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+239 Random Stat 2 (239.00% @ L70)"
+            }
+        ],
+        "name": "Charged Claymore",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222014,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_dragonpvp_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Arathi Holy Standard",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219203,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 1142,
+            "Haste": 311,
+            "Versatility": 167
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Crusher",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223864,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_02.jpg",
+        "stats": {
+            "Critical Strike": 114,
+            "Versatility": 125
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Cleaver",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211054,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_blackdragonoutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 130,
+            "Haste": 109
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Sanctifier's Startierce",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219210,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 94,
+            "Versatility": 145
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219248,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_111.jpg",
+        "stats": {
+            "Haste": 130,
+            "Versatility": 109
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Dirk",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219253,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_shortblade_88.jpg",
+        "stats": {
+            "Critical Strike": 135,
+            "Haste": 104
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Charged Slicer",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222018,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_dragonpvp_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+239 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+239 Random Stat 2 (239.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Great Axe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222033,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_drakonoid_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Battlestaff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223853,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Versatility": 270,
+            "Mastery": 208
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Cudgel",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223858,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Versatility": 130,
+            "Mastery": 109
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Hacker",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211053,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_blackdragonoutdoor_d_01.jpg",
+        "stats": {
+            "Versatility": 104,
+            "Mastery": 135
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Hand of Piety",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219206,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_wand_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Haste": 94,
+            "Mastery": 145
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Flame-Bearing Crozier",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219207,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_02.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Haste": 94,
+            "Versatility": 145
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Pyretic Star",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219208,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Versatility": 89,
+            "Mastery": 150
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Warglaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222008,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_dragonpvp_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222009,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_dragonpvp_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+239 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+239 Random Stat 2 (239.00% @ L70)"
+            }
+        ],
+        "name": "Haunting Void",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222025,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_dragondungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 257
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Scepter",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223865,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_02.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Critical Strike": 104,
+            "Versatility": 135
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Dirk",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223868,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 104,
+            "Versatility": 135
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Greatsword",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211050,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_blackdragonoutdoor.jpg",
+        "stats": {
+            "Critical Strike": 208,
+            "Mastery": 270
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+239 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+239 Random Stat 2 (239.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Greataxe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222010,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_drakonoid_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Broadsword",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223855,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 219,
+            "Versatility": 260
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Rifle",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211044,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_blackdragonoutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 229,
+            "Mastery": 249
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Spellblade",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211045,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_blackdragonoutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Critical Strike": 130,
+            "Haste": 109
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Mallet",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211056,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_blackdragonoutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 109,
+            "Mastery": 130
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Radiant Steelglaives",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219199,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 150,
+            "Mastery": 89
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Shooting Starquebus",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219205,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 290,
+            "Haste": 188
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Dalaran Defender's Crusher",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 219249,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_111.jpg",
+        "stats": {
+            "Critical Strike": 239
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Charged Facesmasher",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222013,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_dragondungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+239 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+239 Random Stat 2 (239.00% @ L70)"
+            }
+        ],
+        "name": "Charged Halberd",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222015,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_dragonpvp_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Twinblade",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223848,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 109,
+            "Versatility": 130
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Club",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223856,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Versatility": 135,
+            "Mastery": 104
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Impaler",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223860,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Versatility": 260,
+            "Mastery": 219
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Wand",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211042,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_wand_1h_blackdragonoutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Critical Strike": 104,
+            "Haste": 135
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Polearm",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211043,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_blackdragonoutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 219,
+            "Versatility": 260
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Halberd",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211058,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_blackdragonoutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 260,
+            "Versatility": 219
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Haunting Void",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 220958,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_dragonquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Siphoning Stiletto",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 220960,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_dragonquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Entangling Cutlass",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222024,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_dragonpvp_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+239 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+239 Random Stat 2 (239.00% @ L70)"
+            }
+        ],
+        "name": "Vagabond's Bounding Baton",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222131,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_inscription_c_01_blue.jpg",
+        "stats": {
+            "Intellect": 257
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Flameshot",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223847,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 229,
+            "Versatility": 249
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Spire",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223852,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 1142,
+            "Haste": 229,
+            "Versatility": 249
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Warglaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211060,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_blackdragonoutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 130,
+            "Haste": 109
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Echoing Tuncheon",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 220957,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_dragonquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Spellblade",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222006,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_primalistraid_d_02.jpg",
+        "stats": {
+            "Intellect": 128
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Charged Hexsword",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222011,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_dragondungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 128
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Charged Runeaxe",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222012,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_dragondungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 128
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+239 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+239 Random Stat 2 (239.00% @ L70)"
+            }
+        ],
+        "name": "Charged Crusher",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222016,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_primalistraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Spear",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223861,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 229,
+            "Versatility": 249
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Censer",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211055,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_blackdragonoutdoor_b_02.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Critical Strike": 125,
+            "Haste": 114
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Cudgel",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211057,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_blackdragonoutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 109,
+            "Mastery": 130
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Imperial Flarebolt",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219204,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 167,
+            "Mastery": 311
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Shortblade",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222005,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_dragonpvp_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Siphoning Stiletto",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222026,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_dragonpvp_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Greatsword",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223854,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 1142,
+            "Haste": 208,
+            "Versatility": 270
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Hammer",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223857,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Haste": 114,
+            "Versatility": 125
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223863,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_arathoroutdoor_d_02.jpg",
+        "stats": {
+            "Haste": 109,
+            "Versatility": 130
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Longsword",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222007,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_dragondungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Delver's Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Uncommon",
+        "id": 211049,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_blackdragonoutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 109,
+            "Mastery": 130
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Worshipper's Poniard",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219209,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 150,
+            "Mastery": 89
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Entangling Cutlass",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 220959,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_dragonquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+120 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+120 Random Stat 2 (120.00% @ L70)"
+            }
+        ],
+        "name": "Echoing Truncheon",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222023,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_dragondungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Hatchet",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223845,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Critical Strike": 109,
+            "Versatility": 130
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Carver",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223846,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 104,
+            "Versatility": 135
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Wand",
+        "item_slot": "N/A",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223862,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_wand_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Critical Strike": 104,
+            "Versatility": 135
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+239 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+239 Random Stat 2 (239.00% @ L70)"
+            }
+        ],
+        "name": "Charged Invoker",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222017,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_dragondungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 257
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+239 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+239 Random Stat 2 (239.00% @ L70)"
+            }
+        ],
+        "name": "Vagabond's Careful Crutch",
+        "item_slot": "Two-Hand",
+        "base_item_level": 350,
+        "quality": "Common",
+        "id": 222130,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_inscription_c_01_green.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Battleaxe",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223844,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Critical Strike": 104,
+            "Versatility": 135
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Forged Warmonger's Dagger",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Rare",
+        "id": 223867,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_arathoroutdoor_d_01.jpg",
+        "stats": {
+            "Intellect": 748,
+            "Haste": 114,
+            "Versatility": 125
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Polearms - Int - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 212393,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polarm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 108,
+            "Mastery": 128
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Mace1H - Str - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 212406,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 56,
+            "Mastery": 61
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Monster Weapon - 1H Sword",
+        "item_slot": "One-Hand",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 212396,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 51,
+            "Versatility": 67
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Wand - RangedRight",
+        "item_slot": "N/A",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 212412,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_wand_1h_maldraxxusquest_b_01.jpg",
+        "stats": {
+            "Intellect": 344,
+            "Critical Strike": 51,
+            "Haste": 67
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Axe1H - Agi - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 212402,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Critical Strike": 51,
+            "Haste": 67
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Axe1H - Int - Weapon",
+        "item_slot": "One-Hand",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 212403,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Intellect": 344,
+            "Critical Strike": 54,
+            "Mastery": 64
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Sword2H - Str - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 212408,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_bastionquest_b_01.jpg",
+        "stats": {
+            "Critical Strike": 108,
+            "Mastery": 128
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Guns - RangedRight",
+        "item_slot": "N/A",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 212390,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Haste": 123,
+            "Mastery": 113
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Sword2H - Int - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 212411,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_bastionquest_b_01.jpg",
+        "stats": {
+            "Intellect": 525,
+            "Critical Strike": 133,
+            "Haste": 103
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "11.0 Raid Template - Mace2H - Int - 2 Hand",
+        "item_slot": "Two-Hand",
+        "base_item_level": 280,
+        "quality": "Epic",
+        "id": 212410,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_revendrethquest_b_01.jpg",
+        "stats": {
+            "Intellect": 525,
+            "Critical Strike": 133,
+            "Haste": 103
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+97 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+97 Random Stat 2 (97.00% @ L70)"
+            }
+        ],
+        "name": "Inquisitor's Baton",
+        "item_slot": "Two-Hand",
+        "base_item_level": 270,
+        "quality": "Common",
+        "id": 222133,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_dragonquest_b_01.jpg",
+        "stats": {
+            "Intellect": 97
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+97 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+97 Random Stat 2 (97.00% @ L70)"
+            }
+        ],
+        "name": "Inquisitor's Crutch",
+        "item_slot": "Two-Hand",
+        "base_item_level": 270,
+        "quality": "Common",
+        "id": 222132,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_dragonquest_b_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Pressurized Alloy Sword",
+        "item_slot": "One-Hand",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217918,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Dirk",
+        "item_slot": "One-Hand",
+        "base_item_level": 270,
+        "quality": "Common",
+        "id": 222028,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_dragonquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Stiletto",
+        "item_slot": "One-Hand",
+        "base_item_level": 270,
+        "quality": "Common",
+        "id": 222027,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_dragonquest_b_02.jpg",
+        "stats": {
+            "Intellect": 49
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Knuckles",
+        "item_slot": "One-Hand",
+        "base_item_level": 270,
+        "quality": "Common",
+        "id": 222030,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_dragonquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Great Axe",
+        "item_slot": "One-Hand",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217909,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Sword",
+        "item_slot": "One-Hand",
+        "base_item_level": 270,
+        "quality": "Common",
+        "id": 222029,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_dragonquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Great Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217913,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 49
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Knuckles",
+        "item_slot": "One-Hand",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217914,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Axe",
+        "item_slot": "One-Hand",
+        "base_item_level": 270,
+        "quality": "Common",
+        "id": 222032,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_dragonquest_b_02.jpg",
+        "stats": {
+            "Intellect": 49
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Stiletto",
+        "item_slot": "One-Hand",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217915,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 49
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+97 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+97 Random Stat 2 (97.00% @ L70)"
+            }
+        ],
+        "name": "Everforged Great Axe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217924,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+49 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+49 Random Stat 2 (49.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Sword",
+        "item_slot": "One-Hand",
+        "base_item_level": 270,
+        "quality": "Rare",
+        "id": 217916,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
+        "stats": {
+            "Intellect": 49
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "+97 Random Stat 1 (0.00% @ L70)"
+            },
+            {
+                "description": "+97 Random Stat 2 (97.00% @ L70)"
+            }
+        ],
+        "name": "Ironclaw Great Mace",
+        "item_slot": "Two-Hand",
+        "base_item_level": 270,
+        "quality": "Common",
+        "id": 222031,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_dragondungeon_c_01.jpg",
+        "stats": {
+            "Intellect": 97
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Greatsword",
+        "item_slot": "Two-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218313,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_newplayer_a_02.jpg",
+        "stats": {
+            "Haste": 90,
+            "Versatility": 49
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Crescent",
+        "item_slot": "One-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218323,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_draenorcrafted_d_01_a_alliance.jpg",
+        "stats": {
+            "Critical Strike": 29,
+            "Mastery": 41
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Longblade",
+        "item_slot": "One-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218321,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_newplayer_a_03.jpg",
+        "stats": {
+            "Haste": 26,
+            "Mastery": 44
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Rod",
+        "item_slot": "Two-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218318,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_newplayer_a_01.jpg",
+        "stats": {
+            "Intellect": 309,
+            "Versatility": 54,
+            "Mastery": 84
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Longblade",
+        "item_slot": "One-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218333,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_draenorcrafted_d_01_a.jpg",
+        "stats": {
+            "Haste": 26,
+            "Mastery": 44
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Crescent",
+        "item_slot": "One-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218335,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Critical Strike": 29,
+            "Mastery": 41
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Rod",
+        "item_slot": "Two-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218330,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_newplayer_a_01.jpg",
+        "stats": {
+            "Intellect": 309,
+            "Versatility": 54,
+            "Mastery": 84
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Mallet",
+        "item_slot": "One-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218331,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Critical Strike": 24,
+            "Haste": 45
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Shank",
+        "item_slot": "One-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218332,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Haste": 26,
+            "Versatility": 44
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Mallet",
+        "item_slot": "One-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218319,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Critical Strike": 24,
+            "Haste": 45
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Saber",
+        "item_slot": "One-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218334,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_draenorcrafted_d_01_a.jpg",
+        "stats": {
+            "Intellect": 202,
+            "Haste": 45,
+            "Mastery": 24
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Maul",
+        "item_slot": "One-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218316,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Intellect": 202,
+            "Versatility": 41,
+            "Mastery": 29
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Bow",
+        "item_slot": "N/A",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218315,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bow_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Critical Strike": 84,
+            "Haste": 54
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Saber",
+        "item_slot": "One-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218322,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_newplayer_a_03.jpg",
+        "stats": {
+            "Intellect": 202,
+            "Haste": 45,
+            "Mastery": 24
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Polearm",
+        "item_slot": "Two-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218324,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_newplayer_a_02.jpg",
+        "stats": {
+            "Critical Strike": 87,
+            "Mastery": 52
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Greataxe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218325,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_newplayer_a_01.jpg",
+        "stats": {
+            "Haste": 78,
+            "Versatility": 60
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Maul",
+        "item_slot": "One-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218328,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Intellect": 202,
+            "Versatility": 41,
+            "Mastery": 29
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Polearm",
+        "item_slot": "Two-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218312,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_newplayer_a_02.jpg",
+        "stats": {
+            "Critical Strike": 87,
+            "Mastery": 52
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Shank",
+        "item_slot": "One-Hand",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218320,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Haste": 26,
+            "Versatility": 44
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Recruit's Sturdy Bow",
+        "item_slot": "N/A",
+        "base_item_level": 252,
+        "quality": "Rare",
+        "id": 218327,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bow_1h_newplayer_a_01.jpg",
+        "stats": {
+            "Critical Strike": 84,
+            "Haste": 54
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Cleaver",
+        "item_slot": "Two-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 222999,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_102.jpg",
+        "stats": {
+            "Critical Strike": 4,
+            "Haste": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Earthen Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 224244,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_92.jpg",
+        "stats": {
+            "Critical Strike": 4,
+            "Haste": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Handaxe",
+        "item_slot": "One-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 222992,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_101.jpg",
+        "stats": {
+            "Haste": 1,
+            "Versatility": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Earthen Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 224246,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_141.jpg",
+        "stats": {
+            "Critical Strike": 2,
+            "Versatility": 1
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Shiv",
+        "item_slot": "One-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 222993,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_shortblade_96.jpg",
+        "stats": {
+            "Critical Strike": 1,
+            "Haste": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Earthen Spire",
+        "item_slot": "Two-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 224241,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_stave_2h_deathwingraid_d_02.jpg",
+        "stats": {
+            "Intellect": 12,
+            "Critical Strike": 2,
+            "Haste": 4
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Earthen Shiv",
+        "item_slot": "One-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 224243,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_shortblade_96.jpg",
+        "stats": {
+            "Critical Strike": 1,
+            "Haste": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Blunderbuss",
+        "item_slot": "N/A",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 223000,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_rifle_33.jpg",
+        "stats": {
+            "Critical Strike": 3,
+            "Haste": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Shillelagh",
+        "item_slot": "One-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 223001,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_90.jpg",
+        "stats": {
+            "Intellect": 8,
+            "Haste": 1,
+            "Versatility": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Earthen Handaxe",
+        "item_slot": "One-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 224242,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_101.jpg",
+        "stats": {
+            "Haste": 1,
+            "Versatility": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Earthen Blunderbuss",
+        "item_slot": "N/A",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 224248,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_rifle_33.jpg",
+        "stats": {
+            "Critical Strike": 3,
+            "Haste": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 222994,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_92.jpg",
+        "stats": {
+            "Critical Strike": 4,
+            "Haste": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Spire",
+        "item_slot": "Two-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 222990,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_stave_2h_deathwingraid_d_02.jpg",
+        "stats": {
+            "Intellect": 12,
+            "Critical Strike": 2,
+            "Haste": 4
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Earthen Shillelagh",
+        "item_slot": "One-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 224249,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_90.jpg",
+        "stats": {
+            "Intellect": 8,
+            "Haste": 1,
+            "Versatility": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Earthen Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 222998,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_141.jpg",
+        "stats": {
+            "Critical Strike": 2,
+            "Versatility": 1
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Earthen Cleaver",
+        "item_slot": "Two-Hand",
+        "base_item_level": 16,
+        "quality": "Uncommon",
+        "id": 224247,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_102.jpg",
+        "stats": {
+            "Critical Strike": 4,
+            "Haste": 2
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Voidtouched Scimitar",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 217714,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_voidelf_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Voidtouched Flail",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 217711,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_voidelf_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Bow of the Ranger Captain",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 213269,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bow_1h_artifactwindrunner_d_03.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Fel-Glade Warglaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225978,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_npc_d_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Harvester's Claw",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 226428,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Feathered Bow of the Night",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 226381,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_bow_17.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Plunderlord's Radiant Sigil",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225982,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_plunder_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Ravencrest's Wrath",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 227294,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_lordravencrest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Feathered Bow of the Fallen",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 226382,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_bow_17.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Ashen Executioner",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 226370,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_cleaver_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Battle-tested Obsidian Warhammer",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 226388,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hammer_2h_horde_a_02_hd.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Aerie Battle Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 226390,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_29.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Brann Bronzebeard's Axe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Common",
+        "id": 216905,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_04.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Coreway Shovel",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225756,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_earthenshovel_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [],
+        "name": "Ol' Faithful",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 216906,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_rifle_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Hallowfall Harvester's Pitchfork",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225758,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_earthenpitchfork_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Wand of the Bright Shadow",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Common",
+        "id": 226384,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_wand_07.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Battle-tested Warhammer",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 226387,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hammer_2h_horde_a_02_hd.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Dark Iron Battle Mace",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 226389,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_29.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Trailblazer's Hookshoot",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225503,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_crossbow_2h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Skypiercing Drillstaff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225504,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Coreway Sledgehammer",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225755,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_newplayer_a_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Keen-eye 'Noculars",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 226379,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_1h_binoculars_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Simple Ebony Wand",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Common",
+        "id": 226383,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_wand_09.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Mana-Lined Slab Slicer",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225506,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Coreway Pickaxe",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225757,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_earthenpickaxe_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Scepter",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225865,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_nerubianraid_d_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Plunderlord's Radiant Neck-Severer",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225992,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_plunder_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add an appearance of this type to your collection (from the Past)."
+            },
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Learn Warglaives Test Item (DNT)",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 217706,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_npc_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Torchlit Pickaxe",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225497,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_undergroundquest_b_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Warglaive",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225859,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Wither-Blade",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225874,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Engineering - 1H Wrench [DNT]",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 221476,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_1h_wrench_a_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Umbral Artist's Chisel",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225498,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Luminous Lampspire",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225505,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_undergroundquest_b_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Dornogal Spear",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225760,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_earthenspear_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Jeweler's Careful Crusher",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225761,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_earthenjeweltool_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Crossbow",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225864,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_crossbow_2h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Oxidized Wrench",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 226385,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_1h_caliper_b_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Lamplighter's Torch",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 220507,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_enchanting_70_pet_torch.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Engineering - 2H Wrench [DNT]",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 221477,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_1h_wrench_a_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Dasher's Trophy Fish",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 224727,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_fish_50.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Lapidarius Gemcutter",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225499,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_undergroundquest_b_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Dornogal Guard's Splitter",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225753,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_earthendungeon_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Axe",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225856,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_1h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Pincer",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225858,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225861,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_nerubianraid_d_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Battlestaff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225863,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Sword",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225873,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_emeralddreamraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Plunderlord's Radiant Hand Cannon",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225983,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_firearm_2h_plunder_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "[PH] Skewered Slum Shark",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 224716,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_2h_farmpitchfork_a_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Dornogal Guard's Hammer",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225754,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_earthendungeon_c_03.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Coreway Engineer's Screwdriver",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225762,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_earthenjeweltool_b_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Greataxe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225871,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Extra Large Leek",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225884,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_greenonion_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "ELIZA's Rake Attachment",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 225947,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_2h_arathor_gardenrake_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Plunderlord's Radiant Cutlass",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225990,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_2h_plunder_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Lamplighter's Unlit Torch",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 220508,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_torch_unlit.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Bedrock Breaker",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225500,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Bow",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225870,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bow_1h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "High-Grade Blade of the Forbade",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225980,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_07.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Plunderlord's Radiant Rapier",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225991,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_plunder_c_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Simple Copper Staff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225994,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_22.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Hillhelm Farmhand's Hoe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 226160,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_2h_arathor_gardenhoe_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Harvester's Claw",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 226426,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Pathfinder's Stonecarver",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225501,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Mountain Shaper's Greataxe",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225502,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_axe_2h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Dagger",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225857,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Spear",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225860,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Claws",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225869,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Pulverizer",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225872,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_nerubianraid_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Jade Blade of the Forbade",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225979,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_07.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Cursed Copper Crossbow",
+        "item_slot": "N/A",
+        "base_item_level": 1,
+        "quality": "Uncommon",
+        "id": 225993,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_weapon_crossbow_35.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Hillhelm Farmhand's Watering Can",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 226161,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_1h_arathor_wateringcan_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Disturbance Detection Device",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Rare",
+        "id": 226172,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_polearm_2h_undergroundquest_b_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Forged Gladiator's Greatstaff",
+        "item_slot": "Two-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 225862,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_staff_2h_nerubianraid_d_02.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Harvester's Claw",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 226425,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Harvester's Claw",
+        "item_slot": "One-Hand",
+        "base_item_level": 1,
+        "quality": "Epic",
+        "id": 226427,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    }
 ];
 
 export default itemData;
