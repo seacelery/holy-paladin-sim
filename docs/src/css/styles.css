@@ -14,7 +14,7 @@
     --panel-colour-table-4: rgb(6, 2, 4);
     --panel-colour-table-5: rgb(15, 7, 12);
     --panel-colour-table-6: rgb(11, 6, 10);
-    --button-colour: #64394c;
+    --button-colour: #64384B;
     --border-colour: #3c3241;
     --border-colour-2: rgb(17, 8, 14);
     --transparent-border-colour-2: #1b1a1fd7;
@@ -153,6 +153,38 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--panel-colour-3);
+}
+
+#template-button {
+    position: absolute;
+    top: 15px;
+    right: 250px;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    height: 33px;
+    padding-bottom: 1px;
+    color: var(--light-font-colour);
+    font-size: 14px;
+    background-color: var(--button-colour);
+    box-shadow: 3px 5px 6px 0 rgba(36, 14, 25, 0.25);
+    border: 1px solid var(--border-colour-2);
+    border-radius: 4px;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.05s;
+}
+
+#template-button:hover {
+    background-color: var(--panel-colour-4);
+    border: var(--border-colour-5);
+}
+
+#template-button:active {
+    background-color: var(--hover-colour-light);
+    border: var(--border-colour-5);
 }
 
 #toggles-container {
@@ -457,24 +489,30 @@ body {
     width: 75px;
     height: 27px;
     
-    border: 1px solid var(--panel-colour-4);
-    border-top: none;
-    border-bottom: none;
-    border-radius: 3px;
-    border-bottom-right-radius: 0px;
-
+    display: flex;
     font-size: 14px;
+    padding-bottom: 2px;
+    justify-content: center;
+    align-items: center;
     color: var(--light-font-colour);
-
-    background-color: var(--panel-colour-2);
+    background-color: var(--button-colour);
+    box-shadow: 3px 5px 6px 0 rgba(36, 14, 25, 0.25);
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.05s;
+    border: none;
 
     outline: none;
 }
 
 #import-button:hover {
-    cursor: pointer;
-    user-select: none;
     background-color: var(--panel-colour-4);
+    border: var(--border-colour-5);
+}
+
+#import-button:active {
+    background-color: var(--hover-colour-light);
+    border: var(--border-colour-5);
 }
 
 #character-name-input {
@@ -519,7 +557,7 @@ body {
     transform: translateY(-40px);
 }
 
-.loading {
+.loading, .loading-import-main {
     width: 25px;
     aspect-ratio: 1;
     display:grid;
@@ -528,7 +566,7 @@ body {
 }
 .loading,
 .loading:before,
-.loading:after{
+.loading:after,{
     background:
         radial-gradient(closest-side at 50% 12.5%,
         #ff98ab 96%,#0000) 50% 0/20% 80% repeat-y,
@@ -536,13 +574,26 @@ body {
         #ff98ab 96%,#0000) 0 50%/80% 20% repeat-x;
 }
 .loading:before,
-.loading:after {
+.loading:after,
+.loading-import-main:before,
+.loading-import-main:after {
     content: "";
     grid-area: 1/1;
     transform: rotate(30deg);
 }
-.loading:after {
+.loading:after,
+.loading-import-main:after {
     transform: rotate(60deg);
+}
+
+.loading-import-main,
+.loading-import-main:before,
+.loading-import-main:after{
+    background:
+        radial-gradient(closest-side at 50% 12.5%,
+        #FFCBD5 96%,#0000) 50% 0/20% 80% repeat-y,
+        radial-gradient(closest-side at 12.5% 50%,
+        #FFCBD5 96%,#0000) 0 50%/80% 20% repeat-x;
 }
 
 @keyframes l26 {
@@ -807,26 +858,35 @@ body {
 }
 
 #import-button-main {
-    width: 150px;
+    width: 275px;
     height: 50px;
     margin-top: 30px;
     margin-bottom: 45px;
     
-    border: 1px solid var(--panel-colour-4);
-    border-radius: 3px;
-
-    font-size: 18px;
+    display: flex;
+    font-size: 16px;
+    padding-bottom: 2px;
+    justify-content: center;
+    align-items: center;
     color: var(--light-font-colour);
-
-    background-color: var(--panel-colour-2);
-
+    background-color: var(--button-colour);
+    box-shadow: 3px 5px 6px 0 rgba(36, 14, 25, 0.25);
+    border: 1px solid var(--border-colour-2);
+    border-radius: 4px;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.05s;
     outline: none;
 }
 
 #import-button-main:hover {
-    cursor: pointer;
-    user-select: none;
-    background-color: var(--panel-colour-table);
+    background-color: var(--panel-colour-4);
+    border: var(--border-colour-5);
+}
+
+#import-button-main:active {
+    background-color: var(--hover-colour-light);
+    border: var(--border-colour-5);
 }
 
 /* character options window */

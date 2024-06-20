@@ -236,6 +236,62 @@ const generateRegionOptions = () => {
     });
 };
 
+const templateButton = document.getElementById("template-button");
+templateButton.addEventListener("click", () => {
+    let characterName = document.getElementById("character-name-input").value.toLowerCase();
+    let characterRealm = document.getElementById("character-realm-input").value.toLowerCase().replaceAll(" ", "-");
+    let characterRegion = document.getElementById("character-region-input").value.toLowerCase();
+
+    if (!characterName) {
+        characterName = document.getElementById("character-name-input-main").value.toLowerCase();
+    };
+    if (!characterRealm) {
+        characterRealm = document.getElementById("character-realm-selected-realm").textContent.toLowerCase().replace(/\u00A0/g, "-").replace(" ", "-");
+    };
+    if (!characterRegion) {
+        characterRegion = document.getElementById("character-region-selected-region").textContent.toLowerCase();
+    };
+
+    if (characterName && characterRealm && characterRegion && isFirstImport) {
+        const importButtonText = document.getElementById("import-button-text-main");
+        const importButtonLoading = document.getElementById("import-button-main-loading-container");
+        importButtonText.style.display = "none";
+        importButtonLoading.style.display = "flex";
+        importButtonMain.style.pointerEvents = "none";
+    };
+
+    if (characterName && characterRealm && characterRegion && !isFirstImport) {
+        const loadingScreen = document.getElementById("loading-screen");
+        loadingScreen.style.display = "flex";
+        const loadingCorner = document.getElementById("loading-corner");
+        loadingCorner.style.display = "flex";
+        const loadingIcon = document.getElementById("import-button-loading-container");
+        loadingIcon.style.display = "flex";
+        const importContainerMain = document.getElementById("import-container-main");
+        importContainerMain.style.display = "none";
+    };
+
+    const templateData = {
+        "character_name": "Skaneschnell",
+        "character_realm": "Twisting Nether",
+        "character_region": "eu",
+        "race": "Dwarf",
+        "class_talents": templateClassTalents,
+        "spec_talents": templateSpecTalents,
+        "equipment": templateEquipment,
+        "consumable": {},
+        "stats": {},
+        "ptr": true,
+    }
+
+    console.log(templateData)
+    updateEquipmentWithEffectValues(templateData);
+    updateUIAfterImport(templateData, isFirstImport);
+    initialiseEquipment();
+    updateStats();
+    isFirstImport = false;
+});
+
 // request functions
 const importCharacter = async () => {
     let characterName = document.getElementById("character-name-input").value.toLowerCase();

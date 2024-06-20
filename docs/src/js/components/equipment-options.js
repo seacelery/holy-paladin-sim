@@ -171,7 +171,7 @@ const updateEquipmentFromImportedData = (data) => {
         };
     };
 
-    combinedItemLevel = Math.round(combinedItemLevel / 16);
+    combinedItemLevel = (combinedItemLevel / 16).toFixed(1);
     const combinedItemLevelValue = document.getElementById("equipped-items-item-level-value");
     combinedItemLevelValue.textContent = combinedItemLevel;
     const combinedItemLevelText = document.getElementById("equipped-items-item-level-text");

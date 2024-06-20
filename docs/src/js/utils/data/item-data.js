@@ -136709,13 +136709,169 @@ const itemData = [
                 "description": "Use: Add this appearance to your Warband collection."
             }
         ],
-        "name": "Harvester's Claw",
-        "item_slot": "One-Hand",
-        "base_item_level": 1,
+        "name": "Sunsoul Pendant",
+        "item_slot": "Necklace",
+        "base_item_level": 571,
+        "quality": "Uncommon",
+        "id": 226427,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
+        "stats": {
+            "Stamina": 5034,
+            "Critical Strike": 1669,
+            "Mastery": 1576
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Sunsoul Cloak of Battle",
+        "item_slot": "Cloak",
+        "base_item_level": 571,
+        "quality": "Uncommon",
+        "id": 226427,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
+        "stats": {
+            "Intellect": 1133,
+            "Stamina": 5034,
+            "Critical Strike": 405,
+            "Mastery": 383
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Everforged Vambraces",
+        "item_slot": "Wrists",
+        "base_item_level": 606,
         "quality": "Epic",
         "id": 226427,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
-        "stats": {},
+        "stats": {
+            "Intellect": 1569, 
+            "Stamina": 8601,
+            "Critical Strike": 484,
+            "Mastery": 484
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Dredger's Developed Defender",
+        "item_slot": "Held in Off-hand",
+        "base_item_level": 558,
+        "quality": "Rare",
+        "id": 226427,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
+        "stats": {
+            "Intellect": 892, 
+            "Stamina": 4182,
+            "Critical Strike": 337,
+            "Mastery": 337
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Sunsoul Band of Might",
+        "item_slot": "Finger",
+        "base_item_level": 571,
+        "quality": "Uncommon",
+        "id": 226427,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
+        "stats": {
+            "Stamina": 5034,
+            "Critical Strike": 1762,
+            "Mastery": 1484
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Sunsoul Ring of Might",
+        "item_slot": "Finger",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 226427,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
+        "stats": {
+            "Stamina": 5034,
+            "Critical Strike": 1762,
+            "Mastery": 1484
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Everforged Sabatons",
+        "item_slot": "Feet",
+        "base_item_level": 606,
+        "quality": "Epic",
+        "id": 226427,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
+        "stats": {
+            "Intellect": 2093, 
+            "Stamina": 11469,
+            "Critical Strike": 646,
+            "Mastery": 646
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "description": "Use: Add this appearance to your Warband collection."
+            }
+        ],
+        "name": "Dredger's Developed Greatbelt",
+        "item_slot": "Wrists",
+        "base_item_level": 558,
+        "quality": "Rare",
+        "id": 226427,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
+        "stats": {
+            "Intellect": 1338, 
+            "Stamina": 6273,
+            "Critical Strike": 506,
+            "Mastery": 506
+        },
         "gems": [],
         "enchantments": [],
         "limit": null
