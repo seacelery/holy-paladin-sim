@@ -33,6 +33,7 @@ const updateEquipmentFromImportedData = (data) => {
     let tierS1Counter = 0;
     let tierS2Counter = 0;
     let tierS3Counter = 0;
+    let tierDragonflightS2Counter = 0;
     let embellishmentCounter = 0;
     let idolCounter = 0;
     let combinedItemLevel = 0;
@@ -153,17 +154,20 @@ const updateEquipmentFromImportedData = (data) => {
             itemSlotInfoContainer.appendChild(itemCategoryDisplay);            
         };
 
-        const tierSetNames = ["Virtuous Silver", "Heartfire Sentinel", "Zealous Pyreknight"];
+        const tierSetNames = ["Entombed Seraph", "Heartfire Sentinel"];
         const bonusesDisplay = createElement("div", "item-slot-bonuses");
         if (itemName.includes(tierSetNames[0])) {
             bonusesDisplay.textContent = "Tier Season 1";
             tierS1Counter += 1;
+        // } else if (itemName.includes(tierSetNames[1])) {
+        //     bonusesDisplay.textContent = "Tier Season 2";
+        //     tierS2Counter += 1;
+        // } else if (itemName.includes(tierSetNames[2])) {
+        //     bonusesDisplay.textContent = "Tier Season 3";
+        //     tierS3Counter += 1;
         } else if (itemName.includes(tierSetNames[1])) {
-            bonusesDisplay.textContent = "Tier Season 2";
-            tierS2Counter += 1;
-        } else if (itemName.includes(tierSetNames[2])) {
-            bonusesDisplay.textContent = "Tier Season 3";
-            tierS3Counter += 1;
+            bonusesDisplay.textContent = "Dragonflight Tier Season 2";
+            tierDragonflightS2Counter += 1;
         };
         itemSlotInfoContainer.appendChild(bonusesDisplay);
 
@@ -208,6 +212,12 @@ const updateEquipmentFromImportedData = (data) => {
             tierContainer.innerHTML = `<span style="color: var(--paladin-font)">Tier Season ${i + 1}</span> <span style="color: ${tierColour}">${tierSetCounts[i]}/5</span>`;
             equippedItemsInfo.appendChild(tierContainer);
         };
+    };
+    if (tierDragonflightS2Counter) {
+        const tierContainer = createElement("div", "item-slot-tier", null);
+        let tierColour = tierDragonflightS2Counter >= 2 ? "var(--sorting-arrow-colour)" : "var(--red-font-hover)";
+        tierContainer.innerHTML = `<span style="color: var(--paladin-font)">DF Tier Season 2</span> <span style="color: ${tierColour}">${tierDragonflightS2Counter}/2</span>`;
+        equippedItemsInfo.appendChild(tierContainer);
     };
 
     const embellishmentsContainer = createElement("div", "item-slot-embellishments", null);

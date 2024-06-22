@@ -962,17 +962,22 @@ class Paladin:
         gems_from_equipment = []
         bonus_effect_enchants = []
         
-        self.set_bonuses = {"season_1": 0, "season_2": 0, "season_3": 0}
+        self.set_bonuses = {"season_1": 0, "season_2": 0, "season_3": 0, "dragonflight_season_2": 0}
         
         for item_slot, item_data in equipment.items():
-            
             name = item_data.get("name", "")
-            if "Virtuous Silver" in name:
-                self.set_bonuses["season_1"] += 1
-            if "Heartfire Sentinel" in name:
-                self.set_bonuses["season_2"] += 1
-            if "Zealous Pyreknight" in name:
-                self.set_bonuses["season_3"] += 1
+            if self.ptr:
+                if "Entombed Seraph" in name:
+                    self.set_bonuses["season_1"] += 1
+                if "Heartfire Sentinel" in name:
+                    self.set_bonuses["dragonflight_season_2"] += 1
+            else:
+                if "Virtuous Silver" in name:
+                    self.set_bonuses["season_1"] += 1
+                if "Heartfire Sentinel" in name:
+                    self.set_bonuses["season_2"] += 1
+                if "Zealous Pyreknight" in name:
+                    self.set_bonuses["season_3"] += 1
             
             stats = item_data.get("stats", {})
             if stats:
@@ -996,7 +1001,10 @@ class Paladin:
         return_enchants_stats(self, formatted_enchants, bonus_effect_enchants, stat_values_from_equipment)
         return_gem_stats(self, gems_from_equipment, stat_values_from_equipment)
          
-        stat_values_from_equipment["intellect"] += 2089
+        if self.ptr:
+            stat_values_from_equipment["intellect"] += 17647
+        else:  
+            stat_values_from_equipment["intellect"] += 2089
         
         stat_values_from_equipment["stamina"] += 3848
         if self.is_talent_active("Sanctified Plates") and self.class_talents["row6"]["Sanctified Plates"]["ranks"]["current rank"] == 1:

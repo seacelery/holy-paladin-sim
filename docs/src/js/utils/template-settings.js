@@ -665,371 +665,265 @@ const templateSpecTalents = {
 const templateEquipment = {
     "back": {
         "effects": [],
-        "enchantments": [
-            "Enchanted: Graceful Avoidance |A:Professions-ChatIcon-Quality-Tier3:20:20|a"
-        ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_cape_plate_raidwarrioremerald_d_01.jpg",
-        "item_id": 207161,
-        "item_level": 528,
+        "enchantments": [],
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_panprog_b_01.jpg",
+        "item_id": 153894,
+        "item_level": 571,
         "limit": null,
-        "name": "Mantle of Blazing Sacrifice",
-        "quality": "Epic",
+        "name": "Sunsoul Cloak of Battle",
+        "quality": "Uncommon",
         "stats": {
-            "crit": 190,
-            "intellect": 759,
-            "mastery": 475,
-            "stamina": 3544
+            "crit": 405,
+            "intellect": 1133,
+            "mastery": 383,
+            "stamina": 5034
         }
     },
     "chest": {
         "effects": [],
-        "enchantments": [
-            "Enchanted: Waking Stats |A:Professions-ChatIcon-Quality-Tier3:20:20|a"
-        ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_chest_plate_raidpaladindragon_d_01.jpg",
-        "item_id": 217196,
-        "item_level": 528,
+        "enchantments": [],
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_chest.jpg",
+        "item_id": 211996,
+        "item_level": 597,
         "limit": null,
-        "name": "Heartfire Sentinel's Brigandine",
+        "name": "Entombed Seraph's Breastplate",
         "quality": "Epic",
         "stats": {
-            "crit": 389,
-            "intellect": 1350,
-            "mastery": 794,
-            "stamina": 6301
+            "haste": 1142,
+            "intellect": 2566,
+            "versatility": 497,
+            "stamina": 13369
         }
     },
     "feet": {
         "effects": [],
-        "enchantments": [
-            "Enchanted: Plainsrunner's Breeze |A:Professions-ChatIcon-Quality-Tier3:20:20|a"
-        ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_boot_plate_raidwarriordragon_d_01.jpg",
-        "item_id": 204396,
-        "item_level": 528,
+        "enchantments": [],
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_boot.jpg",
+        "item_id": 222429,
+        "item_level": 606,
         "limit": null,
-        "name": "Spittle-Resistant Sollerets",
+        "name": "Everforged Sabatons",
         "quality": "Epic",
         "stats": {
-            "crit": 586,
-            "haste": 301,
-            "intellect": 1012,
-            "stamina": 4726
+            "crit": 646,
+            "mastery": 646,
+            "intellect": 2093,
+            "stamina": 11469
         }
     },
     "finger_1": {
         "effects": [],
-        "enchantments": [
-            "Enchanted: +82 Versatility |A:Professions-ChatIcon-Quality-Tier3:20:20|a"
-        ],
-        "gems": [
-            "Radiant Malygite"
-        ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_primalist_ring_1_earth.jpg",
-        "item_id": 193696,
-        "item_level": 528,
+        "enchantments": [],
+        "gems": [],
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_128.jpg",
+        "item_id": 129685,
+        "item_level": 571,
         "limit": null,
-        "name": "Thunderous Downburst Ring",
-        "quality": "Epic",
+        "name": "Sunsoul Ring of Might",
+        "quality": "Uncommon",
         "stats": {
-            "haste": 760,
-            "stamina": 3544,
-            "versatility": 1368
+            "crit": 1762,
+            "mastery": 1484,
+            "stamina": 5034
         }
     },
     "finger_2": {
-        "effects": [
-            {
-                "description": "Equip: Dealing Fire damage has a chance to invigorate you, absorbing 43,270 damage for 6 seconds.\r\n",
-                "id": 394455,
-                "name": "Broodkeeper's Barrier"
-            }
-        ],
-        "enchantments": [
-            "Enchanted: +82 Versatility |A:Professions-ChatIcon-Quality-Tier3:20:20|a"
-        ],
-        "gems": [
-            "Energized Malygite"
-        ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_primalist_ring_3_fire.jpg",
-        "item_id": 195526,
-        "item_level": 535,
+        "effects": [],
+        "enchantments": [],
+        "gems": [],
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_ring_122.jpg",
+        "item_id": 101150,
+        "item_level": 571,
         "limit": null,
-        "name": "Seal of Filial Duty",
-        "quality": "Epic",
+        "name": "Sunsoul Band of Might",
+        "quality": "Uncommon",
         "stats": {
-            "haste": 544,
-            "mastery": 1644,
-            "stamina": 3854
+            "crit": 1762,
+            "mastery": 1484,
+            "stamina": 5034
         }
     },
     "hands": {
         "effects": [],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_glove_plate_raidpaladindragon_d_01.jpg",
-        "item_id": 217197,
-        "item_level": 528,
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_glove.jpg",
+        "item_id": 211994,
+        "item_level": 597,
         "limit": null,
-        "name": "Heartfire Sentinel's Protectors",
+        "name": "Entombed Seraph's Castigation",
         "quality": "Epic",
         "stats": {
-            "crit": 266,
-            "haste": 621,
-            "intellect": 1012,
-            "stamina": 4726
+            "crit": 367,
+            "haste": 862,
+            "intellect": 1924,
+            "stamina": 10027
         }
     },
     "head": {
         "effects": [],
-        "enchantments": [
-            "Enchanted: |cnITEM_EPIC_COLOR:Incandescent Essence|r"
-        ],
-        "gems": [
-            "Radiant Malygite"
-        ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_helm_plate_raidpaladindragon_d_01.jpg",
-        "item_id": 217198,
-        "item_level": 528,
+        "enchantments": [],
+        "gems": [],
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_helm.jpg",
+        "item_id": 211993,
+        "item_level": 597,
         "limit": null,
-        "name": "Heartfire Sentinel's Forgehelm",
+        "name": "Entombed Seraph's Casque",
         "quality": "Epic",
         "stats": {
-            "haste": 355,
-            "intellect": 1350,
-            "stamina": 6301,
-            "versatility": 828
+            "crit": 542,
+            "intellect": 2566,
+            "stamina": 13369,
+            "mastery": 1097
         }
     },
     "legs": {
         "effects": [],
-        "enchantments": [
-            "Enchanted: +177 Intellect & +131 Stamina |A:Professions-ChatIcon-Quality-Tier3:20:20|a"
-        ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_pant_plate_raidpaladindragon_d_01.jpg",
-        "item_id": 217199,
-        "item_level": 528,
+        "enchantments": [],
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_pant.jpg",
+        "item_id": 211992,
+        "item_level": 597,
         "limit": null,
-        "name": "Heartfire Sentinel's Faulds",
+        "name": "Entombed Seraph's Greaves",
         "quality": "Epic",
         "stats": {
-            "combat_rating_avoidance": 507,
-            "haste": 807,
-            "intellect": 1350,
-            "mastery": 376,
-            "stamina": 6301
+            "haste": 492,
+            "intellect": 2566,
+            "crit": 1147,
+            "stamina": 13369
         }
     },
     "main_hand": {
-        "effects": [
-            {
-                "description": "Equip: Your spells and abilities have a chance to draw on the corruption within, dealing an additional 16,099 Shadowflame damage to you and your target.\r\n\r\nDamage increased by 400% against enemies above 90% health.",
-                "id": 424320,
-                "name": "Hungering Shadowflame"
-            }
-        ],
-        "enchantments": [
-            "Enchanted: Sophic Devotion |A:Professions-ChatIcon-Quality-Tier3:20:20|a",
-            "Buzzing Rune"
-        ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_1h_emeralddreamraid_d_01.jpg",
-        "item_id": 207788,
-        "item_level": 528,
+        "effects": [],
+        "enchantments": [],
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_arathor_c_01.jpg",
+        "item_id": 222444,
+        "item_level": 606,
         "limit": null,
-        "name": "Vakash, the Shadowed Inferno",
+        "name": "Charged Hexsword",
         "quality": "Epic",
         "stats": {
-            "haste": 179,
-            "intellect": 3931,
-            "mastery": 412,
-            "stamina": 3150
+            "crit": 430,
+            "intellect": 1395,
+            "mastery": 430,
+            "stamina": 7646
         }
     },
     "neck": {
-        "effects": [
-            {
-                "description": "Your spells and abilities have a chance to empower one of your socketed elemental gems, granting *766 of their associated stat. Lasts 5 sec and an additional 1 sec per elemental gem.",
-                "id": 375323,
-                "name": "Elemental Lariat",
-                "effect_values": [
-                    {
-                        "allocation_type": "rating_multiplier",
-                        "base_item_level": 525,
-                        "base_value": 766,
-                        "effect_coefficient": 0.458195,
-                        "effect_type": "scalar"
-                    }
-                ]
-            }
-        ],
-        "gems": [
-            "Resplendent Illimited Diamond",
-            "Radiant Malygite",
-            "Radiant Malygite"
-        ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_necklace_necklace1_color3.jpg",
-        "item_id": 193001,
-        "item_level": 525,
-        "limit": "Unique-Equipped: Embellished (2)",
-        "name": "Elemental Lariat",
-        "quality": "Epic",
+        "effects": [],
+        "gems": [],
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_73.jpg",
+        "item_id": 153895,
+        "item_level": 571,
+        "limit": null,
+        "name": "Sunsoul Pendant",
+        "quality": "Uncommon",
         "stats": {
-            "crit": 1051,
-            "stamina": 3424,
-            "versatility": 1051
+            "crit": 1669,
+            "stamina": 5034,
+            "mastery": 1579
         }
     },
     "off_hand": {
         "effects": [],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_shield_1h_primalistraid_d_01.jpg",
-        "item_id": 195520,
-        "item_level": 528,
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_undergroundquest_b_02.jpg",
+        "item_id": 222474,
+        "item_level": 558,
         "limit": null,
-        "name": "Broodsworn Legionnaire's Pavise",
-        "quality": "Epic",
+        "name": "Dredger's Developed Defender",
+        "quality": "Rare",
         "stats": {
-            "haste": 204,
-            "intellect": 2070,
-            "mastery": 387,
-            "stamina": 3150
+            "crit": 337,
+            "intellect": 892,
+            "mastery": 337,
+            "stamina": 4182
         }
     },
     "shoulder": {
         "effects": [],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_shoulder_raidpaladindragon_d_01.jpg",
-        "item_id": 217200,
-        "item_level": 528,
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_shoulder.jpg",
+        "item_id": 211991,
+        "item_level": 597,
         "limit": null,
-        "name": "Heartfire Sentinel's Steelwings",
+        "name": "Entombed Seraph's Plumes",
         "quality": "Epic",
         "stats": {
-            "crit": 298,
-            "intellect": 1012,
-            "stamina": 4726,
-            "versatility": 589
+            "versatility": 840,
+            "intellect": 1924,
+            "stamina": 10027,
+            "mastery": 389
         }
     },
     "trinket_1": {
         "effects": [
             {
-                "description": "Use: Channel to unravel your target's essence, dealing 223,000 Nature damage over 3 sec and granting you up to *3823 Mastery for 18 sec. \r\n\r\nDamage increased by 30% against immobilized targets. (2 Min Cooldown)",
-                "id": 422956,
-                "name": "Nymue's Unraveling Spindle",
-                "effect_values": [
-                    {
-                        "base_value": 3823,
-                        "effect_type": "scalar",
-                        "effect_coefficient": 2.263035,
-                        "allocation_type": "rating_multiplier",
-                        "base_item_level": 528
-                    }
-                ]
+                "description": "",
+                "id": 0,
+                "name": "",
+                "effect_values": []
             }
         ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_cloth_outdooremeralddream_d_01_buckle.jpg",
-        "item_id": 208615,
-        "item_level": 528,
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_trinketpanda_03.jpg",
+        "item_id": 170683,
+        "item_level": 571,
         "limit": null,
-        "name": "Nymue's Unraveling Spindle",
-        "quality": "Epic",
+        "name": "Sunsoul Idol of Battle",
+        "quality": "Uncommon",
         "stats": {
-            "intellect": 1283
+            "intellect": 1914,
+            "haste": 1001
         }
     },
     "trinket_2": {
         "effects": [
             {
-                "description": "Equip: Your healing spells have a chance to awaken the Heart, restoring *2250 mana over 10 sec and causing your healing spells to restore *61761 additional health over 10 sec.\r\n\r\nOverhealing from this effect invigorates your target, granting them up to *588 Versatility for 12 sec.",
-                "id": 401183,
-                "name": "Rashok's Molten Heart",
-                "effect_values": [
-                    {
-                        "base_value": 2250,
-                        "effect_type": "scalar",
-                        "effect_coefficient": 1.33174,
-                        "allocation_type": "rating_multiplier",
-                        "base_item_level": 528
-                    },
-                    {
-                        "base_value": 61761,
-                        "effect_type": "scalar",
-                        "effect_coefficient": 22.21365,
-                        "allocation_type": "flat_healing",
-                        "base_item_level": 528
-                    },
-                    {
-                        "base_value": 588,
-                        "effect_type": "scalar",
-                        "effect_coefficient": 0.347837,
-                        "allocation_type": "rating_multiplier",
-                        "base_item_level": 528
-                    }
-                ]
+                "description": "",
+                "id": 0,
+                "name": "",
+                "effect_values": []
             }
         ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_trinket6oih_orb4.jpg",
-        "item_id": 202614,
-        "item_level": 528,
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_trinketpanda_03.jpg",
+        "item_id": 170683,
+        "item_level": 558,
         "limit": null,
-        "name": "Rashok's Molten Heart",
-        "quality": "Epic",
+        "name": "Sunsoul Idol of Battle",
+        "quality": "Uncommon",
         "stats": {
-            "intellect": 1283
+            "intellect": 1696,
+            "haste": 963
         }
     },
     "waist": {
         "effects": [],
-        "enchantments": [
-            "Enchanted: Shadowed Belt Clasp|A:Professions-ChatIcon-Quality-Tier3:20:20|a"
-        ],
-        "gems": [
-            "Radiant Malygite"
-        ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_plate_raidpaladinprimalist_d_01_belt.jpg",
-        "item_id": 195524,
-        "item_level": 528,
+        "enchantments": [],
+        "gems": [],
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_belt.jpg",
+        "item_id": 222431,
+        "item_level": 606,
         "limit": null,
-        "name": "Matriarch's Opulent Girdle",
+        "name": "Everforged Greatbelt",
         "quality": "Epic",
         "stats": {
-            "intellect": 1012,
-            "mastery": 303,
-            "stamina": 4726,
-            "versatility": 584
+            "intellect": 2093,
+            "mastery": 646,
+            "stamina": 11469,
+            "crit": 646
         }
     },
     "wrist": {
-        "effects": [
-            {
-                "description": "Grants *87 Versatility for every ally in a 30 yard radius, stacking up to 4 times.",
-                "id": 395959,
-                "name": "Allied Wristgaurds of Companionship",
-                "effect_values": [
-                    {
-                        "allocation_type": "rating_multiplier",
-                        "base_item_level": 525,
-                        "base_value": 87,
-                        "effect_coefficient": 0.052152,
-                        "effect_type": "scalar"
-                    }
-                ]
-            }
-        ],
-        "enchantments": [
-            "Enchanted: +200 Avoidance |A:Professions-ChatIcon-Quality-Tier3:20:20|a"
-        ],
-        "gems": [
-            "Radiant Malygite"
-        ],
-        "item_icon": "https://render.worldofwarcraft.com/eu/icons/56/inv_bracer_plate_raidwarriorprimalist_d_01.jpg",
-        "item_id": 190526,
-        "item_level": 525,
-        "limit": "Unique-Equipped: Embellished (2)",
-        "name": "Allied Wristguard of Companionship",
+        "effects": [],
+        "enchantments": [],
+        "gems": [],
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_bracer.jpg",
+        "item_id": 222435,
+        "item_level": 606,
+        "limit": "",
+        "name": "Everforged Vambraces",
         "quality": "Epic",
         "stats": {
-            "crit": 273,
-            "haste": 386,
-            "intellect": 738,
-            "stamina": 3424
+            "crit": 484,
+            "mastery": 484,
+            "intellect": 1569,
+            "stamina": 8601
         }
     }
 };
