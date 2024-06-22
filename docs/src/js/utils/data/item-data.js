@@ -127533,14 +127533,7 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+364 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+364 Random Stat 2 (364.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Charged Hexsword",
         "item_slot": "One-Hand",
         "base_item_level": 577,

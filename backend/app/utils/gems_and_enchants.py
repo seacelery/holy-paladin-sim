@@ -74,7 +74,11 @@ def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):
         "Ysemerald": 0,
         "Alexstraszite": 0,
         "Neltharite": 0,
-        "Malygite": 0
+        "Malygite": 0,
+        "Emerald": 0,
+        "Sapphire": 0,
+        "Ruby": 0,
+        "Onyx": 0,
     }
     
     player.gem_types = {
@@ -195,6 +199,81 @@ def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):
             player.gem_counts["Malygite"] += 1
             player.gem_types["Frost"] += 1
             player.total_elemental_gems += 1
+            
+        # ptr
+        if gem == "Cubic Blasphemite":
+            stat_values_from_equipment["intellect"] += 181
+        elif gem == "Elusive Blasphemite":
+            stat_values_from_equipment["intellect"] += 181
+        elif gem == "Insightful Blasphemite":
+            stat_values_from_equipment["intellect"] += 181
+        elif gem == "Culminating Blasphemite":
+            stat_values_from_equipment["intellect"] += 181
+            
+        elif gem == "Deadly Emerald":
+            stat_values_from_equipment["haste"] += 190
+            stat_values_from_equipment["crit"] += 127
+            player.gem_counts["Emerald"] += 1
+        elif gem == "Versatile Emerald":
+            stat_values_from_equipment["haste"] += 190
+            stat_values_from_equipment["versatility"] += 127
+            player.gem_counts["Emerald"] += 1
+        elif gem == "Masterful Emerald":
+            stat_values_from_equipment["haste"] += 190
+            stat_values_from_equipment["mastery"] += 127
+            player.gem_counts["Emerald"] += 1
+        elif gem == "Quick Emerald":
+            stat_values_from_equipment["haste"] += 227
+            player.gem_counts["Emerald"] += 1
+            
+        elif gem == "Deadly Ruby":
+            stat_values_from_equipment["crit"] += 227
+            player.gem_counts["Ruby"] += 1
+        elif gem == "Versatile Ruby":
+            stat_values_from_equipment["crit"] += 190
+            stat_values_from_equipment["versatility"] += 127
+            player.gem_counts["Ruby"] += 1
+        elif gem == "Masterful Ruby":
+            stat_values_from_equipment["crit"] += 190
+            stat_values_from_equipment["mastery"] += 127
+            player.gem_counts["Ruby"] += 1
+        elif gem == "Quick Ruby":
+            stat_values_from_equipment["crit"] += 190
+            stat_values_from_equipment["haste"] += 127
+            player.gem_counts["Ruby"] += 1
+            
+        elif gem == "Deadly Onyx":
+            stat_values_from_equipment["mastery"] += 190
+            stat_values_from_equipment["crit"] += 127
+            player.gem_counts["Onyx"] += 1
+        elif gem == "Versatile Onyx":
+            stat_values_from_equipment["mastery"] += 190
+            stat_values_from_equipment["versatility"] += 127
+            player.gem_counts["Onyx"] += 1
+        elif gem == "Masterful Onyx":
+            stat_values_from_equipment["mastery"] += 227
+            player.gem_counts["Onyx"] += 1
+        elif gem == "Quick Onyx":
+            stat_values_from_equipment["mastery"] += 190
+            stat_values_from_equipment["haste"] += 127
+            player.gem_counts["Onyx"] += 1
+            
+        elif gem == "Deadly Sapphire":
+            stat_values_from_equipment["versatility"] += 190
+            stat_values_from_equipment["crit"] += 127
+            player.gem_counts["Sapphire"] += 1
+        elif gem == "Versatile Sapphire":
+            stat_values_from_equipment["versatility"] += 227
+            player.gem_counts["Sapphire"] += 1
+        elif gem == "Masterful Sapphire":
+            stat_values_from_equipment["versatility"] += 190
+            stat_values_from_equipment["mastery"] += 127
+            player.gem_counts["Sapphire"] += 1
+        elif gem == "Quick Sapphire":
+            stat_values_from_equipment["versatility"] += 190
+            stat_values_from_equipment["haste"] += 127
+            player.gem_counts["Sapphire"] += 1
+        
     # print(stat_values_from_equipment)
     # print(player.gem_counts)
         

@@ -1,9 +1,10 @@
 import { createElement, updateStats } from "./index.js";
-import { itemsToIconsMap, groupedGems } from "../utils/items-to-icons-map.js";
+import { itemsToIconsMap, groupedGems, ptrGroupedGems } from "../utils/items-to-icons-map.js";
 import { generateItemStats } from "../utils/item-level-calculations/generate-item-stats.js";
 import { generateItemEffects } from "../utils/item-level-calculations/generate-item-effect.js";
 import { itemSlotsMap, blizzardItemSlotsMap, itemSlotToDefaultIcon } from "../utils/item-slots-map.js";
-import { itemSlotBonuses, embellishmentsData, embellishmentItems, craftedItems } from "../utils/item-level-calculations/item-slot-bonuses.js";
+import { itemSlotBonuses, ptrItemSlotBonuses, embellishmentsData, ptrEmbellishmentsData, embellishmentItems, ptrEmbellishmentItems, craftedItems, ptrCraftedItems } from "../utils/item-level-calculations/item-slot-bonuses.js";
+import { futurePatchSelected } from "./config/version-config.js";
 import itemData from "../utils/data/item-data.js";
 
 const updateBlurListener = (element, listener) => {
@@ -287,6 +288,12 @@ const clearNewItem = () => {
 };
 
 const initialiseEquipment = () => {
+    const gemsToUse = futurePatchSelected ? ptrGroupedGems : groupedGems;
+    const itemSlotBonusesToUse = futurePatchSelected ? ptrItemSlotBonuses : itemSlotBonuses;
+    const craftedItemsToUse = futurePatchSelected ? ptrCraftedItems : craftedItems;
+    const embellishmentsToUse = futurePatchSelected ? ptrEmbellishmentsData : embellishmentsData;
+    const embellishmentItemsToUse = futurePatchSelected ? ptrEmbellishmentItems : embellishmentItems;
+
     const updateEquippedItemDisplay = (itemSlot, itemSlots) => {
         const currentEquippedIcon = document.getElementById("current-equipped-item-icon");
         const currentItemLevel = document.getElementById("equipped-item-item-level");
@@ -395,7 +402,7 @@ const initialiseEquipment = () => {
                 currentItemLeftContainer.appendChild(field);
 
                 // edit secondary stats
-                if (["current-equipped-item-stat-1", "current-equipped-item-stat-2"].includes(item.id) && itemSlotData.name in craftedItems) {
+                if (["current-equipped-item-stat-1", "current-equipped-item-stat-2"].includes(item.id) && itemSlotData.name in craftedItemsToUse) {
                     const stat = item.text.split(" ")[1].toLowerCase();
 
                     field.contentEditable = true;
@@ -484,7 +491,7 @@ const initialiseEquipment = () => {
             const defaultEnchantOption = createElement("div", "current-equipped-item-default-enchant-option", null);
 
             const selectedItemSlot = document.getElementById("equipped-items-edit-choose-slot-dropdown").value;
-            const availableEnchants = itemSlotBonuses[selectedItemSlot]["enchants"];
+            const availableEnchants = itemSlotBonusesToUse[selectedItemSlot]["enchants"];
 
             if (itemSlotData["enchantments"] && itemSlotData["enchantments"].length > 0) {
                 if (itemSlotData["enchantments"][0].split("|")[1] && itemSlotData["enchantments"][0].split("|")[1].includes("Incandescent Essence")) {
@@ -511,7 +518,7 @@ const initialiseEquipment = () => {
                 };         
             });
 
-            itemSlotBonuses[selectedItemSlot]["enchants"].forEach(enchant => {
+            itemSlotBonusesToUse[selectedItemSlot]["enchants"].forEach(enchant => {
                 const enchantOption = createElement("div", "current-equipped-item-enchant-option", null);
                 enchantOption.textContent = enchant;
                 enchantOptions.appendChild(enchantOption);
@@ -564,7 +571,7 @@ const initialiseEquipment = () => {
             })
             addGemModal.appendChild(secondaryStatRow);
 
-            Object.values(groupedGems).forEach(group => {
+            Object.values(gemsToUse).forEach(group => {
                 const row = createElement("div", "gem-modal-row", null);
 
                 const rowLabel = createElement("div", "gem-modal-row-label", null);
@@ -648,8 +655,8 @@ const initialiseEquipment = () => {
 
                     let gemStatOne, gemStatTwo;
 
-                    for (const gemGroupKey in groupedGems) {
-                        const gemGroup = groupedGems[gemGroupKey];
+                    for (const gemGroupKey in gemsToUse) {
+                        const gemGroup = gemsToUse[gemGroupKey];
                         for (const gemName of gemGroup.gems) {
                             const [currentGemName, , ...stats] = gemName;
                             if (currentGemName === gem) {
@@ -711,10 +718,10 @@ const initialiseEquipment = () => {
             // embellishments
             const currentItemEmbellishmentSelect = createElement("div", "current-equipped-item-field-right-double", "current-equipped-item-embellishments");
             const defaultEmbellishmentOption = createElement("div", "current-equipped-item-default-embellishment-option", null);
-            if (itemSlotData["effects"].length > 0 && (craftedItems[itemSlotData.name] || embellishmentItems[itemSlotData.name])) {
+            if (itemSlotData["effects"].length > 0 && (craftedItemsToUse[itemSlotData.name] || embellishmentItemsToUse[itemSlotData.name])) {
                 defaultEmbellishmentOption.textContent = `Embellishment: ${itemSlotData["effects"][0].name}`;
                 defaultEmbellishmentOption.style.color = "var(--mana)";
-            } else if (craftedItems[itemSlotData.name] || embellishmentItems[itemSlotData.name]) {
+            } else if (craftedItemsToUse[itemSlotData.name] || embellishmentItemsToUse[itemSlotData.name]) {
                 defaultEmbellishmentOption.textContent = `No embellishment`;
                 defaultEmbellishmentOption.style.color = "var(--light-font-colour)";
             } else {
@@ -726,13 +733,13 @@ const initialiseEquipment = () => {
             const embellishmentOptions = createElement("div", "current-equipped-item-embellishment-options", null);
             currentItemEmbellishmentSelect.appendChild(embellishmentOptions);
             currentItemEmbellishmentSelect.addEventListener("click", () => {
-                if (craftedItems[itemSlotData.name] || embellishmentItems[itemSlotData.name]) {
+                if (craftedItemsToUse[itemSlotData.name] || embellishmentItemsToUse[itemSlotData.name]) {
                     embellishmentOptions.style.display = embellishmentOptions.style.display === "flex" ? "none" : "flex";
                 };
             });
 
-            if (craftedItems[itemSlotData.name]) {
-                for (const embellishment in itemSlotBonuses[selectedItemSlot]["embellishments"]) {
+            if (craftedItemsToUse[itemSlotData.name]) {
+                for (const embellishment in itemSlotBonusesToUse[selectedItemSlot]["embellishments"]) {
                     const embellishmentOption = createElement("div", "current-equipped-item-embellishment-option", null);
                     embellishmentOption.textContent = embellishment;
                     embellishmentOptions.appendChild(embellishmentOption);
@@ -746,7 +753,7 @@ const initialiseEquipment = () => {
                         } else {
                             defaultEmbellishmentOption.textContent = `Embellishment: ${embellishmentOption.textContent}`;
                             defaultEmbellishmentOption.style.color = "var(--rarity-uncommon)";
-                            updatedEmbellishmentData = [{"name": embellishmentsData[embellishment].name, "description": embellishmentsData[embellishment].description, "id": embellishmentsData[embellishment].id, "type": embellishmentsData[embellishment].type, "effect_values": embellishmentsData[embellishment].effect_values}];
+                            updatedEmbellishmentData = [{"name": embellishmentsToUse[embellishment].name, "description": embellishmentsToUse[embellishment].description, "id": embellishmentsToUse[embellishment].id, "type": embellishmentsToUse[embellishment].type, "effect_values": embellishmentsToUse[embellishment].effect_values}];
                             
                         };
                         updatedEmbellishmentData = generateItemEffects(updatedEmbellishmentData, itemSlot.getAttribute("data-item-slot"), currentItemLevel.textContent);
@@ -1081,7 +1088,7 @@ const initialiseEquipment = () => {
                     field.style.color = itemStat.colour;
                     newItemLeftContainer.appendChild(field);
 
-                    if (["new-equipped-item-stat-1", "new-equipped-item-stat-2"].includes(itemStat.id) && item.name in craftedItems) {
+                    if (["new-equipped-item-stat-1", "new-equipped-item-stat-2"].includes(itemStat.id) && item.name in craftedItemsToUse) {
                         let stat = itemStat.text.split(" ")[1];
                         if (stat === "Crit") stat = "Critical Strike";
 
@@ -1160,7 +1167,7 @@ const initialiseEquipment = () => {
             const selectedItemSlot = document.getElementById("equipped-items-edit-choose-slot-dropdown").value;
 
             const createNewItemBonusesDisplay = () => {
-                const availableEnchants = itemSlotBonuses[selectedItemSlot]["enchants"];
+                const availableEnchants = itemSlotBonusesToUse[selectedItemSlot]["enchants"];
         
                 const newItemEnchantSelect = createElement("div", "new-equipped-item-field-right", "new-equipped-item-enchants");
                 const defaultEnchantOption = createElement("div", "new-equipped-item-default-enchant-option", null);
@@ -1237,7 +1244,7 @@ const initialiseEquipment = () => {
                 addGemModal.appendChild(secondaryStatRow);
 
                 let newGemData = [];
-                Object.values(groupedGems).forEach(group => {
+                Object.values(gemsToUse).forEach(group => {
                     const row = createElement("div", "gem-modal-row", null);
 
                     const rowLabel = createElement("div", "gem-modal-row-label", null);
@@ -1341,10 +1348,10 @@ const initialiseEquipment = () => {
                 // embellishments
                 const newItemEmbellishmentSelect = createElement("div", "new-equipped-item-field-right-double", "new-equipped-item-embellishments");
                 const defaultEmbellishmentOption = createElement("div", "new-equipped-item-default-embellishment-option", null);
-                if (item["effects"].length > 0 && (craftedItems[item.name] || embellishmentItems[item.name])) {
+                if (item["effects"].length > 0 && (craftedItemsToUse[item.name] || embellishmentItemsToUse[item.name])) {
                     defaultEmbellishmentOption.textContent = `Embellishment: ${item["effects"][0].name}`;
                     defaultEmbellishmentOption.style.color = "var(--mana)";
-                } else if (craftedItems[item.name] || embellishmentItems[item.name]) {
+                } else if (craftedItemsToUse[item.name] || embellishmentItemsToUse[item.name]) {
                     defaultEmbellishmentOption.textContent = `No embellishment`;
                     defaultEmbellishmentOption.style.color = "var(--light-font-colour)";
                 } else {
@@ -1356,13 +1363,13 @@ const initialiseEquipment = () => {
                 const embellishmentOptions = createElement("div", "new-equipped-item-embellishment-options", null);
                 newItemEmbellishmentSelect.appendChild(embellishmentOptions);
                 newItemEmbellishmentSelect.addEventListener("click", () => {
-                    if (craftedItems[item.name]) {
+                    if (craftedItemsToUse[item.name]) {
                         embellishmentOptions.style.display = embellishmentOptions.style.display === "flex" ? "none" : "flex";
                     };
                 });
 
-                if (craftedItems[item.name]) {
-                    for (const embellishment in itemSlotBonuses[selectedItemSlot]["embellishments"]) {
+                if (craftedItemsToUse[item.name]) {
+                    for (const embellishment in itemSlotBonusesToUse[selectedItemSlot]["embellishments"]) {
                         const embellishmentOption = createElement("div", "new-equipped-item-embellishment-option", null);
                         embellishmentOption.textContent = embellishment;
                         embellishmentOptions.appendChild(embellishmentOption);
@@ -1376,7 +1383,7 @@ const initialiseEquipment = () => {
                             } else {
                                 defaultEmbellishmentOption.textContent = `Embellishment: ${embellishmentOption.textContent}`;
                                 defaultEmbellishmentOption.style.color = "var(--mana)";
-                                updatedEmbellishmentData = [{"name": embellishmentsData[embellishment].name, "description": embellishmentsData[embellishment].description, "id": embellishmentsData[embellishment].id, "type": embellishmentsData[embellishment].type, "effect_values": embellishmentsData[embellishment].effect_values}];
+                                updatedEmbellishmentData = [{"name": embellishmentsToUse[embellishment].name, "description": embellishmentsToUse[embellishment].description, "id": embellishmentsToUse[embellishment].id, "type": embellishmentsToUse[embellishment].type, "effect_values": embellishmentsToUse[embellishment].effect_values}];
                             };
                             updatedEmbellishmentData = generateItemEffects(updatedEmbellishmentData, document.getElementById("equipped-items-edit-choose-slot-dropdown").value, newItemLevel.textContent);
                             item["effects"] = updatedEmbellishmentData;

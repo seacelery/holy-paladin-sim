@@ -2862,6 +2862,17 @@ body {
     top: calc(100%);
 }
 
+.current-equipped-item-enchant-options::-webkit-scrollbar, .new-equipped-item-enchant-options::-webkit-scrollbar {
+    width: 5px;
+}
+
+.current-equipped-item-enchant-options::-webkit-scrollbar-thumb, .new-equipped-item-enchant-options::-webkit-scrollbar-thumb {
+    border: 0px solid var(--panel-colour-6);
+    border-radius: 2px;
+
+    background: var(--border-colour-3);
+}
+
 .current-equipped-item-embellishment-options::-webkit-scrollbar, .new-equipped-item-embellishment-options::-webkit-scrollbar {
     width: 4px;
 }
@@ -2874,7 +2885,7 @@ body {
 }
 
 .current-equipped-item-enchant-options, .new-equipped-item-enchant-options {
-    margin-top: -1px;
+    margin-top: 0px;
 }
 
 .current-equipped-item-embellishment-options, .new-equipped-item-embellishment-options {

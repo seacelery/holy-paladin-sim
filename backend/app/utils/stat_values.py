@@ -1,4 +1,4 @@
-stat_conversions = {
+live_stat_conversions = {
     "haste": 170,
     "crit": 180,
     "mastery": 120,
@@ -6,15 +6,38 @@ stat_conversions = {
     "leech": 150
 }
 
-diminishing_returns_values = {
+live_diminishing_returns_values = {
     "haste": [5100, 6800, 8500, 10200, 11900, 13600, 15300, 17000, 18700, 20400],
     "crit": [5400, 7200, 9000, 10800, 12600, 14400, 16200, 18000, 19800, 21600],
     "mastery": [5400, 7200, 9000, 10800, 12600, 14400, 16200, 18000, 19800, 21600],
     "versatility": [6150, 8200, 10250, 12300, 14350, 16400, 18450, 20500, 22550, 24600],
-    "leech": [(stat_conversions["leech"] / 100) * i for i in range(1, 3000)]
+    "leech": [(live_stat_conversions["leech"] / 100) * i for i in range(1, 3000)]
+}
+
+ptr_stat_conversions = {
+    "haste": 660,
+    "crit": 700,
+    "mastery": 466.67,
+    "versatility": 780,
+    "leech": 150
+}
+
+ptr_diminishing_returns_values = {
+    "haste": [19800, 26400, 33000, 39600, 46200, 52800, 59400, 66000, 72600, 79200],
+    "crit": [21000, 28000, 35000, 42000, 49000, 56000, 63000, 70000, 77000, 84000],
+    "mastery": [21000, 28000, 35000, 42000, 49000, 56000, 63000, 70000, 77000, 84000],
+    "versatility": [23400, 31200, 39000, 46800, 54600, 62400, 70200, 78000, 85800, 93600],
+    "leech": [(ptr_stat_conversions["leech"] / 100) * i for i in range(1, 3000)]
 }
 
 def calculate_stat_percent_with_dr(caster, stat, rating, flat_percent):
+    if caster.ptr:
+        stat_conversions = ptr_stat_conversions
+        diminishing_returns_values = ptr_diminishing_returns_values
+    else:
+        stat_conversions = live_stat_conversions
+        diminishing_returns_values = live_diminishing_returns_values
+    
     dr_values = diminishing_returns_values[stat]
     remainder = 0
     current_range_index = 0
@@ -64,6 +87,13 @@ def calculate_stat_percent_with_dr(caster, stat, rating, flat_percent):
     return rating_to_percent
 
 def calculate_leech_percent_with_dr(caster, stat, rating, flat_percent):
+    if caster.ptr:
+        stat_conversions = ptr_stat_conversions
+        diminishing_returns_values = ptr_diminishing_returns_values
+    else:
+        stat_conversions = live_stat_conversions
+        diminishing_returns_values = live_diminishing_returns_values
+    
     dr_values = diminishing_returns_values["leech"]
     remainder = 0
     current_range_index = 0
