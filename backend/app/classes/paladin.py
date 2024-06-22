@@ -4,13 +4,12 @@ import heapq
 import os
 import json
 import random
-import sys
 from dotenv import load_dotenv
 
-from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
+from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
 from ..utils.buff_class_map import buff_class_map
 from ..utils.beacon_transfer_rates import beacon_transfer
-from ..utils.stat_values import diminishing_returns_values, stat_conversions, calculate_stat_percent_with_dr, calculate_leech_percent_with_dr, update_stat_with_multiplicative_percentage
+from ..utils.stat_values import calculate_stat_percent_with_dr, calculate_leech_percent_with_dr, update_stat_with_multiplicative_percentage
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell, LayOnHands, HolyPrism, LightOfTheMartyr, EternalFlame
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion, AuraMastery
@@ -18,7 +17,6 @@ from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
 from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell, HolyBulwarkSacredWeapon
 from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, BroodkeepersPromiseHoT, IncarnatesMarkOfFire, MorningStar, RiteOfAdjurationBuff, RiteOfSanctification
 from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus, MiniatureSingingStone
-from ..utils.talents.talent_dictionaries import test_active_class_talents, test_active_spec_talents
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents, base_active_class_talents_ptr, base_active_spec_talents_ptr, base_active_lightsmith_talents, base_herald_of_the_sun_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
 from .api_client import APIClient
