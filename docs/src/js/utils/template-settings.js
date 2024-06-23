@@ -327,7 +327,7 @@ const templateSpecTalents = {
     "row10": {
         "Awakening": {
             "ranks": {
-                "current rank": 0,
+                "current rank": 1,
                 "max rank": 1
             }
         },
@@ -351,7 +351,7 @@ const templateSpecTalents = {
         },
         "Inflorescence of the Sunwell": {
             "ranks": {
-                "current rank": 1,
+                "current rank": 0,
                 "max rank": 1
             }
         },
@@ -467,7 +467,7 @@ const templateSpecTalents = {
         },
         "Light of the Martyr": {
             "ranks": {
-                "current rank": 0,
+                "current rank": 1,
                 "max rank": 1
             }
         },
@@ -499,7 +499,7 @@ const templateSpecTalents = {
         },
         "Holy Prism": {
             "ranks": {
-                "current rank": 0,
+                "current rank": 1,
                 "max rank": 1
             }
         },
@@ -543,13 +543,13 @@ const templateSpecTalents = {
     "row7": {
         "Bestow Light": {
             "ranks": {
-                "current rank": 0,
+                "current rank": 1,
                 "max rank": 1
             }
         },
         "Breaking Dawn": {
             "ranks": {
-                "current rank": 1,
+                "current rank": 0,
                 "max rank": 2
             }
         },
@@ -579,7 +579,7 @@ const templateSpecTalents = {
         },
         "Tower of Radiance": {
             "ranks": {
-                "current rank": 1,
+                "current rank": 0,
                 "max rank": 1
             }
         }
@@ -660,7 +660,116 @@ const templateSpecTalents = {
             }
         }
     }
-}
+};
+
+const templateUpdateClassTalents = {
+    "Blessing of Freedom": 1,
+    "Hammer of Wrath": 1,
+    "Lay on Hands": 1,
+    "Divine Resonance": 1,
+    "Fading Light": 0,
+    "Quickened Invocation": 0,
+    "Seal of Order": 1,
+    "Vanguard's Momentum": 0,
+    "Auras of Swift Vengeance": 1,
+    "Auras of the Resolute": 1,
+    "Improved Cleanse": 0,
+    "Obduracy": 1,
+    "Turn Evil": 0,
+    "Divine Steed": 1,
+    "Fist of Justice": 0,
+    "Greater Judgment": 1,
+    "Blinding Light": 0,
+    "Cavalier": 1,
+    "Rebuke": 1,
+    "Repentance": 0,
+    "Seasoned Warhorse": 1,
+    "Avenging Wrath": 1,
+    "Holy Aegis": 2,
+    "Justification": 0,
+    "Punishment": 0,
+    "Blessing of Protection": 1,
+    "Blessing of Sacrifice": 1,
+    "Echoing Blessings": 1,
+    "Golden Path": 0,
+    "Lightforged Blessing": 0,
+    "Sanctified Plates": 2,
+    "Afterimage": 1,
+    "Crusader's Reprieve": 1,
+    "Improved Blessing of Protection": 0,
+    "Recompense": 0,
+    "Sacrifice of the Just": 1,
+    "Seal of Mercy": 0,
+    "Unbreakable Spirit": 1,
+    "Divine Purpose": 1,
+    "Faith's Armor": 0,
+    "Incandescence": 0,
+    "Judgment of Light": 1,
+    "Seal of Alacrity": 2,
+    "Seal of Might": 2,
+    "Strength of Conviction": 0,
+    "Touch of Light": 1,
+    "Divine Toll": 1,
+    "Of Dusk and Dawn": 1,
+    "Seal of the Crusader": 0
+};
+
+const templateUpdateSpecTalents = {
+    "Holy Shock": 1,
+    "Awakening": 1,
+    "Boundless Salvation": 1,
+    "Empyrean Legacy": 0,
+    "Glorious Dawn": 1,
+    "Inflorescence of the Sunwell": 0,
+    "Rising Sunlight": 1,
+    "Sanctified Wrath": 0,
+    "Glimmer of Light": 1,
+    "Light of Dawn": 1,
+    "Aura Mastery": 1,
+    "Beacon of the Lightbringer": 1,
+    "Light's Conviction": 1,
+    "Awestruck": 1,
+    "Holy Infusion": 0,
+    "Moment of Compassion": 0,
+    "Resplendent Light": 1,
+    "Tirion's Devotion": 0,
+    "Unending Light": 1,
+    "Divine Favor": 1,
+    "Glistening Radiance": 1,
+    "Hand of Divinity": 0,
+    "Imbued Infusions": 1,
+    "Light of the Martyr": 1,
+    "Protection of Tyr": 0,
+    "Unwavering Spirit": 0,
+    "Barrier of Faith": 0,
+    "Blessed Focus": 0,
+    "Holy Prism": 1,
+    "Illumination": 1,
+    "Light's Protection": 1,
+    "Overflowing Light": 0,
+    "Power of the Silver Hand": 0,
+    "Saved by the Light": 0,
+    "Shining Righteousness": 0,
+    "Bestow Light": 1,
+    "Breaking Dawn": 0,
+    "Commanding Light": 1,
+    "Divine Glimpse": 1,
+    "Divine Revelations": 1,
+    "Righteous Judgment": 0,
+    "Tower of Radiance": 0,
+    "Avenging Crusader": 0,
+    "Avenging Wrath: Might": 1,
+    "Beacon of Faith": 0,
+    "Beacon of Virtue": 1,
+    "Tyr's Deliverance": 1,
+    "Veneration": 0,
+    "Blessing of Summer": 1,
+    "Crusader's Might": 0,
+    "Daybreak": 1,
+    "Merciful Auras": 0,
+    "Reclamation": 1,
+    "Relentless Inquisitor": 0
+};
 
 const templateEquipment = {
     "back": {
@@ -1192,4 +1301,4 @@ const availableEquipment = {
     }
 };
 
-export { templateClassTalents, templateSpecTalents, templateEquipment };
+export { templateClassTalents, templateSpecTalents, templateUpdateClassTalents, templateUpdateSpecTalents, templateEquipment };
