@@ -354,7 +354,7 @@ class Spell:
     def apply_holy_reverberation(self, caster, target, current_time):
         from .auras_buffs import HolyReverberation
         
-        if caster.set_bonuses["season_3"] < 2:
+        if caster.set_bonuses["dragonflight_season_3"] < 2:
             return
         
         new_buff = HolyReverberation(caster)

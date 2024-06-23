@@ -12,7 +12,7 @@ def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_ta
     if len(glimmer_targets) > max_glimmer_targets:             
         oldest_active_glimmer = min(glimmer_targets, key=lambda glimmer_target: glimmer_target.target_active_buffs["Glimmer of Light"][0].duration)
         
-        if caster.set_bonuses["season_3"] >= 2:
+        if caster.set_bonuses["dragonflight_season_3"] >= 2:
             oldest_active_glimmer.apply_buff_to_target(HolyReverberation(caster), current_time, caster=caster)
             
             longest_reverberation_duration = max(buff_instance.duration for buff_instance in oldest_active_glimmer.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in oldest_active_glimmer.target_active_buffs and oldest_active_glimmer.target_active_buffs["Holy Reverberation"] else None
@@ -304,7 +304,7 @@ class Daybreak(Spell):
     
     def __init__(self, caster):
         super().__init__("Daybreak", cooldown=Daybreak.BASE_COOLDOWN) 
-        if caster.set_bonuses["season_3"] >= 4: 
+        if caster.set_bonuses["dragonflight_season_3"] >= 4: 
             self.BASE_COOLDOWN = 45
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
@@ -327,7 +327,7 @@ class Daybreak(Spell):
                 caster.apply_buff_to_self(RisingSunlight(), current_time, stacks_to_apply=3, max_stacks=3)
             
             # tier season 3 4pc  
-            if caster.set_bonuses["season_3"] >= 4:
+            if caster.set_bonuses["dragonflight_season_3"] >= 4:
                 caster.apply_buff_to_self(FirstLight(), current_time)
             
             # adjust for daybreak 200% glimmer healing
@@ -373,7 +373,7 @@ class Daybreak(Spell):
                 update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", target.name)
                 glimmer_targets.remove(target)
                 
-                if caster.set_bonuses["season_3"] >= 2:
+                if caster.set_bonuses["dragonflight_season_3"] >= 2:
                     target.apply_buff_to_target(HolyReverberation(caster), current_time, caster=caster)
                     
                     longest_reverberation_duration = max(buff_instance.duration for buff_instance in target.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in target.target_active_buffs and target.target_active_buffs["Holy Reverberation"] else None
@@ -2215,7 +2215,7 @@ class LightOfDawn(Spell):
                     
             # maraad's dying breath
             if caster.is_talent_active("Maraad's Dying Breath"):
-                if"Maraad's Dying Breath" in caster.active_auras:
+                if "Maraad's Dying Breath" in caster.active_auras:
                     maraads_dying_breath = caster.active_auras["Maraad's Dying Breath"]
                     
                     if maraads_dying_breath.current_stacks < maraads_dying_breath.max_stacks:

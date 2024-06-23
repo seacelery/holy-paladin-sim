@@ -138,7 +138,7 @@ class Paladin:
         self.embellishments = {}
         self.update_embellishments()
         
-        self.set_bonuses = {"season_1": 0, "season_2": 0, "season_3": 0, "dragonflight_season_2": 0}
+        self.set_bonuses = {"tww_season_1": 0, "tww_season_2": 0, "tww_season_3": 0, "dragonflight_season_1": 0, "dragonflight_season_2": 0, "dragonflight_season_3": 0}
         
         # initialise abilities
         self.abilities = {}      
@@ -962,22 +962,22 @@ class Paladin:
         gems_from_equipment = []
         bonus_effect_enchants = []
         
-        self.set_bonuses = {"season_1": 0, "season_2": 0, "season_3": 0, "dragonflight_season_2": 0}
+        self.set_bonuses = {"tww_season_1": 0, "tww_season_2": 0, "tww_season_3": 0, "dragonflight_season_1": 0, "dragonflight_season_2": 0, "dragonflight_season_3": 0}
         
         for item_slot, item_data in equipment.items():
             name = item_data.get("name", "")
             if self.ptr:
                 if "Entombed Seraph" in name:
-                    self.set_bonuses["season_1"] += 1
+                    self.set_bonuses["tww_season_1"] += 1
                 if "Heartfire Sentinel" in name:
                     self.set_bonuses["dragonflight_season_2"] += 1
             else:
                 if "Virtuous Silver" in name:
-                    self.set_bonuses["season_1"] += 1
+                    self.set_bonuses["dragonflight_season_1"] += 1
                 if "Heartfire Sentinel" in name:
-                    self.set_bonuses["season_2"] += 1
+                    self.set_bonuses["dragonflight_season_2"] += 1
                 if "Zealous Pyreknight" in name:
-                    self.set_bonuses["season_3"] += 1
+                    self.set_bonuses["dragonflight_season_3"] += 1
             
             stats = item_data.get("stats", {})
             if stats:
