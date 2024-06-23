@@ -2859,7 +2859,7 @@ body {
 }
 
 .current-equipped-item-enchant-options, .new-equipped-item-enchant-options {
-    top: calc(100%);
+    top: calc(100% - 1px);
 }
 
 .current-equipped-item-enchant-options::-webkit-scrollbar, .new-equipped-item-enchant-options::-webkit-scrollbar {

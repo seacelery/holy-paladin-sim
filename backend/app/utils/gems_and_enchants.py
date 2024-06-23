@@ -21,20 +21,33 @@ def convert_enchants_to_stats(enchants_list):
     return formatted_enchants
 
 def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, stat_values_from_equipment):
-    mana_encount_count = 0
+    mana_enchant_count = 0
     
     for enchant in formatted_enchants:
         if enchant == "Waking Stats":
             stat_values_from_equipment["intellect"] += 150
         elif enchant == "Reserve of Intellect":
             stat_values_from_equipment["intellect"] += 111
-            mana_encount_count += 1
+            mana_enchant_count += 1
+        elif enchant == "Crystalline Radiance":
+            stat_values_from_equipment["intellect"] += 150
+        elif enchant == "Council's Intellect":
+            stat_values_from_equipment["intellect"] += 111
+            mana_enchant_count += 1
         elif enchant == "+177 Intellect & +5% Mana":
             stat_values_from_equipment["intellect"] += 177
-            mana_encount_count += 1
+            mana_enchant_count += 1
         elif enchant == "+177 Intellect & 131 Stamina":
             stat_values_from_equipment["intellect"] += 177
             stat_values_from_equipment["stamina"] += 131
+        elif enchant == "Daybreak Spellthread":
+            stat_values_from_equipment["intellect"] += 340
+            mana_enchant_count += 1
+        elif enchant == "Sunset Spellthread":
+            stat_values_from_equipment["intellect"] += 340
+            stat_values_from_equipment["stamina"] += 92
+        elif enchant == "Weavercloth Spellthread":
+            stat_values_from_equipment["intellect"] += 249
         elif enchant == "+82 Versatility":
             stat_values_from_equipment["versatility"] += 82
         elif enchant == "+82 Haste":
@@ -45,12 +58,39 @@ def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, sta
             stat_values_from_equipment["crit"] += 82
         elif enchant == "Regenerative Leech":
             stat_values_from_equipment["leech"] += 125
+        elif enchant == "Chant of Leeching Fangs":
+            stat_values_from_equipment["leech"] += 125
         elif enchant == "+200 Leech":
+            stat_values_from_equipment["leech"] += 200
+        elif enchant == "Chant of Armored Leech":
             stat_values_from_equipment["leech"] += 200
         elif enchant == "Watcher's Loam":
             stat_values_from_equipment["stamina"] += 131
+        elif enchant == "Defender's March":
+            stat_values_from_equipment["stamina"] += 131
         elif enchant == "Shadowed Belt Clasp":
             stat_values_from_equipment["stamina"] += 106
+        elif enchant == "Radiant Haste":
+            stat_values_from_equipment["haste"] += 35
+        elif enchant == "Radiant Critical Strike":
+            stat_values_from_equipment["crit"] += 35
+        elif enchant == "Radiant Versatility":
+            stat_values_from_equipment["versatility"] += 35
+        elif enchant == "Radiant Mastery":
+            stat_values_from_equipment["mastery"] += 35
+        elif enchant == "Cursed Haste":
+            stat_values_from_equipment["haste"] += 390
+            stat_values_from_equipment["versatility"] -= 115
+        elif enchant == "Cursed Critical Strike":
+            stat_values_from_equipment["crit"] += 390
+            stat_values_from_equipment["haste"] -= 115
+        elif enchant == "Cursed Versatility":
+            stat_values_from_equipment["versatility"] += 390
+            stat_values_from_equipment["mastery"] -= 115
+        elif enchant == "Cursed Mastery":
+            stat_values_from_equipment["mastery"] += 390
+            stat_values_from_equipment["crit"] -= 115
+        
             
         elif enchant == "Sophic Devotion":
             bonus_effect_enchants.append("Sophic Devotion")
@@ -62,10 +102,20 @@ def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, sta
             bonus_effect_enchants.append("Frozen Devotion")
         elif enchant == "Incandescent Essence":
             bonus_effect_enchants.append("Incandescent Essence")
+        elif enchant == "Authority of Fiery Resolve":
+            bonus_effect_enchants.append("Authority of Fiery Resolve")
+        elif enchant == "Oathsworn Tenacity":
+            bonus_effect_enchants.append("Oathsworn Tenacity")
+        elif enchant == "Stonebound Artistry":
+            bonus_effect_enchants.append("Stonebound Artistry")
+        elif enchant == "Stormrider's Fury":
+            bonus_effect_enchants.append("Stormrider's Fury")
+        elif enchant == "Council's Guile":
+            bonus_effect_enchants.append("Council's Guile")
            
-    if mana_encount_count > 0: 
-        player.max_mana = player.base_mana + player.base_mana * mana_encount_count * 0.05
-        player.mana = player.base_mana + player.base_mana * mana_encount_count * 0.05
+    if mana_enchant_count > 0: 
+        player.max_mana = player.base_mana + player.base_mana * mana_enchant_count * 0.05
+        player.mana = player.base_mana + player.base_mana * mana_enchant_count * 0.05
             
     return stat_values_from_equipment, bonus_effect_enchants
 

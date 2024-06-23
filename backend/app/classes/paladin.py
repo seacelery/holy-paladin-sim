@@ -138,7 +138,7 @@ class Paladin:
         self.embellishments = {}
         self.update_embellishments()
         
-        self.set_bonuses = {"season_1": 0, "season_2": 0, "season_3": 0}
+        self.set_bonuses = {"season_1": 0, "season_2": 0, "season_3": 0, "dragonflight_season_2": 0}
         
         # initialise abilities
         self.abilities = {}      

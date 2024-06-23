@@ -21,7 +21,7 @@ class LightsHammerSummon(Summon):
         super().__init__("Light's Hammer", 14)
         self.last_tick_time = 0
         
-        if caster.set_bonuses["season_2"] >= 4:
+        if caster.set_bonuses["dragonflight_season_2"] >= 4:
             self.base_tick_interval = 1
             self.last_holy_power_time = 0
         else:
@@ -39,7 +39,7 @@ class LightsHammerSummon(Summon):
             self.trigger_lights_hammer_tick(caster, current_time)
             self.last_tick_time = 0
             
-        if caster.set_bonuses["season_2"] >= 4:
+        if caster.set_bonuses["dragonflight_season_2"] >= 4:
             self.last_holy_power_time += tick_rate
             if self.last_holy_power_time >= 4:
                 lights_hammer = caster.abilities["Light's Hammer"]

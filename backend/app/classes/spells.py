@@ -282,7 +282,7 @@ class Spell:
             caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing = 0
         
         # season 2 tier 2pc   
-        if self.name in ["Holy Shock", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)"] and caster.set_bonuses["season_2"] >= 2 and is_crit:
+        if self.name in ["Holy Shock", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)"] and caster.set_bonuses["dragonflight_season_2"] >= 2 and is_crit:
             heal_amount *= 1.8
         
         if "Close to Heart" in caster.active_auras:

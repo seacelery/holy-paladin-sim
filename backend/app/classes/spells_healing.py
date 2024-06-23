@@ -158,7 +158,7 @@ class HolyShock(Spell):
             
             # if crits, apply Infusion of Light 
             if spell_crit:
-                if caster.set_bonuses["season_2"] >= 2:
+                if caster.set_bonuses["dragonflight_season_2"] >= 2:
                     if caster.is_talent_active("Holy Prism"):
                         handle_flat_cdr(caster.abilities["Holy Prism"], 1)
                     elif caster.is_talent_active("Light's Hammer"):
@@ -499,7 +499,7 @@ class RisingSunlightHolyShock(Spell):
             
             # if crits, apply Infusion of Light 
             if spell_crit:
-                if caster.set_bonuses["season_2"] >= 2:
+                if caster.set_bonuses["dragonflight_season_2"] >= 2:
                     if caster.is_talent_active("Holy Prism"):
                         handle_flat_cdr(caster.abilities["Holy Prism"], 1)
                     elif caster.is_talent_active("Light's Hammer"):
@@ -775,7 +775,7 @@ class DivineTollHolyShock(Spell):
             
             # if crits, apply Infusion of Light 
             if spell_crit:
-                if caster.set_bonuses["season_2"] >= 2:
+                if caster.set_bonuses["dragonflight_season_2"] >= 2:
                     if caster.is_talent_active("Holy Prism"):
                         handle_flat_cdr(caster.abilities["Holy Prism"], 1)
                     elif caster.is_talent_active("Light's Hammer"):
@@ -1013,7 +1013,7 @@ class DivineResonanceHolyShock(Spell):
             
             # if crits, apply Infusion of Light 
             if spell_crit:
-                if caster.set_bonuses["season_2"] >= 2:
+                if caster.set_bonuses["dragonflight_season_2"] >= 2:
                     if caster.is_talent_active("Holy Prism"):
                         handle_flat_cdr(caster.abilities["Holy Prism"], 1)
                     elif caster.is_talent_active("Light's Hammer"):
@@ -2314,7 +2314,7 @@ class HolyPrism(Spell):
         if caster.ptr:
             self.cooldown = 30
         
-        if caster.set_bonuses["season_2"] >= 4:
+        if caster.set_bonuses["dragonflight_season_2"] >= 4:
             self.spell_healing_modifier *= 1.4
             self.holy_power_gain = 1
             

@@ -11,39 +11,39 @@ const calculateStatAllocations = (stats, itemSlot) => {
     let totalSecondariesAllocated = 0;
     let leechAllocated = 0;
 
-    if (futurePatchSelected) {
-        intellectAllocated = 5259;
-        staminaAllocated = 7889;
-        totalSecondariesAllocated = 6640;
-        leechAllocated = 3000;
+    // if (futurePatchSelected) {
+    //     intellectAllocated = 5259;
+    //     staminaAllocated = 7889;
+    //     totalSecondariesAllocated = 6640;
+    //     leechAllocated = 3000;
 
-        switch(true) {
-            case ["trinket_1", "trinket_2"].includes(itemSlot):
-                intellectAllocated = 6666;
-                totalSecondariesAllocated = 6920;
-                break;
-            case ["finger_1", "finger_2", "neck"].includes(itemSlot):
-                intellectAllocated = 0;
-                totalSecondariesAllocated = 22600;
-                break;
-            case ["main_hand"].includes(itemSlot):
-                intellectAllocated = 30629;
-                totalSecondariesAllocated = 6400;
-                break;
-            case ["off_hand"].includes(itemSlot):
-                intellectAllocated = 16132;
-                totalSecondariesAllocated = 7250;
-                break;
-            case ["waist", "wrist", "feet"].includes(itemSlot):
-                totalSecondariesAllocated = 6400;
-                break;
-            case ["back"].includes(itemSlot):
-                totalSecondariesAllocated = 7250;
-                break;
-            default:
-                break;
-        };
-    } else {
+    //     switch(true) {
+    //         case ["trinket_1", "trinket_2"].includes(itemSlot):
+    //             intellectAllocated = 6666;
+    //             totalSecondariesAllocated = 6920;
+    //             break;
+    //         case ["finger_1", "finger_2", "neck"].includes(itemSlot):
+    //             intellectAllocated = 0;
+    //             totalSecondariesAllocated = 22600;
+    //             break;
+    //         case ["main_hand"].includes(itemSlot):
+    //             intellectAllocated = 30629;
+    //             totalSecondariesAllocated = 6400;
+    //             break;
+    //         case ["off_hand"].includes(itemSlot):
+    //             intellectAllocated = 16132;
+    //             totalSecondariesAllocated = 7250;
+    //             break;
+    //         case ["waist", "wrist", "feet"].includes(itemSlot):
+    //             totalSecondariesAllocated = 6400;
+    //             break;
+    //         case ["back"].includes(itemSlot):
+    //             totalSecondariesAllocated = 7250;
+    //             break;
+    //         default:
+    //             break;
+    //     };
+    // } else {
         intellectAllocated = 5259;
         staminaAllocated = 7889;
         totalSecondariesAllocated = 7000;
@@ -67,7 +67,7 @@ const calculateStatAllocations = (stats, itemSlot) => {
             default:
                 break;
         };
-    };
+    // };
 
     const statAllocations = {};
 
