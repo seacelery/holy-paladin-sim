@@ -90,7 +90,7 @@ class SacredWeapon(Spell):
 class AuthorityOfFieryResolve(Spell):
     
     SPELL_POWER_COEFFICIENT = 0
-    BASE_PPM = 3
+    BASE_PPM = 4
     TARGET_COUNT = 5
     
     def __init__(self, caster):
@@ -101,7 +101,7 @@ class AuthorityOfFieryResolve(Spell):
         
         for chosen_target in targets:
             authority_of_fiery_resolve_heal, authority_of_fiery_resolve_crit = AuthorityOfFieryResolve(caster).calculate_heal(caster)
-            authority_of_fiery_resolve_heal = 170473 * caster.versatility_multiplier
+            authority_of_fiery_resolve_heal = 77061 * caster.versatility_multiplier
             
             if authority_of_fiery_resolve_crit:
                 authority_of_fiery_resolve_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier

@@ -2,7 +2,7 @@ import random
 import copy
 
 from .spells import Spell
-from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath, DawnlightAvailable, Dawnlight, EternalFlameBuff, GleamingRays, SunSear, SolarGrace, SunsAvatar, BlessedAssurance, DivineGuidance, DivineFavorBuff
+from .auras_buffs import InfusionOfLight, GlimmerOfLightBuff, DivineResonance, RisingSunlight, FirstLight, HolyReverberation, AwakeningStacks, AwakeningTrigger, DivinePurpose, BlessingOfDawn, BlessingOfDusk, RelentlessInquisitor, UnendingLight, Veneration, UntemperedDedication, MaraadsDyingBreath, DawnlightAvailable, Dawnlight, EternalFlameBuff, GleamingRays, SunSear, SolarGrace, SunsAvatar, BlessedAssurance, DivineGuidance, DivineFavorBuff, PureLight
 from .spells_passives import GlimmerOfLightSpell
 from .summons import LightsHammerSummon
 from ..utils.misc_functions import format_time, append_spell_heal_event, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, increment_holy_power, update_spell_data_casts, update_spell_data_heals, update_spell_holy_power_gain, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
@@ -48,6 +48,11 @@ class HolyShock(Spell):
         if caster.ptr:
             self.BASE_COOLDOWN = 9.5
             self.cooldown = 9.5
+        
+        # tww season 1 tier 2pc  
+        if caster.set_bonuses["tww_season_1"] >= 2:
+            self.BASE_COOLDOWN /= 1.1
+            self.cooldown /= 1.1
             
         # light's conviction
         if caster.is_talent_active("Light's Conviction"):
@@ -56,6 +61,10 @@ class HolyShock(Spell):
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets, initial_cast=True):
         bonus_crit = 0
+        
+        # tww season 1 tier 2pc
+        if caster.set_bonuses["tww_season_1"] >= 2:
+            self.spell_healing_modifier *= 1.1
         
         # blessing of an'she
         if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
@@ -98,6 +107,10 @@ class HolyShock(Spell):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal, exclude_cast=not initial_cast)
         barrier_of_faith_absorb = 0
         if cast_success:
+            # tww season 1 tier 2pc
+            if caster.set_bonuses["tww_season_1"] >= 2:
+                self.spell_healing_modifier /= 1.1
+            
             # blessing of an'she
             if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
                 self.spell_healing_modifier /= 3
@@ -275,6 +288,19 @@ class HolyShock(Spell):
                 del caster.active_auras["Power of the Silver Hand Stored Healing"]     
                 update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
                 
+            # tww season 1 tier 4pc
+            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+                if "Pure Light" in caster.active_auras:
+                    pure_light = caster.active_auras["Pure Light"]
+                    
+                    if pure_light.current_stacks < pure_light.max_stacks:
+                        pure_light.current_stacks += 1
+                    
+                    pure_light.duration = pure_light.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Pure Light", current_time, "applied", pure_light.duration, pure_light.current_stacks)               
+                else:
+                    caster.apply_buff_to_self(PureLight(caster), current_time, stacks_to_apply=1, max_stacks=4)
+                
             # second sunrise
             if caster.ptr and caster.is_talent_active("Second Sunrise") and initial_cast:
                 second_sunrise_chance = 0.15
@@ -398,6 +424,10 @@ class RisingSunlightHolyShock(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
         
+        # tww season 1 tier 2pc
+        if caster.set_bonuses["tww_season_1"] >= 2:
+            self.spell_healing_modifier *= 1.1
+        
         # blessing of an'she
         if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
             self.spell_healing_modifier *= 3
@@ -439,6 +469,10 @@ class RisingSunlightHolyShock(Spell):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         barrier_of_faith_absorb = 0
         if cast_success:
+            # tww season 1 tier 2pc
+            if caster.set_bonuses["tww_season_1"] >= 2:
+                self.spell_healing_modifier /= 1.1
+            
             # blessing of an'she
             if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
                 self.spell_healing_modifier /= 3
@@ -596,6 +630,19 @@ class RisingSunlightHolyShock(Spell):
                 del caster.active_auras["Power of the Silver Hand Stored Healing"]     
                 update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
                 
+            # tww season 1 tier 4pc
+            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+                if "Pure Light" in caster.active_auras:
+                    pure_light = caster.active_auras["Pure Light"]
+                    
+                    if pure_light.current_stacks < pure_light.max_stacks:
+                        pure_light.current_stacks += 1
+                    
+                    pure_light.duration = pure_light.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Pure Light", current_time, "applied", pure_light.duration, pure_light.current_stacks)               
+                else:
+                    caster.apply_buff_to_self(PureLight(caster), current_time, stacks_to_apply=1, max_stacks=4)
+                
             # second sunrise
             if caster.ptr and caster.is_talent_active("Second Sunrise"):
                 second_sunrise_chance = 0.15
@@ -671,6 +718,10 @@ class DivineTollHolyShock(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
         
+        # tww season 1 tier 2pc
+        if caster.set_bonuses["tww_season_1"] >= 2:
+            self.spell_healing_modifier *= 1.1
+        
         # blessing of an'she
         if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
             self.spell_healing_modifier *= 3
@@ -713,6 +764,10 @@ class DivineTollHolyShock(Spell):
         total_glimmer_healing = 0
         barrier_of_faith_absorb = 0
         if cast_success:
+            # tww season 1 tier 2pc
+            if caster.set_bonuses["tww_season_1"] >= 2:
+                self.spell_healing_modifier /= 1.1
+            
             # blessing of an'she
             if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
                 self.spell_healing_modifier /= 3
@@ -873,6 +928,19 @@ class DivineTollHolyShock(Spell):
                 del caster.active_auras["Power of the Silver Hand Stored Healing"]     
                 update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
                 
+            # tww season 1 tier 4pc
+            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+                if "Pure Light" in caster.active_auras:
+                    pure_light = caster.active_auras["Pure Light"]
+                    
+                    if pure_light.current_stacks < pure_light.max_stacks:
+                        pure_light.current_stacks += 1
+                    
+                    pure_light.duration = pure_light.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Pure Light", current_time, "applied", pure_light.duration, pure_light.current_stacks)               
+                else:
+                    caster.apply_buff_to_self(PureLight(caster), current_time, stacks_to_apply=1, max_stacks=4)
+                
             # second sunrise
             if caster.ptr and caster.is_talent_active("Second Sunrise"):
                 second_sunrise_chance = 0.15
@@ -911,6 +979,10 @@ class DivineResonanceHolyShock(Spell):
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
+        
+        # tww season 1 tier 2pc
+        if caster.set_bonuses["tww_season_1"] >= 2:
+            self.spell_healing_modifier *= 1.1
         
         # blessing of an'she
         if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
@@ -953,6 +1025,10 @@ class DivineResonanceHolyShock(Spell):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         barrier_of_faith_absorb = 0
         if cast_success:
+            # tww season 1 tier 2pc
+            if caster.set_bonuses["tww_season_1"] >= 2:
+                self.spell_healing_modifier /= 1.1
+            
             # blessing of an'she
             if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
                 self.spell_healing_modifier /= 3
@@ -1069,6 +1145,19 @@ class DivineResonanceHolyShock(Spell):
             if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" not in caster.active_auras and "Power of the Silver Hand Stored Healing" in caster.active_auras:
                 del caster.active_auras["Power of the Silver Hand Stored Healing"]     
                 update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
+                
+            # tww season 1 tier 4pc
+            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+                if "Pure Light" in caster.active_auras:
+                    pure_light = caster.active_auras["Pure Light"]
+                    
+                    if pure_light.current_stacks < pure_light.max_stacks:
+                        pure_light.current_stacks += 1
+                    
+                    pure_light.duration = pure_light.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Pure Light", current_time, "applied", pure_light.duration, pure_light.current_stacks)               
+                else:
+                    caster.apply_buff_to_self(PureLight(caster), current_time, stacks_to_apply=1, max_stacks=4)
                 
             # second sunrise
             if caster.ptr and caster.is_talent_active("Second Sunrise"):
@@ -1508,12 +1597,24 @@ class WordOfGlory(Spell):
                 strength_of_conviction_modifier *= 1.2
         self.spell_healing_modifier *= strength_of_conviction_modifier
         
+        # tww season 1 tier 4pc
+        if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+            if "Pure Light" in caster.active_auras:
+                self.spell_healing_modifier *= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
+        
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         total_glimmer_healing = 0
         afterimage_heal = 0
         empyrean_legacy_light_of_dawn_healing = 0
         if cast_success:
             caster.holy_power -= self.holy_power_cost
+            
+            # tww season 1 tier 4pc
+            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+                if "Pure Light" in caster.active_auras:
+                    self.spell_healing_modifier /= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
+                    del caster.active_auras["Pure Light"]
+                    update_self_buff_data(caster.self_buff_breakdown, "Pure Light", current_time, "expired")
             
             # tirion's devotion
             if caster.is_talent_active("Tirion's Devotion"):
@@ -1793,6 +1894,11 @@ class EternalFlame(Spell):
                 strength_of_conviction_modifier *= 1.2
         self.spell_healing_modifier *= strength_of_conviction_modifier
         
+        # tww season 1 tier 4pc
+        if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+            if "Pure Light" in caster.active_auras:
+                self.spell_healing_modifier *= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
+        
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         total_glimmer_healing = 0
         afterimage_heal = 0
@@ -1802,6 +1908,13 @@ class EternalFlame(Spell):
             
             # eternal flame hot
             targets[0].apply_buff_to_target(EternalFlameBuff(caster, 20), current_time, caster=caster)
+            
+            # tww season 1 tier 4pc
+            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+                if "Pure Light" in caster.active_auras:
+                    self.spell_healing_modifier /= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
+                    del caster.active_auras["Pure Light"]
+                    update_self_buff_data(caster.self_buff_breakdown, "Pure Light", current_time, "expired")
             
             # tirion's devotion
             if caster.is_talent_active("Tirion's Devotion"):
@@ -2070,11 +2183,23 @@ class LightOfDawn(Spell):
                     self.spell_healing_modifier *= 1.3
                 elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
                     self.spell_healing_modifier *= 1.6
+                    
+        # tww season 1 tier 4pc
+        if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+            if "Pure Light" in caster.active_auras:
+                self.spell_healing_modifier *= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
         
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal, exclude_cast=not initial_cast)
         total_glimmer_healing = 0
         if cast_success:
             caster.holy_power -= self.holy_power_cost
+            
+            # tww season 1 tier 4pc
+            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+                if "Pure Light" in caster.active_auras:
+                    self.spell_healing_modifier /= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
+                    del caster.active_auras["Pure Light"]
+                    update_self_buff_data(caster.self_buff_breakdown, "Pure Light", current_time, "expired")
             
             # unending light
             if "Divine Purpose" in caster.active_auras:

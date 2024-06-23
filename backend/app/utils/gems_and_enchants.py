@@ -251,15 +251,6 @@ def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):
             player.total_elemental_gems += 1
             
         # ptr
-        if gem == "Cubic Blasphemite":
-            stat_values_from_equipment["intellect"] += 181
-        elif gem == "Elusive Blasphemite":
-            stat_values_from_equipment["intellect"] += 181
-        elif gem == "Insightful Blasphemite":
-            stat_values_from_equipment["intellect"] += 181
-        elif gem == "Culminating Blasphemite":
-            stat_values_from_equipment["intellect"] += 181
-            
         elif gem == "Deadly Emerald":
             stat_values_from_equipment["haste"] += 190
             stat_values_from_equipment["crit"] += 127
@@ -323,6 +314,21 @@ def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):
             stat_values_from_equipment["versatility"] += 190
             stat_values_from_equipment["haste"] += 127
             player.gem_counts["Sapphire"] += 1
+        
+        
+        elif gem == "Cubic Blasphemite":
+            stat_values_from_equipment["intellect"] += 181
+        elif gem == "Elusive Blasphemite":
+            stat_values_from_equipment["intellect"] += 181
+        elif gem == "Insightful Blasphemite":
+            stat_values_from_equipment["intellect"] += 181
+        elif gem == "Culminating Blasphemite":
+            stat_values_from_equipment["intellect"] += 181 
+            
+    if "Insightful Blasphemite" in gems_from_equipment:
+        unique_gem_colours = sum(1 for gem in ["Emerald", "Sapphire", "Onyx", "Ruby"] if player.gem_counts[gem] > 0)
+        player.max_mana = player.mana + player.base_mana * unique_gem_colours * 0.01
+        player.mana = player.max_mana
         
     # print(stat_values_from_equipment)
     # print(player.gem_counts)

@@ -3073,3 +3073,15 @@ class DivineGuidance(Buff):
         for target in chosen_targets:
             target.receive_heal(divine_guidance_heal, caster)
             update_spell_data_heals(caster.ability_breakdown, "Divine Guidance", target, divine_guidance_heal, divine_guidance_crit)
+            
+
+class PureLight(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Pure Light", 30, base_duration=30, current_stacks=1, max_stacks=4)   
+            
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass

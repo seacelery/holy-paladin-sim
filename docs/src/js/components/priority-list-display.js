@@ -699,6 +699,7 @@ beaconOfVirtuePreset.addEventListener("click", () => {
     Tyr's Deliverance
     Nymue's Unraveling Spindle | Timers = [12, 132, 268]
     Avenging Wrath | Timers = [15, 135, 271] | and | previous ability = Nymue's Unraveling Spindle
+    Holy Prism
     Light's Hammer
     Beacon of Virtue | Timers = [15, 77, 135, 196, 271] | or | Avenging Wrath active | or | Daybreak cooldown >= 15
     Daybreak | Beacon of Virtue active

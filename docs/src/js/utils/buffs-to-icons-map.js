@@ -49,6 +49,7 @@ const buffsToIconsMap = {
     "Overflowing Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holyguidance.jpg",
     "Power of the Silver Hand": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_blessedhands.jpg",
     "Power of the Silver Hand Stored Healing": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_blessedhands.jpg",
+    "Pure Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_sacredcleansing.jpg",
     "Relentless Inquisitor": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_mindvision.jpg",
     "Rising Sunlight": "https://render.worldofwarcraft.com/eu/icons/56/spell_priest_divinestar_holy.jpg",
     "Rite of Adjuration": "https://render.worldofwarcraft.com/eu/icons/56/inv_inscription_armorscroll02.jpg",
