@@ -1,3 +1,29 @@
+// season 1
+// Ara-Kara, City of Echoes - Harvester's Edict (not implemented)
+// City of Threads - Viscous Coaglam (coefficient, not implemented)
+// The Stonevault - Scrapsinger's Symphony (coefficients, not implemented), High Speaker's Accretion (not implemented)
+// The Dawnbreaker - Empowering Crystal of Anub'ikkaj (not implemented)
+// Mists of Tirna Scithe - Unbound Changeling (coefficient unsure, not implemented)
+// The Necrotic Wake - Siphoning Phylactery Shard (coefficient, not implemented)
+// Siege of Boralus
+// Grim Batol - Corrupted Egg Shell, Gale of Shadows (not currently in-game)
+
+// season 2
+// Cinderbrew Meadery
+// Darkflame Cleft - Burin of the Candle King, Carved Blazikon Wax, Remnant of Darkness
+// Priory of the Sacred Flame - Signet of the Priory
+// The Rookery - Entropic Skardyn Core, Sigil of Algari Concordance
+
+// raid
+// trinkets
+// Gruesome Syringe (healing coefficient, not implemented)
+// Creeping Coagulum (coefficients, not implemented)
+// Ovinax's Mercurial Egg (not implemented)
+// Treacherous Transmitter (not implemented)
+
+// unique items
+// Fateweaved Mallet (unsure if coefficients correct, not implemented)
+
 const itemData = [
     {
         "id": 173069,
@@ -123173,7 +123199,12 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Equip: Your spells and abilities have a very high chance to power the Transmitter and receive a snippet of cryptic instructions from somewhere in the Twisting Nether...\n\nCollecting 10 snippets deciphers them to reveal your next task. It's probably nothing, so complete it to gain 8271 <Primary Stat> for 15 sec."
+                "name": "Treacherous Transmitter",
+                "id": 446209,
+                "description": "Equip: Your spells and abilities have a very high chance to power the Transmitter and receive a snippet of cryptic instructions from somewhere in the Twisting Nether...\n\nCollecting 10 snippets deciphers them to reveal your next task. It's probably nothing, so complete it to gain *8271 Intellect for 15 sec.",
+                "effect_values": [
+                    {"base_value": 8271, "effect_type": "scalar", "effect_coefficient": 2.1600716114, "allocation_type": "no_multiplier"},
+                ]
             }
         ],
         "name": "Treacherous Transmitter",
@@ -123215,6 +123246,17 @@ const itemData = [
             },
             {
                 "description": "Use: Suspend the Egg's incubation state for 20 sec. (2 Min Cooldown)"
+            }
+        ],
+        "effects": [
+            {
+                "name": "Ovinax's Mercurial Egg",
+                "id": 445066,
+                "description": "Equip: Carefully balance the Egg's incubation. While stationary, gain *95 <Primary Stat> every 1 sec, up to 30 times. Diminishes while moving. While moving, gain *108 of your highest secondary stat every 1 sec, up to 30 times. Diminishes while stationary.\n\nAdditional stacks above 20 grant 60% reduced benefit.<br><br>Use: Suspend the Egg's incubation state for 20 sec. (2 Min Cooldown",
+                "effect_values": [
+                    {"base_value": 95, "effect_type": "scalar", "effect_coefficient": 0.02493842691, "allocation_type": "no_multiplier"},
+                    {"base_value": 108, "effect_type": "scalar", "effect_coefficient": 0.05418000743, "allocation_type": "rating_multiplier"}
+                ]
             }
         ],
         "name": "Ovinax's Mercurial Egg",
@@ -123273,7 +123315,13 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Equip: Your healing spells have a high chance to cause you to inject yourself with a charge of Volatile Serum. Multiple charges may overlap.\n\nIf an ally drops below 70% health, expel a charge to heal them for 159634. If unconsumed after 15 sec, charges catalyze to grant you 2894 Intellect for 10 sec instead."
+                "name": "Gruesome Syringe",
+                "id": 444276,
+                "description": "Equip: Your healing spells have a high chance to cause you to inject yourself with a charge of Volatile Serum. Multiple charges may overlap.\n\nIf an ally drops below 70% health, expel a charge to heal them for *159634. If unconsumed after 15 sec, charges catalyze to grant you *2894 Intellect for 10 sec instead.",
+                "effect_values": [
+                    {"base_value": 159634, "effect_type": "scalar", "effect_coefficient": 63.84856796265, "allocation_type": "flat_damage"},
+                    {"base_value": 2894, "effect_type": "scalar", "effect_coefficient": 0.75579804182, "allocation_type": "no_multiplier"}
+                ]
             }
         ],
         "name": "Gruesome Syringe",
@@ -123346,7 +123394,14 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Use: Feed the Coagulum, redirecting 20% of all healing done until 766815.2 healing has been consumed. Once sated, the Coagulum bursts to heal 5 allies for 541371.531.\n\nLingering effluvia causes affected allies' next attacks to deal an additional (444271s2 / 5) Shadow damage, increased based on overhealing done by the Coagulum. (1 Min, 30 Sec Cooldown)"
+                "name": "Creeping Coagulum",
+                "id": 444282,
+                // 444271
+                "description": "Use: Feed the Coagulum, redirecting 20% of all healing done until *766815.2 healing has been consumed. Once sated, the Coagulum bursts to heal 5 allies for *541371.531.\n\nLingering effluvia causes affected allies' next attacks to deal an additional (444271s2 / 5) Shadow damage, increased based on overhealing done by the Coagulum. (1 Min, 30 Sec Cooldown)",
+                "effect_values": [
+                    {"base_value": 766815.2, "effect_type": "scalar", "effect_coefficient": 66.79903411865, "allocation_type": "flat_healing"},
+                    {"base_value": 541371.531, "effect_type": "scalar", "effect_coefficient": 2.26054334641, "allocation_type": "flat_healing"}
+                ]
             }
         ],
         "name": "Creeping Coagulum",
@@ -124127,10 +124182,12 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Equip: Your excessive healing attracts nearby shadow energy to your party, storing up to 15470 healing and restoring the target's health when they receive damage."
-            },
-            {
-                "description": "Use: Channel the coaglam's power, concentrating all current shadow energy to shield to your target. (1 Min Cooldown)"
+                "name": "Viscous Coaglam",
+                "id": 443557,
+                "description": "Equip: Your excessive healing attracts nearby shadow energy to your party, storing up to *8441 healing and restoring the target's health when they receive damage.<br><br>Use: Channel the coaglam's power, concentrating all current shadow energy to shield to your target. (1 Min Cooldown).",
+                "effect_values": [
+                    {"base_value": 8441, "effect_type": "scalar", "effect_coefficient": 6.03997993469, "allocation_type": "flat_damage"},
+                ]
             }
         ],
         "name": "Viscous Coaglam",
@@ -124166,7 +124223,12 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Equip: Your spells and abilities have a chance to let loose a nascent empowerment from the crystal, increasing a random secondary stat by 1392 for 20 sec."
+                "name": "Empowering Crystal of Anub'ikkaj",
+                "id": 449275,
+                "description": "Equip: Your spells and abilities have a chance to let loose a nascent empowerment from the crystal, increasing a random secondary stat by *1392 for 20 sec.",
+                "effect_values": [
+                    {"base_value": 1392, "effect_type": "scalar", "effect_coefficient": 1.15159761906, "allocation_type": "rating_multiplier"},
+                ]
             }
         ],
         "name": "Empowering Crystal of Anub'ikkaj",
@@ -124380,7 +124442,13 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Equip: Your spells and abilities have a chance to send an orb of volatile black blood drifting to your target, exploding for 62133 Shadow damage split between all nearby enemies on impact. Intercepting the orb allows you to siphon its power, instead increasing your Mastery by 1575 for 15 sec."
+                "name": "Harvester's Edict",
+                "id": 422083,
+                "description": "Equip: Your spells and abilities have a chance to send an orb of volatile black blood drifting to your target, exploding for *62133 Shadow damage split between all nearby enemies on impact. Intercepting the orb allows you to siphon its power, instead increasing your Mastery by *1575 for 15 sec.",
+                "effect_values": [
+                    {"base_value": 62133, "effect_type": "scalar", "effect_coefficient": 24.25875282288, "allocation_type": "flat_healing"},
+                    {"base_value": 1575, "effect_type": "scalar", "effect_coefficient": 1.30279803276, "allocation_type": "rating_multiplier"}
+                ]
             }
         ],
         "name": "Harvester's Edict",
@@ -124496,7 +124564,13 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Equip: Your healing abilities have a chance to call the nearby metal to form a shield around an ally, absorbing 74256 damage.\n\nThe shield reacts explosively to fire, inflicting 4566 Fire damage to nearby enemies when struck."
+                "name": "Scrapsinger's Symphony",
+                "id": 443414,
+                "description": "Equip: Your healing abilities have a chance to call the nearby metal to form a shield around an ally, absorbing *74256 damage.\n\nThe shield reacts explosively to fire, inflicting *4566 Fire damage to nearby enemies when struck.",
+                "effect_values": [
+                    {"base_value": 74256, "effect_type": "scalar", "effect_coefficient": 28.99190330505, "allocation_type": "flat_healing"},
+                    {"base_value": 4566, "effect_type": "scalar", "effect_coefficient": 6.17206573486, "allocation_type": "flat_damage"}
+                ]
             }
         ],
         "name": "Scrapsinger's Symphony",
@@ -124592,7 +124666,13 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Use: Charge the crystal to summon a rift that draws power from nearby enemies, inflicting 307476 Shadow damage over 6 sec.\n\nWhen the rift collapses, its drawn energy returns to you to increase your Intellect by 112 for 20 sec, further increased for each enemy struck. (2 Min Cooldown)"
+                "name": "High Speaker's Accretion",
+                "id": 443415,
+                "description": "Use: Charge the crystal to summon a rift that draws power from nearby enemies, inflicting *307476 Shadow damage over 6 sec.\n\nWhen the rift collapses, its drawn energy returns to you to increase your Intellect by *112 for 20 sec, further increased for each enemy struck. (2 Min Cooldown)",
+                "effect_values": [
+                    {"base_value": 74256, "effect_type": "scalar", "effect_coefficient": 66.79903411865, "allocation_type": "flat_damage"},
+                    {"base_value": 4566, "effect_type": "scalar", "effect_coefficient": 0.09860604256, "allocation_type": "no_multiplier"}
+                ]
             }
         ],
         "name": "High Speaker's Accretion",
@@ -133036,7 +133116,13 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Equip: Your harmful and helpful spells have a chance to weave a Thread of Fate between your and you target for 5 sec. Tethered allies gain 282 bonus primary while the Thread holds and enemies take 2378 Cosmic Damage when the Thread breaks."
+                "name": "Fateweaved Needle",
+                "id": 443384,
+                "description": "Equip: Your harmful and helpful spells have a chance to weave a Thread of Fate between your and you target for 5 sec. Tethered allies gain *282 bonus primary while the Thread holds and enemies take *2378 Cosmic Damage when the Thread breaks.",
+                "effect_values": [
+                    {"base_value": 282, "effect_type": "scalar", "effect_coefficient": 0.57636994123, "allocation_type": "no_multiplier"},
+                    {"base_value": 2378, "effect_type": "scalar", "effect_coefficient": 8.8560256958, "allocation_type": "flat_healing"}
+                ]
             }
         ],
         "name": "Fateweaved Mallet",
@@ -136868,7 +136954,52 @@ const itemData = [
         "gems": [],
         "enchantments": [],
         "limit": null
-    }
+    },
+    {
+        "effects": [
+            {
+                "name": "Unbound Changeling",
+                "id": 330131,
+                "description": "Equip: Your abilities have a chance to grant you *68 in a secondary stat for 12 sec.",
+                "effect_values": [
+                    {"base_value": 68, "effect_type": "scalar", "effect_coefficient": 1.67952597141, "allocation_type": "rating_multiplier"},
+                ]
+            }
+        ],
+        "name": "Unbound Changeling",
+        "item_slot": "Trinket",
+        "base_item_level": 158,
+        "quality": "Rare",
+        "id": 178708,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pet_spectralporcupinered.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Charged Phylactery",
+                "id": 345549,
+                "description": "Sacrifice *345 health to charge the phylactery.<br><br>Healing a target below 30% health expends the phylactery's charge to amplify your spell, restoring *690 additional health to the target.",
+                "effect_values": [
+                    {"base_value": 345, "effect_type": "scalar", "effect_coefficient": 1.67952597141, "allocation_type": "rating_multiplier"},
+                    {"base_value": 690, "effect_type": "scalar", "effect_coefficient": 1.67952597141 * 2, "allocation_type": "rating_multiplier"},
+                ]
+            }
+        ],
+        "name": "Siphoning Phylactery Shard",
+        "item_slot": "Trinket",
+        "base_item_level": 158,
+        "quality": "Rare",
+        "id": 178783,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_enchanting_70_chaosshard.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
 ];
 
 export default itemData;

@@ -1,6 +1,12 @@
 import { ratingMultiplierByItemLevel, ratingMultiplierByItemLevelRingsNeck, ratingMultiplierStamina } from "./rating-multipliers.js";
 import { itemSlotAllocations } from "./item-slot-allocations.js";
 
+// scaling classes
+// -1 = no_multiplier
+// -7 = rating_multiplier
+// -8 = flat_damage
+// -9 = flat_healing
+
 const calculateNewEffect = (effectsData, itemSlot, itemLevel, effectDescription) => {
     let newEffectsData = effectsData;
     let newValues = [];

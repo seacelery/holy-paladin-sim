@@ -814,6 +814,57 @@ const itemDataEffects = [
         "enchantments": [],
         "gems": []
     },
+    {
+        "effects": [
+            {
+                "name": "Gruesome Syringe",
+                "id": 444276,
+                "description": "Equip: Your healing spells have a high chance to cause you to inject yourself with a charge of Volatile Serum. Multiple charges may overlap.\n\nIf an ally drops below 70% health, expel a charge to heal them for *159634. If unconsumed after 15 sec, charges catalyze to grant you *2894 Intellect for 10 sec instead.",
+                "effect_values": [
+                    {"base_value": 159634, "effect_type": "scalar", "effect_coefficient": 63.84856796265, "allocation_type": "flat_damage"},
+                    {"base_value": 2894, "effect_type": "scalar", "effect_coefficient": 0.75579804182, "allocation_type": "no_multiplier"}
+                ]
+            }
+        ],
+        "name": "Gruesome Syringe",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 212452,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_gizmo_runichealthinjector.jpg",
+        "stats": {
+            "Critical Strike": 1001
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Creeping Coagulum",
+                "id": 444282,
+                // 444271
+                "description": "Use: Feed the Coagulum, redirecting 20% of all healing done until *766815.2 healing has been consumed. Once sated, the Coagulum bursts to heal 5 allies for *541371.531.\n\nLingering effluvia causes affected allies' next attacks to deal an additional (444271s2 / 5) Shadow damage, increased based on overhealing done by the Coagulum. (1 Min, 30 Sec Cooldown)",
+                "effect_values": [
+                    {"base_value": 766815.2, "effect_type": "scalar", "effect_coefficient": 66.79903411865, "allocation_type": "flat_healing"},
+                    {"base_value": 541371.531, "effect_type": "scalar", "effect_coefficient": 2.26054334641, "allocation_type": "flat_healing"}
+                ]
+            }
+        ],
+        "name": "Creeping Coagulum",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 219917,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/warlock_-bloodstone.jpg",
+        "stats": {
+            "Intellect": 1914
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
 ];
 
 export default itemDataEffects;
