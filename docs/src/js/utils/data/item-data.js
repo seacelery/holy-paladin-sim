@@ -1,9 +1,9 @@
 // season 1
-// Ara-Kara, City of Echoes - Harvester's Edict (not implemented)
+// Ara-Kara, City of Echoes - Harvester's Edict
 // City of Threads - Viscous Coaglam (coefficient, not implemented)
-// The Stonevault - Scrapsinger's Symphony (coefficients, not implemented), High Speaker's Accretion (not implemented)
-// The Dawnbreaker - Empowering Crystal of Anub'ikkaj (not implemented)
-// Mists of Tirna Scithe - Unbound Changeling (coefficient unsure, not implemented)
+// The Stonevault - Scrapsinger's Symphony (coefficients), High Speaker's Accretion (not implemented)
+// The Dawnbreaker - Empowering Crystal of Anub'ikkaj
+// Mists of Tirna Scithe - Unbound Changeling (coefficient unsure)
 // The Necrotic Wake - Siphoning Phylactery Shard (coefficient, not implemented)
 // Siege of Boralus
 // Grim Batol - Corrupted Egg Shell, Gale of Shadows (not currently in-game)
@@ -22,7 +22,7 @@
 // Treacherous Transmitter (not implemented)
 
 // unique items
-// Fateweaved Mallet (unsure if coefficients correct, not implemented)
+// Fateweaved Mallet (coefficients unsure, not implemented)
 
 const itemData = [
     {
@@ -136969,7 +136969,7 @@ const itemData = [
         "name": "Unbound Changeling",
         "item_slot": "Trinket",
         "base_item_level": 158,
-        "quality": "Rare",
+        "quality": "Epic",
         "id": 178708,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pet_spectralporcupinered.jpg",
         "stats": {},
@@ -136992,7 +136992,7 @@ const itemData = [
         "name": "Siphoning Phylactery Shard",
         "item_slot": "Trinket",
         "base_item_level": 158,
-        "quality": "Rare",
+        "quality": "Epic",
         "id": 178783,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_enchanting_70_chaosshard.jpg",
         "stats": {},

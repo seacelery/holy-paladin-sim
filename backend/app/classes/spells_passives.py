@@ -306,6 +306,32 @@ class BlossomOfAmirdrassilProc(Spell):
         update_spell_data_heals(caster.ability_breakdown, "Blossom of Amirdrassil", target, 0, False)
         
 
+class ScrapsingersSymphony(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    BASE_PPM = 3
+    
+    def __init__(self, caster):
+        super().__init__("Scrapsinger's Symphony")
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # initial hot
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_flat_healing(self, caster, target, current_time, is_heal):    # 
+        scrapsingers_symphony_heal, scrapsingers_symphony_crit = ScrapsingersSymphony(caster).calculate_heal(caster)
+        scrapsingers_symphony_heal = self.trinket_first_value * caster.versatility_multiplier
+        
+        if scrapsingers_symphony_crit:
+            scrapsingers_symphony_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+            
+        scrapsingers_symphony_heal = add_talent_healing_multipliers(scrapsingers_symphony_heal, caster)
+        
+        target.receive_heal(scrapsingers_symphony_heal, caster)
+        update_spell_data_heals(caster.ability_breakdown, "Scrapsinger's Symphony", target, scrapsingers_symphony_heal, scrapsingers_symphony_crit)
+        
+
 # embellishments
 class MagazineOfHealingDarts(Spell):
     

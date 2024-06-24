@@ -1740,9 +1740,6 @@ class InspiredByFrostAndEarth(Buff):
         caster.update_stat("crit", -self.trinket_second_value)
         caster.update_stat("versatility", -self.trinket_second_value)
         
-# TODO 
-# broodkeeper's promise
-# miniature singing stone
 
 class VoiceFromBeyond(Buff):
     
@@ -2584,6 +2581,86 @@ class NymuesUnravelingSpindleBuff(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.update_stat("mastery", -self.trinket_first_value)
+        
+
+class HarvestersEdict(Buff):
+    
+    BASE_PPM = 1.66
+    
+    def __init__(self, caster):
+        super().__init__("Harvester's Edict", 15, base_duration=15)
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # mastery buff
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):        
+        caster.update_stat("mastery", self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", -self.trinket_first_value)
+        
+        
+class EmpoweringCrystalOfAnubikkaj(Buff):
+    
+    BASE_PPM = 1.55
+    
+    def __init__(self, caster):
+        super().__init__("Empowering Crystal of Anub'ikkaj", 20, base_duration=20)
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # random secondary stat buff
+        self.trinket_first_value = trinket_values[0]
+        self.chosen_stat = ""
+        
+    def apply_effect(self, caster, current_time=None):        
+        self.chosen_stat = random.choice(["haste", "crit", "mastery", "versatility"])
+        caster.update_stat(self.chosen_stat, self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat(self.chosen_stat, -self.trinket_first_value)
+        
+
+class UnboundChangeling(Buff):
+    
+    BASE_PPM = 1.5
+    
+    def __init__(self, caster):
+        super().__init__("Unbound Changeling", 12, base_duration=12)
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        
+        self.available_stats = ["haste", "crit", "mastery", "combined"]
+        option_value = caster.trinkets.get(self.name, {}).get("option")
+
+        if not option_value:
+            self.chosen_stat = "mastery"
+        else:
+            self.chosen_stat = option_value.lower()
+        self.available_stats.remove(self.chosen_stat)
+        
+        if self.chosen_stat == "combined":
+            self.trinket_first_value *= (1.2571 / 3)
+        
+    def apply_effect(self, caster, current_time=None):    
+        if self.chosen_stat == "combined":
+            caster.update_stat("haste", self.trinket_first_value)
+            caster.update_stat("crit", self.trinket_first_value)
+            caster.update_stat("mastery", self.trinket_first_value)
+        else:
+            caster.update_stat(self.chosen_stat, self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        if self.chosen_stat == "combined":
+            caster.update_stat("haste", -self.trinket_first_value)
+            caster.update_stat("crit", -self.trinket_first_value)
+            caster.update_stat("mastery", -self.trinket_first_value)
+        else:
+            caster.update_stat(self.chosen_stat, -self.trinket_first_value)
         
 
 # embellishments

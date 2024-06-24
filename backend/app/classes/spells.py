@@ -376,7 +376,7 @@ class Spell:
         from .spells_passives import (
             TouchOfLight, EmbraceOfAkunda, DreamingDevotion, ChirpingRune, LarodarsFieryReverie,
             MagazineOfHealingDarts, BronzedGripWrappings, SacredWeapon, AuthorityOfFieryResolve,
-            DivineInspiration, RiteOfAdjurationSpell
+            DivineInspiration, RiteOfAdjurationSpell, ScrapsingersSymphony
         )
         
         from .auras_buffs import (
@@ -386,7 +386,8 @@ class Spell:
             IdolOfTheDreamerStacks, IdolOfTheEarthWarderStacks, IdolOfTheLifeBinderStacks,
             AlliedChestplateOfGenerosity, ElementalLariat, VerdantTether, VerdantConduit,
             PowerOfTheSilverHand, NeltharionsCallToChaos, InspiredByFrostAndEarth, ScreamingBlackDragonscale,
-            RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond, BlessingOfAnshe
+            RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond, BlessingOfAnshe, HarvestersEdict,
+            EmpoweringCrystalOfAnubikkaj, UnboundChangeling
         )
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False, is_other_effect=False):
@@ -499,6 +500,22 @@ class Spell:
                 try_proc_rppm_effect(voice_from_beyond, is_hasted=False, is_self_buff=True)
             
         # trinkets
+        if "Unbound Changeling" in caster.trinkets:
+            unbound_changeling = UnboundChangeling(caster)
+            try_proc_rppm_effect(unbound_changeling, is_self_buff=True)
+        
+        if "Scrapsinger's Symphony" in caster.trinkets:
+            scrapsingers_symphony = ScrapsingersSymphony(caster)
+            try_proc_rppm_effect(scrapsingers_symphony, is_hasted=True, is_flat_healing=True)
+        
+        if "Harvester's Edict" in caster.trinkets and self.name in ["Judgment", "Crusader Strike", "Consecration", "Hammer of Wrath"]:
+            harvesters_edict = HarvestersEdict(caster)
+            try_proc_rppm_effect(harvesters_edict, is_hasted=True, is_self_buff=True)
+            
+        if "Empowering Crystal of Anub'ikkaj" in caster.trinkets:
+            empowering_crystal_of_anubikkaj = EmpoweringCrystalOfAnubikkaj(caster)
+            try_proc_rppm_effect(empowering_crystal_of_anubikkaj, is_hasted=False, is_self_buff=True)
+        
         if "Emerald Coach's Whistle" in caster.trinkets:
             emerald_coachs_whistle = EmeraldCoachsWhistle(caster)
             try_proc_rppm_effect(emerald_coachs_whistle, is_hasted=False, is_self_buff=True)

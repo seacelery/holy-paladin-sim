@@ -3596,14 +3596,9 @@ body {
 }
 
 #priority-list-items-container::-webkit-scrollbar-thumb {
-    border-left: 1px solid var(--panel-colour-2);
+    border-left: 1px solid var(--panel-colour-3);
     border-right: 2px solid var(--panel-colour);
     border-radius: 3px;
-    background-color: var(--panel-colour-2);
-}
-
-#priority-list-items-container::-webkit-scrollbar-track {
-    background-color: var(--panel-colour);
 }
 
 .priority-list-item-container {
