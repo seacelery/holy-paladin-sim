@@ -2732,11 +2732,17 @@ class DeliberateIncubation(Buff):
         
         self.trinket_intellect_value = trinket_values[0]
         
-    def apply_effect(self, caster, current_time=None):    
-        caster.spell_power += caster.get_effective_spell_power(self.trinket_intellect_value * self.current_stacks)
+    def apply_effect(self, caster, current_time=None):
+        if self.current_stacks > 20:  
+            caster.spell_power += caster.get_effective_spell_power(self.trinket_intellect_value * 20 + (self.trinket_intellect_value * 0.6 * (self.current_stacks - 20)))
+        else:
+            caster.spell_power += caster.get_effective_spell_power(self.trinket_intellect_value * self.current_stacks)
         
     def remove_effect(self, caster, current_time=None):
-        caster.spell_power -= caster.get_effective_spell_power(self.trinket_intellect_value * self.current_stacks)
+        if self.current_stacks > 20:    
+            caster.spell_power -= caster.get_effective_spell_power(self.trinket_intellect_value * 20 + (self.trinket_intellect_value * 0.6 * (self.current_stacks - 20)))
+        else:
+            caster.spell_power -= caster.get_effective_spell_power(self.trinket_intellect_value * self.current_stacks)
         
 
 class RecklessIncubation(Buff):
@@ -2750,10 +2756,16 @@ class RecklessIncubation(Buff):
         self.highest_stat = caster.find_highest_secondary_stat_rating()
         
     def apply_effect(self, caster, current_time=None):    
-        caster.update_stat(self.highest_stat, self.trinket_secondary_stat_value * self.current_stacks)
+        if self.current_stacks > 20:  
+            caster.update_stat(self.highest_stat, self.trinket_secondary_stat_value * 20 + (self.trinket_secondary_stat_value * 0.6 * (self.current_stacks - 20)))
+        else:
+            caster.update_stat(self.highest_stat, self.trinket_secondary_stat_value * self.current_stacks)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat(self.highest_stat, -self.trinket_secondary_stat_value * self.current_stacks)
+        if self.current_stacks > 20:    
+            caster.update_stat(self.highest_stat, -self.trinket_secondary_stat_value * 20 + (-self.trinket_secondary_stat_value * 0.6 * (self.current_stacks - 20)))
+        else:
+            caster.update_stat(self.highest_stat, -self.trinket_secondary_stat_value * self.current_stacks)
         
 
 class CrypticInstructions(Buff):
