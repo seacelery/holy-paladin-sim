@@ -107,6 +107,13 @@ const spellToIconsMap = {
     "Broodkeeper's Promise": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_primalist_trinket_3_omni.jpg",
     "Miniature Singing Stone": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_centaur_trinket_1_color1.jpg",
     "Echoing Tyrstone": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_lightofthemartyr.jpg",
+    "Siphoning Phylactery Shard": "https://wow.zamimg.com/images/wow/icons/large/inv_enchanting_70_chaosshard.jpg",
+    "High Speaker's Accretion": "https://wow.zamimg.com/images/wow/icons/large/inv_cosmicvoid_nova.jpg",
+    "Viscous Coaglam": "https://wow.zamimg.com/images/wow/icons/large/spell_priest_shadoworbs.jpg",
+    "Ovinax's Mercurial Egg": "https://wow.zamimg.com/images/wow/icons/large/creatureportrait_twilightshammer_dragonegg_01.jpg",
+    "Creeping Coagulum": "https://wow.zamimg.com/images/wow/icons/large/warlock_-bloodstone.jpg",
+    "Creeping Coagulum ": "https://wow.zamimg.com/images/wow/icons/large/warlock_-bloodstone.jpg",
+    "Gruesome Syringe": "https://wow.zamimg.com/images/wow/icons/large/inv_gizmo_runichealthinjector.jpg",
 
     // enchants
     "Dreaming Devotion": "https://render.worldofwarcraft.com/eu/icons/56/item_herbd.jpg",

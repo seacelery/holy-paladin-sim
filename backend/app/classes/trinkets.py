@@ -2,16 +2,16 @@ import re
 import random
 
 from .spells import Spell
-from .auras_buffs import MirrorOfFracturedTomorrowsBuff, SmolderingSeedlingActive, NymuesUnravelingSpindleBuff
-from ..utils.misc_functions import update_mana_gained, update_spell_data_casts, update_spell_data_heals
+from .auras_buffs import MirrorOfFracturedTomorrowsBuff, SmolderingSeedlingActive, NymuesUnravelingSpindleBuff, OvinaxsMercurialEggPaused
+from ..utils.misc_functions import update_mana_gained, update_spell_data_heals, update_spell_data_casts, add_talent_healing_multipliers
 
 
 class Trinket(Spell):
     
     def __init__(self, name, cooldown=0, off_gcd=True, base_cast_time=0, hasted_cast_time=False):
         super().__init__(name, cooldown=cooldown, off_gcd=off_gcd, base_cast_time=base_cast_time, hasted_cast_time=hasted_cast_time)
-        
-
+  
+  
 class MiniatureSingingStone(Trinket):
     
     BASE_COOLDOWN = 120
@@ -150,3 +150,98 @@ class SpoilsOfNeltharus(Trinket):
             from .auras_buffs import SpoilsOfNeltharusBuff
             
             caster.apply_buff_to_self(SpoilsOfNeltharusBuff(caster), current_time)
+            
+            
+class HighSpeakersAccretion(Trinket):
+    
+    BASE_COOLDOWN = 120
+    
+    def __init__(self, caster):
+        super().__init__("High Speaker's Accretion", cooldown=HighSpeakersAccretion.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            from .auras_buffs import HighSpeakersAccretionRift
+            
+            caster.apply_buff_to_self(HighSpeakersAccretionRift(caster), current_time)
+            
+
+class SiphoningPhylacteryShard(Trinket):
+    
+    BASE_COOLDOWN = 30
+    
+    def __init__(self, caster):
+        super().__init__("Siphoning Phylactery Shard", cooldown=SiphoningPhylacteryShard.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            update_spell_data_casts(caster.ability_breakdown, self.name, 0, 0, 0)
+            
+            trinket_effect = caster.trinkets[self.name]["effect"]
+            trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+            
+            # self-damage
+            self.trinket_first_value = trinket_values[0]
+            # heal
+            self.trinket_second_value = trinket_values[1]
+       
+            siphoning_phylactery_shard_heal = (self.trinket_second_value - self.trinket_first_value) * caster.versatility_multiplier
+            siphoning_phylactery_shard_heal = add_talent_healing_multipliers(siphoning_phylactery_shard_heal, caster)
+
+            targets[0].receive_heal(siphoning_phylactery_shard_heal, caster)
+            update_spell_data_heals(caster.ability_breakdown, "Siphoning Phylactery Shard", targets[0], siphoning_phylactery_shard_heal, False)
+            
+            caster.handle_beacon_healing("Siphoning Phylactery Shard", targets[0], siphoning_phylactery_shard_heal, current_time)
+            
+
+class CreepingCoagulum(Trinket):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    BASE_COOLDOWN = 90
+    
+    def __init__(self, caster):
+        super().__init__("Creeping Coagulum", cooldown=CreepingCoagulum.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            update_spell_data_casts(caster.ability_breakdown, self.name, 0, 0, 0)
+            
+            trinket_effect = caster.trinkets[self.name]["effect"]
+            trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+            
+            # healing redirected
+            self.trinket_first_value = trinket_values[0]
+            creeping_coagulum_negative_heal = -self.trinket_first_value
+            targets[0].receive_heal(creeping_coagulum_negative_heal, caster)
+            update_spell_data_heals(caster.ability_breakdown, "Creeping Coagulum ", targets[0], creeping_coagulum_negative_heal, False)
+            
+            # heal
+            self.trinket_second_value = trinket_values[1]     
+            chosen_targets = random.sample(caster.potential_healing_targets, 5)
+            for target in chosen_targets:
+                creeping_coagulum_heal, creeping_coagulum_crit = CreepingCoagulum(caster).calculate_heal(caster)
+                creeping_coagulum_heal = self.trinket_second_value * caster.versatility_multiplier   
+                
+                if creeping_coagulum_crit:
+                    creeping_coagulum_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+                    
+                creeping_coagulum_heal = add_talent_healing_multipliers(creeping_coagulum_heal, caster)
+                    
+                target.receive_heal(creeping_coagulum_heal, caster)
+                update_spell_data_heals(caster.ability_breakdown, "Creeping Coagulum", target, creeping_coagulum_heal, creeping_coagulum_crit)
+                
+
+class OvinaxsMercurialEgg(Trinket):
+    
+    BASE_COOLDOWN = 120
+    
+    def __init__(self, caster):
+        super().__init__("Ovinax's Mercurial Egg", cooldown=OvinaxsMercurialEgg.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:
+            caster.apply_buff_to_self(OvinaxsMercurialEggPaused(caster), current_time)

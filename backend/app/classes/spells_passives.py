@@ -316,7 +316,7 @@ class ScrapsingersSymphony(Spell):
         trinket_effect = caster.trinkets[self.name]["effect"]
         trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
         
-        # initial hot
+        # absorb
         self.trinket_first_value = trinket_values[0]
         
     def apply_flat_healing(self, caster, target, current_time, is_heal):    # 
@@ -330,6 +330,32 @@ class ScrapsingersSymphony(Spell):
         
         target.receive_heal(scrapsingers_symphony_heal, caster)
         update_spell_data_heals(caster.ability_breakdown, "Scrapsinger's Symphony", target, scrapsingers_symphony_heal, scrapsingers_symphony_crit)
+        
+
+class GruesomeSyringe(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    BASE_PPM = 6
+    
+    def __init__(self, caster):
+        super().__init__("Gruesome Syringe")
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # heal
+        self.trinket_first_value = trinket_values[1]
+        
+    def apply_flat_healing(self, caster, target, current_time, is_heal):
+        gruesome_syringe_heal, gruesome_syringe_crit = GruesomeSyringe(caster).calculate_heal(caster)
+        gruesome_syringe_heal = self.trinket_first_value * caster.versatility_multiplier
+        
+        if gruesome_syringe_crit:
+            gruesome_syringe_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+            
+        gruesome_syringe_heal = add_talent_healing_multipliers(gruesome_syringe_heal, caster)
+        
+        target.receive_heal(gruesome_syringe_heal, caster)
+        update_spell_data_heals(caster.ability_breakdown, "Gruesome Syringe", target, gruesome_syringe_heal, gruesome_syringe_crit)
         
 
 # embellishments

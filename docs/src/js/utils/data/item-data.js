@@ -1,10 +1,10 @@
 // season 1
 // Ara-Kara, City of Echoes - Harvester's Edict
 // City of Threads - Viscous Coaglam (coefficient, not implemented)
-// The Stonevault - Scrapsinger's Symphony (coefficients), High Speaker's Accretion (not implemented)
+// The Stonevault - Scrapsinger's Symphony (coefficients), High Speaker's Accretion
 // The Dawnbreaker - Empowering Crystal of Anub'ikkaj
 // Mists of Tirna Scithe - Unbound Changeling (coefficient unsure)
-// The Necrotic Wake - Siphoning Phylactery Shard (coefficient, not implemented)
+// The Necrotic Wake - Siphoning Phylactery Shard (coefficient)
 // Siege of Boralus
 // Grim Batol - Corrupted Egg Shell, Gale of Shadows (not currently in-game)
 
@@ -16,13 +16,14 @@
 
 // raid
 // trinkets
-// Gruesome Syringe (healing coefficient, not implemented)
-// Creeping Coagulum (coefficients, not implemented)
-// Ovinax's Mercurial Egg (not implemented)
-// Treacherous Transmitter (not implemented)
+// Gruesome Syringe (healing coefficient)
+// Creeping Coagulum (coefficients)
+// Ovinax's Mercurial Egg (implemented - options pending)
+// Treacherous Transmitter
 
 // unique items
-// Fateweaved Mallet (coefficients unsure, not implemented)
+// Fateweaved Mallet (coefficients unsure)
+// Sureki Zealot's Insignia (not implemented)
 
 const itemData = [
     {
@@ -124454,7 +124455,7 @@ const itemData = [
         "name": "Harvester's Edict",
         "item_slot": "Trinket",
         "base_item_level": 437,
-        "quality": "Rare",
+        "quality": "Epic",
         "id": 219317,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/trade_archaeology_nerubian_obelisk.jpg",
         "stats": {},
@@ -124576,7 +124577,7 @@ const itemData = [
         "name": "Scrapsinger's Symphony",
         "item_slot": "Trinket",
         "base_item_level": 437,
-        "quality": "Rare",
+        "quality": "Epic",
         "id": 219302,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_blacksmithing_craftedoptional_engineering_color1.jpg",
         "stats": {
@@ -124678,7 +124679,7 @@ const itemData = [
         "name": "High Speaker's Accretion",
         "item_slot": "Trinket",
         "base_item_level": 437,
-        "quality": "Rare",
+        "quality": "Epic",
         "id": 219303,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cosmicvoid_nova.jpg",
         "stats": {

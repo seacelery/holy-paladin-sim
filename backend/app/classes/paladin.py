@@ -15,8 +15,8 @@ from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, H
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion, AuraMastery
 from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
 from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell, HolyBulwarkSacredWeapon
-from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, BroodkeepersPromiseHoT, IncarnatesMarkOfFire, MorningStar, RiteOfAdjurationBuff, RiteOfSanctification
-from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus, MiniatureSingingStone
+from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, IncarnatesMarkOfFire, BroodkeepersPromiseHoT, MorningStar, RiteOfAdjurationBuff, RiteOfSanctification, DeliberateIncubation, OvinaxsMercurialEggBuff
+from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus, MiniatureSingingStone, HighSpeakersAccretion, SiphoningPhylacteryShard, CreepingCoagulum, OvinaxsMercurialEgg
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents, base_active_class_talents_ptr, base_active_spec_talents_ptr, base_active_lightsmith_talents, base_herald_of_the_sun_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
 from .api_client import APIClient
@@ -605,6 +605,18 @@ class Paladin:
         if self.is_trinket_equipped("Spoils of Neltharus"):
             self.abilities["Spoils of Neltharus"] = SpoilsOfNeltharus(self)
             
+        if self.is_trinket_equipped("High Speaker's Accretion"):
+            self.abilities["High Speaker's Accretion"] = HighSpeakersAccretion(self)
+            
+        if self.is_trinket_equipped("Siphoning Phylactery Shard"):
+            self.abilities["Siphoning Phylactery Shard"] = SiphoningPhylacteryShard(self)
+            
+        if self.is_trinket_equipped("Creeping Coagulum"):
+            self.abilities["Creeping Coagulum"] = CreepingCoagulum(self)
+            
+        if self.is_trinket_equipped("Ovinax's Mercurial Egg"):
+            self.abilities["Ovinax's Mercurial Egg"] = OvinaxsMercurialEgg(self)
+            
         # ptr abilities
         if self.ptr:
             if self.is_talent_active("Holy Bulwark"):
@@ -641,6 +653,9 @@ class Paladin:
         return False
     
     def apply_buffs_on_encounter_start(self):
+        if self.is_trinket_equipped("Ovinax's Mercurial Egg"):
+            self.apply_buff_to_self(OvinaxsMercurialEggBuff(self), 0)
+        
         if self.is_trinket_equipped("Pip's Emerald Friendship Badge"):
             self.apply_buff_to_self(PipsEmeraldFriendshipBadge(self), 0)
             self.apply_buff_to_self(random.choice([BestFriendsWithPip(self), BestFriendsWithAerwyn(self), BestFriendsWithUrctos(self)]), 0)

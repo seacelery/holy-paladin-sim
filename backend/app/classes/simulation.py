@@ -13,7 +13,7 @@ from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
 from .trinkets import Trinket
-from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight, EternalFlameBuff, InfusionOfLight, SunsAvatarActive
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight, EternalFlameBuff, InfusionOfLight, SunsAvatarActive, DeliberateIncubation, RecklessIncubation
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
 from .priority_list_dsl import parse_condition, condition_to_lambda
 from .simulation_state import check_cancellation, reset_simulation
@@ -391,6 +391,55 @@ class Simulation:
                     if suns_avatar.timer >= 0.5:
                         suns_avatar.trigger_passive_heal(self.paladin, self.elapsed_time, target_count)
                         suns_avatar.timer = 0
+                        
+        if "Ovinax's Mercurial Egg" in self.paladin.trinkets and "Ovinax's Mercurial Egg Paused" not in self.paladin.active_auras:
+            option = self.paladin.trinkets.get("Ovinax's Mercurial Egg", {}).get("option")
+            ovinaxs_mercurial_egg = self.paladin.active_auras["Ovinax's Mercurial Egg"]
+            ovinaxs_mercurial_egg.timer += self.tick_rate
+            
+            probabilities = {"Low Movement": 0.47, "Some Movement": 0.5, "High Movement": 0.54}
+            
+            if ovinaxs_mercurial_egg.timer >= 1 and ovinaxs_mercurial_egg.moving:
+                if "Deliberate Incubation" in self.paladin.active_auras:
+                    self.paladin.active_auras["Deliberate Incubation"].remove_effect(self.paladin)
+                    self.paladin.active_auras["Deliberate Incubation"].current_stacks -= 1
+                    if self.paladin.active_auras["Deliberate Incubation"].current_stacks == 0:
+                        del self.paladin.active_auras["Deliberate Incubation"]
+                        update_self_buff_data(self.paladin.self_buff_breakdown, "Deliberate Incubation", self.elapsed_time, "expired")
+                    else:
+                        self.paladin.active_auras["Deliberate Incubation"].apply_effect(self.paladin)
+                    
+                    if "Reckless Incubation" in self.paladin.active_auras and self.paladin.active_auras["Reckless Incubation"].current_stacks < 30:
+                        self.paladin.active_auras["Reckless Incubation"].remove_effect(self.paladin)
+                        self.paladin.active_auras["Reckless Incubation"].current_stacks += 1
+                        self.paladin.active_auras["Reckless Incubation"].apply_effect(self.paladin)                  
+                    elif "Reckless Incubation" not in self.paladin.active_auras:
+                        self.paladin.apply_buff_to_self(RecklessIncubation(self.paladin), self.elapsed_time)
+                ovinaxs_mercurial_egg.timer = 0   
+                
+            if ovinaxs_mercurial_egg.timer >= 1 and not ovinaxs_mercurial_egg.moving:
+                if "Reckless Incubation" in self.paladin.active_auras:
+                    self.paladin.active_auras["Reckless Incubation"].remove_effect(self.paladin)
+                    self.paladin.active_auras["Reckless Incubation"].current_stacks -= 1
+                    if self.paladin.active_auras["Reckless Incubation"].current_stacks == 0:
+                        del self.paladin.active_auras["Reckless Incubation"]
+                        update_self_buff_data(self.paladin.self_buff_breakdown, "Reckless Incubation", self.elapsed_time, "expired")
+                    else:
+                        self.paladin.active_auras["Reckless Incubation"].apply_effect(self.paladin)
+                    
+                    if "Deliberate Incubation" in self.paladin.active_auras and self.paladin.active_auras["Deliberate Incubation"].current_stacks < 30:
+                        self.paladin.active_auras["Deliberate Incubation"].remove_effect(self.paladin)
+                        self.paladin.active_auras["Deliberate Incubation"].current_stacks += 1
+                        self.paladin.active_auras["Deliberate Incubation"].apply_effect(self.paladin)                  
+                    elif "Deliberate Incubation" not in self.paladin.active_auras:
+                        self.paladin.apply_buff_to_self(DeliberateIncubation(self.paladin), self.elapsed_time)
+                ovinaxs_mercurial_egg.timer = 0        
+            
+            random_num = random.random()
+            if random_num < probabilities[option]:
+                ovinaxs_mercurial_egg.moving = True
+            else:
+                ovinaxs_mercurial_egg.moving = False
         
     def increment_effects_with_additional_triggers(self):
         if "Divine Resonance" in self.paladin.active_auras:

@@ -2662,6 +2662,166 @@ class UnboundChangeling(Buff):
         else:
             caster.update_stat(self.chosen_stat, -self.trinket_first_value)
         
+        
+class HighSpeakersAccretionRift(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("High Speaker's Accretion Rift", 6, base_duration=6)
+        
+    def apply_effect(self, caster, current_time=None):    
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.apply_buff_to_self(HighSpeakersAccretionIntellect(caster), current_time)
+    
+
+class HighSpeakersAccretionIntellect(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("High Speaker's Accretion Intellect", 20, base_duration=20)
+        trinket_effect = caster.trinkets["High Speaker's Accretion"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        option_value = caster.trinkets.get("High Speaker's Accretion", {}).get("option")
+
+        if not option_value:
+            self.target_count = 1
+        else:
+            self.target_count = int(option_value)
+            
+        self.trinket_intellect_value = trinket_values[1] * self.target_count
+        
+    def apply_effect(self, caster, current_time=None):    
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_intellect_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_intellect_value)
+        
+        
+class OvinaxsMercurialEggBuff(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Ovinax's Mercurial Egg", 10000, base_duration=10000)
+        self.moving = False
+        self.timer = 0
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.apply_buff_to_self(DeliberateIncubation(caster, stacks_to_apply=30), 0)
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class OvinaxsMercurialEggPaused(Buff):
+        
+        def __init__(self, caster):
+            super().__init__("Ovinax's Mercurial Egg Paused", 20, base_duration=20)
+            
+        def apply_effect(self, caster, current_time=None):
+            pass
+            
+        def remove_effect(self, caster, current_time=None):
+            pass
+        
+        
+class DeliberateIncubation(Buff):
+    
+    def __init__(self, caster, stacks_to_apply=1):
+        super().__init__("Deliberate Incubation", 10000, base_duration=10000, current_stacks=stacks_to_apply, max_stacks=30)
+        trinket_effect = caster.trinkets["Ovinax's Mercurial Egg"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_intellect_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):    
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_intellect_value * self.current_stacks)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_intellect_value * self.current_stacks)
+        
+
+class RecklessIncubation(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Reckless Incubation", 10000, base_duration=10000, current_stacks=1, max_stacks=30)
+        trinket_effect = caster.trinkets["Ovinax's Mercurial Egg"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_secondary_stat_value = trinket_values[1]
+        self.highest_stat = caster.find_highest_secondary_stat_rating()
+        
+    def apply_effect(self, caster, current_time=None):    
+        caster.update_stat(self.highest_stat, self.trinket_secondary_stat_value * self.current_stacks)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat(self.highest_stat, -self.trinket_secondary_stat_value * self.current_stacks)
+        
+
+class CrypticInstructions(Buff):
+    
+    BASE_PPM = 6
+    
+    def __init__(self, caster):
+        super().__init__("Cryptic Instructions", 10000, base_duration=10000, current_stacks=1, max_stacks=10)
+        
+    def apply_effect(self, caster, current_time=None):    
+        if caster.active_auras[self.name].current_stacks == self.max_stacks:
+            del caster.active_auras[self.name]
+            self.remove_effect(caster, current_time)
+            update_self_buff_data(caster.self_buff_breakdown, "Cryptic Instructions", current_time, "expired")  
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.apply_buff_to_self(EtherealPowerlink(caster), current_time)
+    
+
+class EtherealPowerlink(Buff):
+    
+    def __init__(self, caster, stacks_to_apply=1):
+        super().__init__("Ethereal Powerlink", 15, base_duration=15)
+        trinket_effect = caster.trinkets["Treacherous Transmitter"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # intellect
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):    
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value)
+        
+
+class FateweavedNeedle(Buff):
+    
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Fateweaved Needle", 5, base_duration=5)
+        weapon_effects = caster.equipment["main_hand"]["effects"][0]["description"]
+        weapon_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", weapon_effects)]
+        
+        # intellect
+        self.effect_first_value = weapon_values[0]
+        
+    def apply_effect(self, caster, current_time=None):    
+        caster.spell_power += caster.get_effective_spell_power(self.effect_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.effect_first_value)
+        
+        
+class VolatileSerum(Buff):
+    
+    BASE_PPM = 6
+    
+    def __init__(self, caster):
+        super().__init__("Volatile Serum", 15, base_duration=15)
+        
+    def apply_effect(self, caster, current_time=None):    
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+
 
 # embellishments
 class PotionAbsorptionInhibitor(Buff):
