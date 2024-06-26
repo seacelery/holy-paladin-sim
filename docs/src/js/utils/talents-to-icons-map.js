@@ -108,6 +108,9 @@ const talentsToIcons = {
     "Empyrean Legacy": "https://render.worldofwarcraft.com/eu/icons/56/item_holyspark.jpg",
     "Boundless Salvation": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_selflesshealer.jpg",
     "Bestow Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_sheathoflight.jpg",
+    "Extrication": "https://wow.zamimg.com/images/wow/icons/large/ability_paladin_righteousvengeance.jpg",
+    "Liberation": "https://wow.zamimg.com/images/wow/icons/large/ability_paladin_toweroflight.jpg",
+    "Truth Prevails": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_spiritualguidence.jpg",
 
     // lightsmith talents
     "Holy Bulwark": "https://render.worldofwarcraft.com/eu/icons/56/inv_shield_1h_artifactnorgannon_d_06.jpg",

@@ -1,7 +1,7 @@
 import random
 
 from .spells import Spell
-from .spells_healing import HammerAndAnvilHeal
+from .spells_healing import HammerAndAnvilHeal, TruthPrevailsHeal
 from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals, update_self_buff_data, update_mana_gained, add_talent_healing_multipliers
 from .auras_debuffs import JudgmentOfLightDebuff, GreaterJudgmentDebuff
 from .auras_buffs import BlessingOfDawn, AvengingWrathAwakening, AvengingCrusaderAwakening, EmpyreanLegacy, Veneration
@@ -26,6 +26,11 @@ class Judgment(Spell):
         super().__init__("Judgment", mana_cost=Judgment.MANA_COST, cooldown=self.BASE_COOLDOWN, holy_power_gain=Judgment.HOLY_POWER_GAIN, hasted_cooldown=True) 
         self.is_damage_spell = True
         
+        # truth prevails
+        if caster.ptr and caster.is_talent_active("Truth Prevails"):
+            self.MANA_COST *= 0.7
+            self.mana_cost *= 0.7
+        
         # divine glimpse
         if caster.is_talent_active("Divine Glimpse"):
             self.bonus_crit = Judgment.BONUS_CRIT
@@ -34,7 +39,7 @@ class Judgment(Spell):
         if caster.is_talent_active("Justification"):
             self.spell_damage_modifier = 1.1
             
-    def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):
+    def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):        
         # awakening
         if caster.is_talent_active("Awakening"):
             if "Awakening Ready" in caster.active_auras:
@@ -45,7 +50,7 @@ class Judgment(Spell):
         # avenging crusader        
         if caster.is_talent_active("Avenging Crusader") and "Avenging Crusader" in caster.active_auras:
             self.spell_damage_modifier *= 1.3
-            
+           
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
         
         judgment_of_light_healing = 0
@@ -54,6 +59,12 @@ class Judgment(Spell):
         if cast_success: 
             increment_holy_power(self, caster, current_time)
             target = targets[0]
+            
+            # liberation
+            if caster.ptr and caster.is_talent_active("Liberation") and "Liberation" in caster.active_auras and "Innervate" not in caster.active_auras:
+                caster.active_auras["Liberation"].remove_effect(caster)
+                del caster.active_auras["Liberation"]
+                update_self_buff_data(caster.self_buff_breakdown, "Liberation", current_time, "expired")
             
             # veneration
             if caster.is_talent_active("Veneration"):
@@ -188,7 +199,7 @@ class Judgment(Spell):
             # hammer and anvil               
             if caster.ptr and caster.is_talent_active("Hammer and Anvil") and spell_crit:         
                 hammer_and_anvil_heal, hammer_and_anvil_crit = HammerAndAnvilHeal(caster).calculate_heal(caster)
-                hammer_and_anvil_heal = caster.spell_power * caster.versatility_multiplier + caster.spell_power * 1.04
+                hammer_and_anvil_heal = (1.5 * caster.spell_power * caster.versatility_multiplier) + (1.5 * caster.spell_power * 1.04)
                 
                 if hammer_and_anvil_crit:
                     hammer_and_anvil_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
@@ -200,6 +211,13 @@ class Judgment(Spell):
                 for target in chosen_targets:
                     target.receive_heal(hammer_and_anvil_heal, caster)
                     update_spell_data_heals(caster.ability_breakdown, "Hammer and Anvil", target, hammer_and_anvil_heal, hammer_and_anvil_crit)
+                    
+            # truth prevails
+            if caster.ptr and caster.is_talent_active("Truth Prevails"):
+                truth_prevails_heal, truth_prevails_crit = TruthPrevailsHeal(caster).calculate_heal(caster)
+                caster.receive_self_heal(truth_prevails_heal)
+                
+                update_spell_data_heals(caster.ability_breakdown, "Truth Prevails", caster, truth_prevails_heal, truth_prevails_crit)
                 
         return cast_success, spell_crit, spell_damage, judgment_of_light_healing, greater_judgment_healing, avenging_crusader_healing
            

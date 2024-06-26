@@ -173,7 +173,7 @@ class Dawnlight(HoT):
  
 class EternalFlameBuff(HoT):
     
-    SPELL_POWER_COEFFICIENT = 1
+    SPELL_POWER_COEFFICIENT = 1.2 * 1.1
     
     def __init__(self, caster, duration_to_apply):
         super().__init__("Eternal Flame (HoT)", duration_to_apply, base_duration=duration_to_apply, base_tick_interval=3, initial_haste_multiplier=caster.haste_multiplier) 
@@ -649,8 +649,8 @@ class RelentlessInquisitor(Buff):
             
 class RisingSunlight(Buff):
     
-    def __init__(self):
-        super().__init__("Rising Sunlight", 30, base_duration=30, current_stacks=3, max_stacks=3)
+    def __init__(self, caster):
+        super().__init__("Rising Sunlight", 30, base_duration=30, current_stacks=2 if caster.ptr else 3, max_stacks=4)
         
 
 class UnendingLight(Buff):
@@ -3334,3 +3334,16 @@ class PureLight(Buff):
         
     def remove_effect(self, caster, current_time=None):
         pass
+    
+    
+class Liberation(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Liberation", 20, base_duration=20)   
+        self.mana_cost = caster.abilities["Judgment"].mana_cost * caster.base_mana
+            
+    def apply_effect(self, caster, current_time=None):
+        caster.abilities["Judgment"].mana_cost_modifier *= 1 - (4000 / self.mana_cost)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.abilities["Judgment"].mana_cost_modifier /= 1 - (4000 / self.mana_cost)

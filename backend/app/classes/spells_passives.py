@@ -67,8 +67,7 @@ class RiteOfAdjurationSpell(Spell):
 
 class SacredWeapon(Spell):
     
-    # higher in game than expected
-    SPELL_POWER_COEFFICIENT = 1 * 1.04 * 1.66
+    SPELL_POWER_COEFFICIENT = 1 * 1.04 * 1.5
     BASE_PPM = 10
     TARGET_COUNT = 5
     

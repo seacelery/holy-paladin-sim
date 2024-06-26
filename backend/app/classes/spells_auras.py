@@ -1,7 +1,7 @@
 import random
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable, DivinePurpose, Dawnlight, SolarGrace, GleamingRays, EternalFlameBuff, HolyBulwarkBuff, SacredWeaponBuff, HolyBulwarkSelf, SacredWeaponSelf, SunsAvatar, SunsAvatarActive
+from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable, DivinePurpose, Dawnlight, SolarGrace, GleamingRays, EternalFlameBuff, HolyBulwarkBuff, SacredWeaponBuff, HolyBulwarkSelf, SacredWeaponSelf, SunsAvatar, SunsAvatarActive, RisingSunlight
 from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts, update_spell_data_initialise_spell, update_spell_data_heals
 
 
@@ -126,6 +126,10 @@ class AvengingWrathSpell(Spell):
         if cast_success:
             caster.apply_buff_to_self(AvengingWrathBuff(caster), current_time)
             
+            # rising sunlight
+            if caster.is_talent_active("Rising Sunlight") and caster.ptr:
+                caster.apply_buff_to_self(RisingSunlight(caster), current_time, stacks_to_apply=2, max_stacks=4)
+            
             # sun's avatar
             if caster.ptr and caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
                 # max_dawnlights = 4
@@ -178,6 +182,10 @@ class AvengingCrusaderSpell(Spell):
         if cast_success:
             caster.holy_power -= self.holy_power_cost
             caster.apply_buff_to_self(AvengingCrusaderBuff(caster), current_time)
+            
+            # rising sunlight
+            if caster.is_talent_active("Rising Sunlight"):
+                caster.apply_buff_to_self(RisingSunlight(caster), current_time, stacks_to_apply=2, max_stacks=4)
             
             # sun's avatar
             if caster.ptr and caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):

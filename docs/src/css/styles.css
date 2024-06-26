@@ -157,20 +157,20 @@ body {
 
 #template-button {
     position: absolute;
-    top: 15px;
+    top: 16px;
     right: 250px;
 
     display: none;
     justify-content: center;
     align-items: center;
     width: 140px;
-    height: 33px;
+    height: 32px;
     padding-bottom: 1px;
     color: var(--light-font-colour);
     font-size: 14px;
     background-color: var(--button-colour);
     box-shadow: 3px 5px 6px 0 rgba(36, 14, 25, 0.25);
-    border: 1px solid var(--border-colour-2);
+    border: 0px solid var(--border-colour-2);
     border-radius: 4px;
     user-select: none;
     cursor: pointer;

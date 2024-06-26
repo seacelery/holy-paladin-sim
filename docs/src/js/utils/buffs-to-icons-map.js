@@ -42,6 +42,7 @@ const buffsToIconsMap = {
     "Holy Bulwark": "https://render.worldofwarcraft.com/eu/icons/56/inv_shield_1h_artifactnorgannon_d_06.jpg",
     "Holy Reverberation": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_holybolts01.jpg",
     "Infusion of Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_infusionoflight.jpg",
+    "Liberation": "https://wow.zamimg.com/images/wow/icons/large/ability_paladin_bladeofjusticeblue.jpg",
     "Light of the Martyr": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_lightofthemartyr.jpg",
     "Maraad's Dying Breath": "https://render.worldofwarcraft.com/eu/icons/56/paladin_icon_speedoflight.jpg",
     "Merciful Auras": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_blessedlife.jpg",
@@ -198,5 +199,3 @@ const buffsToIconsMap = {
     "Allied Wristguards of Companionship": "https://render.worldofwarcraft.com/eu/icons/56/inv_bracer_plate_raidwarriorprimalist_d_01.jpg",
     "Allied Wristgaurds of Companionship": "https://render.worldofwarcraft.com/eu/icons/56/inv_bracer_plate_raidwarriorprimalist_d_01.jpg",
 }; 
-
-export { buffsToIconsMap };

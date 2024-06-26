@@ -369,7 +369,7 @@ const templateSpecTalents = {
         }
     },
     "row2": {
-        "Glimmer of Light": {
+        "Extrication": {
             "ranks": {
                 "current rank": 1,
                 "max rank": 1
@@ -447,12 +447,6 @@ const templateSpecTalents = {
                 "max rank": 1
             }
         },
-        "Glistening Radiance": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
         "Hand of Divinity": {
             "ranks": {
                 "current rank": 0,
@@ -503,7 +497,7 @@ const templateSpecTalents = {
                 "max rank": 1
             }
         },
-        "Illumination": {
+        "Liberation": {
             "ranks": {
                 "current rank": 1,
                 "max rank": 1
@@ -541,6 +535,12 @@ const templateSpecTalents = {
         }
     },
     "row7": {
+        "Glistening Radiance": {
+            "ranks": {
+                "current rank": 0,
+                "max rank": 1
+            }
+        },
         "Bestow Light": {
             "ranks": {
                 "current rank": 1,
@@ -549,7 +549,7 @@ const templateSpecTalents = {
         },
         "Breaking Dawn": {
             "ranks": {
-                "current rank": 0,
+                "current rank": 1,
                 "max rank": 2
             }
         },
@@ -631,13 +631,13 @@ const templateSpecTalents = {
         },
         "Crusader's Might": {
             "ranks": {
-                "current rank": 0,
+                "current rank": 1,
                 "max rank": 1
             }
         },
         "Daybreak": {
             "ranks": {
-                "current rank": 1,
+                "current rank": 0,
                 "max rank": 1
             }
         },
@@ -723,7 +723,8 @@ const templateUpdateSpecTalents = {
     "Inflorescence of the Sunwell": 0,
     "Rising Sunlight": 1,
     "Sanctified Wrath": 0,
-    "Glimmer of Light": 1,
+    "Glimmer of Light": 0,
+    "Extrication": 1,
     "Light of Dawn": 1,
     "Aura Mastery": 1,
     "Beacon of the Lightbringer": 1,
@@ -735,7 +736,7 @@ const templateUpdateSpecTalents = {
     "Tirion's Devotion": 0,
     "Unending Light": 1,
     "Divine Favor": 1,
-    "Glistening Radiance": 1,
+    "Glistening Radiance": 0,
     "Hand of Divinity": 0,
     "Imbued Infusions": 1,
     "Light of the Martyr": 1,
@@ -744,14 +745,15 @@ const templateUpdateSpecTalents = {
     "Barrier of Faith": 0,
     "Blessed Focus": 0,
     "Holy Prism": 1,
-    "Illumination": 1,
+    "Illumination": 0,
+    "Liberation": 1,
     "Light's Protection": 1,
     "Overflowing Light": 0,
     "Power of the Silver Hand": 0,
     "Saved by the Light": 0,
     "Shining Righteousness": 0,
     "Bestow Light": 1,
-    "Breaking Dawn": 0,
+    "Breaking Dawn": 1,
     "Commanding Light": 1,
     "Divine Glimpse": 1,
     "Divine Revelations": 1,
@@ -764,8 +766,8 @@ const templateUpdateSpecTalents = {
     "Tyr's Deliverance": 1,
     "Veneration": 0,
     "Blessing of Summer": 1,
-    "Crusader's Might": 0,
-    "Daybreak": 1,
+    "Crusader's Might": 1,
+    "Daybreak": 0,
     "Merciful Auras": 0,
     "Reclamation": 1,
     "Relentless Inquisitor": 0

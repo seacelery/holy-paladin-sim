@@ -226,7 +226,7 @@ base_active_spec_talents_ptr = {
         "Holy Shock": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row2": {
-        "Glimmer of Light": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Extrication": {"ranks": {"current rank": 0, "max rank": 1}},
         "Light of Dawn": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row3": {
@@ -243,29 +243,28 @@ base_active_spec_talents_ptr = {
         "Holy Infusion": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row5": {
-        "Divine Favor": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Hand of Divinity": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Glistening Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Revelations": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Holy Prism": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Barrier of Faith": {"ranks": {"current rank": 0, "max rank": 1}},
         "Unwavering Spirit": {"ranks": {"current rank": 0, "max rank": 1}},
         "Protection of Tyr": {"ranks": {"current rank": 0, "max rank": 1}},
         "Imbued Infusions": {"ranks": {"current rank": 0, "max rank": 1}},
         "Light of the Martyr": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row6": {
-        "Illumination": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Blessed Focus": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Saved by the Light": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Barrier of Faith": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Holy Prism": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Liberation": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Favor": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Hand of Divinity": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Saved by the Light": {"ranks": {"current rank": 0, "max rank": 1}},   
         "Power of the Silver Hand": {"ranks": {"current rank": 0, "max rank": 1}},
         "Light's Protection": {"ranks": {"current rank": 0, "max rank": 1}},
         "Overflowing Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Shining Righteousness": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row7": {
-        "Divine Revelations": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Commanding Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Righteous Judgment": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Commanding Light": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Glistening Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
         "Breaking Dawn": {"ranks": {"current rank": 0, "max rank": 2}},
         "Tower of Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
         "Divine Glimpse": {"ranks": {"current rank": 0, "max rank": 1}},
@@ -280,7 +279,7 @@ base_active_spec_talents_ptr = {
         "Tyr's Deliverance": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row9": {
-        "Daybreak": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Truth Prevails": {"ranks": {"current rank": 0, "max rank": 1}},
         "Crusader's Might": {"ranks": {"current rank": 0, "max rank": 1}},
         "Merciful Auras": {"ranks": {"current rank": 0, "max rank": 1}},
         "Blessing of Summer": {"ranks": {"current rank": 0, "max rank": 1}},
