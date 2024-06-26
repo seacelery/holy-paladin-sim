@@ -199,3 +199,5 @@ const buffsToIconsMap = {
     "Allied Wristguards of Companionship": "https://render.worldofwarcraft.com/eu/icons/56/inv_bracer_plate_raidwarriorprimalist_d_01.jpg",
     "Allied Wristgaurds of Companionship": "https://render.worldofwarcraft.com/eu/icons/56/inv_bracer_plate_raidwarriorprimalist_d_01.jpg",
 }; 
+
+export { buffsToIconsMap };
