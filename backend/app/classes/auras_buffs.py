@@ -362,19 +362,6 @@ class AvengingWrathAwakening(Buff):
                 
                 if "Morning Star" in caster.active_auras:
                     caster.active_auras["Morning Star"].current_stacks = 0
-                
-            for target in dawnlight_targets:
-                target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
-                target.apply_buff_to_target(EternalFlameBuff(caster, 12), current_time, caster=caster)
-                
-                if caster.is_talent_active("Solar Grace"):
-                    caster.apply_buff_to_self(SolarGrace(caster), current_time)
-            
-                if caster.is_talent_active("Gleaming Rays"):
-                    caster.apply_buff_to_self(GleamingRays(caster), current_time, reapply=True)
-                
-                if "Morning Star" in caster.active_auras:
-                    caster.active_auras["Morning Star"].current_stacks = 0
         
     def remove_effect(self, caster, current_time=None):
         if caster.is_talent_active("Avenging Wrath: Might"):
@@ -452,19 +439,6 @@ class AvengingCrusaderAwakening(Buff):
             for target in chosen_targets:
                 target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                 target.apply_buff_to_target(SunsAvatar(caster), current_time, caster=caster)
-                
-                if caster.is_talent_active("Solar Grace"):
-                    caster.apply_buff_to_self(SolarGrace(caster), current_time)
-            
-                if caster.is_talent_active("Gleaming Rays"):
-                    caster.apply_buff_to_self(GleamingRays(caster), current_time, reapply=True)
-                
-                if "Morning Star" in caster.active_auras:
-                    caster.active_auras["Morning Star"].current_stacks = 0
-                
-            for target in dawnlight_targets:
-                target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
-                target.apply_buff_to_target(EternalFlameBuff(caster, 12), current_time, caster=caster)
                 
                 if caster.is_talent_active("Solar Grace"):
                     caster.apply_buff_to_self(SolarGrace(caster), current_time)
@@ -3167,27 +3141,25 @@ class SolarGrace(Buff):
         if SolarGrace.count == 6:
             SolarGrace.count = 0
         super().__init__(f"Solar Grace {self.count}", 12, base_duration=12)  
-        self.active_solar_graces = 0
         
     def apply_effect(self, caster, current_time=None):
-        caster.flat_haste -= 3 * self.active_solar_graces
-        self.active_solar_graces += 1
-        caster.flat_haste += 3 * self.active_solar_graces
-        caster.update_stat("haste", 0)
-        caster.update_hasted_cooldowns_with_haste_changes()
-        
-        # TODO verify if multiplicative
-        # update_stat_with_multiplicative_percentage(caster, "haste", 3 * self.active_solar_graces, False)
+        # if additive
+        # caster.flat_haste -= 3 * self.active_solar_graces
         # self.active_solar_graces += 1
-        # update_stat_with_multiplicative_percentage(caster, "haste", 3 * self.active_solar_graces, True)
+        # caster.flat_haste += 3 * self.active_solar_graces
+        # caster.update_stat("haste", 0)
+        
+        update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name]) - 1), False)
+        update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name])), True)
+        caster.update_hasted_cooldowns_with_haste_changes()
         
     def remove_effect(self, caster, current_time=None):
-        caster.flat_haste -= 3
-        caster.update_stat("haste", 0)
-        caster.update_hasted_cooldowns_with_haste_changes()
+        # caster.flat_haste -= 3
+        # caster.update_stat("haste", 0)
         
-        # update_stat_with_multiplicative_percentage(caster, "haste", 3, False)
-        # self.active_solar_graces -= 1
+        update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name])), False)
+        update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name]) - 1), True)
+        caster.update_hasted_cooldowns_with_haste_changes()
     
 
 class SacredWeaponBuff(Buff):

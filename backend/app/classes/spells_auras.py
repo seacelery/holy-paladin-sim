@@ -152,19 +152,6 @@ class AvengingWrathSpell(Spell):
                     if "Morning Star" in caster.active_auras:
                         caster.active_auras["Morning Star"].current_stacks = 0
                     
-                for target in dawnlight_targets:
-                    target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
-                    target.apply_buff_to_target(EternalFlameBuff(caster, 12), current_time, caster=caster)
-                    
-                    if caster.is_talent_active("Solar Grace"):
-                        caster.apply_buff_to_self(SolarGrace(caster), current_time)
-                
-                    if caster.is_talent_active("Gleaming Rays"):
-                        caster.apply_buff_to_self(GleamingRays(caster), current_time, reapply=True)
-                    
-                    if "Morning Star" in caster.active_auras:
-                        caster.active_auras["Morning Star"].current_stacks = 0
-                    
                 
 class AvengingCrusaderSpell(Spell):
     
@@ -199,19 +186,6 @@ class AvengingCrusaderSpell(Spell):
                 for target in chosen_targets:
                     target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                     target.apply_buff_to_target(SunsAvatar(caster), current_time, caster=caster)
-                    
-                    if caster.is_talent_active("Solar Grace"):
-                        caster.apply_buff_to_self(SolarGrace(caster), current_time)
-                
-                    if caster.is_talent_active("Gleaming Rays"):
-                        caster.apply_buff_to_self(GleamingRays(caster), current_time, reapply=True)
-                    
-                    if "Morning Star" in caster.active_auras:
-                        caster.active_auras["Morning Star"].current_stacks = 0
-                    
-                for target in dawnlight_targets:
-                    target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
-                    target.apply_buff_to_target(EternalFlameBuff(caster, 12), current_time, caster=caster)
                     
                     if caster.is_talent_active("Solar Grace"):
                         caster.apply_buff_to_self(SolarGrace(caster), current_time)

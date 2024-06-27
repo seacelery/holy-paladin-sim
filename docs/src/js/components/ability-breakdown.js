@@ -366,7 +366,8 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         nameCell.appendChild(spellNameText);
 
         // make collapsible if it has sub-spells
-        if (Object.keys(spellData["sub_spells"]).length > 0 || spellName === "Beacon of Light") {    
+        const spellsWithHiddenSubSpells = ["Holy Shock"];
+        if ((Object.keys(spellData["sub_spells"]).length > 0 || spellName === "Beacon of Light") && !spellsWithHiddenSubSpells.includes(spellName)) {   
         
             const arrowIconContainer = document.createElement("div");
             arrowIconContainer.className = "table-icon-container";
