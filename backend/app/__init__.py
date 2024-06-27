@@ -459,10 +459,17 @@ def run_simulation_task(self, simulation_parameters):
                     target_data["crit_percent"] = round((target_data["crits"] / target_data["casts"]) * 100, 1) if target_data["casts"] > 0 else 0
             
             # assign sub-spell data to primary spell
-            for spell, data in ability_breakdown.items():
+            sub_spell_exceptions = []
+                
+            for spell, data in list(ability_breakdown.items()):
                 if spell in sub_spell_map:
                     primary_spell = sub_spell_map[spell]
-                    ability_breakdown[primary_spell]["sub_spells"][spell] = data
+                    
+                    if primary_spell in ability_breakdown:
+                        ability_breakdown[primary_spell]["sub_spells"][spell] = data
+                    else:
+                        ability_breakdown[spell] = data
+                        sub_spell_exceptions.append(spell)
             
             for primary_spell, primary_data in ability_breakdown.items():
                 if primary_spell in sub_spell_map.values():
@@ -521,7 +528,7 @@ def run_simulation_task(self, simulation_parameters):
                 "Eternal Flame (HoT)", "Sacred Weapon 1", "Sacred Weapon 2", "Divine Guidance", "Hammer and Anvil", "Saved by the Light (Word of Glory)",
                 "Saved by the Light (Light of Dawn)", "Saved by the Light (Eternal Flame)"
                 ]:
-                if spell in ability_breakdown:
+                if spell in ability_breakdown and spell not in sub_spell_exceptions:
                     del ability_breakdown[spell]
                             
             # combine beacon glimmer sources into one spell

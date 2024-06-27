@@ -206,12 +206,6 @@ const templateClassTalents = {
                 "max rank": 1
             }
         },
-        "Crusader's Reprieve": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
         "Improved Blessing of Protection": {
             "ranks": {
                 "current rank": 0,
@@ -695,7 +689,7 @@ const templateUpdateClassTalents = {
     "Lightforged Blessing": 0,
     "Sanctified Plates": 2,
     "Afterimage": 1,
-    "Crusader's Reprieve": 1,
+    "Crusader's Reprieve": 0,
     "Improved Blessing of Protection": 0,
     "Recompense": 0,
     "Sacrifice of the Just": 1,

@@ -18,8 +18,8 @@ const classTalentsPTR = [
     "Repentance/Blinding Light", "", "Cavalier", "", "Seasoned Warhorse", "", "Rebuke",
     "", "Holy Aegis", "", "Avenging Wrath", "", "Justification", "Punishment",
     "Golden Path", "Echoing Blessings", "Blessing of Sacrifice", "Sanctified Plates", "Blessing of Protection", "", "Lightforged Blessing",
-    "Seal of Mercy", "Afterimage", "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Improved Blessing of Protection", "Crusader's Reprieve", "",
-    "Strength of Conviction", "Judgment of Light", "Seal of Might", "Divine Purpose", "Seal of Alacrity", "Incandescence/Touch of Light", "Faith's Armor",
+    "Seal of Mercy", "Afterimage", "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Improved Blessing of Protection", "Touch of Light", "",
+    "Strength of Conviction", "Judgment of Light", "Seal of Might", "Divine Purpose", "Seal of Alacrity", "Incandescence", "Faith's Armor",
     "", "Of Dusk and Dawn", "", "Divine Toll", "", "Seal of the Crusader", "",
     "", "Seal of Order/Fading Light", "", "Divine Resonance/Quickened Invocation", "", "Vanguard's Momentum", ""
 ];
@@ -169,7 +169,7 @@ let baseClassTalentsPTR = {
         "Recompense": {"ranks": {"current rank": 0, "max rank": 1}},
         "Unbreakable Spirit": {"ranks": {"current rank": 0, "max rank": 1}},
         "Improved Blessing of Protection": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Crusader's Reprieve": {"ranks": {"current rank": 0, "max rank": 1}}
+        "Touch of Light": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row8": {
         "Strength of Conviction": {"ranks": {"current rank": 0, "max rank": 2}},
@@ -178,7 +178,6 @@ let baseClassTalentsPTR = {
         "Divine Purpose": {"ranks": {"current rank": 0, "max rank": 1}},
         "Seal of Alacrity": {"ranks": {"current rank": 0,"max rank": 2}},
         "Incandescence": {"ranks": {"current rank": 0,"max rank": 1}},
-        "Touch of Light": {"ranks": {"current rank": 0,"max rank": 1}},
         "Faith's Armor": {"ranks": {"current rank": 0,"max rank": 1}}
     },
     "row9": {
@@ -379,8 +378,8 @@ const classTalentsArrowsPTR = {
     "down": [
         "Blessing of Freedom", "Obduracy", "Rebuke", "Holy Aegis", "Avenging Wrath", "Punishment", "Golden Path", "Echoing Blessings",
         "Blessing of Sacrifice", "Sanctified Plates", "Blessing of Protection", "Seal of Mercy", "Afterimage",
-        "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Improved Blessing of Protection", "Crusader's Reprieve", "Judgment of Light",
-        "Divine Purpose", "Incandescence/Touch of Light", "Of Dusk and Dawn", "Divine Toll", "Seal of the Crusader"
+        "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Improved Blessing of Protection", "Touch of Light", "Judgment of Light",
+        "Divine Purpose", "Incandescence", "Of Dusk and Dawn", "Divine Toll", "Seal of the Crusader"
     ],
     "downLong": [
         "Lay on Hands", "Hammer of Wrath", "Improved Cleanse", "Turn Evil", "Fist of Justice", "Greater Judgment", "Repentance/Blinding Light",
@@ -396,7 +395,7 @@ const classTalentsArrowsPTR = {
         "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Auras of Swift Vengeance", "Divine Steed",
         "Greater Judgment", "Repentance/Blinding Light", "Cavalier", "Seasoned Warhorse", "Holy Aegis", "Avenging Wrath", "Justification",
         "Golden Path", "Blessing of Sacrifice", "Blessing of Protection", "Unbreakable Spirit", "Improved Blessing of Protection",
-        "Crusader's Reprieve", "Strength of Conviction", "Seal of Might", "Seal of Alacrity"
+        "Touch of Light", "Strength of Conviction", "Seal of Might", "Seal of Alacrity"
     ]
 };
 
