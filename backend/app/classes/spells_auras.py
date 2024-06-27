@@ -1,7 +1,7 @@
 import random
 
 from .spells import Spell
-from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable, DivinePurpose, Dawnlight, SolarGrace, GleamingRays, EternalFlameBuff, HolyBulwarkBuff, SacredWeaponBuff, HolyBulwarkSelf, SacredWeaponSelf, SunsAvatar, SunsAvatarActive, RisingSunlight
+from .auras_buffs import AvengingWrathBuff, BeaconOfLightBuff, DivineFavorBuff, TyrsDeliveranceSelfBuff, TyrsDeliveranceTargetBuff, BlessingOfSummer, BlessingOfAutumn, BlessingOfWinter, BlessingOfSpring, FirebloodBuff, GiftOfTheNaaruBuff, HandOfDivinityBuff, BarrierOfFaithBuff, AvengingCrusaderBuff, DawnlightAvailable, DivinePurpose, Dawnlight, SolarGrace, GleamingRays, EternalFlameBuff, HolyBulwarkBuff, SacredWeaponBuff, HolyBulwarkSelf, SacredWeaponSelf, SunsAvatar, SunsAvatarActive, RisingSunlight, BlessingOfTheForge
 from ..utils.misc_functions import append_aura_applied_event, format_time, update_spell_data_casts, update_spell_data_initialise_spell, update_spell_data_heals
 
 
@@ -140,7 +140,7 @@ class AvengingWrathSpell(Spell):
                 dawnlights_to_apply = 4
                 chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
                 for target in chosen_targets:
-                    target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    target.apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
                     target.apply_buff_to_target(SunsAvatar(caster), current_time, caster=caster)
                     
                     if caster.is_talent_active("Solar Grace"):
@@ -151,6 +151,17 @@ class AvengingWrathSpell(Spell):
                     
                     if "Morning Star" in caster.active_auras:
                         caster.active_auras["Morning Star"].current_stacks = 0
+                        
+            # blessing of the forge
+            if caster.ptr and caster.is_talent_active("Blessing of the Forge"):
+                sacred_weapon_targets = random.sample(caster.potential_healing_targets, 2)
+                for target in sacred_weapon_targets:
+                    target.apply_buff_to_target(SacredWeaponBuff(caster), current_time, caster=caster)  
+                if "Sacred Weapon" in caster.active_auras:
+                    caster.apply_buff_to_self(SacredWeaponSelf(caster), current_time, reapply=True)     
+                else:      
+                    caster.apply_buff_to_self(SacredWeaponSelf(caster), current_time)
+                caster.apply_buff_to_self(BlessingOfTheForge(caster, 20), current_time)
                     
                 
 class AvengingCrusaderSpell(Spell):
@@ -184,7 +195,7 @@ class AvengingCrusaderSpell(Spell):
                 dawnlights_to_apply = 4
                 chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
                 for target in chosen_targets:
-                    target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    target.apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
                     target.apply_buff_to_target(SunsAvatar(caster), current_time, caster=caster)
                     
                     if caster.is_talent_active("Solar Grace"):
@@ -195,6 +206,17 @@ class AvengingCrusaderSpell(Spell):
                     
                     if "Morning Star" in caster.active_auras:
                         caster.active_auras["Morning Star"].current_stacks = 0
+                        
+            # blessing of the forge
+            if caster.ptr and caster.is_talent_active("Blessing of the Forge"):
+                sacred_weapon_targets = random.sample(caster.potential_healing_targets, 2)
+                for target in sacred_weapon_targets:
+                    target.apply_buff_to_target(SacredWeaponBuff(caster), current_time, caster=caster)  
+                if "Sacred Weapon" in caster.active_auras:
+                    caster.apply_buff_to_self(SacredWeaponSelf(caster), current_time, reapply=True)     
+                else:      
+                    caster.apply_buff_to_self(SacredWeaponSelf(caster), current_time)
+                caster.apply_buff_to_self(BlessingOfTheForge(caster, 20), current_time)
    
             
 class DivineFavorSpell(Spell):

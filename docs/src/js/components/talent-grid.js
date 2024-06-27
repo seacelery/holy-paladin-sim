@@ -35,13 +35,20 @@ const toggleTalentOptions = (talentName, talentData) => {
 };
 
 const updateTalentsFromImportedData = (importedTalents) => {
-    console.log(importedTalents)
     let importedClassTalents = importedTalents.class_talents;
     let importedSpecTalents = importedTalents.spec_talents;
+    let importedLightsmithTalents = "";
+    let importedHeraldOfTheSunTalents = "";
+    if (futurePatchSelected) {
+        importedLightsmithTalents = importedTalents.lightsmith_talents;
+        importedHeraldOfTheSunTalents = importedTalents.herald_of_the_sun_talents;
+    };
 
     const updateTalents = (imported, baseTalents, category) => {
         let classTalentsCount = 0;
         let specTalentsCount = 0;
+        let lightsmithTalentsCount = 0;
+        let heraldOfTheSunTalentsCount = 0;
 
         for (const row in imported) {
             for (const talentName in imported[row]) {
@@ -71,6 +78,10 @@ const updateTalentsFromImportedData = (importedTalents) => {
                         classTalentsCount += talentData.ranks["current rank"];
                     } else if (category === "spec") {
                         specTalentsCount += talentData.ranks["current rank"];
+                    } else if (category === "lightsmith") {
+                        lightsmithTalentsCount += talentData.ranks["current rank"];
+                    } else if (category === "herald-of-the-sun") {
+                        heraldOfTheSunTalentsCount += talentData.ranks["current rank"];
                     };
 
                     // class talents
@@ -123,15 +134,25 @@ const updateTalentsFromImportedData = (importedTalents) => {
             const freeTalentsCount = 0;
             const specTalents = document.getElementById("spec-talents");
             specTalents.setAttribute("data-specs-talents-count", specTalentsCount - freeTalentsCount);
+        } else if (category === "lightsmith") {
+            const heroTalents = document.getElementById("hero-talents-modal");
+            heroTalents.setAttribute("data-hero-talents-count", lightsmithTalentsCount);
+        } else if (category === "herald-of-the-sun") {
+            const heroTalents = document.getElementById("hero-talents-modal");
+            heroTalents.setAttribute("data-hero-talents-count", heraldOfTheSunTalentsCount);
         };
 
         updateTalentCounts("class");
         updateTalentCounts("spec");
+        updateTalentCounts("lightsmith");
+        updateTalentCounts("herald-of-the-sun");
     };
 
     if (futurePatchSelected) {
         updateTalents(importedClassTalents, baseClassTalentsPTR, "class");
         updateTalents(importedSpecTalents, baseSpecTalentsPTR, "spec");  
+        updateTalents(importedLightsmithTalents, baseLightsmithTalents, "lightsmith");
+        updateTalents(importedHeraldOfTheSunTalents, baseHeraldOfTheSunTalents, "herald-of-the-sun");
     } else {
         updateTalents(importedClassTalents, baseClassTalentsLive, "class");
         updateTalents(importedSpecTalents, baseSpecTalentsLive, "spec");  

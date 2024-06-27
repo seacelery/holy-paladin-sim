@@ -22,6 +22,7 @@ const buffsToIconsMap = {
     "Blessing of Spring": "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_spring.jpg",
     "Blessing of Summer": "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_summer.jpg",
     "Blessing of Winter": "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_winter.jpg",
+    "Blessing of the Forge": "https://wow.zamimg.com/images/wow/icons/large/inv_ability_lightsmithpaladin_sacredweapon.jpg",
     "Dawnlight": "https://wow.zamimg.com/images/wow/icons/large/inv_ability_heraldofthesunpaladin_dawnlight.jpg",
     "Dawnlight (HoT)": "https://wow.zamimg.com/images/wow/icons/large/inv_ability_heraldofthesunpaladin_dawnlight.jpg",
     "Divine Favor": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_heal.jpg",

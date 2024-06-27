@@ -20,7 +20,8 @@ import { formatNumbers, formatNumbersNoRounding, formatTime, formatThousands, ma
 import { realmList } from "../utils/data/realm-list.js";
 import { createOptionsSliders, roundIterations } from "../components/create-options-sliders.js";
 import { CONFIG } from "./config.js";
-import { templateClassTalents, templateSpecTalents, templateUpdateClassTalents, templateUpdateSpecTalents, templateEquipment } from "../utils/template-settings.js";
+import { templateClassTalents, templateSpecTalents, templateLightsmithTalents, templateHeraldOfTheSunTalents, templateUpdateClassTalents, templateUpdateSpecTalents, templateUpdateLightsmithTalents, templateUpdateHeraldOfTheSunTalents, templateEquipment } from "../utils/template-settings.js";
+
 
 // helper functions
 const createElement = (elementName, className = null, id = null) => {
@@ -279,11 +280,13 @@ templateButton.addEventListener("click", () => {
         "race": "Human",
         "class_talents": templateClassTalents,
         "spec_talents": templateSpecTalents,
+        // "lightsmith_talents": templateLightsmithTalents,
+        // "herald_of_the_sun_talents": templateHeraldOfTheSunTalents,
         "equipment": templateEquipment,
         "consumable": {},
         "stats": {},
         "ptr": true,
-    }
+    };
 
     console.log(templateData)
     updateEquipmentWithEffectValues(templateData);
@@ -295,7 +298,8 @@ templateButton.addEventListener("click", () => {
     updateCharacter({
         "class_talents": templateUpdateClassTalents,
         "spec_talents": templateUpdateSpecTalents,
-                        
+        // "lightsmith_talents": templateUpdateLightsmithTalents,
+        // "herald_of_the_sun_talents": templateUpdateHeraldOfTheSunTalents,                    
     });
 });
 

@@ -144,8 +144,8 @@ class Dawnlight(HoT):
     # TODO verify 22.5% higher
     SPELL_POWER_COEFFICIENT = 4.8
     
-    def __init__(self, caster):
-        super().__init__("Dawnlight (HoT)", 8, base_duration=8, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
+    def __init__(self, caster, duration_to_apply=8):
+        super().__init__("Dawnlight (HoT)", duration_to_apply, base_duration=duration_to_apply, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
         self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
         
         if "Morning Star" in caster.active_auras:
@@ -351,7 +351,7 @@ class AvengingWrathAwakening(Buff):
             dawnlights_to_apply = 1
             chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
             for target in chosen_targets:
-                target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                target.apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
                 target.apply_buff_to_target(SunsAvatar(caster), current_time, caster=caster)
                 
                 if caster.is_talent_active("Solar Grace"):
@@ -362,6 +362,17 @@ class AvengingWrathAwakening(Buff):
                 
                 if "Morning Star" in caster.active_auras:
                     caster.active_auras["Morning Star"].current_stacks = 0
+                    
+        # blessing of the forge
+        if caster.ptr and caster.is_talent_active("Blessing of the Forge"):
+            sacred_weapon_targets = random.sample(caster.potential_healing_targets, 2)
+            for target in sacred_weapon_targets:
+                target.apply_buff_to_target(SacredWeaponBuff(caster), current_time, caster=caster)  
+            if "Sacred Weapon" in caster.active_auras:
+                caster.apply_buff_to_self(SacredWeaponSelf(caster), current_time, reapply=True)     
+            else:      
+                caster.apply_buff_to_self(SacredWeaponSelf(caster), current_time)
+            caster.apply_buff_to_self(BlessingOfTheForge(caster, 12), current_time)
         
     def remove_effect(self, caster, current_time=None):
         if caster.is_talent_active("Avenging Wrath: Might"):
@@ -437,7 +448,7 @@ class AvengingCrusaderAwakening(Buff):
             dawnlights_to_apply = 1
             chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
             for target in chosen_targets:
-                target.apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                target.apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
                 target.apply_buff_to_target(SunsAvatar(caster), current_time, caster=caster)
                 
                 if caster.is_talent_active("Solar Grace"):
@@ -448,6 +459,17 @@ class AvengingCrusaderAwakening(Buff):
                 
                 if "Morning Star" in caster.active_auras:
                     caster.active_auras["Morning Star"].current_stacks = 0
+                    
+        # blessing of the forge
+        if caster.ptr and caster.is_talent_active("Blessing of the Forge"):
+            sacred_weapon_targets = random.sample(caster.potential_healing_targets, 2)
+            for target in sacred_weapon_targets:
+                target.apply_buff_to_target(SacredWeaponBuff(caster), current_time, caster=caster)  
+            if "Sacred Weapon" in caster.active_auras:
+                caster.apply_buff_to_self(SacredWeaponSelf(caster), current_time, reapply=True)     
+            else:      
+                caster.apply_buff_to_self(SacredWeaponSelf(caster), current_time)
+            caster.apply_buff_to_self(BlessingOfTheForge(caster, 12), current_time)
         
     def remove_effect(self, caster, current_time=None):
         if caster.ptr and caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
@@ -3319,3 +3341,15 @@ class Liberation(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.abilities["Judgment"].mana_cost_modifier /= 1 - (4000 / self.mana_cost)
+        
+
+class BlessingOfTheForge(Buff):
+    
+    def __init__(self, caster, duration_to_apply):
+        super().__init__("Blessing of the Forge", duration_to_apply, base_duration=duration_to_apply)   
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass

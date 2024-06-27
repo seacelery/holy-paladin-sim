@@ -113,7 +113,7 @@ const talentsToIcons = {
     "Truth Prevails": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_spiritualguidence.jpg",
 
     // lightsmith talents
-    "Holy Bulwark": "https://render.worldofwarcraft.com/eu/icons/56/inv_shield_1h_artifactnorgannon_d_06.jpg",
+    "Holy Bulwark": "https://wow.zamimg.com/images/wow/icons/large/inv_ability_lightsmithpaladin_holybulwark.jpg",
     "Rite of Sanctification": "https://render.worldofwarcraft.com/eu/icons/56/inv_inscription_weaponscroll01.jpg",
     "Rite of Adjuration": "https://render.worldofwarcraft.com/eu/icons/56/inv_inscription_armorscroll02.jpg",
     "Solidarity": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_heroism.jpg",
@@ -130,7 +130,7 @@ const talentsToIcons = {
     "Blessing of the Forge": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_1h_artifactnorgannon_d_06.jpg",
 
     // herald of the sun talents
-    "Dawnlight": "https://render.worldofwarcraft.com/eu/icons/56/ability_priest_flashoflight.jpg",
+    "Dawnlight": "https://wow.zamimg.com/images/wow/icons/large/inv_ability_heraldofthesunpaladin_dawnlight.jpg",
     "Morning Star": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_persecution.jpg",
     "Gleaming Rays": "https://wow.zamimg.com/images/wow/icons/large/spell_priest_power-word.jpg",
     "Eternal Flame": "https://render.worldofwarcraft.com/eu/icons/56/inv_torch_thrown.jpg",

@@ -1864,16 +1864,16 @@ class WordOfGlory(Spell):
             # dawnlight
             if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
                 if "Dawnlight (HoT)" in targets[0].target_active_buffs:
-                    # targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
-                    # targets[0].apply_buff_to_target(EternalFlameBuff(caster, 12), current_time, caster=caster)
                     non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
-                    random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
+                        random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                    else:
+                        random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                 else:
-                    # dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]  
-                    # if len(dawnlight_targets) == 4:
-                    #     oldest_dawnlight = min(dawnlight_targets, key=lambda dawnlight_target: dawnlight_target.target_active_buffs["Dawnlight (HoT)"][0].duration)
-                    #     del oldest_dawnlight.target_active_buffs["Dawnlight (HoT)"]
-                    targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
+                        targets[0].apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                    else:
+                        targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                     
                 if caster.is_talent_active("Sun's Avatar"):
                     if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
@@ -1917,6 +1917,12 @@ class WordOfGlory(Spell):
                 random_num = random.random()
                 if random_num <= caster.haste_multiplier - 1:
                     caster.apply_buff_to_self(Liberation(caster), current_time)
+                    
+            # blessing of the forge
+            if caster.ptr and "Blessing of the Forge" in caster.active_auras:
+                sacred_word_heal, sacred_word_crit = SacredWord(caster).calculate_heal(caster)
+                targets[0].receive_heal(sacred_word_heal, caster)
+                update_spell_data_heals(caster.ability_breakdown, "Sacred Word", targets[0], sacred_word_heal, sacred_word_crit)
                     
         return cast_success, spell_crit, heal_amount, total_glimmer_healing, afterimage_heal, empyrean_legacy_light_of_dawn_healing
  
@@ -2189,16 +2195,16 @@ class EternalFlame(Spell):
             # dawnlight
             if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
                 if "Dawnlight (HoT)" in targets[0].target_active_buffs:
-                    # targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
-                    # targets[0].apply_buff_to_target(EternalFlameBuff(caster, 12), current_time, caster=caster)
                     non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
-                    random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
+                        random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                    else:
+                        random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                 else:
-                    # dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]  
-                    # if len(dawnlight_targets) == 4:
-                    #     oldest_dawnlight = min(dawnlight_targets, key=lambda dawnlight_target: dawnlight_target.target_active_buffs["Dawnlight (HoT)"][0].duration)
-                    #     del oldest_dawnlight.target_active_buffs["Dawnlight (HoT)"]
-                    targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
+                        targets[0].apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                    else:
+                        targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                     
                 if caster.is_talent_active("Sun's Avatar"):
                     if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
@@ -2476,16 +2482,16 @@ class LightOfDawn(Spell):
             # dawnlight        
             if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
                 if "Dawnlight (HoT)" in targets[0].target_active_buffs:
-                    # targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
-                    # targets[0].apply_buff_to_target(EternalFlameBuff(caster, 12), current_time, caster=caster)
                     non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
-                    random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
+                        random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                    else:
+                        random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                 else:
-                    # dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]  
-                    # if len(dawnlight_targets) == 4:
-                    #     oldest_dawnlight = min(dawnlight_targets, key=lambda dawnlight_target: dawnlight_target.target_active_buffs["Dawnlight (HoT)"][0].duration)
-                    #     del oldest_dawnlight.target_active_buffs["Dawnlight (HoT)"]
-                    targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
+                    if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
+                        targets[0].apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                    else:
+                        targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                     
                 if caster.is_talent_active("Sun's Avatar"):
                     if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
@@ -2529,6 +2535,14 @@ class LightOfDawn(Spell):
                 random_num = random.random()
                 if random_num <= caster.haste_multiplier - 1:
                     caster.apply_buff_to_self(Liberation(caster), current_time)
+                    
+            # blessing of the forge
+            if caster.ptr and "Blessing of the Forge" in caster.active_auras:
+                chosen_targets = random.sample(caster.potential_healing_targets, 5)
+                for target in chosen_targets:
+                    radiant_aura_heal, radiant_aura_crit = RadiantAura(caster).calculate_heal(caster)
+                    target.receive_heal(radiant_aura_heal, caster)
+                    update_spell_data_heals(caster.ability_breakdown, "Radiant Aura", target, radiant_aura_heal, radiant_aura_crit)
             
             # second sunrise        
             if caster.ptr and caster.is_talent_active("Second Sunrise") and initial_cast:
@@ -2759,3 +2773,19 @@ class TruthPrevailsHeal(Spell):
     
     def __init__(self, caster):
         super().__init__("Truth Prevails", off_gcd=True)
+        
+
+class SacredWord(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 1.5
+    
+    def __init__(self, caster):
+        super().__init__("Sacred Word", off_gcd=True)
+        
+
+class RadiantAura(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0.6
+    
+    def __init__(self, caster):
+        super().__init__("Radiant Aura", off_gcd=True)

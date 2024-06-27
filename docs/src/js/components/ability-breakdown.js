@@ -124,7 +124,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
         "Broodkeeper's Promise", "Sun Sear", "Sacred Weapon 1", "Sacred Weapon 2", "Authority of Fiery Resolve", "Rite of Adjuration",
         "Avenging Crusader (Judgment)", "Avenging Crusader (Crusader Strike)", "Sun's Avatar", "Divine Guidance", "Hammer and Anvil", "Scrapsinger's Symphony",
         "Siphoning Phylactery Shard", "Creeping Coagulum ", "Gruesome Syringe", "Truth Prevails", "Saved by the Light (Word of Glory)", 
-        "Saved by the Light (Eternal Flame)", "Saved by the Light (Light of Dawn)"
+        "Saved by the Light (Eternal Flame)", "Saved by the Light (Light of Dawn)", "Radiant Aura", "Sacred Word"
     ];
     // displays casts with average as healing divided by hits
     const excludedSpellsCastsAverageHits = [
