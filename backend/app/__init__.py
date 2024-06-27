@@ -327,8 +327,9 @@ def run_simulation_task(self, simulation_parameters):
                         
                     ability_breakdown[spell]["overhealing"] = total_overheal_percent 
             
-            for source_spell in ability_breakdown["Beacon of Light"]["source_spells"]:
-                ability_breakdown["Beacon of Light"]["source_spells"][source_spell]["healing"] *= 1 - simulation.overhealing.get("Beacon of Light", 0)
+            if "Beacon of Light" in ability_breakdown:
+                for source_spell in ability_breakdown["Beacon of Light"]["source_spells"]:
+                    ability_breakdown["Beacon of Light"]["source_spells"][source_spell]["healing"] *= 1 - simulation.overhealing.get("Beacon of Light", 0)
         
         # complete all simulation iterations and process the data of each
         for i in range(simulation.iterations):
