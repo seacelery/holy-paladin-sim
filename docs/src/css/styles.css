@@ -1319,6 +1319,11 @@ body {
     color: var(--light-font-colour);
 }
 
+.overhealing-container {
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
 #overhealing-notification {
     font-size: 14px;
     width: 250px;

@@ -154,7 +154,7 @@ class Dawnlight(HoT):
             self.SPELL_POWER_COEFFICIENT *= 1 + (0.05 * caster.active_auras["Morning Star"].current_stacks)
         
     def radiate_healing(self, caster, current_time, heal_amount):
-        target_count = 12
+        target_count = caster.variable_target_counts["Dawnlight"]
         
         scaling_factor = calculate_sqrt_ability_scaling(target_count, 5) / target_count
         # scaling is not currently working

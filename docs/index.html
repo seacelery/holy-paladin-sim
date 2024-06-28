@@ -286,22 +286,12 @@
                                             </div>
                                             <input type="range" id="resplendent-light-option" class="options-option option-slider" value="5" min="1" max="5" step="1">                              
                                         </div>                              
-                                    </div>  
-                                    
-                                    <div class="option-container" id="blessing-of-the-seasons-option-container">
-                                        <div id="blessing-of-the-seasons-option-label" class="options-option-label">Blessing of the Seasons</div>
-                                        <div id="blessing-of-the-seasons-checkboxes-container" class="slider-container">
-                                            <img class="blessing-of-the-seasons-image blessing-of-the-seasons-unselected" src="https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_summer.jpg" draggable="false" data-season="Blessing of Summer">                                     
-                                            <img class="blessing-of-the-seasons-image blessing-of-the-seasons-selected" src="https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_autumn.jpg" draggable="false" data-season="Blessing of Autumn">                                                                   
-                                            <img class="blessing-of-the-seasons-image blessing-of-the-seasons-selected" src="https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_winter.jpg" draggable="false" data-season="Blessing of Winter">                                                                     
-                                            <img class="blessing-of-the-seasons-image blessing-of-the-seasons-selected" src="https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_spring.jpg" draggable="false" data-season="Blessing of Spring">                                  
-                                        </div>                              
                                     </div>   
                                 </div>
                                 
                                 <div class="options-half options-half-right">
-                                    <div class="options-header" id="overhealing-header">Overhealing</div>
-                                    <div class="options-divider"></div>
+                                    <!-- <div class="options-header" id="overhealing-header">Overhealing</div>
+                                    <div class="options-divider"></div> -->
 
                                     <div class="checkbox-button-container">
                                         <label class="option-checkbox-container">Enable Overhealing
@@ -311,7 +301,7 @@
                                         <div class="overhealing-abilities-button">Abilities</div>                              
                                     </div>
 
-                                    <div class="options-header" id="cooldown-tracking-header">Cooldown Tracking</div>
+                                    <!-- <div class="options-header" id="cooldown-tracking-header">Cooldown Tracking</div>
                                     <div class="options-divider"></div>
 
                                     <label class="option-checkbox-container cooldown-tracking-option" id="cooldown-tracking-avenging-wrath-option">Avenging Wrath
@@ -332,7 +322,62 @@
                                     <label class="option-checkbox-container cooldown-tracking-option" id="cooldown-tracking-blessing-of-spring-option">Blessing of Spring
                                         <input type="checkbox" class="option-checkbox cooldown-tracking-checkbox" id="cooldown-tracking-blessing-of-spring-checkbox" checked="checked">                                                        
                                         <span class="options-checkbox-checkmark"></span>                                      
-                                    </label>
+                                    </label> -->
+
+                                    <div class="option-container">
+                                        <label for="dawnlight-option" id="dawnlight-option-label" class="options-option-label">Dawnlight Targets</label>
+                                        <div id="dawnlight-slider-container" class="slider-container">
+                                            <div id="dawnlight-value-container" class="slider-value-container">
+                                                <div id="dawnlight-value" class="slider-value">1</div>
+                                            </div>
+                                            <input type="range" id="dawnlight-option" class="options-option option-slider" value="12" min="1" max="20" step="1">                              
+                                        </div>                              
+                                    </div> 
+
+                                    <div class="option-container">
+                                        <label for="suns-avatar-option" id="suns-avatar-option-label" class="options-option-label">Sun's Avatar Targets</label>
+                                        <div id="suns-avatar-slider-container" class="slider-container">
+                                            <div id="suns-avatar-value-container" class="slider-value-container">
+                                                <div id="suns-avatar-value" class="slider-value">1</div>
+                                            </div>
+                                            <input type="range" id="suns-avatar-option" class="options-option option-slider" value="10" min="1" max="20" step="1">                              
+                                        </div>                              
+                                    </div> 
+
+                                    <div class="option-container" id="blessing-of-the-seasons-option-container">
+                                        <div id="blessing-of-the-seasons-option-label" class="options-option-label">Blessing of the Seasons</div>
+                                        <div id="blessing-of-the-seasons-checkboxes-container" class="slider-container">
+                                            <img class="blessing-of-the-seasons-image blessing-of-the-seasons-unselected" src="https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_summer.jpg" draggable="false" data-season="Blessing of Summer">                                     
+                                            <img class="blessing-of-the-seasons-image blessing-of-the-seasons-selected" src="https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_autumn.jpg" draggable="false" data-season="Blessing of Autumn">                                                                   
+                                            <img class="blessing-of-the-seasons-image blessing-of-the-seasons-selected" src="https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_winter.jpg" draggable="false" data-season="Blessing of Winter">                                                                     
+                                            <img class="blessing-of-the-seasons-image blessing-of-the-seasons-selected" src="https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_spring.jpg" draggable="false" data-season="Blessing of Spring">                                  
+                                        </div>                              
+                                    </div> 
+
+                                    <div style="display: none">
+                                        <div class="options-header" id="cooldown-tracking-header">Cooldown Tracking</div>
+                                        <div class="options-divider"></div>
+
+                                        <label class="option-checkbox-container cooldown-tracking-option" id="cooldown-tracking-avenging-wrath-option">Avenging Wrath
+                                            <input type="checkbox" class="option-checkbox cooldown-tracking-checkbox" id="cooldown-tracking-avenging-wrath-checkbox" checked="checked">                                                        
+                                            <span class="options-checkbox-checkmark"></span>                                      
+                                        </label>
+
+                                        <label class="option-checkbox-container cooldown-tracking-option" id="cooldown-tracking-avenging-wrath-awakening-option">Avenging Wrath (Awakening)
+                                            <input type="checkbox" class="option-checkbox cooldown-tracking-checkbox" id="cooldown-tracking-avenging-wrath-awakening-checkbox" checked="checked">                                                        
+                                            <span class="options-checkbox-checkmark"></span>                                      
+                                        </label>
+
+                                        <label class="option-checkbox-container cooldown-tracking-option" id="cooldown-tracking-rising-sunlight-option">Daybreak (Rising Sunlight)
+                                            <input type="checkbox" class="option-checkbox cooldown-tracking-checkbox" id="cooldown-tracking-rising-sunlight-checkbox" checked="checked">                                                        
+                                            <span class="options-checkbox-checkmark"></span>                                      
+                                        </label>
+
+                                        <label class="option-checkbox-container cooldown-tracking-option" id="cooldown-tracking-blessing-of-spring-option">Blessing of Spring
+                                            <input type="checkbox" class="option-checkbox cooldown-tracking-checkbox" id="cooldown-tracking-blessing-of-spring-checkbox" checked="checked">                                                        
+                                            <span class="options-checkbox-checkmark"></span>                                      
+                                        </label>
+                                    </div>
 
                                     <div class="options-header" id="miscellaneous-header">Miscellaneous</div>
                                     <div class="options-divider"></div>

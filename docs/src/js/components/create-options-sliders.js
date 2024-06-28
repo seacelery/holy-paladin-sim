@@ -186,6 +186,26 @@ const createOptionsSliders = () => {
     resplendentLightValue.textContent = resplendentLightSlider.value;
     makeFieldEditable(resplendentLightValue, 1, resplendentLightSlider);
 
+    // dawnlight targets slider
+    const dawnlightSlider = document.getElementById("dawnlight-option");
+    const dawnlightValue = document.getElementById("dawnlight-value");
+    
+    dawnlightSlider.addEventListener("input", () => {
+        dawnlightValue.textContent = dawnlightSlider.value;
+    });
+    dawnlightValue.textContent = dawnlightSlider.value;
+    makeFieldEditable(dawnlightValue, 1, dawnlightSlider);
+
+    // sun's avatar targets slider
+    const sunsAvatarSlider = document.getElementById("suns-avatar-option");
+    const sunsAvatarValue = document.getElementById("suns-avatar-value");
+    
+    sunsAvatarSlider.addEventListener("input", () => {
+        sunsAvatarValue.textContent = sunsAvatarSlider.value;
+    });
+    sunsAvatarValue.textContent = sunsAvatarSlider.value;
+    makeFieldEditable(sunsAvatarValue, 1, sunsAvatarSlider);
+
     // blessing of the seasons
     const seasonsIcons = document.querySelectorAll(".blessing-of-the-seasons-image");
     seasonsIcons.forEach(icon => {
