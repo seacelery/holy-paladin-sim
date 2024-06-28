@@ -998,7 +998,7 @@ body {
 .option-container {
     position: relative;
     display: flex;
-    margin-bottom: 23px;
+    margin-bottom: 27px;
 
     justify-content: space-between;    
 }
@@ -1515,7 +1515,7 @@ body {
 
 #race-container {
     margin-top: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .options-option-container {
