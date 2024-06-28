@@ -31,6 +31,7 @@ const buffsToIconsMap = {
     "Divine Resonance": "https://render.worldofwarcraft.com/eu/icons/56/ability_mount_goatmountwhite.jpg",
     "Embrace of Pa'ku": "https://render.worldofwarcraft.com/eu/icons/56/ability_racial_embraceoftheloa_paku.jpg",
     "Empyrean Legacy": "https://render.worldofwarcraft.com/eu/icons/56/item_holyspark.jpg",
+    "Empyrean Legacy Cooldown": "docs/public/custom-icons/empyrean-legacy-cooldown.png",
     "Eternal Flame": "https://render.worldofwarcraft.com/eu/icons/56/inv_torch_thrown.jpg",
     "Eternal Flame (HoT)": "https://render.worldofwarcraft.com/eu/icons/56/inv_torch_thrown.jpg",
     "Fading Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_shadow_sealofkings.jpg",

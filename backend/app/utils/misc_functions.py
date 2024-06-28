@@ -1,5 +1,6 @@
-from .beacon_transfer_rates import *
+import math
 
+from .beacon_transfer_rates import *
 
 # formatting
 def format_time(time):
@@ -58,6 +59,9 @@ def handle_flat_cdr(spell, amount):
     
     if spell.remaining_cooldown < 0:
         spell.remaining_cooldown = 0.05
+        
+def calculate_sqrt_ability_scaling(total_targets, target_cap):
+    return total_targets / (math.sqrt(total_targets / target_cap))
 
 # data tracking functions
 def append_spell_heal_event(array, spell_name, caster, target, amount, current_time, is_crit, spends_mana=False, is_absorb=False):

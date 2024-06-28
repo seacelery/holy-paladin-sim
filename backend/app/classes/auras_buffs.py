@@ -2,7 +2,7 @@ import random
 import re
 
 from .auras import Buff
-from ..utils.misc_functions import format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, add_talent_healing_multipliers, update_target_buff_data
+from ..utils.misc_functions import format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, add_talent_healing_multipliers, update_target_buff_data, calculate_sqrt_ability_scaling
 from ..utils.stat_values import update_stat_with_multiplicative_percentage
 
 
@@ -47,9 +47,10 @@ class HoT(Buff):
         update_spell_data_heals(caster.ability_breakdown, self.name, target, total_heal_value, is_crit)
         
         if self.name == "Dawnlight (HoT)":
-            self.radiate_healing(caster, current_time)
+            # print(f"radiating {total_heal_value}")
+            self.radiate_healing(caster, current_time, total_heal_value)
              
-    def calculate_tick_healing(self, caster):
+    def calculate_tick_healing(self, caster, can_crit=True):
         spell_power = caster.spell_power
         
         total_healing = spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier
@@ -68,10 +69,11 @@ class HoT(Buff):
             healing_per_tick = total_healing / number_of_ticks
         
         is_crit = False
-        crit_chance = caster.crit
-        random_num = random.random() * 100
-        if random_num <= crit_chance:
-            is_crit = True
+        if can_crit:
+            crit_chance = caster.crit
+            random_num = random.random() * 100
+            if random_num <= crit_chance:
+                is_crit = True
             
         healing_per_tick = add_talent_healing_multipliers(healing_per_tick, caster)
 
@@ -142,7 +144,7 @@ class BroodkeepersPromiseHoT(HoT):
 class Dawnlight(HoT):
     
     # TODO verify 22.5% higher
-    SPELL_POWER_COEFFICIENT = 4.8
+    SPELL_POWER_COEFFICIENT = 4.8 * 1.225
     
     def __init__(self, caster, duration_to_apply=8):
         super().__init__("Dawnlight (HoT)", duration_to_apply, base_duration=duration_to_apply, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
@@ -151,17 +153,21 @@ class Dawnlight(HoT):
         if "Morning Star" in caster.active_auras:
             self.SPELL_POWER_COEFFICIENT *= 1 + (0.05 * caster.active_auras["Morning Star"].current_stacks)
         
-    def radiate_healing(self, caster, current_time):
-        target_count = 5
+    def radiate_healing(self, caster, current_time, heal_amount):
+        target_count = 12
+        
+        scaling_factor = calculate_sqrt_ability_scaling(target_count, 5) / target_count
+        # scaling is not currently working
+        scaling_factor = 1
         
         targets = random.sample(caster.potential_healing_targets, target_count)
         for target in targets:            
-            tick_healing, spell_crit = self.calculate_tick_healing(caster)
         
-            radiation_healing = tick_healing * 0.1
+            radiation_healing = heal_amount * 0.1 * scaling_factor
+            # print(radiation_healing)
 
             target.receive_heal(radiation_healing, caster)
-            update_spell_data_heals(caster.ability_breakdown, "Dawnlight (AoE)", target, radiation_healing, spell_crit)
+            update_spell_data_heals(caster.ability_breakdown, "Dawnlight (AoE)", target, radiation_healing, False)
             
             caster.handle_beacon_healing("Dawnlight (AoE)", target, radiation_healing, current_time)
             
