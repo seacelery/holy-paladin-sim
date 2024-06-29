@@ -12,7 +12,7 @@ from ..utils.beacon_transfer_rates import beacon_transfer
 from ..utils.stat_values import calculate_stat_percent_with_dr, calculate_leech_percent_with_dr, update_stat_with_multiplicative_percentage
 from .spells import Wait
 from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, HolyLight, DivineToll, Daybreak, LightsHammerSpell, LayOnHands, HolyPrism, LightOfTheMartyr, EternalFlame
-from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion, AuraMastery
+from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion, AuraMastery, AlgariManaPotion, SlumberingSoulSerum, TemperedPotion
 from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
 from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell, HolyBulwarkSacredWeapon
 from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, IncarnatesMarkOfFire, BroodkeepersPromiseHoT, MorningStar, RiteOfAdjurationBuff, RiteOfSanctification, DeliberateIncubation, OvinaxsMercurialEggBuff
@@ -160,6 +160,7 @@ class Paladin:
         
         self.currently_casting = None
         self.remaining_cast_time = 0
+        self.is_occupied = False
         
         self.total_casts = {}
         self.healing_by_ability = {}
@@ -384,6 +385,9 @@ class Paladin:
         self.abilities["Potion"] = Potion(self)
         self.abilities["Aerated Mana Potion"] = AeratedManaPotion(self)
         self.abilities["Elemental Potion of Ultimate Power"] = ElementalPotionOfUltimatePowerPotion(self)
+        self.abilities["Algari Mana Potion"] = AlgariManaPotion(self)
+        self.abilities["Slumbering Soul Serum"] = SlumberingSoulSerum(self)
+        self.abilities["Tempered Potion"] = TemperedPotion(self)
         
     def apply_item_effects(self):
         item_effect_buffs = {}
@@ -518,8 +522,11 @@ class Paladin:
                             "Judgment": Judgment(self),
                             "Consecration": Consecration(self),
                             "Lay on Hands": LayOnHands(self),
-                            "Aerated Mana Potion": AeratedManaPotion(self),
+                            "Aerated Mana Potion": AeratedManaPotion(self),                          
                             "Elemental Potion of Ultimate Power": ElementalPotionOfUltimatePowerPotion(self),
+                            "Algari Mana Potion": AlgariManaPotion(self),
+                            "Slumbering Soul Serum": SlumberingSoulSerum(self),
+                            "Tempered Potion": TemperedPotion(self),
                             "Potion": Potion(self)
         }     
         
@@ -695,6 +702,9 @@ class Paladin:
         for ability in self.abilities.values():
             if ability.hasted_cooldown and ability.original_cooldown is not None:
                 elapsed_cooldown = ability.original_cooldown - ability.remaining_cooldown
+                if elapsed_cooldown < 0:
+                    elapsed_cooldown = 0
+                    
                 ability.remaining_cooldown = ability.calculate_cooldown(self) - elapsed_cooldown * (ability.calculate_cooldown(self) / ability.original_cooldown)
                 
     def find_highest_secondary_stat_rating(self):

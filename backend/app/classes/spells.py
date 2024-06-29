@@ -56,6 +56,8 @@ class Spell:
         update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)    
         
     def can_cast(self, caster, current_time=0):
+        if caster.is_occupied:
+            return False
         if self.name in ["Hammer of Wrath"] and "Avenging Wrath" not in caster.active_auras and "Veneration" not in caster.active_auras and not caster.is_enemy_below_20_percent:
             return False       
         if not self.off_gcd and caster.global_cooldown > 0:
@@ -155,7 +157,7 @@ class Spell:
             caster.mana -= self.get_mana_cost(caster)
                      
         # add spells that cost mana and do heal       
-        elif caster.mana >= self.get_mana_cost(caster) and is_heal: 
+        elif caster.mana >= self.get_mana_cost(caster) and is_heal and not exclude_cast: 
             if self.name not in ["Tyr's Deliverance", "Light's Hammer", "Holy Shock (Divine Toll)", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Resonance)", "Flash of Light", "Golden Path", "Holy Light"]:
                 update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)    
             
@@ -168,7 +170,6 @@ class Spell:
                 
                 mana_cost = self.get_mana_cost(caster)
                 healing_value = round(healing_value) 
-                # print(self.name, healing_value)   
                 target.receive_heal(healing_value, caster)
                 if target_count > 1:
                     # deduct mana on the first instance of a multi-target spell

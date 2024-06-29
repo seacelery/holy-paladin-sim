@@ -159,7 +159,7 @@ class HolyShock(Spell):
                     holy_shock_reset_chance = (10 + len(glimmer_targets) * 1.5) / 100
                 if random.random() <= holy_shock_reset_chance:
                     self.reset_cooldown(caster, current_time)
-            
+     
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
                 if caster.ptr:
@@ -271,7 +271,7 @@ class HolyShock(Spell):
                 append_spell_heal_event(caster.events, "Overflowing Light", caster, targets[0], overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                         
             # rising sunlight  
-            if caster.is_talent_active("Rising Sunlight"):
+            if caster.is_talent_active("Rising Sunlight") and initial_cast:
                 if "Rising Sunlight" in caster.active_auras:
                     caster.delayed_casts.append((RisingSunlightHolyShock(caster), current_time + 0.3, targets[0]))
                     caster.delayed_casts.append((RisingSunlightHolyShock(caster), current_time + 0.6, targets[0]))
@@ -2282,7 +2282,7 @@ class LightOfDawn(Spell):
         self.bonus_crit = bonus_crit
         
         # divine purpose
-        if caster.is_talent_active("Divine Purpose"): 
+        if caster.is_talent_active("Divine Purpose") and initial_cast: 
             if "Divine Purpose" in caster.active_auras:
                 self.spell_healing_modifier *= 1.15
                 self.holy_power_cost = 0
@@ -2318,12 +2318,12 @@ class LightOfDawn(Spell):
                     update_self_buff_data(caster.self_buff_breakdown, "Pure Light", current_time, "expired")
             
             # unending light
-            if "Divine Purpose" in caster.active_auras:
+            if "Divine Purpose" in caster.active_auras and initial_cast:
                 if "Unending Light" in caster.active_auras:
                     caster.apply_buff_to_self(caster.active_auras["Unending Light"], current_time, stacks_to_apply=3, max_stacks=9)
                 else:
                     caster.apply_buff_to_self(UnendingLight(self.holy_power_cost), current_time, stacks_to_apply=3, max_stacks=9)
-            else:
+            elif initial_cast:
                 if "Unending Light" in caster.active_auras:
                     caster.apply_buff_to_self(caster.active_auras["Unending Light"], current_time, stacks_to_apply=self.holy_power_cost, max_stacks=9)
                 else:

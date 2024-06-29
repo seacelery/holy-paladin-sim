@@ -94,7 +94,7 @@ const spellToIconsMap = {
     "Chirping Rune": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_09.jpg",
     "Algari Mana Potion": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape1_blue.jpg",
     "Grotesque Vial": "https://render.worldofwarcraft.com/eu/icons/56/inv_summerfest_firepotion.jpg",
-    "Slumbering Soul Serum": "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_dpotion_a17.jpg",
+    "Slumbering Soul Serum": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_bottle_shape4_blue.jpg",
 
     // trinkets
     "Mirror of Fractured Tomorrows": "https://render.worldofwarcraft.com/eu/icons/56/achievement_dungeon_ulduarraid_misc_06.jpg",

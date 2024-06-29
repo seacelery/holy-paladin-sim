@@ -1338,6 +1338,21 @@ class TemperedPotionBuff(Buff):
             caster.update_stat("versatility", -2168)
 
 
+class SlumberingSoulSerumBuff(Buff):
+        
+    def __init__(self, caster):
+        super().__init__("Slumbering Soul Serum", 10, base_duration=10)
+        
+    def apply_effect(self, caster, current_time=None):
+        slumbering_soul_serum_mana_gain = 218390
+        caster.mana += slumbering_soul_serum_mana_gain
+        update_mana_gained(caster.ability_breakdown, self.name, slumbering_soul_serum_mana_gain)
+        caster.is_occupied = True
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.is_occupied = False
+
+
 # food
 class GrandBanquetOfTheKaluakFood(Buff):
     
