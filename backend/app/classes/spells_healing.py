@@ -184,7 +184,6 @@ class HolyShock(Spell):
                     elif caster.is_talent_active("Light's Hammer"):
                         handle_flat_cdr(caster.abilities["Light's Hammer"], 2)
                     
-                
                 if caster.is_talent_active("Inflorescence of the Sunwell"):
                     caster.apply_buff_to_self(InfusionOfLight(caster), current_time, stacks_to_apply=2, max_stacks=2)
                 else:
@@ -2318,16 +2317,11 @@ class LightOfDawn(Spell):
                     update_self_buff_data(caster.self_buff_breakdown, "Pure Light", current_time, "expired")
             
             # unending light
-            if "Divine Purpose" in caster.active_auras and initial_cast:
+            if caster.is_talent_active("Unending Light") and initial_cast:
                 if "Unending Light" in caster.active_auras:
                     caster.apply_buff_to_self(caster.active_auras["Unending Light"], current_time, stacks_to_apply=3, max_stacks=9)
                 else:
-                    caster.apply_buff_to_self(UnendingLight(self.holy_power_cost), current_time, stacks_to_apply=3, max_stacks=9)
-            elif initial_cast:
-                if "Unending Light" in caster.active_auras:
-                    caster.apply_buff_to_self(caster.active_auras["Unending Light"], current_time, stacks_to_apply=self.holy_power_cost, max_stacks=9)
-                else:
-                    caster.apply_buff_to_self(UnendingLight(self.holy_power_cost), current_time, stacks_to_apply=self.holy_power_cost, max_stacks=9)
+                    caster.apply_buff_to_self(UnendingLight(3), current_time, stacks_to_apply=3, max_stacks=9)
                     
             # tirion's devotion
             if caster.is_talent_active("Tirion's Devotion"):
