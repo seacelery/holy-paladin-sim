@@ -6,7 +6,9 @@ from ..classes.auras_buffs import (
                                    CloseToHeart, RetributionAura, SourceOfMagic, PowerInfusion, Innervate, PotionAbsorptionInhibitor,
                                    AlliedChestplateOfGenerosity, AlliedWristguardOfCompanionship, VerdantConduit, VerdantTether, ElementalLariat,
                                    DreamtendersCharm, IcedPhialOfCorruptingRage, ManaSpringTotem, SymbolOfHope, MagazineOfHealingDarts,
-                                   BronzedGripWrappings, ManaTideTotem
+                                   BronzedGripWrappings, ManaTideTotem, FlaskOfSavingGraces, FlaskOfTemperedAggression, FlaskOfAlchemicalChaos,
+                                   FlaskOfTemperedMastery, FlaskOfTemperedSwiftness, FlaskOfTemperedVersatility, CrystallizedAugmentRune,
+                                   AlgariManaOil, OilOfBeledarsGrace
                                   )
 
 buff_class_map = {
@@ -14,9 +16,16 @@ buff_class_map = {
     "Phial of Tepid Versatility": PhialOfTepidVersatility,
     "Phial of Elemental Chaos": PhialOfElementalChaos,
     "Iced Phial of Corrupting Rage": IcedPhialOfCorruptingRage,
+    "Flask of Saving Graces": FlaskOfSavingGraces,
+    "Flask of Tempered Aggression": FlaskOfTemperedAggression,
+    "Flask of Alchemical Chaos": FlaskOfAlchemicalChaos,
+    "Flask of Tempered Mastery": FlaskOfTemperedMastery,
+    "Flask of Tempered Swiftness": FlaskOfTemperedSwiftness,
+    "Flask of Tempered Versatility": FlaskOfTemperedVersatility,
     
     # augment runes
     "Draconic Augment Rune": DraconicAugmentRune,
+    "Crystallized Augment Rune": CrystallizedAugmentRune,
     
     # food
     "Grand Banquet of the Kalu'ak": GrandBanquetOfTheKaluakFood,
@@ -36,6 +45,8 @@ buff_class_map = {
     "Howling Rune": HowlingRune,
     "Chirping Rune": ChirpingRune,
     "Hissing Rune": HissingRune,
+    "Algari Mana Oil": AlgariManaOil,
+    "Oil of Beledar's Grace": OilOfBeledarsGrace,
     
     # raid buffs
     "Arcane Intellect": ArcaneIntellect,

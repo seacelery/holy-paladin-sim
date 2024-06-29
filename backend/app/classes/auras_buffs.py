@@ -1151,7 +1151,7 @@ class AlchemicalChaosAir(Buff):
         
     def apply_effect(self, caster, current_time=None):
         caster.update_stat("haste", 6002)
-        self.chosen_stats = random.sample("crit", "versatility", "mastery", 2)
+        self.chosen_stats = random.sample(["crit", "versatility", "mastery"], 2)
         for stat in self.chosen_stats:
             caster.update_stat(stat, -405)
         
@@ -1173,7 +1173,7 @@ class AlchemicalChaosFire(Buff):
         
     def apply_effect(self, caster, current_time=None):
         caster.update_stat("crit", 6002)
-        self.chosen_stats = random.sample("haste", "versatility", "mastery", 2)
+        self.chosen_stats = random.sample(["haste", "versatility", "mastery"], 2)
         for stat in self.chosen_stats:
             caster.update_stat(stat, -405)
         
@@ -1195,7 +1195,7 @@ class AlchemicalChaosFrost(Buff):
         
     def apply_effect(self, caster, current_time=None):
         caster.update_stat("versatility", 6002)
-        self.chosen_stats = random.sample("crit", "haste", "mastery", 2)
+        self.chosen_stats = random.sample(["crit", "haste", "mastery"], 2)
         for stat in self.chosen_stats:
             caster.update_stat(stat, -405)
         
@@ -1217,7 +1217,7 @@ class AlchemicalChaosEarth(Buff):
         
     def apply_effect(self, caster, current_time=None):
         caster.update_stat("mastery", 6002)
-        self.chosen_stats = random.sample("crit", "versatility", "haste", 2)
+        self.chosen_stats = random.sample(["crit", "versatility", "haste"], 2)
         for stat in self.chosen_stats:
             caster.update_stat(stat, -405)
         
@@ -1547,12 +1547,50 @@ class HissingRune(Buff):
     def remove_effect(self, caster, current_time=None):
         caster.update_stat("mastery", -310)
         
+
+class AlgariManaOil(Buff):
+    
+    def __init__(self):
+        super().__init__("Algari Mana Oil", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("haste", 272)
+        caster.update_stat("crit", 272)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("haste", -272)
+        caster.update_stat("crit", -272)
+        
+
+class OilOfBeledarsGrace(Buff):
+    
+    def __init__(self):
+        super().__init__("Oil of Beledar's Grace", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+        
         
 # augment runes
 class DraconicAugmentRune(Buff):
     
     def __init__(self):
         super().__init__("Draconic Augment Rune", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(87)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(87)
+        
+
+class CrystallizedAugmentRune(Buff):
+    
+    def __init__(self):
+        super().__init__("Crystallized Augment Rune", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
         caster.spell_power += caster.get_effective_spell_power(87)

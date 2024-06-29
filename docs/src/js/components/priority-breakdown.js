@@ -62,7 +62,10 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
         "Thousandbone Tongueslicer", "Great Cerulean Sea", "Pip's Emerald Friendship Badge", "Elemental Lariat",
         "Close to Heart", "Allied Wristguards of Companionship", "Potion Absorption Inhibitor", "Saved by the Light",
         "Retribution Aura ", "Source of Magic", "Symbol of Hope", "Mana Spring Totem", "Ominous Chromatic Essence",
-        "Magazine of Healing Darts", "Bronzed Grip Wrappings", "Incarnate's Mark of Fire", "Mana Tide Totem"
+        "Magazine of Healing Darts", "Bronzed Grip Wrappings", "Incarnate's Mark of Fire", "Mana Tide Totem",
+        "Flask of Saving Graces", "Flask of Tempered Aggression", "Flask of Tempered Swiftness",
+        "Flask of Tempered Mastery", "Flask of Tempered Versatility", "Flask of Alchemical Chaos",
+        "Algari Mana Oil", "Oil of Beledar's Grace", "Crystallized Augment Rune"
     ];
     const playerAurasModalIconOrder = [
         "Avenging Wrath", "Blessing of Dawn", "Blessing of Dusk", "Infusion of Light", "Divine Purpose", 
