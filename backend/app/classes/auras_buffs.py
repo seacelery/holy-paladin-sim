@@ -1292,10 +1292,10 @@ class FlaskOfSavingGraces(Buff):
         pass
     
 
-class SavingGrace(Buff):
+class SavingGraces(Buff):
     
     def __init__(self):
-        super().__init__("Saving Grace", 10, base_duration=10)
+        super().__init__("Saving Graces", 10, base_duration=10)
         
     def apply_effect(self, caster, current_time=None):
         caster.healing_multiplier *= 1.15

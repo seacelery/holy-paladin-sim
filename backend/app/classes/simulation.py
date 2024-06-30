@@ -13,7 +13,7 @@ from collections import defaultdict
 
 from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
 from .trinkets import Trinket
-from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight, EternalFlameBuff, InfusionOfLight, SunsAvatarActive, DeliberateIncubation, RecklessIncubation
+from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight, EternalFlameBuff, InfusionOfLight, SunsAvatarActive, DeliberateIncubation, RecklessIncubation, SavingGraces
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
 from .priority_list_dsl import parse_condition, condition_to_lambda
 from .simulation_state import check_cancellation, reset_simulation
@@ -56,6 +56,7 @@ class Simulation:
         
         self.iced_phial_active = False
         self.iced_phial_timer = 0
+        self.saving_graces_timer = 0
         self.light_of_the_martyr_uptime = 0.8
         self.light_of_the_martyr_timer = 0
         self.bestow_light_timer = 0
@@ -469,6 +470,12 @@ class Simulation:
             if self.iced_phial_timer >= 15:
                 self.iced_phial_timer = 0
                 self.paladin.apply_buff_to_self(CorruptingRage(), self.elapsed_time)
+                
+        if "Flask of Saving Graces" in self.paladin.active_auras:
+            self.saving_graces_timer += self.tick_rate
+            if self.saving_graces_timer >= 30:
+                self.saving_graces_timer = 0
+                self.paladin.apply_buff_to_self(SavingGraces(), self.elapsed_time)
                 
         if self.paladin.ptr and self.paladin.is_talent_active("Light of the Martyr"):   
             uptime_duration = self.encounter_length * self.light_of_the_martyr_uptime

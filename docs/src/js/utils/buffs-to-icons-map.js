@@ -85,6 +85,7 @@ const buffsToIconsMap = {
     "Iced Phial of Corrupting Rage": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_red.jpg",
     "Corrupting Rage": "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_shamanrage.jpg",
     "Flask of Saving Graces": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potione4.jpg",
+    "Saving Graces": "https://wow.zamimg.com/images/wow/icons/large/inv_pet_achievement_captureapetatlessthan5health.jpg",
     "Flask of Alchemical Chaos": "https://wow.zamimg.com/images/wow/icons/large/inv_alchemy_potion_06.jpg",
     "Alchemical Chaos: Air": "https://render.worldofwarcraft.com/eu/icons/56/ability_druid_galewinds.jpg",
     "Alchemical Chaos: Fire": "https://render.worldofwarcraft.com/eu/icons/56/ability_mage_livingbomb.jpg",
