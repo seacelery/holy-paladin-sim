@@ -78,6 +78,7 @@ def register_socketio_events(socketio):
             "light_of_dawn_targets": int(data['light_of_dawn_targets']),
             "lights_hammer_targets": int(data['lights_hammer_targets']),
             "resplendent_light_targets": int(data['resplendent_light_targets']),
+            "sureki_zealots_insignia_count": int(data['sureki_zealots_insignia_count']),
             "dawnlight_targets": int(data['dawnlight_targets']),
             "suns_avatar_targets": int(data['suns_avatar_targets']),
             "seasons": data["seasons"],

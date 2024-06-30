@@ -128,7 +128,7 @@ const itemSlotBonuses = {
 };
 
 const ptrItemSlotBonuses = {
-    "Main Hand": {"enchants": ["No enchant", "Authority of Air", "Authority of Fiery Resolve", "Authority of Radiant Power", "Authority of Storms", "Authority of the Depths", "Stonebound Artistry", "Oathsworn Tenacity", "Stormrider's Fury", "Council's Guile"], "embellishments": ptrEmbellishmentsData},
+    "Main Hand": {"enchants": ["No enchant", "Authority of Air", "Authority of Fiery Resolve", "Authority of Radiant Power", "Authority of Storms", "Authority of the Depths", "Stonebound Artistry", "Oathsworn's Tenacity", "Stormrider's Fury", "Council's Guile"], "embellishments": ptrEmbellishmentsData},
     "Off Hand":  {"enchants": [], "embellishments": ptrEmbellishmentsData},
     "Head": {"enchants": [], "embellishments": ptrEmbellishmentsData},
     "Necklace":  {"enchants": [], "embellishments": ptrEmbellishmentsData},

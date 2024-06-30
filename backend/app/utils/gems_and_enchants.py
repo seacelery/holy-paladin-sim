@@ -104,8 +104,10 @@ def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, sta
             bonus_effect_enchants.append("Incandescent Essence")
         elif enchant == "Authority of Fiery Resolve":
             bonus_effect_enchants.append("Authority of Fiery Resolve")
-        elif enchant == "Oathsworn Tenacity":
-            bonus_effect_enchants.append("Oathsworn Tenacity")
+        elif enchant == "Authority of Radiant Power":
+            bonus_effect_enchants.append("Authority of Radiant Power")
+        elif enchant == "Oathsworn's Tenacity":
+            bonus_effect_enchants.append("Oathsworn's Tenacity")
         elif enchant == "Stonebound Artistry":
             bonus_effect_enchants.append("Stonebound Artistry")
         elif enchant == "Stormrider's Fury":

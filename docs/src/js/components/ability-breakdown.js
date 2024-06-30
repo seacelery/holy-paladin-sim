@@ -105,7 +105,7 @@ const createAbilityBreakdown = (simulationData, containerCount) => {
     const excludedSpells = [
         "Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", 
         "Aerated Mana Potion", "Tirion's Devotion", "Source of Magic", "Mana Spring Totem", "Symbol of Hope", "Mana Tide Totem",
-        "Algari Mana Potion"
+        "Algari Mana Potion", "Sureki Zealot's Insignia"
     ];
     // displays only casts and resource gains
     const excludedSpellsOnlyResourcesAndCasts = [

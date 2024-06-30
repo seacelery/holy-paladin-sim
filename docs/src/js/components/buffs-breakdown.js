@@ -173,6 +173,32 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
             buffsData["Solar Grace"] = {"average_duration": solarGraceAverageDuration, "total_duration": solarGraceTotalDuration, "count": solarGraceCount, "uptime": solarGraceUptime};
         };
 
+        let surekiZealotsInsigniaActive = false;
+        for (let buffName in buffsData) {
+            if (buffName.includes("Sureki Zealot's Insignia")) {
+                surekiZealotsInsigniaActive = true;
+            };
+        };
+        if (isTargetBuffs && surekiZealotsInsigniaActive) {
+            let surekiZealotsInsigniaUptime = 0;
+            let surekiZealotsInsigniaAverageDuration = 0;
+            let surekiZealotsInsigniaTotalDuration = 0;
+            let surekiZealotsInsigniaCount = 0;
+            for (let buffName in buffsData) {
+                if (buffName.includes("Sureki Zealot's Insignia")) {
+                    
+                    const surekiZealotsInsigniaData = buffsData[buffName];
+                    surekiZealotsInsigniaUptime = surekiZealotsInsigniaData.uptime;
+                    surekiZealotsInsigniaAverageDuration = surekiZealotsInsigniaData.average_duration;
+                    surekiZealotsInsigniaTotalDuration += surekiZealotsInsigniaData.total_duration;
+                    surekiZealotsInsigniaCount += surekiZealotsInsigniaData.count;
+    
+                    delete buffsData[buffName];
+                };
+            };
+            buffsData["Sureki Zealot's Insignia"] = {"average_duration": surekiZealotsInsigniaAverageDuration, "total_duration": surekiZealotsInsigniaTotalDuration, "count": surekiZealotsInsigniaCount, "uptime": surekiZealotsInsigniaUptime};
+        };
+
         let buffsBreakdownArray = Object.entries(buffsData);
         buffsBreakdownArray.sort((a, b) => b[1].uptime - a[1].uptime);
         let sortedBuffsBreakdownData = Object.fromEntries(buffsBreakdownArray);

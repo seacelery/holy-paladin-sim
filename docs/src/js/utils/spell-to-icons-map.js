@@ -120,6 +120,7 @@ const spellToIconsMap = {
     "Creeping Coagulum": "https://wow.zamimg.com/images/wow/icons/large/warlock_-bloodstone.jpg",
     "Creeping Coagulum ": "https://wow.zamimg.com/images/wow/icons/large/warlock_-bloodstone.jpg",
     "Gruesome Syringe": "https://wow.zamimg.com/images/wow/icons/large/inv_gizmo_runichealthinjector.jpg",
+    "Sureki Zealot's Insignia": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_113.jpg",
 
     // enchants
     "Dreaming Devotion": "https://render.worldofwarcraft.com/eu/icons/56/item_herbd.jpg",

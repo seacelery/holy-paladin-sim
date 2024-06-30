@@ -388,7 +388,9 @@ class Spell:
             AlliedChestplateOfGenerosity, ElementalLariat, VerdantTether, VerdantConduit,
             PowerOfTheSilverHand, NeltharionsCallToChaos, InspiredByFrostAndEarth, ScreamingBlackDragonscale,
             RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond, BlessingOfAnshe, HarvestersEdict,
-            EmpoweringCrystalOfAnubikkaj, UnboundChangeling, CrypticInstructions, FateweavedNeedle
+            EmpoweringCrystalOfAnubikkaj, UnboundChangeling, CrypticInstructions, FateweavedNeedle,
+            AuthorityOfRadiantPower, CouncilsGuile, StormridersFury, StoneboundArtistry, OathswornsTenacity,
+            SurekiZealotsInsignia
         )
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False, is_other_effect=False):
@@ -480,6 +482,26 @@ class Spell:
         if caster.ptr and "Authority of Fiery Resolve" in caster.bonus_enchants:
             authority_of_fiery_resolve = AuthorityOfFieryResolve(caster)
             try_proc_rppm_effect(authority_of_fiery_resolve, is_flat_healing=True, is_hasted=False)
+
+        if caster.ptr and "Authority of Radiant Power" in caster.bonus_enchants:
+            authority_of_radiant_power = AuthorityOfRadiantPower(caster)
+            try_proc_rppm_effect(authority_of_radiant_power, is_self_buff=True, is_hasted=False)
+            
+        if caster.ptr and "Council's Guile" in caster.bonus_enchants:
+            councils_guile = CouncilsGuile(caster)
+            try_proc_rppm_effect(councils_guile, is_self_buff=True, is_hasted=False)
+            
+        if caster.ptr and "Stormrider's Fury" in caster.bonus_enchants:
+            stormriders_fury = StormridersFury(caster)
+            try_proc_rppm_effect(stormriders_fury, is_self_buff=True, is_hasted=False)
+            
+        if caster.ptr and "Stonebound Artistry" in caster.bonus_enchants:
+            stonebound_artistry = StoneboundArtistry(caster)
+            try_proc_rppm_effect(stonebound_artistry, is_self_buff=True, is_hasted=False)
+
+        if caster.ptr and "Oathsworn's Tenacity" in caster.bonus_enchants:
+            oathsworns_tenacity = OathswornsTenacity(caster)
+            try_proc_rppm_effect(oathsworns_tenacity, is_self_buff=True, is_hasted=False)
             
         if "Incandescent Essence" in caster.bonus_enchants:
             incandescent_essence = LarodarsFieryReverie(caster)
@@ -503,6 +525,10 @@ class Spell:
             voice_from_beyond = VoiceFromBeyond(caster)
             if "The Silent Star" not in caster.active_auras:
                 try_proc_rppm_effect(voice_from_beyond, is_hasted=False, is_self_buff=True)
+                
+        if caster.variable_target_counts["Sureki Zealot's Insignia"] > 0:
+            sureki_zealots_insignia = SurekiZealotsInsignia(caster)
+            try_proc_rppm_effect(sureki_zealots_insignia, is_hasted=False, is_self_buff=True)
             
         # trinkets
         if "Treacherous Transmitter" in caster.trinkets:

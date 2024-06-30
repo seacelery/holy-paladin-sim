@@ -600,6 +600,7 @@ const startSimulation = () => {
         light_of_dawn_targets: document.getElementById("light-of-dawn-option").value,
         lights_hammer_targets: document.getElementById("lights-hammer-option").value,
         resplendent_light_targets: document.getElementById("resplendent-light-option").value,
+        sureki_zealots_insignia_count: document.getElementById("sureki-zealots-insignia-option").value,
         dawnlight_targets: document.getElementById("dawnlight-option").value,
         suns_avatar_targets: document.getElementById("suns-avatar-option").value,
         priority_list: priorityList,

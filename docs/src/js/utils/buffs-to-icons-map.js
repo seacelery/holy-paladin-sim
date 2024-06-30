@@ -59,7 +59,6 @@ const buffsToIconsMap = {
     "Rite of Sanctification": "https://render.worldofwarcraft.com/eu/icons/56/inv_inscription_weaponscroll01.jpg",
     "Sacred Weapon": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_1h_artifactnorgannon_d_06.jpg",
     "Saved by the Light": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_savedbythelight.jpg",
-    "Sophic Devotion": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_elementalcombinedfoozles_titan.jpg",
     "Strength of Conviction": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_eyeforaneye.jpg",
     "Solar Grace": "https://render.worldofwarcraft.com/eu/icons/56/ability_malkorok_blightofyshaarj_yellow.jpg",
     "Sun's Avatar": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_holyavenger.jpg",
@@ -198,6 +197,15 @@ const buffsToIconsMap = {
     "Ethereal Powerlink": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_twistedfaith.jpg",
 
     "Fateweaved Needle": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_02.jpg",
+    "Sureki Zealot's Insignia": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_113.jpg",
+
+    // enchants
+    "Sophic Devotion": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_elementalcombinedfoozles_titan.jpg",
+    "Authority of Radiant Power": "https://wow.zamimg.com/images/wow/icons/large/inv_ability_holyfire_orb.jpg",
+    "Council's Guile": "https://wow.zamimg.com/images/wow/icons/large/ability_gift_of_earth.jpg",
+    "Stormrider's Fury": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_stormlordsfavor.jpg",
+    "Stonebound Artistry": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_stonetablet_10.jpg",
+    "Oathsworn's Tenacity": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_rune_14.jpg",
 
     // embellishments
     "Potion Absorption Inhibitor": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_gooamber_drop.jpg",

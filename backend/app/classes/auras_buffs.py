@@ -3412,3 +3412,110 @@ class BlessingOfTheForge(Buff):
         
     def remove_effect(self, caster, current_time=None):
         pass
+    
+
+class AuthorityOfRadiantPower(Buff):
+    
+    BASE_PPM = 3
+    
+    def __init__(self, caster):
+        super().__init__("Authority of Radiant Power", 10, base_duration=10)   
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(1339)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(1339)
+        
+
+class CouncilsGuile(Buff):
+    
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Council's Guile", 12, base_duration=12)   
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("crit", 1360)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("crit", -1360)
+        
+        
+class CouncilsGuile(Buff):
+    
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Council's Guile", 12, base_duration=12)   
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("crit", 1360)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("crit", -1360)
+        
+        
+class StormridersFury(Buff):
+    
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Stormrider's Fury", 12, base_duration=12)   
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("haste", 1360)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("haste", -1360)
+        
+
+class StoneboundArtistry(Buff):
+    
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Stonebound Artistry", 12, base_duration=12)   
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", 1360)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", -1360)
+        
+
+class OathswornsTenacity(Buff):
+    
+    BASE_PPM = 2
+    
+    def __init__(self, caster):
+        super().__init__("Oathsworn's Tenacity", 12, base_duration=12)   
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", 1360)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", -1360)
+        
+
+class SurekiZealotsInsignia(Buff):
+    count = 0
+    
+    BASE_PPM = 1
+    
+    def __init__(self, caster):
+        SurekiZealotsInsignia.count += 1
+        self.count = SurekiZealotsInsignia.count
+        
+        if SurekiZealotsInsignia.count == 10:
+            SurekiZealotsInsignia.count = 0
+        super().__init__(f"Sureki Zealot's Insignia {self.count}", 10, base_duration=10)  
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", 694)
+        mana_gain = 6250
+        caster.mana += mana_gain
+        update_mana_gained(caster.ability_breakdown, "Sureki Zealot's Insignia", mana_gain)
+    
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", -694)

@@ -91,6 +91,19 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
         };
         playerAurasData["Solar Grace"] = {"applied_duration": 12, "duration": solarGraceHighestDuration, "stacks": solarGraceCount};
 
+        let surekiZealotsInsigniaCount = 0;
+        let surekiZealotsInsigniaHighestDuration = 0;
+        for (let aura in playerAurasData) {
+            if (aura.includes("Sureki Zealot's Insignia ")) { 
+                surekiZealotsInsigniaCount += 1;
+                if (playerAurasData[aura].duration > surekiZealotsInsigniaHighestDuration) {
+                    surekiZealotsInsigniaHighestDuration = playerAurasData[aura].duration;
+                };
+                delete playerAurasData[aura];
+            };
+        };
+        playerAurasData["Sureki Zealot's Insignia"] = {"applied_duration": 12, "duration": surekiZealotsInsigniaHighestDuration, "stacks": surekiZealotsInsigniaCount};
+
         for (const auraName in playerAurasData) {
             if (excludedAuras.includes(auraName)) {
                 continue;

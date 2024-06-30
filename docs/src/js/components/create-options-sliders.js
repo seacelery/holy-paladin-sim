@@ -186,6 +186,16 @@ const createOptionsSliders = () => {
     resplendentLightValue.textContent = resplendentLightSlider.value;
     makeFieldEditable(resplendentLightValue, 1, resplendentLightSlider);
 
+    // sureki zealot's insignia count slider
+    const surekiZealotsInsigniaSlider = document.getElementById("sureki-zealots-insignia-option");
+    const surekiZealotsInsigniaValue = document.getElementById("sureki-zealots-insignia-value");
+    
+    surekiZealotsInsigniaSlider.addEventListener("input", () => {
+        surekiZealotsInsigniaValue.textContent = surekiZealotsInsigniaSlider.value;
+    });
+    surekiZealotsInsigniaValue.textContent = surekiZealotsInsigniaSlider.value;
+    makeFieldEditable(surekiZealotsInsigniaValue, 1, surekiZealotsInsigniaSlider);
+
     // dawnlight targets slider
     const dawnlightSlider = document.getElementById("dawnlight-option");
     const dawnlightValue = document.getElementById("dawnlight-value");
