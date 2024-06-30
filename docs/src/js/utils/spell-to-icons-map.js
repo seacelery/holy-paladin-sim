@@ -37,6 +37,7 @@ const spellToIconsMap = {
     "Embrace of Akunda": "https://render.worldofwarcraft.com/eu/icons/56/ability_racial_embraceoftheloa_akuna.jpg",
     "Eternal Flame": "https://render.worldofwarcraft.com/eu/icons/56/inv_torch_thrown.jpg",
     "Eternal Flame (HoT)": "https://render.worldofwarcraft.com/eu/icons/56/inv_torch_thrown.jpg",
+    "Fading Light": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_sealofkings.jpg",
     "Fireblood": "https://render.worldofwarcraft.com/eu/icons/56/ability_racial_fireblood.jpg",
     "Flash of Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_flashheal.jpg",
     "Gift of the Naaru": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_holyprotection.jpg",

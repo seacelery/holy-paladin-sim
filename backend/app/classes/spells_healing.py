@@ -150,6 +150,12 @@ class HolyShock(Spell):
                 if caster.blessing_of_dawn_counter == 3:
                     caster.apply_buff_to_self(BlessingOfDawn(), current_time, stacks_to_apply=1, max_stacks=2)
                     caster.blessing_of_dawn_counter = 0
+                    
+            # fading light
+            if caster.is_talent_active("Fading Light") and "Blessing of Dusk" in caster.active_auras:
+                fading_light_absorb = heal_amount * 0.03
+                caster.receive_self_heal(fading_light_absorb)
+                update_spell_data_heals(caster.ability_breakdown, "Fading Light", caster, fading_light_absorb, False)
             
             # glorious dawn
             if caster.is_talent_active("Glorious Dawn"):
@@ -523,6 +529,12 @@ class RisingSunlightHolyShock(Spell):
                 if caster.blessing_of_dawn_counter == 3:
                     caster.apply_buff_to_self(BlessingOfDawn(), current_time, stacks_to_apply=1, max_stacks=2)
                     caster.blessing_of_dawn_counter = 0
+                    
+            # fading light
+            if caster.is_talent_active("Fading Light") and "Blessing of Dusk" in caster.active_auras:
+                fading_light_absorb = heal_amount * 0.03
+                caster.receive_self_heal(fading_light_absorb)
+                update_spell_data_heals(caster.ability_breakdown, "Fading Light", caster, fading_light_absorb, False)
             
             # glorious dawn
             if caster.is_talent_active("Glorious Dawn"):
@@ -834,6 +846,12 @@ class DivineTollHolyShock(Spell):
                 if caster.blessing_of_dawn_counter == 3:
                     caster.apply_buff_to_self(BlessingOfDawn(), current_time, stacks_to_apply=1, max_stacks=2)
                     caster.blessing_of_dawn_counter = 0
+                    
+            # fading light
+            if caster.is_talent_active("Fading Light") and "Blessing of Dusk" in caster.active_auras:
+                fading_light_absorb = heal_amount * 0.03
+                caster.receive_self_heal(fading_light_absorb)
+                update_spell_data_heals(caster.ability_breakdown, "Fading Light", caster, fading_light_absorb, False)
             
             # glorious dawn
             if caster.is_talent_active("Glorious Dawn"):
@@ -1107,6 +1125,12 @@ class DivineResonanceHolyShock(Spell):
                 if caster.blessing_of_dawn_counter == 3:
                     caster.apply_buff_to_self(BlessingOfDawn(), current_time, stacks_to_apply=1, max_stacks=2)
                     caster.blessing_of_dawn_counter = 0
+                    
+            # fading light
+            if caster.is_talent_active("Fading Light") and "Blessing of Dusk" in caster.active_auras:
+                fading_light_absorb = heal_amount * 0.03
+                caster.receive_self_heal(fading_light_absorb)
+                update_spell_data_heals(caster.ability_breakdown, "Fading Light", caster, fading_light_absorb, False)
             
             # glorious dawn
             if caster.is_talent_active("Glorious Dawn"):
@@ -1311,6 +1335,12 @@ class HolyLight(Spell):
                 if caster.blessing_of_dawn_counter == 3:
                     caster.apply_buff_to_self(BlessingOfDawn(), current_time, stacks_to_apply=1, max_stacks=2)
                     caster.blessing_of_dawn_counter = 0
+                    
+            # fading light
+            if caster.is_talent_active("Fading Light") and "Blessing of Dusk" in caster.active_auras and caster.is_talent_active("Tower of Radiance"):
+                fading_light_absorb = heal_amount * 0.03
+                caster.receive_self_heal(fading_light_absorb)
+                update_spell_data_heals(caster.ability_breakdown, "Fading Light", caster, fading_light_absorb, False)
             
             # resplendent light
             if caster.is_talent_active("Resplendent Light"):
@@ -1505,6 +1535,12 @@ class FlashOfLight(Spell):
                 if caster.blessing_of_dawn_counter == 3:
                     caster.apply_buff_to_self(BlessingOfDawn(), current_time, stacks_to_apply=1, max_stacks=2)
                     caster.blessing_of_dawn_counter = 0
+                    
+            # fading light
+            if caster.is_talent_active("Fading Light") and "Blessing of Dusk" in caster.active_auras and caster.is_talent_active("Tower of Radiance"):
+                fading_light_absorb = heal_amount * 0.03
+                caster.receive_self_heal(fading_light_absorb)
+                update_spell_data_heals(caster.ability_breakdown, "Fading Light", caster, fading_light_absorb, False)
             
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
                 if caster.ptr:

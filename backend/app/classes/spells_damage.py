@@ -91,6 +91,12 @@ class Judgment(Spell):
                 if caster.blessing_of_dawn_counter == 3:
                     caster.apply_buff_to_self(BlessingOfDawn(), current_time, stacks_to_apply=1, max_stacks=2)
                     caster.blessing_of_dawn_counter = 0
+                    
+            # fading light
+            if caster.is_talent_active("Fading Light") and "Blessing of Dusk" in caster.active_auras:
+                fading_light_absorb = spell_damage * 0.03
+                caster.receive_self_heal(fading_light_absorb)
+                update_spell_data_heals(caster.ability_breakdown, "Fading Light", caster, fading_light_absorb, False)
         
             # awakening
             if caster.is_talent_active("Awakening"):
@@ -292,6 +298,12 @@ class CrusaderStrike(Spell):
                 if caster.blessing_of_dawn_counter == 3:
                     caster.apply_buff_to_self(BlessingOfDawn(), current_time, stacks_to_apply=1, max_stacks=2)
                     caster.blessing_of_dawn_counter = 0
+                    
+            # fading light
+            if caster.is_talent_active("Fading Light") and "Blessing of Dusk" in caster.active_auras:
+                fading_light_absorb = spell_damage * 0.03
+                caster.receive_self_heal(fading_light_absorb)
+                update_spell_data_heals(caster.ability_breakdown, "Fading Light", caster, fading_light_absorb, False)
             
             increment_holy_power(self, caster, current_time)
             
@@ -351,6 +363,12 @@ class HammerOfWrath(Spell):
                 if caster.blessing_of_dawn_counter == 3:
                     caster.apply_buff_to_self(BlessingOfDawn(), current_time, stacks_to_apply=1, max_stacks=2)
                     caster.blessing_of_dawn_counter = 0
+                    
+            # fading light
+            if caster.is_talent_active("Fading Light") and "Blessing of Dusk" in caster.active_auras:
+                fading_light_absorb = spell_damage * 0.03
+                caster.receive_self_heal(fading_light_absorb)
+                update_spell_data_heals(caster.ability_breakdown, "Fading Light", caster, fading_light_absorb, False)
             
             # vanguard's momentum
             if caster.is_talent_active("Vanguard's Momentum") and caster.is_enemy_below_20_percent:
