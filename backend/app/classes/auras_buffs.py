@@ -3507,7 +3507,7 @@ class SurekiZealotsInsignia(Buff):
         SurekiZealotsInsignia.count += 1
         self.count = SurekiZealotsInsignia.count
         
-        if SurekiZealotsInsignia.count == 10:
+        if SurekiZealotsInsignia.count == caster.variable_target_counts["Sureki Zealot's Insignia"]:
             SurekiZealotsInsignia.count = 0
         super().__init__(f"Sureki Zealot's Insignia {self.count}", 10, base_duration=10)  
         
