@@ -104,7 +104,7 @@ def parse_condition(condition_str):
                 match = re.match(pattern, part)
                 condition["first_value"], condition["first_operator"], condition["second_operator"], condition["second_value"] = match.groups()
                 condition["keyword"] = "fight length"
-                
+   
         else:
             if " inactive" in part:
                 condition["keyword"] = "inactive"
@@ -116,6 +116,14 @@ def parse_condition(condition_str):
                 
             elif " active" in part:
                 condition["keyword"] = "active"
+                condition["name"] = part.rsplit(" ", 1)[0]
+                
+            elif " not talented" in part:
+                condition["keyword"] = "not talented"
+                condition["name"] = part.rsplit(" ", 2)[0]
+                
+            elif " talented" in part:
+                condition["keyword"] = "talented"
                 condition["name"] = part.rsplit(" ", 1)[0]
                 
             elif "stacks " in part:
@@ -286,6 +294,19 @@ def condition_to_lambda(sim_instance, all_conditions):
                             in_target_buffs = True
                     result = condition["name"] not in sim_instance.paladin.active_auras and not in_target_buffs
                     
+                elif condition["keyword"].lower() == "talented":
+                    talented = False
+                    if sim_instance.paladin.is_talent_active(condition["name"]):
+                        talented = True
+                    result = talented
+                    
+                elif condition["keyword"].lower() == "not talented":
+                    talented = False
+                    if not sim_instance.paladin.is_talent_active(condition["name"]):
+                        talented = True
+                    result = talented
+                    print(result)
+                    
                 elif condition["keyword"].lower() == "mana":
                     mana = sim_instance.paladin.mana                 
                     if condition["multiple_comparisons"]:
@@ -384,6 +405,7 @@ def condition_to_lambda(sim_instance, all_conditions):
                     group_result = False
                     break
 
+            # print(group_result)
             # if the group's result is true, the whole thing is true
             if group_result:
                 return True

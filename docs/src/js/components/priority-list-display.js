@@ -871,6 +871,7 @@ priorityListInfoModalContainer.innerHTML = `
     Buff name active/not active<br>
     Buff name duration<br>
     Buff name stacks<br>
+    Talent name talented/not talented<br>
     Previous Ability<br>
     Overhealing<br>
     <br>
@@ -891,7 +892,8 @@ priorityListInfoModalContainer.innerHTML = `
     Timers = [0, 150, 300]<br>
     Timers = [30]+<br>
     Previous Ability = Daybreak<br>
-    Light of Dawn overhealing > 70%
+    Light of Dawn overhealing > 70%<br>
+    Holy Infusion talented
 `;
 
 const addPotionToPriorityList = (potionName, potionTimers, repeat = false) => {
