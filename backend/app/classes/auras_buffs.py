@@ -2656,6 +2656,28 @@ class HarvestersEdict(Buff):
     def remove_effect(self, caster, current_time=None):
         caster.update_stat("mastery", -self.trinket_first_value)
         
+
+class AraKaraSacbrood(Buff):
+    
+    BASE_PPM = 2.5
+    count = 0
+
+    def __init__(self, caster):
+        AraKaraSacbrood.count += 1
+        self.count = AraKaraSacbrood.count
+
+        super().__init__(f"Ara-Kara Sacbrood", 60, base_duration=60)
+        trinket_effect = caster.trinkets["Ara-Kara Sacbrood"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+            
+        self.trinket_intellect_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):    
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_intellect_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_intellect_value)
+        
         
 class EmpoweringCrystalOfAnubikkaj(Buff):
     

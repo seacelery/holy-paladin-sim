@@ -390,7 +390,7 @@ class Spell:
             RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond, BlessingOfAnshe, HarvestersEdict,
             EmpoweringCrystalOfAnubikkaj, UnboundChangeling, CrypticInstructions, FateweavedNeedle,
             AuthorityOfRadiantPower, CouncilsGuile, StormridersFury, StoneboundArtistry, OathswornsTenacity,
-            SurekiZealotsInsignia
+            SurekiZealotsInsignia, AraKaraSacbrood
         )
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False, is_other_effect=False):
@@ -534,6 +534,10 @@ class Spell:
         if "Treacherous Transmitter" in caster.trinkets:
             treacherous_transmitter = CrypticInstructions(caster)
             try_proc_rppm_effect(treacherous_transmitter, is_hasted=False, is_self_buff=True)
+         
+        if "Ara-Kara Sacbrood" in caster.trinkets:
+            ara_kara_sacbrood = AraKaraSacbrood(caster)
+            try_proc_rppm_effect(ara_kara_sacbrood, is_hasted=False, is_self_buff=True)
         
         if "Unbound Changeling" in caster.trinkets:
             unbound_changeling = UnboundChangeling(caster)

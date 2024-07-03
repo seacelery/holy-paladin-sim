@@ -825,7 +825,10 @@ const initialiseEquipment = () => {
             "Idol of the Spell-Weaver", "Idol of the Life-Binder", "Idol of the Earth-Warder", "Idol of the Dreamer",
             "Time-Breaching Talon", "Nymue's Unraveling Spindle", "Mirror of Fractured Tomorrows", "Echoing Tyrstone",
             "Sea Star", "Coagulated Genesaur Blood", "Sustaining Alchemist Stone", "Alactritous Alchemist Stone",
-            "Eye of the Broodmother", "Emerald Coach's Whistle", "Unbound Changeling"
+            "Eye of the Broodmother", "Emerald Coach's Whistle", "Unbound Changeling", "Gruesome Syringe",
+            "Harvester's Edict", "Scrapsinger's Symphony", "High Speaker's Accretion", "Ovinax's Mercurial Egg",
+            "Empowering Crystal of Anub'ikkaj", "Siphoning Phylactery Shard", "Creeping Coagulum", "Treacherous Transmitter",
+            "Mereldar's Toll"
         ];
         if ((currentItemSlot === "trinket_1" || currentItemSlot === "trinket_2") && !supportedTrinkets.includes(itemName)) {
             trinketUnsupported.style.display = "block";

@@ -116,10 +116,9 @@ const spellToIconsMap = {
     "Siphoning Phylactery Shard": "https://wow.zamimg.com/images/wow/icons/large/inv_enchanting_70_chaosshard.jpg",
     "High Speaker's Accretion": "https://wow.zamimg.com/images/wow/icons/large/inv_cosmicvoid_nova.jpg",
     "Viscous Coaglam": "https://wow.zamimg.com/images/wow/icons/large/spell_priest_shadoworbs.jpg",
-    "Ovinax's Mercurial Egg": "https://wow.zamimg.com/images/wow/icons/large/creatureportrait_twilightshammer_dragonegg_01.jpg",
-    "Creeping Coagulum": "https://wow.zamimg.com/images/wow/icons/large/warlock_-bloodstone.jpg",
-    "Creeping Coagulum ": "https://wow.zamimg.com/images/wow/icons/large/warlock_-bloodstone.jpg",
-    "Gruesome Syringe": "https://wow.zamimg.com/images/wow/icons/large/inv_gizmo_runichealthinjector.jpg",
+    "Ovinax's Mercurial Egg": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
+    "Creeping Coagulum": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_creepingcoagulum_purple.jpg",
+    "Gruesome Syringe": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_gruesomesyringe_red.jpg",
     "Sureki Zealot's Insignia": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_113.jpg",
 
     // enchants

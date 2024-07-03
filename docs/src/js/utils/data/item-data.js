@@ -1,5 +1,5 @@
 // season 1
-// Ara-Kara, City of Echoes - Harvester's Edict
+// Ara-Kara, City of Echoes - Harvester's Edict, Ara-Kara Sacbrood (not implemented properly)
 // City of Threads - Viscous Coaglam (coefficient, not implemented)
 // The Stonevault - Scrapsinger's Symphony (coefficients), High Speaker's Accretion
 // The Dawnbreaker - Empowering Crystal of Anub'ikkaj
@@ -8,7 +8,7 @@
 // Siege of Boralus
 // Grim Batol - Corrupted Egg Shell, Gale of Shadows (not currently in-game)
 
-// season 2
+// season 2 (not implemented)
 // Cinderbrew Meadery
 // Darkflame Cleft - Burin of the Candle King, Carved Blazikon Wax, Remnant of Darkness
 // Priory of the Sacred Flame - Signet of the Priory
@@ -17,13 +17,13 @@
 // raid
 // trinkets
 // Gruesome Syringe (healing coefficient)
-// Creeping Coagulum (coefficients)
-// Ovinax's Mercurial Egg (implemented - options pending)
+// Creeping Coagulum
+// Ovinax's Mercurial Egg
 // Treacherous Transmitter
 
 // unique items
-// Fateweaved Mallet (coefficients unsure)
-// Sureki Zealot's Insignia (not implemented)
+// Fateweaved Mallet
+// Sureki Zealot's Insignia
 
 const itemData = [
     {
@@ -123265,7 +123265,7 @@ const itemData = [
         "base_item_level": 571,
         "quality": "Epic",
         "id": 220305,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/creatureportrait_twilightshammer_dragonegg_01.jpg",
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
         "stats": {},
         "gems": [],
         "enchantments": [],
@@ -123330,7 +123330,7 @@ const itemData = [
         "base_item_level": 571,
         "quality": "Epic",
         "id": 212452,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_gizmo_runichealthinjector.jpg",
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_gruesomesyringe_red.jpg",
         "stats": {
             "Critical Strike": 1001
         },
@@ -123398,9 +123398,9 @@ const itemData = [
                 "name": "Creeping Coagulum",
                 "id": 444282,
                 // 444271
-                "description": "Use: Feed the Coagulum, redirecting 20% of all healing done until *766815.2 healing has been consumed. Once sated, the Coagulum bursts to heal 5 allies for *541371.531.\n\nLingering effluvia causes affected allies' next attacks to deal an additional (444271s2 / 5) Shadow damage, increased based on overhealing done by the Coagulum. (1 Min, 30 Sec Cooldown)",
+                "description": "Use: Feed the Coagulum, redirecting 20% of all healing done until *766815.2 healing has been consumed. Once sated, the Coagulum bursts to heal 5 allies for *541371.531.\n\nLingering effluvia causes affected allies' next attacks to deal an additional 444,271 Shadow damage, increased based on overhealing done by the Coagulum. (1 Min, 30 Sec Cooldown)",
                 "effect_values": [
-                    {"base_value": 766815.2, "effect_type": "scalar", "effect_coefficient": 66.79903411865, "allocation_type": "flat_healing"},
+                    {"base_value": 766815.2, "effect_type": "scalar", "effect_coefficient": 317.36041259766, "allocation_type": "flat_healing"},
                     {"base_value": 541371.531, "effect_type": "scalar", "effect_coefficient": 2.26054334641, "allocation_type": "flat_healing"}
                 ]
             }
@@ -123410,7 +123410,7 @@ const itemData = [
         "base_item_level": 571,
         "quality": "Epic",
         "id": 219917,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/warlock_-bloodstone.jpg",
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_creepingcoagulum_purple.jpg",
         "stats": {
             "Intellect": 1914
         },
@@ -124196,7 +124196,7 @@ const itemData = [
         "base_item_level": 437,
         "quality": "Rare",
         "id": 219320,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_priest_shadoworbs.jpg",
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_creepingcoagulum_blue.jpg",
         "stats": {
             "Intellect": 549
         },
@@ -124237,7 +124237,7 @@ const itemData = [
         "base_item_level": 437,
         "quality": "Rare",
         "id": 219312,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/achievement_dungeon_ulduarraid_misc_04.jpg",
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_arathordungeon_fragment_color5.jpg",
         "stats": {},
         "gems": [],
         "enchantments": [],
@@ -124317,15 +124317,21 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Equip: Your abilities have a chance to stir the sac, releasing an egg which grants you 225 <Primary Stat>. Each egg hatches after 1 min, and the new brood attacks your next target, inflicting 10096 Nature damage over 8 sec. (100ms cooldown)"
+                "name": "Ara-Kara Sacbrood",
+                "id": 443541,
+                "description": "Equip: Your abilities have a chance to stir the sac, releasing an egg which grants you *225 Intellect. Each egg hatches after 1 min, and the new brood attacks your next target, inflicting *10096 Nature damage over 8 sec. (100ms cooldown)",
+                "effect_values": [
+                    {"base_value": 225, "effect_type": "scalar", "effect_coefficient": 0.20447586477, "allocation_type": "no_multiplier"},
+                    {"base_value": 10096, "effect_type": "scalar", "effect_coefficient": 1.64512729645 * 10, "allocation_type": "flat_damage"}
+                ]
             }
         ],
         "name": "Ara-Kara Sacbrood",
         "item_slot": "Trinket",
         "base_item_level": 437,
-        "quality": "Rare",
+        "quality": "Epic",
         "id": 219314,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ability_web_nova.jpg",
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_red.jpg",
         "stats": {
             "Haste": 604
         },
@@ -124457,7 +124463,7 @@ const itemData = [
         "base_item_level": 437,
         "quality": "Epic",
         "id": 219317,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/trade_archaeology_nerubian_obelisk.jpg",
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_11_0_dungeon_oldgodstatuepiece_purple.jpg",
         "stats": {},
         "gems": [],
         "enchantments": [],
@@ -124681,7 +124687,7 @@ const itemData = [
         "base_item_level": 437,
         "quality": "Epic",
         "id": 219303,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cosmicvoid_nova.jpg",
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_magic_swirl_color3.jpg",
         "stats": {
             "Mastery": 604
         },
@@ -133121,8 +133127,8 @@ const itemData = [
                 "id": 443384,
                 "description": "Equip: Your harmful and helpful spells have a chance to weave a Thread of Fate between your and you target for 5 sec. Tethered allies gain *282 bonus primary while the Thread holds and enemies take *2378 Cosmic Damage when the Thread breaks.",
                 "effect_values": [
-                    {"base_value": 282, "effect_type": "scalar", "effect_coefficient": 0.57636994123, "allocation_type": "no_multiplier"},
-                    {"base_value": 2378, "effect_type": "scalar", "effect_coefficient": 8.8560256958, "allocation_type": "flat_healing"}
+                    {"base_value": 282, "effect_type": "scalar", "effect_coefficient": 1.44092488289, "allocation_type": "no_multiplier"},
+                    {"base_value": 2378, "effect_type": "scalar", "effect_coefficient": 24.16174125671, "allocation_type": "flat_healing"}
                 ]
             }
         ],

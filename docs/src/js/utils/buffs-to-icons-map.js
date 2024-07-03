@@ -182,16 +182,17 @@ const buffsToIconsMap = {
     "Voice from Beyond": "https://wow.zamimg.com/images/wow/icons/large/inv_cosmicvoid_nova.jpg",
     "The Silent Star": "https://wow.zamimg.com/images/wow/icons/large/inv_cosmicvoid_debuff.jpg",
 
-    "High Speaker's Accretion Rift": "https://wow.zamimg.com/images/wow/icons/large/inv_cosmicvoid_nova.jpg",
-    "High Speaker's Accretion Intellect": "https://wow.zamimg.com/images/wow/icons/large/inv_cosmicvoid_nova.jpg",
+    "High Speaker's Accretion Rift": "https://wow.zamimg.com/images/wow/icons/large/inv_magic_swirl_color3.jpg",
+    "High Speaker's Accretion Intellect": "https://wow.zamimg.com/images/wow/icons/large/inv_magic_swirl_color3.jpg",
     "Unbound Changeling": "https://wow.zamimg.com/images/wow/icons/large/inv_pet_spectralporcupinegreen.jpg",
-    "Empowering Crystal of Anub'ikkaj": "https://wow.zamimg.com/images/wow/icons/large/achievement_dungeon_ulduarraid_misc_04.jpg",
-    "Harvester's Edict": "https://wow.zamimg.com/images/wow/icons/large/trade_archaeology_nerubian_obelisk.jpg",
+    "Empowering Crystal of Anub'ikkaj": "https://wow.zamimg.com/images/wow/icons/large/inv_arathordungeon_fragment_color5.jpg",
+    "Harvester's Edict": "https://wow.zamimg.com/images/wow/icons/large/inv_11_0_dungeon_oldgodstatuepiece_purple.jpg",
+    "Ara-Kara Sacbrood": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_red.jpg",
     
     "Deliberate Incubation": "https://wow.zamimg.com/images/wow/icons/large/inv_10_specialreagentfoozles_coolegg_red.jpg",
     "Reckless Incubation": "https://wow.zamimg.com/images/wow/icons/large/inv_10_specialreagentfoozles_coolegg_green.jpg",
-    "Ovinax's Mercurial Egg": "https://wow.zamimg.com/images/wow/icons/large/creatureportrait_twilightshammer_dragonegg_01.jpg",
-    "Ovinax's Mercurial Egg Paused": "https://wow.zamimg.com/images/wow/icons/large/creatureportrait_twilightshammer_dragonegg_01.jpg",
+    "Ovinax's Mercurial Egg": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
+    "Ovinax's Mercurial Egg Paused": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
 
     "Cryptic Instructions": "https://wow.zamimg.com/images/wow/icons/large/ability_racial_etherealconnection.jpg",
     "Ethereal Powerlink": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_twistedfaith.jpg",

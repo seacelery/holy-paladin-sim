@@ -831,7 +831,7 @@ const itemDataEffects = [
         "base_item_level": 571,
         "quality": "Epic",
         "id": 212452,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_gizmo_runichealthinjector.jpg",
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_gruesomesyringe_red.jpg",
         "stats": {
             "Critical Strike": 1001
         },
@@ -845,9 +845,9 @@ const itemDataEffects = [
                 "name": "Creeping Coagulum",
                 "id": 444282,
                 // 444271
-                "description": "Use: Feed the Coagulum, redirecting 20% of all healing done until *766815.2 healing has been consumed. Once sated, the Coagulum bursts to heal 5 allies for *541371.531.\n\nLingering effluvia causes affected allies' next attacks to deal an additional (444271s2 / 5) Shadow damage, increased based on overhealing done by the Coagulum. (1 Min, 30 Sec Cooldown)",
+                "description": "Use: Feed the Coagulum, redirecting 20% of all healing done until *766815.2 healing has been consumed. Once sated, the Coagulum bursts to heal 5 allies for *541371.531.\n\nLingering effluvia causes affected allies' next attacks to deal an additional 444,271 Shadow damage, increased based on overhealing done by the Coagulum. (1 Min, 30 Sec Cooldown)",
                 "effect_values": [
-                    {"base_value": 766815.2, "effect_type": "scalar", "effect_coefficient": 66.79903411865, "allocation_type": "flat_healing"},
+                    {"base_value": 766815.2, "effect_type": "scalar", "effect_coefficient": 317.36041259766, "allocation_type": "flat_healing"},
                     {"base_value": 541371.531, "effect_type": "scalar", "effect_coefficient": 2.26054334641, "allocation_type": "flat_healing"}
                 ]
             }
@@ -857,9 +857,34 @@ const itemDataEffects = [
         "base_item_level": 571,
         "quality": "Epic",
         "id": 219917,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/warlock_-bloodstone.jpg",
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_creepingcoagulum_purple.jpg",
         "stats": {
             "Intellect": 1914
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Fateweaved Needle",
+                "id": 443384,
+                "description": "Equip: Your harmful and helpful spells have a chance to weave a Thread of Fate between your and you target for 5 sec. Tethered allies gain *282 bonus primary while the Thread holds and enemies take *2378 Cosmic Damage when the Thread breaks.",
+                "effect_values": [
+                    {"base_value": 282, "effect_type": "scalar", "effect_coefficient": 1.44092488289, "allocation_type": "no_multiplier"},
+                    {"base_value": 2378, "effect_type": "scalar", "effect_coefficient": 24.16174125671, "allocation_type": "flat_healing"}
+                ]
+            }
+        ],
+        "name": "Fateweaved Mallet",
+        "item_slot": "One-Hand",
+        "base_item_level": 350,
+        "quality": "Epic",
+        "id": 219941,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_nerubianraid_d_01.jpg",
+        "stats": {
+            "Intellect": 748
         },
         "gems": [],
         "enchantments": [],
