@@ -1134,16 +1134,16 @@ const templateEquipment = {
     "neck": {
         "effects": [],
         "gems": [],
-        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_7_0raid_necklace_03c.jpg",
-        "item_id": 212448,
-        "item_level": 616,
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_nerubian_necklace_01_color4.jpg",
+        "item_id": 225577,
+        "item_level": 626,
         "limit": null,
-        "name": "Locket of Broken Memories",
+        "name": "Sureki Zealot's Insignia",
         "quality": "Epic",
         "stats": {
-            "crit": 4124,
-            "stamina": 9938,
-            "haste": 1031
+            "haste": 4702,
+            "stamina": 11419,
+            "mastery": 877
         }
     },
     "off_hand": {
@@ -1179,39 +1179,43 @@ const templateEquipment = {
     "trinket_1": {
         "effects": [
             {
-                "description": "Feed the Coagulum, redirecting 20% of all healing done until 766815.2 healing has been consumed. Once sated, the Coagulum bursts to heal 5 allies for 541371.531.<br><br>Lingering effluvia causes affected allies' next attacks to deal an additional (444271s2 / 5) Shadow damage, increased based on overhealing done by the Coagulum. (1 Min, 30 Sec Cooldown)",
-                "id": 0,
-                "name": "",
-                "effect_values": []
+                "name": "Empowering Crystal of Anub'ikkaj",
+                "id": 449275,
+                "description": "Equip: Your spells and abilities have a chance to let loose a nascent empowerment from the crystal, increasing a random secondary stat by *1392 for 20 sec.",
+                "effect_values": [
+                    {"base_value": 1392, "effect_type": "scalar", "effect_coefficient": 1.15159761906, "allocation_type": "rating_multiplier"},
+                ]
             }
         ],
-        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/warlock_-bloodstone.jpg",
-        "item_id": 219917,
-        "item_level": 613,
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_arathordungeon_fragment_color5.jpg",
+        "item_id": 219312,
+        "item_level": 597,
         "limit": null,
-        "name": "Creeping Coagulum",
+        "name": "Empowering Crystal of Anub'ikkaj",
         "quality": "Epic",
         "stats": {
-            "intellect": 2831,
+            "intellect": 2439,
         }
     },
     "trinket_2": {
         "effects": [
             {
-                "description": "Your healing spells have a high chance to cause you to inject yourself with a charge of Volatile Serum. Multiple charges may overlap.<br><br>If an ally drops below 70% health, expel a charge to heal them for 258787. If unconsumed after 15 sec, charges catalyze to grant you 4526 Intellect for 10 sec instead.",
-                "id": 0,
-                "name": "",
-                "effect_values": []
+                "name": "Ovinax's Mercurial Egg",
+                "id": 445066,
+                "description": "Equip: Carefully balance the Egg's incubation. While stationary, gain *95 Intellect every 1 sec, up to 30 times. Diminishes while moving. While moving, gain *108 of your highest secondary stat every 1 sec, up to 30 times. Diminishes while stationary.\n\nAdditional stacks above 20 grant 60% reduced benefit.<br><br>Use: Suspend the Egg's incubation state for 20 sec. (2 Min Cooldown",
+                "effect_values": [
+                    {"base_value": 95, "effect_type": "scalar", "effect_coefficient": 0.02493842691, "allocation_type": "no_multiplier"},
+                    {"base_value": 108, "effect_type": "scalar", "effect_coefficient": 0.05418000743, "allocation_type": "rating_multiplier"}
+                ]
             }
         ],
-        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_gizmo_runichealthinjector.jpg",
-        "item_id": 212452,
-        "item_level": 619,
+        "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
+        "item_id": 220305,
+        "item_level": 616,
         "limit": null,
-        "name": "Gruesome Syringe",
+        "name": "Ovinax's Mercurial Egg",
         "quality": "Epic",
         "stats": {
-            "crit": 1314
         }
     },
     "waist": {

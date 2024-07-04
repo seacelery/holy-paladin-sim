@@ -668,22 +668,35 @@ priorityListPresetsButton.addEventListener("mousedown", () => {
 
 const beaconOfFaithPreset = document.getElementById("standard-beacon-of-faith-preset");
 beaconOfFaithPreset.addEventListener("click", () => {
-    priorityListPastedCode = `Divine Toll | Previous Ability = Daybreak
-        Aerated Mana Potion | Timers = [30]+
-        Avenging Wrath | Timers = [18]+
-        Lay on Hands
-        Divine Favor
-        Light of Dawn | Holy Power = 5
-        Nymue's Unraveling Spindle | Timers = [17]+
-        Daybreak | Timers = [18]+
-        Holy Shock
-        Blessing of the Seasons
-        Tyr's Deliverance
-        Holy Prism
-        Light's Hammer
-        Light of Dawn | Holy Power >= 3
-        Holy Light | Divine Favor active | and | Infusion of Light active
-        Flash of Light | Infusion of Light active`,
+    priorityListPastedCode = `Algari Mana Potion | Timers = [30]
+Blessing of the Seasons | Avenging Wrath (Awakening) not active | or | Avenging Wrath not active
+Tyr's Deliverance | Avenging Wrath (Awakening) not active
+Avenging Wrath | Divine Toll cooldown = 0 | and | Holy Power >= 3
+Judgment | Awakening Ready active | and | Holy Power < 5
+Holy Shock | Holy Shock charges = 2 | and | Rising Sunlight not active
+Holy Shock | Holy Power <= 2 | and | Holy Shock charges = 2 | and | Rising Sunlight active
+Holy Prism
+Eternal Flame | Dawnlight active
+Eternal Flame | Holy Power = 5 | and | Unending Light stacks = 9
+Light of Dawn | Holy Power = 5
+Eternal Flame | Holy Power >= 3 | and | Avenging Wrath active | and | Divine Toll cooldown = 0 | and | Unending Light stacks = 9
+Eternal Flame | Holy Power >= 3 | and | Avenging Wrath (Awakening) active | and | Divine Toll cooldown = 0 | and | Unending Light stacks = 9
+Light of Dawn | Holy Power >= 3 | and | Avenging Wrath active | and | Divine Toll cooldown = 0
+Light of Dawn | Holy Power >= 3 | and | Avenging Wrath (Awakening) active | and | Divine Toll cooldown = 0
+Divine Toll | Avenging Wrath active | or | Avenging Wrath (Awakening) active
+Holy Shock | Holy Power <= 2 | and | Rising Sunlight active
+Holy Shock | Holy Power < 5 | and | Rising Sunlight not active
+Crusader Strike | Holy Power <= 3
+Holy Light | Divine Favor active | and | Infusion of Light active
+Holy Light | Infusion of Light active | and | Liberation active
+Flash of Light | Infusion of Light active
+Eternal Flame | Unending Light stacks = 9 | and
+Judgment | Awakening Ready not active | and | Awakening stacks < 8
+Light of Dawn
+Hammer of Wrath
+Arcane Torrent
+Crusader Strike
+Consecration`,
     convertPasteToPriorityList(priorityListPastedCode);
     document.querySelectorAll(".priority-list-item-ability-text").forEach(itemText => {
         adjustTextareaHeight(itemText, 40);

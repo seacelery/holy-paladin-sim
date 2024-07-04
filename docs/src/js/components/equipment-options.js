@@ -872,7 +872,9 @@ const initialiseEquipment = () => {
             });
 
             let trinketItemData = JSON.parse(itemSlot.getAttribute("data-item-data"));
-            trinketOptionDropdown.value = trinketItemData["effects"][0].trinket_options ?? "Mastery";
+            trinketOptionDropdown.value = trinketItemData["effects"][0].trinket_options ?? trinketsWithOptions[itemName][0];
+            trinketItemData["effects"][0].trinket_options = trinketOptionDropdown.value;
+            itemSlot.setAttribute("data-item-data", JSON.stringify(trinketItemData));
 
             trinketOptionDropdown.addEventListener("input", () => {
                 let trinketItemData = JSON.parse(itemSlot.getAttribute("data-item-data"));

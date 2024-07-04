@@ -1216,16 +1216,16 @@ class AlchemicalChaosEarth(Buff):
         super().__init__("Alchemical Chaos: Earth", 30, base_duration=30)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", 6002)
+        caster.update_stat("mastery", 4082)
         self.chosen_stats = random.sample(["crit", "versatility", "haste"], 2)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, -405)
+            caster.update_stat(stat, -340)
         
     def remove_effect(self, caster, current_time):
-        caster.update_stat("mastery", -6002)
+        caster.update_stat("mastery", -4082)
         apply_alchemical_chaos_aura(caster, current_time)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, 405)
+            caster.update_stat(stat, 340)
         
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
@@ -1238,10 +1238,10 @@ class FlaskOfTemperedSwiftness(Buff):
         super().__init__("Flask of Tempered Swiftness", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("haste", 2168)
+        caster.update_stat("haste", 3323)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("haste", -2168)
+        caster.update_stat("haste", -3323)
             
 
 class FlaskOfTemperedAggression(Buff):
@@ -1250,10 +1250,10 @@ class FlaskOfTemperedAggression(Buff):
         super().__init__("Flask of Tempered Aggression", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("crit", 2168)
+        caster.update_stat("crit", 3323)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("crit", -2168)
+        caster.update_stat("crit", -3323)
             
 
 class FlaskOfTemperedMastery(Buff):
@@ -1262,10 +1262,10 @@ class FlaskOfTemperedMastery(Buff):
         super().__init__("Flask of Tempered Mastery", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", 2168)
+        caster.update_stat("mastery", 3323)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", -2168)
+        caster.update_stat("mastery", -3323)
             
     
 class FlaskOfTemperedVersatility(Buff):
@@ -1274,10 +1274,10 @@ class FlaskOfTemperedVersatility(Buff):
         super().__init__("Flask of Tempered Versatility", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("versatility", 2168)
+        caster.update_stat("versatility", 3323)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("versatility", -2168)
+        caster.update_stat("versatility", -3323)
 
 
 class FlaskOfSavingGraces(Buff):

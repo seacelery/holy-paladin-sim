@@ -890,6 +890,53 @@ const itemDataEffects = [
         "enchantments": [],
         "limit": null
     },
+    {
+        "effects": [
+            {
+                "name": "Ovinax's Mercurial Egg",
+                "id": 445066,
+                "description": "Equip: Carefully balance the Egg's incubation. While stationary, gain *95 Intellect every 1 sec, up to 30 times. Diminishes while moving. While moving, gain *108 of your highest secondary stat every 1 sec, up to 30 times. Diminishes while stationary.\n\nAdditional stacks above 20 grant 60% reduced benefit.<br><br>Use: Suspend the Egg's incubation state for 20 sec. (2 Min Cooldown",
+                "effect_values": [
+                    {"base_value": 95, "effect_type": "scalar", "effect_coefficient": 0.02493842691, "allocation_type": "no_multiplier"},
+                    {"base_value": 108, "effect_type": "scalar", "effect_coefficient": 0.05418000743, "allocation_type": "rating_multiplier"}
+                ]
+            }
+        ],
+        "name": "Ovinax's Mercurial Egg",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 220305,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Empowering Crystal of Anub'ikkaj",
+                "id": 449275,
+                "description": "Equip: Your spells and abilities have a chance to let loose a nascent empowerment from the crystal, increasing a random secondary stat by *1392 for 20 sec.",
+                "effect_values": [
+                    {"base_value": 1392, "effect_type": "scalar", "effect_coefficient": 1.15159761906, "allocation_type": "rating_multiplier"},
+                ]
+            }
+        ],
+        "name": "Empowering Crystal of Anub'ikkaj",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Epic",
+        "id": 219312,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_arathordungeon_fragment_color5.jpg",
+        "stats": {
+            "intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
 ];
 
 export default itemDataEffects;
