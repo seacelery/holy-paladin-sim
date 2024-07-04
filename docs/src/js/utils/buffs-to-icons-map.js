@@ -122,6 +122,7 @@ const buffsToIconsMap = {
     "Close to Heart": "https://render.worldofwarcraft.com/eu/icons/56/inv_offhand_1h_pvppandarias2_c_01.jpg",
     "Retribution Aura ": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusade.jpg",
     "Retribution Aura": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusade.jpg",
+    "Skyfury": "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_artifactdoomhammer_d_02.jpg",
     "Mana Spring Totem": "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_manaregentotem.jpg",
     "Mana Tide Totem": "https://render.worldofwarcraft.com/eu/icons/56/ability_shaman_manatidetotem.jpg",
     "Symbol of Hope": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_symbolofhope.jpg",

@@ -8,11 +8,11 @@ const flasks = {
 };
 
 const ptrFlasks = {
-    "Flask of Tempered Swiftness": {effect: "Increases your Haste by 2168.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_potiona3.jpg"},
-    "Flask of Tempered Aggression": {effect: "Increases your Critical Strike by 2168.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_potiona5.jpg"},
-    "Flask of Tempered Mastery": {effect: "Increases your Mastery by 2168.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_potiona4.jpg"},
-    "Flask of Tempered Versatility": {effect: "Increases your Versatility by 2168.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_potiona2.jpg"},
-    "Flask of Alchemical Chaos": {effect: "Drink to increase a random secondary stat by 6002 at the cost of 405 of two other secondary stats. These effects are randomized again every 30 sec.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_alchemy_potion_06.jpg"},
+    "Flask of Tempered Swiftness": {effect: "Increases your Haste by 3323.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_potiona3.jpg"},
+    "Flask of Tempered Aggression": {effect: "Increases your Critical Strike by 3323.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_potiona5.jpg"},
+    "Flask of Tempered Mastery": {effect: "Increases your Mastery by 3323.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_potiona4.jpg"},
+    "Flask of Tempered Versatility": {effect: "Increases your Versatility by 3323.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_potiona2.jpg"},
+    "Flask of Alchemical Chaos": {effect: "Drink to increase a random secondary stat by 4082 at the cost of 340 of two other secondary stats. These effects are randomized again every 30 sec.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_alchemy_potion_06.jpg"},
     "Flask of Saving Graces": {effect: "Directly healing an ally player that is below 25% health grants 15% increased healing done for 10 sec.", image: "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_potione4.jpg"}
 };
 
@@ -64,6 +64,7 @@ const ptrRaidBuffs = {
     "Arcane Intellect": {effect: "Increases your Intellect by 5%.", image: "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_magicalsentry.jpg"},
     "Mark of the Wild": {effect: "Increases your Versatility by 3%.", image: "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_regeneration.jpg"},
     // "Retribution Aura": {effect: "When any party or raid member within 40 yds takes more than 30% of their health in damage in a single hit, each member gains 5% increased damage and healing, decaying over 30 seconds.", image: "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusade.jpg"},
+    "Skyfury": {effect: "Increases your Mastery by 2%.", image: "https://wow.zamimg.com/images/wow/icons/large/inv_offhand_1h_artifactdoomhammer_d_02.jpg"},
     "Symbol of Hope": {effect: "Bolster the morale of raid members within 40 yds. They each recover 30 sec of cooldown of a major defensive ability, and regain 10% of their missing mana, over 4 seconds.", image: "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_symbolofhope.jpg"},
     "Mana Spring Totem": {effect: "Lava Burst and Riptide casts restore 150 mana to you and 4 allies nearest to you within 40 yards.", image: "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_manaregentotem.jpg"},
     "Mana Tide Totem": {effect: "Your mana regeneration is increased by 80% for 8 seconds.", image: "https://render.worldofwarcraft.com/eu/icons/56/ability_shaman_manatidetotem.jpg"}

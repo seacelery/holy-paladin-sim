@@ -1241,7 +1241,7 @@ presetBuffsButton.addEventListener("click", () => {
             if (futurePatchSelected) {
                 if (["Flask of Saving Graces", "Grand Banquet of the Kalu'ak", "Algari Mana Oil",
                     "Crystallized Augment Rune", "Arcane Intellect", "Mark of the Wild", "Symbol of Hope",
-                    "Source of Magic"].includes(imageData)) {
+                    "Source of Magic", "Skyfury"].includes(imageData)) {
                         image.classList.toggle(`${type}-selected`); 
                         image.classList.toggle(`${type}-unselected`);
                 };
@@ -1262,7 +1262,7 @@ presetBuffsButton.addEventListener("click", () => {
             food: ["Grand Banquet of the Kalu'ak"],
             weapon_imbue: ["Algari Mana Oil"],
             augment_rune: ["Crystallized Augment Rune"],
-            raid_buff: ["Arcane Intellect", "Mark of the Wild", "Symbol of Hope"],
+            raid_buff: ["Arcane Intellect", "Mark of the Wild", "Symbol of Hope", "Skyfury"],
             external_buff: {"Source of Magic": ["0"]},
             potion: {}
         };

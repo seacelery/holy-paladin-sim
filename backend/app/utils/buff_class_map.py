@@ -8,7 +8,7 @@ from ..classes.auras_buffs import (
                                    DreamtendersCharm, IcedPhialOfCorruptingRage, ManaSpringTotem, SymbolOfHope, MagazineOfHealingDarts,
                                    BronzedGripWrappings, ManaTideTotem, FlaskOfSavingGraces, FlaskOfTemperedAggression, FlaskOfAlchemicalChaos,
                                    FlaskOfTemperedMastery, FlaskOfTemperedSwiftness, FlaskOfTemperedVersatility, CrystallizedAugmentRune,
-                                   AlgariManaOil, OilOfBeledarsGrace
+                                   AlgariManaOil, OilOfBeledarsGrace, Skyfury
                                   )
 
 buff_class_map = {
@@ -52,7 +52,8 @@ buff_class_map = {
     "Arcane Intellect": ArcaneIntellect,
     "Mark of the Wild": MarkOfTheWild,
     "Close to Heart": CloseToHeart,
-    "Retribution Aura": RetributionAura,
+    "Skyfury": Skyfury,
+    # "Retribution Aura": RetributionAura,
     "Symbol of Hope": SymbolOfHope,
     "Mana Spring Totem": ManaSpringTotem,
     "Mana Tide Totem": ManaTideTotem,

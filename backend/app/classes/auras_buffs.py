@@ -1662,6 +1662,20 @@ class RetributionAuraTrigger(Buff):
         caster.healing_multiplier /= 1.02
         
 
+class Skyfury(Buff):
+    
+    def __init__(self):
+        super().__init__("Skyfury", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.flat_mastery += 2
+        caster.update_stat("mastery", 0)
+    
+    def remove_effect(self, caster, current_time=None):
+        caster.flat_mastery -= 2
+        caster.update_stat("mastery", 0)
+        
+
 class ManaSpringTotem(Buff):
     
     def __init__(self):
