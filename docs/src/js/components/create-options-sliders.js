@@ -196,6 +196,16 @@ const createOptionsSliders = () => {
     surekiZealotsInsigniaValue.textContent = surekiZealotsInsigniaSlider.value;
     makeFieldEditable(surekiZealotsInsigniaValue, 1, surekiZealotsInsigniaSlider);
 
+    // potion bomb of power uptime slider
+    const potionBombOfPowerSlider = document.getElementById("potion-bomb-of-power-option");
+    const potionBombOfPowerValue = document.getElementById("potion-bomb-of-power-value");
+    
+    potionBombOfPowerSlider.addEventListener("input", () => {
+        potionBombOfPowerValue.textContent = potionBombOfPowerSlider.value;
+    });
+    potionBombOfPowerValue.textContent = potionBombOfPowerSlider.value;
+    makeFieldEditable(potionBombOfPowerValue, 1, potionBombOfPowerSlider);
+
     // dawnlight targets slider
     const dawnlightSlider = document.getElementById("dawnlight-option");
     const dawnlightValue = document.getElementById("dawnlight-value");

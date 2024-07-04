@@ -998,7 +998,7 @@ body {
 .option-container {
     position: relative;
     display: flex;
-    margin-bottom: 27px;
+    margin-bottom: 33px;
 
     justify-content: space-between;    
 }

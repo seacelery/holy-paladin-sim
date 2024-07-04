@@ -3542,3 +3542,15 @@ class SurekiZealotsInsignia(Buff):
     
     def remove_effect(self, caster, current_time=None):
         caster.update_stat("versatility", -694)
+        
+
+class PotionBombOfPower(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Potion Bomb of Power", 30, base_duration=30)   
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(800)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(800)

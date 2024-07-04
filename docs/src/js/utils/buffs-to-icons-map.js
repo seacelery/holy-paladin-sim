@@ -114,6 +114,7 @@ const buffsToIconsMap = {
     "Hissing Rune": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_09.jpg",
     "Algari Mana Oil": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiond1.jpg",
     "Oil of Beledar's Grace": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiond5.jpg",
+    "Potion Bomb of Power": "https://wow.zamimg.com/images/wow/icons/large/inv_10_engineering_explosives_1_color2.jpg",
 
     // raid buffs
     "Arcane Intellect": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_magicalsentry.jpg",

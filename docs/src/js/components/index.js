@@ -603,6 +603,7 @@ const startSimulation = () => {
         sureki_zealots_insignia_count: document.getElementById("sureki-zealots-insignia-option").value,
         dawnlight_targets: document.getElementById("dawnlight-option").value,
         suns_avatar_targets: document.getElementById("suns-avatar-option").value,
+        potion_bomb_of_power_uptime: document.getElementById("potion-bomb-of-power-option").value,
         priority_list: priorityList,
         custom_equipment: generateFullItemData()["equipment"],
         seasons: seasons,
