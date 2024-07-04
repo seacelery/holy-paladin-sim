@@ -16,7 +16,7 @@ from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPoti
 from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
 from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell, HolyBulwarkSacredWeapon
 from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, IncarnatesMarkOfFire, BroodkeepersPromiseHoT, MorningStar, RiteOfAdjurationBuff, RiteOfSanctification, DeliberateIncubation, OvinaxsMercurialEggBuff
-from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus, MiniatureSingingStone, HighSpeakersAccretion, SiphoningPhylacteryShard, CreepingCoagulum, OvinaxsMercurialEgg
+from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus, MiniatureSingingStone, HighSpeakersAccretion, SiphoningPhylacteryShard, CreepingCoagulum, OvinaxsMercurialEgg, TreacherousTransmitter
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents, base_active_class_talents_ptr, base_active_spec_talents_ptr, base_active_lightsmith_talents, base_herald_of_the_sun_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
 from .api_client import APIClient
@@ -623,6 +623,9 @@ class Paladin:
             
         if self.is_trinket_equipped("Ovinax's Mercurial Egg"):
             self.abilities["Ovinax's Mercurial Egg"] = OvinaxsMercurialEgg(self)
+            
+        if self.is_trinket_equipped("Treacherous Transmitter"):
+            self.abilities["Treacherous Transmitter"] = TreacherousTransmitter(self)
             
         # ptr abilities
         if self.ptr:

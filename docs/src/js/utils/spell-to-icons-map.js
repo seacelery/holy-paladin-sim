@@ -48,7 +48,7 @@ const spellToIconsMap = {
     "Hammer and Anvil": "https://wow.zamimg.com/images/wow/icons/large/inv_10_blacksmithing_consumable_repairhammer_color1.jpg",
     "Hammer of Wrath": "https://render.worldofwarcraft.com/eu/icons/56/spell_paladin_hammerofwrath.jpg",
     "Hand of Divinity": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_vindication.jpg",
-    "Holy Armament": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_1h_artifactnorgannon_d_06.jpg",
+    "Holy Armament": "https://wow.zamimg.com/images/wow/icons/large/inv_ability_lightsmithpaladin_holybulwark.jpg",
     "Holy Bulwark": "https://render.worldofwarcraft.com/eu/icons/56/inv_shield_1h_artifactnorgannon_d_06.jpg",
     "Holy Light": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_surgeoflight.jpg",
     "Holy Prism": "https://render.worldofwarcraft.com/eu/icons/56/spell_paladin_holyprism.jpg",
@@ -96,6 +96,7 @@ const spellToIconsMap = {
     "Algari Mana Potion": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape1_blue.jpg",
     "Grotesque Vial": "https://render.worldofwarcraft.com/eu/icons/56/inv_summerfest_firepotion.jpg",
     "Slumbering Soul Serum": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_bottle_shape4_blue.jpg",
+    "Tempered Potion": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiona4.jpg",
 
     // trinkets
     "Mirror of Fractured Tomorrows": "https://render.worldofwarcraft.com/eu/icons/56/achievement_dungeon_ulduarraid_misc_06.jpg",
@@ -120,6 +121,7 @@ const spellToIconsMap = {
     "Creeping Coagulum": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_creepingcoagulum_purple.jpg",
     "Gruesome Syringe": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_gruesomesyringe_red.jpg",
     "Sureki Zealot's Insignia": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_113.jpg",
+    "Treacherous Transmitter": "https://wow.zamimg.com/images/wow/icons/large/inv_etherealraid_communicator_color1.jpg",
 
     // enchants
     "Dreaming Devotion": "https://render.worldofwarcraft.com/eu/icons/56/item_herbd.jpg",

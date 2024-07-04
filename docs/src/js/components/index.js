@@ -1240,14 +1240,14 @@ presetBuffsButton.addEventListener("click", () => {
             if (futurePatchSelected) {
                 if (["Flask of Saving Graces", "Grand Banquet of the Kalu'ak", "Algari Mana Oil",
                     "Crystallized Augment Rune", "Arcane Intellect", "Mark of the Wild", "Symbol of Hope",
-                    "Retribution Aura", "Source of Magic"].includes(imageData)) {
+                    "Source of Magic"].includes(imageData)) {
                         image.classList.toggle(`${type}-selected`); 
                         image.classList.toggle(`${type}-unselected`);
                 };
             } else {
                 if (["Iced Phial of Corrupting Rage", "Grand Banquet of the Kalu'ak", "Hissing Rune",
                     "Draconic Augment Rune", "Arcane Intellect", "Mark of the Wild", "Symbol of Hope",
-                    "Retribution Aura", "Source of Magic"].includes(imageData)) {
+                    "Source of Magic"].includes(imageData)) {
                         image.classList.toggle(`${type}-selected`); 
                         image.classList.toggle(`${type}-unselected`);
                 };
@@ -1261,7 +1261,7 @@ presetBuffsButton.addEventListener("click", () => {
             food: ["Grand Banquet of the Kalu'ak"],
             weapon_imbue: ["Algari Mana Oil"],
             augment_rune: ["Crystallized Augment Rune"],
-            raid_buff: ["Arcane Intellect", "Mark of the Wild", "Symbol of Hope", "Retribution Aura"],
+            raid_buff: ["Arcane Intellect", "Mark of the Wild", "Symbol of Hope"],
             external_buff: {"Source of Magic": ["0"]},
             potion: {}
         };
@@ -1271,7 +1271,7 @@ presetBuffsButton.addEventListener("click", () => {
             food: ["Grand Banquet of the Kalu'ak"],
             weapon_imbue: ["Hissing Rune"],
             augment_rune: ["Draconic Augment Rune"],
-            raid_buff: ["Arcane Intellect", "Mark of the Wild", "Symbol of Hope", "Retribution Aura"],
+            raid_buff: ["Arcane Intellect", "Mark of the Wild", "Symbol of Hope"],
             external_buff: {"Source of Magic": ["0"]},
             potion: {}
         };

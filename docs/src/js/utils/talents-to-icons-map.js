@@ -7,6 +7,7 @@ const talentsToIcons = {
     "Auras of the Resolute": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_devotionaura.jpg",
     "Obduracy": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_speedoflight.jpg",
     "Auras of Swift Vengeance": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_crusade.jpg",
+    "Crusader Aura": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_crusaderaura.jpg",
     "Turn Evil": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_turnevil.jpg",
     "Fist of Justice": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_fistofjustice.jpg",
     "Divine Steed": "https://render.worldofwarcraft.com/eu/icons/56/ability_paladin_divinesteed.jpg",

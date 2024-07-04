@@ -2845,21 +2845,22 @@ class RecklessIncubation(Buff):
             caster.update_stat(self.highest_stat, -self.trinket_secondary_stat_value * self.current_stacks)
         
 
-class CrypticInstructions(Buff):
+# Treacherous Transmitter RNG proc removed for now
+# class CrypticInstructions(Buff):
     
-    BASE_PPM = 6
+#     BASE_PPM = 6
     
-    def __init__(self, caster):
-        super().__init__("Cryptic Instructions", 10000, base_duration=10000, current_stacks=1, max_stacks=10)
+#     def __init__(self, caster):
+#         super().__init__("Cryptic Instructions", 10000, base_duration=10000, current_stacks=1, max_stacks=10)
         
-    def apply_effect(self, caster, current_time=None):    
-        if caster.active_auras[self.name].current_stacks == self.max_stacks:
-            del caster.active_auras[self.name]
-            self.remove_effect(caster, current_time)
-            update_self_buff_data(caster.self_buff_breakdown, "Cryptic Instructions", current_time, "expired")  
+#     def apply_effect(self, caster, current_time=None):    
+#         if caster.active_auras[self.name].current_stacks == self.max_stacks:
+#             del caster.active_auras[self.name]
+#             self.remove_effect(caster, current_time)
+#             update_self_buff_data(caster.self_buff_breakdown, "Cryptic Instructions", current_time, "expired")  
         
-    def remove_effect(self, caster, current_time=None):
-        caster.apply_buff_to_self(EtherealPowerlink(caster), current_time)
+#     def remove_effect(self, caster, current_time=None):
+#         caster.apply_buff_to_self(EtherealPowerlink(caster), current_time)
     
 
 class EtherealPowerlink(Buff):

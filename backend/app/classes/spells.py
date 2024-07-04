@@ -388,7 +388,7 @@ class Spell:
             AlliedChestplateOfGenerosity, ElementalLariat, VerdantTether, VerdantConduit,
             PowerOfTheSilverHand, NeltharionsCallToChaos, InspiredByFrostAndEarth, ScreamingBlackDragonscale,
             RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond, BlessingOfAnshe, HarvestersEdict,
-            EmpoweringCrystalOfAnubikkaj, UnboundChangeling, CrypticInstructions, FateweavedNeedle,
+            EmpoweringCrystalOfAnubikkaj, UnboundChangeling, FateweavedNeedle,
             AuthorityOfRadiantPower, CouncilsGuile, StormridersFury, StoneboundArtistry, OathswornsTenacity,
             SurekiZealotsInsignia, AraKaraSacbrood
         )
@@ -531,9 +531,9 @@ class Spell:
             try_proc_rppm_effect(sureki_zealots_insignia, is_hasted=False, is_self_buff=True)
             
         # trinkets
-        if "Treacherous Transmitter" in caster.trinkets:
-            treacherous_transmitter = CrypticInstructions(caster)
-            try_proc_rppm_effect(treacherous_transmitter, is_hasted=False, is_self_buff=True)
+        # if "Treacherous Transmitter" in caster.trinkets:
+        #     treacherous_transmitter = CrypticInstructions(caster)
+        #     try_proc_rppm_effect(treacherous_transmitter, is_hasted=False, is_self_buff=True)
          
         if "Ara-Kara Sacbrood" in caster.trinkets:
             ara_kara_sacbrood = AraKaraSacbrood(caster)

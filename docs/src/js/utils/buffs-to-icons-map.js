@@ -75,6 +75,7 @@ const buffsToIconsMap = {
     // consumables
     "Elemental Potion of Ultimate Power": "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_dpotion_b20.jpg",
     "Slumbering Soul Serum": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_bottle_shape4_blue.jpg",
+    "Tempered Potion": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiona4.jpg",
     "Phial of Tepid Versatility": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_black.jpg",
     "Phial of Elemental Chaos": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape2_orange.jpg",
     "Elemental Chaos: Air": "https://render.worldofwarcraft.com/eu/icons/56/ability_druid_galewinds.jpg",
@@ -195,7 +196,7 @@ const buffsToIconsMap = {
     "Ovinax's Mercurial Egg Paused": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
 
     "Cryptic Instructions": "https://wow.zamimg.com/images/wow/icons/large/ability_racial_etherealconnection.jpg",
-    "Ethereal Powerlink": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_twistedfaith.jpg",
+    "Ethereal Powerlink": "https://wow.zamimg.com/images/wow/icons/large/inv_etherealraid_communicator_color1.jpg",
 
     "Fateweaved Needle": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_02.jpg",
     "Sureki Zealot's Insignia": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_113.jpg",

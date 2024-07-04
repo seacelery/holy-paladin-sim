@@ -6,12 +6,13 @@ const transparentImage = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEA
 
 const abilityNames = [
     "Holy Shock", "Holy Light", "Flash of Light", "Word of Glory", "Light of Dawn", "Divine Toll", 
-    "Daybreak", "Light's Hammer", "Holy Prism", "Beacon of Virtue", "Divine Favor", "Hand of Divinity",
+    "Daybreak", "Holy Prism", "Beacon of Virtue", "Divine Favor", "Hand of Divinity",
     "Lay on Hands", "Blessing of the Seasons", "Tyr's Deliverance", "Aerated Mana Potion",
     "Elemental Potion of Ultimate Power", "Avenging Wrath", "Avenging Crusader", "Judgment",
-    "Crusader Strike", "Nymue's Unraveling Spindle", "Mirror of Fractured Tomorrows",
-    "Light of the Martyr", "Consecration", "Barrier of Faith", "Aura Mastery", "Hammer of Wrath",
-    "Eternal Flame"
+    "Crusader Strike", "Consecration", "Barrier of Faith", "Aura Mastery", 
+    "Hammer of Wrath", "Eternal Flame", "Ovinax's Mercurial Egg", "Treacherous Transmitter", 
+    "Creeping Coagulum", "High Speaker's Accretion", "Siphoning Phylactery Shard", "Holy Armament",
+    "Tempered Potion", "Algari Mana Potion", "Slumbering Soul Serum"
 ];
 
 const abilityAutocomplete = (element, abilityNames, icon) => {

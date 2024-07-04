@@ -13,7 +13,7 @@ const classTalentsLive = [
 
 const classTalentsPTR = [
     "", "Lay on Hands", "", "Blessing of Freedom", "", "Hammer of Wrath", "",
-    "Improved Cleanse", "", "Auras of the Resolute", "Obduracy", "Auras of Swift Vengeance", "", "Turn Evil",
+    "Improved Cleanse", "", "Auras of the Resolute", "Obduracy", "Crusader Aura", "", "Turn Evil",
     "", "Fist of Justice", "", "Divine Steed", "", "Greater Judgment", "",
     "Repentance/Blinding Light", "", "Cavalier", "", "Seasoned Warhorse", "", "Rebuke",
     "", "Holy Aegis", "", "Avenging Wrath", "", "Justification", "Punishment",
@@ -133,7 +133,7 @@ let baseClassTalentsPTR = {
         "Improved Cleanse": {"ranks": {"current rank": 0, "max rank": 1}},
         "Auras of the Resolute": {"ranks": {"current rank": 0, "max rank": 1}},
         "Obduracy": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Auras of Swift Vengeance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Crusader Aura": {"ranks": {"current rank": 0, "max rank": 1}},
         "Turn Evil": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row3": {
@@ -386,13 +386,13 @@ const classTalentsArrowsPTR = {
         "Lightforged Blessing",
     ],
     "left": [
-        "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Auras of Swift Vengeance", "Turn Evil", "Fist of Justice", 
+        "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Crusader Aura", "Turn Evil", "Fist of Justice", 
         "Cavalier", "Divine Steed", "Seasoned Warhorse", "Rebuke", "Holy Aegis", "Avenging Wrath", "Justification", "Blessing of Sacrifice", 
         "Blessing of Protection", "Lightforged Blessing", "Afterimage", "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Seal of Might", 
         "Seal of Alacrity", "Faith's Armor"
     ],
     "right": [
-        "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Auras of Swift Vengeance", "Divine Steed",
+        "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Crusader Aura", "Divine Steed",
         "Greater Judgment", "Repentance/Blinding Light", "Cavalier", "Seasoned Warhorse", "Holy Aegis", "Avenging Wrath", "Justification",
         "Golden Path", "Blessing of Sacrifice", "Blessing of Protection", "Unbreakable Spirit", "Improved Blessing of Protection",
         "Touch of Light", "Strength of Conviction", "Seal of Might", "Seal of Alacrity"

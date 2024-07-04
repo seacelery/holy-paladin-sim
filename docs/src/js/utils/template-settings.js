@@ -52,7 +52,7 @@ const templateClassTalents = {
         }
     },
     "row2": {
-        "Auras of Swift Vengeance": {
+        "Crusader Aura": {
             "ranks": {
                 "current rank": 1,
                 "max rank": 1
@@ -849,7 +849,7 @@ const templateUpdateClassTalents = {
     "Quickened Invocation": 0,
     "Seal of Order": 1,
     "Vanguard's Momentum": 0,
-    "Auras of Swift Vengeance": 1,
+    "Crusader Aura": 1,
     "Auras of the Resolute": 1,
     "Improved Cleanse": 0,
     "Obduracy": 1,

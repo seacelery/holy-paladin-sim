@@ -2,7 +2,7 @@ import re
 import random
 
 from .spells import Spell
-from .auras_buffs import MirrorOfFracturedTomorrowsBuff, SmolderingSeedlingActive, NymuesUnravelingSpindleBuff, OvinaxsMercurialEggPaused
+from .auras_buffs import MirrorOfFracturedTomorrowsBuff, SmolderingSeedlingActive, NymuesUnravelingSpindleBuff, OvinaxsMercurialEggPaused, EtherealPowerlink
 from ..utils.misc_functions import update_mana_gained, update_spell_data_heals, update_spell_data_casts, add_talent_healing_multipliers
 
 
@@ -245,3 +245,17 @@ class OvinaxsMercurialEgg(Trinket):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             caster.apply_buff_to_self(OvinaxsMercurialEggPaused(caster), current_time)
+            
+
+class TreacherousTransmitter(Trinket):
+    
+    BASE_COOLDOWN = 90
+    
+    def __init__(self, caster):
+        super().__init__("Treacherous Transmitter", cooldown=TreacherousTransmitter.BASE_COOLDOWN, off_gcd=True)
+    
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:          
+            caster.apply_buff_to_self(EtherealPowerlink(caster), current_time)
+        

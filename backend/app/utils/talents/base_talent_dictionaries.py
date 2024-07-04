@@ -80,7 +80,7 @@ base_active_class_talents_ptr = {
         "Improved Cleanse": {"ranks": {"current rank": 0, "max rank": 1}},
         "Auras of the Resolute": {"ranks": {"current rank": 0, "max rank": 1}},
         "Obduracy": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Auras of Swift Vengeance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Crusader Aura": {"ranks": {"current rank": 0, "max rank": 1}},
         "Turn Evil": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row3": {

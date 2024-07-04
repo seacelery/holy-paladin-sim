@@ -123202,9 +123202,9 @@ const itemData = [
             {
                 "name": "Treacherous Transmitter",
                 "id": 446209,
-                "description": "Equip: Your spells and abilities have a very high chance to power the Transmitter and receive a snippet of cryptic instructions from somewhere in the Twisting Nether...\n\nCollecting 10 snippets deciphers them to reveal your next task. It's probably nothing, so complete it to gain *8271 Intellect for 15 sec.",
+                "description": "Use: Receive cryptic instructions from somewhere in the Twisting Nether to reveal your next task. It's probably nothing, so complete it to gain *6133 Intellect for 15 sec. (1 Min Cooldown)",
                 "effect_values": [
-                    {"base_value": 8271, "effect_type": "scalar", "effect_coefficient": 2.1600716114, "allocation_type": "no_multiplier"},
+                    {"base_value": 6133, "effect_type": "scalar", "effect_coefficient": 1.60166716576, "allocation_type": "no_multiplier"},
                 ]
             }
         ],
@@ -123213,7 +123213,7 @@ const itemData = [
         "base_item_level": 571,
         "quality": "Epic",
         "id": 221023,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_weathermachine_01.jpg",
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_etherealraid_communicator_color1.jpg",
         "stats": {
             "Haste": 1001
         },
