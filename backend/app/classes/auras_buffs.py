@@ -643,10 +643,10 @@ class RelentlessInquisitor(Buff):
         super().__init__("Relentless Inquisitor", 12, base_duration=12, current_stacks=1, max_stacks=5)
         
     def apply_effect(self, caster, current_time=None):
-        update_stat_with_multiplicative_percentage(caster, "haste", 1 * self.current_stacks, True)
+        update_stat_with_multiplicative_percentage(caster, "haste", (pow(1.01, self.current_stacks) - 1) * 100, True)
     
     def remove_effect(self, caster, current_time=None):
-        update_stat_with_multiplicative_percentage(caster, "haste", 1 * self.current_stacks, False)
+        update_stat_with_multiplicative_percentage(caster, "haste", (pow(1.01, self.current_stacks) - 1) * 100, False)
 
             
 class RisingSunlight(Buff):
@@ -3253,16 +3253,35 @@ class SolarGrace(Buff):
         # caster.flat_haste += 3 * self.active_solar_graces
         # caster.update_stat("haste", 0)
         
-        update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name]) - 1), False)
-        update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name])), True)
+        current_stacks = len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name])
+        current_stacks_multiplier = ((pow(1.03, current_stacks)) - 1) * 100
+        
+        new_stacks = current_stacks + 1
+        new_stacks_multiplier = ((pow(1.03, new_stacks)) - 1) * 100
+        
+        # update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name]) - 1), False)
+        # update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name])), True)
+        
+        update_stat_with_multiplicative_percentage(caster, "haste", current_stacks_multiplier, False)
+        update_stat_with_multiplicative_percentage(caster, "haste", new_stacks_multiplier, True)
+        
         caster.update_hasted_cooldowns_with_haste_changes()
         
     def remove_effect(self, caster, current_time=None):
         # caster.flat_haste -= 3
         # caster.update_stat("haste", 0)
         
-        update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name])), False)
-        update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name]) - 1), True)
+        # update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name])), False)
+        # update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name]) - 1), True)
+        
+        current_stacks = len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name])
+        current_stacks_multiplier = ((pow(1.03, current_stacks)) - 1) * 100
+        
+        new_stacks = current_stacks - 1
+        new_stacks_multiplier = ((pow(1.03, new_stacks)) - 1) * 100
+        
+        update_stat_with_multiplicative_percentage(caster, "haste", current_stacks_multiplier, False)
+        update_stat_with_multiplicative_percentage(caster, "haste", new_stacks_multiplier, True)
         caster.update_hasted_cooldowns_with_haste_changes()
     
 

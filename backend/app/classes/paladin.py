@@ -80,6 +80,7 @@ class Paladin:
         self.base_flat_versatility = 0
         
         self.flat_haste = 0
+        self.multiplicative_haste = 1
         self.flat_crit = 5
         self.flat_mastery = 12
         self.flat_versatility = 0
@@ -441,10 +442,10 @@ class Paladin:
             self.leech_rating += stat_rating
             self.leech = calculate_leech_percent_with_dr(self, "leech", self.leech_rating, self.flat_leech)
             
-        if stat == "haste" and "Time Warp" in self.active_auras:
-            update_stat_with_multiplicative_percentage(self, "haste", 30, True)
-        if stat == "haste" and "First Light" in self.active_auras:
-            update_stat_with_multiplicative_percentage(self, "haste", 25, True)
+        # if stat == "haste" and "Time Warp" in self.active_auras:
+        #     update_stat_with_multiplicative_percentage(self, "haste", 30, True)
+        # if stat == "haste" and "First Light" in self.active_auras:
+        #     update_stat_with_multiplicative_percentage(self, "haste", 25, True)
             
     def update_stats_with_racials(self):   
         # reset stats

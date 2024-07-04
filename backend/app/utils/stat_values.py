@@ -81,7 +81,9 @@ def calculate_stat_percent_with_dr(caster, stat, rating, flat_percent):
             rating_to_percent = rating_to_percent * 1.02 + 2
         elif caster.is_talent_active("Seal of Alacrity") and caster.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 2:
             rating_to_percent = rating_to_percent * 1.04 + 4
-            
+    
+    if stat == "haste":
+        rating_to_percent = (((1 + rating_to_percent / 100) * caster.multiplicative_haste) - 1) * 100  
     rating_to_percent += flat_percent
     
     return rating_to_percent
@@ -124,6 +126,7 @@ def update_stat_with_multiplicative_percentage(caster, stat, percentage, add_per
         if stat == "haste":
             caster.haste = (((caster.haste / 100 + 1) * (1 + percentage / 100)) - 1) * 100
             caster.haste_multiplier *= (1 + percentage / 100)
+            caster.multiplicative_haste *= (1 + percentage / 100)
             caster.update_hasted_cooldowns_with_haste_changes()
         elif stat == "crit":
             caster.crit = (((caster.crit / 100 + 1) * (1 + percentage / 100)) - 1) * 100
@@ -138,6 +141,7 @@ def update_stat_with_multiplicative_percentage(caster, stat, percentage, add_per
         if stat == "haste":
             caster.haste = (((caster.haste / 100 + 1) / (1 + percentage / 100)) - 1) * 100
             caster.haste_multiplier /= (1 + percentage / 100)
+            caster.multiplicative_haste /= (1 + percentage / 100)
             caster.update_hasted_cooldowns_with_haste_changes()
         elif stat == "crit":
             caster.crit = (((caster.crit / 100 + 1) / (1 + percentage / 100)) - 1) * 100
