@@ -33,8 +33,8 @@ def import_character(character_name, realm, region, version):
     
     return paladin, healing_targets
     
-def initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list=None, custom_equipment=None, tick_rate=None, raid_health=None, mastery_effectiveness=None, light_of_dawn_targets=None, lights_hammer_targets=None, resplendent_light_targets=None, sureki_zealots_insignia_count=None, dawnlight_targets=None, suns_avatar_targets=None, potion_bomb_of_power_uptime=None, seasons=None, overhealing=None, test=False):
-    simulation = Simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets, sureki_zealots_insignia_count, dawnlight_targets, suns_avatar_targets, potion_bomb_of_power_uptime, seasons, overhealing, access_token, test)
+def initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list=None, custom_equipment=None, tick_rate=None, raid_health=None, mastery_effectiveness=None, light_of_dawn_targets=None, lights_hammer_targets=None, resplendent_light_targets=None, sureki_zealots_insignia_count=None, dawnlight_targets=None, suns_avatar_targets=None, light_of_the_martyr_uptime=None, potion_bomb_of_power_uptime=None, seasons=None, overhealing=None, test=False):
+    simulation = Simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets, sureki_zealots_insignia_count, dawnlight_targets, suns_avatar_targets, light_of_the_martyr_uptime, potion_bomb_of_power_uptime, seasons, overhealing, access_token, test)
     return simulation
 
 def fetch_updated_data(paladin):

@@ -23,7 +23,7 @@ pp = pprint.PrettyPrinter(width=200)
 
 class Simulation:
     
-    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets, sureki_zealots_insignia_count, dawnlight_targets, suns_avatar_targets, potion_bomb_of_power_uptime, seasons, overhealing, access_token, test=False):
+    def __init__(self, paladin, healing_targets_list, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets, sureki_zealots_insignia_count, dawnlight_targets, suns_avatar_targets, light_of_the_martyr_uptime, potion_bomb_of_power_uptime, seasons, overhealing, access_token, test=False):
 
         self.access_token = access_token
 
@@ -57,7 +57,7 @@ class Simulation:
         self.iced_phial_active = False
         self.iced_phial_timer = 0
         self.saving_graces_timer = 0
-        self.light_of_the_martyr_uptime = 0.8
+        self.light_of_the_martyr_uptime = float(light_of_the_martyr_uptime)
         self.light_of_the_martyr_timer = 0
         self.bestow_light_timer = 0
         self.retribution_aura_timer = 40

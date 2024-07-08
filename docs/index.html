@@ -355,6 +355,16 @@
                                     </div> 
 
                                     <div class="option-container">
+                                        <label for="light-of-the-martyr-option" id="light-of-the-martyr-option-label" class="options-option-label">Light of the Martyr Uptime</label>
+                                        <div id="light-of-the-martyr-slider-container" class="slider-container">
+                                            <div id="light-of-the-martyr-value-container" class="slider-value-container">
+                                                <div id="light-of-the-martyr-value" class="slider-value">1</div>
+                                            </div>
+                                            <input type="range" id="light-of-the-martyr-option" class="options-option option-slider" value="80" min="1" max="100" step="1">                              
+                                        </div>                              
+                                    </div> 
+
+                                    <div class="option-container">
                                         <label for="potion-bomb-of-power-option" id="potion-bomb-of-power-option-label" class="options-option-label">Potion Bomb of Power Uptime</label>
                                         <div id="potion-bomb-of-power-slider-container" class="slider-container">
                                             <div id="potion-bomb-of-power-value-container" class="slider-value-container">
@@ -399,15 +409,15 @@
                                         </label>
                                     </div>
 
-                                    <div class="options-header" id="miscellaneous-header">Miscellaneous</div>
-                                    <div class="options-divider"></div>
+                                    <div class="options-header" id="miscellaneous-header" style="display: none">Miscellaneous</div>
+                                    <div class="options-divider" style="display: none"></div>
 
-                                    <label class="option-checkbox-container">Show Healing Graph
+                                    <label class="option-checkbox-container" style="display: none">Show Healing Graph
                                         <input type="checkbox" id="hide-healing-graph-option" class="option-checkbox" checked="checked">                                                        
                                         <span class="options-checkbox-checkmark"></span>                                      
                                     </label>
 
-                                    <label class="option-checkbox-container">Show Resource Graphs
+                                    <label class="option-checkbox-container" style="display: none">Show Resource Graphs
                                         <input type="checkbox" id="hide-resource-graph-option" class="option-checkbox" checked="checked">                                                        
                                         <span class="options-checkbox-checkmark"></span>                                      
                                     </label>
