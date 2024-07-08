@@ -201,9 +201,9 @@ const createOptionsSliders = () => {
     const potionBombOfPowerValue = document.getElementById("potion-bomb-of-power-value");
     
     potionBombOfPowerSlider.addEventListener("input", () => {
-        potionBombOfPowerValue.textContent = potionBombOfPowerSlider.value;
+        potionBombOfPowerValue.textContent = potionBombOfPowerSlider.value + "%";
     });
-    potionBombOfPowerValue.textContent = potionBombOfPowerSlider.value;
+    potionBombOfPowerValue.textContent = potionBombOfPowerSlider.value + "%";
     makeFieldEditable(potionBombOfPowerValue, 1, potionBombOfPowerSlider);
 
     // dawnlight targets slider
@@ -226,14 +226,14 @@ const createOptionsSliders = () => {
     sunsAvatarValue.textContent = sunsAvatarSlider.value;
     makeFieldEditable(sunsAvatarValue, 1, sunsAvatarSlider);
 
-    // sun's avatar targets slider
+    // light of the martyr uptime slider
     const lightOfTheMartyrSlider = document.getElementById("light-of-the-martyr-option");
     const lightOfTheMartyrValue = document.getElementById("light-of-the-martyr-value");
     
     lightOfTheMartyrSlider.addEventListener("input", () => {
-        lightOfTheMartyrValue.textContent = lightOfTheMartyrSlider.value;
+        lightOfTheMartyrValue.textContent = lightOfTheMartyrSlider.value + "%";
     });
-    lightOfTheMartyrValue.textContent = lightOfTheMartyrSlider.value;
+    lightOfTheMartyrValue.textContent = lightOfTheMartyrSlider.value + "%";
     makeFieldEditable(lightOfTheMartyrValue, 1, lightOfTheMartyrSlider);
 
     // blessing of the seasons
