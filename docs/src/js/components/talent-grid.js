@@ -27,9 +27,20 @@ const toggleTalentOptions = (talentName, talentData) => {
         case talentName === "Rising Sunlight":
             document.getElementById("cooldown-tracking-rising-sunlight-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";  
             break;
+        case talentName === "Light of the Martyr":
+            document.getElementById("light-of-the-martyr-option-container").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
+            break;
+        case talentName === "Dawnlight":
+            document.getElementById("dawnlight-option-container").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
+            break;
+        case talentName === "Sun's Avatar":
+            document.getElementById("cooldown-tracking-suns-avatar-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
+            break;
         case talentName === "Blessing of Summer":
             document.getElementById("blessing-of-the-seasons-option-container").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
             document.getElementById("cooldown-tracking-blessing-of-spring-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
+            break;
+        default:
             break;
     };
 };

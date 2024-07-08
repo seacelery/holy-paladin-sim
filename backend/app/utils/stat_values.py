@@ -19,7 +19,7 @@ ptr_stat_conversions = {
     "crit": 700,
     "mastery": 466.67,
     "versatility": 780,
-    "leech": 150
+    "leech": 1000
 }
 
 ptr_diminishing_returns_values = {
