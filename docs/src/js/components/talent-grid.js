@@ -5,6 +5,7 @@ import { createTooltip, addTooltipFunctionality } from "../utils/misc-functions.
 import { futurePatchSelected } from "./config/version-config.js";
 
 const toggleTalentOptions = (talentName, talentData) => {
+    console.log(talentName)
     switch(true) {
         case talentName === "Light of Dawn":
             document.getElementById("light-of-dawn-option-container").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
@@ -34,7 +35,7 @@ const toggleTalentOptions = (talentName, talentData) => {
             document.getElementById("dawnlight-option-container").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
             break;
         case talentName === "Sun's Avatar":
-            document.getElementById("cooldown-tracking-suns-avatar-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
+            document.getElementById("suns-avatar-option").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
             break;
         case talentName === "Blessing of Summer":
             document.getElementById("blessing-of-the-seasons-option-container").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
