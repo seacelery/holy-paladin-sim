@@ -37,6 +37,7 @@ class Simulation:
         self.priority_list = []
         self.custom_equipment = custom_equipment
         self.paladin.update_equipment(custom_equipment)
+        self.paladin.overhealing = overhealing
         self.test = test
 
         for item in priority_list:

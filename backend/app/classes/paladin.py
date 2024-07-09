@@ -144,6 +144,7 @@ class Paladin:
         # initialise abilities
         self.abilities = {}      
         self.load_abilities_based_on_talents()
+        self.overhealing = {}
         
         # initialise stats with racials
         self.update_stats_with_racials()

@@ -268,7 +268,7 @@ class HolyShock(Spell):
                         
             # overflowing light
             if caster.is_talent_active("Overflowing Light") and caster.ptr:
-                overflowing_light_absorb_value = heal_amount * 0.15
+                overflowing_light_absorb_value = heal_amount * 0.15 * (caster.overhealing[self.name])
                 targets[0].receive_heal(overflowing_light_absorb_value, caster)
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                 
@@ -646,7 +646,7 @@ class RisingSunlightHolyShock(Spell):
                         
             # overflowing light
             if caster.is_talent_active("Overflowing Light") and caster.ptr:
-                overflowing_light_absorb_value = heal_amount * 0.15
+                overflowing_light_absorb_value = heal_amount * 0.15 * (caster.overhealing[self.name])
                 targets[0].receive_heal(overflowing_light_absorb_value, caster)
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                 
@@ -966,7 +966,7 @@ class DivineTollHolyShock(Spell):
                     
             # overflowing light
             if caster.is_talent_active("Overflowing Light") and caster.ptr:
-                overflowing_light_absorb_value = heal_amount * 0.15
+                overflowing_light_absorb_value = heal_amount * 0.15 * (caster.overhealing[self.name])
                 targets[0].receive_heal(overflowing_light_absorb_value, caster)
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                 
@@ -1202,7 +1202,7 @@ class DivineResonanceHolyShock(Spell):
                         
             # overflowing light
             if caster.is_talent_active("Overflowing Light") and caster.ptr:
-                overflowing_light_absorb_value = heal_amount * 0.15
+                overflowing_light_absorb_value = heal_amount * 0.15 * (caster.overhealing[self.name])
                 targets[0].receive_heal(overflowing_light_absorb_value, caster)
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                 

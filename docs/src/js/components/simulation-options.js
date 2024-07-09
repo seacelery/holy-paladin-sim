@@ -229,6 +229,10 @@ const handleOverhealingAbilitiesModal = () => {
         "Rashok's Molten Heart",
         "Restorative Sands",
         "Smoldering Seedling",
+        "Scrapsinger's Symphony",
+        "Gruesome Syringe",
+        "Creeping Coagulum",
+        "Viscous Coaglam"
     ];
     const miscellaneous = [
         "Dreaming Devotion",
