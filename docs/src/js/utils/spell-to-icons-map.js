@@ -93,9 +93,9 @@ const spellToIconsMap = {
     "Elemental Potion of Ultimate Power": "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_dpotion_b20.jpg",
     "Potion": "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_dpotion_b20.jpg",
     "Chirping Rune": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_09.jpg",
-    "Algari Mana Potion": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape1_blue.jpg",
+    "Algari Mana Potion": "https://wow.zamimg.com/images/wow/icons/large/inv_flask_blue.jpg",
     "Grotesque Vial": "https://render.worldofwarcraft.com/eu/icons/56/inv_summerfest_firepotion.jpg",
-    "Slumbering Soul Serum": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_bottle_shape4_blue.jpg",
+    "Slumbering Soul Serum": "https://wow.zamimg.com/images/wow/icons/large/inv_flask_green.jpg",
     "Tempered Potion": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiona4.jpg",
 
     // trinkets

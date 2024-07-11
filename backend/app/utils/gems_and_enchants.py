@@ -30,9 +30,9 @@ def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, sta
             stat_values_from_equipment["intellect"] += 111
             mana_enchant_count += 1
         elif enchant == "Crystalline Radiance":
-            stat_values_from_equipment["intellect"] += 150
+            stat_values_from_equipment["intellect"] += 745
         elif enchant == "Council's Intellect":
-            stat_values_from_equipment["intellect"] += 111
+            stat_values_from_equipment["intellect"] += 630
             mana_enchant_count += 1
         elif enchant == "+177 Intellect & +5% Mana":
             stat_values_from_equipment["intellect"] += 177
@@ -59,11 +59,11 @@ def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, sta
         elif enchant == "Regenerative Leech":
             stat_values_from_equipment["leech"] += 125
         elif enchant == "Chant of Leeching Fangs":
-            stat_values_from_equipment["leech"] += 125
+            stat_values_from_equipment["leech"] += 1020
         elif enchant == "+200 Leech":
             stat_values_from_equipment["leech"] += 200
         elif enchant == "Chant of Armored Leech":
-            stat_values_from_equipment["leech"] += 200
+            stat_values_from_equipment["leech"] += 2040
         elif enchant == "Watcher's Loam":
             stat_values_from_equipment["stamina"] += 131
         elif enchant == "Defender's March":
@@ -71,13 +71,13 @@ def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, sta
         elif enchant == "Shadowed Belt Clasp":
             stat_values_from_equipment["stamina"] += 106
         elif enchant == "Radiant Haste":
-            stat_values_from_equipment["haste"] += 35
+            stat_values_from_equipment["haste"] += 315
         elif enchant == "Radiant Critical Strike":
-            stat_values_from_equipment["crit"] += 35
+            stat_values_from_equipment["crit"] += 315
         elif enchant == "Radiant Versatility":
-            stat_values_from_equipment["versatility"] += 35
+            stat_values_from_equipment["versatility"] += 315
         elif enchant == "Radiant Mastery":
-            stat_values_from_equipment["mastery"] += 35
+            stat_values_from_equipment["mastery"] += 315
         elif enchant == "Cursed Haste":
             stat_values_from_equipment["haste"] += 390
             stat_values_from_equipment["versatility"] -= 115
@@ -254,69 +254,68 @@ def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):
             
         # ptr
         elif gem == "Deadly Emerald":
-            stat_values_from_equipment["haste"] += 190
-            stat_values_from_equipment["crit"] += 127
+            stat_values_from_equipment["haste"] += 147
+            stat_values_from_equipment["crit"] += 49
             player.gem_counts["Emerald"] += 1
         elif gem == "Versatile Emerald":
-            stat_values_from_equipment["haste"] += 190
-            stat_values_from_equipment["versatility"] += 127
+            stat_values_from_equipment["haste"] += 147
+            stat_values_from_equipment["versatility"] += 49
             player.gem_counts["Emerald"] += 1
         elif gem == "Masterful Emerald":
-            stat_values_from_equipment["haste"] += 190
-            stat_values_from_equipment["mastery"] += 127
+            stat_values_from_equipment["haste"] += 147
+            stat_values_from_equipment["mastery"] += 49
             player.gem_counts["Emerald"] += 1
         elif gem == "Quick Emerald":
-            stat_values_from_equipment["haste"] += 227
+            stat_values_from_equipment["haste"] += 176
             player.gem_counts["Emerald"] += 1
             
         elif gem == "Deadly Ruby":
-            stat_values_from_equipment["crit"] += 227
+            stat_values_from_equipment["crit"] += 176
             player.gem_counts["Ruby"] += 1
         elif gem == "Versatile Ruby":
-            stat_values_from_equipment["crit"] += 190
-            stat_values_from_equipment["versatility"] += 127
+            stat_values_from_equipment["crit"] += 147
+            stat_values_from_equipment["versatility"] += 49
             player.gem_counts["Ruby"] += 1
         elif gem == "Masterful Ruby":
-            stat_values_from_equipment["crit"] += 190
-            stat_values_from_equipment["mastery"] += 127
+            stat_values_from_equipment["crit"] += 147
+            stat_values_from_equipment["mastery"] += 49
             player.gem_counts["Ruby"] += 1
         elif gem == "Quick Ruby":
-            stat_values_from_equipment["crit"] += 190
-            stat_values_from_equipment["haste"] += 127
+            stat_values_from_equipment["crit"] += 147
+            stat_values_from_equipment["haste"] += 49
             player.gem_counts["Ruby"] += 1
             
         elif gem == "Deadly Onyx":
-            stat_values_from_equipment["mastery"] += 190
-            stat_values_from_equipment["crit"] += 127
+            stat_values_from_equipment["mastery"] += 147
+            stat_values_from_equipment["crit"] += 49
             player.gem_counts["Onyx"] += 1
         elif gem == "Versatile Onyx":
-            stat_values_from_equipment["mastery"] += 190
-            stat_values_from_equipment["versatility"] += 127
+            stat_values_from_equipment["mastery"] += 147
+            stat_values_from_equipment["versatility"] += 49
             player.gem_counts["Onyx"] += 1
         elif gem == "Masterful Onyx":
-            stat_values_from_equipment["mastery"] += 227
+            stat_values_from_equipment["mastery"] += 176
             player.gem_counts["Onyx"] += 1
         elif gem == "Quick Onyx":
-            stat_values_from_equipment["mastery"] += 190
-            stat_values_from_equipment["haste"] += 127
+            stat_values_from_equipment["mastery"] += 147
+            stat_values_from_equipment["haste"] += 49
             player.gem_counts["Onyx"] += 1
             
         elif gem == "Deadly Sapphire":
-            stat_values_from_equipment["versatility"] += 190
-            stat_values_from_equipment["crit"] += 127
+            stat_values_from_equipment["versatility"] += 147
+            stat_values_from_equipment["crit"] += 49
             player.gem_counts["Sapphire"] += 1
         elif gem == "Versatile Sapphire":
-            stat_values_from_equipment["versatility"] += 227
+            stat_values_from_equipment["versatility"] += 176
             player.gem_counts["Sapphire"] += 1
         elif gem == "Masterful Sapphire":
-            stat_values_from_equipment["versatility"] += 190
-            stat_values_from_equipment["mastery"] += 127
+            stat_values_from_equipment["versatility"] += 147
+            stat_values_from_equipment["mastery"] += 49
             player.gem_counts["Sapphire"] += 1
         elif gem == "Quick Sapphire":
-            stat_values_from_equipment["versatility"] += 190
-            stat_values_from_equipment["haste"] += 127
+            stat_values_from_equipment["versatility"] += 147
+            stat_values_from_equipment["haste"] += 49
             player.gem_counts["Sapphire"] += 1
-        
         
         elif gem == "Cubic Blasphemite":
             stat_values_from_equipment["intellect"] += 181

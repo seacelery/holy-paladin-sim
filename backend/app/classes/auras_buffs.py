@@ -3492,10 +3492,10 @@ class CouncilsGuile(Buff):
         super().__init__("Council's Guile", 12, base_duration=12)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("crit", 1360)
+        caster.update_stat("crit", 910)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("crit", -1360)
+        caster.update_stat("crit", -910)
         
         
 class CouncilsGuile(Buff):
@@ -3506,10 +3506,10 @@ class CouncilsGuile(Buff):
         super().__init__("Council's Guile", 12, base_duration=12)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("crit", 1360)
+        caster.update_stat("crit", 910)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("crit", -1360)
+        caster.update_stat("crit", -910)
         
         
 class StormridersFury(Buff):
@@ -3520,10 +3520,10 @@ class StormridersFury(Buff):
         super().__init__("Stormrider's Fury", 12, base_duration=12)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("haste", 1360)
+        caster.update_stat("haste", 910)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("haste", -1360)
+        caster.update_stat("haste", -910)
         
 
 class StoneboundArtistry(Buff):
@@ -3534,10 +3534,10 @@ class StoneboundArtistry(Buff):
         super().__init__("Stonebound Artistry", 12, base_duration=12)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", 1360)
+        caster.update_stat("mastery", 910)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", -1360)
+        caster.update_stat("mastery", -910)
         
 
 class OathswornsTenacity(Buff):

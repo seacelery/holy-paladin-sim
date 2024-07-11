@@ -8,11 +8,11 @@ const flasks = {
 };
 
 const ptrFlasks = {
-    "Flask of Tempered Swiftness": {effect: "Increases your Haste by 3323.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_potiona3.jpg"},
-    "Flask of Tempered Aggression": {effect: "Increases your Critical Strike by 3323.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_potiona5.jpg"},
-    "Flask of Tempered Mastery": {effect: "Increases your Mastery by 3323.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_potiona4.jpg"},
-    "Flask of Tempered Versatility": {effect: "Increases your Versatility by 3323.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_potiona2.jpg"},
-    "Flask of Alchemical Chaos": {effect: "Drink to increase a random secondary stat by 4082 at the cost of 340 of two other secondary stats. These effects are randomized again every 30 sec.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_alchemy_potion_06.jpg"},
+    "Flask of Tempered Swiftness": {effect: "Increases your Haste by 3323.", image: "https://wow.zamimg.com/images/wow/icons/large/inv_potion_green.jpg"},
+    "Flask of Tempered Aggression": {effect: "Increases your Critical Strike by 3323.", image: "https://wow.zamimg.com/images/wow/icons/large/inv_potion_red.jpg"},
+    "Flask of Tempered Mastery": {effect: "Increases your Mastery by 3323.", image: "https://wow.zamimg.com/images/wow/icons/large/inv_potion_purlple.jpg"},
+    "Flask of Tempered Versatility": {effect: "Increases your Versatility by 3323.", image: "https://wow.zamimg.com/images/wow/icons/large/inv_potion_blue.jpg"},
+    "Flask of Alchemical Chaos": {effect: "Drink to increase a random secondary stat by 4082 at the cost of 340 of two other secondary stats. These effects are randomized again every 30 sec.", image: "https://wow.zamimg.com/images/wow/icons/large/inv_potion_orange.jpg"},
     "Flask of Saving Graces": {effect: "Directly healing an ally player that is below 25% health grants 15% increased healing done for 10 sec.", image: "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_potione4.jpg"}
 };
 
@@ -82,8 +82,8 @@ const potions = {
 };
 
 const ptrPotions = {
-    "Algari Mana Potion": {effect: "Restores 150000 mana.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_bottle_shape1_blue.jpg"},
-    "Slumbering Soul Serum": {effect: "Elevate your focus to restore 218390 mana over 10 sec, but you are defenseless until your focus is broken.", image: "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_dpotion_a17.jpg"},
+    "Algari Mana Potion": {effect: "Restores 150000 mana.", image: "https://wow.zamimg.com/images/wow/icons/large/inv_flask_blue.jpg"},
+    "Slumbering Soul Serum": {effect: "Elevate your focus to restore 218390 mana over 10 sec, but you are defenseless until your focus is broken.", image: "https://wow.zamimg.com/images/wow/icons/large/inv_flask_green.jpg"},
     "Tempered Potion": {effect: "Gain the effects of all inactive Tempered Flasks, increasing their associated secondary stats by 2168 for 30 sec.", image: "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_potiona4.jpg"},
 }
 
