@@ -162,7 +162,7 @@ class Judgment(Spell):
             if "Infusion of Light" in caster.active_auras:
                 # imbued infusions
                 if caster.is_talent_active("Imbued Infusions"):
-                    caster.abilities["Holy Shock"].remaining_cooldown -= 2
+                    caster.abilities["Holy Shock"].remaining_cooldown -= 1
                     
                     if caster.abilities["Holy Shock"].remaining_cooldown <= 0 and caster.is_talent_active("Light's Conviction"):
                         caster.holy_shock_cooldown_overflow = abs(caster.abilities["Holy Shock"].remaining_cooldown)

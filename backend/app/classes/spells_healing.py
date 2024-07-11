@@ -80,7 +80,7 @@ class HolyShock(Spell):
              
         # luminosity    
         if caster.ptr and caster.is_talent_active("Luminosity"):
-            bonus_crit += 0.1
+            bonus_crit += 0.05
         
         self.bonus_crit = HolyShock.BONUS_CRIT + bonus_crit
         
@@ -459,7 +459,7 @@ class RisingSunlightHolyShock(Spell):
              
         # luminosity    
         if caster.ptr and caster.is_talent_active("Luminosity"):
-            bonus_crit += 0.1
+            bonus_crit += 0.05
         
         self.bonus_crit = HolyShock.BONUS_CRIT + bonus_crit
         
@@ -775,7 +775,7 @@ class DivineTollHolyShock(Spell):
              
         # luminosity    
         if caster.ptr and caster.is_talent_active("Luminosity"):
-            bonus_crit += 0.1
+            bonus_crit += 0.05
         
         self.bonus_crit = HolyShock.BONUS_CRIT + bonus_crit
         
@@ -1055,7 +1055,7 @@ class DivineResonanceHolyShock(Spell):
              
         # luminosity    
         if caster.ptr and caster.is_talent_active("Luminosity"):
-            bonus_crit += 0.1
+            bonus_crit += 0.05
         
         self.bonus_crit = HolyShock.BONUS_CRIT + bonus_crit
         
@@ -1284,7 +1284,7 @@ class HolyLight(Spell):
             self.mana_cost = 0.064
             
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 5.096
+            self.SPELL_POWER_COEFFICIENT = 4
     
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # tyr's deliverance
@@ -1378,7 +1378,7 @@ class HolyLight(Spell):
                 
                 # imbued infusions
                 if caster.is_talent_active("Imbued Infusions"):
-                    caster.abilities["Holy Shock"].remaining_cooldown -= 2
+                    caster.abilities["Holy Shock"].remaining_cooldown -= 1
                     
                     if caster.abilities["Holy Shock"].remaining_cooldown <= 0 and caster.is_talent_active("Light's Conviction"):
                         caster.holy_shock_cooldown_overflow = abs(caster.abilities["Holy Shock"].remaining_cooldown)
@@ -1569,7 +1569,7 @@ class FlashOfLight(Spell):
             if "Infusion of Light" in caster.active_auras:
                 # imbued infusions
                 if caster.is_talent_active("Imbued Infusions"):
-                    caster.abilities["Holy Shock"].remaining_cooldown -= 2
+                    caster.abilities["Holy Shock"].remaining_cooldown -= 1
                     
                     if caster.abilities["Holy Shock"].remaining_cooldown <= 0 and caster.is_talent_active("Light's Conviction"):
                         caster.holy_shock_cooldown_overflow = abs(caster.abilities["Holy Shock"].remaining_cooldown)
@@ -1661,7 +1661,7 @@ class WordOfGlory(Spell):
         
         # gleaming rays
         if caster.ptr and caster.is_talent_active("Gleaming Rays"):
-            self.spell_healing_modifier *= 1.1
+            self.spell_healing_modifier *= 1.06
         
         # divine purpose
         if caster.is_talent_active("Divine Purpose"): 
@@ -1725,7 +1725,7 @@ class WordOfGlory(Spell):
                     
             # gleaming rays
             if caster.ptr and caster.is_talent_active("Gleaming Rays"):
-                self.spell_healing_modifier /= 1.1
+                self.spell_healing_modifier /= 1.06
             
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -1984,7 +1984,7 @@ class EternalFlame(Spell):
         
         # gleaming rays
         if caster.ptr and caster.is_talent_active("Gleaming Rays"):
-            self.spell_healing_modifier *= 1.1
+            self.spell_healing_modifier *= 1.06
         
         # divine purpose
         if caster.is_talent_active("Divine Purpose"): 
@@ -2051,7 +2051,7 @@ class EternalFlame(Spell):
                     
             # gleaming rays
             if caster.ptr and caster.is_talent_active("Gleaming Rays"):
-                self.spell_healing_modifier /= 1.1
+                self.spell_healing_modifier /= 1.06
             
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -2307,7 +2307,7 @@ class LightOfDawn(Spell):
 
         # luminosity    
         if caster.ptr and caster.is_talent_active("Luminosity"):
-            bonus_crit += 0.1
+            bonus_crit += 0.05
             
         # extrication
         if caster.is_talent_active("Extrication"):
@@ -2325,7 +2325,7 @@ class LightOfDawn(Spell):
                 
         # gleaming rays
         if caster.ptr and caster.is_talent_active("Gleaming Rays"):
-            self.spell_healing_modifier *= 1.1
+            self.spell_healing_modifier *= 1.06
                 
         # apply blessing of dawn healing (20% per stack without seal of order or fading light)
         if caster.is_talent_active("Of Dusk and Dawn"):
@@ -2368,7 +2368,7 @@ class LightOfDawn(Spell):
                     
             # gleaming rays
             if caster.ptr and caster.is_talent_active("Gleaming Rays"):
-                self.spell_healing_modifier /= 1.1
+                self.spell_healing_modifier /= 1.06
                     
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -2686,7 +2686,7 @@ class MercifulAurasHeal(Spell):
 
 class SunsAvatarHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.3
+    SPELL_POWER_COEFFICIENT = 0.24
     
     def __init__(self, caster):
         super().__init__("Sun's Avatar", off_gcd=True)

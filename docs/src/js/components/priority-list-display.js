@@ -690,8 +690,8 @@ Crusader Strike | Holy Power <= 3
 Holy Light | Divine Favor active | and | Infusion of Light active
 Holy Light | Infusion of Light active | and | Liberation active
 Flash of Light | Infusion of Light active
-Eternal Flame | Unending Light stacks = 9 | and
 Judgment | Awakening Ready not active | and | Awakening stacks < 8
+Eternal Flame | Unending Light stacks = 9 | and
 Light of Dawn
 Hammer of Wrath
 Arcane Torrent

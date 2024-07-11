@@ -179,7 +179,7 @@ class Dawnlight(HoT):
  
 class EternalFlameBuff(HoT):
     
-    SPELL_POWER_COEFFICIENT = 1.2 * 1.1
+    SPELL_POWER_COEFFICIENT = 0.96 * 1.1
     
     def __init__(self, caster, duration_to_apply):
         super().__init__("Eternal Flame (HoT)", duration_to_apply, base_duration=duration_to_apply, base_tick_interval=3, initial_haste_multiplier=caster.haste_multiplier) 
