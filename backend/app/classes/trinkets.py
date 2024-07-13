@@ -2,7 +2,7 @@ import re
 import random
 
 from .spells import Spell
-from .auras_buffs import MirrorOfFracturedTomorrowsBuff, SmolderingSeedlingActive, NymuesUnravelingSpindleBuff, OvinaxsMercurialEggPaused, EtherealPowerlink
+from .auras_buffs import MirrorOfFracturedTomorrowsBuff, SmolderingSeedlingActive, NymuesUnravelingSpindleBuff, OvinaxsMercurialEggPaused, EtherealPowerlink, ImperfectAscendancySerumBuff
 from ..utils.misc_functions import update_mana_gained, update_spell_data_heals, update_spell_data_casts, add_talent_healing_multipliers
 
 
@@ -259,3 +259,15 @@ class TreacherousTransmitter(Trinket):
         if cast_success:          
             caster.apply_buff_to_self(EtherealPowerlink(caster), current_time)
         
+        
+class ImperfectAscendancySerumSpell(Trinket):
+    
+    BASE_COOLDOWN = 120
+    
+    def __init__(self, caster):
+        super().__init__("Imperfect Ascendancy Serum", cooldown=ImperfectAscendancySerumSpell.BASE_COOLDOWN, base_cast_time=1.5, hasted_cast_time=False, off_gcd=False)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:          
+            caster.apply_buff_to_self(ImperfectAscendancySerumBuff(caster), current_time)

@@ -937,6 +937,29 @@ const itemDataEffects = [
         "enchantments": [],
         "limit": null
     },
+    {
+        "effects": [
+            {
+                "name": "Ascension",
+                "id": 455482,
+                "description": "Use: Drink from the vial and ascend over 1.5 sec before taking on a new more powerful form increasing your Intellect by *221 and all other stats by *140 but only for 20 sec.",
+                "effect_values": [
+                    {"base_value": 2256, "effect_type": "scalar", "effect_coefficient": 2.89916276932, "allocation_type": "no_multiplier"},
+                    {"base_value": 1205, "effect_type": "scalar", "effect_coefficient": 1.22288262844, "allocation_type": "rating_multiplier"},
+                ]
+            }
+        ],
+        "name": "Imperfect Ascendancy Serum",
+        "item_slot": "Trinket",
+        "base_item_level": 400,
+        "quality": "Epic",
+        "id": 225654,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_dpotion_a25.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
 ];
 
 export default itemDataEffects;

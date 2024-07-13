@@ -2927,6 +2927,33 @@ class VolatileSerum(Buff):
         pass
 
 
+class ImperfectAscendancySerumBuff(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Imperfect Ascendancy Serum", 20, base_duration=20)
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # intellect
+        self.trinket_first_value = trinket_values[0]
+        # secondaries
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):    
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_first_value)
+        caster.update_stat("haste", self.trinket_second_value)
+        caster.update_stat("crit", self.trinket_second_value)
+        caster.update_stat("mastery", self.trinket_second_value)
+        caster.update_stat("versatility", self.trinket_second_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value)
+        caster.update_stat("haste", -self.trinket_second_value)
+        caster.update_stat("crit", -self.trinket_second_value)
+        caster.update_stat("mastery", -self.trinket_second_value)
+        caster.update_stat("versatility", -self.trinket_second_value)
+
+
 # embellishments
 class PotionAbsorptionInhibitor(Buff):
     

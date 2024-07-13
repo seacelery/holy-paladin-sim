@@ -191,6 +191,7 @@ const buffsToIconsMap = {
     "Empowering Crystal of Anub'ikkaj": "https://wow.zamimg.com/images/wow/icons/large/inv_arathordungeon_fragment_color5.jpg",
     "Harvester's Edict": "https://wow.zamimg.com/images/wow/icons/large/inv_11_0_dungeon_oldgodstatuepiece_purple.jpg",
     "Ara-Kara Sacbrood": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_red.jpg",
+    "Imperfect Ascendancy Serum": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_dpotion_a25.jpg",
     
     "Deliberate Incubation": "https://wow.zamimg.com/images/wow/icons/large/inv_10_specialreagentfoozles_coolegg_red.jpg",
     "Reckless Incubation": "https://wow.zamimg.com/images/wow/icons/large/inv_10_specialreagentfoozles_coolegg_green.jpg",
