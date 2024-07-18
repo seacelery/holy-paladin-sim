@@ -144,7 +144,7 @@ class BroodkeepersPromiseHoT(HoT):
 class Dawnlight(HoT):
     
     # TODO verify 22.5% higher
-    SPELL_POWER_COEFFICIENT = 4.8 * 1.225
+    SPELL_POWER_COEFFICIENT = 4 * 1.225
     
     def __init__(self, caster, duration_to_apply=8):
         super().__init__("Dawnlight (HoT)", duration_to_apply, base_duration=duration_to_apply, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
@@ -163,7 +163,7 @@ class Dawnlight(HoT):
         targets = random.sample(caster.potential_healing_targets, target_count)
         for target in targets:            
         
-            radiation_healing = heal_amount * 0.1 * scaling_factor
+            radiation_healing = heal_amount * 0.08 * scaling_factor
             # print(radiation_healing)
 
             target.receive_heal(radiation_healing, caster)
@@ -189,7 +189,7 @@ class EternalFlameBuff(HoT):
 class SunSear(HoT):
     
     # TODO verify 22.5% higher
-    SPELL_POWER_COEFFICIENT = 0.6
+    SPELL_POWER_COEFFICIENT = 0.6 * 1.225
     
     def __init__(self, caster):
         super().__init__("Sun Sear", 4, base_duration=4, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier) 
@@ -3419,6 +3419,8 @@ class SunsAvatarActive(Buff):
 
             target.receive_heal(suns_avatar_heal, caster)
             update_spell_data_heals(caster.ability_breakdown, "Sun's Avatar", target, suns_avatar_heal, suns_avatar_crit)
+            
+            caster.handle_beacon_healing("Sun's Avatar", target, suns_avatar_heal, current_time)
         
     
 class BlessedAssurance(Buff):

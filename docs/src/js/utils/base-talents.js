@@ -46,8 +46,8 @@ const specTalentsPTR = [
     "", "Liberation", "Divine Favor/Hand of Divinity", "Saved by the Light", "Power of the Silver Hand", "Light's Protection", "Overflowing Light", "Shining Righteousness", "", 
     "Righteous Judgment", "", "Commanding Light", "Glistening Radiance", "Breaking Dawn", "Tower of Radiance", "Divine Glimpse", "", "Bestow Light", 
     "", "Beacon of Faith/Beacon of Virtue", "", "Veneration", "", "Avenging Wrath: Might/Avenging Crusader", "", "Tyr's Deliverance", "", 
-    "Truth Prevails", "", "Crusader's Might", "", "Merciful Auras/Blessing of Summer", "", "Relentless Inquisitor", "", "Reclamation", 
-    "", "Rising Sunlight", "", "Glorious Dawn", "Sanctified Wrath/Awakening", "Inflorescence of the Sunwell/Empyrean Legacy", "", "Boundless Salvation", "", 
+    "Truth Prevails", "", "Crusader's Might", "", "Sanctified Wrath/Awakening", "", "Relentless Inquisitor", "", "Reclamation", 
+    "", "Rising Sunlight", "", "Glorious Dawn", "Merciful Auras/Blessing of Summer", "Inflorescence of the Sunwell/Empyrean Legacy", "", "Boundless Salvation", "", 
 ];
 
 
@@ -333,16 +333,16 @@ let baseSpecTalentsPTR = {
     "row9": {
         "Truth Prevails": {"ranks": {"current rank": 0, "max rank": 1}},
         "Crusader's Might": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Merciful Auras": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Blessing of Summer": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sanctified Wrath": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Awakening": {"ranks": {"current rank": 0, "max rank": 1}},
         "Relentless Inquisitor": {"ranks": {"current rank": 0, "max rank": 1}},
         "Reclamation": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row10": {
         "Rising Sunlight": {"ranks": {"current rank": 0, "max rank": 1}},
         "Glorious Dawn": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Sanctified Wrath": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Awakening": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Merciful Auras": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blessing of Summer": {"ranks": {"current rank": 0, "max rank": 1}},
         "Inflorescence of the Sunwell": {"ranks": {"current rank": 0, "max rank": 1}},
         "Empyrean Legacy": {"ranks": {"current rank": 0, "max rank": 1}},
         "Boundless Salvation": {"ranks": {"current rank": 0, "max rank": 1}}
@@ -428,7 +428,7 @@ const specTalentsArrowsPTR = {
     "down": [
         "Glistening Radiance", "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Saved by the Light", "Holy Prism/Barrier of Faith",
         "Power of the Silver Hand", "Light's Protection", "Overflowing Light", "Divine Favor/Hand of Divinity", "Tower of Radiance",
-        "Reclamation/Barrier of Faith", "Daybreak", "Merciful Auras/Blessing of Summer",
+        "Reclamation/Barrier of Faith", "Daybreak", "Sanctified Wrath/Awakening",
     ],
     "downLong": [
         "Light's Conviction", "Aura Mastery", "Beacon of the Lightbringer", "Moment of Compassion/Resplendent Light", "Tirion's Devotion",
@@ -440,13 +440,13 @@ const specTalentsArrowsPTR = {
         "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Liberation", "Light's Hammer/Holy Prism",
         "Light's Protection", "Shining Righteousness", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Bestow Light",
         "Veneration", "Avenging Wrath: Might/Avenging Crusader", "Reclamation/Barrier of Faith", "Maraad's Dying Breath", 
-        "Merciful Auras/Blessing of Summer", "Relentless Inquisitor", "Tyr's Deliverance", "Saved by the Light", "Beacon of Faith/Beacon of Virtue",
+        "Sanctified Wrath/Awakening", "Relentless Inquisitor", "Tyr's Deliverance", "Saved by the Light", "Beacon of Faith/Beacon of Virtue",
     ],
     "right": [
         "Holy Shock", "Extrication", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Awestruck/Holy Infusion",
         "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Liberation", "Light's Hammer/Holy Prism",
         "Light's Protection", "Righteous Judgment", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Beacon of Faith/Beacon of Virtue",
-        "Veneration", "Avenging Wrath: Might/Avenging Crusader", "Crusader's Might", "Merciful Auras/Blessing of Summer", "Tyr's Deliverance",
+        "Veneration", "Avenging Wrath: Might/Avenging Crusader", "Crusader's Might", "Sanctified Wrath/Awakening", "Tyr's Deliverance",
         "Saved by the Light"
     ]
 };

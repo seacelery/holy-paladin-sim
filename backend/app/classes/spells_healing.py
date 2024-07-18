@@ -1485,7 +1485,7 @@ class FlashOfLight(Spell):
             self.holy_power_gain = 1
             
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 2.63
+            self.SPELL_POWER_COEFFICIENT = 3.156
             self.MANA_COST = 0.018
             self.mana_cost = 0.018
             self.BASE_MANA_COST = 0.018
@@ -1649,7 +1649,7 @@ class WordOfGlory(Spell):
     def __init__(self, caster):
         super().__init__("Word of Glory", mana_cost=WordOfGlory.MANA_COST, holy_power_cost=WordOfGlory.HOLY_POWER_COST, max_charges=0, is_heal=True)
         if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 3.15 * 1.65
+            self.SPELL_POWER_COEFFICIENT = 3.15 * 1.65 * 1.1
             self.MANA_COST = 0.006
             self.mana_cost = 0.006
         
@@ -1807,7 +1807,7 @@ class WordOfGlory(Spell):
                 random_num = random.random()
                 if random_num <= 0.25:
                     for saved_by_the_light_target in caster.beacon_targets:
-                        saved_by_the_light_heal = caster.spell_power * 4.5 * caster.versatility_multiplier
+                        saved_by_the_light_heal = caster.spell_power * 3 * caster.versatility_multiplier
                         saved_by_the_light_target.receive_heal(saved_by_the_light_heal, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Saved by the Light (Word of Glory)", saved_by_the_light_target, saved_by_the_light_heal, False)
             
@@ -2133,7 +2133,7 @@ class EternalFlame(Spell):
                 random_num = random.random()
                 if random_num <= 0.25:
                     for saved_by_the_light_target in caster.beacon_targets:
-                        saved_by_the_light_heal = caster.spell_power * 4.5 * caster.versatility_multiplier
+                        saved_by_the_light_heal = caster.spell_power * 3 * caster.versatility_multiplier
                         saved_by_the_light_target.receive_heal(saved_by_the_light_heal, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Saved by the Light (Eternal Flame)", saved_by_the_light_target, saved_by_the_light_heal, False)
 
@@ -2439,7 +2439,7 @@ class LightOfDawn(Spell):
                 random_num = random.random()
                 if random_num <= 0.25:
                     for saved_by_the_light_target in caster.beacon_targets:
-                        saved_by_the_light_heal = caster.spell_power * 4.5 * caster.versatility_multiplier
+                        saved_by_the_light_heal = caster.spell_power * 3 * caster.versatility_multiplier
                         saved_by_the_light_target.receive_heal(saved_by_the_light_heal, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Saved by the Light (Light of Dawn)", saved_by_the_light_target, saved_by_the_light_heal, False)
             
@@ -2686,7 +2686,7 @@ class MercifulAurasHeal(Spell):
 
 class SunsAvatarHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.24
+    SPELL_POWER_COEFFICIENT = 0.18
     
     def __init__(self, caster):
         super().__init__("Sun's Avatar", off_gcd=True)

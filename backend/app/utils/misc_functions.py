@@ -18,7 +18,7 @@ def calculate_beacon_healing(spell_name, amount, caster):
         single_beacon_transfer += 0.1
         
     if caster.ptr:
-        single_beacon_transfer -= 0.1
+        single_beacon_transfer -= 0.15
     
     double_beacon_transfer = single_beacon_transfer * 0.7
     

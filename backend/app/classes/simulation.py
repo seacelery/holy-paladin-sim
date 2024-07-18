@@ -1007,7 +1007,7 @@ class Simulation:
             # combine beacon glimmer sources into one spell
             if "Beacon of Light" in ability_breakdown:
                 beacon_source_spells = ability_breakdown["Beacon of Light"]["source_spells"]   
-                combine_beacon_sources_by_prefix("Glimmer of Light", beacon_source_spells)
+                # combine_beacon_sources_by_prefix("Glimmer of Light", beacon_source_spells)
                 combine_beacon_sources_by_prefix("Holy Shock", beacon_source_spells)
             
             excluded_spells = ["Divine Toll", "Daybreak", "Judgment", "Crusader Strike"]
