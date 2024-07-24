@@ -2628,6 +2628,8 @@ class HolyPrism(Spell):
                 caster.apply_buff_to_self(DivinePurpose(), current_time, reapply=True)
                 
             if caster.ptr and caster.is_talent_active("Divine Favor"):
+                if "Divine Favor" in caster.active_auras:
+                    caster.active_auras["Divine Favor"].remove_effect(caster, current_time)
                 caster.apply_buff_to_self(DivineFavorBuff(), current_time)
                 
             return cast_success, spell_crit, heal_amount

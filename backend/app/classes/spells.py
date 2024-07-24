@@ -57,17 +57,27 @@ class Spell:
         
     def can_cast(self, caster, current_time=0):
         if caster.is_occupied:
+            if self.name == "Light of Dawn" and current_time == 0:
+                print(current_time, "Light of Dawn occupied")
             return False
         if self.name in ["Hammer of Wrath"] and "Avenging Wrath" not in caster.active_auras and "Veneration" not in caster.active_auras and not caster.is_enemy_below_20_percent:
             return False       
         if not self.off_gcd and caster.global_cooldown > 0:
+            if self.name == "Light of Dawn" and current_time == 0:
+                print(current_time, "Light of Dawn not off gcd, cd > 0", caster.global_cooldown)
             return False
         if self.max_charges > 0:
             if self.remaining_cooldown > 0 and self.current_charges == 0:
+                if self.name == "Light of Dawn" and current_time == 0:
+                    print(current_time, "Light of Dawn charges???")
                 return False    
         if caster.mana < self.get_mana_cost(caster):
+            if self.name == "Light of Dawn" and current_time == 0:
+                print(current_time, "Light of Dawn MANA ISSUE")
             return False
         if hasattr(self, "holy_power_cost") and caster.holy_power < self.holy_power_cost:
+            if self.name == "Light of Dawn" and current_time == 0:
+                print(current_time, "Light of Dawn HOLY POWER ISSUE")
             return False       
         return True
     
@@ -157,7 +167,7 @@ class Spell:
             caster.mana -= self.get_mana_cost(caster)
                      
         # add spells that cost mana and do heal       
-        elif caster.mana >= self.get_mana_cost(caster) and is_heal and not exclude_cast: 
+        elif caster.mana >= self.get_mana_cost(caster) and is_heal: 
             if self.name not in ["Tyr's Deliverance", "Light's Hammer", "Holy Shock (Divine Toll)", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Resonance)", "Flash of Light", "Golden Path", "Holy Light", "Seal of Mercy"]:
                 update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)    
             
