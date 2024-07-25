@@ -30,8 +30,6 @@ const version = document.documentElement.getAttribute("data-version");
 const futurePatchSelected = version === "The War Within";
 
 const templateButton = document.getElementById("template-button");
-if (futurePatchSelected) {
-    templateButton.style.display = "flex";
-};
+templateButton.style.display = "flex";
 
 export { initialiseVersion, futurePatchSelected };

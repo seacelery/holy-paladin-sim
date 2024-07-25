@@ -1240,16 +1240,16 @@ presetBuffsButton.addEventListener("click", () => {
         unselectedImages.forEach(image => {
             const imageData = image.getAttribute(`data-${type}`);
             if (futurePatchSelected) {
-                if (["Flask of Saving Graces", "Grand Banquet of the Kalu'ak", "Algari Mana Oil",
+                if (["Flask of Alchemical Chaos", "Grand Banquet of the Kalu'ak", "Algari Mana Oil",
                     "Crystallized Augment Rune", "Arcane Intellect", "Mark of the Wild", "Symbol of Hope",
                     "Source of Magic", "Skyfury"].includes(imageData)) {
                         image.classList.toggle(`${type}-selected`); 
                         image.classList.toggle(`${type}-unselected`);
                 };
             } else {
-                if (["Iced Phial of Corrupting Rage", "Grand Banquet of the Kalu'ak", "Hissing Rune",
-                    "Draconic Augment Rune", "Arcane Intellect", "Mark of the Wild", "Symbol of Hope",
-                    "Source of Magic"].includes(imageData)) {
+                if (["Flask of Alchemical Chaos", "Grand Banquet of the Kalu'ak", "Algari Mana Oil",
+                    "Crystallized Augment Rune", "Arcane Intellect", "Mark of the Wild", "Symbol of Hope",
+                    "Source of Magic", "Skyfury"].includes(imageData)) {
                         image.classList.toggle(`${type}-selected`); 
                         image.classList.toggle(`${type}-unselected`);
                 };
@@ -1259,7 +1259,7 @@ presetBuffsButton.addEventListener("click", () => {
 
     if (futurePatchSelected) {
         currentConsumables = {
-            flask: ["Flask of Saving Graces"],
+            flask: ["Flask of Alchemical Chaos"],
             food: ["Grand Banquet of the Kalu'ak"],
             weapon_imbue: ["Algari Mana Oil"],
             augment_rune: ["Crystallized Augment Rune"],
@@ -1269,11 +1269,11 @@ presetBuffsButton.addEventListener("click", () => {
         };
     } else {
         currentConsumables = {
-            flask: ["Iced Phial of Corrupting Rage"],
+            flask: ["Flask of Alchemical Chaos"],
             food: ["Grand Banquet of the Kalu'ak"],
-            weapon_imbue: ["Hissing Rune"],
-            augment_rune: ["Draconic Augment Rune"],
-            raid_buff: ["Arcane Intellect", "Mark of the Wild", "Symbol of Hope"],
+            weapon_imbue: ["Algari Mana Oil"],
+            augment_rune: ["Crystallized Augment Rune"],
+            raid_buff: ["Arcane Intellect", "Mark of the Wild", "Symbol of Hope", "Skyfury"],
             external_buff: {"Source of Magic": ["0"]},
             potion: {}
         };
@@ -1333,11 +1333,8 @@ raceImages.forEach(image => {
 // temporary fix for version differences
 const lightforgedDraeneiImage = document.getElementById("lightforged-draenei-image");
 const earthenDwarfImage = document.getElementById("earthen-dwarf-image");
-const version = document.documentElement.getAttribute("data-version");
-if (version === "The War Within") {
-    lightforgedDraeneiImage.style.display = "none";
-    earthenDwarfImage.style.display = "block";
-};
+lightforgedDraeneiImage.style.display = "none";
+earthenDwarfImage.style.display = "block";
 
 const flaskImages = document.querySelectorAll(".flask-image");
 handleOptionImages(flaskImages, "flask", "consumable", true);

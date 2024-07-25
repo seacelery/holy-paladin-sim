@@ -428,25 +428,32 @@ const generateBuffsConsumablesImages = () => {
         aeratedManaPotionContainer.style.display = "none";
         elementalPowerPotionContainer.style.display = "none";
     } else {
-        const aeratedManaPotionTooltip = createTooltip("mana-potion-tooltip", "option-image-tooltip");
-        const aeratedManaPotionImage = aeratedManaPotionContainer.querySelector(".potion-image");
-        aeratedManaPotionImage.src = potionsVersion["Aerated Mana Potion"].image;
-        aeratedManaPotionImage.draggable = false;
-        aeratedManaPotionImage.setAttribute("data-potion", "Aerated Mana Potion");
-        const aeratedManaPotionInnerHTML = `Aerated Mana Potion<br><br>` + colourStatWords(potionsVersion["Aerated Mana Potion"].effect);
-        addTooltipFunctionality(aeratedManaPotionImage, aeratedManaPotionTooltip, null, aeratedManaPotionInnerHTML);
-    
-        const elementalPowerPotionTooltip = createTooltip("intellect-potion-tooltip", "option-image-tooltip");
-        const elementalPowerPotionImage = elementalPowerPotionContainer.querySelector(".potion-image");
-        elementalPowerPotionImage.src = potionsVersion["Elemental Potion of Ultimate Power"].image;
-        elementalPowerPotionImage.draggable = false;
-        elementalPowerPotionImage.setAttribute("data-potion", "Elemental Potion of Ultimate Power");
-        const elementalPowerPotionInnerHTML = `Elemental Potion of Ultimate Power<br><br>` + colourStatWords(potionsVersion["Elemental Potion of Ultimate Power"].effect);
-        addTooltipFunctionality(elementalPowerPotionImage, elementalPowerPotionTooltip, null, elementalPowerPotionInnerHTML);    
+        const algariManaPotionTooltip = createTooltip("mana-potion-tooltip", "option-image-tooltip");
+        const algariManaPotionImage = algariManaPotionContainer.querySelector(".potion-image");
+        algariManaPotionImage.src = potionsVersion["Algari Mana Potion"].image;
+        algariManaPotionImage.draggable = false;
+        algariManaPotionImage.setAttribute("data-potion", "Algari Mana Potion");
+        const algariManaPotionInnerHTML = `Algari Mana Potion<br><br>` + colourStatWords(potionsVersion["Algari Mana Potion"].effect);
+        addTooltipFunctionality(algariManaPotionImage, algariManaPotionTooltip, null, algariManaPotionInnerHTML);
+        
+        const slumberingSoulSerumPotionTooltip = createTooltip("intellect-potion-tooltip", "option-image-tooltip");
+        const slumberingSoulSerumPotionImage = slumberingSoulSerumPotionContainer.querySelector(".potion-image");
+        slumberingSoulSerumPotionImage.src = potionsVersion["Slumbering Soul Serum"].image;
+        slumberingSoulSerumPotionImage.draggable = false;
+        slumberingSoulSerumPotionImage.setAttribute("data-potion", "Slumbering Soul Serum");
+        const slumberingSoulSerumPotionInnerHTML = `Slumbering Soul Serum<br><br>` + colourStatWords(potionsVersion["Slumbering Soul Serum"].effect);
+        addTooltipFunctionality(slumberingSoulSerumPotionImage, slumberingSoulSerumPotionTooltip, null, slumberingSoulSerumPotionInnerHTML);    
 
-        algariManaPotionContainer.style.display = "none";
-        slumberingSoulSerumPotionContainer.style.display = "none";
-        temperedPotionContainer.style.display = "none";
+        const temperedPotionTooltip = createTooltip("intellect-potion-tooltip", "option-image-tooltip");
+        const temperedPotionImage = temperedPotionContainer.querySelector(".potion-image");
+        temperedPotionImage.src = potionsVersion["Tempered Potion"].image;
+        temperedPotionImage.draggable = false;
+        temperedPotionImage.setAttribute("data-potion", "Tempered Potion");
+        const temperedPotionInnerHTML = `Tempered Potion<br><br>` + colourStatWords(potionsVersion["Tempered Potion"].effect);
+        addTooltipFunctionality(temperedPotionImage, temperedPotionTooltip, null, temperedPotionInnerHTML);   
+
+        aeratedManaPotionContainer.style.display = "none";
+        elementalPowerPotionContainer.style.display = "none";
     };
     
     const raidBuffsFilterContainer = document.getElementById("raid-buffs-filter-container");

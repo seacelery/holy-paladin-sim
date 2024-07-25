@@ -51,10 +51,8 @@ const updateTalentsFromImportedData = (importedTalents) => {
     let importedSpecTalents = importedTalents.spec_talents;
     let importedLightsmithTalents = "";
     let importedHeraldOfTheSunTalents = "";
-    if (futurePatchSelected) {
-        importedLightsmithTalents = importedTalents.lightsmith_talents;
-        importedHeraldOfTheSunTalents = importedTalents.herald_of_the_sun_talents;
-    };
+    importedLightsmithTalents = importedTalents.lightsmith_talents;
+    importedHeraldOfTheSunTalents = importedTalents.herald_of_the_sun_talents;
 
     const updateTalents = (imported, baseTalents, category) => {
         let classTalentsCount = 0;
@@ -163,12 +161,13 @@ const updateTalentsFromImportedData = (importedTalents) => {
     if (futurePatchSelected) {
         updateTalents(importedClassTalents, baseClassTalentsPTR, "class");
         updateTalents(importedSpecTalents, baseSpecTalentsPTR, "spec");  
-        updateTalents(importedLightsmithTalents, baseLightsmithTalents, "lightsmith");
-        updateTalents(importedHeraldOfTheSunTalents, baseHeraldOfTheSunTalents, "herald-of-the-sun");
     } else {
         updateTalents(importedClassTalents, baseClassTalentsLive, "class");
         updateTalents(importedSpecTalents, baseSpecTalentsLive, "spec");  
     };
+
+    updateTalents(importedLightsmithTalents, baseLightsmithTalents, "lightsmith");
+    updateTalents(importedHeraldOfTheSunTalents, baseHeraldOfTheSunTalents, "herald-of-the-sun");
 };
 
 const updateTalentCounts = (category, pointsToAdd = 0) => {
@@ -981,38 +980,33 @@ const createTalentGrid = () => {
     };
 
     const heroTalentsButtonContainer = document.getElementById("hero-talents-button-container");
-    if (futurePatchSelected) {
-        const heroTalentsModal = document.getElementById("hero-talents-modal");
-        heroTalentsModal.style.display = "none";
-        const heroTalentsScreenCover = document.getElementById("hero-talents-screen-cover");
-        heroTalentsScreenCover.style.display = "none";
+    const heroTalentsModal = document.getElementById("hero-talents-modal");
+    heroTalentsModal.style.display = "none";
+    const heroTalentsScreenCover = document.getElementById("hero-talents-screen-cover");
+    heroTalentsScreenCover.style.display = "none";
 
-        const lightsmithIcon = document.getElementById("lightsmith-icon");
-        const heraldOfTheSunIcon = document.getElementById("herald-of-the-sun-icon");
-        lightsmithIcon.style.filter = "grayscale(1)";
-        heraldOfTheSunIcon.style.filter = "grayscale(1)";
+    const lightsmithIcon = document.getElementById("lightsmith-icon");
+    const heraldOfTheSunIcon = document.getElementById("herald-of-the-sun-icon");
+    lightsmithIcon.style.filter = "grayscale(1)";
+    heraldOfTheSunIcon.style.filter = "grayscale(1)";
 
-        const lightsmithTalentsGridContainer = document.getElementById("lightsmith-talent-grid");
-        const heraldOfTheSunTalentsGridContainer = document.getElementById("herald-of-the-sun-talent-grid");
+    const lightsmithTalentsGridContainer = document.getElementById("lightsmith-talent-grid");
+    const heraldOfTheSunTalentsGridContainer = document.getElementById("herald-of-the-sun-talent-grid");
 
-        heroTalentsButtonContainer.addEventListener("click", () => {
-            heroTalentsModal.style.display = heroTalentsModal.style.display === "none" ? "flex" : "none";
-            heroTalentsScreenCover.style.display = heroTalentsScreenCover.style.display === "none" ? "flex" : "none";
-        });
+    heroTalentsButtonContainer.addEventListener("click", () => {
+        heroTalentsModal.style.display = heroTalentsModal.style.display === "none" ? "flex" : "none";
+        heroTalentsScreenCover.style.display = heroTalentsScreenCover.style.display === "none" ? "flex" : "none";
+    });
 
-        window.addEventListener("click", (e) => {
-            if (heroTalentsModal.style.display === "flex" && (!heroTalentsModal.contains(e.target) && !heroTalentsButtonContainer.contains(e.target))) {
-                heroTalentsModal.style.display = "none";
-                heroTalentsScreenCover.style.display = "none";
-            };
-        });
+    window.addEventListener("click", (e) => {
+        if (heroTalentsModal.style.display === "flex" && (!heroTalentsModal.contains(e.target) && !heroTalentsButtonContainer.contains(e.target))) {
+            heroTalentsModal.style.display = "none";
+            heroTalentsScreenCover.style.display = "none";
+        };
+    });
 
-        createHeroTalentCells(heroTalentsLightsmith, baseLightsmithTalents, lightsmithTalentsGridContainer, "lightsmith");
-        createHeroTalentCells(heroTalentsHeraldOfTheSun, baseHeraldOfTheSunTalents, heraldOfTheSunTalentsGridContainer, "herald-of-the-sun");
-    } else {
-        heroTalentsButtonContainer.style.display = "none";
-    };
-    
+    createHeroTalentCells(heroTalentsLightsmith, baseLightsmithTalents, lightsmithTalentsGridContainer, "lightsmith");
+    createHeroTalentCells(heroTalentsHeraldOfTheSun, baseHeraldOfTheSunTalents, heraldOfTheSunTalentsGridContainer, "herald-of-the-sun");
 };
 
 export { createTalentGrid, updateTalentsFromImportedData };

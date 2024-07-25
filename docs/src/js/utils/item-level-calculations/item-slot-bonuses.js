@@ -54,6 +54,54 @@ const embellishmentsData = {
         "effect_values": [{"allocation_type": "rating_multiplier_jewellery", "base_item_level": 330, "base_value": 46.5, "effect_coefficient": 0.229097 / 2, "effect_type": "scalar"},
                           {"allocation_type": "rating_multiplier_jewellery", "base_item_level": 330, "base_value": 93, "effect_coefficient": 0.229097, "effect_type": "scalar"}]
     },
+    "Blessed Weapon Grip": {
+        "name": "Blessed Weapon Grip", 
+        "description": "Damaging a target has a chance bless your weapon, increasing your highest secondary stat. The effect slowly fades over time.", 
+        "id": 0, 
+        "type": "embellishment"
+    },
+    "Captured Starlight": {
+        "name": "Captured Starlight", 
+        "description": "When damaged at low health, unleash starlight to shield yourself. The frequency this can occur increases with socketed gems.", 
+        "id": 0, 
+        "type": "embellishment"
+    },
+    "Dawnthread Lining": {
+        "name": "Dawnthread Lining", 
+        "description": "While above 80% health, gain *2773 Critical Strike.", 
+        "id": 0, 
+        "type": "embellishment"
+    },
+    "Duskthread Lining": {
+        "name": "Duskthread Lining", 
+        "description": "While above 80% health, gain *2773 Versatility.", 
+        "id": 0, 
+        "type": "embellishment"
+    },
+    "Echoing Impact Seal": {
+        "name": "Echoing Impact Seal", 
+        "description": "", 
+        "id": 0, 
+        "type": "embellishment"
+    },
+    "Elemental Focusing Lens": {
+        "name": "Elemental Focusing Lens", 
+        "description": "Your damaging spells and abilities have a chance to deal *214 damage to your target. The magic school chosen is based upon your selection of socketed Khaz Algar gems.", 
+        "id": 0, 
+        "type": "embellishment"
+    },
+    "Prismatic Null Stone": {
+        "name": "Prismatic Null Stone", 
+        "description": "Increases effectiveness of Blasphemite secondary effects by 50%.", 
+        "id": 0, 
+        "type": "embellishment"
+    },
+    "Writhing Armor Banding": {
+        "name": "Writhing Armor Banding", 
+        "description": "Double the effects of your other Nerubian embellished item, positive and negative.", 
+        "id": 0, 
+        "type": "embellishment"
+    },
 };
 
 const ptrEmbellishmentsData = {
@@ -109,22 +157,22 @@ const ptrEmbellishmentsData = {
 };
 
 const itemSlotBonuses = {
-    "Main Hand": {"enchants": ["No enchant", "Sophic Devotion", "Dreaming Devotion"], "embellishments": embellishmentsData},
-    "Off Hand":  {"enchants": [], "embellishments": embellishmentsData},
-    "Head": {"enchants": ["No enchant", "Incandescent Essence"], "embellishments": embellishmentsData},
-    "Necklace":  {"enchants": [], "embellishments": embellishmentsData},
-    "Shoulders": {"enchants": [], "embellishments": embellishmentsData},
-    "Cloak":  {"enchants": ["No enchant", "Regenerative Leech", "Graceful Avoidance"], "embellishments": embellishmentsData},
-    "Gloves": {"enchants": [], "embellishments": embellishmentsData},
-    "Body":  {"enchants": ["No enchant", "Waking Stats", "Reserve of Intellect"], "embellishments": embellishmentsData},
-    "Bracers": {"enchants": ["No enchant", "+200 Leech", "+200 Avoidance"], "embellishments": embellishmentsData},
-    "Belt":  {"enchants": [], "embellishments": embellishmentsData},
-    "Legs": {"enchants": ["No enchant", "+177 Intellect & +131 Stamina", "+177 Intellect & +5% Mana"], "embellishments": embellishmentsData},
-    "Boots":  {"enchants": ["No enchant", "Plainsrunner's Breeze", "Watcher's Loam"], "embellishments": embellishmentsData},
-    "Ring 1": {"enchants": ["No enchant", "+82 Haste", "+82 Critical Strike", "+82 Mastery", "+82 Versatility"], "embellishments": embellishmentsData},
-    "Ring 2":  {"enchants": ["No enchant", "+82 Haste", "+82 Critical Strike", "+82 Mastery", "+82 Versatility"], "embellishments": embellishmentsData},
-    "Trinket 1": {"enchants": [], "embellishments": embellishmentsData},
-    "Trinket 2":  {"enchants": [], "embellishments": embellishmentsData},
+    "Main Hand": {"enchants": ["No enchant", "Authority of Air", "Authority of Fiery Resolve", "Authority of Radiant Power", "Authority of Storms", "Authority of the Depths", "Stonebound Artistry", "Oathsworn's Tenacity", "Stormrider's Fury", "Council's Guile"], "embellishments": ptrEmbellishmentsData},
+    "Off Hand":  {"enchants": [], "embellishments": ptrEmbellishmentsData},
+    "Head": {"enchants": [], "embellishments": ptrEmbellishmentsData},
+    "Necklace":  {"enchants": [], "embellishments": ptrEmbellishmentsData},
+    "Shoulders": {"enchants": [], "embellishments": ptrEmbellishmentsData},
+    "Cloak":  {"enchants": ["No enchant", "Chant of Winged Grace", "Chant of Leeching Fangs", "Chant of Burrowing Rapidity"], "embellishments": ptrEmbellishmentsData},
+    "Gloves": {"enchants": [], "embellishments": ptrEmbellishmentsData},
+    "Body":  {"enchants": ["No enchant", "Council's Intellect", "Crystalline Radiance"], "embellishments": ptrEmbellishmentsData},
+    "Bracers": {"enchants": ["No enchant", "Chant of Armored Avoidance", "Chant of Armored Leech", "Chant of Armored Speed"], "embellishments": ptrEmbellishmentsData},
+    "Belt":  {"enchants": [], "embellishments": ptrEmbellishmentsData},
+    "Legs": {"enchants": ["No enchant", "Daybreak Spellthread", "Sunset Spellthread", "Weavercloth Spellthread"], "embellishments": ptrEmbellishmentsData},
+    "Boots":  {"enchants": ["No enchant", "Cavalry's March", "Scout's March", "Defender's March"], "embellishments": ptrEmbellishmentsData},
+    "Ring 1": {"enchants": ["No enchant", "Radiant Haste", "Radiant Critical Strike", "Radiant Mastery", "Radiant Versatility", "Cursed Haste", "Cursed Critical Strike", "Cursed Mastery", "Cursed Versatility"], "embellishments": ptrEmbellishmentsData},
+    "Ring 2":  {"enchants": ["No enchant", "Radiant Haste", "Radiant Critical Strike", "Radiant Mastery", "Radiant Versatility", "Cursed Haste", "Cursed Critical Strike", "Cursed Mastery", "Cursed Versatility"], "embellishments": ptrEmbellishmentsData},
+    "Trinket 1": {"enchants": [], "embellishments": ptrEmbellishmentsData},
+    "Trinket 2":  {"enchants": [], "embellishments": ptrEmbellishmentsData},
 };
 
 const ptrItemSlotBonuses = {
@@ -153,7 +201,17 @@ const craftedItems = {
     "Primal Molten Sabatons": embellishmentsData,
     "Primal Molten Breastplate": embellishmentsData,
     "Torc of Passed Time": embellishmentsData,
-    "Elemental Lariat": ""
+    "Elemental Lariat": "",
+    "Charged Hexsword": ptrEmbellishmentsData,
+    "Charged Invoker": ptrEmbellishmentsData,
+    "Everforged Breastplate": ptrEmbellishmentsData,
+    "Everforged Helm": ptrEmbellishmentsData,
+    "Everforged Gauntlets": ptrEmbellishmentsData,
+    "Everforged Greatbelt": ptrEmbellishmentsData,
+    "Everforged Legplates": ptrEmbellishmentsData,
+    "Everforged Pauldrons": ptrEmbellishmentsData,
+    "Everforged Sabatons": ptrEmbellishmentsData,
+    "Everforged Vambraces": ptrEmbellishmentsData,
 };
 
 const ptrCraftedItems = {
