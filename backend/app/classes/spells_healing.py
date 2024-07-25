@@ -32,26 +32,16 @@ def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_ta
 # generators
 class HolyShock(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.535 * 0.8
-    MANA_COST = 0.028
-    BASE_MANA_COST = 0.028
-    BASE_COOLDOWN = 8.5
+    SPELL_POWER_COEFFICIENT = 2.65
+    MANA_COST = 0.026
+    BASE_MANA_COST = 0.026
+    BASE_COOLDOWN = 9.5
     HOLY_POWER_GAIN = 1
     CHARGES = 1
     BONUS_CRIT = 0.1
     
     def __init__(self, caster):
         super().__init__("Holy Shock", mana_cost=HolyShock.MANA_COST, base_mana_cost=HolyShock.BASE_MANA_COST, cooldown=HolyShock.BASE_COOLDOWN, holy_power_gain=HolyShock.HOLY_POWER_GAIN, max_charges=HolyShock.CHARGES, hasted_cooldown=True, is_heal=True)
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 2.65
-            
-            self.MANA_COST = 0.026
-            self.mana_cost = 0.026
-            self.BASE_MANA_COST = 0.026
-            self.base_mana_cost = 0.026
-            
-            self.BASE_COOLDOWN = 9.5
-            self.cooldown = 9.5
             
         # tww season 1 tier 2pc  
         if caster.set_bonuses["tww_season_1"] >= 2:
@@ -71,7 +61,7 @@ class HolyShock(Spell):
             self.spell_healing_modifier *= 1.1
         
         # blessing of an'she
-        if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+        if caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
             self.spell_healing_modifier *= 3
         
         # divine glimpse
@@ -79,7 +69,7 @@ class HolyShock(Spell):
             bonus_crit += 0.08      
              
         # luminosity    
-        if caster.ptr and caster.is_talent_active("Luminosity"):
+        if caster.is_talent_active("Luminosity"):
             bonus_crit += 0.05
         
         self.bonus_crit = HolyShock.BONUS_CRIT + bonus_crit
@@ -91,22 +81,18 @@ class HolyShock(Spell):
         
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            if caster.ptr:
-                self.spell_healing_modifier *= 1.1
-            else:
-                self.spell_healing_modifier *= 1.15
+            self.spell_healing_modifier *= 1.1
             
         # reclamation
         if caster.is_talent_active("Reclamation"):
             self.spell_healing_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
         
         # light of the martyr & bestow light    
-        if caster.ptr:
-            if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
-                cumulative_healing_mod = 1.2
-                if caster.is_talent_active("Bestow Light") and "Bestow Light" in caster.active_auras:
-                    cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
-                self.spell_healing_modifier *= cumulative_healing_mod
+        if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+            cumulative_healing_mod = 1.2
+            if caster.is_talent_active("Bestow Light") and "Bestow Light" in caster.active_auras:
+                cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
+            self.spell_healing_modifier *= cumulative_healing_mod
         
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal, exclude_cast=not initial_cast)
         barrier_of_faith_absorb = 0
@@ -116,13 +102,13 @@ class HolyShock(Spell):
                 self.spell_healing_modifier /= 1.1
             
             # blessing of an'she
-            if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+            if caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
                 self.spell_healing_modifier /= 3
                 del caster.active_auras["Blessing of An'she"]
                 update_self_buff_data(caster.self_buff_breakdown, "Blessing of An'she", current_time, "expired")
                 
             # sun sear
-            if spell_crit and caster.ptr and caster.is_talent_active("Sun Sear"):
+            if spell_crit and caster.is_talent_active("Sun Sear"):
                 targets[0].apply_buff_to_target(SunSear(caster), current_time, caster=caster)
             
             # reset reclamation
@@ -134,15 +120,14 @@ class HolyShock(Spell):
                 update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
                 
             # reset light of the martyr & bestow light
-            if caster.ptr:
-                if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
-                    self.spell_healing_modifier /= cumulative_healing_mod
-                    
-                    light_of_the_martyr_negative_healing = heal_amount * 0.3 * -1
-                    target = targets[0]
-                    target.receive_heal(light_of_the_martyr_negative_healing, caster)
-                    
-                    update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
+            if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+                self.spell_healing_modifier /= cumulative_healing_mod
+                
+                light_of_the_martyr_negative_healing = heal_amount * 0.3 * -1
+                target = targets[0]
+                target.receive_heal(light_of_the_martyr_negative_healing, caster)
+                
+                update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
             
             # blessing of dawn
             if caster.is_talent_active("Of Dusk and Dawn"):
@@ -159,19 +144,13 @@ class HolyShock(Spell):
             
             # glorious dawn
             if caster.is_talent_active("Glorious Dawn"):
-                if caster.ptr:
-                    holy_shock_reset_chance = 0.12
-                else:
-                    holy_shock_reset_chance = (10 + len(glimmer_targets) * 1.5) / 100
+                holy_shock_reset_chance = 0.12
                 if random.random() <= holy_shock_reset_chance:
                     self.reset_cooldown(caster, current_time)
      
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                if caster.ptr:
-                    self.spell_healing_modifier /= 1.1
-                else:
-                    self.spell_healing_modifier /= 1.15
+                self.spell_healing_modifier /= 1.1
                     
                 if caster.is_talent_active("Boundless Salvation"):
                     if "Tyr's Deliverance (self)" in caster.active_auras:
@@ -267,7 +246,7 @@ class HolyShock(Spell):
                         handle_glimmer_removal(caster, glimmer_targets, current_time, 3)
                         
             # overflowing light
-            if caster.is_talent_active("Overflowing Light") and caster.ptr:
+            if caster.is_talent_active("Overflowing Light"):
                 overflowing_light_absorb_value = heal_amount * 0.15 * (caster.overhealing[self.name])
                 targets[0].receive_heal(overflowing_light_absorb_value, caster)
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
@@ -297,10 +276,7 @@ class HolyShock(Spell):
             if caster.is_talent_active("Barrier of Faith"):
                 for target in caster.potential_healing_targets:
                     if "Barrier of Faith" in target.target_active_buffs:
-                        if caster.ptr:
-                            barrier_of_faith_absorb = heal_amount * 0.2
-                        else:
-                            barrier_of_faith_absorb = heal_amount * 0.25
+                        barrier_of_faith_absorb = heal_amount * 0.2
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Shock)", target, barrier_of_faith_absorb, False)
             
@@ -310,7 +286,7 @@ class HolyShock(Spell):
                 update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
                 
             # tww season 1 tier 4pc
-            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+            if caster.set_bonuses["tww_season_1"] >= 4:            
                 if "Pure Light" in caster.active_auras:
                     pure_light = caster.active_auras["Pure Light"]
                     
@@ -323,7 +299,7 @@ class HolyShock(Spell):
                     caster.apply_buff_to_self(PureLight(caster), current_time, stacks_to_apply=1, max_stacks=4)
                 
             # second sunrise
-            if caster.ptr and caster.is_talent_active("Second Sunrise") and initial_cast:
+            if caster.is_talent_active("Second Sunrise") and initial_cast:
                 second_sunrise_chance = 0.15
                 if random.random() <= second_sunrise_chance:
                     caster.global_cooldown = 0
@@ -433,14 +409,12 @@ class Daybreak(Spell):
                
 class RisingSunlightHolyShock(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.535 * 0.8
+    SPELL_POWER_COEFFICIENT = 2.65
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
     
     def __init__(self, caster):
         super().__init__("Holy Shock (Rising Sunlight)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=RisingSunlightHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 2.65
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
@@ -450,7 +424,7 @@ class RisingSunlightHolyShock(Spell):
             self.spell_healing_modifier *= 1.1
         
         # blessing of an'she
-        if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+        if caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
             self.spell_healing_modifier *= 3
         
         # divine glimpse
@@ -458,7 +432,7 @@ class RisingSunlightHolyShock(Spell):
             bonus_crit += 0.08      
              
         # luminosity    
-        if caster.ptr and caster.is_talent_active("Luminosity"):
+        if caster.is_talent_active("Luminosity"):
             bonus_crit += 0.05
         
         self.bonus_crit = HolyShock.BONUS_CRIT + bonus_crit
@@ -470,22 +444,18 @@ class RisingSunlightHolyShock(Spell):
         
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            if caster.ptr:
-                self.spell_healing_modifier *= 1.1
-            else:
-                self.spell_healing_modifier *= 1.15
+            self.spell_healing_modifier *= 1.1
             
         # reclamation
         if caster.is_talent_active("Reclamation"):
             self.spell_healing_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
             
         # light of the martyr & bestow light    
-        if caster.ptr:
-            if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
-                cumulative_healing_mod = 1.2
-                if caster.is_talent_active("Bestow Light") and "Bestow Light" in caster.active_auras:
-                    cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
-                self.spell_healing_modifier *= cumulative_healing_mod
+        if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+            cumulative_healing_mod = 1.2
+            if caster.is_talent_active("Bestow Light") and "Bestow Light" in caster.active_auras:
+                cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
+            self.spell_healing_modifier *= cumulative_healing_mod
         
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         barrier_of_faith_absorb = 0
@@ -495,25 +465,24 @@ class RisingSunlightHolyShock(Spell):
                 self.spell_healing_modifier /= 1.1
             
             # blessing of an'she
-            if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+            if caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
                 self.spell_healing_modifier /= 3
                 del caster.active_auras["Blessing of An'she"]
                 update_self_buff_data(caster.self_buff_breakdown, "Blessing of An'she", current_time, "expired")
                 
             # sun sear
-            if spell_crit and caster.ptr and caster.is_talent_active("Sun Sear"):
+            if spell_crit and caster.is_talent_active("Sun Sear"):
                 targets[0].apply_buff_to_target(SunSear(caster), current_time, caster=caster)
             
             # reset light of the martyr & bestow light
-            if caster.ptr:
-                if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
-                    self.spell_healing_modifier /= cumulative_healing_mod
-                    
-                    light_of_the_martyr_negative_healing = heal_amount * 0.3 * -1
-                    target = targets[0]
-                    target.receive_heal(light_of_the_martyr_negative_healing, caster)
-                    
-                    update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
+            if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+                self.spell_healing_modifier /= cumulative_healing_mod
+                
+                light_of_the_martyr_negative_healing = heal_amount * 0.3 * -1
+                target = targets[0]
+                target.receive_heal(light_of_the_martyr_negative_healing, caster)
+                
+                update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
             
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
@@ -538,19 +507,13 @@ class RisingSunlightHolyShock(Spell):
             
             # glorious dawn
             if caster.is_talent_active("Glorious Dawn"):
-                if caster.ptr:
-                    holy_shock_reset_chance = 0.12
-                else:
-                    holy_shock_reset_chance = (10 + len(glimmer_targets) * 1.5) / 100
+                holy_shock_reset_chance = 0.12
                 if random.random() <= holy_shock_reset_chance:
                     self.reset_cooldown(caster, current_time)
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                if caster.ptr:
-                    self.spell_healing_modifier /= 1.1
-                else:
-                    self.spell_healing_modifier /= 1.15
+                self.spell_healing_modifier /= 1.1
                     
                 if caster.is_talent_active("Boundless Salvation"):
                     if "Tyr's Deliverance (self)" in caster.active_auras:
@@ -645,7 +608,7 @@ class RisingSunlightHolyShock(Spell):
                         handle_glimmer_removal(caster, glimmer_targets, current_time, 3)
                         
             # overflowing light
-            if caster.is_talent_active("Overflowing Light") and caster.ptr:
+            if caster.is_talent_active("Overflowing Light"):
                 overflowing_light_absorb_value = heal_amount * 0.15 * (caster.overhealing[self.name])
                 targets[0].receive_heal(overflowing_light_absorb_value, caster)
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
@@ -657,10 +620,7 @@ class RisingSunlightHolyShock(Spell):
             if caster.is_talent_active("Barrier of Faith"):
                 for target in caster.potential_healing_targets:
                     if "Barrier of Faith" in target.target_active_buffs:
-                        if caster.ptr:
-                            barrier_of_faith_absorb = heal_amount * 0.2
-                        else:
-                            barrier_of_faith_absorb = heal_amount * 0.25
+                        barrier_of_faith_absorb = heal_amount * 0.2
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Shock)", target, barrier_of_faith_absorb, False)
                         
@@ -670,7 +630,7 @@ class RisingSunlightHolyShock(Spell):
                 update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
                 
             # tww season 1 tier 4pc
-            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+            if caster.set_bonuses["tww_season_1"] >= 4:            
                 if "Pure Light" in caster.active_auras:
                     pure_light = caster.active_auras["Pure Light"]
                     
@@ -683,7 +643,7 @@ class RisingSunlightHolyShock(Spell):
                     caster.apply_buff_to_self(PureLight(caster), current_time, stacks_to_apply=1, max_stacks=4)
                 
             # second sunrise
-            if caster.ptr and caster.is_talent_active("Second Sunrise"):
+            if caster.is_talent_active("Second Sunrise"):
                 second_sunrise_chance = 0.15
                 if random.random() <= second_sunrise_chance:
                     holy_shock = caster.abilities["Holy Shock"]
@@ -741,7 +701,7 @@ class DivineToll(Spell):
                 caster.apply_buff_to_self(DivineResonance(), current_time)
                 
             # rising sunlight
-            if caster.is_talent_active("Rising Sunlight") and caster.ptr:
+            if caster.is_talent_active("Rising Sunlight"):
                 caster.apply_buff_to_self(RisingSunlight(caster), current_time, stacks_to_apply=2, max_stacks=4)
                 
         return cast_success, spell_crit, heal_amount   
@@ -749,14 +709,12 @@ class DivineToll(Spell):
   
 class DivineTollHolyShock(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.535 * 0.8
+    SPELL_POWER_COEFFICIENT = 2.65
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
     
     def __init__(self, caster):
         super().__init__("Holy Shock (Divine Toll)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, is_heal=True)
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 2.65
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
@@ -766,7 +724,7 @@ class DivineTollHolyShock(Spell):
             self.spell_healing_modifier *= 1.1
         
         # blessing of an'she
-        if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+        if caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
             self.spell_healing_modifier *= 3
         
         # divine glimpse
@@ -774,7 +732,7 @@ class DivineTollHolyShock(Spell):
             bonus_crit += 0.08      
              
         # luminosity    
-        if caster.ptr and caster.is_talent_active("Luminosity"):
+        if caster.is_talent_active("Luminosity"):
             bonus_crit += 0.05
         
         self.bonus_crit = HolyShock.BONUS_CRIT + bonus_crit
@@ -786,22 +744,18 @@ class DivineTollHolyShock(Spell):
 
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            if caster.ptr:
-                self.spell_healing_modifier *= 1.1
-            else:
-                self.spell_healing_modifier *= 1.15
+            self.spell_healing_modifier *= 1.1
             
         # reclamation
         if caster.is_talent_active("Reclamation"):
             self.spell_healing_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
             
         # light of the martyr & bestow light    
-        if caster.ptr:
-            if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
-                cumulative_healing_mod = 1.2
-                if caster.is_talent_active("Bestow Light") and "Bestow Light" in caster.active_auras:
-                    cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
-                self.spell_healing_modifier *= cumulative_healing_mod
+        if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+            cumulative_healing_mod = 1.2
+            if caster.is_talent_active("Bestow Light") and "Bestow Light" in caster.active_auras:
+                cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
+            self.spell_healing_modifier *= cumulative_healing_mod
             
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         total_glimmer_healing = 0
@@ -812,25 +766,24 @@ class DivineTollHolyShock(Spell):
                 self.spell_healing_modifier /= 1.1
             
             # blessing of an'she
-            if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+            if caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
                 self.spell_healing_modifier /= 3
                 del caster.active_auras["Blessing of An'she"]
                 update_self_buff_data(caster.self_buff_breakdown, "Blessing of An'she", current_time, "expired")
                 
             # sun sear
-            if spell_crit and caster.ptr and caster.is_talent_active("Sun Sear"):
+            if spell_crit and caster.is_talent_active("Sun Sear"):
                 targets[0].apply_buff_to_target(SunSear(caster), current_time, caster=caster)
             
             # reset light of the martyr & bestow light
-            if caster.ptr:
-                if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
-                    self.spell_healing_modifier /= cumulative_healing_mod
-                    
-                    light_of_the_martyr_negative_healing = heal_amount * 0.3 * -1
-                    target = targets[0]
-                    target.receive_heal(light_of_the_martyr_negative_healing, caster)
-                    
-                    update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
+            if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+                self.spell_healing_modifier /= cumulative_healing_mod
+                
+                light_of_the_martyr_negative_healing = heal_amount * 0.3 * -1
+                target = targets[0]
+                target.receive_heal(light_of_the_martyr_negative_healing, caster)
+                
+                update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
             
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
@@ -855,19 +808,13 @@ class DivineTollHolyShock(Spell):
             
             # glorious dawn
             if caster.is_talent_active("Glorious Dawn"):
-                if caster.ptr:
-                    holy_shock_reset_chance = 0.12
-                else:
-                    holy_shock_reset_chance = (10 + len(glimmer_targets) * 1.5) / 100
+                holy_shock_reset_chance = 0.12
                 if random.random() <= holy_shock_reset_chance:
                     self.reset_cooldown(caster, current_time)
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                if caster.ptr:
-                    self.spell_healing_modifier /= 1.1
-                else:
-                    self.spell_healing_modifier /= 1.15
+                self.spell_healing_modifier /= 1.1
                     
                 if caster.is_talent_active("Boundless Salvation"):
                     if "Tyr's Deliverance (self)" in caster.active_auras:
@@ -965,7 +912,7 @@ class DivineTollHolyShock(Spell):
                     caster.divine_toll_holy_shock_count = 0 
                     
             # overflowing light
-            if caster.is_talent_active("Overflowing Light") and caster.ptr:
+            if caster.is_talent_active("Overflowing Light"):
                 overflowing_light_absorb_value = heal_amount * 0.15 * (caster.overhealing[self.name])
                 targets[0].receive_heal(overflowing_light_absorb_value, caster)
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
@@ -977,10 +924,7 @@ class DivineTollHolyShock(Spell):
             if caster.is_talent_active("Barrier of Faith"):
                 for target in caster.potential_healing_targets:
                     if "Barrier of Faith" in target.target_active_buffs:
-                        if caster.ptr:
-                            barrier_of_faith_absorb = heal_amount * 0.2
-                        else:
-                            barrier_of_faith_absorb = heal_amount * 0.25
+                        barrier_of_faith_absorb = heal_amount * 0.2
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Shock)", target, barrier_of_faith_absorb, False)
                         
@@ -990,7 +934,7 @@ class DivineTollHolyShock(Spell):
                 update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
                 
             # tww season 1 tier 4pc
-            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+            if caster.set_bonuses["tww_season_1"] >= 4:            
                 if "Pure Light" in caster.active_auras:
                     pure_light = caster.active_auras["Pure Light"]
                     
@@ -1003,7 +947,7 @@ class DivineTollHolyShock(Spell):
                     caster.apply_buff_to_self(PureLight(caster), current_time, stacks_to_apply=1, max_stacks=4)
                 
             # second sunrise
-            if caster.ptr and caster.is_talent_active("Second Sunrise"):
+            if caster.is_talent_active("Second Sunrise"):
                 second_sunrise_chance = 0.15
                 if random.random() <= second_sunrise_chance:
                     holy_shock = caster.abilities["Holy Shock"]
@@ -1029,14 +973,12 @@ class DivineTollHolyShock(Spell):
             
 class DivineResonanceHolyShock(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.535 * 0.8
+    SPELL_POWER_COEFFICIENT = 2.65
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
     
     def __init__(self, caster):
         super().__init__("Holy Shock (Divine Resonance)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 2.65
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         bonus_crit = 0
@@ -1046,7 +988,7 @@ class DivineResonanceHolyShock(Spell):
             self.spell_healing_modifier *= 1.1
         
         # blessing of an'she
-        if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+        if caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
             self.spell_healing_modifier *= 3
         
         # divine glimpse
@@ -1054,7 +996,7 @@ class DivineResonanceHolyShock(Spell):
             bonus_crit += 0.08      
              
         # luminosity    
-        if caster.ptr and caster.is_talent_active("Luminosity"):
+        if caster.is_talent_active("Luminosity"):
             bonus_crit += 0.05
         
         self.bonus_crit = HolyShock.BONUS_CRIT + bonus_crit
@@ -1066,22 +1008,18 @@ class DivineResonanceHolyShock(Spell):
         
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            if caster.ptr:
-                self.spell_healing_modifier *= 1.1
-            else:
-                self.spell_healing_modifier *= 1.15
+            self.spell_healing_modifier *= 1.1
                       
         # reclamation
         if caster.is_talent_active("Reclamation"):
             self.spell_healing_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
             
         # light of the martyr & bestow light    
-        if caster.ptr:
-            if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
-                cumulative_healing_mod = 1.2
-                if caster.is_talent_active("Bestow Light") and "Bestow Light" in caster.active_auras:
-                    cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
-                self.spell_healing_modifier *= cumulative_healing_mod
+        if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+            cumulative_healing_mod = 1.2
+            if caster.is_talent_active("Bestow Light") and "Bestow Light" in caster.active_auras:
+                cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
+            self.spell_healing_modifier *= cumulative_healing_mod
             
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         barrier_of_faith_absorb = 0
@@ -1091,25 +1029,24 @@ class DivineResonanceHolyShock(Spell):
                 self.spell_healing_modifier /= 1.1
             
             # blessing of an'she
-            if caster.ptr and caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
+            if caster.is_talent_active("Blessing of An'she") and "Blessing of An'she" in caster.active_auras:
                 self.spell_healing_modifier /= 3
                 del caster.active_auras["Blessing of An'she"]
                 update_self_buff_data(caster.self_buff_breakdown, "Blessing of An'she", current_time, "expired")
               
             # sun sear
-            if spell_crit and caster.ptr and caster.is_talent_active("Sun Sear"):
+            if spell_crit and caster.is_talent_active("Sun Sear"):
                 targets[0].apply_buff_to_target(SunSear(caster), current_time, caster=caster)
             
             # reset light of the martyr & bestow light
-            if caster.ptr:
-                if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
-                    self.spell_healing_modifier /= cumulative_healing_mod
-                    
-                    light_of_the_martyr_negative_healing = heal_amount * 0.3 * -1
-                    target = targets[0]
-                    target.receive_heal(light_of_the_martyr_negative_healing, caster)
-                    
-                    update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
+            if caster.is_talent_active("Light of the Martyr") and "Light of the Martyr" in caster.active_auras:
+                self.spell_healing_modifier /= cumulative_healing_mod
+                
+                light_of_the_martyr_negative_healing = heal_amount * 0.3 * -1
+                target = targets[0]
+                target.receive_heal(light_of_the_martyr_negative_healing, caster)
+                
+                update_spell_data_heals(caster.ability_breakdown, "Light of the Martyr ", target, light_of_the_martyr_negative_healing, False)
             
             # reclamation
             if caster.is_talent_active("Reclamation"):
@@ -1134,19 +1071,13 @@ class DivineResonanceHolyShock(Spell):
             
             # glorious dawn
             if caster.is_talent_active("Glorious Dawn"):
-                if caster.ptr:
-                    holy_shock_reset_chance = 0.12
-                else:
-                    holy_shock_reset_chance = (10 + len(glimmer_targets) * 1.5) / 100
+                holy_shock_reset_chance = 0.12
                 if random.random() <= holy_shock_reset_chance:
                     self.reset_cooldown(caster, current_time)
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                if caster.ptr:
-                    self.spell_healing_modifier /= 1.1
-                else:
-                    self.spell_healing_modifier /= 1.15
+                self.spell_healing_modifier /= 1.1
                     
                 if caster.is_talent_active("Boundless Salvation"):
                     if "Tyr's Deliverance (self)" in caster.active_auras:
@@ -1201,7 +1132,7 @@ class DivineResonanceHolyShock(Spell):
                         handle_glimmer_removal(caster, glimmer_targets, current_time, 3)
                         
             # overflowing light
-            if caster.is_talent_active("Overflowing Light") and caster.ptr:
+            if caster.is_talent_active("Overflowing Light"):
                 overflowing_light_absorb_value = heal_amount * 0.15 * (caster.overhealing[self.name])
                 targets[0].receive_heal(overflowing_light_absorb_value, caster)
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
@@ -1213,10 +1144,7 @@ class DivineResonanceHolyShock(Spell):
             if caster.is_talent_active("Barrier of Faith"):
                 for target in caster.potential_healing_targets:
                     if "Barrier of Faith" in target.target_active_buffs:
-                        if caster.ptr:
-                            barrier_of_faith_absorb = heal_amount * 0.2
-                        else:
-                            barrier_of_faith_absorb = heal_amount * 0.25
+                        barrier_of_faith_absorb = heal_amount * 0.2
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Shock)", target, barrier_of_faith_absorb, False)
                         
@@ -1226,7 +1154,7 @@ class DivineResonanceHolyShock(Spell):
                 update_self_buff_data(caster.self_buff_breakdown, "Power of the Silver Hand Stored Healing", current_time, "expired")
                 
             # tww season 1 tier 4pc
-            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+            if caster.set_bonuses["tww_season_1"] >= 4:            
                 if "Pure Light" in caster.active_auras:
                     pure_light = caster.active_auras["Pure Light"]
                     
@@ -1239,7 +1167,7 @@ class DivineResonanceHolyShock(Spell):
                     caster.apply_buff_to_self(PureLight(caster), current_time, stacks_to_apply=1, max_stacks=4)
                 
             # second sunrise
-            if caster.ptr and caster.is_talent_active("Second Sunrise"):
+            if caster.is_talent_active("Second Sunrise"):
                 second_sunrise_chance = 0.15
                 if random.random() <= second_sunrise_chance:
                     holy_shock = caster.abilities["Holy Shock"]
@@ -1265,34 +1193,21 @@ class DivineResonanceHolyShock(Spell):
 
 class HolyLight(Spell):
     
-    SPELL_POWER_COEFFICIENT = 5.096 * 0.8
-    MANA_COST = 0.024
+    SPELL_POWER_COEFFICIENT = 4
+    MANA_COST = 0.064
     HOLY_POWER_GAIN = 0
-    BASE_CAST_TIME = 2.5
+    BASE_CAST_TIME = 2
     
     def __init__(self, caster):
         super().__init__("Holy Light", base_mana_cost=HolyLight.MANA_COST, holy_power_gain=HolyLight.HOLY_POWER_GAIN, base_cast_time=HolyLight.BASE_CAST_TIME, is_heal=True)
         # tower of radiance
         if caster.is_talent_active("Tower of Radiance"):
             self.holy_power_gain = 1
-            
-        if caster.ptr:
-            self.base_cast_time = 2
-            
-        if caster.ptr:
-            self.MANA_COST = 0.064
-            self.mana_cost = 0.064
-            
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 4
     
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            if caster.ptr:
-                self.spell_healing_modifier *= 1.1
-            else:
-                self.spell_healing_modifier *= 1.15
+            self.spell_healing_modifier *= 1.1
         
         # awestruck   
         self.bonus_crit_healing = 0   
@@ -1301,9 +1216,9 @@ class HolyLight(Spell):
         
         # infusion of light & inflorescence of the sunwell
         if "Infusion of Light" in caster.active_auras:  
-            if caster.ptr and caster.is_talent_active("Inflorescence of the Sunwell"):
+            if caster.is_talent_active("Inflorescence of the Sunwell"):
                 self.spell_healing_modifier *= 2.5
-            elif caster.ptr:
+            else:
                 self.spell_healing_modifier *= 2
         
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
@@ -1358,10 +1273,7 @@ class HolyLight(Spell):
                     caster.handle_beacon_healing("Resplendent Light", target, resplendent_light_healing, current_time)
             
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                if caster.ptr:
-                    self.spell_healing_modifier /= 1.1
-                else:
-                    self.spell_healing_modifier /= 1.15
+                self.spell_healing_modifier /= 1.1
                 
                 # boundless salvation
                 if caster.is_talent_active("Boundless Salvation"):
@@ -1387,18 +1299,10 @@ class HolyLight(Spell):
                             caster.abilities["Holy Shock"].current_charges += 1
                 
                 # handle inflorescence of the sunwell
-                if caster.ptr and caster.is_talent_active("Inflorescence of the Sunwell"):
+                if caster.is_talent_active("Inflorescence of the Sunwell"):
                     self.spell_healing_modifier /= 2.5
-                elif caster.ptr:
-                    self.spell_healing_modifier /= 2
                 else:
-                    caster.infused_holy_light_count += 1
-
-                    if caster.infused_holy_light_count == 3 and caster.is_talent_active("Inflorescence of the Sunwell"):
-                        self.holy_power_gain = 4
-                        caster.infused_holy_light_count = 0
-                    else:
-                        self.holy_power_gain = 3
+                    self.spell_healing_modifier /= 2
                     
                 increment_holy_power(self, caster, current_time)
                 update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
@@ -1415,7 +1319,7 @@ class HolyLight(Spell):
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "expired")
                     
-                if caster.ptr and caster.is_talent_active("Valiance"):
+                if caster.is_talent_active("Valiance"):
                     # extended version (removed for now)
                     # holy_bulwark_targets = [target for target in caster.potential_healing_targets if "Holy Bulwark" in target.target_active_buffs]
                     # sacred_weapon_targets = [target for target in caster.potential_healing_targets if "Sacred Weapon" in target.target_active_buffs]
@@ -1445,8 +1349,6 @@ class HolyLight(Spell):
             
                 caster.active_auras["Divine Favor"].remove_effect(caster)
                 del caster.active_auras["Divine Favor"]
-                if not caster.ptr:
-                    caster.abilities["Divine Favor"].remaining_cooldown = 30
                 
                 update_self_buff_data(caster.self_buff_breakdown, "Divine Favor", current_time, "expired")
             
@@ -1460,10 +1362,7 @@ class HolyLight(Spell):
             if caster.is_talent_active("Barrier of Faith"):
                 for target in caster.potential_healing_targets:
                     if "Barrier of Faith" in target.target_active_buffs:
-                        if caster.ptr:
-                            barrier_of_faith_absorb = heal_amount * 0.2
-                        else:
-                            barrier_of_faith_absorb = heal_amount * 0.25
+                        barrier_of_faith_absorb = heal_amount * 0.2
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Holy Light)", target, barrier_of_faith_absorb, False)
                 
@@ -1472,9 +1371,9 @@ class HolyLight(Spell):
 
 class FlashOfLight(Spell):
     
-    SPELL_POWER_COEFFICIENT = 2.63 * 1.2
-    MANA_COST = 0.036 
-    BASE_MANA_COST = 0.036
+    SPELL_POWER_COEFFICIENT = 3.156
+    MANA_COST = 0.018 
+    BASE_MANA_COST = 0.018
     HOLY_POWER_GAIN = 0
     BASE_CAST_TIME = 1.5 
     
@@ -1483,21 +1382,11 @@ class FlashOfLight(Spell):
         # tower of radiance
         if caster.is_talent_active("Tower of Radiance"):
             self.holy_power_gain = 1
-            
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 3.156
-            self.MANA_COST = 0.018
-            self.mana_cost = 0.018
-            self.BASE_MANA_COST = 0.018
-            self.base_mana_cost = 0.018
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            if caster.ptr:
-                self.spell_healing_modifier *= 1.1
-            else:
-                self.spell_healing_modifier *= 1.15
+            self.spell_healing_modifier *= 1.1
             
         # moment of compassion
         if caster.is_talent_active("Moment of Compassion"):
@@ -1543,10 +1432,7 @@ class FlashOfLight(Spell):
                 update_spell_data_heals(caster.ability_breakdown, "Fading Light", caster, fading_light_absorb, False)
             
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                if caster.ptr:
-                    self.spell_healing_modifier /= 1.1
-                else:
-                    self.spell_healing_modifier /= 1.15
+                self.spell_healing_modifier /= 1.1
                 
                 # boundless salvation
                 if caster.is_talent_active("Boundless Salvation"):
@@ -1593,7 +1479,7 @@ class FlashOfLight(Spell):
                     update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "expired")
                     append_aura_removed_event(caster.events, "Infusion of Light", caster, caster, current_time)
                     
-                if caster.ptr and caster.is_talent_active("Valiance"):
+                if caster.is_talent_active("Valiance"):
                     # extended version (removed for now)
                     # holy_bulwark_targets = [target for target in caster.potential_healing_targets if "Holy Bulwark" in target.target_active_buffs]
                     # sacred_weapon_targets = [target for target in caster.potential_healing_targets if "Sacred Weapon" in target.target_active_buffs]
@@ -1613,14 +1499,12 @@ class FlashOfLight(Spell):
                     if "Sacred Weapon" in caster.abilities:
                         caster.abilities["Sacred Weapon"].remaining_cooldown -= 3
                 
-            # remove divine favor, start divine favor spell cd
+            # remove divine favor
             if "Divine Favor" in caster.active_auras:
                 append_aura_removed_event(caster.events, "Divine Favor", caster, caster, current_time)
 
                 caster.active_auras["Divine Favor"].remove_effect(caster)
                 del caster.active_auras["Divine Favor"]
-                if not caster.ptr:
-                    caster.abilities["Divine Favor"].remaining_cooldown = 30
                 
                 update_self_buff_data(caster.self_buff_breakdown, "Divine Favor", current_time, "expired")
                 
@@ -1628,10 +1512,7 @@ class FlashOfLight(Spell):
             if caster.is_talent_active("Barrier of Faith"):
                 for target in caster.potential_healing_targets:
                     if "Barrier of Faith" in target.target_active_buffs:
-                        if caster.ptr:
-                            barrier_of_faith_absorb = heal_amount * 0.2
-                        else:
-                            barrier_of_faith_absorb = heal_amount * 0.25
+                        barrier_of_faith_absorb = heal_amount * 0.2
                         target.receive_heal(barrier_of_faith_absorb, caster)
                         update_spell_data_heals(caster.ability_breakdown, "Barrier of Faith (Flash of Light)", target, barrier_of_faith_absorb, False)
                 
@@ -1641,17 +1522,13 @@ class FlashOfLight(Spell):
 # spenders
 class WordOfGlory(Spell):
     
-    SPELL_POWER_COEFFICIENT = 3.15 * 0.88 * 1.15
-    MANA_COST = 0.012
+    SPELL_POWER_COEFFICIENT = 3.15 * 1.65 * 1.1
+    MANA_COST = 0.006
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
     
     def __init__(self, caster):
         super().__init__("Word of Glory", mana_cost=WordOfGlory.MANA_COST, holy_power_cost=WordOfGlory.HOLY_POWER_COST, max_charges=0, is_heal=True)
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 3.15 * 1.65 * 1.1
-            self.MANA_COST = 0.006
-            self.mana_cost = 0.006
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # extrication
@@ -1660,7 +1537,7 @@ class WordOfGlory(Spell):
             self.bonus_crit = 0.3 - (0.3 * raid_health)
         
         # gleaming rays
-        if caster.ptr and caster.is_talent_active("Gleaming Rays"):
+        if caster.is_talent_active("Gleaming Rays"):
             self.spell_healing_modifier *= 1.06
         
         # divine purpose
@@ -1698,7 +1575,7 @@ class WordOfGlory(Spell):
         self.spell_healing_modifier *= strength_of_conviction_modifier
         
         # tww season 1 tier 4pc
-        if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+        if caster.set_bonuses["tww_season_1"] >= 4:            
             if "Pure Light" in caster.active_auras:
                 self.spell_healing_modifier *= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
         
@@ -1710,7 +1587,7 @@ class WordOfGlory(Spell):
             caster.holy_power -= self.holy_power_cost
             
             # tww season 1 tier 4pc
-            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+            if caster.set_bonuses["tww_season_1"] >= 4:            
                 if "Pure Light" in caster.active_auras:
                     self.spell_healing_modifier /= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
                     del caster.active_auras["Pure Light"]
@@ -1724,7 +1601,7 @@ class WordOfGlory(Spell):
                     handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * self.holy_power_cost)
                     
             # gleaming rays
-            if caster.ptr and caster.is_talent_active("Gleaming Rays"):
+            if caster.is_talent_active("Gleaming Rays"):
                 self.spell_healing_modifier /= 1.06
             
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
@@ -1803,7 +1680,7 @@ class WordOfGlory(Spell):
                             caster.handle_beacon_healing("Glimmer of Light", glimmer_target, glimmer_heal_value, current_time, spell_display_name="Glimmer of Light (Glistening Radiance)")
             
             # glistening radiance
-            if caster.ptr and caster.is_talent_active("Glistening Radiance"):
+            if caster.is_talent_active("Glistening Radiance"):
                 random_num = random.random()
                 if random_num <= 0.25:
                     for saved_by_the_light_target in caster.beacon_targets:
@@ -1895,9 +1772,8 @@ class WordOfGlory(Spell):
                 else:
                     caster.apply_buff_to_self(RelentlessInquisitor(), current_time, stacks_to_apply=1, max_stacks=5)
                     
-            # ptr
             # dawnlight
-            if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
+            if caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
                 if "Dawnlight (HoT)" in targets[0].target_active_buffs:
                     non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
                     if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
@@ -1931,11 +1807,11 @@ class WordOfGlory(Spell):
                     update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "expired")
                     
             # blessed assurance    
-            if caster.ptr and caster.is_talent_active("Blessed Assurance"):
+            if caster.is_talent_active("Blessed Assurance"):
                 caster.apply_buff_to_self(BlessedAssurance(caster), current_time)
                 
             # divine guidance
-            if caster.ptr and caster.is_talent_active("Divine Guidance"):            
+            if caster.is_talent_active("Divine Guidance"):            
                 if "Divine Guidance" in caster.active_auras:
                     divine_guidance = caster.active_auras["Divine Guidance"]
                     
@@ -1948,13 +1824,13 @@ class WordOfGlory(Spell):
                     caster.apply_buff_to_self(DivineGuidance(caster), current_time, stacks_to_apply=1, max_stacks=10)
                     
             # liberation
-            if caster.ptr and caster.is_talent_active("Liberation"):
+            if caster.is_talent_active("Liberation"):
                 random_num = random.random()
                 if random_num <= caster.haste_multiplier - 1:
                     caster.apply_buff_to_self(Liberation(caster), current_time)
                     
             # blessing of the forge
-            if caster.ptr and "Blessing of the Forge" in caster.active_auras:
+            if "Blessing of the Forge" in caster.active_auras:
                 sacred_word_heal, sacred_word_crit = SacredWord(caster).calculate_heal(caster)
                 targets[0].receive_heal(sacred_word_heal, caster)
                 update_spell_data_heals(caster.ability_breakdown, "Sacred Word", targets[0], sacred_word_heal, sacred_word_crit)
@@ -1964,17 +1840,13 @@ class WordOfGlory(Spell):
 
 class EternalFlame(Spell):
     
-    SPELL_POWER_COEFFICIENT = 3.15 * 0.88
-    MANA_COST = 0.012
+    SPELL_POWER_COEFFICIENT = 3.15 * 1.65 * 1.1
+    MANA_COST = 0.006
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
     
     def __init__(self, caster):
         super().__init__("Eternal Flame", mana_cost=EternalFlame.MANA_COST, holy_power_cost=EternalFlame.HOLY_POWER_COST, max_charges=0, is_heal=True)
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 3.15 * 1.65 * 1.1
-            self.MANA_COST = 0.006
-            self.mana_cost = 0.006
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # extrication
@@ -1983,7 +1855,7 @@ class EternalFlame(Spell):
             self.bonus_crit = 0.3 - (0.3 * raid_health)
         
         # gleaming rays
-        if caster.ptr and caster.is_talent_active("Gleaming Rays"):
+        if caster.is_talent_active("Gleaming Rays"):
             self.spell_healing_modifier *= 1.06
         
         # divine purpose
@@ -2021,7 +1893,7 @@ class EternalFlame(Spell):
         self.spell_healing_modifier *= strength_of_conviction_modifier
         
         # tww season 1 tier 4pc
-        if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+        if caster.set_bonuses["tww_season_1"] >= 4:            
             if "Pure Light" in caster.active_auras:
                 self.spell_healing_modifier *= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
         
@@ -2036,7 +1908,7 @@ class EternalFlame(Spell):
             targets[0].apply_buff_to_target(EternalFlameBuff(caster, 16), current_time, caster=caster)
             
             # tww season 1 tier 4pc
-            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+            if caster.set_bonuses["tww_season_1"] >= 4:            
                 if "Pure Light" in caster.active_auras:
                     self.spell_healing_modifier /= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
                     del caster.active_auras["Pure Light"]
@@ -2050,7 +1922,7 @@ class EternalFlame(Spell):
                     handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * self.holy_power_cost)
                     
             # gleaming rays
-            if caster.ptr and caster.is_talent_active("Gleaming Rays"):
+            if caster.is_talent_active("Gleaming Rays"):
                 self.spell_healing_modifier /= 1.06
             
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
@@ -2129,7 +2001,7 @@ class EternalFlame(Spell):
                             caster.handle_beacon_healing("Glimmer of Light", glimmer_target, glimmer_heal_value, current_time, spell_display_name="Glimmer of Light (Glistening Radiance)")
 
             # glistening radiance
-            if caster.ptr and caster.is_talent_active("Glistening Radiance"):
+            if caster.is_talent_active("Glistening Radiance"):
                 random_num = random.random()
                 if random_num <= 0.25:
                     for saved_by_the_light_target in caster.beacon_targets:
@@ -2226,9 +2098,8 @@ class EternalFlame(Spell):
                 else:
                     caster.apply_buff_to_self(RelentlessInquisitor(), current_time, stacks_to_apply=1, max_stacks=5)
                     
-            # ptr
             # dawnlight
-            if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
+            if caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
                 if "Dawnlight (HoT)" in targets[0].target_active_buffs:
                     non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
                     if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
@@ -2262,11 +2133,11 @@ class EternalFlame(Spell):
                     update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "expired")
               
             # blessed assurance    
-            if caster.ptr and caster.is_talent_active("Blessed Assurance"):
+            if caster.is_talent_active("Blessed Assurance"):
                 caster.apply_buff_to_self(BlessedAssurance(caster), current_time)
                 
             # divine guidance
-            if caster.ptr and caster.is_talent_active("Divine Guidance"):            
+            if caster.is_talent_active("Divine Guidance"):            
                 if "Divine Guidance" in caster.active_auras:
                     divine_guidance = caster.active_auras["Divine Guidance"]
                     
@@ -2279,7 +2150,7 @@ class EternalFlame(Spell):
                     caster.apply_buff_to_self(DivineGuidance(caster), current_time, stacks_to_apply=1, max_stacks=10)
                     
             # liberation
-            if caster.ptr and caster.is_talent_active("Liberation"):
+            if caster.is_talent_active("Liberation"):
                 random_num = random.random()
                 if random_num <= caster.haste_multiplier - 1:
                     caster.apply_buff_to_self(Liberation(caster), current_time)
@@ -2289,24 +2160,20 @@ class EternalFlame(Spell):
             
 class LightOfDawn(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.8
-    MANA_COST = 0.012
+    SPELL_POWER_COEFFICIENT = 1.1
+    MANA_COST = 0.006
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
     TARGET_COUNT = 5
     
     def __init__(self, caster):
         super().__init__("Light of Dawn", mana_cost=LightOfDawn.MANA_COST, holy_power_cost=LightOfDawn.HOLY_POWER_COST, healing_target_count=LightOfDawn.TARGET_COUNT, is_heal=True)
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 1.1
-            self.MANA_COST = 0.006
-            self.mana_cost = 0.006
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal, initial_cast=True):
         bonus_crit = 0
 
         # luminosity    
-        if caster.ptr and caster.is_talent_active("Luminosity"):
+        if caster.is_talent_active("Luminosity"):
             bonus_crit += 0.05
             
         # extrication
@@ -2324,7 +2191,7 @@ class LightOfDawn(Spell):
                 self.mana_cost = 0
                 
         # gleaming rays
-        if caster.ptr and caster.is_talent_active("Gleaming Rays"):
+        if caster.is_talent_active("Gleaming Rays"):
             self.spell_healing_modifier *= 1.06
                 
         # apply blessing of dawn healing (20% per stack without seal of order or fading light)
@@ -2336,7 +2203,7 @@ class LightOfDawn(Spell):
                     self.spell_healing_modifier *= 1.6
                     
         # tww season 1 tier 4pc
-        if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+        if caster.set_bonuses["tww_season_1"] >= 4:            
             if "Pure Light" in caster.active_auras:
                 self.spell_healing_modifier *= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
         
@@ -2346,7 +2213,7 @@ class LightOfDawn(Spell):
             caster.holy_power -= self.holy_power_cost
             
             # tww season 1 tier 4pc
-            if caster.ptr and caster.set_bonuses["tww_season_1"] >= 4:            
+            if caster.set_bonuses["tww_season_1"] >= 4:            
                 if "Pure Light" in caster.active_auras:
                     self.spell_healing_modifier /= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
                     del caster.active_auras["Pure Light"]
@@ -2367,7 +2234,7 @@ class LightOfDawn(Spell):
                     handle_flat_cdr(caster.abilities["Lay on Hands"], 1.5 * self.holy_power_cost)
                     
             # gleaming rays
-            if caster.ptr and caster.is_talent_active("Gleaming Rays"):
+            if caster.is_talent_active("Gleaming Rays"):
                 self.spell_healing_modifier /= 1.06
                     
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
@@ -2435,7 +2302,7 @@ class LightOfDawn(Spell):
                             caster.handle_beacon_healing("Glimmer of Light", glimmer_target, glimmer_heal_value, current_time, spell_display_name="Glimmer of Light (Glistening Radiance)")                   
             
             # glistening radiance
-            if caster.ptr and caster.is_talent_active("Glistening Radiance"):
+            if caster.is_talent_active("Glistening Radiance"):
                 random_num = random.random()
                 if random_num <= 0.25:
                     for saved_by_the_light_target in caster.beacon_targets:
@@ -2508,9 +2375,8 @@ class LightOfDawn(Spell):
                 else:
                     caster.apply_buff_to_self(MaraadsDyingBreath(len(targets)), current_time, stacks_to_apply=len(targets), max_stacks=5)
             
-            # ptr
             # dawnlight        
-            if caster.ptr and caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
+            if caster.is_talent_active("Dawnlight") and "Dawnlight" in caster.active_auras:
                 if "Dawnlight (HoT)" in targets[0].target_active_buffs:
                     non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
                     if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
@@ -2544,11 +2410,11 @@ class LightOfDawn(Spell):
                     update_self_buff_data(caster.self_buff_breakdown, "Dawnlight", current_time, "expired")
                     
             # blessed assurance    
-            if caster.ptr and caster.is_talent_active("Blessed Assurance"):
+            if caster.is_talent_active("Blessed Assurance"):
                 caster.apply_buff_to_self(BlessedAssurance(caster), current_time)
                 
             # divine guidance
-            if caster.ptr and caster.is_talent_active("Divine Guidance"):            
+            if caster.is_talent_active("Divine Guidance"):            
                 if "Divine Guidance" in caster.active_auras:
                     divine_guidance = caster.active_auras["Divine Guidance"]
                     
@@ -2561,13 +2427,13 @@ class LightOfDawn(Spell):
                     caster.apply_buff_to_self(DivineGuidance(caster), current_time, stacks_to_apply=1, max_stacks=10)
                     
             # liberation
-            if caster.ptr and caster.is_talent_active("Liberation"):
+            if caster.is_talent_active("Liberation"):
                 random_num = random.random()
                 if random_num <= caster.haste_multiplier - 1:
                     caster.apply_buff_to_self(Liberation(caster), current_time)
                     
             # blessing of the forge
-            if caster.ptr and "Blessing of the Forge" in caster.active_auras:
+            if "Blessing of the Forge" in caster.active_auras:
                 chosen_targets = random.sample(caster.potential_healing_targets, 5)
                 for target in chosen_targets:
                     radiant_aura_heal, radiant_aura_crit = RadiantAura(caster).calculate_heal(caster)
@@ -2575,7 +2441,7 @@ class LightOfDawn(Spell):
                     update_spell_data_heals(caster.ability_breakdown, "Radiant Aura", target, radiant_aura_heal, radiant_aura_crit)
             
             # second sunrise        
-            if caster.ptr and caster.is_talent_active("Second Sunrise") and initial_cast:
+            if caster.is_talent_active("Second Sunrise") and initial_cast:
                 second_sunrise_chance = 0.15
                 if random.random() <= second_sunrise_chance:
                     caster.global_cooldown = 0
@@ -2598,22 +2464,17 @@ class LightOfDawn(Spell):
 
 class HolyPrism(Spell):
     
-    SPELL_POWER_COEFFICIENT = 2.45 * 0.8 * 0.8
-    BASE_COOLDOWN = 20
+    SPELL_POWER_COEFFICIENT = 3.5
+    BASE_COOLDOWN = 30
     MANA_COST = 0.026
     TARGET_COUNT = 5
     
     def __init__(self, caster):
         super().__init__("Holy Prism", mana_cost=HolyPrism.MANA_COST, cooldown=HolyPrism.BASE_COOLDOWN, healing_target_count=HolyPrism.TARGET_COUNT, is_heal=True)
-        if caster.ptr:
-            self.cooldown = 30
         
         if caster.set_bonuses["dragonflight_season_2"] >= 4:
             self.spell_healing_modifier *= 1.4
             self.holy_power_gain = 1
-            
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 3.5
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
@@ -2621,13 +2482,13 @@ class HolyPrism(Spell):
             increment_holy_power(self, caster, current_time)
             update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
             
-            if caster.ptr and caster.is_talent_active("Dawnlight"):
+            if caster.is_talent_active("Dawnlight"):
                 caster.apply_buff_to_self(DawnlightAvailable(caster), current_time, stacks_to_apply=2, max_stacks=2)
                 
-            if caster.ptr and caster.is_talent_active("Aurora"):
+            if caster.is_talent_active("Aurora"):
                 caster.apply_buff_to_self(DivinePurpose(), current_time, reapply=True)
                 
-            if caster.ptr and caster.is_talent_active("Divine Favor"):
+            if caster.is_talent_active("Divine Favor"):
                 if "Divine Favor" in caster.active_auras:
                     caster.active_auras["Divine Favor"].remove_effect(caster, current_time)
                 caster.apply_buff_to_self(DivineFavorBuff(), current_time)
@@ -2678,12 +2539,10 @@ class SealOfMercyHeal(Spell):
 
 class MercifulAurasHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.207 * 0.8
+    SPELL_POWER_COEFFICIENT = 0.1724 * 0.8
     
     def __init__(self, caster):  
         super().__init__("Merciful Auras", off_gcd=True)
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 0.1724 * 0.8
             
 
 class SunsAvatarHeal(Spell):

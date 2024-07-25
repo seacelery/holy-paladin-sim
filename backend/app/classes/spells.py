@@ -194,7 +194,7 @@ class Spell:
                             update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, 0, self.holy_power_cost)
                             
                     # sun sear
-                    if is_crit and caster.ptr and caster.is_talent_active("Sun Sear") and self.name == "Light of Dawn":
+                    if is_crit and caster.is_talent_active("Sun Sear") and self.name == "Light of Dawn":
                         target.apply_buff_to_target(SunSear(caster), current_time, caster=caster)
                         
                     self.aoe_cast_counter -= 1
@@ -456,11 +456,11 @@ class Spell:
             power_of_the_silver_hand = PowerOfTheSilverHand()
             try_proc_rppm_effect(power_of_the_silver_hand, is_hasted=False, is_self_buff=True)
             
-        if caster.ptr and caster.is_talent_active("Blessing of An'she") and (self.name in ["Eternal Flame", "Dawnlight", "Sun Sear"]):
+        if caster.is_talent_active("Blessing of An'she") and (self.name in ["Eternal Flame", "Dawnlight", "Sun Sear"]):
             blessing_of_anshe = BlessingOfAnshe(caster)
             try_proc_rppm_effect(blessing_of_anshe, is_hasted=False, is_self_buff=True)
             
-        if caster.ptr and caster.is_talent_active("Holy Bulwark"):
+        if caster.is_talent_active("Holy Bulwark"):
             sacred_weapon_targets = [target for target in caster.potential_healing_targets if "Sacred Weapon" in target.target_active_buffs]
             if len(sacred_weapon_targets) == 2:
                 sacred_weapon_1 = SacredWeapon(caster, 1)
@@ -472,11 +472,11 @@ class Spell:
                 sacred_weapon_1 = SacredWeapon(caster, 1)
                 try_proc_rppm_effect(sacred_weapon_1, is_other_effect=True, is_hasted=False)
         
-        if caster.ptr and caster.is_talent_active("Divine Inspiration"):
+        if caster.is_talent_active("Divine Inspiration"):
             divine_inspiration = DivineInspiration(caster)
             try_proc_rppm_effect(divine_inspiration, is_hasted=False, is_other_effect=True)
             
-        if caster.ptr and caster.is_talent_active("Rite of Adjuration") and (self.name == "Light of Dawn" or self.name == "Word of Glory"):
+        if caster.is_talent_active("Rite of Adjuration") and (self.name == "Light of Dawn" or self.name == "Word of Glory"):
             rite_of_adjuration = RiteOfAdjurationSpell(caster)
             try_proc_rppm_effect(rite_of_adjuration, is_hasted=False, is_other_effect=True)
         
@@ -489,27 +489,27 @@ class Spell:
             dreaming_devotion = DreamingDevotion(caster)
             try_proc_rppm_effect(dreaming_devotion, is_flat_healing=True)
             
-        if caster.ptr and "Authority of Fiery Resolve" in caster.bonus_enchants:
+        if "Authority of Fiery Resolve" in caster.bonus_enchants:
             authority_of_fiery_resolve = AuthorityOfFieryResolve(caster)
             try_proc_rppm_effect(authority_of_fiery_resolve, is_flat_healing=True, is_hasted=False)
 
-        if caster.ptr and "Authority of Radiant Power" in caster.bonus_enchants:
+        if "Authority of Radiant Power" in caster.bonus_enchants:
             authority_of_radiant_power = AuthorityOfRadiantPower(caster)
             try_proc_rppm_effect(authority_of_radiant_power, is_self_buff=True, is_hasted=False)
             
-        if caster.ptr and "Council's Guile" in caster.bonus_enchants:
+        if "Council's Guile" in caster.bonus_enchants:
             councils_guile = CouncilsGuile(caster)
             try_proc_rppm_effect(councils_guile, is_self_buff=True, is_hasted=False)
             
-        if caster.ptr and "Stormrider's Fury" in caster.bonus_enchants:
+        if "Stormrider's Fury" in caster.bonus_enchants:
             stormriders_fury = StormridersFury(caster)
             try_proc_rppm_effect(stormriders_fury, is_self_buff=True, is_hasted=False)
             
-        if caster.ptr and "Stonebound Artistry" in caster.bonus_enchants:
+        if "Stonebound Artistry" in caster.bonus_enchants:
             stonebound_artistry = StoneboundArtistry(caster)
             try_proc_rppm_effect(stonebound_artistry, is_self_buff=True, is_hasted=False)
 
-        if caster.ptr and "Oathsworn's Tenacity" in caster.bonus_enchants:
+        if "Oathsworn's Tenacity" in caster.bonus_enchants:
             oathsworns_tenacity = OathswornsTenacity(caster)
             try_proc_rppm_effect(oathsworns_tenacity, is_self_buff=True, is_hasted=False)
             

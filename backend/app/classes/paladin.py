@@ -64,9 +64,8 @@ class Paladin:
         self.class_talents = copy.deepcopy(self.talents.class_talents)
         self.spec_talents = copy.deepcopy(self.talents.spec_talents)
         
-        if self.ptr:
-            self.lightsmith_talents = copy.deepcopy(self.talents.lightsmith_talents)
-            self.herald_of_the_sun_talents = copy.deepcopy(self.talents.herald_of_the_sun_talents)
+        self.lightsmith_talents = copy.deepcopy(self.talents.lightsmith_talents)
+        self.herald_of_the_sun_talents = copy.deepcopy(self.talents.herald_of_the_sun_talents)
         
         self.base_mana = 250000 if not self.ptr else 2500000
         self.mana = self.base_mana
@@ -532,7 +531,7 @@ class Paladin:
                             "Potion": Potion(self)
         }     
         
-        if self.ptr and self.is_talent_active("Eternal Flame"):
+        if self.is_talent_active("Eternal Flame"):
             self.abilities["Eternal Flame"] = EternalFlame(self)
         else:
             self.abilities["Word of Glory"] = WordOfGlory(self)
@@ -558,9 +557,6 @@ class Paladin:
         if self.is_talent_active("Hammer of Wrath"):
             self.abilities["Hammer of Wrath"] = HammerOfWrath(self)
             
-        if self.is_talent_active("Divine Favor") and not self.ptr:
-            self.abilities["Divine Favor"] = DivineFavorSpell(self)
-            
         if self.is_talent_active("Hand of Divinity"):
             self.abilities["Hand of Divinity"] = HandOfDivinitySpell(self)
          
@@ -584,13 +580,6 @@ class Paladin:
             
         if self.is_talent_active("Blessing of Summer"):
             self.abilities["Blessing of the Seasons"] = BlessingOfTheSeasons(self)
-            
-        if not self.ptr:
-            if self.is_talent_active("Light's Hammer"):
-                self.abilities["Light's Hammer"] = LightsHammerSpell(self)
-            
-            if self.is_talent_active("Light of the Martyr"):
-                self.abilities["Light of the Martyr"] = LightOfTheMartyr(self)
             
         # trinkets
         if self.is_trinket_equipped("Miniature Singing Stone"):
@@ -632,14 +621,8 @@ class Paladin:
         if self.is_trinket_equipped("Imperfect Ascendancy Serum"):
             self.abilities["Imperfect Ascendancy Serum"] = ImperfectAscendancySerumSpell(self)
             
-        # ptr abilities
-        if self.ptr:
-            if self.is_talent_active("Holy Bulwark"):
-                self.abilities["Holy Armament"] = HolyBulwarkSacredWeapon(self)
-        
-        # ptr trinkets
-        if self.ptr:
-            pass
+        if self.is_talent_active("Holy Bulwark"):
+            self.abilities["Holy Armament"] = HolyBulwarkSacredWeapon(self)
             
     def is_talent_active(self, talent_name):
         for row, talents in self.class_talents.items():
@@ -650,14 +633,13 @@ class Paladin:
             if talent_name in talents and talents[talent_name]["ranks"]["current rank"] > 0:
                 return True, talents[talent_name]["ranks"]["current rank"]
             
-        if self.ptr:    
-            for row, talents in self.lightsmith_talents.items():
-                if talent_name in talents and talents[talent_name]["ranks"]["current rank"] > 0:
-                    return True, talents[talent_name]["ranks"]["current rank"]
-                
-            for row, talents in self.herald_of_the_sun_talents.items():
-                if talent_name in talents and talents[talent_name]["ranks"]["current rank"] > 0:
-                    return True, talents[talent_name]["ranks"]["current rank"]
+        for row, talents in self.lightsmith_talents.items():
+            if talent_name in talents and talents[talent_name]["ranks"]["current rank"] > 0:
+                return True, talents[talent_name]["ranks"]["current rank"]
+            
+        for row, talents in self.herald_of_the_sun_talents.items():
+            if talent_name in talents and talents[talent_name]["ranks"]["current rank"] > 0:
+                return True, talents[talent_name]["ranks"]["current rank"]
 
         return False
     
@@ -693,13 +675,13 @@ class Paladin:
         if self.is_talent_active("Saved by the Light"):
             self.apply_buff_to_self(SavedByTheLight(), 0)
             
-        if self.ptr and self.is_talent_active("Morning Star"):
+        if self.is_talent_active("Morning Star"):
             self.apply_buff_to_self(MorningStar(self), 0)
             
-        if self.ptr and self.is_talent_active("Rite of Sanctification"):
+        if self.is_talent_active("Rite of Sanctification"):
             self.apply_buff_to_self(RiteOfSanctification(self), 0)
             
-        if self.ptr and self.is_talent_active("Rite of Adjuration"):
+        if self.is_talent_active("Rite of Adjuration"):
             self.apply_buff_to_self(RiteOfAdjurationBuff(self), 0)
     
     # misc simulation functions 
@@ -999,18 +981,10 @@ class Paladin:
         
         for item_slot, item_data in equipment.items():
             name = item_data.get("name", "")
-            if self.ptr:
-                if "Entombed Seraph" in name:
-                    self.set_bonuses["tww_season_1"] += 1
-                if "Heartfire Sentinel" in name:
-                    self.set_bonuses["dragonflight_season_2"] += 1
-            else:
-                if "Virtuous Silver" in name:
-                    self.set_bonuses["dragonflight_season_1"] += 1
-                if "Heartfire Sentinel" in name:
-                    self.set_bonuses["dragonflight_season_2"] += 1
-                if "Zealous Pyreknight" in name:
-                    self.set_bonuses["dragonflight_season_3"] += 1
+            if "Entombed Seraph" in name:
+                self.set_bonuses["tww_season_1"] += 1
+            if "Heartfire Sentinel" in name:
+                self.set_bonuses["dragonflight_season_2"] += 1
             
             stats = item_data.get("stats", {})
             if stats:
@@ -1073,19 +1047,14 @@ class Paladin:
         class_talents = {}
         spec_talents = {}
         
-        if self.ptr:
-            lightsmith_talents = {}
-            herald_of_the_sun_talents = {}
+        lightsmith_talents = {}
+        herald_of_the_sun_talents = {}
 
-        if self.ptr:
-            active_class_talents = copy.deepcopy(base_active_class_talents_ptr)
-            active_spec_talents = copy.deepcopy(base_active_spec_talents_ptr)
-            
-            active_lightsmith_talents = copy.deepcopy(base_active_lightsmith_talents)
-            active_herald_of_the_sun_talents = copy.deepcopy(base_herald_of_the_sun_talents)
-        else:
-            active_class_talents = copy.deepcopy(base_active_class_talents)
-            active_spec_talents = copy.deepcopy(base_active_spec_talents)
+        active_class_talents = copy.deepcopy(base_active_class_talents_ptr)
+        active_spec_talents = copy.deepcopy(base_active_spec_talents_ptr)
+        
+        active_lightsmith_talents = copy.deepcopy(base_active_lightsmith_talents)
+        active_herald_of_the_sun_talents = copy.deepcopy(base_herald_of_the_sun_talents)
 
         class_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_class_talents"]
         for talent in class_talent_data:
@@ -1132,7 +1101,4 @@ class Paladin:
                     if talent_name in spec_talents:
                         active_herald_of_the_sun_talents[talent_row][talent_name]["ranks"]["current rank"] = herald_of_the_sun_talents[talent_name]
         
-        if self.ptr:
-            return Talents(active_class_talents, active_spec_talents, active_lightsmith_talents, active_herald_of_the_sun_talents)
-        else:           
-            return Talents(active_class_talents, active_spec_talents)
+        return Talents(active_class_talents, active_spec_talents, active_lightsmith_talents, active_herald_of_the_sun_talents)

@@ -22,13 +22,15 @@ class BarrierOfFaithSpell(Spell):
             
             target.apply_buff_to_target(BarrierOfFaithBuff(caster), current_time, caster=caster)
             
-            if caster.ptr and caster.is_talent_active("Dawnlight"):
+            if caster.is_talent_active("Dawnlight"):
                 caster.apply_buff_to_self(DawnlightAvailable(caster), current_time, stacks_to_apply=2, max_stacks=2)
                 
-            if caster.ptr and caster.is_talent_active("Aurora"):
+            if caster.is_talent_active("Aurora"):
                 caster.apply_buff_to_self(DivinePurpose(), current_time, reapply=True)
                 
-            if caster.ptr and caster.is_talent_active("Divine Favor"):
+            if caster.is_talent_active("Divine Favor"):
+                if "Divine Favor" in caster.active_auras:
+                    caster.active_auras["Divine Favor"].remove_effect(caster, current_time)
                 caster.apply_buff_to_self(DivineFavorBuff(), current_time)
             
         return cast_success, spell_crit, heal_amount
@@ -96,12 +98,10 @@ class TyrsDeliveranceSpell(Spell):
             
 class TyrsDeliveranceHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.626875
+    SPELL_POWER_COEFFICIENT = 0.3
     
     def __init__(self, caster):
         super().__init__("Tyr's Deliverance", is_heal=True, off_gcd=True)
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 0.3
             
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
@@ -127,11 +127,11 @@ class AvengingWrathSpell(Spell):
             caster.apply_buff_to_self(AvengingWrathBuff(caster), current_time)
             
             # rising sunlight
-            if caster.is_talent_active("Rising Sunlight") and caster.ptr:
+            if caster.is_talent_active("Rising Sunlight"):
                 caster.apply_buff_to_self(RisingSunlight(caster), current_time, stacks_to_apply=2, max_stacks=4)
             
             # sun's avatar
-            if caster.ptr and caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
+            if caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
                 # max_dawnlights = 4
                 
                 dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]        
@@ -153,7 +153,7 @@ class AvengingWrathSpell(Spell):
                         caster.active_auras["Morning Star"].current_stacks = 0
                         
             # blessing of the forge
-            if caster.ptr and caster.is_talent_active("Blessing of the Forge"):
+            if caster.is_talent_active("Blessing of the Forge"):
                 sacred_weapon_targets = random.sample(caster.potential_healing_targets, 2)
                 for target in sacred_weapon_targets:
                     target.apply_buff_to_target(SacredWeaponBuff(caster), current_time, caster=caster)  
@@ -168,12 +168,10 @@ class AvengingCrusaderSpell(Spell):
     
     BASE_COOLDOWN = 60
     MANA_COST = 0.036
-    HOLY_POWER_COST = 3
+    HOLY_POWER_COST = 0
     
     def __init__(self, caster):
         super().__init__("Avenging Crusader", cooldown=AvengingCrusaderSpell.BASE_COOLDOWN, mana_cost=AvengingCrusaderSpell.MANA_COST, holy_power_cost=AvengingCrusaderSpell.HOLY_POWER_COST, off_gcd=True)
-        if caster.ptr:
-            self.holy_power_cost = 0
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success = super().cast_healing_spell(caster, targets, current_time, is_heal)
@@ -186,7 +184,7 @@ class AvengingCrusaderSpell(Spell):
                 caster.apply_buff_to_self(RisingSunlight(caster), current_time, stacks_to_apply=2, max_stacks=4)
             
             # sun's avatar
-            if caster.ptr and caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
+            if caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
                 # max_dawnlights = 4
                 
                 dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]        
@@ -208,7 +206,7 @@ class AvengingCrusaderSpell(Spell):
                         caster.active_auras["Morning Star"].current_stacks = 0
                         
             # blessing of the forge
-            if caster.ptr and caster.is_talent_active("Blessing of the Forge"):
+            if caster.is_talent_active("Blessing of the Forge"):
                 sacred_weapon_targets = random.sample(caster.potential_healing_targets, 2)
                 for target in sacred_weapon_targets:
                     target.apply_buff_to_target(SacredWeaponBuff(caster), current_time, caster=caster)  
@@ -315,7 +313,6 @@ class GiftOfTheNaaruSpell(Spell):
             targets[0].apply_buff_to_target(GiftOfTheNaaruBuff(caster), current_time, caster=caster)
             
 
-# ptr
 class HolyBulwarkSacredWeapon(Spell):
     
     BASE_COOLDOWN = 60

@@ -74,7 +74,6 @@ class ElementalPotionOfUltimatePowerPotion(Potion):
             Potion.shared_cooldown_end_time = current_time + self.cooldown
             
 
-# ptr
 class AlgariManaPotion(Potion):
     
     def __init__(self, caster):

@@ -8,12 +8,10 @@ from ..classes.auras_buffs import HolyBulwarkBuff, SacredWeaponBuff
 
 class GlimmerOfLightSpell(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.6416 * 0.8
+    SPELL_POWER_COEFFICIENT = 1.1
     
     def __init__(self, caster):
         super().__init__("Glimmer of Light")
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 1.1
         
     def cast_healing_spell(self):
         pass

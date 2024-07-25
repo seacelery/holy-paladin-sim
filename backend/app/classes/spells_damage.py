@@ -27,7 +27,7 @@ class Judgment(Spell):
         self.is_damage_spell = True
         
         # truth prevails
-        if caster.ptr and caster.is_talent_active("Truth Prevails"):
+        if caster.is_talent_active("Truth Prevails"):
             self.MANA_COST *= 0.7
             self.mana_cost *= 0.7
         
@@ -61,7 +61,7 @@ class Judgment(Spell):
             target = targets[0]
             
             # liberation
-            if caster.ptr and caster.is_talent_active("Liberation") and "Liberation" in caster.active_auras and "Innervate" not in caster.active_auras:
+            if caster.is_talent_active("Liberation") and "Liberation" in caster.active_auras and "Innervate" not in caster.active_auras:
                 caster.active_auras["Liberation"].remove_effect(caster)
                 del caster.active_auras["Liberation"]
                 update_self_buff_data(caster.self_buff_breakdown, "Liberation", current_time, "expired")
@@ -122,10 +122,7 @@ class Judgment(Spell):
                     
             # avenging crusader        
             if caster.is_talent_active("Avenging Crusader") and "Avenging Crusader" in caster.active_auras:
-                if caster.ptr:
-                    avenging_crusader_healing = spell_damage * 4.2 / 5
-                else:
-                    avenging_crusader_healing = spell_damage * 3.6 / 5
+                avenging_crusader_healing = spell_damage * 4.2 / 5
                 for avenging_crusader_target in random.sample(caster.potential_healing_targets, 5):
                     avenging_crusader_target.receive_heal(avenging_crusader_healing, caster)
                     
@@ -182,7 +179,7 @@ class Judgment(Spell):
                     update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "expired")
                     append_aura_removed_event(caster.buff_events, "Infusion of Light", caster, caster, current_time)
                     
-                if caster.ptr and caster.is_talent_active("Valiance"):
+                if caster.is_talent_active("Valiance"):
                     # extended version (removed for now)
                     # holy_bulwark_targets = [target for target in caster.potential_healing_targets if "Holy Bulwark" in target.target_active_buffs]
                     # sacred_weapon_targets = [target for target in caster.potential_healing_targets if "Sacred Weapon" in target.target_active_buffs]
@@ -203,7 +200,7 @@ class Judgment(Spell):
                         caster.abilities["Sacred Weapon"].remaining_cooldown -= 3
             
             # hammer and anvil               
-            if caster.ptr and caster.is_talent_active("Hammer and Anvil") and spell_crit:         
+            if caster.is_talent_active("Hammer and Anvil") and spell_crit:         
                 hammer_and_anvil_heal, hammer_and_anvil_crit = HammerAndAnvilHeal(caster).calculate_heal(caster)
                 hammer_and_anvil_heal = (1.5 * caster.spell_power * caster.versatility_multiplier) + (1.5 * caster.spell_power * 1.04)
                 
@@ -219,7 +216,7 @@ class Judgment(Spell):
                     update_spell_data_heals(caster.ability_breakdown, "Hammer and Anvil", target, hammer_and_anvil_heal, hammer_and_anvil_crit)
                     
             # truth prevails
-            if caster.ptr and caster.is_talent_active("Truth Prevails"):
+            if caster.is_talent_active("Truth Prevails"):
                 truth_prevails_heal, truth_prevails_crit = TruthPrevailsHeal(caster).calculate_heal(caster)
                 caster.receive_self_heal(truth_prevails_heal)
                 
@@ -253,7 +250,7 @@ class CrusaderStrike(Spell):
         if caster.is_talent_active("Avenging Crusader"):
             self.spell_damage_modifier *= 1.3
             
-        if caster.ptr and "Avenging Crusader" in caster.active_auras:
+        if "Avenging Crusader" in caster.active_auras:
             if self.max_charges == 1:
                 self.max_charges = 2
                 if self.current_charges < self.max_charges:
@@ -262,7 +259,7 @@ class CrusaderStrike(Spell):
             self.max_charges = 1
             
         # blessed assurance
-        if caster.ptr and caster.is_talent_active("Blessed Assurance") and "Blessed Assurance" in caster.active_auras:
+        if caster.is_talent_active("Blessed Assurance") and "Blessed Assurance" in caster.active_auras:
             self.spell_damage_modifier *= 2
         
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
@@ -280,10 +277,7 @@ class CrusaderStrike(Spell):
                 
             # avenging crusader        
             if caster.is_talent_active("Avenging Crusader"):
-                if caster.ptr:
-                    avenging_crusader_healing = spell_damage * 4.2 / 5
-                else:
-                    avenging_crusader_healing = spell_damage * 3.6 / 5
+                avenging_crusader_healing = spell_damage * 4.2 / 5
                 for avenging_crusader_target in random.sample(caster.potential_healing_targets, 5):
                     avenging_crusader_target.receive_heal(avenging_crusader_healing, caster)
                     
@@ -327,7 +321,7 @@ class CrusaderStrike(Spell):
                         caster.abilities["Holy Shock"].current_charges += 1
                         
             # blessed assurance
-            if caster.ptr and caster.is_talent_active("Blessed Assurance") and "Blessed Assurance" in caster.active_auras:
+            if caster.is_talent_active("Blessed Assurance") and "Blessed Assurance" in caster.active_auras:
                 self.spell_damage_modifier /= 2
                 del caster.active_auras["Blessed Assurance"]                 
                 update_self_buff_data(caster.self_buff_breakdown, "Blessed Assurance", current_time, "expired")
@@ -416,7 +410,7 @@ class Consecration(Spell):
         if cast_success:
             caster.apply_summon(ConsecrationSummon(), current_time)
             
-            if caster.ptr and "Divine Guidance" in caster.active_auras:
+            if "Divine Guidance" in caster.active_auras:
                 caster.active_auras["Divine Guidance"].remove_effect(caster)
                 del caster.active_auras["Divine Guidance"]
                 update_self_buff_data(caster.self_buff_breakdown, "Divine Guidance", current_time, "expired")

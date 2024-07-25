@@ -387,7 +387,7 @@ class Simulation:
                     saved_by_the_light.trigger_passive_heal(self.paladin, self.elapsed_time)
                     saved_by_the_light.timer = 0
                     
-        if self.paladin.ptr and self.paladin.is_talent_active("Sun's Avatar"):
+        if self.paladin.is_talent_active("Sun's Avatar"):
             if "Avenging Wrath" in self.paladin.active_auras or "Avenging Crusader" in self.paladin.active_auras or "Avenging Wrath (Awakening)" in self.paladin.active_auras or "Avenging Crusader (Awakening)" in self.paladin.active_auras:
                 suns_avatar_count = len([target for target in self.paladin.potential_healing_targets if "Sun's Avatar" in target.target_active_buffs])
                 target_count = 5 * suns_avatar_count
@@ -484,7 +484,7 @@ class Simulation:
                 self.saving_graces_timer = 0
                 self.paladin.apply_buff_to_self(SavingGraces(), self.elapsed_time)
                 
-        if self.paladin.ptr and self.paladin.is_talent_active("Light of the Martyr"):   
+        if self.paladin.is_talent_active("Light of the Martyr"):   
             uptime_duration = self.encounter_length * self.light_of_the_martyr_uptime
             downtime_duration = self.encounter_length - uptime_duration
             light_of_the_martyr_intervals = 5
@@ -610,7 +610,7 @@ class Simulation:
                 self.paladin.apply_buff_to_self(AvengingCrusaderAwakening(), self.elapsed_time)
                 self.paladin.awakening_queued = False
                 
-            if self.paladin.ptr and self.paladin.is_talent_active("Laying Down Arms"):    
+            if self.paladin.is_talent_active("Laying Down Arms"):    
                 if buff_name == "Holy Bulwark" or buff_name == "Sacred Weapon":
                     handle_flat_cdr(self.paladin.abilities["Lay on Hands"], 15)
                     if self.paladin.is_talent_active("Inflorescence of the Sunwell"):
@@ -690,7 +690,7 @@ class Simulation:
                         if buff_name == "Beacon of Light":
                             self.paladin.beacon_targets.remove(target)
                             
-                        if self.paladin.ptr and self.paladin.is_talent_active("Lingering Radiance") and buff_name == "Dawnlight (HoT)":
+                        if self.paladin.is_talent_active("Lingering Radiance") and buff_name == "Dawnlight (HoT)":
                             target.apply_buff_to_target(EternalFlameBuff(self.paladin, 10), self.elapsed_time, caster=self.paladin)
                         
                         update_target_buff_data(self.paladin.target_buff_breakdown, buff_name, self.elapsed_time, "expired", target.name)

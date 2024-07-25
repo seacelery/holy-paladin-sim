@@ -140,7 +140,6 @@ class BroodkeepersPromiseHoT(HoT):
         return healing_per_tick, False
         
 
-# ptr
 class Dawnlight(HoT):
     
     # TODO verify 22.5% higher
@@ -312,7 +311,7 @@ class AvengingWrathBuff(Buff):
             caster.abilities["Holy Shock"].cooldown *= 0.8
             caster.abilities["Holy Shock"].remaining_cooldown *= 0.8
             
-        if caster.ptr and caster.is_talent_active("Sun's Avatar"):
+        if caster.is_talent_active("Sun's Avatar"):
             caster.apply_buff_to_self(SunsAvatarActive(caster), current_time)
         
     def remove_effect(self, caster, current_time=None):
@@ -326,7 +325,7 @@ class AvengingWrathBuff(Buff):
             caster.abilities["Holy Shock"].cooldown /= 0.8
             caster.abilities["Holy Shock"].remaining_cooldown /= 0.8
             
-        if caster.ptr and caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
+        if caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
             del caster.active_auras["Sun's Avatar Active"]   
             update_self_buff_data(caster.self_buff_breakdown, "Sun's Avatar Active", current_time, "expired")   
             
@@ -349,7 +348,7 @@ class AvengingWrathAwakening(Buff):
         caster.damage_multiplier *= 1.15
         
         # sun's avatar
-        if caster.ptr and caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
+        if caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
             caster.apply_buff_to_self(SunsAvatarActive(caster), current_time)
             
             dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]        
@@ -370,7 +369,7 @@ class AvengingWrathAwakening(Buff):
                     caster.active_auras["Morning Star"].current_stacks = 0
                     
         # blessing of the forge
-        if caster.ptr and caster.is_talent_active("Blessing of the Forge"):
+        if caster.is_talent_active("Blessing of the Forge"):
             sacred_weapon_targets = random.sample(caster.potential_healing_targets, 2)
             for target in sacred_weapon_targets:
                 target.apply_buff_to_target(SacredWeaponBuff(caster), current_time, caster=caster)  
@@ -387,7 +386,7 @@ class AvengingWrathAwakening(Buff):
         caster.healing_multiplier /= 1.15
         caster.damage_multiplier /= 1.15
         
-        if caster.ptr and caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
+        if caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
             del caster.active_auras["Sun's Avatar Active"]   
             update_self_buff_data(caster.self_buff_breakdown, "Sun's Avatar Active", current_time, "expired")  
         
@@ -400,14 +399,11 @@ class AvengingWrathAwakening(Buff):
 class AvengingCrusaderBuff(Buff):
     
     def __init__(self, caster):
-        super().__init__("Avenging Crusader", 12, base_duration=12)
-        if caster.is_talent_active("Sanctified Wrath") and not caster.ptr:
-            self.duration = 15
-            self.base_duration = 15            
-        elif caster.is_talent_active("Sanctified Wrath") and caster.ptr:
+        super().__init__("Avenging Crusader", 12, base_duration=12)          
+        if caster.is_talent_active("Sanctified Wrath"):
             self.duration = 18
             self.base_duration = 18
-        elif caster.ptr:
+        else:
             self.duration = 15
             self.base_duration = 15
         
@@ -421,7 +417,7 @@ class AvengingCrusaderBuff(Buff):
             caster.abilities["Holy Shock"].cooldown *= 0.8
             caster.abilities["Holy Shock"].remaining_cooldown *= 0.8
             
-        if caster.ptr and caster.is_talent_active("Sun's Avatar"):
+        if caster.is_talent_active("Sun's Avatar"):
             caster.apply_buff_to_self(SunsAvatarActive(caster), current_time)
         
     def remove_effect(self, caster, current_time=None):
@@ -429,7 +425,7 @@ class AvengingCrusaderBuff(Buff):
             caster.abilities["Holy Shock"].cooldown /= 0.8
             caster.abilities["Holy Shock"].remaining_cooldown /= 0.8
             
-        if caster.ptr and caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
+        if caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
             del caster.active_auras["Sun's Avatar Active"]   
             update_self_buff_data(caster.self_buff_breakdown, "Sun's Avatar Active", current_time, "expired")  
             
@@ -446,7 +442,7 @@ class AvengingCrusaderAwakening(Buff):
         
     def apply_effect(self, caster, current_time=None):
         # sun's avatar
-        if caster.ptr and caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
+        if caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
             caster.apply_buff_to_self(SunsAvatarActive(caster), current_time)
             
             dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]        
@@ -467,7 +463,7 @@ class AvengingCrusaderAwakening(Buff):
                     caster.active_auras["Morning Star"].current_stacks = 0
                     
         # blessing of the forge
-        if caster.ptr and caster.is_talent_active("Blessing of the Forge"):
+        if caster.is_talent_active("Blessing of the Forge"):
             sacred_weapon_targets = random.sample(caster.potential_healing_targets, 2)
             for target in sacred_weapon_targets:
                 target.apply_buff_to_target(SacredWeaponBuff(caster), current_time, caster=caster)  
@@ -478,7 +474,7 @@ class AvengingCrusaderAwakening(Buff):
             caster.apply_buff_to_self(BlessingOfTheForge(caster, 12), current_time)
         
     def remove_effect(self, caster, current_time=None):
-        if caster.ptr and caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
+        if caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
             del caster.active_auras["Sun's Avatar Active"]   
             update_self_buff_data(caster.self_buff_breakdown, "Sun's Avatar Active", current_time, "expired")  
         
@@ -507,33 +503,21 @@ class DivineFavorBuff(Buff):
         
     def apply_effect(self, caster, current_time=None):
         if "Holy Light" in caster.abilities:
-            if caster.ptr:
-                caster.abilities["Holy Light"].spell_healing_modifier *= 1.4
-            else:
-                caster.abilities["Holy Light"].spell_healing_modifier *= 1.6
+            caster.abilities["Holy Light"].spell_healing_modifier *= 1.4
             caster.abilities["Holy Light"].cast_time_modifier *= 0.7
             caster.abilities["Holy Light"].mana_cost_modifier *= 0.5
         if "Flash of Light" in caster.abilities:
-            if caster.ptr:
-                caster.abilities["Flash of Light"].spell_healing_modifier *= 1.4
-            else:
-                caster.abilities["Flash of Light"].spell_healing_modifier *= 1.6
+            caster.abilities["Flash of Light"].spell_healing_modifier *= 1.4
             caster.abilities["Flash of Light"].cast_time_modifier *= 0.7
             caster.abilities["Flash of Light"].mana_cost_modifier *= 0.5
             
     def remove_effect(self, caster, current_time=None):
         if "Holy Light" in caster.abilities:
-            if caster.ptr:
-                caster.abilities["Holy Light"].spell_healing_modifier /= 1.4
-            else:
-                caster.abilities["Holy Light"].spell_healing_modifier /= 1.6
+            caster.abilities["Holy Light"].spell_healing_modifier /= 1.4
             caster.abilities["Holy Light"].cast_time_modifier /= 0.7
             caster.abilities["Holy Light"].mana_cost_modifier /= 0.5
         if "Flash of Light" in caster.abilities:
-            if caster.ptr:
-                caster.abilities["Flash of Light"].spell_healing_modifier /= 1.4
-            else:
-                caster.abilities["Flash of Light"].spell_healing_modifier /= 1.6
+            caster.abilities["Flash of Light"].spell_healing_modifier /= 1.4
             caster.abilities["Flash of Light"].cast_time_modifier /= 0.7
             caster.abilities["Flash of Light"].mana_cost_modifier /= 0.5
  
@@ -545,10 +529,7 @@ class HandOfDivinityBuff(Buff):
         
     def apply_effect(self, caster, current_time=None):
         if "Holy Light" in caster.abilities:
-            if caster.ptr:
-                caster.abilities["Holy Light"].spell_healing_modifier *= 1.3
-            else:
-                caster.abilities["Holy Light"].spell_healing_modifier *= 1.4
+            caster.abilities["Holy Light"].spell_healing_modifier *= 1.3
             caster.abilities["Holy Light"].base_cast_time = 0
             caster.abilities["Holy Light"].mana_cost_modifier *= 0.5
             
@@ -556,10 +537,7 @@ class HandOfDivinityBuff(Buff):
         from ..classes.spells_healing import HolyLight
         
         if "Holy Light" in caster.abilities:
-            if caster.ptr:
-                caster.abilities["Holy Light"].spell_healing_modifier /= 1.3
-            else:
-                caster.abilities["Holy Light"].spell_healing_modifier /= 1.4
+            caster.abilities["Holy Light"].spell_healing_modifier /= 1.3
             caster.abilities["Holy Light"].base_cast_time = HolyLight.BASE_CAST_TIME
             caster.abilities["Holy Light"].mana_cost_modifier /= 0.5
        
@@ -652,7 +630,7 @@ class RelentlessInquisitor(Buff):
 class RisingSunlight(Buff):
     
     def __init__(self, caster):
-        super().__init__("Rising Sunlight", 30, base_duration=30, current_stacks=2 if caster.ptr else 3, max_stacks=4)
+        super().__init__("Rising Sunlight", 30, base_duration=30, current_stacks=2, max_stacks=4)
         
 
 class UnendingLight(Buff):
@@ -1107,7 +1085,6 @@ class ElementalChaosEarth(Buff):
         caster.apply_buff_to_self(new_buff, current_time, reapply=True)
         
 
-# ptr
 def apply_alchemical_chaos_aura(caster, current_time):
         alchemical_chaos_auras = [
             AlchemicalChaosAir,
@@ -3189,7 +3166,6 @@ class BronzedGripWrappings(Buff):
         pass
    
     
-# PTR
 class DawnlightAvailable(Buff):
     
     def __init__(self, caster):
