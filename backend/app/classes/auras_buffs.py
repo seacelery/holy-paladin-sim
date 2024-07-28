@@ -3271,10 +3271,10 @@ class SolarGrace(Buff):
         # caster.update_stat("haste", 0)
         
         current_stacks = len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name])
-        current_stacks_multiplier = ((pow(1.03, current_stacks)) - 1) * 100
+        current_stacks_multiplier = ((pow(1.02, current_stacks)) - 1) * 100
         
         new_stacks = current_stacks + 1
-        new_stacks_multiplier = ((pow(1.03, new_stacks)) - 1) * 100
+        new_stacks_multiplier = ((pow(1.02, new_stacks)) - 1) * 100
         
         # update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name]) - 1), False)
         # update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name])), True)
@@ -3292,10 +3292,10 @@ class SolarGrace(Buff):
         # update_stat_with_multiplicative_percentage(caster, "haste", 3 * (len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name]) - 1), True)
         
         current_stacks = len([buff for buff in caster.active_auras.values() if "Solar Grace" in buff.name])
-        current_stacks_multiplier = ((pow(1.03, current_stacks)) - 1) * 100
+        current_stacks_multiplier = ((pow(1.02, current_stacks)) - 1) * 100
         
         new_stacks = current_stacks - 1
-        new_stacks_multiplier = ((pow(1.03, new_stacks)) - 1) * 100
+        new_stacks_multiplier = ((pow(1.02, new_stacks)) - 1) * 100
         
         update_stat_with_multiplicative_percentage(caster, "haste", current_stacks_multiplier, False)
         update_stat_with_multiplicative_percentage(caster, "haste", new_stacks_multiplier, True)
