@@ -373,7 +373,7 @@ def run_simulation_task(self, simulation_parameters):
 
                 for spell, data in beacon_sources.items():
                     if spell.startswith(prefix):
-                        combined_source["healing"] += data["healing"] * simulation.overhealing.get("Beacon of Light", 1)
+                        combined_source["healing"] += data["healing"]
                         combined_source["hits"] += data["hits"]
                         keys_to_delete.append(spell)
 
@@ -491,7 +491,7 @@ def run_simulation_task(self, simulation_parameters):
             # combine beacon glimmer sources into one spell
             if "Beacon of Light" in ability_breakdown:
                 beacon_source_spells = ability_breakdown["Beacon of Light"]["source_spells"]   
-                combine_beacon_sources_by_prefix("Glimmer of Light", beacon_source_spells)
+                # combine_beacon_sources_by_prefix("Glimmer of Light", beacon_source_spells)
                 combine_beacon_sources_by_prefix("Holy Shock", beacon_source_spells)
             
             excluded_spells = ["Divine Toll", "Daybreak", "Judgment", "Crusader Strike"]
