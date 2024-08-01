@@ -173,17 +173,16 @@ base_active_spec_talents = {
         "Light of the Martyr": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row6": {
-        "Liberation": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Righteous Judgment": {"ranks": {"current rank": 0, "max rank": 1}},
         "Divine Favor": {"ranks": {"current rank": 0, "max rank": 1}},
         "Hand of Divinity": {"ranks": {"current rank": 0, "max rank": 1}},
         "Saved by the Light": {"ranks": {"current rank": 0, "max rank": 1}},   
-        "Power of the Silver Hand": {"ranks": {"current rank": 0, "max rank": 1}},
         "Light's Protection": {"ranks": {"current rank": 0, "max rank": 1}},
         "Overflowing Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Shining Righteousness": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row7": {
-        "Righteous Judgment": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Liberation": {"ranks": {"current rank": 0, "max rank": 1}},
         "Commanding Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Glistening Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
         "Breaking Dawn": {"ranks": {"current rank": 0, "max rank": 2}},
@@ -194,26 +193,27 @@ base_active_spec_talents = {
     "row8": {
         "Beacon of Faith": {"ranks": {"current rank": 0, "max rank": 1}},
         "Beacon of Virtue": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Empyrean Legacy": {"ranks": {"current rank": 0, "max rank": 1}},
         "Veneration": {"ranks": {"current rank": 0, "max rank": 1}},
         "Avenging Wrath: Might": {"ranks": {"current rank": 0, "max rank": 1}},
         "Avenging Crusader": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Power of the Silver Hand": {"ranks": {"current rank": 0, "max rank": 1}},
         "Tyr's Deliverance": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row9": {
         "Truth Prevails": {"ranks": {"current rank": 0, "max rank": 1}},
         "Crusader's Might": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Merciful Auras": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Blessing of Summer": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Awakening": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sanctified Wrath": {"ranks": {"current rank": 0, "max rank": 1}},
         "Relentless Inquisitor": {"ranks": {"current rank": 0, "max rank": 1}},
         "Reclamation": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row10": {
         "Rising Sunlight": {"ranks": {"current rank": 0, "max rank": 1}},
         "Glorious Dawn": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Sanctified Wrath": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Awakening": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Merciful Auras": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blessing of Summer": {"ranks": {"current rank": 0, "max rank": 1}},
         "Inflorescence of the Sunwell": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Empyrean Legacy": {"ranks": {"current rank": 0, "max rank": 1}},
         "Boundless Salvation": {"ranks": {"current rank": 0, "max rank": 1}}
     }
 }
@@ -249,17 +249,16 @@ base_active_spec_talents_ptr = {
         "Light of the Martyr": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row6": {
-        "Liberation": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Righteous Judgment": {"ranks": {"current rank": 0, "max rank": 1}},
         "Divine Favor": {"ranks": {"current rank": 0, "max rank": 1}},
         "Hand of Divinity": {"ranks": {"current rank": 0, "max rank": 1}},
         "Saved by the Light": {"ranks": {"current rank": 0, "max rank": 1}},   
-        "Power of the Silver Hand": {"ranks": {"current rank": 0, "max rank": 1}},
         "Light's Protection": {"ranks": {"current rank": 0, "max rank": 1}},
         "Overflowing Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Shining Righteousness": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row7": {
-        "Righteous Judgment": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Liberation": {"ranks": {"current rank": 0, "max rank": 1}},
         "Commanding Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Glistening Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
         "Breaking Dawn": {"ranks": {"current rank": 0, "max rank": 2}},
@@ -270,26 +269,27 @@ base_active_spec_talents_ptr = {
     "row8": {
         "Beacon of Faith": {"ranks": {"current rank": 0, "max rank": 1}},
         "Beacon of Virtue": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Empyrean Legacy": {"ranks": {"current rank": 0, "max rank": 1}},
         "Veneration": {"ranks": {"current rank": 0, "max rank": 1}},
         "Avenging Wrath: Might": {"ranks": {"current rank": 0, "max rank": 1}},
         "Avenging Crusader": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Power of the Silver Hand": {"ranks": {"current rank": 0, "max rank": 1}},
         "Tyr's Deliverance": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row9": {
         "Truth Prevails": {"ranks": {"current rank": 0, "max rank": 1}},
         "Crusader's Might": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Merciful Auras": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Blessing of Summer": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Awakening": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sanctified Wrath": {"ranks": {"current rank": 0, "max rank": 1}},
         "Relentless Inquisitor": {"ranks": {"current rank": 0, "max rank": 1}},
         "Reclamation": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row10": {
         "Rising Sunlight": {"ranks": {"current rank": 0, "max rank": 1}},
         "Glorious Dawn": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Sanctified Wrath": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Awakening": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Merciful Auras": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blessing of Summer": {"ranks": {"current rank": 0, "max rank": 1}},
         "Inflorescence of the Sunwell": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Empyrean Legacy": {"ranks": {"current rank": 0, "max rank": 1}},
         "Boundless Salvation": {"ranks": {"current rank": 0, "max rank": 1}}
     }
 }     
