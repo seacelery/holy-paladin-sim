@@ -319,21 +319,21 @@ const templateSpecTalents = {
         }
     },
     "row10": {
-        "Awakening": {
+        "Blessing of Summer": {
             "ranks": {
                 "current rank": 1,
+                "max rank": 1
+            }
+        },
+        "Merciful Auras": {
+            "ranks": {
+                "current rank": 0,
                 "max rank": 1
             }
         },
         "Boundless Salvation": {
             "ranks": {
                 "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Empyrean Legacy": {
-            "ranks": {
-                "current rank": 0,
                 "max rank": 1
             }
         },
@@ -355,12 +355,6 @@ const templateSpecTalents = {
                 "max rank": 1
             }
         },
-        "Sanctified Wrath": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        }
     },
     "row2": {
         "Extrication": {
@@ -435,18 +429,6 @@ const templateSpecTalents = {
         }
     },
     "row5": {
-        "Divine Favor": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Hand of Divinity": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
         "Imbued Infusions": {
             "ranks": {
                 "current rank": 1,
@@ -470,16 +452,14 @@ const templateSpecTalents = {
                 "current rank": 0,
                 "max rank": 1
             }
-        }
-    },
-    "row6": {
-        "Barrier of Faith": {
+        },
+        "Divine Revelations": {
             "ranks": {
-                "current rank": 0,
+                "current rank": 1,
                 "max rank": 1
             }
         },
-        "Blessed Focus": {
+        "Barrier of Faith": {
             "ranks": {
                 "current rank": 0,
                 "max rank": 1
@@ -491,9 +471,23 @@ const templateSpecTalents = {
                 "max rank": 1
             }
         },
-        "Liberation": {
+    },
+    "row6": {
+        "Divine Favor": {
             "ranks": {
                 "current rank": 1,
+                "max rank": 1
+            }
+        },
+        "Hand of Divinity": {
+            "ranks": {
+                "current rank": 0,
+                "max rank": 1
+            }
+        },
+        "Blessed Focus": {
+            "ranks": {
+                "current rank": 0,
                 "max rank": 1
             }
         },
@@ -504,12 +498,6 @@ const templateSpecTalents = {
             }
         },
         "Overflowing Light": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Power of the Silver Hand": {
             "ranks": {
                 "current rank": 0,
                 "max rank": 1
@@ -526,7 +514,13 @@ const templateSpecTalents = {
                 "current rank": 0,
                 "max rank": 1
             }
-        }
+        },
+        "Righteous Judgment": {
+            "ranks": {
+                "current rank": 0,
+                "max rank": 1
+            }
+        },
     },
     "row7": {
         "Glistening Radiance": {
@@ -559,26 +553,32 @@ const templateSpecTalents = {
                 "max rank": 1
             }
         },
-        "Divine Revelations": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Righteous Judgment": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
         "Tower of Radiance": {
             "ranks": {
                 "current rank": 0,
                 "max rank": 1
             }
-        }
+        },
+        "Liberation": {
+            "ranks": {
+                "current rank": 1,
+                "max rank": 1
+            }
+        },
     },
     "row8": {
+        "Power of the Silver Hand": {
+            "ranks": {
+                "current rank": 0,
+                "max rank": 1
+            }
+        },
+        "Empyrean Legacy": {
+            "ranks": {
+                "current rank": 0,
+                "max rank": 1
+            }
+        },
         "Avenging Crusader": {
             "ranks": {
                 "current rank": 0,
@@ -593,13 +593,13 @@ const templateSpecTalents = {
         },
         "Beacon of Faith": {
             "ranks": {
-                "current rank": 0,
+                "current rank": 1,
                 "max rank": 1
             }
         },
         "Beacon of Virtue": {
             "ranks": {
-                "current rank": 1,
+                "current rank": 0,
                 "max rank": 1
             }
         },
@@ -617,25 +617,26 @@ const templateSpecTalents = {
         }
     },
     "row9": {
-        "Blessing of Summer": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Crusader's Might": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Daybreak": {
+        "Sanctified Wrath": {
             "ranks": {
                 "current rank": 0,
                 "max rank": 1
             }
         },
-        "Merciful Auras": {
+        "Awakening": {
+            "ranks": {
+                "current rank": 1,
+                "max rank": 1
+            }
+        },
+        
+        "Crusader's Might": {
+            "ranks": {
+                "current rank": 0,
+                "max rank": 1
+            }
+        },
+        "Daybreak": {
             "ranks": {
                 "current rank": 0,
                 "max rank": 1
@@ -649,7 +650,7 @@ const templateSpecTalents = {
         },
         "Relentless Inquisitor": {
             "ranks": {
-                "current rank": 0,
+                "current rank": 1,
                 "max rank": 1
             }
         }
@@ -939,16 +940,16 @@ const templateUpdateSpecTalents = {
     "Tower of Radiance": 0,
     "Avenging Crusader": 0,
     "Avenging Wrath: Might": 1,
-    "Beacon of Faith": 0,
-    "Beacon of Virtue": 1,
+    "Beacon of Faith": 1,
+    "Beacon of Virtue": 0,
     "Tyr's Deliverance": 1,
     "Veneration": 0,
     "Blessing of Summer": 1,
-    "Crusader's Might": 1,
+    "Crusader's Might": 0,
     "Daybreak": 0,
     "Merciful Auras": 0,
     "Reclamation": 1,
-    "Relentless Inquisitor": 0
+    "Relentless Inquisitor": 1
 };
 
 const templateUpdateLightsmithTalents = {
