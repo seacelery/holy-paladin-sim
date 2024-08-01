@@ -465,13 +465,13 @@ class Spell:
             sacred_weapon_targets = [target for target in caster.potential_healing_targets if "Sacred Weapon" in target.target_active_buffs]
             if len(sacred_weapon_targets) == 2:
                 sacred_weapon_1 = SacredWeapon(caster, 1)
-                try_proc_rppm_effect(sacred_weapon_1, is_other_effect=True, is_hasted=False)
+                try_proc_rppm_effect(sacred_weapon_1, is_other_effect=True, is_hasted=True)
                 
                 sacred_weapon_2 = SacredWeapon(caster, 2)
-                try_proc_rppm_effect(sacred_weapon_2, is_other_effect=True, is_hasted=False)
+                try_proc_rppm_effect(sacred_weapon_2, is_other_effect=True, is_hasted=True)
             elif len(sacred_weapon_targets) == 1:
                 sacred_weapon_1 = SacredWeapon(caster, 1)
-                try_proc_rppm_effect(sacred_weapon_1, is_other_effect=True, is_hasted=False)
+                try_proc_rppm_effect(sacred_weapon_1, is_other_effect=True, is_hasted=True)
         
         if caster.is_talent_active("Divine Inspiration"):
             divine_inspiration = DivineInspiration(caster)

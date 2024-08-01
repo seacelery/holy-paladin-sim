@@ -65,8 +65,8 @@ class RiteOfAdjurationSpell(Spell):
 
 class SacredWeapon(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1 * 1.04 * 1.5
-    BASE_PPM = 10
+    SPELL_POWER_COEFFICIENT = 1 * 1.04 * 0.8
+    BASE_PPM = 8
     TARGET_COUNT = 5
     
     def __init__(self, caster, count):
