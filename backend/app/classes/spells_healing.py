@@ -81,7 +81,7 @@ class HolyShock(Spell):
         
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            self.spell_healing_modifier *= 1.1
+            self.spell_healing_modifier *= 1.12
             
         # reclamation
         if caster.is_talent_active("Reclamation"):
@@ -150,7 +150,7 @@ class HolyShock(Spell):
      
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                self.spell_healing_modifier /= 1.1
+                self.spell_healing_modifier /= 1.12
                     
                 if caster.is_talent_active("Boundless Salvation"):
                     if "Tyr's Deliverance (self)" in caster.active_auras:
@@ -247,7 +247,7 @@ class HolyShock(Spell):
                         
             # overflowing light
             if caster.is_talent_active("Overflowing Light"):
-                overflowing_light_absorb_value = heal_amount * 0.15 * (caster.overhealing[self.name])
+                overflowing_light_absorb_value = heal_amount * 0.3 * (caster.overhealing[self.name])
                 targets[0].receive_heal(overflowing_light_absorb_value, caster)
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                 
@@ -444,7 +444,7 @@ class RisingSunlightHolyShock(Spell):
         
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            self.spell_healing_modifier *= 1.1
+            self.spell_healing_modifier *= 1.12
             
         # reclamation
         if caster.is_talent_active("Reclamation"):
@@ -513,7 +513,7 @@ class RisingSunlightHolyShock(Spell):
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                self.spell_healing_modifier /= 1.1
+                self.spell_healing_modifier /= 1.12
                     
                 if caster.is_talent_active("Boundless Salvation"):
                     if "Tyr's Deliverance (self)" in caster.active_auras:
@@ -609,7 +609,7 @@ class RisingSunlightHolyShock(Spell):
                         
             # overflowing light
             if caster.is_talent_active("Overflowing Light"):
-                overflowing_light_absorb_value = heal_amount * 0.15 * (caster.overhealing[self.name])
+                overflowing_light_absorb_value = heal_amount * 0.3 * (caster.overhealing[self.name])
                 targets[0].receive_heal(overflowing_light_absorb_value, caster)
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                 
@@ -744,7 +744,7 @@ class DivineTollHolyShock(Spell):
 
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            self.spell_healing_modifier *= 1.1
+            self.spell_healing_modifier *= 1.12
             
         # reclamation
         if caster.is_talent_active("Reclamation"):
@@ -814,7 +814,7 @@ class DivineTollHolyShock(Spell):
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                self.spell_healing_modifier /= 1.1
+                self.spell_healing_modifier /= 1.12
                     
                 if caster.is_talent_active("Boundless Salvation"):
                     if "Tyr's Deliverance (self)" in caster.active_auras:
@@ -913,7 +913,7 @@ class DivineTollHolyShock(Spell):
                     
             # overflowing light
             if caster.is_talent_active("Overflowing Light"):
-                overflowing_light_absorb_value = heal_amount * 0.15 * (caster.overhealing[self.name])
+                overflowing_light_absorb_value = heal_amount * 0.3 * (caster.overhealing[self.name])
                 targets[0].receive_heal(overflowing_light_absorb_value, caster)
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                 
@@ -1008,7 +1008,7 @@ class DivineResonanceHolyShock(Spell):
         
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            self.spell_healing_modifier *= 1.1
+            self.spell_healing_modifier *= 1.12
                       
         # reclamation
         if caster.is_talent_active("Reclamation"):
@@ -1077,7 +1077,7 @@ class DivineResonanceHolyShock(Spell):
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                self.spell_healing_modifier /= 1.1
+                self.spell_healing_modifier /= 1.12
                     
                 if caster.is_talent_active("Boundless Salvation"):
                     if "Tyr's Deliverance (self)" in caster.active_auras:
@@ -1133,7 +1133,7 @@ class DivineResonanceHolyShock(Spell):
                         
             # overflowing light
             if caster.is_talent_active("Overflowing Light"):
-                overflowing_light_absorb_value = heal_amount * 0.15 * (caster.overhealing[self.name])
+                overflowing_light_absorb_value = heal_amount * 0.3 * (caster.overhealing[self.name])
                 targets[0].receive_heal(overflowing_light_absorb_value, caster)
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                 
@@ -1207,7 +1207,7 @@ class HolyLight(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            self.spell_healing_modifier *= 1.1
+            self.spell_healing_modifier *= 1.12
         
         # awestruck   
         self.bonus_crit_healing = 0   
@@ -1273,7 +1273,7 @@ class HolyLight(Spell):
                     caster.handle_beacon_healing("Resplendent Light", target, resplendent_light_healing, current_time)
             
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                self.spell_healing_modifier /= 1.1
+                self.spell_healing_modifier /= 1.12
                 
                 # boundless salvation
                 if caster.is_talent_active("Boundless Salvation"):
@@ -1386,12 +1386,12 @@ class FlashOfLight(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # tyr's deliverance
         if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-            self.spell_healing_modifier *= 1.1
+            self.spell_healing_modifier *= 1.12
             
         # moment of compassion
         if caster.is_talent_active("Moment of Compassion"):
             if targets[0] in caster.beacon_targets:
-                self.spell_healing_modifier *= 1.15
+                self.spell_healing_modifier *= 1.5
         
         # awestruck   
         self.bonus_crit_healing = 0   
@@ -1432,7 +1432,7 @@ class FlashOfLight(Spell):
                 update_spell_data_heals(caster.ability_breakdown, "Fading Light", caster, fading_light_absorb, False)
             
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
-                self.spell_healing_modifier /= 1.1
+                self.spell_healing_modifier /= 1.12
                 
                 # boundless salvation
                 if caster.is_talent_active("Boundless Salvation"):
@@ -1446,7 +1446,7 @@ class FlashOfLight(Spell):
                             
             if caster.is_talent_active("Moment of Compassion"):
                 if targets[0] in caster.beacon_targets:
-                    self.spell_healing_modifier /= 1.15
+                    self.spell_healing_modifier /= 1.5
             
             increment_holy_power(self, caster, current_time)
             update_spell_holy_power_gain(caster.ability_breakdown, self.name, self.holy_power_gain)
@@ -1522,7 +1522,7 @@ class FlashOfLight(Spell):
 # spenders
 class WordOfGlory(Spell):
     
-    SPELL_POWER_COEFFICIENT = 3.15 * 1.44 * 1.1
+    SPELL_POWER_COEFFICIENT = 3.15 * 1.66 * 1.1
     MANA_COST = 0.006
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
@@ -1538,7 +1538,7 @@ class WordOfGlory(Spell):
         
         # gleaming rays
         if caster.is_talent_active("Gleaming Rays"):
-            self.spell_healing_modifier *= 1.06
+            self.spell_healing_modifier *= 1.05
         
         # divine purpose
         if caster.is_talent_active("Divine Purpose"): 
@@ -1547,13 +1547,13 @@ class WordOfGlory(Spell):
                 self.holy_power_cost = 0
                 self.mana_cost = 0
             
-        # apply blessing of dawn healing (20% per stack without seal of order or fading light)
+        # apply blessing of dawn healing
         if caster.is_talent_active("Of Dusk and Dawn"):
             if "Blessing of Dawn" in caster.active_auras:
                 if caster.active_auras["Blessing of Dawn"].current_stacks == 1:
-                    self.spell_healing_modifier *= 1.3
+                    self.spell_healing_modifier *= 1.1
                 elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
-                    self.spell_healing_modifier *= 1.6
+                    self.spell_healing_modifier *= 1.2
         
         # unending light
         unending_light_modifier = 1           
@@ -1602,15 +1602,15 @@ class WordOfGlory(Spell):
                     
             # gleaming rays
             if caster.is_talent_active("Gleaming Rays"):
-                self.spell_healing_modifier /= 1.06
+                self.spell_healing_modifier /= 1.05
             
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
             if caster.is_talent_active("Of Dusk and Dawn"):
                 if "Blessing of Dawn" in caster.active_auras:
                     if caster.active_auras["Blessing of Dawn"].current_stacks == 1:
-                        self.spell_healing_modifier /= 1.3
+                        self.spell_healing_modifier /= 1.1
                     elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
-                        self.spell_healing_modifier /= 1.6   
+                        self.spell_healing_modifier /= 1.2
                     del caster.active_auras["Blessing of Dawn"]
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Blessing of Dawn", current_time, "expired")
@@ -1726,8 +1726,8 @@ class WordOfGlory(Spell):
             # awakening
             if caster.is_talent_active("Awakening"):
                 if "Awakening" in caster.active_auras:
-                    caster.apply_buff_to_self(caster.active_auras["Awakening"], current_time, stacks_to_apply=1, max_stacks=12)
-                    if caster.active_auras["Awakening"].current_stacks >= 12:
+                    caster.apply_buff_to_self(caster.active_auras["Awakening"], current_time, stacks_to_apply=1, max_stacks=15)
+                    if caster.active_auras["Awakening"].current_stacks >= 15:
                         del caster.active_auras["Awakening"]
                         
                         update_self_buff_data(caster.self_buff_breakdown, "Awakening", current_time, "expired")
@@ -1735,7 +1735,7 @@ class WordOfGlory(Spell):
                         caster.apply_buff_to_self(AwakeningTrigger(), current_time)
                         caster.awakening_trigger_times.update({round(current_time): 1})
                 else:
-                    caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=12)
+                    caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=15)
             
             # empyrean legacy        
             if caster.is_talent_active("Empyrean Legacy") and "Empyrean Legacy" in caster.active_auras:
@@ -1777,12 +1777,12 @@ class WordOfGlory(Spell):
                 if "Dawnlight (HoT)" in targets[0].target_active_buffs:
                     non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
                     if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
-                        random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                        random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster, 8 * 1.2), current_time, caster=caster)
                     else:
                         random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                 else:
                     if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
-                        targets[0].apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                        targets[0].apply_buff_to_target(Dawnlight(caster, 8 * 1.2), current_time, caster=caster)
                     else:
                         targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                     
@@ -1840,7 +1840,7 @@ class WordOfGlory(Spell):
 
 class EternalFlame(Spell):
     
-    SPELL_POWER_COEFFICIENT = 3.15 * 1.44 * 1.1
+    SPELL_POWER_COEFFICIENT = 3.15 * 1.66 * 1.1
     MANA_COST = 0.006
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
@@ -1856,7 +1856,7 @@ class EternalFlame(Spell):
         
         # gleaming rays
         if caster.is_talent_active("Gleaming Rays"):
-            self.spell_healing_modifier *= 1.06
+            self.spell_healing_modifier *= 1.05
         
         # divine purpose
         if caster.is_talent_active("Divine Purpose"): 
@@ -1865,13 +1865,13 @@ class EternalFlame(Spell):
                 self.holy_power_cost = 0
                 self.mana_cost = 0
             
-        # apply blessing of dawn healing (20% per stack without seal of order or fading light)
+        # apply blessing of dawn healing
         if caster.is_talent_active("Of Dusk and Dawn"):
             if "Blessing of Dawn" in caster.active_auras:
                 if caster.active_auras["Blessing of Dawn"].current_stacks == 1:
-                    self.spell_healing_modifier *= 1.3
+                    self.spell_healing_modifier *= 1.1
                 elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
-                    self.spell_healing_modifier *= 1.6
+                    self.spell_healing_modifier *= 1.2
         
         # unending light
         unending_light_modifier = 1           
@@ -1923,15 +1923,15 @@ class EternalFlame(Spell):
                     
             # gleaming rays
             if caster.is_talent_active("Gleaming Rays"):
-                self.spell_healing_modifier /= 1.06
+                self.spell_healing_modifier /= 1.05
             
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
             if caster.is_talent_active("Of Dusk and Dawn"):
                 if "Blessing of Dawn" in caster.active_auras:
                     if caster.active_auras["Blessing of Dawn"].current_stacks == 1:
-                        self.spell_healing_modifier /= 1.3
+                        self.spell_healing_modifier /= 1.1
                     elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
-                        self.spell_healing_modifier /= 1.6   
+                        self.spell_healing_modifier /= 1.2
                     del caster.active_auras["Blessing of Dawn"]
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Blessing of Dawn", current_time, "expired")
@@ -2052,8 +2052,8 @@ class EternalFlame(Spell):
             # awakening
             if caster.is_talent_active("Awakening"):
                 if "Awakening" in caster.active_auras:
-                    caster.apply_buff_to_self(caster.active_auras["Awakening"], current_time, stacks_to_apply=1, max_stacks=12)
-                    if caster.active_auras["Awakening"].current_stacks >= 12:
+                    caster.apply_buff_to_self(caster.active_auras["Awakening"], current_time, stacks_to_apply=1, max_stacks=15)
+                    if caster.active_auras["Awakening"].current_stacks >= 15:
                         del caster.active_auras["Awakening"]
                         
                         update_self_buff_data(caster.self_buff_breakdown, "Awakening", current_time, "expired")
@@ -2061,7 +2061,7 @@ class EternalFlame(Spell):
                         caster.apply_buff_to_self(AwakeningTrigger(), current_time)
                         caster.awakening_trigger_times.update({round(current_time): 1})
                 else:
-                    caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=12)
+                    caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=15)
             
             # empyrean legacy        
             if caster.is_talent_active("Empyrean Legacy") and "Empyrean Legacy" in caster.active_auras:
@@ -2103,12 +2103,12 @@ class EternalFlame(Spell):
                 if "Dawnlight (HoT)" in targets[0].target_active_buffs:
                     non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
                     if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
-                        random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                        random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster, 8 * 1.2), current_time, caster=caster)
                     else:
                         random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                 else:
                     if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
-                        targets[0].apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                        targets[0].apply_buff_to_target(Dawnlight(caster, 8 * 1.2), current_time, caster=caster)
                     else:
                         targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                     
@@ -2160,7 +2160,7 @@ class EternalFlame(Spell):
             
 class LightOfDawn(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.1
+    SPELL_POWER_COEFFICIENT = 1.265
     MANA_COST = 0.006
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
@@ -2192,15 +2192,15 @@ class LightOfDawn(Spell):
                 
         # gleaming rays
         if caster.is_talent_active("Gleaming Rays"):
-            self.spell_healing_modifier *= 1.06
+            self.spell_healing_modifier *= 1.05
                 
-        # apply blessing of dawn healing (20% per stack without seal of order or fading light)
+        # apply blessing of dawn healing
         if caster.is_talent_active("Of Dusk and Dawn"):
             if "Blessing of Dawn" in caster.active_auras:
                 if caster.active_auras["Blessing of Dawn"].current_stacks == 1:
-                    self.spell_healing_modifier *= 1.3
+                    self.spell_healing_modifier *= 1.1
                 elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
-                    self.spell_healing_modifier *= 1.6
+                    self.spell_healing_modifier *= 1.2
                     
         # tww season 1 tier 4pc
         if caster.set_bonuses["tww_season_1"] >= 4:            
@@ -2235,15 +2235,15 @@ class LightOfDawn(Spell):
                     
             # gleaming rays
             if caster.is_talent_active("Gleaming Rays"):
-                self.spell_healing_modifier /= 1.06
+                self.spell_healing_modifier /= 1.05
                     
             # reset healing modifier, remove blessing of dawn, and apply blessing of dusk
             if caster.is_talent_active("Of Dusk and Dawn"):
                 if "Blessing of Dawn" in caster.active_auras:
                     if caster.active_auras["Blessing of Dawn"].current_stacks == 1:
-                        self.spell_healing_modifier /= 1.3
+                        self.spell_healing_modifier /= 1.1
                     elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
-                        self.spell_healing_modifier /= 1.6   
+                        self.spell_healing_modifier /= 1.2
                     del caster.active_auras["Blessing of Dawn"]
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Blessing of Dawn", current_time, "expired")
@@ -2334,8 +2334,8 @@ class LightOfDawn(Spell):
             # awakening
             if caster.is_talent_active("Awakening") and initial_cast:
                 if "Awakening" in caster.active_auras:
-                    caster.apply_buff_to_self(caster.active_auras["Awakening"], current_time, stacks_to_apply=1, max_stacks=12)
-                    if caster.active_auras["Awakening"].current_stacks >= 12:
+                    caster.apply_buff_to_self(caster.active_auras["Awakening"], current_time, stacks_to_apply=1, max_stacks=15)
+                    if caster.active_auras["Awakening"].current_stacks >= 15:
                         del caster.active_auras["Awakening"]
                         
                         update_self_buff_data(caster.self_buff_breakdown, "Awakening", current_time, "expired")
@@ -2343,7 +2343,7 @@ class LightOfDawn(Spell):
                         caster.apply_buff_to_self(AwakeningTrigger(), current_time)
                         caster.awakening_trigger_times.update({round(current_time): 1})
                 else:
-                    caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=12)
+                    caster.apply_buff_to_self(AwakeningStacks(), current_time, stacks_to_apply=1, max_stacks=15)
             
             # relentless inquisitor        
             if caster.is_talent_active("Relentless Inquisitor"):
@@ -2380,12 +2380,12 @@ class LightOfDawn(Spell):
                 if "Dawnlight (HoT)" in targets[0].target_active_buffs:
                     non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
                     if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
-                        random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                        random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster, 8 * 1.2), current_time, caster=caster)
                     else:
                         random.choice(non_dawnlight_targets).apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                 else:
                     if "Avenging Wrath" in caster.active_auras or "Avenging Crusader" in caster.active_auras or "Avenging Wrath (Awakening)" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
-                        targets[0].apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                        targets[0].apply_buff_to_target(Dawnlight(caster, 8 * 1.2), current_time, caster=caster)
                     else:
                         targets[0].apply_buff_to_target(Dawnlight(caster), current_time, caster=caster)
                     

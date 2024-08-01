@@ -45,7 +45,7 @@ class Judgment(Spell):
             if "Awakening Ready" in caster.active_auras:
                 # add 30% damage buff and guaranteed crit
                 self.bonus_crit = 1
-                self.spell_damage_modifier *= 1.3
+                self.spell_damage_modifier *= 1.4
         
         # avenging crusader        
         if caster.is_talent_active("Avenging Crusader") and "Avenging Crusader" in caster.active_auras:
@@ -117,7 +117,7 @@ class Judgment(Spell):
                     append_aura_removed_event(caster.events, "Awakening Ready", caster, caster, current_time)
                     
                     # remove 30% damage buff
-                    self.spell_damage_modifier /= 1.3
+                    self.spell_damage_modifier /= 1.4
                     self.bonus_crit = 0
                     
             # avenging crusader        
@@ -152,7 +152,7 @@ class Judgment(Spell):
             # righteous judgment
             if caster.is_talent_active("Righteous Judgment"):
                 random_num = random.random()
-                if random_num <= 0.3:
+                if random_num <= 0.5:
                     caster.apply_summon(RighteousJudgmentSummon(caster), current_time)
                 
             # decrement stacks or remove infusion of light
@@ -228,7 +228,7 @@ class Judgment(Spell):
 class CrusaderStrike(Spell):
     
     # uses attack power instead of spell power
-    SPELL_POWER_COEFFICIENT = 1.071 * 1.04
+    SPELL_POWER_COEFFICIENT = 1.071 * 1.04 * 1.25
     BASE_COOLDOWN = 7.75
     MANA_COST = 0.006
     HOLY_POWER_GAIN = 1
@@ -240,6 +240,7 @@ class CrusaderStrike(Spell):
         # holy infusion
         if caster.is_talent_active("Holy Infusion"):
             self.holy_power_gain = 2
+            self.spell_damage_modifier = 1.5
         
     def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):  
         # reclamation
@@ -260,7 +261,7 @@ class CrusaderStrike(Spell):
             
         # blessed assurance
         if caster.is_talent_active("Blessed Assurance") and "Blessed Assurance" in caster.active_auras:
-            self.spell_damage_modifier *= 2
+            self.spell_damage_modifier *= 1.2
         
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
         
@@ -311,8 +312,8 @@ class CrusaderStrike(Spell):
                
             # crusader's might 
             if caster.is_talent_active("Crusader's Might"):
-                caster.abilities["Holy Shock"].remaining_cooldown -= 1.5
-                caster.abilities["Judgment"].remaining_cooldown -= 1.5
+                caster.abilities["Holy Shock"].remaining_cooldown -= 2
+                caster.abilities["Judgment"].remaining_cooldown -= 2
                     
                 if caster.abilities["Holy Shock"].remaining_cooldown <= 0 and caster.is_talent_active("Light's Conviction"):
                     caster.holy_shock_cooldown_overflow = abs(caster.abilities["Holy Shock"].remaining_cooldown)
@@ -322,7 +323,7 @@ class CrusaderStrike(Spell):
                         
             # blessed assurance
             if caster.is_talent_active("Blessed Assurance") and "Blessed Assurance" in caster.active_auras:
-                self.spell_damage_modifier /= 2
+                self.spell_damage_modifier /= 1.2
                 del caster.active_auras["Blessed Assurance"]                 
                 update_self_buff_data(caster.self_buff_breakdown, "Blessed Assurance", current_time, "expired")
                 
@@ -332,7 +333,7 @@ class CrusaderStrike(Spell):
 class HammerOfWrath(Spell):
     
     # uses attack power instead of spell power
-    SPELL_POWER_COEFFICIENT = 1.302 * 1.04 * 1.38
+    SPELL_POWER_COEFFICIENT = 1.302 * 1.04 * 1.7625
     BASE_COOLDOWN = 7.5
     MANA_COST = 0.006
     CHARGES = 1

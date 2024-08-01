@@ -691,7 +691,7 @@ class Simulation:
                             self.paladin.beacon_targets.remove(target)
                             
                         if self.paladin.is_talent_active("Lingering Radiance") and buff_name == "Dawnlight (HoT)":
-                            target.apply_buff_to_target(EternalFlameBuff(self.paladin, 10), self.elapsed_time, caster=self.paladin)
+                            target.apply_buff_to_target(EternalFlameBuff(self.paladin, 6), self.elapsed_time, caster=self.paladin)
                         
                         update_target_buff_data(self.paladin.target_buff_breakdown, buff_name, self.elapsed_time, "expired", target.name)
             

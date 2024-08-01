@@ -303,7 +303,8 @@ class Spell:
             heal_amount *= 1.1
             
         if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" in caster.active_auras:
-            caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing += heal_amount * 0.1
+            spell_overhealing_multiplier = (1 - caster.overhealing[self.name]) if self.name in caster.overhealing else 0
+            caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing += heal_amount * 0.2 * spell_overhealing_multiplier
             caster.active_auras["Power of the Silver Hand Stored Healing"].duration = caster.active_auras["Power of the Silver Hand Stored Healing"].base_duration
             
         if self.name in leech_abilities:   

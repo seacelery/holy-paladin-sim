@@ -98,7 +98,7 @@ class TyrsDeliveranceSpell(Spell):
             
 class TyrsDeliveranceHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.3
+    SPELL_POWER_COEFFICIENT = 0.39
     
     def __init__(self, caster):
         super().__init__("Tyr's Deliverance", is_heal=True, off_gcd=True)
@@ -140,7 +140,7 @@ class AvengingWrathSpell(Spell):
                 dawnlights_to_apply = 4
                 chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
                 for target in chosen_targets:
-                    target.apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                    target.apply_buff_to_target(Dawnlight(caster, 8 * 1.2), current_time, caster=caster)
                     target.apply_buff_to_target(SunsAvatar(caster), current_time, caster=caster)
                     
                     if caster.is_talent_active("Solar Grace"):
@@ -193,7 +193,7 @@ class AvengingCrusaderSpell(Spell):
                 dawnlights_to_apply = 4
                 chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
                 for target in chosen_targets:
-                    target.apply_buff_to_target(Dawnlight(caster, 10), current_time, caster=caster)
+                    target.apply_buff_to_target(Dawnlight(caster, 8 * 1.2), current_time, caster=caster)
                     target.apply_buff_to_target(SunsAvatar(caster), current_time, caster=caster)
                     
                     if caster.is_talent_active("Solar Grace"):

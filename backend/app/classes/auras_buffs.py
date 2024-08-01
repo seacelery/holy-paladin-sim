@@ -308,8 +308,8 @@ class AvengingWrathBuff(Buff):
         caster.damage_multiplier *= 1.15
         
         if caster.is_talent_active("Sanctified Wrath"):
-            caster.abilities["Holy Shock"].cooldown *= 0.8
-            caster.abilities["Holy Shock"].remaining_cooldown *= 0.8
+            caster.abilities["Holy Shock"].cooldown *= 0.5
+            caster.abilities["Holy Shock"].remaining_cooldown *= 0.5
             
         if caster.is_talent_active("Sun's Avatar"):
             caster.apply_buff_to_self(SunsAvatarActive(caster), current_time)
@@ -322,8 +322,8 @@ class AvengingWrathBuff(Buff):
         caster.damage_multiplier /= 1.15
         
         if caster.is_talent_active("Sanctified Wrath"):
-            caster.abilities["Holy Shock"].cooldown /= 0.8
-            caster.abilities["Holy Shock"].remaining_cooldown /= 0.8
+            caster.abilities["Holy Shock"].cooldown /= 0.5
+            caster.abilities["Holy Shock"].remaining_cooldown /= 0.5
             
         if caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
             del caster.active_auras["Sun's Avatar Active"]   
@@ -414,16 +414,16 @@ class AvengingCrusaderBuff(Buff):
             update_self_buff_data(caster.self_buff_breakdown, "Avenging Crusader (Awakening)", current_time, "expired")      
         
         if caster.is_talent_active("Sanctified Wrath"):
-            caster.abilities["Holy Shock"].cooldown *= 0.8
-            caster.abilities["Holy Shock"].remaining_cooldown *= 0.8
+            caster.abilities["Holy Shock"].cooldown *= 0.5
+            caster.abilities["Holy Shock"].remaining_cooldown *= 0.5
             
         if caster.is_talent_active("Sun's Avatar"):
             caster.apply_buff_to_self(SunsAvatarActive(caster), current_time)
         
     def remove_effect(self, caster, current_time=None):
         if caster.is_talent_active("Sanctified Wrath"):
-            caster.abilities["Holy Shock"].cooldown /= 0.8
-            caster.abilities["Holy Shock"].remaining_cooldown /= 0.8
+            caster.abilities["Holy Shock"].cooldown /= 0.5
+            caster.abilities["Holy Shock"].remaining_cooldown /= 0.5
             
         if caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
             del caster.active_auras["Sun's Avatar Active"]   
@@ -655,7 +655,7 @@ class FirstLight(Buff):
 class AwakeningStacks(Buff):
     
     def __init__(self):
-        super().__init__("Awakening", 60, base_duration=60, current_stacks=1, max_stacks=12)
+        super().__init__("Awakening", 60, base_duration=60, current_stacks=1, max_stacks=15)
        
         
 class AwakeningTrigger(Buff):
