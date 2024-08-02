@@ -254,7 +254,7 @@ class BlessingOfTheSeasons(Spell):
     BASE_COOLDOWN = 45
     
     def __init__(self, caster):
-        super().__init__("Blessing of Summer", mana_cost=BlessingOfTheSeasons.MANA_COST, cooldown=BlessingOfTheSeasons.BASE_COOLDOWN)
+        super().__init__("Blessing of Summer", mana_cost=BlessingOfTheSeasons.MANA_COST, cooldown=BlessingOfTheSeasons.BASE_COOLDOWN, off_gcd=True)
         self.initial_cast = True
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):

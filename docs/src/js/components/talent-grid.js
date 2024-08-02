@@ -5,7 +5,6 @@ import { createTooltip, addTooltipFunctionality } from "../utils/misc-functions.
 import { futurePatchSelected } from "./config/version-config.js";
 
 const toggleTalentOptions = (talentName, talentData) => {
-    console.log(talentName)
     switch(true) {
         case talentName === "Light of Dawn":
             document.getElementById("light-of-dawn-option-container").style.display = talentData.ranks["current rank"] === 1 ? "flex" : "none";
