@@ -94,7 +94,7 @@ class HolyShock(Spell):
                 cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
             self.spell_healing_modifier *= cumulative_healing_mod
         
-        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal, exclude_cast=not initial_cast)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal, exclude_cast=not initial_cast, initial_cast=initial_cast)
         barrier_of_faith_absorb = 0
         if cast_success:
             # tww season 1 tier 2pc
@@ -2207,7 +2207,7 @@ class LightOfDawn(Spell):
             if "Pure Light" in caster.active_auras:
                 self.spell_healing_modifier *= 1 + (0.08 * caster.active_auras["Pure Light"].current_stacks)
         
-        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal, exclude_cast=not initial_cast)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal, exclude_cast=not initial_cast, initial_cast=initial_cast)
         total_glimmer_healing = 0
         if cast_success:
             caster.holy_power -= self.holy_power_cost
