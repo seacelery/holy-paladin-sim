@@ -143,7 +143,7 @@ class BroodkeepersPromiseHoT(HoT):
 class Dawnlight(HoT):
     
     # TODO verify 22.5% higher
-    SPELL_POWER_COEFFICIENT = 4 * 1.225
+    SPELL_POWER_COEFFICIENT = 3.6 * 1.225
     
     def __init__(self, caster, duration_to_apply=8):
         super().__init__("Dawnlight (HoT)", duration_to_apply, base_duration=duration_to_apply, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
@@ -178,7 +178,7 @@ class Dawnlight(HoT):
  
 class EternalFlameBuff(HoT):
     
-    SPELL_POWER_COEFFICIENT = 0.96 * 1.1
+    SPELL_POWER_COEFFICIENT = 0.912 * 1.1
     
     def __init__(self, caster, duration_to_apply):
         super().__init__("Eternal Flame (HoT)", duration_to_apply, base_duration=duration_to_apply, base_tick_interval=3, initial_haste_multiplier=caster.haste_multiplier) 
@@ -188,7 +188,7 @@ class EternalFlameBuff(HoT):
 class SunSear(HoT):
     
     # TODO verify 22.5% higher
-    SPELL_POWER_COEFFICIENT = 0.6 * 1.225
+    SPELL_POWER_COEFFICIENT = 0.54 * 1.225
     
     def __init__(self, caster):
         super().__init__("Sun Sear", 4, base_duration=4, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier) 

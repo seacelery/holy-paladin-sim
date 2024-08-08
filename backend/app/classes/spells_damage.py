@@ -228,7 +228,7 @@ class Judgment(Spell):
 class CrusaderStrike(Spell):
     
     # uses attack power instead of spell power
-    SPELL_POWER_COEFFICIENT = 1.071 * 1.04 * 1.25
+    SPELL_POWER_COEFFICIENT = 1.071 * 1.04 * 1.13
     BASE_COOLDOWN = 7.75
     MANA_COST = 0.006
     HOLY_POWER_GAIN = 1

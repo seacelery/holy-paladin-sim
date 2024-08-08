@@ -98,7 +98,7 @@ class TyrsDeliveranceSpell(Spell):
             
 class TyrsDeliveranceHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.39
+    SPELL_POWER_COEFFICIENT = 0.351
     
     def __init__(self, caster):
         super().__init__("Tyr's Deliverance", is_heal=True, off_gcd=True)

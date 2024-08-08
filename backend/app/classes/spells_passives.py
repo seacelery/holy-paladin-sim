@@ -19,7 +19,7 @@ class GlimmerOfLightSpell(Spell):
     
 class JudgmentOfLightSpell(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.175 * 0.8
+    SPELL_POWER_COEFFICIENT = 0.175 * 0.9
     
     def __init__(self, caster):
         super().__init__("Judgment of Light")
@@ -35,7 +35,7 @@ class GreaterJudgmentSpell(Spell):
         
 class TouchOfLight(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.45 * 5
+    SPELL_POWER_COEFFICIENT = 0.45 * 5 * 0.88
     BASE_PPM = 3
     
     def __init__(self, caster):
