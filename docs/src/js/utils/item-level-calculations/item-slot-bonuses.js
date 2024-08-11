@@ -68,15 +68,17 @@ const embellishmentsData = {
     },
     "Dawnthread Lining": {
         "name": "Dawnthread Lining", 
-        "description": "While above 80% health, gain *2773 Critical Strike.", 
+        "description": "While above 80% health, gain *756 Critical Strike.", 
         "id": 0, 
-        "type": "embellishment"
+        "type": "embellishment",
+        "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 602, "base_value": 756, "effect_coefficient": .3643973, "effect_type": "scalar"}]
     },
     "Duskthread Lining": {
         "name": "Duskthread Lining", 
-        "description": "While above 80% health, gain *2773 Versatility.", 
+        "description": "While above 80% health, gain *756 Versatility.", 
         "id": 0, 
-        "type": "embellishment"
+        "type": "embellishment",
+        "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 602, "base_value": 756, "effect_coefficient": .3643973, "effect_type": "scalar"}]
     },
     "Echoing Impact Seal": {
         "name": "Echoing Impact Seal", 
@@ -120,15 +122,17 @@ const ptrEmbellishmentsData = {
     },
     "Dawnthread Lining": {
         "name": "Dawnthread Lining", 
-        "description": "While above 80% health, gain *2773 Critical Strike.", 
+        "description": "While above 80% health, gain *756 Critical Strike.", 
         "id": 0, 
-        "type": "embellishment"
+        "type": "embellishment",
+        "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 602, "base_value": 756, "effect_coefficient": .3643973, "effect_type": "scalar"}]
     },
     "Duskthread Lining": {
         "name": "Duskthread Lining", 
-        "description": "While above 80% health, gain *2773 Versatility.", 
+        "description": "While above 80% health, gain *756 Versatility.", 
         "id": 0, 
-        "type": "embellishment"
+        "type": "embellishment",
+        "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 602, "base_value": 756, "effect_coefficient": .3643973, "effect_type": "scalar"}]
     },
     "Echoing Impact Seal": {
         "name": "Echoing Impact Seal", 

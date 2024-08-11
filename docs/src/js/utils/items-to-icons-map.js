@@ -28,25 +28,25 @@ const itemsToIconsMap = {
     "Exuding Steam Stone": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_elementalcombinedfoozles_water.jpg",
     "Wild Spirit Stone": "https://render.worldofwarcraft.com/eu/icons/56/inv_elemental_primal_life.jpg",
 
-    "Quick Emerald": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_air_cut_green.jpg",
-    "Deadly Emerald": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg",
-    "Masterful Emerald": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg",
-    "Versatile Emerald": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg",
+    "Quick Emerald": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem_color2.jpg",
+    "Deadly Emerald": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color1_2.jpg",
+    "Masterful Emerald": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color1_3.jpg",
+    "Versatile Emerald": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color1_1.jpg",
 
-    "Quick Ruby": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_air_cut_green.jpg",
-    "Deadly Ruby": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg",
-    "Masterful Ruby": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg",
-    "Versatile Ruby": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg",
+    "Quick Ruby": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color4_3.jpg",
+    "Deadly Ruby": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem_color5.jpg",
+    "Masterful Ruby": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color4_1.jpg",
+    "Versatile Ruby": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color4_2.jpg",
 
-    "Quick Onyx": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_air_cut_green.jpg",
-    "Deadly Onyx": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg",
-    "Masterful Onyx": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg",
-    "Versatile Onyx": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg",
+    "Quick Onyx": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color2_3.jpg",
+    "Deadly Onyx": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color2_2.jpg",
+    "Masterful Onyx": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem_color1.jpg",
+    "Versatile Onyx": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color2_1.jpg",
 
-    "Quick Sapphire": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_air_cut_green.jpg",
-    "Deadly Sapphire": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg",
-    "Masterful Sapphire": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg",
-    "Versatile Sapphire": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg",
+    "Quick Sapphire": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color5_3.jpg",
+    "Deadly Sapphire": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color5_2.jpg",
+    "Masterful Sapphire": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color5_1.jpg",
+    "Versatile Sapphire": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color5_1.jpg",
 
     "Cubic Blasphemite": "https://wow.zamimg.com/images/wow/icons/large/inv_stone_01.jpg",
     "Elusive Blasphemite": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_gem_x4_metagem_cut.jpg",
@@ -58,41 +58,41 @@ const groupedGems = {
     "Emerald": {
         "label": "Haste",
         "gems": [
-            ["Quick Emerald", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_air_cut_green.jpg", "+227 Haste"],
-            ["Deadly Emerald", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg", "+190 Haste", "+127 Crit"],
-            ["Masterful Emerald", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg", "+190 Haste", "+127 Mastery"],
-            ["Versatile Emerald", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg", "+190 Haste", "+127 Versatility"],
+            ["Quick Emerald", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem_color2.jpg", "+227 Haste"],
+            ["Deadly Emerald", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color1_2.jpg", "+190 Haste", "+127 Crit"],
+            ["Masterful Emerald", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color1_3.jpg", "+190 Haste", "+127 Mastery"],
+            ["Versatile Emerald", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color1_1.jpg", "+190 Haste", "+127 Versatility"],
             ["Cubic Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/inv_stone_01.jpg", "+121 Intellect"],
         ]
     },
     "Ruby": {
         "label": "Crit",
         "gems": [
-            ["Quick Ruby", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_air_cut_green.jpg", "+190 Crit", "+127 Haste"],
-            ["Deadly Ruby", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg", "+227 Crit"],
-            ["Masterful Ruby", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg", "+190 Crit", "+127 Mastery"],
-            ["Versatile Ruby", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg", "+190 Crit", "+127 Versatility"],
-            ["Elusive Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/inv_misc_gem_x4_metagem_cut.jpg", "+121 Intellect"],
+            ["Quick Ruby", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color4_3.jpg", "+190 Crit", "+127 Haste"],
+            ["Deadly Ruby", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem_color5.jpg", "+227 Crit"],
+            ["Masterful Ruby", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color4_1.jpg", "+190 Crit", "+127 Mastery"],
+            ["Versatile Ruby", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color4_2.jpg", "+190 Crit", "+127 Versatility"],
+            ["Elusive Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/inv_misc_gem_x4_metagem_cut.jpg", "+121 Intellect", "+2% Movement Speed per unique gem colour"],
         ]
     },
     "Onyx": {
         "label": "Mastery",
         "gems": [
-            ["Quick Onyx", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_air_cut_green.jpg", "+190 Mastery", "+127 Haste"],
-            ["Deadly Onyx", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg", "+190 Mastery", "+127 Crit"],
-            ["Masterful Onyx", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg", "+227 Mastery"],
-            ["Versatile Onyx", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg", "+190 Mastery", "+127 Versatility"],
-            ["Insightful Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/inv_misc_metagem_b.jpg", "+121 Intellect"],         
+            ["Quick Onyx", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color2_3.jpg", "+190 Mastery", "+127 Haste"],
+            ["Deadly Onyx", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color2_2.jpg", "+190 Mastery", "+127 Crit"],
+            ["Masterful Onyx", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem_color1.jpg", "+227 Mastery"],
+            ["Versatile Onyx", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color2_1.jpg", "+190 Mastery", "+127 Versatility"],
+            ["Insightful Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/inv_misc_metagem_b.jpg", "+121 Intellect", "+1% Max Mana per unique gem colour"],         
         ]
     },
     "Sapphire": {
         "label": "Versatility",
         "gems": [
-            ["Quick Sapphire", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_air_cut_green.jpg", "+190 Versatility", "+127 Haste"],
-            ["Deadly Sapphire", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg", "+190 Versatility", "+127 Crit"],
-            ["Masterful Sapphire", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg", "+190 Versatility", "+127 Mastery"],
-            ["Versatile Sapphire", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg", "+227 Versatility"],
-            ["Culminating Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/item_cutmetagemb.jpg", "+121 Intellect"],
+            ["Quick Sapphire", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color5_3.jpg", "+190 Versatility", "+127 Haste"],
+            ["Deadly Sapphire", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color5_2.jpg", "+190 Versatility", "+127 Crit"],
+            ["Masterful Sapphire", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color5_1.jpg", "+190 Versatility", "+127 Mastery"],
+            ["Versatile Sapphire", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color5_1.jpg", "+227 Versatility"],
+            ["Culminating Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/item_cutmetagemb.jpg", "+121 Intellect", "+0.15% Crit Effect per unique gem colour"],
         ]
     },
 };
@@ -101,41 +101,41 @@ const ptrGroupedGems = {
     "Emerald": {
         "label": "Haste",
         "gems": [
-            ["Quick Emerald", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_air_cut_green.jpg", "+227 Haste"],
-            ["Deadly Emerald", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg", "+190 Haste", "+127 Crit"],
-            ["Masterful Emerald", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg", "+190 Haste", "+127 Mastery"],
-            ["Versatile Emerald", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg", "+190 Haste", "+127 Versatility"],
+            ["Quick Emerald", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem_color2.jpg", "+227 Haste"],
+            ["Deadly Emerald", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color1_2.jpg", "+190 Haste", "+127 Crit"],
+            ["Masterful Emerald", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color1_3.jpg", "+190 Haste", "+127 Mastery"],
+            ["Versatile Emerald", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color1_1.jpg", "+190 Haste", "+127 Versatility"],
             ["Cubic Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/inv_stone_01.jpg", "+121 Intellect"],
         ]
     },
     "Ruby": {
         "label": "Crit",
         "gems": [
-            ["Quick Ruby", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_air_cut_green.jpg", "+190 Crit", "+127 Haste"],
-            ["Deadly Ruby", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg", "+227 Crit"],
-            ["Masterful Ruby", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg", "+190 Crit", "+127 Mastery"],
-            ["Versatile Ruby", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg", "+190 Crit", "+127 Versatility"],
-            ["Elusive Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/inv_misc_gem_x4_metagem_cut.jpg", "+121 Intellect"],
+            ["Quick Ruby", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color4_3.jpg", "+190 Crit", "+127 Haste"],
+            ["Deadly Ruby", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem_color5.jpg", "+227 Crit"],
+            ["Masterful Ruby", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color4_1.jpg", "+190 Crit", "+127 Mastery"],
+            ["Versatile Ruby", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color4_2.jpg", "+190 Crit", "+127 Versatility"],
+            ["Elusive Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/inv_misc_gem_x4_metagem_cut.jpg", "+121 Intellect", "+2% Movement Speed per unique gem colour"],
         ]
     },
     "Onyx": {
         "label": "Mastery",
         "gems": [
-            ["Quick Onyx", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_air_cut_green.jpg", "+190 Mastery", "+127 Haste"],
-            ["Deadly Onyx", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg", "+190 Mastery", "+127 Crit"],
-            ["Masterful Onyx", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg", "+227 Mastery"],
-            ["Versatile Onyx", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg", "+190 Mastery", "+127 Versatility"],
-            ["Insightful Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/inv_misc_metagem_b.jpg", "+121 Intellect"],         
+            ["Quick Onyx", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color2_3.jpg", "+190 Mastery", "+127 Haste"],
+            ["Deadly Onyx", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color2_2.jpg", "+190 Mastery", "+127 Crit"],
+            ["Masterful Onyx", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem_color1.jpg", "+227 Mastery"],
+            ["Versatile Onyx", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color2_1.jpg", "+190 Mastery", "+127 Versatility"],
+            ["Insightful Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/inv_misc_metagem_b.jpg", "+121 Intellect", "+1% Max Mana per unique gem colour"],         
         ]
     },
     "Sapphire": {
         "label": "Versatility",
         "gems": [
-            ["Quick Sapphire", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_air_cut_green.jpg", "+190 Versatility", "+127 Haste"],
-            ["Deadly Sapphire", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg", "+190 Versatility", "+127 Crit"],
-            ["Masterful Sapphire", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg", "+190 Versatility", "+127 Mastery"],
-            ["Versatile Sapphire", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg", "+227 Versatility"],
-            ["Culminating Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/item_cutmetagemb.jpg", "+121 Intellect"],
+            ["Quick Sapphire", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color5_3.jpg", "+190 Versatility", "+127 Haste"],
+            ["Deadly Sapphire", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color5_2.jpg", "+190 Versatility", "+127 Crit"],
+            ["Masterful Sapphire", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem-hybrid_color5_1.jpg", "+190 Versatility", "+127 Mastery"],
+            ["Versatile Sapphire", "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_cut-standart-gem_color3.jpg", "+227 Versatility"],
+            ["Culminating Blasphemite", "https://wow.zamimg.com/images/wow/icons/large/item_cutmetagemb.jpg", "+121 Intellect", "+0.15% Crit Effect per unique gem colour"],
         ]
     },
 };

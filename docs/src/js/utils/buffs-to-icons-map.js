@@ -228,6 +228,10 @@ const buffsToIconsMap = {
     "Allied Chestplate of Generosity": "https://render.worldofwarcraft.com/eu/icons/56/inv_chest_plate_raidwarriorprimalist_d_01.jpg",
     "Allied Wristguards of Companionship": "https://render.worldofwarcraft.com/eu/icons/56/inv_bracer_plate_raidwarriorprimalist_d_01.jpg",
     "Allied Wristgaurds of Companionship": "https://render.worldofwarcraft.com/eu/icons/56/inv_bracer_plate_raidwarriorprimalist_d_01.jpg",
+
+    "Dawnthread Lining": "https://wow.zamimg.com/images/wow/icons/large/inv_10_tailoring_embroiderythread_color1.jpg",
+    "Duskthread Lining": "https://wow.zamimg.com/images/wow/icons/large/inv_10_tailoring_tailoringconsumable_color3.jpg",
+    "Prismatic Null Stone": "https://wow.zamimg.com/images/wow/icons/large/inv_enchant_prismaticsphere.jpg"
 }; 
 
 export { buffsToIconsMap };

@@ -325,11 +325,16 @@ def return_gem_stats(player, gems_from_equipment, stat_values_from_equipment):
             stat_values_from_equipment["intellect"] += 181
         elif gem == "Culminating Blasphemite":
             stat_values_from_equipment["intellect"] += 181 
+      
+    unique_gem_colours = sum(1 for gem in ["Emerald", "Sapphire", "Onyx", "Ruby"] if player.gem_counts[gem] > 0)  
             
     if "Insightful Blasphemite" in gems_from_equipment:
-        unique_gem_colours = sum(1 for gem in ["Emerald", "Sapphire", "Onyx", "Ruby"] if player.gem_counts[gem] > 0)
         player.max_mana = player.mana + player.base_mana * unique_gem_colours * 0.01
         player.mana = player.max_mana
+        
+    if "Culminating Blasphemite" in gems_from_equipment:
+        player.crit_healing_modifier += unique_gem_colours * 0.0015
+        player.base_crit_healing_modifier += unique_gem_colours * 0.0015
         
     # print(stat_values_from_equipment)
     # print(player.gem_counts)

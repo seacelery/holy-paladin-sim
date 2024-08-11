@@ -3592,3 +3592,55 @@ class PotionBombOfPower(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.spell_power -= caster.get_effective_spell_power(800)
+        
+
+class DawnthreadLining(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Dawnthread Lining", 10000, base_duration=10000)   
+        embellishment_effect = caster.embellishments["Dawnthread Lining"]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("crit", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("crit", -self.embellishment_first_value)
+        
+        
+class DuskthreadLining(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Duskthread Lining", 10000, base_duration=10000)   
+        embellishment_effect = caster.embellishments["Duskthread Lining"]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", -self.embellishment_first_value)
+        
+        
+class PrismaticNullStone(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Prismatic Null Stone", 10000, base_duration=10000)   
+        
+    def apply_effect(self, caster, current_time=None):
+        unique_gem_colours = sum(1 for gem in ["Emerald", "Sapphire", "Onyx", "Ruby"] if caster.gem_counts[gem] > 0)
+        
+        if "Insightful Blasphemite" in caster.gems:
+            caster.max_mana = caster.mana + caster.base_mana * unique_gem_colours * 0.0025
+            caster.mana = caster.max_mana
+            
+        if "Culminating Blasphemite" in caster.gems:
+            caster.crit_healing_modifier += unique_gem_colours * 0.0015 * 0.25
+            caster.base_crit_healing_modifier += unique_gem_colours * 0.0015 * 0.25
+        
+    def remove_effect(self, caster, current_time=None):
+        pass

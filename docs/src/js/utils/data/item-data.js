@@ -137024,6 +137024,50 @@ const itemData = [
         "enchantments": [],
         "limit": null
     },
+    {
+        "effects": [
+            {
+                "name": "Deadwinds",
+                "id": 90986,
+                "description": "Your healing and damage periodic spells grant *124 Intellect each time they heal or deal damage. Lasts 15 sec, stacking up to 20 times.",
+                "effect_values": [
+                    {"base_value": 124, "effect_type": "scalar", "effect_coefficient": 0.029, "allocation_type": "rating_multiplier_jewellery"},
+                ]
+            }
+        ],
+        "name": "Gale of Shadows",
+        "item_slot": "Trinket",
+        "base_item_level": 593,
+        "quality": "Epic",
+        "id": 133304,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_gathershadows.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Egg Shell",
+                "id": 91308,
+                "description": "Use: Places Egg Shell on your current target, absorbing *3700000 damage. While Egg Shell persists, you gain 0.333% mana every 5 sec.  When the effect ends, you gain 4% mana. Lasts 30 sec.",
+                "effect_values": [
+                    {"base_value": 3700000, "effect_type": "scalar", "effect_coefficient": 2100, "allocation_type": "flat_healing"},
+                ]
+            }
+        ],
+        "name": "Corrupted Egg Shell",
+        "item_slot": "Trinket",
+        "base_item_level": 593,
+        "quality": "Epic",
+        "id": 133305,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_cat_trinket09.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
 ];
 
 export default itemData;
