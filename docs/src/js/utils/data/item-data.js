@@ -123310,9 +123310,9 @@ const itemData = [
             {
                 "name": "Gruesome Syringe",
                 "id": 444276,
-                "description": "Equip: Your healing spells have a high chance to cause you to inject yourself with a charge of Volatile Serum. Multiple charges may overlap.\n\nIf an ally drops below 70% health, expel a charge to heal them for *159634. If unconsumed after 15 sec, charges catalyze to grant you *2894 Intellect for 10 sec instead.",
+                "description": "Equip: Your healing spells have a high chance to cause you to inject yourself with a charge of Volatile Serum. Multiple charges may overlap.\n\nIf an ally drops below 70% health, expel a charge to heal them for *163309. If unconsumed after 15 sec, charges catalyze to grant you *2894 Intellect for 10 sec instead.",
                 "effect_values": [
-                    {"base_value": 159634, "effect_type": "scalar", "effect_coefficient": 63.84856796265, "allocation_type": "flat_damage"},
+                    {"base_value": 159634, "effect_type": "scalar", "effect_coefficient": 63.84856796265 * 0.675, "allocation_type": "no_multiplier"},
                     {"base_value": 2894, "effect_type": "scalar", "effect_coefficient": 0.75579804182, "allocation_type": "no_multiplier"}
                 ]
             }
@@ -136961,7 +136961,7 @@ const itemData = [
             {
                 "name": "Unbound Changeling",
                 "id": 330131,
-                "description": "Equip: Your abilities have a chance to grant you *68 in a secondary stat for 12 sec.",
+                "description": "Equip: Your abilities have a chance to grant you *3909 in a secondary stat for 12 sec.",
                 "effect_values": [
                     {"base_value": 68, "effect_type": "scalar", "effect_coefficient": 1.67952597141, "allocation_type": "rating_multiplier"},
                 ]
@@ -136969,11 +136969,11 @@ const itemData = [
         ],
         "name": "Unbound Changeling",
         "item_slot": "Trinket",
-        "base_item_level": 158,
+        "base_item_level": 593,
         "quality": "Epic",
         "id": 178708,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pet_spectralporcupinered.jpg",
-        "stats": {},
+        "stats": {"Intellect": 2350},
         "gems": [],
         "enchantments": [],
         "limit": null

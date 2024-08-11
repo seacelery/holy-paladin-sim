@@ -85,6 +85,7 @@ const spellToIconsMap = {
     "Tirion's Devotion": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_revivechampion.jpg",
     "Touch of Light": "https://render.worldofwarcraft.com/eu/icons/56/achievment_raid_houroftwilight.jpg",
     "Tyr's Deliverance": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_2h_artifactsilverhand_d_01.jpg",
+    "Truth Prevails": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_spiritualguidence.jpg",
     "Veneration": "https://render.worldofwarcraft.com/eu/icons/56/ability_crown_of_the_heavens_icon.jpg",
     "Word of Glory": "https://render.worldofwarcraft.com/eu/icons/56/inv_helmet_96.jpg",
 
@@ -123,6 +124,7 @@ const spellToIconsMap = {
     "Sureki Zealot's Insignia": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_113.jpg",
     "Treacherous Transmitter": "https://wow.zamimg.com/images/wow/icons/large/inv_etherealraid_communicator_color1.jpg",
     "Imperfect Ascendancy Serum": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_dpotion_a25.jpg",
+    "Corrupted Egg Shell": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_cat_trinket09.jpg",
 
     // enchants
     "Dreaming Devotion": "https://render.worldofwarcraft.com/eu/icons/56/item_herbd.jpg",

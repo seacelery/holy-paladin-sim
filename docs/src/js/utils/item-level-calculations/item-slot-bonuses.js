@@ -56,9 +56,10 @@ const embellishmentsData = {
     },
     "Blessed Weapon Grip": {
         "name": "Blessed Weapon Grip", 
-        "description": "Damaging a target has a chance bless your weapon, increasing your highest secondary stat. The effect slowly fades over time.", 
+        "description": "Damaging a target has a chance bless your weapon, increasing your highest secondary stat by *220. The effect slowly fades over time.", 
         "id": 0, 
-        "type": "embellishment"
+        "type": "embellishment",
+        "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 330, "base_value": 220, "effect_coefficient": 0.032211, "effect_type": "scalar"}]
     },
     "Captured Starlight": {
         "name": "Captured Starlight", 
@@ -110,9 +111,10 @@ const ptrEmbellishmentsData = {
     "No embellishment": "",
     "Blessed Weapon Grip": {
         "name": "Blessed Weapon Grip", 
-        "description": "Damaging a target has a chance bless your weapon, increasing your highest secondary stat. The effect slowly fades over time.", 
+        "description": "Damaging a target has a chance bless your weapon, increasing your highest secondary stat by *220. The effect slowly fades over time.", 
         "id": 0, 
-        "type": "embellishment"
+        "type": "embellishment",
+        "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 330, "base_value": 220, "effect_coefficient": 0.032211, "effect_type": "scalar"}]
     },
     "Captured Starlight": {
         "name": "Captured Starlight", 

@@ -2,7 +2,7 @@ import random
 
 from .auras_buffs import SunSear
 from ..utils.leech_abilities import leech_abilities
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts, update_target_buff_data, update_priority_breakdown
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts, update_target_buff_data, update_priority_breakdown, update_self_buff_data
 from collections import defaultdict
 
 class Spell:
@@ -285,16 +285,29 @@ class Spell:
             
         heal_amount = spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier * versatility_multiplier * crit_multiplier * mastery_multiplier * spell_healing_modifier * caster_crit_healing_modifier
         
+        # if "Holy Shock" in self.name:
+        #     print(" ")
+        #     print(self.name, is_crit)
+        #     print(f"Heal amount: {heal_amount}")
+        #     if "Power of the Silver Hand" in caster.active_auras:
+        #         print(f"Current stored healing: {caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing}")
+        
         if self.name in ["Holy Shock", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)"] and "Power of the Silver Hand Stored Healing" in caster.active_auras:
             if is_crit:
                 heal_amount += caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing * 2
             else:
                 heal_amount += caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing
             caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing = 0
+            
+        # if "Holy Shock" in self.name:
+        #     print(f"Heal amount after stored healing: {heal_amount}")
         
         # season 2 tier 2pc   
         if self.name in ["Holy Shock", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)"] and caster.set_bonuses["dragonflight_season_2"] >= 2 and is_crit:
             heal_amount *= 1.8
+            
+        # if "Holy Shock" in self.name:
+        #     print(f"Heal amount after season 2 2pc: {heal_amount}")
         
         if "Close to Heart" in caster.active_auras:
             heal_amount *= 1.04
@@ -302,20 +315,22 @@ class Spell:
         if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
             heal_amount *= 1.1
             
-        if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" in caster.active_auras:
+        if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" in caster.active_auras and self.name != "Lay on Hands":
             spell_overhealing_multiplier = (1 - caster.overhealing[self.name]) if self.name in caster.overhealing else 0
             caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing += heal_amount * 0.2 * spell_overhealing_multiplier
             caster.active_auras["Power of the Silver Hand Stored Healing"].duration = caster.active_auras["Power of the Silver Hand Stored Healing"].base_duration
             
+        # if "Holy Shock" in self.name and "Power of the Silver Hand" in caster.active_auras:
+        #     print(f"New stored healing: {caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing}")
+            
         if self.name in leech_abilities:   
             leech_multiplier = 0.7
             update_spell_data_heals(caster.ability_breakdown, "Leech", caster, heal_amount * (caster.leech / 100) * leech_multiplier, False)
-        
-        # if self.name == "Glimmer of Light":  
             
-        # if "Holy Shock" in self.name:
-        #     print(f"Heal amount for {self.name}, {heal_amount}")
-        #     print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
+        # if "Holy Shock" in self.name and "Power of the Silver Hand" in caster.active_auras:
+        #     print(f"Heal amount for {self.name}, {heal_amount}, {is_crit}")
+        #     print(f"new stored healing {caster.active_auras['Power of the Silver Hand Stored Healing'].stored_healing}")
+            # print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
         return heal_amount, is_crit
     
     def calculate_damage(self, caster, bonus_crit=0, bonus_versatility=0):
@@ -457,10 +472,6 @@ class Spell:
             power_of_the_silver_hand = PowerOfTheSilverHand()
             try_proc_rppm_effect(power_of_the_silver_hand, is_hasted=False, is_self_buff=True)
             
-        if caster.is_talent_active("Blessing of An'she") and (self.name in ["Eternal Flame", "Dawnlight", "Sun Sear"]):
-            blessing_of_anshe = BlessingOfAnshe(caster)
-            try_proc_rppm_effect(blessing_of_anshe, is_hasted=False, is_self_buff=True)
-            
         if caster.is_talent_active("Holy Bulwark"):
             sacred_weapon_targets = [target for target in caster.potential_healing_targets if "Sacred Weapon" in target.target_active_buffs]
             if len(sacred_weapon_targets) == 2:
@@ -552,7 +563,8 @@ class Spell:
         
         if "Unbound Changeling" in caster.trinkets:
             unbound_changeling = UnboundChangeling(caster)
-            try_proc_rppm_effect(unbound_changeling, is_self_buff=True)
+            if "Unbound Changeling" not in caster.active_auras:
+                try_proc_rppm_effect(unbound_changeling, is_hasted=False, is_self_buff=True)
             
         if "Gruesome Syringe" in caster.trinkets:
             gruesome_syringe = GruesomeSyringe(caster)
@@ -568,7 +580,8 @@ class Spell:
             
         if "Empowering Crystal of Anub'ikkaj" in caster.trinkets:
             empowering_crystal_of_anubikkaj = EmpoweringCrystalOfAnubikkaj(caster)
-            try_proc_rppm_effect(empowering_crystal_of_anubikkaj, is_hasted=False, is_self_buff=True)
+            if "Empowering Crystal of Anub'ikkaj" not in caster.active_auras:
+                try_proc_rppm_effect(empowering_crystal_of_anubikkaj, is_hasted=False, is_self_buff=True)
         
         if "Emerald Coach's Whistle" in caster.trinkets:
             emerald_coachs_whistle = EmeraldCoachsWhistle(caster)

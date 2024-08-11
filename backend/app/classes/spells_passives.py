@@ -340,7 +340,7 @@ class GruesomeSyringe(Spell):
         trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
         
         # heal
-        self.trinket_first_value = trinket_values[1]
+        self.trinket_first_value = trinket_values[0]
         
     def apply_flat_healing(self, caster, target, current_time, is_heal):
         gruesome_syringe_heal, gruesome_syringe_crit = GruesomeSyringe(caster).calculate_heal(caster)

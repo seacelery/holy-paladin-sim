@@ -2,7 +2,7 @@ import random
 import re
 
 from .auras import Buff
-from ..utils.misc_functions import format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, add_talent_healing_multipliers, update_target_buff_data, calculate_sqrt_ability_scaling
+from ..utils.misc_functions import format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, add_talent_healing_multipliers, update_target_buff_data, calculate_sqrt_ability_scaling, try_proc_rppm_effect
 from ..utils.stat_values import update_stat_with_multiplicative_percentage
 
 
@@ -37,6 +37,8 @@ class HoT(Buff):
         target.receive_heal(total_heal_value, caster)
         caster.handle_beacon_healing(self.name, target, total_heal_value, current_time)
         
+        self.trigger_on_periodic_heal_effect(caster, current_time, target)
+        
         if is_crit and self.name == "Holy Reverberation":
             caster.events.append(f"{format_time(current_time)}: Holy Reverberation crit healed {target.name} for {round(total_heal_value)}")
         elif self.name == "Holy Reverberation":
@@ -47,7 +49,6 @@ class HoT(Buff):
         update_spell_data_heals(caster.ability_breakdown, self.name, target, total_heal_value, is_crit)
         
         if self.name == "Dawnlight (HoT)":
-            # print(f"radiating {total_heal_value}")
             self.radiate_healing(caster, current_time, total_heal_value)
              
     def calculate_tick_healing(self, caster, can_crit=True):
@@ -78,6 +79,31 @@ class HoT(Buff):
         healing_per_tick = add_talent_healing_multipliers(healing_per_tick, caster)
 
         return healing_per_tick, is_crit
+    
+    def trigger_on_periodic_heal_effect(self, caster, current_time, target):
+        from .auras_buffs import (
+            GaleOfShadows, BlessingOfAnshe
+        )
+        
+        if self.name in ["Eternal Flame (HoT)", "Dawnlight (HoT)", "Sun Sear (HoT)"]:
+            if caster.is_trinket_equipped("Gale of Shadows"):
+                if "Gale of Shadows" in caster.active_auras:
+                    gale_of_shadows = caster.active_auras["Gale of Shadows"]
+                    
+                    if gale_of_shadows.current_stacks < gale_of_shadows.max_stacks:
+                        gale_of_shadows.remove_effect(caster)
+                        gale_of_shadows.current_stacks += 1
+                        gale_of_shadows.apply_effect(caster)
+                    
+                    gale_of_shadows.duration = gale_of_shadows.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Gale of Shadows", current_time, "applied", gale_of_shadows.duration, gale_of_shadows.current_stacks)               
+                else:
+                    caster.apply_buff_to_self(GaleOfShadows(caster), current_time, stacks_to_apply=1, max_stacks=20)
+        
+        if caster.is_talent_active("Blessing of An'she") and (self.name in ["Eternal Flame", "Dawnlight", "Sun Sear"]):
+            blessing_of_anshe = BlessingOfAnshe(caster)
+            try_proc_rppm_effect(caster, target, current_time, blessing_of_anshe, is_hasted=False, is_self_buff=True)
+            
 
 
 class GiftOfTheNaaruBuff(HoT):
@@ -112,8 +138,6 @@ class HolyReverberation(HoT):
 
 # trinket hots
 class BroodkeepersPromiseHoT(HoT):
-    
-    # TODO everything
     
     def __init__(self, caster):
         super().__init__("Broodkeeper's Promise", 10000, base_duration=10000, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier, hasted=False)
@@ -3559,6 +3583,22 @@ class OathswornsTenacity(Buff):
         caster.update_stat("versatility", -1360)
         
 
+class GaleOfShadows(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Gale of Shadows", 15, base_duration=15, current_stacks=1, max_stacks=20)   
+        trinket_effect = caster.trinkets["Gale of Shadows"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_first_value * self.current_stacks)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value * self.current_stacks)
+        
+
 class SurekiZealotsInsignia(Buff):
     count = 0
     
@@ -3644,3 +3684,49 @@ class PrismaticNullStone(Buff):
         
     def remove_effect(self, caster, current_time=None):
         pass
+    
+
+class WrithingArmorBanding(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Writhing Armor Banding", 10000, base_duration=10000)   
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class EnergyDistributionBeacon(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Energy Distribution Beacon", 10000, base_duration=10000)   
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+    
+class BlessedWeaponGrip(Buff):
+    
+    BASE_PPM = 1
+    
+    def __init__(self, caster):
+        super().__init__("Blessed Weapon Grip", 30, base_duration=30, current_stacks=10, max_stacks=10)   
+        embellishment_effect = caster.embellishments["Blessed Weapon Grip"]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        print(embellishment_effect)
+        print(embellishment_values)
+        
+        self.embellishment_first_value = embellishment_values[0]
+        self.highest_stat = caster.find_highest_secondary_stat_rating()
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat(self.highest_stat, self.embellishment_first_value * self.current_stacks)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat(self.highest_stat, -self.embellishment_first_value * self.current_stacks)

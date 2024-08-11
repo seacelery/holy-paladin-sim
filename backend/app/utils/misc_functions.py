@@ -1,4 +1,5 @@
 import math
+import random
 
 from .beacon_transfer_rates import *
 
@@ -59,6 +60,48 @@ def handle_flat_cdr(spell, amount):
         
 def calculate_sqrt_ability_scaling(total_targets, target_cap):
     return total_targets / (math.sqrt(total_targets / target_cap))
+
+def try_proc_rppm_effect(caster, target, current_time, effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False, is_other_effect=False):
+    # time since last attempt makes it so the number of events happening has very little impact on the number of procs that occur
+    proc_occurred = False
+    
+    caster.time_since_last_rppm_proc[effect.name] = caster.time_since_last_rppm_proc.get(effect.name, 0)
+    caster.time_since_last_rppm_proc_attempt[effect.name] = caster.time_since_last_rppm_proc_attempt.get(effect.name, 0)
+    
+    if is_hasted:
+        bad_luck_protection = max(1, 1 + 3 * (caster.time_since_last_rppm_proc[effect.name] * (effect.BASE_PPM * caster.haste_multiplier) / 60 - 1.5))
+        effect_proc_chance = bad_luck_protection * ((effect.BASE_PPM * caster.haste_multiplier) / 60) * min(caster.time_since_last_rppm_proc_attempt[effect.name], 10)
+    else:
+        bad_luck_protection = max(1, 1 + 3 * (caster.time_since_last_rppm_proc[effect.name] * effect.BASE_PPM / 60 - 1.5))
+        effect_proc_chance = bad_luck_protection * (effect.BASE_PPM / 60) * min(caster.time_since_last_rppm_proc_attempt[effect.name], 10)
+    
+    if random.random() < effect_proc_chance:  
+        proc_occurred = True   
+        caster.time_since_last_rppm_proc[effect.name] = 0
+        if is_heal:
+            effect_heal, is_crit = effect.calculate_heal(caster, exclude_mastery=exclude_mastery)
+            target.receive_heal(effect_heal, caster)
+            
+            update_spell_data_heals(caster.ability_breakdown, effect.name, target, effect_heal, is_crit)
+        elif is_other_effect:
+            effect.apply_effect(caster, target, current_time)
+            
+        elif is_flat_healing:
+            effect.apply_flat_healing(caster, target, current_time, True)
+            
+        if is_self_buff and effect.name in caster.active_auras:
+            if effect.max_stacks > 1:
+                caster.apply_buff_to_self(caster.active_auras[effect.name], current_time, effect.current_stacks, effect.max_stacks)
+            else:
+                effect.remove_effect(caster, current_time)
+                del caster.active_auras[effect.name]
+                caster.apply_buff_to_self(effect, current_time, effect.current_stacks, effect.max_stacks)
+        elif is_self_buff:
+            caster.apply_buff_to_self(effect, current_time, effect.current_stacks, effect.max_stacks)
+            
+    caster.time_since_last_rppm_proc_attempt[effect.name] = 0
+    
+    return proc_occurred
 
 # data tracking functions
 def append_spell_heal_event(array, spell_name, caster, target, amount, current_time, is_crit, spends_mana=False, is_absorb=False):

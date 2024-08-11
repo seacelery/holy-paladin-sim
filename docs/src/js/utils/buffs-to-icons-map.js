@@ -192,6 +192,7 @@ const buffsToIconsMap = {
     "Harvester's Edict": "https://wow.zamimg.com/images/wow/icons/large/inv_11_0_dungeon_oldgodstatuepiece_purple.jpg",
     "Ara-Kara Sacbrood": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_red.jpg",
     "Imperfect Ascendancy Serum": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_dpotion_a25.jpg",
+    "Gale of Shadows": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_gathershadows.jpg",
     
     "Deliberate Incubation": "https://wow.zamimg.com/images/wow/icons/large/inv_10_specialreagentfoozles_coolegg_red.jpg",
     "Reckless Incubation": "https://wow.zamimg.com/images/wow/icons/large/inv_10_specialreagentfoozles_coolegg_green.jpg",
@@ -231,7 +232,10 @@ const buffsToIconsMap = {
 
     "Dawnthread Lining": "https://wow.zamimg.com/images/wow/icons/large/inv_10_tailoring_embroiderythread_color1.jpg",
     "Duskthread Lining": "https://wow.zamimg.com/images/wow/icons/large/inv_10_tailoring_tailoringconsumable_color3.jpg",
-    "Prismatic Null Stone": "https://wow.zamimg.com/images/wow/icons/large/inv_enchant_prismaticsphere.jpg"
+    "Prismatic Null Stone": "https://wow.zamimg.com/images/wow/icons/large/inv_enchant_prismaticsphere.jpg",
+    "Writhing Armor Banding": "https://wow.zamimg.com/images/wow/icons/large/inv_10_skinning_craftedoptionalreagent_studdedleatherswatch_color2.jpg",
+    "Energy Distribution Beacon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_enggizmos_24.jpg",
+    "Blessed Weapon Grip": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_weaponmastery.jpg"
 }; 
 
 export { buffsToIconsMap };
