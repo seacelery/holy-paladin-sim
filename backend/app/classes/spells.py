@@ -294,9 +294,9 @@ class Spell:
         
         if self.name in ["Holy Shock", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)"] and "Power of the Silver Hand Stored Healing" in caster.active_auras:
             if is_crit:
-                heal_amount += caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing * 2
+                heal_amount += (caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing * 2) / caster.mastery_multiplier
             else:
-                heal_amount += caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing
+                heal_amount += caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing / caster.mastery_multiplier
             caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing = 0
             
         # if "Holy Shock" in self.name:
