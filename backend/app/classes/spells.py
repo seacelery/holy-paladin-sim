@@ -1,4 +1,5 @@
 import random
+import re
 
 from .auras_buffs import SunSear
 from ..utils.leech_abilities import leech_abilities
@@ -552,14 +553,23 @@ class Spell:
             sureki_zealots_insignia = SurekiZealotsInsignia(caster)
             try_proc_rppm_effect(sureki_zealots_insignia, is_hasted=False, is_self_buff=True)
             
-        # trinkets
-        # if "Treacherous Transmitter" in caster.trinkets:
-        #     treacherous_transmitter = CrypticInstructions(caster)
-        #     try_proc_rppm_effect(treacherous_transmitter, is_hasted=False, is_self_buff=True)
-         
+        # trinkets   
         if "Ara-Kara Sacbrood" in caster.trinkets:
             ara_kara_sacbrood = AraKaraSacbrood(caster)
-            try_proc_rppm_effect(ara_kara_sacbrood, is_hasted=False, is_self_buff=True)
+            proc_occurred = try_proc_rppm_effect(ara_kara_sacbrood, is_hasted=False, is_self_buff=True)
+            if proc_occurred:
+                ara_kara_sacbrood_counters = [
+                    int(match.group(1)) for aura_name in caster.active_auras 
+                    if (match := re.search(r'Ara-Kara Sacbrood (\d+)', aura_name))
+                ]
+                
+                counter = 1
+                while counter in ara_kara_sacbrood_counters:
+                    counter += 1
+                
+                new_name = f"Ara-Kara Sacbrood {counter}"
+                caster.active_auras[new_name] = caster.active_auras.pop("Ara-Kara Sacbrood")
+                caster.active_auras[new_name].name = new_name
         
         if "Unbound Changeling" in caster.trinkets:
             unbound_changeling = UnboundChangeling(caster)

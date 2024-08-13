@@ -38,6 +38,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     const priorityBreakdownContainer = document.getElementById(`priority-breakdown-table-container-${containerCount}`);
 
     // create filter options
+
     // player auras filter
     const playerAurasFilter = createElement("div", "priority-grid-player-auras-filter", null);
     const playerAurasFilterModal = createElement("div", "priority-grid-player-auras-filter-modal", null);
@@ -77,7 +78,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
     for (const timestamp in priorityData) {
         const playerAurasData = priorityData[timestamp].player_active_auras;
 
-        // overlapping buff case
+        // overlapping buff case, generalise if needed
         let solarGraceCount = 0;
         let solarGraceHighestDuration = 0;
         for (let aura in playerAurasData) {
@@ -90,7 +91,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             };
         };
         playerAurasData["Solar Grace"] = {"applied_duration": 12, "duration": solarGraceHighestDuration, "stacks": solarGraceCount};
-
+        
         let surekiZealotsInsigniaCount = 0;
         let surekiZealotsInsigniaHighestDuration = 0;
         for (let aura in playerAurasData) {
@@ -103,6 +104,19 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             };
         };
         playerAurasData["Sureki Zealot's Insignia"] = {"applied_duration": 12, "duration": surekiZealotsInsigniaHighestDuration, "stacks": surekiZealotsInsigniaCount};
+
+        let araKaraSacbroodCount = 0;
+        let araKaraSacbroodHighestDuration = 0;
+        for (let aura in playerAurasData) {
+            if (aura.includes("Ara-Kara Sacbrood ")) { 
+                araKaraSacbroodCount += 1;
+                if (playerAurasData[aura].duration > araKaraSacbroodHighestDuration) {
+                    araKaraSacbroodHighestDuration = playerAurasData[aura].duration;
+                };
+                delete playerAurasData[aura];
+            };
+        };
+        playerAurasData["Ara-Kara Sacbrood"] = {"applied_duration": 60, "duration": araKaraSacbroodHighestDuration, "stacks": araKaraSacbroodCount};
 
         for (const auraName in playerAurasData) {
             if (excludedAuras.includes(auraName)) {
@@ -257,7 +271,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const resourcesCell = createElement("div", "priority-grid-resources-cell priority-grid-cell", null);
 
             const holyPowerDisplay = createElement("img", "priority-grid-holy-power-display");
-            holyPowerDisplay.src = `public/holy-power/holy-power-${timestampData.resources.holy_power}.png`;
+            holyPowerDisplay.src = `holy-power/holy-power-${timestampData.resources.holy_power}.png`;
             resourcesCell.appendChild(holyPowerDisplay);
 
             const manaBarContainer = createElement("div", "priority-grid-mana-bar-container", null);
@@ -635,6 +649,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             };
         };
     };
+    // window.addEventListener("resize", syncColumnWidths);
 };
 
 export { createPriorityBreakdown };

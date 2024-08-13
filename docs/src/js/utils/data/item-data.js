@@ -1,12 +1,12 @@
 // season 1
-// Ara-Kara, City of Echoes - Harvester's Edict, Ara-Kara Sacbrood (not implemented properly)
+// Ara-Kara, City of Echoes - Harvester's Edict, Ara-Kara Sacbrood
 // City of Threads - Viscous Coaglam (coefficient, not implemented)
 // The Stonevault - Scrapsinger's Symphony (coefficients), High Speaker's Accretion
 // The Dawnbreaker - Empowering Crystal of Anub'ikkaj
-// Mists of Tirna Scithe - Unbound Changeling (coefficient unsure)
-// The Necrotic Wake - Siphoning Phylactery Shard (coefficient)
+// Mists of Tirna Scithe - Unbound Changeling
+// The Necrotic Wake - Siphoning Phylactery Shard (coefficient not 100%)
 // Siege of Boralus
-// Grim Batol - Corrupted Egg Shell, Gale of Shadows (not currently in-game)
+// Grim Batol - Corrupted Egg Shell, Gale of Shadows
 
 // season 2 (not implemented)
 // Cinderbrew Meadery
@@ -124572,7 +124572,7 @@ const itemData = [
                 "id": 443414,
                 "description": "Equip: Your healing abilities have a chance to call the nearby metal to form a shield around an ally, absorbing *74256 damage.\n\nThe shield reacts explosively to fire, inflicting *4566 Fire damage to nearby enemies when struck.",
                 "effect_values": [
-                    {"base_value": 74256, "effect_type": "scalar", "effect_coefficient": 28.99190330505, "allocation_type": "flat_healing"},
+                    {"base_value": 74256, "effect_type": "scalar", "effect_coefficient": 28.99190330505 * 3, "allocation_type": "flat_healing"},
                     {"base_value": 4566, "effect_type": "scalar", "effect_coefficient": 6.17206573486, "allocation_type": "flat_damage"}
                 ]
             }
@@ -136986,20 +136986,20 @@ const itemData = [
             {
                 "name": "Charged Phylactery",
                 "id": 345549,
-                "description": "Sacrifice *345 health to charge the phylactery.<br><br>Healing a target below 30% health expends the phylactery's charge to amplify your spell, restoring *690 additional health to the target.",
+                "description": "Use: Sacrifice *297516 health to charge the phylactery.<br><br>Healing a target below 30% health expends the phylactery's charge to amplify your spell, restoring *595147 additional health to the target.",
                 "effect_values": [
-                    {"base_value": 345, "effect_type": "scalar", "effect_coefficient": 1.67952597141, "allocation_type": "rating_multiplier"},
-                    {"base_value": 690, "effect_type": "scalar", "effect_coefficient": 1.67952597141 * 2, "allocation_type": "rating_multiplier"},
+                    {"base_value": 297516, "effect_type": "scalar", "effect_coefficient": 44.53448 * 1.25, "allocation_type": "no_multiplier"},
+                    {"base_value": 595147, "effect_type": "scalar", "effect_coefficient": 89.08621 * 1.25, "allocation_type": "no_multiplier"},
                 ]
             }
         ],
         "name": "Siphoning Phylactery Shard",
         "item_slot": "Trinket",
-        "base_item_level": 158,
+        "base_item_level": 607,
         "quality": "Epic",
         "id": 178783,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_enchanting_70_chaosshard.jpg",
-        "stats": {},
+        "stats": {"Intellect": 2677},
         "gems": [],
         "enchantments": [],
         "limit": null

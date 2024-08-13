@@ -416,7 +416,7 @@ class RisingSunlightHolyShock(Spell):
     def __init__(self, caster):
         super().__init__("Holy Shock (Rising Sunlight)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=RisingSunlightHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
         
-    def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
+    def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets, initial_cast=True):
         bonus_crit = 0
         
         # tww season 1 tier 2pc
@@ -457,7 +457,7 @@ class RisingSunlightHolyShock(Spell):
                 cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
             self.spell_healing_modifier *= cumulative_healing_mod
         
-        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal, exclude_cast=not initial_cast, initial_cast=initial_cast)
         barrier_of_faith_absorb = 0
         if cast_success:
             # tww season 1 tier 2pc
@@ -509,7 +509,7 @@ class RisingSunlightHolyShock(Spell):
             if caster.is_talent_active("Glorious Dawn"):
                 holy_shock_reset_chance = 0.12
                 if random.random() <= holy_shock_reset_chance:
-                    self.reset_cooldown(caster, current_time)
+                    caster.abilities["Holy Shock"].reset_cooldown(caster, current_time)
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
@@ -646,20 +646,15 @@ class RisingSunlightHolyShock(Spell):
             if caster.is_talent_active("Second Sunrise"):
                 second_sunrise_chance = 0.15
                 if random.random() <= second_sunrise_chance:
-                    holy_shock = caster.abilities["Holy Shock"]
+                    holy_shock = self
                     
                     caster.global_cooldown = 0
                     holy_shock.SPELL_POWER_COEFFICIENT *= 0.3
-                    original_mana_cost = holy_shock.MANA_COST
-                    holy_shock.MANA_COST = 0
-                    holy_shock.mana_cost = 0
                     holy_shock.current_charges += 1
                     
                     holy_shock.cast_healing_spell(caster, targets, current_time, is_heal, glimmer_targets, initial_cast=False)
                     
                     holy_shock.SPELL_POWER_COEFFICIENT /= 0.3                  
-                    holy_shock.MANA_COST = original_mana_cost
-                    holy_shock.mana_cost = original_mana_cost
                     caster.global_cooldown = caster.base_global_cooldown / caster.haste_multiplier
                     
                     return
@@ -716,7 +711,7 @@ class DivineTollHolyShock(Spell):
     def __init__(self, caster):
         super().__init__("Holy Shock (Divine Toll)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, is_heal=True)
         
-    def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
+    def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets, initial_cast=True):
         bonus_crit = 0
         
         # tww season 1 tier 2pc
@@ -757,7 +752,7 @@ class DivineTollHolyShock(Spell):
                 cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
             self.spell_healing_modifier *= cumulative_healing_mod
             
-        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal, exclude_cast=not initial_cast, initial_cast=initial_cast)
         total_glimmer_healing = 0
         barrier_of_faith_absorb = 0
         if cast_success:
@@ -810,7 +805,7 @@ class DivineTollHolyShock(Spell):
             if caster.is_talent_active("Glorious Dawn"):
                 holy_shock_reset_chance = 0.12
                 if random.random() <= holy_shock_reset_chance:
-                    self.reset_cooldown(caster, current_time)
+                    caster.abilities["Holy Shock"].reset_cooldown(caster, current_time)
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
@@ -950,20 +945,15 @@ class DivineTollHolyShock(Spell):
             if caster.is_talent_active("Second Sunrise"):
                 second_sunrise_chance = 0.15
                 if random.random() <= second_sunrise_chance:
-                    holy_shock = caster.abilities["Holy Shock"]
+                    holy_shock = self
                     
                     caster.global_cooldown = 0
                     holy_shock.SPELL_POWER_COEFFICIENT *= 0.3
-                    original_mana_cost = holy_shock.MANA_COST
-                    holy_shock.MANA_COST = 0
-                    holy_shock.mana_cost = 0
                     holy_shock.current_charges += 1
                     
                     holy_shock.cast_healing_spell(caster, targets, current_time, is_heal, glimmer_targets, initial_cast=False)
                     
                     holy_shock.SPELL_POWER_COEFFICIENT /= 0.3                  
-                    holy_shock.MANA_COST = original_mana_cost
-                    holy_shock.mana_cost = original_mana_cost
                     caster.global_cooldown = caster.base_global_cooldown / caster.haste_multiplier
                     
                     return
@@ -980,7 +970,7 @@ class DivineResonanceHolyShock(Spell):
     def __init__(self, caster):
         super().__init__("Holy Shock (Divine Resonance)", base_mana_cost=HolyShock.BASE_MANA_COST, holy_power_gain=DivineTollHolyShock.HOLY_POWER_GAIN, is_heal=True, off_gcd=True)
         
-    def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
+    def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets, initial_cast=True):
         bonus_crit = 0
         
         # tww season 1 tier 2pc
@@ -1021,7 +1011,7 @@ class DivineResonanceHolyShock(Spell):
                 cumulative_healing_mod += 0.05 * caster.active_auras["Bestow Light"].current_stacks
             self.spell_healing_modifier *= cumulative_healing_mod
             
-        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal, exclude_cast=not initial_cast, initial_cast=initial_cast)
         barrier_of_faith_absorb = 0
         if cast_success:
             # tww season 1 tier 2pc
@@ -1073,7 +1063,7 @@ class DivineResonanceHolyShock(Spell):
             if caster.is_talent_active("Glorious Dawn"):
                 holy_shock_reset_chance = 0.12
                 if random.random() <= holy_shock_reset_chance:
-                    self.reset_cooldown(caster, current_time)
+                    caster.abilities["Holy Shock"].reset_cooldown(caster, current_time)
             
             # tyr's deliverance extension
             if "Tyr's Deliverance (target)" in targets[0].target_active_buffs:
@@ -1170,20 +1160,15 @@ class DivineResonanceHolyShock(Spell):
             if caster.is_talent_active("Second Sunrise"):
                 second_sunrise_chance = 0.15
                 if random.random() <= second_sunrise_chance:
-                    holy_shock = caster.abilities["Holy Shock"]
+                    holy_shock = self
                     
                     caster.global_cooldown = 0
                     holy_shock.SPELL_POWER_COEFFICIENT *= 0.3
-                    original_mana_cost = holy_shock.MANA_COST
-                    holy_shock.MANA_COST = 0
-                    holy_shock.mana_cost = 0
                     holy_shock.current_charges += 1
                     
                     holy_shock.cast_healing_spell(caster, targets, current_time, is_heal, glimmer_targets, initial_cast=False)
                     
                     holy_shock.SPELL_POWER_COEFFICIENT /= 0.3                  
-                    holy_shock.MANA_COST = original_mana_cost
-                    holy_shock.mana_cost = original_mana_cost
                     caster.global_cooldown = caster.base_global_cooldown / caster.haste_multiplier
                     
                     return

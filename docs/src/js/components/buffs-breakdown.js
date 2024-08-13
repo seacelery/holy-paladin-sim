@@ -162,7 +162,7 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
             for (let buffName in buffsData) {
                 if (buffName.includes("Solar Grace")) {
                     const solarGraceData = buffsData[buffName];
-                    solarGraceUptime += solarGraceData.uptime;
+                    solarGraceUptime = solarGraceData.uptime;
                     solarGraceAverageDuration = solarGraceData.average_duration;
                     solarGraceTotalDuration += solarGraceData.total_duration;
                     solarGraceCount += solarGraceData.count;
@@ -197,6 +197,32 @@ const createBuffsBreakdown = (simulationData, containerCount) => {
                 };
             };
             buffsData["Sureki Zealot's Insignia"] = {"average_duration": surekiZealotsInsigniaAverageDuration, "total_duration": surekiZealotsInsigniaTotalDuration, "count": surekiZealotsInsigniaCount, "uptime": surekiZealotsInsigniaUptime};
+        };
+
+        let araKaraSacbroodActive = false;
+        for (let buffName in buffsData) {
+            if (buffName.includes("Ara-Kara Sacbrood")) {
+                araKaraSacbroodActive = true;
+            };
+        };
+        if (isTargetBuffs && araKaraSacbroodActive) {
+            let araKaraSacbroodUptime = 0;
+            let araKaraSacbroodAverageDuration = 0;
+            let araKaraSacbroodTotalDuration = 0;
+            let araKaraSacbroodCount = 0;
+            for (let buffName in buffsData) {
+                if (buffName.includes("Ara-Kara Sacbrood")) {
+                    
+                    const araKaraSacbroodData = buffsData[buffName];
+                    araKaraSacbroodUptime = araKaraSacbroodData.uptime;
+                    araKaraSacbroodAverageDuration = araKaraSacbroodData.average_duration;
+                    araKaraSacbroodTotalDuration += araKaraSacbroodData.total_duration;
+                    araKaraSacbroodCount += araKaraSacbroodData.count;
+
+                    delete buffsData[buffName];
+                };
+            };
+            buffsData["Ara-Kara Sacbrood"] = {"average_duration": araKaraSacbroodAverageDuration, "total_duration": araKaraSacbroodTotalDuration, "count": araKaraSacbroodCount, "uptime": araKaraSacbroodUptime};
         };
 
         let buffsBreakdownArray = Object.entries(buffsData);

@@ -2678,7 +2678,6 @@ class AraKaraSacbrood(Buff):
     count = 0
 
     def __init__(self, caster):
-        AraKaraSacbrood.count += 1
         self.count = AraKaraSacbrood.count
 
         super().__init__(f"Ara-Kara Sacbrood", 60, base_duration=60)

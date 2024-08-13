@@ -1051,6 +1051,54 @@ const itemDataEffects = [
         "enchantments": [],
         "limit": null
     },
+    {
+        "effects": [
+            {
+                "name": "Charged Phylactery",
+                "id": 345549,
+                "description": "Use: Sacrifice *297516 health to charge the phylactery.<br><br>Healing a target below 30% health expends the phylactery's charge to amplify your spell, restoring *595147 additional health to the target.",
+                "effect_values": [
+                    {"base_value": 297516, "effect_type": "scalar", "effect_coefficient": 44.53448 * 1.25, "allocation_type": "no_multiplier"},
+                    {"base_value": 595147, "effect_type": "scalar", "effect_coefficient": 89.08621 * 1.25, "allocation_type": "no_multiplier"},
+                ]
+            }
+        ],
+        "name": "Siphoning Phylactery Shard",
+        "item_slot": "Trinket",
+        "base_item_level": 607,
+        "quality": "Epic",
+        "id": 178783,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_enchanting_70_chaosshard.jpg",
+        "stats": {"Intellect": 2677},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Scrapsinger's Symphony",
+                "id": 443414,
+                "description": "Equip: Your healing abilities have a chance to call the nearby metal to form a shield around an ally, absorbing *74256 damage.\n\nThe shield reacts explosively to fire, inflicting *4566 Fire damage to nearby enemies when struck.",
+                "effect_values": [
+                    {"base_value": 74256, "effect_type": "scalar", "effect_coefficient": 28.99190330505 * 3, "allocation_type": "flat_healing"},
+                    {"base_value": 4566, "effect_type": "scalar", "effect_coefficient": 6.17206573486, "allocation_type": "flat_damage"}
+                ]
+            }
+        ],
+        "name": "Scrapsinger's Symphony",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Epic",
+        "id": 219302,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_blacksmithing_craftedoptional_engineering_color1.jpg",
+        "stats": {
+            "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
 ];
 
 export default itemDataEffects;
