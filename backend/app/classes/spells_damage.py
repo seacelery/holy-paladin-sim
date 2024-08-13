@@ -228,7 +228,7 @@ class Judgment(Spell):
 class CrusaderStrike(Spell):
     
     # uses attack power instead of spell power
-    SPELL_POWER_COEFFICIENT = 1.071 * 1.04 * 1.13
+    SPELL_POWER_COEFFICIENT = 1.071 * 1.04 * 1.58
     BASE_COOLDOWN = 7.75
     MANA_COST = 0.006
     HOLY_POWER_GAIN = 1
@@ -237,10 +237,10 @@ class CrusaderStrike(Spell):
         super().__init__("Crusader Strike", mana_cost=CrusaderStrike.MANA_COST, cooldown=CrusaderStrike.BASE_COOLDOWN, holy_power_gain=CrusaderStrike.HOLY_POWER_GAIN, hasted_cooldown=True) 
         self.is_damage_spell = True
         
-        # holy infusion
-        if caster.is_talent_active("Holy Infusion"):
-            self.holy_power_gain = 2
-            self.spell_damage_modifier = 1.5
+        # holy infusion (removed)
+        # if caster.is_talent_active("Holy Infusion"):
+        #     self.holy_power_gain = 2
+        #     self.spell_damage_modifier = 1.5
         
     def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):  
         # reclamation

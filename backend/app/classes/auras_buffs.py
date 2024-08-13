@@ -1151,16 +1151,16 @@ class AlchemicalChaosAir(Buff):
         self.chosen_stats = []
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("haste", 6002)
+        caster.update_stat("haste", 3470)
         self.chosen_stats = random.sample(["crit", "versatility", "mastery"], 2)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, -405)
+            caster.update_stat(stat, -290)
         
     def remove_effect(self, caster, current_time):
-        caster.update_stat("haste", -6002)
+        caster.update_stat("haste", -3470)
         apply_alchemical_chaos_aura(caster, current_time)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, 405)
+            caster.update_stat(stat, 290)
         
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
@@ -1173,16 +1173,16 @@ class AlchemicalChaosFire(Buff):
         super().__init__("Alchemical Chaos: Fire", 30, base_duration=30)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("crit", 6002)
+        caster.update_stat("crit", 3470)
         self.chosen_stats = random.sample(["haste", "versatility", "mastery"], 2)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, -405)
+            caster.update_stat(stat, -290)
         
     def remove_effect(self, caster, current_time):
-        caster.update_stat("crit", -6002)
+        caster.update_stat("crit", -3470)
         apply_alchemical_chaos_aura(caster, current_time)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, 405)
+            caster.update_stat(stat, 290)
         
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
@@ -1195,16 +1195,16 @@ class AlchemicalChaosFrost(Buff):
         super().__init__("Alchemical Chaos: Frost", 30, base_duration=30)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("versatility", 6002)
+        caster.update_stat("versatility", 3470)
         self.chosen_stats = random.sample(["crit", "haste", "mastery"], 2)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, -405)
+            caster.update_stat(stat, -290)
         
     def remove_effect(self, caster, current_time):
-        caster.update_stat("versatility", -6002)
+        caster.update_stat("versatility", -3470)
         apply_alchemical_chaos_aura(caster, current_time)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, 405)
+            caster.update_stat(stat, 290)
         
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
@@ -1217,16 +1217,16 @@ class AlchemicalChaosEarth(Buff):
         super().__init__("Alchemical Chaos: Earth", 30, base_duration=30)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", 4082)
+        caster.update_stat("mastery", 3470)
         self.chosen_stats = random.sample(["crit", "versatility", "haste"], 2)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, -340)
+            caster.update_stat(stat, -290)
         
     def remove_effect(self, caster, current_time):
-        caster.update_stat("mastery", -4082)
+        caster.update_stat("mastery", -3470)
         apply_alchemical_chaos_aura(caster, current_time)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, 340)
+            caster.update_stat(stat, 290)
         
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
@@ -1239,10 +1239,10 @@ class FlaskOfTemperedSwiftness(Buff):
         super().__init__("Flask of Tempered Swiftness", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("haste", 3323)
+        caster.update_stat("haste", 2825)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("haste", -3323)
+        caster.update_stat("haste", -2825)
             
 
 class FlaskOfTemperedAggression(Buff):
@@ -1251,10 +1251,10 @@ class FlaskOfTemperedAggression(Buff):
         super().__init__("Flask of Tempered Aggression", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("crit", 3323)
+        caster.update_stat("crit", 2825)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("crit", -3323)
+        caster.update_stat("crit", -2825)
             
 
 class FlaskOfTemperedMastery(Buff):
@@ -1263,10 +1263,10 @@ class FlaskOfTemperedMastery(Buff):
         super().__init__("Flask of Tempered Mastery", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", 3323)
+        caster.update_stat("mastery", 2825)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", -3323)
+        caster.update_stat("mastery", -2825)
             
     
 class FlaskOfTemperedVersatility(Buff):
@@ -1275,10 +1275,10 @@ class FlaskOfTemperedVersatility(Buff):
         super().__init__("Flask of Tempered Versatility", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("versatility", 3323)
+        caster.update_stat("versatility", 2825)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("versatility", -3323)
+        caster.update_stat("versatility", -2825)
 
 
 class FlaskOfSavingGraces(Buff):
@@ -3481,10 +3481,10 @@ class Liberation(Buff):
         self.mana_cost = caster.abilities["Judgment"].mana_cost * caster.base_mana
             
     def apply_effect(self, caster, current_time=None):
-        caster.abilities["Judgment"].mana_cost_modifier *= 1 - (4000 / self.mana_cost)
+        caster.abilities["Judgment"].mana_cost_modifier *= 1 - (6000 / self.mana_cost)
         
     def remove_effect(self, caster, current_time=None):
-        caster.abilities["Judgment"].mana_cost_modifier /= 1 - (4000 / self.mana_cost)
+        caster.abilities["Judgment"].mana_cost_modifier /= 1 - (6000 / self.mana_cost)
         
 
 class BlessingOfTheForge(Buff):
@@ -3718,9 +3718,6 @@ class BlessedWeaponGrip(Buff):
         super().__init__("Blessed Weapon Grip", 30, base_duration=30, current_stacks=10, max_stacks=10)   
         embellishment_effect = caster.embellishments["Blessed Weapon Grip"]["effect"]
         embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
-        
-        print(embellishment_effect)
-        print(embellishment_values)
         
         self.embellishment_first_value = embellishment_values[0]
         self.highest_stat = caster.find_highest_secondary_stat_rating()

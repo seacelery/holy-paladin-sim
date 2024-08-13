@@ -93,7 +93,6 @@ test_active_spec_talents = {
         "Tirion's Devotion": {"ranks": {"current rank": 0, "max rank": 1}},
         "Unending Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Awestruck": {"ranks": {"current rank": 1, "max rank": 1}},
-        "Holy Infusion": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row5": {
         "Divine Favor": {"ranks": {"current rank": 1, "max rank": 1}},

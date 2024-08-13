@@ -907,7 +907,7 @@ priorityListInfoModalContainer.innerHTML = `
     Timers = [30]+<br>
     Previous Ability = Daybreak<br>
     Light of Dawn overhealing > 70%<br>
-    Holy Infusion talented
+    Awestruck talented
 `;
 
 const addPotionToPriorityList = (potionName, potionTimers, repeat = false) => {

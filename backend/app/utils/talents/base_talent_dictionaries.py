@@ -156,15 +156,14 @@ base_active_spec_talents = {
         "Beacon of the Lightbringer": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row4": {
-        "Moment of Compassion": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Resplendent Light": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Tower of Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
         "Tirion's Devotion": {"ranks": {"current rank": 0, "max rank": 1}},
         "Unending Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Awestruck": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Holy Infusion": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row5": {
-        "Divine Revelations": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Moment of Compassion": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Resplendent Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Holy Prism": {"ranks": {"current rank": 0, "max rank": 1}},
         "Barrier of Faith": {"ranks": {"current rank": 0, "max rank": 1}},
         "Unwavering Spirit": {"ranks": {"current rank": 0, "max rank": 1}},
@@ -186,7 +185,7 @@ base_active_spec_talents = {
         "Commanding Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Glistening Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
         "Breaking Dawn": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Tower of Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Revelations": {"ranks": {"current rank": 0, "max rank": 1}},
         "Divine Glimpse": {"ranks": {"current rank": 0, "max rank": 1}},
         "Bestow Light": {"ranks": {"current rank": 0, "max rank": 1}}
     },
@@ -232,15 +231,14 @@ base_active_spec_talents_ptr = {
         "Beacon of the Lightbringer": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row4": {
-        "Moment of Compassion": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Resplendent Light": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Tower of Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
         "Tirion's Devotion": {"ranks": {"current rank": 0, "max rank": 1}},
         "Unending Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Awestruck": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Holy Infusion": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row5": {
-        "Divine Revelations": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Moment of Compassion": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Resplendent Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Holy Prism": {"ranks": {"current rank": 0, "max rank": 1}},
         "Barrier of Faith": {"ranks": {"current rank": 0, "max rank": 1}},
         "Unwavering Spirit": {"ranks": {"current rank": 0, "max rank": 1}},
@@ -262,7 +260,7 @@ base_active_spec_talents_ptr = {
         "Commanding Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Glistening Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
         "Breaking Dawn": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Tower of Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Revelations": {"ranks": {"current rank": 0, "max rank": 1}},
         "Divine Glimpse": {"ranks": {"current rank": 0, "max rank": 1}},
         "Bestow Light": {"ranks": {"current rank": 0, "max rank": 1}}
     },

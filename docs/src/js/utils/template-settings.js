@@ -397,12 +397,6 @@ const templateSpecTalents = {
                 "max rank": 1
             }
         },
-        "Holy Infusion": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
         "Moment of Compassion": {
             "ranks": {
                 "current rank": 0,
@@ -909,7 +903,6 @@ const templateUpdateSpecTalents = {
     "Beacon of the Lightbringer": 1,
     "Light's Conviction": 1,
     "Awestruck": 1,
-    "Holy Infusion": 0,
     "Moment of Compassion": 0,
     "Resplendent Light": 1,
     "Tirion's Devotion": 0,
