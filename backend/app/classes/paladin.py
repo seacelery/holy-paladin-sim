@@ -16,7 +16,7 @@ from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPoti
 from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
 from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell, HolyBulwarkSacredWeapon
 from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, IncarnatesMarkOfFire, BroodkeepersPromiseHoT, MorningStar, RiteOfAdjurationBuff, RiteOfSanctification, DeliberateIncubation, OvinaxsMercurialEggBuff
-from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus, MiniatureSingingStone, HighSpeakersAccretion, SiphoningPhylacteryShard, CreepingCoagulum, OvinaxsMercurialEgg, TreacherousTransmitter, ImperfectAscendancySerumSpell
+from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus, MiniatureSingingStone, HighSpeakersAccretion, SiphoningPhylacteryShard, CreepingCoagulum, OvinaxsMercurialEgg, TreacherousTransmitter, ImperfectAscendancySerumSpell, SpymastersWebSpell, CorruptedEggShell
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents, base_active_class_talents_ptr, base_active_spec_talents_ptr, base_active_lightsmith_talents, base_herald_of_the_sun_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
 from .api_client import APIClient
@@ -582,6 +582,9 @@ class Paladin:
         if self.is_talent_active("Blessing of Summer"):
             self.abilities["Blessing of the Seasons"] = BlessingOfTheSeasons(self)
             
+        if self.is_talent_active("Holy Bulwark"):
+            self.abilities["Holy Armament"] = HolyBulwarkSacredWeapon(self)
+            
         # trinkets
         if self.is_trinket_equipped("Miniature Singing Stone"):
             self.abilities["Miniature Singing Stone"] = MiniatureSingingStone(self)
@@ -622,8 +625,12 @@ class Paladin:
         if self.is_trinket_equipped("Imperfect Ascendancy Serum"):
             self.abilities["Imperfect Ascendancy Serum"] = ImperfectAscendancySerumSpell(self)
             
-        if self.is_talent_active("Holy Bulwark"):
-            self.abilities["Holy Armament"] = HolyBulwarkSacredWeapon(self)
+        if self.is_trinket_equipped("Spymaster's Web"):
+            self.abilities["Spymaster's Web"] = SpymastersWebSpell(self)
+            
+        if self.is_trinket_equipped("Corrupted Egg Shell"):
+            self.abilities["Corrupted Egg Shell"] = CorruptedEggShell(self)
+            
             
     def is_talent_active(self, talent_name):
         for row, talents in self.class_talents.items():

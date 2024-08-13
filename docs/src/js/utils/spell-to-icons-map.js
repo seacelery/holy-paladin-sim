@@ -125,6 +125,7 @@ const spellToIconsMap = {
     "Treacherous Transmitter": "https://wow.zamimg.com/images/wow/icons/large/inv_etherealraid_communicator_color1.jpg",
     "Imperfect Ascendancy Serum": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_dpotion_a25.jpg",
     "Corrupted Egg Shell": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_cat_trinket09.jpg",
+    "Spymaster's Web": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_nightelfspyglass.jpg",
 
     // enchants
     "Dreaming Devotion": "https://render.worldofwarcraft.com/eu/icons/56/item_herbd.jpg",

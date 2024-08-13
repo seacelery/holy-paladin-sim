@@ -3719,6 +3719,9 @@ class BlessedWeaponGrip(Buff):
         embellishment_effect = caster.embellishments["Blessed Weapon Grip"]["effect"]
         embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
         
+        print(embellishment_effect)
+        print(embellishment_values)
+        
         self.embellishment_first_value = embellishment_values[0]
         self.highest_stat = caster.find_highest_secondary_stat_rating()
         
@@ -3727,3 +3730,43 @@ class BlessedWeaponGrip(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.update_stat(self.highest_stat, -self.embellishment_first_value * self.current_stacks)
+        
+
+class SpymastersWebStacks(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Spymaster's Web Stacks", 10000, base_duration=10000, current_stacks=1, max_stacks=40)   
+        trinket_effect = caster.trinkets["Spymaster's Web"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*?(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_first_value * self.current_stacks)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value * self.current_stacks)
+    
+
+class SpymastersWebBuff(Buff):
+        
+    def __init__(self, caster):
+        super().__init__("Spymaster's Web", 20, base_duration=20)   
+        trinket_effect = caster.trinkets["Spymaster's Web"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_second_value = trinket_values[1]
+        self.stack_count = 0
+        
+    def apply_effect(self, caster, current_time=None):
+        self.stack_count = caster.active_auras["Spymaster's Web Stacks"].current_stacks
+        
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_second_value * self.stack_count)
+        
+        caster.active_auras["Spymaster's Web Stacks"].remove_effect(caster)
+        del caster.active_auras["Spymaster's Web Stacks"]
+        update_self_buff_data(caster.self_buff_breakdown, "Spymaster's Web Stacks", current_time, "expired")
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_second_value * self.stack_count)
+        self.stack_count = 0

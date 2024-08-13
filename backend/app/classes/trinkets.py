@@ -2,7 +2,7 @@ import re
 import random
 
 from .spells import Spell
-from .auras_buffs import MirrorOfFracturedTomorrowsBuff, SmolderingSeedlingActive, NymuesUnravelingSpindleBuff, OvinaxsMercurialEggPaused, EtherealPowerlink, ImperfectAscendancySerumBuff
+from .auras_buffs import MirrorOfFracturedTomorrowsBuff, SmolderingSeedlingActive, NymuesUnravelingSpindleBuff, OvinaxsMercurialEggPaused, EtherealPowerlink, ImperfectAscendancySerumBuff, SpymastersWebBuff
 from ..utils.misc_functions import update_mana_gained, update_spell_data_heals, update_spell_data_casts, add_talent_healing_multipliers
 
 
@@ -271,3 +271,52 @@ class ImperfectAscendancySerumSpell(Trinket):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:          
             caster.apply_buff_to_self(ImperfectAscendancySerumBuff(caster), current_time)
+            
+
+class SpymastersWebSpell(Trinket):
+    
+    BASE_COOLDOWN = 20
+    
+    def __init__(self, caster):
+        super().__init__("Spymaster's Web", cooldown=SpymastersWebSpell.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:          
+            caster.apply_buff_to_self(SpymastersWebBuff(caster), current_time)
+            
+
+class CorruptedEggShell(Trinket):
+    
+    BASE_COOLDOWN = 120
+    
+    def __init__(self, caster):
+        super().__init__("Corrupted Egg Shell", cooldown=CorruptedEggShell.BASE_COOLDOWN, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
+        if cast_success:          
+            update_spell_data_casts(caster.ability_breakdown, self.name, 0, 0, 0)
+            
+            trinket_effect = caster.trinkets[self.name]["effect"]
+            trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+            
+            # absorb
+            self.trinket_first_value = trinket_values[0]
+            
+            target_count = 1
+            targets = random.sample(caster.potential_healing_targets, target_count)
+            
+            for target in targets:            
+                corrupted_egg_shell_absorb = self.trinket_first_value * caster.versatility_multiplier
+
+                target.receive_heal(corrupted_egg_shell_absorb, caster)
+                update_spell_data_heals(caster.ability_breakdown, self.name, target, corrupted_egg_shell_absorb, False)
+                
+                caster.handle_beacon_healing(self.name, target, corrupted_egg_shell_absorb, current_time)
+            
+            corrupted_egg_shell_mana_gain = caster.max_mana * 0.05
+            caster.mana += corrupted_egg_shell_mana_gain
+            update_mana_gained(caster.ability_breakdown, self.name, corrupted_egg_shell_mana_gain)
+                
+            

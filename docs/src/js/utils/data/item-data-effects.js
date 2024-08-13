@@ -1026,6 +1026,31 @@ const itemDataEffects = [
         "enchantments": [],
         "limit": null
     },
+    {   
+        "effects": [
+            {
+                "name": "Spymaster's Web",
+                "id": 220202,
+                "description": "Equip: Your damaging spells dispatch a spider to spy on your foes, increasing your Intellect by *56 per report received. Stacks up to 40 times. This effect may only occur every 6 sec. \nUse: Use your accumulated knowledge to strike when the time is right, granting *541 Intellect per report for 20 sec and consuming their passive effect. (20 Sec Cooldown)",
+                "effect_values": [
+                    {"base_value": 56, "effect_type": "scalar", "effect_coefficient": 0.014709, "allocation_type": "no_multiplier"},
+                    {"base_value": 541, "effect_type": "scalar", "effect_coefficient": 0.141408, "allocation_type": "no_multiplier"}
+                ]
+            }
+        ],
+        "name": "Spymaster's Web",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 220202,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_nightelfspyglass.jpg",
+        "stats": {
+            "Mastery": 1001
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
 ];
 
 export default itemDataEffects;

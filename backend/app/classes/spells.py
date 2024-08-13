@@ -694,6 +694,7 @@ class Spell:
     def try_trigger_conditional_effects(self, caster, targets, current_time):
         from .spells_passives import EchoingTyrstoneProc, BlossomOfAmirdrassilProc
         from .trinkets import EchoingTyrstone
+        from .auras_buffs import SpymastersWebStacks
         
         if caster.is_trinket_equipped("Echoing Tyrstone"):
             echoing_tyrstone_cast = EchoingTyrstone(caster)
@@ -712,6 +713,23 @@ class Spell:
             if current_time >= blossom_proc.AVERAGE_TIME_TO_PROC and caster.conditional_effect_cooldowns[blossom_proc.name] <= 0:
                 caster.conditional_effect_cooldowns[blossom_proc.name] = blossom_proc.BASE_COOLDOWN
                 blossom_proc.trigger_proc(caster, targets, current_time)
+                
+        if caster.is_trinket_equipped("Spymaster's Web"):
+            if self.name in ["Judgment", "Crusader Strike", "Consecration"] and caster.conditional_effect_cooldowns.get("Spymaster's Web", 0) <= 0:
+                caster.conditional_effect_cooldowns["Spymaster's Web"] = 6
+                if "Spymaster's Web Stacks" not in caster.active_auras:
+                    caster.apply_buff_to_self(SpymastersWebStacks(caster), current_time, stacks_to_apply=1, max_stacks=40)
+                else:
+                    spymasters_web_stacks = caster.active_auras["Spymaster's Web Stacks"]
+                    
+                    if spymasters_web_stacks.current_stacks < spymasters_web_stacks.max_stacks:
+                        spymasters_web_stacks.remove_effect(caster)
+                        spymasters_web_stacks.current_stacks += 1
+                        spymasters_web_stacks.apply_effect(caster)
+                    
+                    spymasters_web_stacks.duration = spymasters_web_stacks.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Spymaster's Web Stacks", current_time, "applied", spymasters_web_stacks.duration, spymasters_web_stacks.current_stacks)       
+                
                           
     def collect_priority_breakdown_data(self, caster, targets=None, exclude_target_auras=False):
         # add auras to dictionaries and check current spell cooldownsfor display in priority list example

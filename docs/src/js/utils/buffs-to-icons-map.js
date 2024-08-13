@@ -202,6 +202,9 @@ const buffsToIconsMap = {
     "Cryptic Instructions": "https://wow.zamimg.com/images/wow/icons/large/ability_racial_etherealconnection.jpg",
     "Ethereal Powerlink": "https://wow.zamimg.com/images/wow/icons/large/inv_etherealraid_communicator_color1.jpg",
 
+    "Spymaster's Web Stacks": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_nightelfspyglass.jpg",
+    "Spymaster's Web": "https://wow.zamimg.com/images/wow/icons/large/ability_spy.jpg",
+
     "Fateweaved Needle": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_02.jpg",
     "Sureki Zealot's Insignia": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_113.jpg",
 
