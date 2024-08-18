@@ -181,7 +181,7 @@ class AvengingCrusaderSpell(Spell):
             
             # rising sunlight
             if caster.is_talent_active("Rising Sunlight"):
-                caster.apply_buff_to_self(RisingSunlight(caster), current_time, stacks_to_apply=2, max_stacks=4)
+                caster.apply_buff_to_self(RisingSunlight(caster), current_time, stacks_to_apply=1, max_stacks=4)
             
             # sun's avatar
             if caster.is_talent_active("Dawnlight") and caster.is_talent_active("Sun's Avatar"):
@@ -190,7 +190,7 @@ class AvengingCrusaderSpell(Spell):
                 dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" in target.target_active_buffs]        
                 non_dawnlight_targets = [target for target in caster.potential_healing_targets if "Dawnlight (HoT)" not in target.target_active_buffs]
                 # dawnlights_to_apply = max_dawnlights - len(dawnlight_targets)
-                dawnlights_to_apply = 4
+                dawnlights_to_apply = 2
                 chosen_targets = random.sample(non_dawnlight_targets, dawnlights_to_apply)
                 for target in chosen_targets:
                     target.apply_buff_to_target(Dawnlight(caster, 8 * 1.2), current_time, caster=caster)
