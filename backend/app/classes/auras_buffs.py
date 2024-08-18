@@ -768,7 +768,7 @@ class SophicDevotion(Buff):
 
 class PowerOfTheSilverHand(Buff):
     
-    BASE_PPM = 2
+    BASE_PPM = 1
     
     def __init__(self):
         super().__init__("Power of the Silver Hand", 10, base_duration=10)
