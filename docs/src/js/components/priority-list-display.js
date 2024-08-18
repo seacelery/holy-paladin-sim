@@ -101,6 +101,8 @@ const createPriorityListItem = (index) => {
         if (spellToIconsMap.hasOwnProperty(abilityText)) {
             priorityListItemIcon.src = spellToIconsMap[abilityText];
             e.target.value = abilityText;
+        } else if (abilityText.includes("Reset")) {
+            priorityListItemIcon.src = "https://wow.zamimg.com/images/wow/icons/large/trade_engineering.jpg";
         } else {
             priorityListItemIcon.src = "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg";
         };
@@ -285,6 +287,8 @@ const createPriorityListDisplay = () => {
         if (spellToIconsMap.hasOwnProperty(abilityText)) {
             firstPriorityListItemIcon.src = spellToIconsMap[abilityText];
             firstPriorityListItemAbilityText.value = abilityText;
+        } else if (abilityText.includes("Reset")) {
+            firstPriorityListItemIcon.src = "https://wow.zamimg.com/images/wow/icons/large/trade_engineering.jpg";
         } else {
             firstPriorityListItemIcon.src = "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg";
         };
