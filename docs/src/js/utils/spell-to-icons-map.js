@@ -137,6 +137,7 @@ const spellToIconsMap = {
 
     // misc
     "Wait": "https://render.worldofwarcraft.com/eu/icons/56/inv_gauntlets_06.jpg",
+    "Reset": "https://wow.zamimg.com/images/wow/icons/large/trade_engineering.jpg",
     "Leech": "https://render.worldofwarcraft.com/eu/icons/56/spell_shadow_lifedrain02.jpg",
     "Source of Magic": "https://render.worldofwarcraft.com/eu/icons/56/ability_evoker_blue_01.jpg",
     "Mana Spring Totem": "https://render.worldofwarcraft.com/eu/icons/56/spell_nature_manaregentotem.jpg",

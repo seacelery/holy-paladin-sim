@@ -506,6 +506,8 @@ const convertPasteToPriorityList = (pastedCode) => {
 
                 if (spellToIconsMap.hasOwnProperty(abilityText.textContent)) {
                     abilityIcon.src = spellToIconsMap[abilityText.textContent];
+                } else if (abilityText.textContent.includes("Reset")) {
+                    abilityIcon.src = "https://wow.zamimg.com/images/wow/icons/large/trade_engineering.jpg";
                 } else {
                     abilityIcon.src = "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg";
                 };
@@ -888,6 +890,7 @@ priorityListInfoModalContainer.innerHTML = `
     Talent name talented/not talented<br>
     Previous Ability<br>
     Overhealing<br>
+    Reset buff name<br>
     <br>
     Operations<div id="info-modal-divider"></div>
     Condition = or <span class="aligned">!=</span> Value<br>

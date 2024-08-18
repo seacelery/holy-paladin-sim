@@ -262,7 +262,7 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
             const spellCell = createElement("div", "priority-grid-name-cell priority-grid-cell", null);
             const spellIconContainer = createElement("div", "priority-grid-spell-icon-container", null);
             const spellIcon = createElement("img", "priority-grid-spell-icon", null);
-            spellIcon.src = spellToIconsMap[timestampData.spell_name];
+            spellIcon.src = spellToIconsMap[timestampData.spell_name] || "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg";
             
             spellIconContainer.appendChild(spellIcon);
             spellCell.appendChild(spellIconContainer);

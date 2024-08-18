@@ -215,7 +215,7 @@ def parse_condition(condition_str):
                 
         if "Potion" in action_name:
             condition["extra_condition"] = "potion"
-
+            
         current_group.append(condition)
 
         if i + 2 >= len(parts) or parts[i + 2].strip().lower() not in ["and", "or"]:
@@ -305,7 +305,6 @@ def condition_to_lambda(sim_instance, all_conditions):
                     if not sim_instance.paladin.is_talent_active(condition["name"]):
                         talented = True
                     result = talented
-                    print(result)
                     
                 elif condition["keyword"].lower() == "mana":
                     mana = sim_instance.paladin.mana                 

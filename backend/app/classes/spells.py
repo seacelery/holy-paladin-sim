@@ -776,3 +776,18 @@ class Wait(Spell):
 
     def __init__(self):
         super().__init__("Wait")
+        
+
+class Reset(Spell):
+    
+    def __init__(self, caster, action):
+        self.buff_to_reset = action.split("Reset ")[1]
+        super().__init__(f"Reset {self.buff_to_reset}", cooldown=0, off_gcd=True)
+        
+    def cast_healing_spell(self, caster, targets, current_time, is_heal):
+        if self.buff_to_reset in caster.active_auras:
+            caster.active_auras[self.buff_to_reset].remove_effect(caster, current_time)
+            del caster.active_auras[self.buff_to_reset]
+            update_self_buff_data(caster.self_buff_breakdown, self.buff_to_reset, current_time, "expired")    
+            self_auras, target_auras, total_target_aura_counts, spell_cooldowns, current_stats  = self.collect_priority_breakdown_data(caster, targets)
+            update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", "Reset", self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)

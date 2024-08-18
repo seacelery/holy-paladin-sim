@@ -1,17 +1,13 @@
 import random
 import pprint
-import inspect
 import sys
 import copy
 import time
-import cProfile
-import json
 import eventlet
 from flask_socketio import emit
 
-from collections import defaultdict
-
-from .target import Target, BeaconOfLight, EnemyTarget, SmolderingSeedling
+from .target import EnemyTarget, SmolderingSeedling
+from .spells import Reset
 from .trinkets import Trinket
 from .auras_buffs import HolyReverberation, HoT, BeaconOfLightBuff, AvengingWrathAwakening, AvengingCrusaderAwakening, TimeWarp, BestFriendsWithAerwynEmpowered, BestFriendsWithPipEmpowered, BestFriendsWithUrctosEmpowered, CorruptingRage, RetributionAuraTrigger, LightOfTheMartyrBuff, BestowLight, EternalFlameBuff, InfusionOfLight, SunsAvatarActive, DeliberateIncubation, RecklessIncubation, SavingGraces, PotionBombOfPower
 from ..utils.misc_functions import append_aura_removed_event, get_timestamp, append_aura_applied_event, format_time, update_self_buff_data, update_target_buff_data, update_mana_gained, handle_flat_cdr
@@ -44,6 +40,9 @@ class Simulation:
             action_name, parsed_conditions = parse_condition(item)
             condition_lambda = condition_to_lambda(self, parsed_conditions)
             self.priority_list.append((action_name, condition_lambda))
+            
+            if "Reset" in action_name:
+                self.paladin.abilities[action_name] = Reset(self.paladin, action_name)
             
         self.overhealing = overhealing
         
