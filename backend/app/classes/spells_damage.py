@@ -333,7 +333,7 @@ class CrusaderStrike(Spell):
 class HammerOfWrath(Spell):
     
     # uses attack power instead of spell power
-    SPELL_POWER_COEFFICIENT = 1.302 * 1.04 * 1.7625
+    SPELL_POWER_COEFFICIENT = 1.11067 * 1.04 * 1.88
     BASE_COOLDOWN = 7.5
     MANA_COST = 0.006
     CHARGES = 1
