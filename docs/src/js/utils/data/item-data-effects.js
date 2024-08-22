@@ -420,6 +420,51 @@ const itemDataEffects = [
         "gems": []
     },
     {
+        "effects": [
+            {
+                "name": "Fractured Gemstone Locket", 
+                "description":  "Equip: When you enter combat, gain 1 Dormant Gemstone per socketed gem.\n\nWhenever you heal an ally, bestow upon them 1 Empowered Gemstone to increase the potency of one of their socketed gems by 17 for 20 sec. When their gemstone becomes dormant, it is returned to you.",
+                "id": 0,
+                "type": "embellishment",
+                "effect_values": []
+            }
+        ],
+        "name": "Fractured Gemstone Locket",
+        "item_slot": "Neck",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 215134,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_11_0_arathor_necklace_02_color5.jpg",
+        "stats": {
+            "Mastery": 1750,
+            "Critical Strike": 1750
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Binding of Binding", 
+                "description":  "Equip: Your spells and abilities have a chance to empower each unique gem color of an ally's socketed gems. This boon grants 44.75 to each empowered secondary stat for 15 sec. This effect will always target your bonded ally, if able.",
+                "id": 0,
+                "type": "embellishment",
+                "effect_values": []
+            }
+        ],
+        "name": "Binding of Binding",
+        "item_slot": "Finger",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 215133,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_11_0_jewelcrafting_ring_color1.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
         "id": 208615,
         "name": "Nymue's Unraveling Spindle",
         "item_slot": "Trinket",
@@ -1094,6 +1139,30 @@ const itemDataEffects = [
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_blacksmithing_craftedoptional_engineering_color1.jpg",
         "stats": {
             "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Algari Alchemist Stone",
+                "id": 432421,
+                "description": "Equip: When you heal or deal damage you have a chance to increase your Intellect by *1304 for 15 sec. Your highest stat is always chosen.",
+                "effect_values": [
+                    {"base_value": 1304, "effect_type": "scalar", "effect_coefficient": 0.27749052644, "allocation_type": "no_multiplier"},
+                ]
+            }
+        ],
+        "name": "Algari Alchemist Stone",
+        "item_slot": "Trinket",
+        "base_item_level": 593,
+        "quality": "Epic",
+        "id": 210816,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_alchemystone_color4.jpg",
+        "stats": {
+            "Versatility": 1144
         },
         "gems": [],
         "enchantments": [],

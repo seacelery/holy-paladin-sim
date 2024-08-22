@@ -547,7 +547,7 @@ class Simulation:
             self.mana_spring_totem_timer += self.tick_rate
             if self.mana_spring_totem_timer >= 5.5:
                 self.mana_spring_totem_timer = 0
-                mana_spring_totem_mana_gain = 150
+                mana_spring_totem_mana_gain = 2625
                 self.paladin.mana += mana_spring_totem_mana_gain
                 update_mana_gained(self.paladin.ability_breakdown, "Mana Spring Totem", mana_spring_totem_mana_gain)
                 

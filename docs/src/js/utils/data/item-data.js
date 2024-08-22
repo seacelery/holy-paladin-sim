@@ -112592,14 +112592,7 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+546 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+546 Random Stat 2 (546.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Pauldrons",
         "item_slot": "Shoulder",
         "base_item_level": 577,
@@ -112607,7 +112600,9 @@ const itemData = [
         "id": 222436,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_shoulder.jpg",
         "stats": {
-            "Intellect": 1597
+            "Intellect": 1597,
+            "Mastery": 546,
+            "Critical Strike": 546
         },
         "gems": [],
         "enchantments": [],
@@ -112635,14 +112630,7 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+728 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+728 Random Stat 2 (728.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Helm",
         "item_slot": "Head",
         "base_item_level": 577,
@@ -112650,21 +112638,16 @@ const itemData = [
         "id": 222433,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_helm.jpg",
         "stats": {
-            "Intellect": 2129
+            "Intellect": 2129,
+            "Mastery": 728,
+            "Critical Strike": 728
         },
         "gems": [],
         "enchantments": [],
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+409 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+409 Random Stat 2 (409.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Vambraces",
         "item_slot": "Wrist",
         "base_item_level": 577,
@@ -112672,7 +112655,9 @@ const itemData = [
         "id": 222435,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_bracer.jpg",
         "stats": {
-            "Intellect": 1198
+            "Intellect": 1198,
+            "Mastery": 409,
+            "Critical Strike": 409
         },
         "gems": [],
         "enchantments": [],
@@ -112686,24 +112671,20 @@ const itemData = [
         ],
         "name": "Dangerous Distraction Inhibitor",
         "item_slot": "Head",
-        "base_item_level": 577,
+        "base_item_level": 593,
         "quality": "Epic",
         "id": 221804,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_armor_gnomish_c_01_red.jpg",
-        "stats": {},
+        "stats": {
+            "Intellect": 2472,
+            "Mastery": 1602
+        },
         "gems": [],
         "enchantments": [],
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+546 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+546 Random Stat 2 (546.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Sabatons",
         "item_slot": "Feet",
         "base_item_level": 577,
@@ -112711,21 +112692,16 @@ const itemData = [
         "id": 222429,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_boot.jpg",
         "stats": {
-            "Intellect": 1597
+            "Intellect": 1597,
+            "Mastery": 546,
+            "Critical Strike": 546
         },
         "gems": [],
         "enchantments": [],
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+728 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+728 Random Stat 2 (728.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Breastplate",
         "item_slot": "Chest",
         "base_item_level": 577,
@@ -112733,7 +112709,9 @@ const itemData = [
         "id": 222430,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_robe.jpg",
         "stats": {
-            "Intellect": 2129
+            "Intellect": 2129,
+            "Mastery": 728,
+            "Critical Strike": 728
         },
         "gems": [],
         "enchantments": [],
@@ -112762,14 +112740,7 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+546 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+546 Random Stat 2 (546.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Gauntlets",
         "item_slot": "Hands",
         "base_item_level": 577,
@@ -112777,7 +112748,9 @@ const itemData = [
         "id": 222437,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_glove.jpg",
         "stats": {
-            "Intellect": 1597
+            "Intellect": 1597,
+            "Mastery": 546,
+            "Critical Strike": 546
         },
         "gems": [],
         "enchantments": [],
@@ -112816,11 +112789,14 @@ const itemData = [
         ],
         "name": "Clanking Cuffs",
         "item_slot": "Wrist",
-        "base_item_level": 577,
+        "base_item_level": 593,
         "quality": "Epic",
         "id": 221808,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_dragonquest_b_01.jpg",
-        "stats": {},
+        "stats": {
+            "Intellect": 1390,
+            "Mastery": 901
+        },
         "gems": [],
         "enchantments": [],
         "limit": null
@@ -112848,14 +112824,7 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+728 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+728 Random Stat 2 (728.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Legplates",
         "item_slot": "Legs",
         "base_item_level": 577,
@@ -112863,7 +112832,9 @@ const itemData = [
         "id": 222434,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_pant.jpg",
         "stats": {
-            "Intellect": 2129
+            "Intellect": 2129,
+            "Mastery": 728,
+            "Critical Strike": 728
         },
         "gems": [],
         "enchantments": [],
@@ -112952,14 +112923,7 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+546 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+546 Random Stat 2 (546.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Greatbelt",
         "item_slot": "Waist",
         "base_item_level": 577,
@@ -112967,7 +112931,9 @@ const itemData = [
         "id": 222431,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_outdoorarathor_d_01_belt.jpg",
         "stats": {
-            "Intellect": 1597
+            "Intellect": 1597,
+            "Mastery": 546,
+            "Critical Strike": 546
         },
         "gems": [],
         "enchantments": [],
@@ -114385,112 +114351,6 @@ const itemData = [
                 "description": "+556 Random Stat 2 (556.00% @ L70)"
             }
         ],
-        "name": "Everforged Chest",
-        "item_slot": "Head",
-        "base_item_level": 500,
-        "quality": "Epic",
-        "id": 217854,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
-        "stats": {
-            "Intellect": 1039
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+417 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+417 Random Stat 2 (417.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Waist",
-        "item_slot": "Shoulder",
-        "base_item_level": 500,
-        "quality": "Epic",
-        "id": 217849,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
-        "stats": {
-            "Intellect": 779
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+556 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+556 Random Stat 2 (556.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Hands",
-        "item_slot": "Legs",
-        "base_item_level": 500,
-        "quality": "Epic",
-        "id": 217847,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
-        "stats": {
-            "Intellect": 1039
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+556 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+556 Random Stat 2 (556.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Legs",
-        "item_slot": "Two-Hand",
-        "base_item_level": 500,
-        "quality": "Epic",
-        "id": 217850,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
-        "stats": {},
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+278 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+278 Random Stat 2 (278.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Shoulders",
-        "item_slot": "N/A",
-        "base_item_level": 500,
-        "quality": "Epic",
-        "id": 217852,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
-        "stats": {},
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+556 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+556 Random Stat 2 (556.00% @ L70)"
-            }
-        ],
         "name": "Pressurized Alloy Breastplate",
         "item_slot": "Chest",
         "base_item_level": 500,
@@ -114499,70 +114359,6 @@ const itemData = [
         "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
         "stats": {
             "Intellect": 1039
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+278 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+278 Random Stat 2 (278.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Wrists",
-        "item_slot": "One-Hand",
-        "base_item_level": 500,
-        "quality": "Epic",
-        "id": 217848,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
-        "stats": {},
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+278 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+278 Random Stat 2 (278.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Helm",
-        "item_slot": "One-Hand",
-        "base_item_level": 500,
-        "quality": "Epic",
-        "id": 217855,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
-        "stats": {
-            "Intellect": 520
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+417 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+417 Random Stat 2 (417.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Feet",
-        "item_slot": "Feet",
-        "base_item_level": 500,
-        "quality": "Epic",
-        "id": 217851,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_misc_emotionsad.jpg",
-        "stats": {
-            "Intellect": 779
         },
         "gems": [],
         "enchantments": [],
@@ -117194,50 +116990,6 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+239 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+239 Random Stat 2 (239.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Breastplate",
-        "item_slot": "Chest",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 221997,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_chest_plate_dragonpvp_d_01.jpg",
-        "stats": {
-            "Intellect": 257
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+179 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+179 Random Stat 2 (179.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Pauldrons",
-        "item_slot": "Shoulder",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 222003,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_plate_dragonpvp_d_01.jpg",
-        "stats": {
-            "Intellect": 193
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
         "effects": [],
         "name": "Forged Warmonger's Clasp",
         "item_slot": "Waist",
@@ -117300,28 +117052,6 @@ const itemData = [
             "Intellect": 257,
             "Haste": 229,
             "Mastery": 249
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+179 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+179 Random Stat 2 (179.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Greatbelt",
-        "item_slot": "Waist",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 221998,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_belt_plate_dragonpvp_d_01.jpg",
-        "stats": {
-            "Intellect": 193
         },
         "gems": [],
         "enchantments": [],
@@ -117668,28 +117398,6 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+239 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+239 Random Stat 2 (239.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Legplates",
-        "item_slot": "Legs",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 222001,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pant_plate_dragonpvp_d_01.jpg",
-        "stats": {
-            "Intellect": 257
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
         "effects": [],
         "name": "Charmbelt of Hidden Stars",
         "item_slot": "Waist",
@@ -117804,28 +117512,6 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "+239 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+239 Random Stat 2 (239.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Helm",
-        "item_slot": "Head",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 222000,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_helm_plate_dragonpvp_d_01.jpg",
-        "stats": {
-            "Intellect": 257
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
                 "description": "+179 Random Stat 1 (0.00% @ L70)"
             },
             {
@@ -117837,72 +117523,6 @@ const itemData = [
         "base_item_level": 350,
         "quality": "Common",
         "id": 222021,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_dragonpvp_d_01.jpg",
-        "stats": {
-            "Intellect": 193
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+179 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+179 Random Stat 2 (179.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Sabatons",
-        "item_slot": "Feet",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 221996,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_plate_dragonpvp_d_01.jpg",
-        "stats": {
-            "Intellect": 193
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+134 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+134 Random Stat 2 (134.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Vambraces",
-        "item_slot": "Wrist",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 222002,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_plate_dragonpvp_d_01.jpg",
-        "stats": {
-            "Intellect": 144
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+179 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+179 Random Stat 2 (179.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Gauntlets",
-        "item_slot": "Hands",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 222004,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glove_plate_dragonpvp_d_01.jpg",
         "stats": {
             "Intellect": 193
@@ -119593,21 +119213,18 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+364 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+364 Random Stat 2 (364.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Defender",
-        "item_slot": "N/A",
+        "item_slot": "Off Hand",
         "base_item_level": 577,
         "quality": "Epic",
         "id": 222432,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_arathoroutdoor_d_01.jpg",
-        "stats": {},
+        "stats": {
+            "Intellect": 3266,
+            "Mastery": 364,
+            "Critical Strike": 364
+        },
         "gems": [],
         "enchantments": [],
         "limit": null
@@ -119635,21 +119252,18 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+409 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+409 Random Stat 2 (409.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Consecrated Cloak",
         "item_slot": "Back",
-        "base_item_level": 577,
+        "base_item_level": 593,
         "quality": "Epic",
         "id": 221667,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cloth_dragonpvp_d_01_cape.jpg",
-        "stats": {},
+        "stats": {
+            "Intellect": 1390,
+            "Mastery": 451,
+            "Critical Strike": 451
+        },
         "gems": [],
         "enchantments": [],
         "limit": null
@@ -121561,26 +121175,6 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+120 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+120 Random Stat 2 (120.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Defender",
-        "item_slot": "N/A",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 221999,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_shield_1h_dragonpvp_d_01.jpg",
-        "stats": {},
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
         "effects": [],
         "name": "Amice of Hidden Stars",
         "item_slot": "Back",
@@ -122851,16 +122445,11 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "+1,750 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+1,750 Random Stat 2 (1.00% @ L70)"
-            },
-            {
-                "description": "Use: Sever your bond at the cost of 1 Blasphemite. (2 Min Cooldown)"
-            },
-            {
-                "description": "Equip: Your spells and abilities have a chance to empower each unique gem color of an ally's socketed gems. This boon grants 44.75 to each empowered secondary stat for 15 sec. This effect will always target your bonded ally, if able."
+                "name": "Binding of Binding", 
+                "description":  "Equip: Your spells and abilities have a chance to empower each unique gem color of an ally's socketed gems. This boon grants 44.75 to each empowered secondary stat for 15 sec. This effect will always target your bonded ally, if able.",
+                "id": 0,
+                "type": "embellishment",
+                "effect_values": []
             }
         ],
         "name": "Binding of Binding",
@@ -122868,7 +122457,7 @@ const itemData = [
         "base_item_level": 577,
         "quality": "Epic",
         "id": 215133,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ringwod_d3_4.jpg",
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_11_0_jewelcrafting_ring_color1.jpg",
         "stats": {},
         "gems": [],
         "enchantments": [],
@@ -122911,13 +122500,11 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "+1,750 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+1,750 Random Stat 2 (1.00% @ L70)"
-            },
-            {
-                "description": "Equip: When you enter combat, gain 1 Dormant Gemstone per socketed gem.\n\nWhenever you heal an ally, bestow upon them 1 Empowered Gemstone to increase the potency of one of their socketed gems by 17 for 20 sec. When their gemstone becomes dormant, it is returned to you."
+                "name": "Fractured Gemstone Locket", 
+                "description":  "Equip: When you enter combat, gain 1 Dormant Gemstone per socketed gem.\n\nWhenever you heal an ally, bestow upon them 1 Empowered Gemstone to increase the potency of one of their socketed gems by 17 for 20 sec. When their gemstone becomes dormant, it is returned to you.",
+                "id": 0,
+                "type": "embellishment",
+                "effect_values": []
             }
         ],
         "name": "Fractured Gemstone Locket",
@@ -122925,8 +122512,11 @@ const itemData = [
         "base_item_level": 577,
         "quality": "Epic",
         "id": 215134,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelcrafting_70_maxlvlneck_purple.jpg",
-        "stats": {},
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_11_0_arathor_necklace_02_color5.jpg",
+        "stats": {
+            "Mastery": 1750,
+            "Critical Strike": 1750
+        },
         "gems": [],
         "enchantments": [],
         "limit": null
@@ -122946,7 +122536,10 @@ const itemData = [
         "quality": "Epic",
         "id": 215135,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/item_icecrownringb.jpg",
-        "stats": {},
+        "stats": {
+            "Mastery": 1750,
+            "Critical Strike": 1750
+        },
         "gems": [],
         "enchantments": [],
         "limit": null
@@ -122986,7 +122579,10 @@ const itemData = [
         "quality": "Epic",
         "id": 215136,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_7_0raid_necklace_02a.jpg",
-        "stats": {},
+        "stats": {
+            "Mastery": 1750,
+            "Critical Strike": 1750
+        },
         "gems": [],
         "enchantments": [],
         "limit": null
@@ -123963,20 +123559,22 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Equip: When you heal or deal damage you have a chance to increase your Strength, Agility, or Intellect by 826 for 15 sec. Your highest stat is always chosen."
-            },
-            {
-                "description": "Equip: Increases the effect that healing and mana potions have on the wearer by 40%.  This effect does not stack."
+                "name": "Algari Alchemist Stone",
+                "id": 432421,
+                "description": "Equip: When you heal or deal damage you have a chance to increase your Intellect by *1304 for 15 sec. Your highest stat is always chosen.",
+                "effect_values": [
+                    {"base_value": 1304, "effect_type": "scalar", "effect_coefficient": 0.27749052644, "allocation_type": "no_multiplier"},
+                ]
             }
         ],
         "name": "Algari Alchemist Stone",
         "item_slot": "Trinket",
-        "base_item_level": 544,
-        "quality": "Rare",
+        "base_item_level": 593,
+        "quality": "Epic",
         "id": 210816,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_alchemystone_color4.jpg",
         "stats": {
-            "Versatility": 924
+            "Versatility": 1144
         },
         "gems": [],
         "enchantments": [],
@@ -127355,14 +126953,7 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+728 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+728 Random Stat 2 (728.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Greataxe",
         "item_slot": "Two-Hand",
         "base_item_level": 577,
@@ -127517,26 +127108,6 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "+364 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+364 Random Stat 2 (364.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Warglaive",
-        "item_slot": "One-Hand",
-        "base_item_level": 577,
-        "quality": "Epic",
-        "id": 222441,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_arathoroutdoor_d_01.jpg",
-        "stats": {},
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
                 "description": "+728 Random Stat 1 (0.00% @ L70)"
             },
             {
@@ -127575,14 +127146,7 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+364 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+364 Random Stat 2 (364.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Dagger",
         "item_slot": "One-Hand",
         "base_item_level": 577,
@@ -127597,14 +127161,7 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+364 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+364 Random Stat 2 (364.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Longsword",
         "item_slot": "One-Hand",
         "base_item_level": 577,
@@ -127916,14 +127473,7 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+364 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+364 Random Stat 2 (364.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Stabber",
         "item_slot": "One-Hand",
         "base_item_level": 577,
@@ -127971,14 +127521,7 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+728 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+728 Random Stat 2 (728.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Charged Invoker",
         "item_slot": "Two-Hand",
         "base_item_level": 577,
@@ -128079,14 +127622,7 @@ const itemData = [
         "limit": null
     },
     {
-        "effects": [
-            {
-                "description": "+364 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+364 Random Stat 2 (364.00% @ L70)"
-            }
-        ],
+        "effects": [],
         "name": "Everforged Mace",
         "item_slot": "One-Hand",
         "base_item_level": 577,
@@ -133400,46 +132936,6 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "+120 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+120 Random Stat 2 (120.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Warglaive",
-        "item_slot": "One-Hand",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 222008,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_glaive_1h_dragonpvp_d_01.jpg",
-        "stats": {},
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+120 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+120 Random Stat 2 (120.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Mace",
-        "item_slot": "One-Hand",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 222009,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_1h_dragonpvp_d_01.jpg",
-        "stats": {},
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
                 "description": "+239 Random Stat 1 (0.00% @ L70)"
             },
             {
@@ -133938,28 +133434,6 @@ const itemData = [
                 "description": "+120 Random Stat 2 (120.00% @ L70)"
             }
         ],
-        "name": "Everforged Spellblade",
-        "item_slot": "One-Hand",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 222006,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_primalistraid_d_02.jpg",
-        "stats": {
-            "Intellect": 128
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+120 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+120 Random Stat 2 (120.00% @ L70)"
-            }
-        ],
         "name": "Charged Hexsword",
         "item_slot": "One-Hand",
         "base_item_level": 350,
@@ -134089,26 +133563,6 @@ const itemData = [
                 "description": "+120 Random Stat 2 (120.00% @ L70)"
             }
         ],
-        "name": "Everforged Shortblade",
-        "item_slot": "One-Hand",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 222005,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_dragonpvp_d_01.jpg",
-        "stats": {},
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+120 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+120 Random Stat 2 (120.00% @ L70)"
-            }
-        ],
         "name": "Siphoning Stiletto",
         "item_slot": "One-Hand",
         "base_item_level": 350,
@@ -134165,26 +133619,6 @@ const itemData = [
             "Haste": 109,
             "Versatility": 130
         },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+120 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+120 Random Stat 2 (120.00% @ L70)"
-            }
-        ],
-        "name": "Everforged Longsword",
-        "item_slot": "One-Hand",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 222007,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_dragondungeon_c_01.jpg",
-        "stats": {},
         "gems": [],
         "enchantments": [],
         "limit": null
@@ -134306,28 +133740,6 @@ const itemData = [
             "Intellect": 748,
             "Critical Strike": 104,
             "Versatility": 135
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "+239 Random Stat 1 (0.00% @ L70)"
-            },
-            {
-                "description": "+239 Random Stat 2 (239.00% @ L70)"
-            }
-        ],
-        "name": "Charged Invoker",
-        "item_slot": "Two-Hand",
-        "base_item_level": 350,
-        "quality": "Common",
-        "id": 222017,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_mace_2h_dragondungeon_c_01.jpg",
-        "stats": {
-            "Intellect": 257
         },
         "gems": [],
         "enchantments": [],
@@ -136835,28 +136247,6 @@ const itemData = [
                 "description": "Use: Add this appearance to your Warband collection."
             }
         ],
-        "name": "Everforged Vambraces",
-        "item_slot": "Wrists",
-        "base_item_level": 606,
-        "quality": "Epic",
-        "id": 226427,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
-        "stats": {
-            "Intellect": 1569, 
-            "Stamina": 8601,
-            "Critical Strike": 484,
-            "Mastery": 484
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "Use: Add this appearance to your Warband collection."
-            }
-        ],
         "name": "Dredger's Developed Defender",
         "item_slot": "Held in Off-hand",
         "base_item_level": 558,
@@ -136910,28 +136300,6 @@ const itemData = [
             "Stamina": 5034,
             "Critical Strike": 1762,
             "Mastery": 1484
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
-                "description": "Use: Add this appearance to your Warband collection."
-            }
-        ],
-        "name": "Everforged Sabatons",
-        "item_slot": "Feet",
-        "base_item_level": 606,
-        "quality": "Epic",
-        "id": 226427,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
-        "stats": {
-            "Intellect": 2093, 
-            "Stamina": 11469,
-            "Critical Strike": 646,
-            "Mastery": 646
         },
         "gems": [],
         "enchantments": [],

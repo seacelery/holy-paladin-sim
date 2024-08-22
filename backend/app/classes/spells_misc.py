@@ -83,7 +83,9 @@ class AlgariManaPotion(Potion):
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
-            algari_mana_potion_mana_gain = 150000
+            algari_mana_potion_mana_gain = 270000
+            if "Algari Alchemist Stone" in caster.trinkets:
+                algari_mana_potion_mana_gain *= 1.4
             caster.mana += algari_mana_potion_mana_gain
             update_mana_gained(caster.ability_breakdown, self.name, algari_mana_potion_mana_gain)
             

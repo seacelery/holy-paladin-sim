@@ -115,6 +115,15 @@ const buffsToIconsMap = {
     "Algari Mana Oil": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiond1.jpg",
     "Oil of Beledar's Grace": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiond5.jpg",
     "Potion Bomb of Power": "https://wow.zamimg.com/images/wow/icons/large/inv_10_engineering_explosives_1_color2.jpg",
+    "Feast of the Divine Day": "https://wow.zamimg.com/images/wow/icons/large/inv_11_cooking_profession_feast_table01.jpg",
+    "The Sushi Special": "https://wow.zamimg.com/images/wow/icons/large/inv_tradeskill_cooking_feastofthewater.jpg",
+    "Stuffed Cave Peppers": "https://wow.zamimg.com/images/wow/icons/large/inv_cooking_90_smuggledproduce.jpg",
+    "Marinated Tenderloins": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_meat_cooked_02.jpg",
+    "Chippy Tea": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_deepfriedmossgill.jpg",
+    "Deepfin Patty": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_164_fish_seadog.jpg",
+    "Sweet and Spicy Soup": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_drogbarstylesalmon.jpg",
+    "Fish and Chips": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_draenor_sturgeonstew.jpg",
+    "Salt Baked Seafood": "https://render.worldofwarcraft.com/eu/icons/56/inv_cooking_100_revengeservedcold_color02.jpg",
 
     // raid buffs
     "Arcane Intellect": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_magicalsentry.jpg",

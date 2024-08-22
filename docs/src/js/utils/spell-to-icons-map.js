@@ -98,6 +98,7 @@ const spellToIconsMap = {
     "Grotesque Vial": "https://render.worldofwarcraft.com/eu/icons/56/inv_summerfest_firepotion.jpg",
     "Slumbering Soul Serum": "https://wow.zamimg.com/images/wow/icons/large/inv_flask_green.jpg",
     "Tempered Potion": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiona4.jpg",
+    "Beledar's Grace": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiond5.jpg",
 
     // trinkets
     "Mirror of Fractured Tomorrows": "https://render.worldofwarcraft.com/eu/icons/56/achievement_dungeon_ulduarraid_misc_06.jpg",

@@ -154,6 +154,27 @@ class ChirpingRune(Spell):
         update_spell_data_heals(caster.ability_breakdown, "Chirping Rune", target, chirping_rune_heal, chirping_rune_crit)
         
 
+class BeledarsGrace(Spell):
+    
+    SPELL_POWER_COEFFICIENT = 0
+    BASE_PPM = 6
+    
+    def __init__(self, caster):
+        super().__init__("Beledar's Grace")
+        
+    def apply_flat_healing(self, caster, target, current_time, is_heal):     
+        beledars_grace_heal, beledars_grace_crit = BeledarsGrace(caster).calculate_heal(caster)
+        beledars_grace_heal = 13750 * caster.versatility_multiplier
+        
+        if beledars_grace_crit:
+            beledars_grace_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
+            
+        beledars_grace_heal = add_talent_healing_multipliers(beledars_grace_heal, caster)
+        
+        target.receive_heal(beledars_grace_heal, caster)
+        update_spell_data_heals(caster.ability_breakdown, "Beledar's Grace", target, beledars_grace_heal, beledars_grace_crit)
+        
+
 class DreamingDevotion(Spell):
     
     SPELL_POWER_COEFFICIENT = 0

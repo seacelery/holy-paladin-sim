@@ -1240,14 +1240,14 @@ presetBuffsButton.addEventListener("click", () => {
         unselectedImages.forEach(image => {
             const imageData = image.getAttribute(`data-${type}`);
             if (futurePatchSelected) {
-                if (["Flask of Alchemical Chaos", "Grand Banquet of the Kalu'ak", "Algari Mana Oil",
+                if (["Flask of Alchemical Chaos", "Feast of the Divine Day", "Algari Mana Oil",
                     "Crystallized Augment Rune", "Arcane Intellect", "Mark of the Wild", "Symbol of Hope",
                     "Source of Magic", "Skyfury"].includes(imageData)) {
                         image.classList.toggle(`${type}-selected`); 
                         image.classList.toggle(`${type}-unselected`);
                 };
             } else {
-                if (["Flask of Alchemical Chaos", "Grand Banquet of the Kalu'ak", "Algari Mana Oil",
+                if (["Flask of Alchemical Chaos", "Feast of the Divine Day", "Algari Mana Oil",
                     "Crystallized Augment Rune", "Arcane Intellect", "Mark of the Wild", "Symbol of Hope",
                     "Source of Magic", "Skyfury"].includes(imageData)) {
                         image.classList.toggle(`${type}-selected`); 
@@ -1260,7 +1260,7 @@ presetBuffsButton.addEventListener("click", () => {
     if (futurePatchSelected) {
         currentConsumables = {
             flask: ["Flask of Alchemical Chaos"],
-            food: ["Grand Banquet of the Kalu'ak"],
+            food: ["Feast of the Divine Day"],
             weapon_imbue: ["Algari Mana Oil"],
             augment_rune: ["Crystallized Augment Rune"],
             raid_buff: ["Arcane Intellect", "Mark of the Wild", "Symbol of Hope", "Skyfury"],
@@ -1270,7 +1270,7 @@ presetBuffsButton.addEventListener("click", () => {
     } else {
         currentConsumables = {
             flask: ["Flask of Alchemical Chaos"],
-            food: ["Grand Banquet of the Kalu'ak"],
+            food: ["Feast of the Divine Day"],
             weapon_imbue: ["Algari Mana Oil"],
             augment_rune: ["Crystallized Augment Rune"],
             raid_buff: ["Arcane Intellect", "Mark of the Wild", "Symbol of Hope", "Skyfury"],

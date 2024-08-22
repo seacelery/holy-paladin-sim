@@ -404,7 +404,8 @@ class Spell:
         from .spells_passives import (
             TouchOfLight, EmbraceOfAkunda, DreamingDevotion, ChirpingRune, LarodarsFieryReverie,
             MagazineOfHealingDarts, BronzedGripWrappings, SacredWeapon, AuthorityOfFieryResolve,
-            DivineInspiration, RiteOfAdjurationSpell, ScrapsingersSymphony, GruesomeSyringe
+            DivineInspiration, RiteOfAdjurationSpell, ScrapsingersSymphony, GruesomeSyringe,
+            BeledarsGrace
         )
         
         from .auras_buffs import (
@@ -417,7 +418,7 @@ class Spell:
             RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond, BlessingOfAnshe, HarvestersEdict,
             EmpoweringCrystalOfAnubikkaj, UnboundChangeling, FateweavedNeedle,
             AuthorityOfRadiantPower, CouncilsGuile, StormridersFury, StoneboundArtistry, OathswornsTenacity,
-            SurekiZealotsInsignia, AraKaraSacbrood
+            SurekiZealotsInsignia, AraKaraSacbrood, AlgariAlchemistStoneBuff
         )
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False, is_other_effect=False):
@@ -534,6 +535,10 @@ class Spell:
             chirping_rune = ChirpingRune(caster)
             try_proc_rppm_effect(chirping_rune, is_flat_healing=True)
             
+        if "Oil of Beledar's Grace" in caster.active_auras:
+            beledars_grace = BeledarsGrace(caster)
+            try_proc_rppm_effect(beledars_grace, is_flat_healing=True)
+            
         if caster.race == "Zandalari Troll":
             embrace_of_paku = EmbraceOfPaku()
             try_proc_rppm_effect(embrace_of_paku, is_self_buff=True)
@@ -630,6 +635,10 @@ class Spell:
             alacritous_alchemist_stone = AlacritousAlchemistStoneBuff(caster)
             try_proc_rppm_effect(alacritous_alchemist_stone, is_self_buff=True)
             
+        if "Algari Alchemist Stone" in caster.trinkets:
+            algari_alchemist_stone = AlgariAlchemistStoneBuff(caster)
+            try_proc_rppm_effect(algari_alchemist_stone, is_self_buff=True)
+            
         if "Pip's Emerald Friendship Badge" in caster.trinkets:
             pips_emerald_friendship_badge = PipsEmeraldFriendshipBadge(caster)
             pips_proc = try_proc_rppm_effect(pips_emerald_friendship_badge, is_hasted=False, is_self_buff=True)
@@ -725,7 +734,7 @@ class Spell:
                 blossom_proc.trigger_proc(caster, targets, current_time)
                 
         if caster.is_trinket_equipped("Spymaster's Web"):
-            if self.name in ["Judgment", "Crusader Strike", "Consecration"] and caster.conditional_effect_cooldowns.get("Spymaster's Web", 0) <= 0:
+            if self.name in ["Judgment", "Crusader Strike", "Hammer of Wrath", "Consecration"] and caster.conditional_effect_cooldowns.get("Spymaster's Web", 0) <= 0:
                 caster.conditional_effect_cooldowns["Spymaster's Web"] = 6
                 if "Spymaster's Web Stacks" not in caster.active_auras:
                     caster.apply_buff_to_self(SpymastersWebStacks(caster), current_time, stacks_to_apply=1, max_stacks=40)

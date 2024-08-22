@@ -66,7 +66,8 @@ const createPriorityBreakdown = (simulationData, containerCount) => {
         "Magazine of Healing Darts", "Bronzed Grip Wrappings", "Incarnate's Mark of Fire", "Mana Tide Totem",
         "Flask of Saving Graces", "Flask of Tempered Aggression", "Flask of Tempered Swiftness",
         "Flask of Tempered Mastery", "Flask of Tempered Versatility", "Flask of Alchemical Chaos",
-        "Algari Mana Oil", "Oil of Beledar's Grace", "Crystallized Augment Rune"
+        "Algari Mana Oil", "Oil of Beledar's Grace", "Crystallized Augment Rune", "Feast of the Divine Day",
+        "The Sushi Special", "Skyfury"
     ];
     const playerAurasModalIconOrder = [
         "Avenging Wrath", "Blessing of Dawn", "Blessing of Dusk", "Infusion of Light", "Divine Purpose", 
