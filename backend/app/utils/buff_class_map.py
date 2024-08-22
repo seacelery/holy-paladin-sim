@@ -9,8 +9,9 @@ from ..classes.auras_buffs import (
                                    BronzedGripWrappings, ManaTideTotem, FlaskOfSavingGraces, FlaskOfTemperedAggression, FlaskOfAlchemicalChaos,
                                    FlaskOfTemperedMastery, FlaskOfTemperedSwiftness, FlaskOfTemperedVersatility, CrystallizedAugmentRune,
                                    AlgariManaOil, OilOfBeledarsGrace, Skyfury, DawnthreadLining, DuskthreadLining, PrismaticNullStone,
-                                   WrithingArmorBanding, EnergyDistributionBeacon, BlessedWeaponGrip, FeastOfTheDivineDay, TheSushiSpecial, 
-                                   StuffedCavePeppers, MarinatedTenderloins, ChippyTea, DeepfinPatty, SweetAndSpicySoup, FishAndChips, SaltBakedSeafood
+                                   WrithingArmorBanding, EnergyRedistributionBeacon, BlessedWeaponGrip, FeastOfTheDivineDay, TheSushiSpecial, 
+                                   StuffedCavePeppers, MarinatedTenderloins, ChippyTea, DeepfinPatty, SweetAndSpicySoup, FishAndChips, SaltBakedSeafood,
+                                   DarkmoonSigilSymbiosis
                                   )
 
 buff_class_map = {
@@ -90,6 +91,8 @@ buff_class_map = {
     "Duskthread Lining": DuskthreadLining,
     "Prismatic Null Stone": PrismaticNullStone,
     "Writhing Armor Banding": WrithingArmorBanding,
-    "Energy Distribution Beacon": EnergyDistributionBeacon,
-    "Blessed Weapon Grip": BlessedWeaponGrip
+    "Energy Redistribution Beacon": EnergyRedistributionBeacon,
+    "Blessed Weapon Grip": BlessedWeaponGrip,
+    
+    "Darkmoon Sigil: Symbiosis": DarkmoonSigilSymbiosis
 }

@@ -3308,6 +3308,24 @@ class DreamtendersCharm(Buff):
         caster.update_stat("crit", self.embellishment_first_value * self.current_stacks)
         
 
+class DarkmoonSigilSymbiosis(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Darkmoon Sigil: Symbiosis", 10000, base_duration=10000, current_stacks=1, max_stacks=5)
+        self.stacks_to_apply = 1
+        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = 131
+        caster.time_based_stacking_buffs[self] = 10
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.embellishment_first_value * self.current_stacks)
+        
+
 class MagazineOfHealingDarts(Buff):
     
     def __init__(self, caster):
@@ -3649,24 +3667,10 @@ class AuthorityOfRadiantPower(Buff):
         super().__init__("Authority of Radiant Power", 10, base_duration=10)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.spell_power += caster.get_effective_spell_power(1339)
+        caster.spell_power += caster.get_effective_spell_power(1670)
         
     def remove_effect(self, caster, current_time=None):
-        caster.spell_power -= caster.get_effective_spell_power(1339)
-        
-
-class CouncilsGuile(Buff):
-    
-    BASE_PPM = 2
-    
-    def __init__(self, caster):
-        super().__init__("Council's Guile", 12, base_duration=12)   
-        
-    def apply_effect(self, caster, current_time=None):
-        caster.update_stat("crit", 910)
-        
-    def remove_effect(self, caster, current_time=None):
-        caster.update_stat("crit", -910)
+        caster.spell_power -= caster.get_effective_spell_power(1670)
         
         
 class CouncilsGuile(Buff):
@@ -3677,10 +3681,10 @@ class CouncilsGuile(Buff):
         super().__init__("Council's Guile", 12, base_duration=12)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("crit", 910)
+        caster.update_stat("crit", 3910)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("crit", -910)
+        caster.update_stat("crit", -3910)
         
         
 class StormridersFury(Buff):
@@ -3691,10 +3695,10 @@ class StormridersFury(Buff):
         super().__init__("Stormrider's Fury", 12, base_duration=12)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("haste", 910)
+        caster.update_stat("haste", 3910)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("haste", -910)
+        caster.update_stat("haste", -3910)
         
 
 class StoneboundArtistry(Buff):
@@ -3705,10 +3709,10 @@ class StoneboundArtistry(Buff):
         super().__init__("Stonebound Artistry", 12, base_duration=12)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", 910)
+        caster.update_stat("mastery", 3910)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", -910)
+        caster.update_stat("mastery", -3910)
         
 
 class OathswornsTenacity(Buff):
@@ -3719,10 +3723,10 @@ class OathswornsTenacity(Buff):
         super().__init__("Oathsworn's Tenacity", 12, base_duration=12)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("versatility", 1360)
+        caster.update_stat("versatility", 3910)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("versatility", -1360)
+        caster.update_stat("versatility", -3910)
         
 
 class GaleOfShadows(Buff):
@@ -3783,7 +3787,7 @@ class DawnthreadLining(Buff):
         embellishment_effect = caster.embellishments["Dawnthread Lining"]["effect"]
         embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
         
-        self.embellishment_first_value = embellishment_values[0]
+        self.embellishment_first_value = 756
         
     def apply_effect(self, caster, current_time=None):
         caster.update_stat("crit", self.embellishment_first_value)
@@ -3799,7 +3803,7 @@ class DuskthreadLining(Buff):
         embellishment_effect = caster.embellishments["Duskthread Lining"]["effect"]
         embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
         
-        self.embellishment_first_value = embellishment_values[0]
+        self.embellishment_first_value = 756
         
     def apply_effect(self, caster, current_time=None):
         caster.update_stat("versatility", self.embellishment_first_value)
@@ -3840,10 +3844,10 @@ class WrithingArmorBanding(Buff):
         pass
     
 
-class EnergyDistributionBeacon(Buff):
+class EnergyRedistributionBeacon(Buff):
     
     def __init__(self, caster):
-        super().__init__("Energy Distribution Beacon", 10000, base_duration=10000)   
+        super().__init__("Energy Redistribution Beacon", 10000, base_duration=10000)   
         
     def apply_effect(self, caster, current_time=None):
         pass
@@ -3861,10 +3865,7 @@ class BlessedWeaponGrip(Buff):
         embellishment_effect = caster.embellishments["Blessed Weapon Grip"]["effect"]
         embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
         
-        print(embellishment_effect)
-        print(embellishment_values)
-        
-        self.embellishment_first_value = embellishment_values[0]
+        self.embellishment_first_value = 185
         self.highest_stat = caster.find_highest_secondary_stat_rating()
         
     def apply_effect(self, caster, current_time=None):

@@ -105,6 +105,19 @@ const embellishmentsData = {
         "id": 0, 
         "type": "embellishment"
     },
+    "Darkmoon Sigil: Symbiosis": {
+        "name": "Darkmoon Sigil: Symbiosis", 
+        "description": "Every 10 seconds in combat take 1% of your maximum Health as Nature damage and gain a stack of Symbiosis, granting *131 Versatility for 20 sec  stacking up to 5 times.", 
+        "id": 463232, 
+        "type": "embellishment",
+        "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 602, "base_value": 131, "effect_coefficient": 0.08835853636, "effect_type": "scalar"}]
+    },
+    "Energy Redistribution Beacon": {
+        "name": "Energy Redistribution Beacon", 
+        "description": "", 
+        "id": 0, 
+        "type": "embellishment"
+    }
 };
 
 const ptrEmbellishmentsData = {
@@ -160,6 +173,19 @@ const ptrEmbellishmentsData = {
         "id": 0, 
         "type": "embellishment"
     },
+    "Darkmoon Sigil: Symbiosis": {
+        "name": "Darkmoon Sigil: Symbiosis", 
+        "description": "Every 10 seconds in combat take 1% of your maximum Health as Nature damage and gain a stack of Symbiosis, granting *131 Versatility for 20 sec  stacking up to 5 times.", 
+        "id": 463232, 
+        "type": "embellishment",
+        "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 602, "base_value": 131, "effect_coefficient": 0.02280857228, "effect_type": "scalar"}]
+    },
+    "Energy Redistribution Beacon": {
+        "name": "Energy Redistribution Beacon", 
+        "description": "", 
+        "id": 0, 
+        "type": "embellishment"
+    }
 };
 
 const itemSlotBonuses = {

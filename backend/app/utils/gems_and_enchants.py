@@ -32,7 +32,7 @@ def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, sta
         elif enchant == "Crystalline Radiance":
             stat_values_from_equipment["intellect"] += 745
         elif enchant == "Council's Intellect":
-            stat_values_from_equipment["intellect"] += 630
+            stat_values_from_equipment["intellect"] += 520
             mana_enchant_count += 1
         elif enchant == "+177 Intellect & +5% Mana":
             stat_values_from_equipment["intellect"] += 177
@@ -41,11 +41,11 @@ def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, sta
             stat_values_from_equipment["intellect"] += 177
             stat_values_from_equipment["stamina"] += 131
         elif enchant == "Daybreak Spellthread":
-            stat_values_from_equipment["intellect"] += 340
+            stat_values_from_equipment["intellect"] += 747
             mana_enchant_count += 1
         elif enchant == "Sunset Spellthread":
-            stat_values_from_equipment["intellect"] += 340
-            stat_values_from_equipment["stamina"] += 92
+            stat_values_from_equipment["intellect"] += 747
+            stat_values_from_equipment["stamina"] += 230
         elif enchant == "Weavercloth Spellthread":
             stat_values_from_equipment["intellect"] += 249
         elif enchant == "+82 Versatility":

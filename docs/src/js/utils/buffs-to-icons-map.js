@@ -247,7 +247,9 @@ const buffsToIconsMap = {
     "Prismatic Null Stone": "https://wow.zamimg.com/images/wow/icons/large/inv_enchant_prismaticsphere.jpg",
     "Writhing Armor Banding": "https://wow.zamimg.com/images/wow/icons/large/inv_10_skinning_craftedoptionalreagent_studdedleatherswatch_color2.jpg",
     "Energy Distribution Beacon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_enggizmos_24.jpg",
-    "Blessed Weapon Grip": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_weaponmastery.jpg"
+    "Blessed Weapon Grip": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_weaponmastery.jpg",
+
+    "Darkmoon Sigil: Symbiosis": "https://wow.zamimg.com/images/wow/icons/large/inv_inscriptions_darkmoonsigil_teal.jpg",
 }; 
 
 export { buffsToIconsMap };

@@ -418,7 +418,7 @@ class Spell:
             RashoksMoltenHeart, EmeraldCoachsWhistle, VoiceFromBeyond, BlessingOfAnshe, HarvestersEdict,
             EmpoweringCrystalOfAnubikkaj, UnboundChangeling, FateweavedNeedle,
             AuthorityOfRadiantPower, CouncilsGuile, StormridersFury, StoneboundArtistry, OathswornsTenacity,
-            SurekiZealotsInsignia, AraKaraSacbrood, AlgariAlchemistStoneBuff
+            SurekiZealotsInsignia, AraKaraSacbrood, AlgariAlchemistStoneBuff, BlessedWeaponGrip
         )
         
         def try_proc_rppm_effect(effect, is_hasted=True, is_heal=False, is_self_buff=False, exclude_mastery=False, is_flat_healing=False, is_other_effect=False):
@@ -709,6 +709,10 @@ class Spell:
         if "Bronzed Grip Wrappings" in caster.embellishments:
             bronzed_grip_wrappings = BronzedGripWrappings(caster)
             try_proc_rppm_effect(bronzed_grip_wrappings, is_flat_healing=True)
+            
+        if "Blessed Weapon Grip" in caster.embellishments:
+            blessed_weapon_grip = BlessedWeaponGrip(caster)
+            try_proc_rppm_effect(blessed_weapon_grip, is_hasted=False, is_self_buff=True)
                 
     def try_trigger_conditional_effects(self, caster, targets, current_time):
         from .spells_passives import EchoingTyrstoneProc, BlossomOfAmirdrassilProc
