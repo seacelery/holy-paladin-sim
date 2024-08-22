@@ -1017,10 +1017,7 @@ class Paladin:
         return_gem_stats(self, gems_from_equipment, stat_values_from_equipment)
         self.gems = gems_from_equipment
          
-        if self.ptr:
-            stat_values_from_equipment["intellect"] += 17647
-        else:  
-            stat_values_from_equipment["intellect"] += 2089
+        stat_values_from_equipment["intellect"] += 17647
         
         stat_values_from_equipment["stamina"] += 3848
         if self.is_talent_active("Sanctified Plates") and self.class_talents["row6"]["Sanctified Plates"]["ranks"]["current rank"] == 1:
