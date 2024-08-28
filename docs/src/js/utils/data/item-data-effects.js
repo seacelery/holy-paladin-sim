@@ -866,7 +866,7 @@ const itemDataEffects = [
                 "id": 444276,
                 "description": "Equip: Your healing spells have a high chance to cause you to inject yourself with a charge of Volatile Serum. Multiple charges may overlap.\n\nIf an ally drops below 70% health, expel a charge to heal them for *163309. If unconsumed after 15 sec, charges catalyze to grant you *2894 Intellect for 10 sec instead.",
                 "effect_values": [
-                    {"base_value": 159634, "effect_type": "scalar", "effect_coefficient": 63.84856796265 * 0.675, "allocation_type": "no_multiplier"},
+                    {"base_value": 159634, "effect_type": "scalar", "effect_coefficient": 94.21494293213 * 0.675, "allocation_type": "no_multiplier"},
                     {"base_value": 2894, "effect_type": "scalar", "effect_coefficient": 0.75579804182, "allocation_type": "no_multiplier"}
                 ]
             }
@@ -892,8 +892,8 @@ const itemDataEffects = [
                 // 444271
                 "description": "Use: Feed the Coagulum, redirecting 20% of all healing done until *766815.2 healing has been consumed. Once sated, the Coagulum bursts to heal 5 allies for *541371.531.\n\nLingering effluvia causes affected allies' next attacks to deal an additional 444,271 Shadow damage, increased based on overhealing done by the Coagulum. (1 Min, 30 Sec Cooldown)",
                 "effect_values": [
-                    {"base_value": 766815.2, "effect_type": "scalar", "effect_coefficient": 317.36041259766, "allocation_type": "flat_healing"},
-                    {"base_value": 541371.531, "effect_type": "scalar", "effect_coefficient": 2.26054334641, "allocation_type": "flat_healing"}
+                    {"base_value": 766815.2, "effect_type": "scalar", "effect_coefficient": 468.29669189453, "allocation_type": "rating_multiplier"},
+                    {"base_value": 541371.531, "effect_type": "scalar", "effect_coefficient": 468.29669189453 / 1.416, "allocation_type": "rating_multiplier"}
                 ]
             }
         ],
@@ -1126,8 +1126,8 @@ const itemDataEffects = [
                 "id": 443414,
                 "description": "Equip: Your healing abilities have a chance to call the nearby metal to form a shield around an ally, absorbing *74256 damage.\n\nThe shield reacts explosively to fire, inflicting *4566 Fire damage to nearby enemies when struck.",
                 "effect_values": [
-                    {"base_value": 74256, "effect_type": "scalar", "effect_coefficient": 28.99190330505 * 3, "allocation_type": "flat_healing"},
-                    {"base_value": 4566, "effect_type": "scalar", "effect_coefficient": 6.17206573486, "allocation_type": "flat_damage"}
+                    {"base_value": 74256, "effect_type": "scalar", "effect_coefficient": 28.99190330505 * 3 * 1.5, "allocation_type": "flat_healing"},
+                    {"base_value": 4566, "effect_type": "scalar", "effect_coefficient": 6.17206573486 * 1.5, "allocation_type": "flat_damage"}
                 ]
             }
         ],
@@ -1164,6 +1164,52 @@ const itemDataEffects = [
         "stats": {
             "Versatility": 1144
         },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Viscous Coaglam",
+                "id": 443557,
+                "description": "Equip: Your excessive healing attracts nearby shadow energy to your party, storing up to *8441 healing and restoring the target's health when they receive damage.<br><br>Use: Channel the coaglam's power, concentrating all current shadow energy to shield to your target. (1 Min Cooldown).",
+                "effect_values": [
+                    {"base_value": 8441, "effect_type": "scalar", "effect_coefficient": 6.03997993469 * 1.5, "allocation_type": "flat_damage"},
+                ]
+            }
+        ],
+        "name": "Viscous Coaglam",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219320,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_creepingcoagulum_blue.jpg",
+        "stats": {
+            "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Darkmoon Deck: Symbiosis",
+                "id": 463610,
+                "description": "Every 10 sec in combat take 1% of your maximum Health as Nature damage and gain a stack of Symbiosis, granting *24 Versatility for 20 sec stacking up to 5 times.",
+                "effect_values": [
+                    {"base_value": 2696, "effect_type": "scalar", "effect_coefficient": 0.08835853636 * 1.599, "allocation_type": "rating_multiplier_jewellery"},
+                ]
+            }
+        ],
+        "name": "Darkmoon Deck: Symbiosis",
+        "item_slot": "Trinket",
+        "base_item_level": 372,
+        "quality": "Epic",
+        "id": 220171,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_spore_blank.jpg",
+        "stats": {},
         "gems": [],
         "enchantments": [],
         "limit": null

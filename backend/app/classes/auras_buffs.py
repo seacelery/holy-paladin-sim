@@ -3326,6 +3326,25 @@ class DarkmoonSigilSymbiosis(Buff):
         caster.update_stat("versatility", self.embellishment_first_value * self.current_stacks)
         
 
+class DarkmoonDeckSymbiosis(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Darkmoon Deck: Symbiosis", 10000, base_duration=10000, current_stacks=1, max_stacks=5)
+        self.stacks_to_apply = 1
+        trinket_effect = caster.trinkets["Darkmoon Deck: Symbiosis"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        
+        caster.time_based_stacking_buffs[self] = 10
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.trinket_first_value * self.current_stacks)
+        
+
 class MagazineOfHealingDarts(Buff):
     
     def __init__(self, caster):

@@ -250,6 +250,7 @@ const buffsToIconsMap = {
     "Blessed Weapon Grip": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_weaponmastery.jpg",
 
     "Darkmoon Sigil: Symbiosis": "https://wow.zamimg.com/images/wow/icons/large/inv_inscriptions_darkmoonsigil_teal.jpg",
+    "Darkmoon Deck: Symbiosis": "https://wow.zamimg.com/images/wow/icons/large/inv_inscriptions_darkmoonsigil_teal.jpg",
 }; 
 
 export { buffsToIconsMap };

@@ -15,7 +15,7 @@ from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, H
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion, AuraMastery, AlgariManaPotion, SlumberingSoulSerum, TemperedPotion
 from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
 from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell, HolyBulwarkSacredWeapon
-from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, IncarnatesMarkOfFire, BroodkeepersPromiseHoT, MorningStar, RiteOfAdjurationBuff, RiteOfSanctification, DeliberateIncubation, OvinaxsMercurialEggBuff
+from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, IncarnatesMarkOfFire, BroodkeepersPromiseHoT, MorningStar, RiteOfAdjurationBuff, RiteOfSanctification, DeliberateIncubation, OvinaxsMercurialEggBuff, DarkmoonDeckSymbiosis
 from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus, MiniatureSingingStone, HighSpeakersAccretion, SiphoningPhylacteryShard, CreepingCoagulum, OvinaxsMercurialEgg, TreacherousTransmitter, ImperfectAscendancySerumSpell, SpymastersWebSpell, CorruptedEggShell
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents, base_active_class_talents_ptr, base_active_spec_talents_ptr, base_active_lightsmith_talents, base_herald_of_the_sun_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
@@ -660,6 +660,9 @@ class Paladin:
     def apply_buffs_on_encounter_start(self):
         if self.is_trinket_equipped("Ovinax's Mercurial Egg"):
             self.apply_buff_to_self(OvinaxsMercurialEggBuff(self), 0)
+            
+        if self.is_trinket_equipped("Darkmoon Deck: Symbiosis"):
+            self.apply_buff_to_self(DarkmoonDeckSymbiosis(self), 0)
         
         if self.is_trinket_equipped("Pip's Emerald Friendship Badge"):
             self.apply_buff_to_self(PipsEmeraldFriendshipBadge(self), 0)
