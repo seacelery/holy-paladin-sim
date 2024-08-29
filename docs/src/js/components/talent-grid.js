@@ -155,6 +155,16 @@ const updateTalentsFromImportedData = (importedTalents) => {
         updateTalentCounts("spec");
         updateTalentCounts("lightsmith");
         updateTalentCounts("herald-of-the-sun");
+
+        const lightsmithIcon = document.getElementById("lightsmith-icon");
+        const heraldOfTheSunIcon = document.getElementById("herald-of-the-sun-icon");
+        if (lightsmithTalentsCount > 0) {
+            lightsmithIcon.style.filter = "grayscale(0)";
+            lightsmithIcon.style.boxShadow = "0px 0px 3px 1px var(--paladin-font)";
+        } else if (heraldOfTheSunTalentsCount > 0) {
+            heraldOfTheSunIcon.style.filter = "grayscale(0)";
+            heraldOfTheSunIcon.style.boxShadow = "0px 0px 3px 1px var(--paladin-font)";
+        };
     };
 
     if (futurePatchSelected) {

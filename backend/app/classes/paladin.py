@@ -1058,6 +1058,8 @@ class Paladin:
         
         lightsmith_talents = {}
         herald_of_the_sun_talents = {}
+        
+        active_hero_talent_tree = talent_data["active_hero_talent_tree"]["name"]
 
         active_class_talents = copy.deepcopy(base_active_class_talents_ptr)
         active_spec_talents = copy.deepcopy(base_active_spec_talents_ptr)
@@ -1067,15 +1069,27 @@ class Paladin:
 
         class_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_class_talents"]
         for talent in class_talent_data:
-            talent_name = talent["tooltip"]["talent"]["name"]
-            talent_rank = talent["rank"]
-            class_talents[talent_name] = talent_rank
-            
+            if talent.get("tooltip"):
+                talent_name = talent["tooltip"]["talent"]["name"]
+                talent_rank = talent["rank"]
+                class_talents[talent_name] = talent_rank
+        
         spec_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_spec_talents"]
         for talent in spec_talent_data:
-            talent_name = talent["tooltip"]["talent"]["name"]
-            talent_rank = talent["rank"]
-            spec_talents[talent_name] = talent_rank    
+            if talent.get("tooltip"):
+                talent_name = talent["tooltip"]["talent"]["name"]
+                talent_rank = talent["rank"]
+                spec_talents[talent_name] = talent_rank  
+            
+        hero_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_hero_talents"]  
+        for talent in hero_talent_data:
+            if talent.get("tooltip"):
+                talent_name = talent["tooltip"]["talent"]["name"]
+                talent_rank = talent["rank"]
+                if active_hero_talent_tree == "Lightsmith":
+                    lightsmith_talents[talent_name] = talent_rank
+                elif active_hero_talent_tree == "Herald of the Sun":
+                    herald_of_the_sun_talents[talent_name] = talent_rank
         
         for talent_row, talents in active_class_talents.items():
             for talent_name, talent_info in talents.items():
@@ -1086,27 +1100,15 @@ class Paladin:
             for talent_name, talent_info in talents.items():
                 if talent_name in spec_talents:
                     active_spec_talents[talent_row][talent_name]["ranks"]["current rank"] = spec_talents[talent_name]
-                    
-            # lightsmith_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_lightsmith_talents"]
-            # for talent in lightsmith_talent_data:
-            #     talent_name = talent["tooltip"]["talent"]["name"]
-            #     talent_rank = talent["rank"]
-            #     lightsmith_talents[talent_name] = talent_rank
-                
-            # herald_of_the_sun_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_herald_of_the_sun_talents"]
-            # for talent in herald_of_the_sun_talent_data:
-            #     talent_name = talent["tooltip"]["talent"]["name"]
-            #     talent_rank = talent["rank"]
-            #     herald_of_the_sun_talents[talent_name] = talent_rank  
                 
         for talent_row, talents in active_lightsmith_talents.items():
             for talent_name, talent_info in talents.items():
-                if talent_name in class_talents:
+                if talent_name in lightsmith_talents:
                     active_lightsmith_talents[talent_row][talent_name]["ranks"]["current rank"] = lightsmith_talents[talent_name]
                     
         for talent_row, talents in active_herald_of_the_sun_talents.items():
             for talent_name, talent_info in talents.items():
-                if talent_name in spec_talents:
+                if talent_name in herald_of_the_sun_talents:
                     active_herald_of_the_sun_talents[talent_row][talent_name]["ranks"]["current rank"] = herald_of_the_sun_talents[talent_name]
         
         return Talents(active_class_talents, active_spec_talents, active_lightsmith_talents, active_herald_of_the_sun_talents)

@@ -98,7 +98,7 @@ class AuthorityOfFieryResolve(Spell):
         
         for chosen_target in targets:
             authority_of_fiery_resolve_heal, authority_of_fiery_resolve_crit = AuthorityOfFieryResolve(caster).calculate_heal(caster)
-            authority_of_fiery_resolve_heal = 85944 * caster.versatility_multiplier
+            authority_of_fiery_resolve_heal = 126340 * caster.versatility_multiplier
             
             if authority_of_fiery_resolve_crit:
                 authority_of_fiery_resolve_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier

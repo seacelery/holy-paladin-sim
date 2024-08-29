@@ -94,6 +94,8 @@ def fetch_updated_stats_route():
         "character_region": region,
         "class_talents": paladin.class_talents,
         "spec_talents": paladin.spec_talents,
+        "lightsmith_talents": paladin.lightsmith_talents,
+        "herald_of_the_sun_talents": paladin.herald_of_the_sun_talents,
         "race": paladin.race,
         "consumable": paladin.consumables,
         "equipment": paladin.equipment,

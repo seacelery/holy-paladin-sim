@@ -3738,10 +3738,10 @@ class AuthorityOfRadiantPower(Buff):
         super().__init__("Authority of Radiant Power", 10, base_duration=10)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.spell_power += caster.get_effective_spell_power(1670)
+        caster.spell_power += caster.get_effective_spell_power(2230)
         
     def remove_effect(self, caster, current_time=None):
-        caster.spell_power -= caster.get_effective_spell_power(1670)
+        caster.spell_power -= caster.get_effective_spell_power(2230)
         
         
 class CouncilsGuile(Buff):
