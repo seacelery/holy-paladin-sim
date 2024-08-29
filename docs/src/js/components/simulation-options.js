@@ -54,17 +54,11 @@ const handleOverhealingPercentagesModal = () => {
     Tyr's Deliverance 0%
     Veneration 0%
     Word of Glory 0%
-    Blossom of Amirdrassil Absorb 0%
-    Blossom of Amirdrassil Large HoT 0%
-    Blossom of Amirdrassil Small HoT 0%
-    Broodkeeper's Promise 0%
-    Echoing Tyrstone 0%
-    Miniature Singing Stone 0%
-    Rashok's Molten Heart 0%
-    Restorative Sands 0%
-    Smoldering Seedling 0%
-    Dreaming Devotion 0%
-    Larodar's Fiery Reverie 0%
+    Scrapsinger's Symphony 0%
+    Gruesome Syringe 0%
+    Creeping Coagulum 0%
+    Viscous Coaglam 0%
+    Authority of Fiery Resolve 0%
     Leech 0%`;
 
     modalContent.value = text;
@@ -220,23 +214,13 @@ const handleOverhealingAbilitiesModal = () => {
         "Word of Glory"
     ];
     const trinkets = [
-        "Blossom of Amirdrassil Absorb",
-        "Blossom of Amirdrassil Large HoT",
-        "Blossom of Amirdrassil Small HoT",
-        "Broodkeeper's Promise",
-        "Echoing Tyrstone",
-        "Miniature Singing Stone",
-        "Rashok's Molten Heart",
-        "Restorative Sands",
-        "Smoldering Seedling",
         "Scrapsinger's Symphony",
         "Gruesome Syringe",
         "Creeping Coagulum",
         "Viscous Coaglam"
     ];
     const miscellaneous = [
-        "Dreaming Devotion",
-        "Larodar's Fiery Reverie",
+        "Authority of Fiery Resolve",
         "Leech"
     ];
 
