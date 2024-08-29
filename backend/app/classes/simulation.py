@@ -555,7 +555,7 @@ class Simulation:
             self.mana_tide_totem_timer += self.tick_rate
             if self.mana_tide_totem_timer >= 180:
                 self.mana_tide_totem_timer = 0
-                mana_tide_totem_mana_gain = 12800
+                mana_tide_totem_mana_gain = self.paladin.mana_regen_per_second * 8 * 0.8
                 self.paladin.mana += mana_tide_totem_mana_gain
                 update_mana_gained(self.paladin.ability_breakdown, "Mana Tide Totem", mana_tide_totem_mana_gain)
                 
