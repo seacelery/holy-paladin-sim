@@ -249,6 +249,7 @@ const buffsToIconsMap = {
     "Energy Distribution Beacon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_enggizmos_24.jpg",
     "Blessed Weapon Grip": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_weaponmastery.jpg",
 
+    "Darkmoon Sigil: Ascension": "https://wow.zamimg.com/images/wow/icons/large/inv_inscriptions_darkmoonsigil_purple.jpg",
     "Darkmoon Sigil: Symbiosis": "https://wow.zamimg.com/images/wow/icons/large/inv_inscriptions_darkmoonsigil_teal.jpg",
     "Darkmoon Deck: Symbiosis": "https://wow.zamimg.com/images/wow/icons/large/inv_inscriptions_darkmoonsigil_teal.jpg",
 }; 

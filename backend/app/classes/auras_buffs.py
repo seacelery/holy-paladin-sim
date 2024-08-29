@@ -3306,7 +3306,55 @@ class DreamtendersCharm(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.update_stat("crit", self.embellishment_first_value * self.current_stacks)
+    
+    
+class DarkmoonSigilAscension(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Darkmoon Sigil: Ascension", 10000, base_duration=10000, current_stacks=1, max_stacks=11)
+        self.stacks_to_apply = 1
+        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        self.first_stack = True
+        self.first_time_reaching_ten_stacks = True
         
+        self.embellishment_first_value = 89
+        caster.time_based_stacking_buffs[self] = 8
+        
+        self.chosen_stat = None
+        
+    def apply_effect(self, caster, current_time=None):
+        if self.chosen_stat and self.current_stacks == 10:
+            caster.update_stat(self.chosen_stat, -self.embellishment_first_value * (self.current_stacks))
+        elif self.chosen_stat:
+            caster.update_stat(self.chosen_stat, -self.embellishment_first_value * self.current_stacks)
+            
+        if self.first_time_reaching_ten_stacks:
+            caster.update_stat(self.chosen_stat, self.embellishment_first_value)
+            self.first_time_reaching_ten_stacks = False
+        
+        available_stats = ["haste", "crit", "mastery", "versatility"]
+        if self.chosen_stat in available_stats:
+            available_stats.remove(self.chosen_stat)
+        
+        self.chosen_stat = random.choice(available_stats)
+        if self.current_stacks == 10:
+            caster.update_stat(self.chosen_stat, self.embellishment_first_value * (self.current_stacks))
+        else:
+            caster.update_stat(self.chosen_stat, self.embellishment_first_value * (self.current_stacks + 1))
+            
+        
+        if self.current_stacks == 1 and self.first_stack:
+            caster.update_stat(self.chosen_stat, -self.embellishment_first_value * (self.current_stacks + 1))
+            self.current_stacks -= 1
+            self.first_stack = False
+            
+        if self.current_stacks == 10:
+            self.current_stacks -= 1
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat(self.chosen_stat, -self.embellishment_first_value * self.current_stacks)
+    
 
 class DarkmoonSigilSymbiosis(Buff):
     

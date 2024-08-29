@@ -11,7 +11,7 @@ from ..classes.auras_buffs import (
                                    AlgariManaOil, OilOfBeledarsGrace, Skyfury, DawnthreadLining, DuskthreadLining, PrismaticNullStone,
                                    WrithingArmorBanding, EnergyRedistributionBeacon, BlessedWeaponGrip, FeastOfTheDivineDay, TheSushiSpecial, 
                                    StuffedCavePeppers, MarinatedTenderloins, ChippyTea, DeepfinPatty, SweetAndSpicySoup, FishAndChips, SaltBakedSeafood,
-                                   DarkmoonSigilSymbiosis
+                                   DarkmoonSigilSymbiosis, DarkmoonSigilAscension
                                   )
 
 buff_class_map = {
@@ -94,5 +94,6 @@ buff_class_map = {
     "Energy Redistribution Beacon": EnergyRedistributionBeacon,
     "Blessed Weapon Grip": BlessedWeaponGrip,
     
-    "Darkmoon Sigil: Symbiosis": DarkmoonSigilSymbiosis
+    "Darkmoon Sigil: Symbiosis": DarkmoonSigilSymbiosis,
+    "Darkmoon Sigil: Ascension": DarkmoonSigilAscension
 }

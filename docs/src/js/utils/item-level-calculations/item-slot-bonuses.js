@@ -112,6 +112,13 @@ const embellishmentsData = {
         "type": "embellishment",
         "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 602, "base_value": 131, "effect_coefficient": 0.08835853636, "effect_type": "scalar"}]
     },
+    "Darkmoon Sigil: Ascension": {
+        "name": "Darkmoon Sigil: Ascension", 
+        "description": "Gain Ascendance every 8 seconds spent in combat. Ascendance grants *89 of a random secondary stat for 15 sec, stacking up to 10 times.", 
+        "id": 463232, 
+        "type": "embellishment",
+        "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 602, "base_value": 89, "effect_coefficient": 0.02280857228, "effect_type": "scalar"}]
+    },
     "Energy Redistribution Beacon": {
         "name": "Energy Redistribution Beacon", 
         "description": "", 
@@ -179,6 +186,13 @@ const ptrEmbellishmentsData = {
         "id": 463232, 
         "type": "embellishment",
         "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 602, "base_value": 131, "effect_coefficient": 0.02280857228, "effect_type": "scalar"}]
+    },
+    "Darkmoon Sigil: Ascension": {
+        "name": "Darkmoon Sigil: Ascension", 
+        "description": "Gain Ascendance every 8 seconds spent in combat. Ascendance grants *89 of a random secondary stat for 15 sec, stacking up to 10 times.", 
+        "id": 463232, 
+        "type": "embellishment",
+        "effect_values": [{"allocation_type": "rating_multiplier", "base_item_level": 602, "base_value": 89, "effect_coefficient": 0.02280857228, "effect_type": "scalar"}]
     },
     "Energy Redistribution Beacon": {
         "name": "Energy Redistribution Beacon", 
