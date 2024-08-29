@@ -13,5 +13,11 @@ leech_abilities = [
     "Light's Hammer",
     "Holy Prism",
     "Holy Reverberation",
-    "Dreaming Devotion"
+    "Dreaming Devotion",
+    "Authority of Fiery Resolve",
+    "Dawnlight",
+    "Dawnlight (HoT)",
+    "Eternal Flame",
+    "Eternal Flame (HoT)",
+    "Sun's Avatar"
 ]
