@@ -4,6 +4,7 @@ import heapq
 import os
 import json
 import random
+import sys
 from dotenv import load_dotenv
 
 from ..utils.misc_functions import format_time, append_aura_applied_event, append_aura_stacks_decremented, update_self_buff_data, calculate_beacon_healing, update_spell_data_beacon_heals, append_spell_beacon_event
@@ -1092,6 +1093,11 @@ class Paladin:
                     herald_of_the_sun_talents[talent_name] = talent_rank
                     
         pp.pprint(herald_of_the_sun_talents)
+        print("herald talents flush", flush=True)
+        print(herald_of_the_sun_talents, flush=True)
+        
+        sys.stdout.write("herald talents sys")
+        sys.stdout.write(herald_of_the_sun_talents)
         
         for talent_row, talents in active_class_talents.items():
             for talent_name, talent_info in talents.items():
