@@ -1091,13 +1091,10 @@ class Paladin:
                     lightsmith_talents[talent_name] = talent_rank
                 elif active_hero_talent_tree == "Herald of the Sun":
                     herald_of_the_sun_talents[talent_name] = talent_rank
-                    
+
+        sys.stdout.flush()
         pp.pprint(herald_of_the_sun_talents)
-        print("herald talents flush", flush=True)
-        print(herald_of_the_sun_talents, flush=True)
-        
-        sys.stdout.write("herald talents sys")
-        sys.stdout.write(herald_of_the_sun_talents)
+        sys.stdout.flush()
         
         for talent_row, talents in active_class_talents.items():
             for talent_name, talent_info in talents.items():
@@ -1119,6 +1116,8 @@ class Paladin:
                 if talent_name in herald_of_the_sun_talents:
                     active_herald_of_the_sun_talents[talent_row][talent_name]["ranks"]["current rank"] = herald_of_the_sun_talents[talent_name]
                     
+        sys.stdout.flush()
         pp.pprint(active_herald_of_the_sun_talents)
+        sys.stdout.flush()
         
         return Talents(active_class_talents, active_spec_talents, active_lightsmith_talents, active_herald_of_the_sun_talents)
