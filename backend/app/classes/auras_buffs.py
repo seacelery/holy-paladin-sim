@@ -3319,6 +3319,8 @@ class DarkmoonSigilAscension(Buff):
         self.first_time_reaching_ten_stacks = True
         
         self.embellishment_first_value = 89
+        if "Writhing Armor Banding" in caster.embellishments:
+            self.embellishment_first_value *= 2
         caster.time_based_stacking_buffs[self] = 8
         
         self.chosen_stat = None
@@ -3365,6 +3367,8 @@ class DarkmoonSigilSymbiosis(Buff):
         embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
         
         self.embellishment_first_value = 131
+        if "Writhing Armor Banding" in caster.embellishments:
+            self.embellishment_first_value *= 2
         caster.time_based_stacking_buffs[self] = 10
         
     def apply_effect(self, caster, current_time=None):
