@@ -13,7 +13,7 @@ click-plugins==1.1.1
 click-repl==0.3.0
 colorama==0.4.6
 dnspython==2.6.1
-eventlet==0.36.1
+eventlet
 exceptiongroup==1.2.0
 Flask==3.0.0
 Flask-Cors==4.0.0
@@ -21,7 +21,7 @@ Flask-SocketIO==5.3.6
 flower==2.0.1
 gevent==24.2.1
 gevent-websocket==0.10.1
-greenlet==0.4.13
+greenlet
 h11==0.14.0
 -e git+https://github.com/seacelery/holy-paladin-sim.git@23cb4d492bdeaddba2bed27eef0d8631eec6e0a9#egg=holy_paladin_sim&subdirectory=backend
 hpy==0.9.0
