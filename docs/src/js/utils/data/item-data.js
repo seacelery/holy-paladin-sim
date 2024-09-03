@@ -125776,19 +125776,45 @@ const itemData = [
             {
                 "name": "Darkmoon Deck: Symbiosis",
                 "id": 463610,
-                "description": "Every 10 sec in combat take 1% of your maximum Health as Nature damage and gain a stack of Symbiosis, granting *24 Versatility for 20 sec stacking up to 5 times.",
+                "description": "Every 10 sec in combat take 1% of your maximum Health as Nature damage and gain a stack of Symbiosis, granting *251 Versatility for 20 sec stacking up to 5 times.",
                 "effect_values": [
-                    {"base_value": 2696, "effect_type": "scalar", "effect_coefficient": 0.08835853636 * 1.599, "allocation_type": "rating_multiplier_jewellery"},
+                    {"base_value": 2696, "effect_type": "scalar", "effect_coefficient": 0.1205, "allocation_type": "rating_multiplier"},
                 ]
             }
         ],
         "name": "Darkmoon Deck: Symbiosis",
         "item_slot": "Trinket",
-        "base_item_level": 372,
+        "base_item_level": 577,
         "quality": "Epic",
-        "id": 220171,
+        "id": 222653,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_spore_blank.jpg",
-        "stats": {},
+        "stats": {
+            "intellect": 2024
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Darkmoon Deck: Ascension",
+                "id": 463610,
+                "description": "Equip: Gain Ascendance every 8 seconds spent in combat. Ascendance grants *145 of a random secondary stat for 15 sec, stacking up to 10 times.",
+                "effect_values": [
+                    {"base_value": 145, "effect_type": "scalar", "effect_coefficient": 6.98910188675, "allocation_type": "rating_multiplier_jewellery"},
+                ]
+            }
+        ],
+        "name": "Darkmoon Deck: Ascension",
+        "item_slot": "Trinket",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222680,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_inscriptions_darkmoondeckevolution_0.jpg",
+        "stats": {
+            "intellect": 2024
+        },
         "gems": [],
         "enchantments": [],
         "limit": null
@@ -125797,11 +125823,13 @@ const itemData = [
         "effects": [],
         "name": "Darkmoon Deck: Vivacity",
         "item_slot": "Trinket",
-        "base_item_level": 372,
+        "base_item_level": 577,
         "quality": "Epic",
         "id": 219675,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_spore_blank.jpg",
-        "stats": {},
+        "stats": {
+            "intellect": 2024
+        },
         "gems": [],
         "enchantments": [],
         "limit": null
