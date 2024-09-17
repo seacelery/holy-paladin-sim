@@ -8,7 +8,7 @@ from ..utils.misc_functions import append_aura_applied_event, format_time, updat
 # APPLIES BUFFS   
 class BarrierOfFaithSpell(Spell):
     
-    SPELL_POWER_COEFFICIENT = 5
+    SPELL_POWER_COEFFICIENT = 5 * 0.94
     BASE_COOLDOWN = 30
     MANA_COST = 0.024
 
@@ -98,7 +98,7 @@ class TyrsDeliveranceSpell(Spell):
             
 class TyrsDeliveranceHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.351
+    SPELL_POWER_COEFFICIENT = 0.351 * 0.94
     
     def __init__(self, caster):
         super().__init__("Tyr's Deliverance", is_heal=True, off_gcd=True)
