@@ -32,7 +32,7 @@ def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_ta
 # generators
 class HolyShock(Spell):
     
-    SPELL_POWER_COEFFICIENT = 2.266 * 0.94
+    SPELL_POWER_COEFFICIENT = 2.266
     MANA_COST = 0.026
     BASE_MANA_COST = 0.026
     BASE_COOLDOWN = 9.5
@@ -409,7 +409,7 @@ class Daybreak(Spell):
                
 class RisingSunlightHolyShock(Spell):
     
-    SPELL_POWER_COEFFICIENT = 2.266 * 0.94
+    SPELL_POWER_COEFFICIENT = 2.266
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
     
@@ -704,7 +704,7 @@ class DivineToll(Spell):
   
 class DivineTollHolyShock(Spell):
     
-    SPELL_POWER_COEFFICIENT = 2.266 * 0.94
+    SPELL_POWER_COEFFICIENT = 2.266
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
     
@@ -963,7 +963,7 @@ class DivineTollHolyShock(Spell):
             
 class DivineResonanceHolyShock(Spell):
     
-    SPELL_POWER_COEFFICIENT = 2.266 * 0.94
+    SPELL_POWER_COEFFICIENT = 2.266
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.1
     
@@ -1178,7 +1178,7 @@ class DivineResonanceHolyShock(Spell):
 
 class HolyLight(Spell):
     
-    SPELL_POWER_COEFFICIENT = 3.8 * 0.94
+    SPELL_POWER_COEFFICIENT = 3.8
     MANA_COST = 0.064
     HOLY_POWER_GAIN = 0
     BASE_CAST_TIME = 2
@@ -1356,7 +1356,7 @@ class HolyLight(Spell):
 
 class FlashOfLight(Spell):
     
-    SPELL_POWER_COEFFICIENT = 3.156 * 0.95 * 0.94
+    SPELL_POWER_COEFFICIENT = 3.156 * 0.95
     MANA_COST = 0.018 
     BASE_MANA_COST = 0.018
     HOLY_POWER_GAIN = 0
@@ -1507,7 +1507,7 @@ class FlashOfLight(Spell):
 # spenders
 class WordOfGlory(Spell):
     
-    SPELL_POWER_COEFFICIENT = 3.15 * 1.58 * 1.1 * 0.94
+    SPELL_POWER_COEFFICIENT = 3.15 * 1.58 * 1.1
     MANA_COST = 0.006
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
@@ -1825,7 +1825,7 @@ class WordOfGlory(Spell):
 
 class EternalFlame(Spell):
     
-    SPELL_POWER_COEFFICIENT = 3.15 * 1.58 * 1.1 * 0.94
+    SPELL_POWER_COEFFICIENT = 3.15 * 1.58 * 1.1
     MANA_COST = 0.006
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
@@ -2145,7 +2145,7 @@ class EternalFlame(Spell):
             
 class LightOfDawn(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.2 * 0.94
+    SPELL_POWER_COEFFICIENT = 1.2
     MANA_COST = 0.006
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
@@ -2449,7 +2449,7 @@ class LightOfDawn(Spell):
 
 class HolyPrism(Spell):
     
-    SPELL_POWER_COEFFICIENT = 3.15 * 0.94
+    SPELL_POWER_COEFFICIENT = 3.15
     BASE_COOLDOWN = 30
     MANA_COST = 0.026
     TARGET_COUNT = 5
@@ -2497,7 +2497,7 @@ class LightsHammerSpell(Spell):
                 
 class LightsHammerHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.48 * 0.8 * 0.94
+    SPELL_POWER_COEFFICIENT = 0.48 * 0.8
     TARGET_COUNT = 6
     
     def __init__(self, caster):
@@ -2506,7 +2506,7 @@ class LightsHammerHeal(Spell):
 
 class GoldenPathHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.05 * 1.04 * 0.94
+    SPELL_POWER_COEFFICIENT = 0.05 * 1.04
     TARGET_COUNT = 6
     
     def __init__(self, caster):
@@ -2515,7 +2515,7 @@ class GoldenPathHeal(Spell):
 
 class SealOfMercyHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.05 * 1.04 * 0.94
+    SPELL_POWER_COEFFICIENT = 0.05 * 1.04
     TARGET_COUNT = 1
     
     def __init__(self, caster):
@@ -2524,7 +2524,7 @@ class SealOfMercyHeal(Spell):
 
 class MercifulAurasHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.1552 * 0.94
+    SPELL_POWER_COEFFICIENT = 0.1552
     
     def __init__(self, caster):  
         super().__init__("Merciful Auras", off_gcd=True)
@@ -2532,7 +2532,7 @@ class MercifulAurasHeal(Spell):
 
 class SunsAvatarHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.162 * 0.94
+    SPELL_POWER_COEFFICIENT = 0.162
     
     def __init__(self, caster):
         super().__init__("Sun's Avatar", off_gcd=True)
@@ -2574,7 +2574,7 @@ class LayOnHands(Spell):
                 
 class LightOfTheMartyr(Spell):
     
-    SPELL_POWER_COEFFICIENT = 2.31 * 0.8 * 0.94
+    SPELL_POWER_COEFFICIENT = 2.31 * 0.8
     MANA_COST = 0.016
     
     def __init__(self, caster):
@@ -2629,7 +2629,7 @@ class LightOfTheMartyr(Spell):
 
 class DivineGuidanceHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 2 * 1.04 * 0.94
+    SPELL_POWER_COEFFICIENT = 2 * 1.04
     
     def __init__(self, caster):
         super().__init__("Divine Guidance", off_gcd=True)
@@ -2645,7 +2645,7 @@ class HammerAndAnvilHeal(Spell):
 
 class TruthPrevailsHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 2.7 * 0.94
+    SPELL_POWER_COEFFICIENT = 2.7
     
     def __init__(self, caster):
         super().__init__("Truth Prevails", off_gcd=True)
@@ -2653,7 +2653,7 @@ class TruthPrevailsHeal(Spell):
 
 class SacredWord(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.5 * 0.94
+    SPELL_POWER_COEFFICIENT = 1.5
     
     def __init__(self, caster):
         super().__init__("Sacred Word", off_gcd=True)
@@ -2661,7 +2661,7 @@ class SacredWord(Spell):
 
 class RadiantAura(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.6 * 0.94
+    SPELL_POWER_COEFFICIENT = 0.6
     
     def __init__(self, caster):
         super().__init__("Radiant Aura", off_gcd=True)

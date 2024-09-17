@@ -19,7 +19,7 @@ class GlimmerOfLightSpell(Spell):
     
 class JudgmentOfLightSpell(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.175 * 0.9 * 0.94
+    SPELL_POWER_COEFFICIENT = 0.175 * 0.9
     
     def __init__(self, caster):
         super().__init__("Judgment of Light")
@@ -27,7 +27,7 @@ class JudgmentOfLightSpell(Spell):
 
 class GreaterJudgmentSpell(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.84 * 0.94
+    SPELL_POWER_COEFFICIENT = 1.84
     
     def __init__(self, caster):
         super().__init__("Greater Judgment", is_absorb=True)
@@ -35,7 +35,7 @@ class GreaterJudgmentSpell(Spell):
         
 class TouchOfLight(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.45 * 5 * 0.88 * 0.94
+    SPELL_POWER_COEFFICIENT = 0.45 * 5 * 0.88
     BASE_PPM = 3
     
     def __init__(self, caster):
@@ -44,7 +44,7 @@ class TouchOfLight(Spell):
 
 class RiteOfAdjurationSpell(Spell):
         
-        SPELL_POWER_COEFFICIENT = 2.04 * 0.94
+        SPELL_POWER_COEFFICIENT = 2.04
         BASE_PPM = 5
         TARGET_COUNT = 5
         
@@ -65,7 +65,7 @@ class RiteOfAdjurationSpell(Spell):
 
 class SacredWeapon(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1 * 1.04 * 0.8 * 0.94
+    SPELL_POWER_COEFFICIENT = 1 * 1.04 * 0.8
     BASE_PPM = 8
     TARGET_COUNT = 5
     
