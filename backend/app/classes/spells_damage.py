@@ -10,7 +10,7 @@ from .summons import ConsecrationSummon, RighteousJudgmentSummon
 
 class Judgment(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.125 / 1.04
+    SPELL_POWER_COEFFICIENT = (1.125 * 1.6) / 1.04
     BASE_COOLDOWN = 12
     MANA_COST = 0.024
     HOLY_POWER_GAIN = 1
@@ -122,7 +122,7 @@ class Judgment(Spell):
                     
             # avenging crusader        
             if caster.is_talent_active("Avenging Crusader") and "Avenging Crusader" in caster.active_auras:
-                avenging_crusader_healing = spell_damage * 4.2 / 5
+                avenging_crusader_healing = spell_damage * 3.6 / 5
                 for avenging_crusader_target in random.sample(caster.potential_healing_targets, 5):
                     avenging_crusader_target.receive_heal(avenging_crusader_healing, caster)
                     
@@ -228,7 +228,7 @@ class Judgment(Spell):
 class CrusaderStrike(Spell):
     
     # uses attack power instead of spell power
-    SPELL_POWER_COEFFICIENT = 1.071 * 1.04 * 1.58
+    SPELL_POWER_COEFFICIENT = 1.071 * 1.04 * 1.58 * 1.6
     BASE_COOLDOWN = 7.75
     MANA_COST = 0.006
     HOLY_POWER_GAIN = 1
@@ -278,7 +278,7 @@ class CrusaderStrike(Spell):
                 
             # avenging crusader        
             if caster.is_talent_active("Avenging Crusader"):
-                avenging_crusader_healing = spell_damage * 4.2 / 5
+                avenging_crusader_healing = spell_damage * 3.6 / 5
                 for avenging_crusader_target in random.sample(caster.potential_healing_targets, 5):
                     avenging_crusader_target.receive_heal(avenging_crusader_healing, caster)
                     
@@ -333,7 +333,7 @@ class CrusaderStrike(Spell):
 class HammerOfWrath(Spell):
     
     # uses attack power instead of spell power
-    SPELL_POWER_COEFFICIENT = 1.11067 * 1.04 * 1.88
+    SPELL_POWER_COEFFICIENT = 1.11067 * 1.04 * 1.88 * 1.2
     BASE_COOLDOWN = 7.5
     MANA_COST = 0.006
     CHARGES = 1

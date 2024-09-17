@@ -332,6 +332,10 @@ class Spell:
         #     print(f"Heal amount for {self.name}, {heal_amount}, {is_crit}")
         #     print(f"new stored healing {caster.active_auras['Power of the Silver Hand Stored Healing'].stored_healing}")
             # print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
+         
+        # 6% nerf   
+        heal_amount *= 0.94
+            
         return heal_amount, is_crit
     
     def calculate_damage(self, caster, bonus_crit=0, bonus_versatility=0):
