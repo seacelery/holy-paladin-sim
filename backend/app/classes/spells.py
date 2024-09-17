@@ -323,6 +323,8 @@ class Spell:
             
         # if "Holy Shock" in self.name and "Power of the Silver Hand" in caster.active_auras:
         #     print(f"New stored healing: {caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing}")
+        
+        heal_amount *= 0.94
             
         if self.name in leech_abilities:   
             leech_multiplier = 0.7
