@@ -95,5 +95,7 @@ buff_class_map = {
     "Blessed Weapon Grip": BlessedWeaponGrip,
     
     "Darkmoon Sigil: Symbiosis": DarkmoonSigilSymbiosis,
-    "Darkmoon Sigil: Ascension": DarkmoonSigilAscension
+    "Symbiosis": DarkmoonSigilSymbiosis,
+    "Darkmoon Sigil: Ascension": DarkmoonSigilAscension,
+    "Ascendance": DarkmoonSigilAscension
 }

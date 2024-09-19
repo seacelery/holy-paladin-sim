@@ -100,7 +100,9 @@ const updateEquipmentFromImportedData = (data) => {
                     "Hissing Rune",
                     "Howling Rune",
                     "Chirping Rune",
-                    "Buzzing Rune"
+                    "Buzzing Rune",
+                    "Algari Mana Oil",
+                    "Oil of Beledar's Grace"
                 ];
 
                 if (excludedEnchants.includes(formattedEnchantText[0])) {

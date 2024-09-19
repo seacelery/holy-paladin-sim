@@ -3313,7 +3313,7 @@ class DarkmoonSigilAscension(Buff):
     def __init__(self, caster):
         super().__init__("Darkmoon Sigil: Ascension", 10000, base_duration=10000, current_stacks=1, max_stacks=11)
         self.stacks_to_apply = 1
-        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_effect = caster.embellishments["Ascendance"]["effect"]
         embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
         self.first_stack = True
         self.first_time_reaching_ten_stacks = True
@@ -3363,7 +3363,7 @@ class DarkmoonSigilSymbiosis(Buff):
     def __init__(self, caster):
         super().__init__("Darkmoon Sigil: Symbiosis", 10000, base_duration=10000, current_stacks=1, max_stacks=5)
         self.stacks_to_apply = 1
-        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_effect = caster.embellishments["Symbiosis"]["effect"]
         embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
         
         self.embellishment_first_value = 131
